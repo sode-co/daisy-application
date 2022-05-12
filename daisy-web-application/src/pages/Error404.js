@@ -1,6 +1,7 @@
-import React from "react";
+/* eslint-disable prettier/prettier */
+import React from 'react';
 import t from '../i18n/t';
-export default function ErrorDeny () {
+export default function ErrorDeny() {
       return (
         <div>
           <meta charSet="UTF-8" />
