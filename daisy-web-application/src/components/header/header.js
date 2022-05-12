@@ -1,12 +1,14 @@
-import { Button, Stack, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import React from "react";
 import './header.css';
 
 export default function Header() {
 
     return (
-        <Stack spacing={15} direction="row" style={{ position: 'fixed', top: 0, boxShadow: '0 1px 0px #ECE9E8' }}>
-            <Stack spacing={1} direction="row" style={{ float: 'left' }}>
+        <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '200', position: 'fixed', top: 0, boxShadow: '0 3px 0px #ECE9E8'}}>
+
+        <Stack spacing={20} direction="row">
+            <Stack spacing={5} direction="row" style={{ float: 'left' }}>
                 <img src={require('../../assets/images/app_logo.avif')} className="headerLogo" />
                 <Button href="/categories">
                     <Typography variant="subtitle1" className="headerItemText">Categories</Typography>
@@ -21,7 +23,7 @@ export default function Header() {
                     <Typography variant="subtitle1" className="headerItemText">Studio</Typography>
                 </Button>
             </Stack>
-            <Stack spacing={1} direction="row" style={{ float: 'right' }}>
+            <Stack spacing={3} direction="row" style={{ float: 'right' }}>
                 <Button href="/contact">
                     <Typography variant="subtitle1" className="headerItemText">Contact</Typography>
                 </Button>
@@ -29,6 +31,8 @@ export default function Header() {
                     <Typography variant="subtitle1" className="headerItemText">Login</Typography>
                 </Button>
             </Stack>
-        </Stack>
+            </Stack>
+            </Container>
+
     )
 }

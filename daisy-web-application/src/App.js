@@ -8,7 +8,7 @@ import Categories from './pages/Categories';
 import Error404 from './pages/Error404';
 import FindADesigner from './pages/FindADesigner';
 import HowItWorks from './pages/HowItWorks';
-import LandingPage from './pages/LandingPage';
+import LandingPage from './pages/landing/LandingPage';
 import { default as Contact, default as Login } from './pages/Login';
 import Studio from './pages/Studio';
 
