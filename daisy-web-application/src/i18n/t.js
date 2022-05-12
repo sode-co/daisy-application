@@ -8,10 +8,10 @@ i18next.init({
         404: 'Oops! Page Not Found',
 
         'login#login_title': 'Sign in',
-        'login#signup_title': 'Sign up',
-      },
-    },
-  },
+        'login#signup_title': 'Sign up'
+      }
+    }
+  }
 });
 
 export default function t(key, params) {

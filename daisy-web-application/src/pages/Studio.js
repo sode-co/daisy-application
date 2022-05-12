@@ -1,6 +1,4 @@
-import React from "react";
+import React from 'react';
 export default function Studio() {
-    return (
-        <p>Studio</p>
-    )
+  return <p>Studio</p>;
 }

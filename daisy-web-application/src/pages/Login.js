@@ -1,8 +1,6 @@
-import React from "react";
+import React from 'react';
 export default function Contact() {
-    // render() {
-        return (
-            <div>"Contact nha"</div>
-        )
-    // }
+  // render() {
+  return <p>Login</p>;
+  // }
 }
