@@ -1,19 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Utils
 {
     public class Config
     {
-        public static string DB_HOST_NAME { get; private set; }
-        public static int DB_PORT { get; private set; }
+        public class _Config
+        {
+            public string DB_HOST_NAME { get; set; }
+            public int DB_PORT { get; set; }
+            public string DB_NAME { get; set; }
+            public string DB_USER { get; set; }
+            public string DB_PASSWORD { get; set; }
+        }
+
+        private static _Config Value = new _Config();
+
+        public static _Config Get() => Value;
+
+        public static void Load()
+        {
+            using (StreamReader r = new StreamReader("../Shared/appsettings2.json"))
+            {
+                string json = r.ReadToEnd();
+                Console.WriteLine(json);
+                Value = JsonConvert.DeserializeObject<_Config>(json);
+            }
+        }
 
         public static void Load(IConfiguration configuration)
         {
             try
             {
-                DB_HOST_NAME = configuration.GetValue<string>("Database:DB_HOST_NAME");
-                DB_PORT = configuration.GetValue<int>("Database:DB_PORT");
+                Value.DB_HOST_NAME = configuration.GetValue<string>("DB_HOST_NAME");
+                Value.DB_PORT = configuration.GetValue<int>("DB_PORT");
+                Value.DB_NAME = configuration.GetValue<string>("DB_NAME");
+                Value.DB_PASSWORD = configuration.GetValue<string>("DB_PASSWORD");
+                Value.DB_USER = configuration.GetValue<string>("DB_USER");
             }
             catch (Exception ex)
             {
