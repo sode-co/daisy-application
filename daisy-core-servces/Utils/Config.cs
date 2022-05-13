@@ -8,7 +8,7 @@ namespace Utils
         public static string DB_HOST_NAME { get; private set; }
         public static int DB_PORT { get; private set; }
 
-        public static void LoadConfig(IConfiguration configuration)
+        public static void Load(IConfiguration configuration)
         {
             try
             {
