@@ -1,5 +1,7 @@
 import { Container } from '@mui/material';
 import SimpleImageSlider from 'react-simple-image-slider';
+import white from '../../constants/colors';
+
 const images = [
   { url: require('../../assets/images/banner/packaging.avif') },
   { url: require('../../assets/images/banner/logo.avif') },
@@ -17,7 +19,7 @@ export default function LeftBanner() {
         images={images}
         showBullets={true}
         showNavs={true}
-        bgColor={'#ffffff'}
+        bgColor={white}
       />
     </Container>
   );
