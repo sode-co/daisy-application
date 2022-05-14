@@ -2,4 +2,13 @@
     font-family: 'OpenSans-Light';
     src: url('./assets/fonts/OpenSans/OpenSans-Light.ttf');
 }
-  
+
+@font-face {
+    font-family: 'OpenSans-ExtraBold';
+    src: url('./assets/fonts/OpenSans/OpenSans-ExtraBold.ttf');
+}
+
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('./assets/fonts/OpenSans/OpenSans-Bold.ttf');
+}

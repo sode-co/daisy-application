@@ -8,7 +8,15 @@ i18next.init({
         404: 'Oops! Page Not Found',
 
         'login#login_title': 'Sign in',
-        'login#signup_title': 'Sign up'
+        'login#signup_title': 'Sign up',
+
+        'intro#title_line01': 'World-class design.',
+        'intro#title_line02': 'At your service.',
+
+        'categories#get_started': 'Get Started',
+
+        'intro#description':
+          'Daisy designs is the go-to graphic design service by Sode. We make it easy to work with professional, creative experts from around the world and build your brand through custom, memorable design.'
       }
     }
   }

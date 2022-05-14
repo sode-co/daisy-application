@@ -2,24 +2,29 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Categories from './pages/Categories';
-import Error404 from './pages/Error404';
-import FindADesigner from './pages/FindADesigner';
-import HowItWorks from './pages/HowItWorks';
-import LandingPage from './pages/landing/LandingPage';
-import { default as Contact, default as Login } from './pages/Login';
-import Studio from './pages/Studio';
+import Error404 from './pages/404error';
+import Categories from './pages/categories';
+import FindADesigner from './pages/find-a-design';
+import HowItWorks from './pages/how-it-works';
+import LandingPage from './pages/landing';
+import { default as Contact, default as Login } from './pages/login';
+import Studio from './pages/studio';
 
 function App() {
   const THEME = createTheme({
     typography: {
+      h3: {
+        fontFamily: 'OpenSans-Bold',
+        fontSize: 50,
+        fontWeight: 600
+      },
       subtitle1: {
         fontFamily: 'OpenSans-Light',
         fontSize: 14,
         fontWeight: 600
       },
       subtitle2: {
-        fontFamily: 'OpenSans-Light',
+        fontFamily: 'OpenSans-Bold',
         fontSize: 14,
         fontWeight: 500
       },

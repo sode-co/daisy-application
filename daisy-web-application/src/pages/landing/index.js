@@ -1,7 +1,8 @@
 import { Box, Container } from '@mui/material';
 import React from 'react';
-import Header from '../../components/header/header';
-import Categories from '../Categories';
+import Banner from '../../components/banner';
+import Header from '../../components/header';
+import Categories from '../categories';
 import './landingPage.css';
 
 export default function LandingPage() {
@@ -9,6 +10,7 @@ export default function LandingPage() {
     <Container style={{ width: '100%' }}>
       <Header />
       <Box className="bodyContainer">
+        <Banner />
         <Categories />
         <Categories />
         <Categories />
