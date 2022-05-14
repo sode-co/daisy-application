@@ -15,7 +15,8 @@ export default function Header() {
         top: 0,
         boxShadow: '0 4px 22px 0px #E5E3E3',
         backgroundColor: '#ffffff',
-        width: '100%'
+        width: '100%',
+        zIndex: 1
       }}>
       <Stack spacing={20} direction="row">
         <Stack spacing={5} direction="row" style={{ float: 'left' }}>
