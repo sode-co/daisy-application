@@ -13,13 +13,18 @@ import Studio from './pages/studio';
 function App() {
   const THEME = createTheme({
     typography: {
+      h3: {
+        fontFamily: 'OpenSans-Bold',
+        fontSize: 50,
+        fontWeight: 600
+      },
       subtitle1: {
         fontFamily: 'OpenSans-Light',
         fontSize: 14,
         fontWeight: 600
       },
       subtitle2: {
-        fontFamily: 'OpenSans-Light',
+        fontFamily: 'OpenSans-Bold',
         fontSize: 14,
         fontWeight: 500
       },
