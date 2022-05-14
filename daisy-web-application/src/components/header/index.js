@@ -19,7 +19,7 @@ export default function Header() {
       }}>
       <Stack spacing={20} direction="row">
         <Stack spacing={5} direction="row" style={{ float: 'left' }}>
-          <img src={require('../../assets/images/logo.jpg')} className="headerLogo" />
+          <img src={require('../../assets/images/daisylogo.png')} className="headerLogo" />
           <Button href="/categories">
             <Typography variant="subtitle1" className="headerItemText">
               Categories
