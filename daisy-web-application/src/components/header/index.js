@@ -1,7 +1,6 @@
 import CallIcon from '@mui/icons-material/Call';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import React from 'react';
-import white from '../../constants/colors';
 import './header.css';
 
 export default function Header() {
@@ -15,8 +14,6 @@ export default function Header() {
         position: 'fixed',
         top: 0,
         boxShadow: '0 4px 22px 0px #E5E3E3',
-        backgroundColor: white,
-        width: '3000px',
         zIndex: 1
       }}
       className="headerContainer"
