@@ -1,7 +1,11 @@
-import { Box } from '@mui/material';
-
-export default function ImageItem() {
-  <Box>
-    <img src={require('../../assets/images/daisylogo.png')} className="headerLogo" />
-  </Box>;
+import { ImageListItem } from '@mui/material';
+export default function ImageItem(item) {
+  <ImageListItem key={item.img}>
+    <img
+      src={`${item.img}?w=161&fit=crop&auto=format`}
+      srcSet={`${item.img}?w=161&fit=crop&auto=format&dpr=2 2x`}
+      alt={item.title}
+      loading="lazy"
+    />
+  </ImageListItem>;
 }

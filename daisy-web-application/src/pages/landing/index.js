@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import Banner from '../../components/banner';
 import Header from '../../components/header';
@@ -8,8 +8,8 @@ import './landingPage.css';
 
 export default function LandingPage() {
   return (
-    <Container style={{ width: '100%' }}>
-      <Header />
+    <React.Fragment style={{ width: '100%' }}>
+      <Header style={{ zIndex: 1, backgroundColor: '#ffffff' }} />
       <Box className="bodyContainer">
         <Banner />
         <Trending />
@@ -37,6 +37,6 @@ export default function LandingPage() {
         <Categories />
         <Categories />
       </Box>
-    </Container>
+    </React.Fragment>
   );
 }
