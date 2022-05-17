@@ -39,11 +39,21 @@ export default function Trending() {
   ];
 
   return (
-    <Container>
+    <Container
+      maxWidth={false}
+      style={{
+        marginLeft: '20px'
+      }}>
       <Typography style={{ fontFamily: 'OpenSans-Bold', fontSize: '20px' }}>
         {t('trending#title')}
       </Typography>
-      <ImageList sx={{ width: '100%', height: '100%' }} cols={8}>
+      <ImageList
+        sx={{
+          width: '95%',
+          height: '100%',
+          overflow: 'hidden'
+        }}
+        cols={8}>
         {itemData.map((item) => (
           <ImageListItem key={item.img} className="imageItem">
             <img src={`${item.img}`} srcSet={`${item.img}`} alt={item.title} loading="lazy" />
