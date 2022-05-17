@@ -9,7 +9,7 @@ import './landingPage.css';
 export default function LandingPage() {
   return (
     <React.Fragment style={{ width: '100%' }}>
-      <Header style={{ zIndex: 1, backgroundColor: '#ffffff' }} />
+      <Header />
       <Box className="bodyContainer">
         <Banner />
         <Trending />
