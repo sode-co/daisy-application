@@ -6,3 +6,9 @@
 .headerLogo {
     height: 70px;
 }
+.headerContainer{
+    background-color: #ffffff !important;
+    width: 1500px !important;
+    margin: 0;
+    padding: 0;
+}

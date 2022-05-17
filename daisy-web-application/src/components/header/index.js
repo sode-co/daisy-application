@@ -1,7 +1,6 @@
 import CallIcon from '@mui/icons-material/Call';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import React from 'react';
-import white from '../../constants/colors';
 import './header.css';
 
 export default function Header() {
@@ -15,10 +14,10 @@ export default function Header() {
         position: 'fixed',
         top: 0,
         boxShadow: '0 4px 22px 0px #E5E3E3',
-        backgroundColor: white,
-        width: '100%',
         zIndex: 1
-      }}>
+      }}
+      className="headerContainer"
+      maxWidth={false}>
       <Stack spacing={20} direction="row">
         <Stack spacing={5} direction="row" style={{ float: 'left' }}>
           <img src={require('../../assets/images/daisylogo.png')} className="headerLogo" />
@@ -43,7 +42,7 @@ export default function Header() {
             </Typography>
           </Button>
         </Stack>
-        <Stack spacing={3} direction="row">
+        <Stack spacing={9} direction="row">
           <Button href="/contact">
             <CallIcon style={{ color: 'black' }} />
             <Typography variant="subtitle2" className="headerItemText">
