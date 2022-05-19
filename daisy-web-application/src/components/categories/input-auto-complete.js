@@ -3,7 +3,7 @@ import { Button, Grid, Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
-import { default as gray, default as green } from '../../constants/colors';
+import colors from '../../constants/colors';
 import t from '../../i18n/t';
 
 const categories = [
@@ -31,6 +31,8 @@ const categories = [
 ];
 
 export default function CategoriesComboBox() {
+  const { gray, green } = colors;
+
   return (
     <Grid container>
       <Grid item xs={8}>

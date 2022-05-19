@@ -1,11 +1,12 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
-import green from '../../constants/colors';
+import colors from '../../constants/colors';
 import t from '../../i18n/t';
 import CategoriesComboBox from '../categories/input-auto-complete';
 import './banner.css';
 
 export default function RightBanner() {
+  const { green } = colors;
   return (
     <Container>
       <Typography variant="h3" style={{ color: green }}>

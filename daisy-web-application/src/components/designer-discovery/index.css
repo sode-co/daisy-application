@@ -1,0 +1,8 @@
+.bg {
+    background-image: url('../../assets/discovery-designer/map.jpg');
+    height: 650px;
+    width: 1900px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+

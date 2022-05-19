@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import SimpleImageSlider from 'react-simple-image-slider';
-import white from '../../constants/colors';
+import colors from '../../constants/colors';
 
 const images = [
   { url: require('../../assets/images/banner/packaging.avif') },
@@ -11,6 +11,8 @@ const images = [
 ];
 
 export default function LeftBanner() {
+  const { white } = colors;
+
   return (
     <Container>
       <SimpleImageSlider

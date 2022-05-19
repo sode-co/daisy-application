@@ -1,11 +1,12 @@
 import { Container } from '@mui/material';
 import React from 'react';
-import white from '../../constants/colors';
+import colors from '../../constants/colors';
 import './banner.css';
 import LeftBanner from './leftItem';
 import RightBanner from './rightItem';
 
 export default function Banner() {
+  const { white } = colors;
   return (
     <Container
       style={{
