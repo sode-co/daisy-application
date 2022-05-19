@@ -21,8 +21,16 @@ i18next.init({
         'trending#title': 'Trending',
 
         'discovery#designs': 'designs',
+        'discovery#connections': 'connections',
+
         'discovery#getstarted': 'Get started',
-        'discovery#joinnow': 'Designers, join now'
+        'discovery#joinnow': 'Designers, join now',
+        'discovery#customer-review-title':
+          '"We wanted something fun and eye-catching that didn’t look like every other coffee logo out there…',
+        'discovery#customer-review-description':
+          'There were so many designs to choose from and all of the designers were friendly and willing to change things up based on our preferences. In the end, we went with a design from Wintrygrey that we absolutely love. I would definitely recommend 99designs to anyone looking for logos and branding."',
+        'discovery#customer-review-name': 'Ngo Lan Vy',
+        'discovery#customer-review-major': 'Software engineering student'
       }
     }
   }

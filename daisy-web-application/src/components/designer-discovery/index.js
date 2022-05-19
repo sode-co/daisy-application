@@ -1,6 +1,7 @@
-import { Typography } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import CustomerReview from './customer-review';
+import NumOfConnections from './num-of-connections';
 import NumOfDesigns from './num-of-designs';
 
 export default function Discovery() {
@@ -10,19 +11,11 @@ export default function Discovery() {
         <NumOfDesigns />
       </div>
       <div>
-        <Item02 />
+        <CustomerReview />
       </div>
       <div>
-        <Item03 />
+        <NumOfConnections />
       </div>
     </Carousel>
   );
-}
-
-function Item02() {
-  return <Typography>item02</Typography>;
-}
-
-function Item03() {
-  return <Typography>item03</Typography>;
 }
