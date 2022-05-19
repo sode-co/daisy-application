@@ -2,6 +2,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Footer from './components/footer';
 import Error404 from './pages/404error';
 import Categories from './pages/categories';
 import FindADesigner from './pages/find-a-design';
@@ -50,6 +51,7 @@ function App() {
             <Route path="/pro/studio" element={<Studio />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<Error404 />} />
+            <Route path="*" element={<Footer />} />
           </Routes>
         </div>
       </Router>
