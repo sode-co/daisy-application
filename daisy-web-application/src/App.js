@@ -2,6 +2,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Discovery from './components/designer-discovery/index';
 import Error404 from './pages/404error';
 import Categories from './pages/categories';
 import FindADesigner from './pages/find-a-design';
@@ -49,6 +50,7 @@ function App() {
             <Route path="/designers/search" element={<FindADesigner />} />
             <Route path="/pro/studio" element={<Studio />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/discovery" element={<Discovery />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
         </div>
