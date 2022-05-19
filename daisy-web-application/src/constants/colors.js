@@ -1,7 +1,7 @@
 const green = '#009697';
 const white = '#ffffff';
 const gray = '#71706F';
-const orange = '#EE7313';
+const orange = '#ED6800';
 
 export default {
   green,

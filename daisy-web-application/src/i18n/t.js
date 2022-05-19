@@ -18,7 +18,11 @@ i18next.init({
         'intro#description':
           'Daisy designs is the go-to graphic design service by Sode. We make it easy to work with professional, creative experts from around the world and build your brand through custom, memorable design.',
 
-        'trending#title': 'Trending'
+        'trending#title': 'Trending',
+
+        'discovery#designs': 'designs',
+        'discovery#getstarted': 'Get started',
+        'discovery#joinnow': 'Designers, join now'
       }
     }
   }

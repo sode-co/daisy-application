@@ -14,6 +14,11 @@ import Studio from './pages/studio';
 function App() {
   const THEME = createTheme({
     typography: {
+      h1: {
+        fontFamily: 'OpenSans-Bold',
+        fontSize: 90,
+        fontWeight: 900
+      },
       h3: {
         fontFamily: 'OpenSans-Bold',
         fontSize: 50,
