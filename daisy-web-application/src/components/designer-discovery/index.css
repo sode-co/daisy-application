@@ -8,3 +8,15 @@
     align-items: center;
     justify-content: center;
 }
+
+.carousel.carousel-slider .control-arrow {
+    background-color: #ED6800;
+    color: white;
+    height: 100px;
+    margin-top: 19%;
+    width: 80px;
+}
+.carousel.carousel-slider .control-arrow :hover {
+    background-color: rgb(23, 88, 0);
+    color: white;
+}
