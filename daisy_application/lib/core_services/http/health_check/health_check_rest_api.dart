@@ -9,6 +9,6 @@ part 'health_check_rest_api.g.dart';
 abstract class HealthCheckRestApi {
   factory HealthCheckRestApi(Dio dio, {String baseUrl}) = _HealthCheckRestApi;
 
-  @GET("")
+  @GET('')
   Future<HttpResponse<HealthCheckResponseModel>> get();
 }

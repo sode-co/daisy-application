@@ -20,10 +20,13 @@ namespace Api
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
+            Config.Load();
             return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-
+                    webBuilder
+                    .UseUrls($"{Config.Get().PROTOCOL}://{Config.Get().API_HOST}:{Config.Get().API_PORT}")
+                    .UseIISIntegration();
                     webBuilder.UseStartup<Startup>();
                 })
                 .ConfigureAppConfiguration((hostingContext, config) =>
