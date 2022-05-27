@@ -1,7 +1,9 @@
-# daisy_application
-
+# Daisy application
+  Include Mobile (Android, iOS) and Web
+  
 # 1. Prerequisites
   It recommend to run this Flutter project on VsCode for easier to setup Environment variables.
+  If you have any trouble when setup Flutter with VsCode, please ask TienDang to get a tutorial of Flutter on Udemy
 # 2. Local Development Workflow
   ### How to run:
   1. Create `launch.json` on Visual Studio Code by clicking on `Run and Debug` tab, click on create `launch.json` file if not exist.
