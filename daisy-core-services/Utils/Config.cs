@@ -15,6 +15,11 @@ namespace Utils
             public string DB_NAME { get; set; }
             public string DB_USER { get; set; }
             public string DB_PASSWORD { get; set; }
+            public string API_HOST { get; set; }
+            public string API_PORT { get; set; }
+            public string GRPC_HOST { get; set; }
+            public string PROTOCOL { get; set; }
+            public int GRPC_PORT { get; set; }
         }
 
         private static _Config Value = new _Config();
@@ -23,7 +28,7 @@ namespace Utils
 
         public static void Load()
         {
-            using (StreamReader r = new StreamReader("../Shared/appsettings2.json"))
+            using (StreamReader r = new StreamReader("../Shared/appsettings.json"))
             {
                 string json = r.ReadToEnd();
                 Console.WriteLine(json);

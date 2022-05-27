@@ -1,5 +1,21 @@
 {
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:48196",
+      "sslPort": 0
+    }
+  },
   "profiles": {
+    "Custom": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:64407;http://localhost:13360",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "GrpcServices": {
       "commandName": "Project",
       "applicationUrl": "http://localhost:34726;https://localhost:8643",
