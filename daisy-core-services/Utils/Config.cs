@@ -19,7 +19,7 @@ namespace Utils
             public string API_PORT { get; set; }
             public string GRPC_HOST { get; set; }
             public string PROTOCOL { get; set; }
-            public string GRPC_PORT { get; set; }
+            public int GRPC_PORT { get; set; }
         }
 
         private static _Config Value = new _Config();

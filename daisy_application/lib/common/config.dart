@@ -1,6 +1,6 @@
 class Config {
   static const String API_HOST =
-      String.fromEnvironment('API_HOST', defaultValue: '192.168.1.9');
+      String.fromEnvironment('API_HOST', defaultValue: 'localhost');
   static const int API_PORT =
       int.fromEnvironment('API_PORT', defaultValue: 2433);
   static const String PROTOCOL =

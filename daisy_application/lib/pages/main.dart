@@ -1,11 +1,10 @@
 import 'package:daisy_application/common/config.dart';
+import 'package:daisy_application/core_services/grpc/healthcheck/HealthCheckGrpcService.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
-import 'package:daisy_application/core_services/models/health_check_response_model.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:retrofit/dio.dart';
-import '../common/Debug/logger.dart';
+import '../common/debuger/logger.dart';
 import '../service_locator/locator.dart';
 import 'dart:async';
 
@@ -13,13 +12,20 @@ void main() {
   setupDependencies();
   String ns = 'network-healthcheck';
   Timer.periodic(const Duration(seconds: 10), (Timer t) async {
+    HealthCheckGrpcService client = locator.get();
+    if (await client.performNetworkCheck()) {
+      Debug.log('$ns-grpc', 'Grpc connection ok');
+    } else {
+      Error.log('$ns-grpc', 'Grpc connection error');
+    }
+
     HealthCheckRestApi healthCheckApi = locator.get();
     Response response = (await healthCheckApi.get()).response;
     if (response.statusCode != 200) {
-      Error.log(ns, 'Failed when perform network check with status',
+      Error.log('$ns-http', 'Failed when perform network check with status',
           response.statusCode);
     } else {
-      Debug.log(ns, 'Network check with result', response.data);
+      Debug.log('$ns-http', 'Network check with result', response.data);
     }
   });
 
