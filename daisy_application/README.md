@@ -35,12 +35,12 @@
     
 # 3. Environment Variables
   ### 1. API_HOST: The host of Restful Api service to connect, for local development: 
-    - Use 10.0.2.2 when run on Android Emulator
-    - Use localhost when run on Web brower
+   - Use `10.0.2.2` when run on Android Emulator
+   - Use `localhost` when run on Web brower
   ### 2. API_PORT: The port of Restful Api service
   ### 3. PROTOCOL: `http` or `https`, it is `http` by default
   ### 4. GRPC_HOST: The host of gRPC service 
-    - Use 10.0.2.2 when run on Android Emulator
-    - Use localhost when run on Web brower
+   - Use `10.0.2.2` when run on Android Emulator
+   - Use `localhost` when run on Web brower
   ### 5.GRPC_PORT: The port of gRPC service
   
