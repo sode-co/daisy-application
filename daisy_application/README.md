@@ -4,7 +4,7 @@
   It recommend to run this Flutter project on VsCode for easier to setup Environment variables.
 # 2. Local Development Workflow
   ### How to run:
-  1. Prepare create launch.json on Visual Studio Code by clicking on `Run and Debug` tab, click on create `launch.json` file if not exist.
+  1. Create `launch.json` on Visual Studio Code by clicking on `Run and Debug` tab, click on create `launch.json` file if not exist.
   2. Edit the launch.json file as below to add environment variables.
   3. Run the project with the profile we already defined in `launch.json`.
   ### Other commands:
