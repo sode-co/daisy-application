@@ -38,7 +38,8 @@
    - Use `10.0.2.2` when run on Android Emulator
    - Use `localhost` when run on Web brower
   ### 2. API_PORT: The port of Restful Api service
-  ### 3. PROTOCOL: `http` or `https`, it is `http` by default
+  ### 3. PROTOCOL: 
+   - `http` or `https`, it is `http` by default
   ### 4. GRPC_HOST: The host of gRPC service 
    - Use `10.0.2.2` when run on Android Emulator
    - Use `localhost` when run on Web brower
