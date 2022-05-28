@@ -37,15 +37,13 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-    # - images/
+  assets:
+    - assets/images/
 
-  #  fonts:
-  #   - family: Butler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

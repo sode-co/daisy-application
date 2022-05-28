@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
+import 'package:daisy_application/pages/common/header.dart';
+import 'package:daisy_application/pages/common/sidebar.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
 import '../common/debuger/logger.dart';
 import '../service_locator/locator.dart';
-import 'dart:async';
 
 void main() {
   setupDependencies();
@@ -40,11 +44,9 @@ class MyApp extends StatelessWidget {
       title: 'Daisy',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'OpenSans'
       ),
-      home: Container(
-        color: Colors.white,
-        child: Container(),
-      ),
+      home: Scaffold(appBar: Header(), drawer: Sidebar()),
     );
   }
 }
