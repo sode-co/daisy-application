@@ -28,7 +28,7 @@
   #### 9. `GRPC_PORT`: Port that you want the gRPC service to running on (5 digits)
   #### 10. `Protocol`: `http` or `https`
   
-    ### Example of `appsettings.json` file
+  ### Example of `appsettings.json` file
     {
         "DB_HOST_NAME": "agent.kobiton",
         "DB_PORT": "1533",
