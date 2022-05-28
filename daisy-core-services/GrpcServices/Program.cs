@@ -25,11 +25,11 @@ namespace GrpcServices
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //WORKAROUND: To allow Network.insecure connection, we need to setup cert in the future and remove these lines
                     webBuilder
                     .UseUrls($"{Config.Get().PROTOCOL}://{Config.Get().GRPC_HOST}:{Config.Get().GRPC_PORT}")
                     .UseIISIntegration();
                     webBuilder.UseStartup<Startup>();
+                    //WORKAROUND: To allow Network.insecure connection, we need to setup cert in the future and remove these lines
                     //.UseKestrel(options =>
                     //{
 
