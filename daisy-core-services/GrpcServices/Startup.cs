@@ -26,19 +26,21 @@ namespace GrpcServices
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => o.AddPolicy("AllowAll", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
-            }));
             services.AddGrpc();
+            services.AddCors(o => o.AddPolicy("AllowAll", builder =>
+           {
+
+               builder
+                   .AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+           }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             Config.Load(Configuration);
 
             if (env.IsDevelopment())
@@ -46,11 +48,12 @@ namespace GrpcServices
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowAll");
             app.UseRouting();
-
+            app.UseGrpcWeb();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<HealthCheckServiceImp>();
+                endpoints.MapGrpcService<HealthCheckServiceImp>().EnableGrpcWeb();
 
                 endpoints.MapGet("/", async context =>
                 {
