@@ -14,7 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   retrofit: '3.0.1'
-  logger: any 
+  logger: any
   provider: ^6.0.3
   uuid: ^3.0.6
   fluttertoast: ^8.0.9
@@ -24,12 +24,13 @@ dependencies:
   ionicons: ^0.1.2
   json_serializable: '^6.2.0'
   grpc: ^3.0.2
+  json_annotation: ^4.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   retrofit_generator: '^3.0.1'
-  build_runner: '^2.1.11' 
+  build_runner: '^2.1.11'
   flutter_lints: ^2.0.0
 
 flutter:

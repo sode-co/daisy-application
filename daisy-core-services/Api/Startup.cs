@@ -34,7 +34,7 @@ namespace Api
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowAnyOrigin()
+                    .AllowAnyOrigin();
             }));
             services.AddSwaggerGen(c =>
             {
