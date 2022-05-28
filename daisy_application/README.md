@@ -5,13 +5,18 @@
   It recommend to run this Flutter project on VsCode for easier to setup Environment variables.
   If you have any trouble when setup Flutter with VsCode, please ask TienDang to get a tutorial of Flutter on Udemy
 # 2. Local Development Workflow
+  
   ### How to run:
-  1. Create `launch.json` on Visual Studio Code by clicking on `Run and Debug` tab, click on create `launch.json` file if not exist.
-  2. Edit the launch.json file as below to add environment variables.
-  3. Run the project with the profile we already defined in `launch.json`.
+  1. Open project with VsCode, open terminal, go to `daisy_application` folder, run command `flutter pub get` to install all dependencies
+  3. Create `launch.json` on Visual Studio Code by clicking on `Run and Debug` tab, click on create `launch.json` file if not exist.
+  4. Edit the launch.json file as below to add environment variables.
+  5. Run the project with the profile we already defined in `launch.json`.
+  
   ### Other commands:
   1. `flutter analyze`: Run linter to detect error, required to run this command before you make the pull request.
   2. `flutter pub run build_runner build`: Code auto generation for `Retrofit` library.
+  3. `flutter clean`: Clean up all generated file in project, include build folder.
+  4. `flutter pub get`: Install dependencies
   
   ### Example `launch.json file`
     {
