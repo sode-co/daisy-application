@@ -30,7 +30,7 @@
   
   ### Example of `appsettings.json` file
     {
-        "DB_HOST_NAME": "agent.kobiton",
+        "DB_HOST_NAME": "localhost",
         "DB_PORT": "1533",
         "DB_NAME": "Daisy",
         "DB_USER": "SA",
