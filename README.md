@@ -1,5 +1,5 @@
 # daisy-application
-Daisy Application all services, include frontend (mobile, web) and backend
+All services of `Daisy`, include frontend (mobile, web) and backend
 
 # Coding workflow:
 
