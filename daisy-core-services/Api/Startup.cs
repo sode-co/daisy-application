@@ -34,6 +34,8 @@ namespace Api
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .AllowCredentials()
                     .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
             }));
             services.AddSwaggerGen(c =>
