@@ -1,10 +1,10 @@
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:dio/dio.dart';
-import 'package:grpc/grpc.dart';
-
 import '../common/config.dart';
 import 'locator.dart';
+import 'native_locator.dart' if (dart.library.html) 'web_locator.dart'
+    as universal_locator;
 
 class CoreServiceLocator {
   static init() {
@@ -13,13 +13,9 @@ class CoreServiceLocator {
   }
 
   static void _initGrpcService() {
-    locator.registerFactory(() => ClientChannel(Config.GRPC_HOST,
-        port: Config.GRPC_PORT,
-        options:
-            const ChannelOptions(credentials: ChannelCredentials.insecure())));
-
-    locator.registerFactory<HealthCheckGrpcClient>(
-        () => HealthCheckGrpcClient(locator.get()));
+    universal_locator.UniversalLocator.init();
+    locator
+        .registerFactory<HealthCheckGrpcClient>(() => HealthCheckGrpcClient());
   }
 
   static void _initHttpService() {
