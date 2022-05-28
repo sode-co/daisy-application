@@ -17,19 +17,19 @@
 
 # 3. Environment Variables:
 
-### Example of `appsettings.json` file
-  {
-      "DB_HOST_NAME": "agent.kobiton",
-      "DB_PORT": "1533",
-      "DB_NAME": "Daisy",
-      "DB_USER": "SA",
-      "DB_PASSWORD": "Password123",
-      "API_PORT": 2433,
-      "API_HOST": "localhost",
-      "GRPC_HOST": "localhost",
-      "GRPC_PORT": 50052,
-      "PROTOCOL": "http",
-      "LogLevel": "Warning",
-      "AllowedHosts": "*"
-  }
+  ### Example of `appsettings.json` file
 
+    {
+        "DB_HOST_NAME": "agent.kobiton",
+        "DB_PORT": "1533",
+        "DB_NAME": "Daisy",
+        "DB_USER": "SA",
+        "DB_PASSWORD": "Password123",
+        "API_PORT": 2433,
+        "API_HOST": "localhost",
+        "GRPC_HOST": "localhost",
+        "GRPC_PORT": 50052,
+        "PROTOCOL": "http",
+        "LogLevel": "Warning",
+        "AllowedHosts": "*"
+    }
