@@ -18,7 +18,16 @@
 # 3. Environment Variables:
 
   ### Example of `appsettings.json` file
-
+  #### 1. `DB_HOST_NAME`: The host name of MssqlDatabase
+  #### 2. `DB_PORT`: The port of MssqlDatabase
+  #### 3. `DB_NAME`: Database name, type `Daisy`
+  #### 4. `DB_USER`: Authenticated database user name
+  #### 5. `DB_PASSWORD`: Authenticated database user password
+  #### 6. `API_PORT`: Port that you want the api service to running on
+  #### 7. `API_HOST`: Host that you want the api service to running on
+  #### 8. `GRPC_HOST`: Host that you want the gRPC service to running on
+  #### 9. `GRPC_PORT`: Port that you want the gRPC service to running on (5 digits)
+  #### 10. `Protocol`: `http` or `https`
     {
         "DB_HOST_NAME": "agent.kobiton",
         "DB_PORT": "1533",
