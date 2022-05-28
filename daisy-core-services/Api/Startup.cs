@@ -35,8 +35,6 @@ namespace Api
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowAnyOrigin()
-                    .AllowCredentials()
-                    .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
             }));
             services.AddSwaggerGen(c =>
             {
@@ -55,9 +53,8 @@ namespace Api
             }
 
             app.UseRouting();
-
+            app.UseCors("AllowAll");
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
