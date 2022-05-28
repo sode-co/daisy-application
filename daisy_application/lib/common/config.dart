@@ -9,5 +9,6 @@ class Config {
       String.fromEnvironment('GRPC_HOST', defaultValue: 'localhost');
   static const int GRPC_PORT =
       int.fromEnvironment('GRPC_PORT', defaultValue: 5121);
+  static const String GRPC_URL = '$PROTOCOL://$GRPC_HOST:$GRPC_PORT';
   static const String API_URL = '$PROTOCOL://$API_HOST:$API_PORT';
 }
