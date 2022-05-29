@@ -34,12 +34,16 @@ pipeline {
       }
       stage('Setup environment') {
         steps {
-          sh """
-            mkdir -p pipeline/env
-            mkdir -p ../daisy-core-services/Shared
-            cp ${APPSETTINGS_FILE_PATH} pipeline/env/appsettings.json
-            cp ${APPSETTINGS_FILE_PATH} ../daisy-core-services/Shared/appsettings.json
-          """
+          script {
+            dir('./') {
+              sh """
+                mkdir -p pipeline/env
+                mkdir -p daisy-core-services/Shared
+                cp ${APPSETTINGS_FILE_PATH} pipeline/env/appsettings.json
+                cp ${APPSETTINGS_FILE_PATH} daisy-core-services/Shared/appsettings.json
+              """
+            }
+          }
         }
       }
       stage('Build Api Image') {
@@ -81,9 +85,9 @@ pipeline {
       stage ('Setting up network') {
         steps {
             sh """
-              docker network create DaisyInternal || true
-              docker network connect DaisyInternal jenkins
-              docker network connect DaisyInternal mssqlserver
+              docker network create DaisyInternal || echo 'skipping error...'
+              docker network connect DaisyInternal jenkins || echo 'skipping error...'
+              docker network connect DaisyInternal mssqlserver || echo 'skipping error...'
             """
         }
       }
