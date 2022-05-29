@@ -24,14 +24,17 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
     });
 
     return Padding(
-        padding: EdgeInsets.only(left: size.width * 0.0055),
+        padding: EdgeInsets.all(size.width * 0.03),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            introText(Color(colors[colorIndex])),
+            Padding(
+              padding: EdgeInsets.only(left: size.width * 0.035),
+              child: introText(Color(colors[colorIndex]))
+            ),
             Divider(
                 thickness: 6,
-                indent: 0,
+                indent: size.width * 0.05,
                 endIndent: size.width * 0.85,
                 color: Color(colors[colorIndex])),
             const SizedBox(height: 20),
@@ -71,8 +74,8 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
       Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-        SizedBox(width: width * 0.35),
-        Icon(Icons.play_circle, color: color),
+        SizedBox(width: width * 0.3),
+        Icon(Icons.play_circle, color: color), // sometimes it causes bug not in dom tree??? sometimes not
         const SizedBox(width: 7),
         Text('See creativity at work', style: TextStyle(color: color, fontWeight: FontWeight.w600)),
       ]),
