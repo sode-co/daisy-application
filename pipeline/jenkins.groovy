@@ -44,10 +44,14 @@ pipeline {
       }
       stage('Build Api Image') {
         steps {
-            sh """
-            docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:${GIT_COMMIT_SHORT} ../
-            docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:latest ../
-            """
+          script {
+            dir('../') {
+              sh """
+              docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:${GIT_COMMIT_SHORT} .
+              docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:latest .
+              """
+            }
+          }
         }
       }
       stage('Build gRPC Image') {
