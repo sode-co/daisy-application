@@ -56,18 +56,26 @@ pipeline {
       }
       stage('Build gRPC Image') {
         steps {
-            sh """
-            docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT} ../
-            docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:latest ../
-            """
+          script {
+            dir('./') {
+              sh """
+              docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT} .
+              docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:latest .
+              """
+            }
+          }
         }
       }
       stage('Build Flutter Web Image') {
         steps {
-            sh """
-            docker build --no-cache -f pipeline/FlutterWeb.Dockerfile -t tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT} ../
-            docker build --no-cache -f pipeline/FlutterWeb.Dockerfile -t tiendvlp/daisy_flutter_web:latest ../
-            """
+          script {
+            dir('./') {
+              sh """
+              docker build --no-cache -f pipeline/FlutterWeb.Dockerfile -t tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT} .
+              docker build --no-cache -f pipeline/FlutterWeb.Dockerfile -t tiendvlp/daisy_flutter_web:latest .
+              """
+            }
+          }
         }
       }
       stage ('Setting up network') {
