@@ -1,5 +1,4 @@
 ﻿using System;
-using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Utils;
@@ -8,8 +7,6 @@ namespace DataAccess.MssqlServerIntegration
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-
         public ApplicationDbContext()
         {
         }
