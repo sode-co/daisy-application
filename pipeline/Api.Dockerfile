@@ -9,7 +9,7 @@ WORKDIR /src
 COPY ["daisy-core-services/daisy-core-services.sln", "./"]
 COPY ["daisy-core-services/Api/Api.csproj", "Api/"]
 
-COPY ../daisy-core-services .
+COPY daisy-core-services .
 RUN dotnet restore Api/Api.csproj
 
 WORKDIR /src/Api  
