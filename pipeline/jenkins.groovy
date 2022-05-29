@@ -16,7 +16,6 @@ pipeline {
     }
     options {
       disableConcurrentBuilds() 
-      // maximum 10 artifacts to be kept
       buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
     }
     stages {
