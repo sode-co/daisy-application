@@ -1,5 +1,7 @@
 def repo
 def FUNCTION_TESTING_REPORT_FILE_NAME = 'FunctionalTestingReports'
+def APPSETTINGS_FILE_PATH = '/var/jenkins_home/workspace/var-environment-all/daisy-appsettings.json'
+
 pipeline {
     agent any
     triggers {
@@ -35,8 +37,8 @@ pipeline {
           sh """
             mkdir -p env
             mkdir -p ../daisy-core-services/Shared
-            cp ${APPSETTINGS_FILE_PATH} env/
-            cp ${APPSETTINGS_FILE_PATH} ../daisy-core-services/Shared
+            cp ${APPSETTINGS_FILE_PATH} env/appsettings.json
+            cp ${APPSETTINGS_FILE_PATH} ../daisy-core-services/Shared/appsettings.json
           """
         }
       }
