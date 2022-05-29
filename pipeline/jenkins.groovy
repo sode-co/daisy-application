@@ -45,7 +45,7 @@ pipeline {
       stage('Build Api Image') {
         steps {
           script {
-            dir('../') {
+            dir('./') {
               sh """
               docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:${GIT_COMMIT_SHORT} .
               docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:latest .
