@@ -3,9 +3,6 @@ def FUNCTION_TESTING_REPORT_FILE_NAME = 'FunctionalTestingReports'
 def APPSETTINGS_FILE_PATH = '/var/jenkins_home/workspace/var-environment-all/daisy-appsettings.json'
 
 pipeline {
-    options { 
-      disableConcurrentBuilds() 
-    }
     agent any
     triggers {
         // check every minutes
@@ -18,6 +15,7 @@ pipeline {
       GIT_COMMIT_SHORT = ''
     }
     options {
+      disableConcurrentBuilds() 
       // maximum 10 artifacts to be kept
       buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
     }
