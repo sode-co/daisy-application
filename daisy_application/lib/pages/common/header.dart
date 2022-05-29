@@ -11,7 +11,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
         title: (Responsive.isDesktop(context)) ?
                 Row(children: <Widget>[
-                    const SizedBox(width: 15),
+                    const SizedBox(width: 150),
                     Image.asset('/images/logo.png', width: 150),
                     TextButton(child: const Text('Categories', style: Style.stringBold), onPressed: () {}),
                     TextButton(child: const Text('How it works', style: Style.stringBold), onPressed: () {}),
@@ -55,7 +55,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
             ),
           ),
           if(Responsive.isDesktop(context))
-          const SizedBox(width: 15),
+          const SizedBox(width: 150),
           ],
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
