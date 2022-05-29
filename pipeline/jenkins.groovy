@@ -19,7 +19,7 @@ pipeline {
     stages {
       stage ('Checking out') {
         steps {
-          repo = checkout scm
+          checkout scm
           dir('daisy-application') {
             GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'git rev-parse HEAD')
           }
