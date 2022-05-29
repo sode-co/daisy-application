@@ -3,6 +3,9 @@ def FUNCTION_TESTING_REPORT_FILE_NAME = 'FunctionalTestingReports'
 def APPSETTINGS_FILE_PATH = '/var/jenkins_home/workspace/var-environment-all/daisy-appsettings.json'
 
 pipeline {
+    options { 
+      disableConcurrentBuilds() 
+    }
     agent any
     triggers {
         // check every minutes
