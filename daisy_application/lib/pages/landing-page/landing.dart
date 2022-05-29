@@ -12,7 +12,7 @@ class LandingPage extends StatelessWidget {
     return Scaffold(
       appBar: const Header(),
       drawer: !Responsive.isDesktop(context) ? const Sidebar() : null,
-      body: Responsive.isDesktop(context) ? const SingleChildScrollView(child: BodyLandingPageWeb()) : SingleChildScrollView(child: BodyLandingPageMobile()),
+      body: Responsive.isDesktop(context) ? SingleChildScrollView(child: BodyLandingPageWeb()) : SingleChildScrollView(child: BodyLandingPageMobile()),
     );
   }
 }
