@@ -95,7 +95,7 @@ pipeline {
         steps {
            dir('daisy-core-services') {
             sh """
-            dotnet ef database update --startup-project DataAccess
+              dotnet ef database update --startup-project DataAccess
             """
            }
         }
