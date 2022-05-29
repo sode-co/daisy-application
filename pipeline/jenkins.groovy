@@ -19,8 +19,8 @@ pipeline {
     stages {
       stage ('Checking out') {
         steps {
-          repo = checkout scm
           script {
+            repo = checkout scm
             dir('daisy-application') {
               GIT_COMMIT_SHORT = sh(
                       script: "printf \$(git rev-parse --short ${repo.GIT_COMMIT})",
