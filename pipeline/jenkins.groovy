@@ -35,9 +35,9 @@ pipeline {
       stage('Setup environment') {
         steps {
           sh """
-            mkdir -p env
+            mkdir -p pipeline/env
             mkdir -p ../daisy-core-services/Shared
-            cp ${APPSETTINGS_FILE_PATH} env/appsettings.json
+            cp ${APPSETTINGS_FILE_PATH} pipeline/env/appsettings.json
             cp ${APPSETTINGS_FILE_PATH} ../daisy-core-services/Shared/appsettings.json
           """
         }
