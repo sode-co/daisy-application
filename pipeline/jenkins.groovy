@@ -9,7 +9,7 @@ pipeline {
     environment {
       // Replace the credentials with your webhook url, and Katalon api key
       // DISCORD_WEBHOOK = credentials('discord-fptbook-webhook')
-      DOTNET_APPSETTINGS_FILE_PATH = credentials('env/daisy-core-services');
+      // DOTNET_APPSETTINGS_FILE_PATH = credentials('env/daisy-core-services');
       GIT_COMMIT_SHORT = ''
     }
     options {
@@ -19,10 +19,12 @@ pipeline {
     stages {
       stage ('Checking out') {
         steps {
-          checkout scm
+          repo = checkout scm
           script {
             dir('daisy-application') {
-              GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'git rev-parse HEAD')
+              GIT_COMMIT_SHORT = sh(
+                      script: "printf \$(git rev-parse --short ${repo.GIT_COMMIT})",
+                      returnStdout: true)
             }
             echo "Git commit short hash: ${GIT_COMMIT_SHORT}"
           }
