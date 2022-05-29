@@ -8,7 +8,7 @@ pipeline {
     }
     environment {
       // Replace the credentials with your webhook url, and Katalon api key
-      DISCORD_WEBHOOK = credentials('discord-fptbook-webhook')
+      // DISCORD_WEBHOOK = credentials('discord-fptbook-webhook')
       DOTNET_APPSETTINGS_FILE_PATH = credentials('env/daisy-core-services');
       GIT_COMMIT_SHORT = ''
     }
