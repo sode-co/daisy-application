@@ -103,6 +103,9 @@ pipeline {
       stage('Launch Api') {
         steps {
           sh """
+              echo 'Stopping daisy-api...'
+              docker stop daisy-api || echo 'skipping error...'
+              echo 'Running daisy-api...'
               docker run -d -p 2433:2433 --rm --network DaisyInternal --name daisy-api tiendvlp/daisy_api:latest
           """
         }
@@ -110,6 +113,9 @@ pipeline {
       stage('Launch gRPC') {
         steps {
           sh """
+              echo 'Stopping daisy-grpc...'
+              docker stop daisy-grpc || echo 'skipping error...'
+              echo 'Running daisy-grpc...'
               docker run -d -p 50052:50052 --rm --network DaisyInternal --name daisy-grpc tiendvlp/daisy_grpc:latest
           """
         }
@@ -117,6 +123,9 @@ pipeline {
       stage('Launch Web') {
         steps {
           sh """
+              echo 'Stopping daisy-flutter-web...'
+              docker stop daisy-flutter-web || echo 'skipping error...'
+              echo 'Running daisy-flutter-web...'
               docker run -p 8081:8081 -d --rm --network DaisyInternal --name daisy-flutter-web tiendvlp/daisy_flutter_web:latest
           """
         }

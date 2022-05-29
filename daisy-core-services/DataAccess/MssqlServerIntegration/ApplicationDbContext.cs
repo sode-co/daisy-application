@@ -8,7 +8,7 @@ namespace DataAccess.MssqlServerIntegration
 {
     public class ApplicationDbContext : DbContext
     {
-        DbSet<User> Users;
+        public DbSet<User> Users { get; set; }
 
         public ApplicationDbContext()
         {
