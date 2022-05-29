@@ -8,6 +8,7 @@ import '../service_locator/locator.dart';
 import 'dart:async';
 
 void main() {
+  Debug.log('init-client', 'Client start healthcheck');
   setupDependencies();
   String ns = 'network-healthcheck';
   Timer.periodic(const Duration(seconds: 10), (Timer t) async {
