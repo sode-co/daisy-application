@@ -1,16 +1,18 @@
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class Header extends StatelessWidget with PreferredSizeWidget {
+  const Header({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
         title: (Responsive.isDesktop(context)) ?
                 Row(children: <Widget>[
-                  Image.asset('/images/logo.png', width: 150),
+                    const SizedBox(width: 15),
+                    Image.asset('/images/logo.png', width: 150),
                     TextButton(child: const Text('Categories', style: Style.stringBold), onPressed: () {}),
                     TextButton(child: const Text('How it works', style: Style.stringBold), onPressed: () {}),
                     TextButton(child: const Text('Find a designer', style: Style.stringBold), onPressed: () {}),
@@ -18,15 +20,11 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                 Center(child: Image.asset('/images/logo.png', width: 150)),
         actions: <Widget>[
           if(Responsive.isDesktop(context))
-          TextButton(onPressed: () {  },
-          child: RichText(
-            text: const TextSpan(
-              children: [
-                WidgetSpan(child: Icon(Icons.phone, color: Colors.black)),
-                TextSpan(text: '1900 9999', style: Style.stringBold)
-              ]
-            )
-          )),
+          TextButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.phone, color: Colors.black),
+            label: const Text('1900 8989', style: Style.stringBold)
+          ),
           if(Responsive.isDesktop(context))
           const SizedBox(width: 5),
           InkWell(
@@ -57,7 +55,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
             ),
           ),
           if(Responsive.isDesktop(context))
-          const Text('Login', style: TextStyle(color: Colors.white)),
+          const SizedBox(width: 15),
           ],
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
