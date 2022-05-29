@@ -20,11 +20,12 @@ pipeline {
       stage ('Checking out') {
         steps {
           repo = checkout scm
-          GIT_COMMIT_SHORT = sh(
-            script: "printf \$(git rev-parse --short ${repo.GIT_COMMIT})",
-            returnStdout: true
-          )
-          
+          dir('daisy-application') {
+            GIT_COMMIT_SHORT = sh(
+              script: "printf \$(git rev-parse --short ${repo.GIT_COMMIT})",
+              returnStdout: true
+            )
+          }
           echo "Git commit short hash: ${GIT_COMMIT_SHORT}"
         }
       }
