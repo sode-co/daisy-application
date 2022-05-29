@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 
 class BodyLandingPageMobile extends StatefulWidget {
@@ -9,11 +10,12 @@ class BodyLandingPageMobile extends StatefulWidget {
 
 class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
   int colorIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     List<int> colors = [0xFF5022B8, 0xFF0493DD, 0xFF1C1B1A, 0xFF009697];
-    Timer.periodic(const Duration(seconds: 5), (timer) {
+    Timer.periodic(const Duration(seconds: 15), (timer) {
       if (colorIndex == colors.length - 1) {
         setState(() => {colorIndex = 0});
       } else {
@@ -21,33 +23,75 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
       }
     });
 
-    return Container(
+    return Padding(
+        padding: EdgeInsets.only(left: size.width * 0.0055),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            introText(colors[colorIndex]),
+            introText(Color(colors[colorIndex])),
             Divider(
                 thickness: 6,
                 indent: 0,
                 endIndent: size.width * 0.85,
                 color: Color(colors[colorIndex])),
+            const SizedBox(height: 20),
+            searchCategoriesTextField(size.width * 0.89, Color(colors[colorIndex])),
           ],
-    ));
+        ));
+  }
+
+  Column searchCategoriesTextField(width, color) {
+    return Column(children: [
+      SizedBox(
+        width: width,
+        child: const TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            prefixIcon: Icon(Icons.search),
+            labelText: 'Logo, website, branding...',
+          ),
+        ),
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+      SizedBox(
+      height: 50,
+      width: width,
+      child:
+            TextButton(
+                onPressed: () {  },
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(color)),
+                child: const Center(child: Text('Get started', style: Style.whiteStringBold)),
+      )),
+      const SizedBox(
+        height: 10,
+      ),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+        SizedBox(width: width * 0.35),
+        Icon(Icons.play_circle, color: color),
+        const SizedBox(width: 7),
+        Text('See creativity at work', style: TextStyle(color: color, fontWeight: FontWeight.w600)),
+      ]),
+    ]);
   }
 
   Column introText(color) =>
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text('World-class design',
             style: TextStyle(
-                color: Color(color),
-                fontWeight: FontWeight.w900,
-                fontSize: 50,
+              color: color,
+              fontWeight: FontWeight.w900,
+              fontSize: 50,
             )),
         Text('At your service',
             style: TextStyle(
-                color: Color(color),
-                fontWeight: FontWeight.w900,
-                fontSize: 50,
+              color: color,
+              fontWeight: FontWeight.w900,
+              fontSize: 50,
             )),
       ]);
 }
