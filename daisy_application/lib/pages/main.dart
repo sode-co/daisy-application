@@ -8,6 +8,7 @@ import '../service_locator/locator.dart';
 import 'dart:async';
 
 void main() {
+  Debug.log('hello');
   setupDependencies();
   String ns = 'network-healthcheck';
   Timer.periodic(const Duration(seconds: 10), (Timer t) async {
@@ -28,11 +29,13 @@ void main() {
     }
   });
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) {
+    Debug.log('Init client');
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

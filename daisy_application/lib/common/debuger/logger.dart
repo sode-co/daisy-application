@@ -6,7 +6,8 @@ import 'dart:convert';
 import 'package:logger/logger.dart';
 
 class Debug {
-  static final _debug = tool.Logger(level: tool.Level.debug, printer: _printer);
+  static final _debug = tool.Logger(
+      level: tool.Level.debug, printer: _printer, filter: _Filter());
   static dynamic log = _VarargsFunction(Debug._invoked);
 
   static void _invoked(List arguments) {
@@ -24,7 +25,8 @@ class Debug {
 }
 
 class Error {
-  static final _error = tool.Logger(level: tool.Level.error, printer: _printer);
+  static final _error = tool.Logger(
+      level: tool.Level.error, printer: _printer, filter: _Filter());
   static dynamic log = _VarargsFunction(Error._invoked);
 
   static void _invoked(List arguments) {
@@ -38,6 +40,13 @@ class Error {
     }
 
     _error.e(rootMessage);
+  }
+}
+
+class _Filter extends LogFilter {
+  @override
+  bool shouldLog(LogEvent event) {
+    return true;
   }
 }
 
