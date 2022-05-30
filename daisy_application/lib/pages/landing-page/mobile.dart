@@ -27,7 +27,30 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
     'assets/images/intro/packaging2.png',
   ];
 
-  List<String> items = ['1', '2', '3'];
+  List<Map<String, String>> trendingItems = [
+    {'Branding design': 'assets/images/intro/trending/branding-design.png'},
+    {
+      'Logo & website':
+          'assets/images/intro/trending/logo-website-squarespace.png'
+    },
+    {'Website builders': 'assets/images/intro/trending/web-builder.png'},
+    {
+      'Logo & brand identity pack':
+          'assets/images/intro/trending/brand-identity-pack.png'
+    },
+    {
+      'Product packaging':
+          'assets/images/intro/trending/product-packaging-design.png'
+    },
+    {'T-shirt': 'assets/images/intro/trending/t-shirt-design.png'},
+    {
+      'Illustration or graphics':
+          'assets/images/intro/trending/illustrations.png'
+    },
+    {'Book cover': 'assets/images/intro/trending/book-cover-design.png'},
+    {'Show more': 'assets/images/intro/trending/categories.png'}
+  ];
+
   setColorIndex(value) {
     if (mounted) {
       setState(() => colorIndex = value);
@@ -65,35 +88,29 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
                 size.width * 0.89, Color(colors[colorIndex])),
             renderImageCarousel(),
             introDescription(size.width),
-            SizedBox(height: 200.0, child: trendingTab()),
+            const Text('Trending', style: Style.stringBold),
+            SizedBox(height: 200.0, child: trendingTab(size.width)),
           ],
         ));
   }
 
-  ListView trendingTab() {
+  SizedBox renderTrendingImageItem(pageWidth, imageItem) {
+    String title = '';
+    String imgSrc = '';
+    imageItem.forEach((k, v) => {title = k, imgSrc = v});
+    return SizedBox(
+        width: pageWidth * 0.3,
+        child:
+            Column(children: [Image.asset(imgSrc, height: 150), Text(title)]));
+  }
+
+  ListView trendingTab(pageWidth) {
     return ListView(
       padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-          height: 50,
-          width: 300,
-          color: Colors.amber[600],
-          child: const Center(child: Text('Entry A')),
-        ),
-        Container(
-          width: 300,
-          height: 50,
-          color: Colors.amber[500],
-          child: const Center(child: Text('Entry B')),
-        ),
-        Container(
-          width: 300,
-          height: 50,
-          color: Colors.amber[100],
-          child: const Center(child: Text('Entry C')),
-        ),
-      ],
       scrollDirection: Axis.horizontal,
+      children: trendingItems
+          .map((item) => renderTrendingImageItem(pageWidth, item))
+          .toList(),
     );
   }
 
