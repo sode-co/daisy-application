@@ -4,6 +4,8 @@ import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 
 class BodyLandingPageMobile extends StatefulWidget {
+  const BodyLandingPageMobile({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _BodyLandingMobileState();
 }
