@@ -20,11 +20,11 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
     0xFF009697
   ];
   List<String> images = [
-    'images/intro/clothes.png',
-    'images/intro/brand.png',
-    'images/intro/packaging.png',
-    'images/intro/logo.png',
-    'images/intro/packaging2.png',
+    'assets/images/intro/clothes.png',
+    'assets/images/intro/brand.png',
+    'assets/images/intro/packaging.png',
+    'assets/images/intro/logo.png',
+    'assets/images/intro/packaging2.png',
   ];
 
   setColorIndex(value) {
