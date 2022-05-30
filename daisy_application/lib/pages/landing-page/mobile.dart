@@ -27,6 +27,7 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
     'images/intro/packaging2.png',
   ];
 
+  List<String> items = ['1', '2', '3'];
   setColorIndex(value) {
     if (mounted) {
       setState(() => colorIndex = value);
@@ -64,37 +65,35 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
                 size.width * 0.89, Color(colors[colorIndex])),
             renderImageCarousel(),
             introDescription(size.width),
-            trendingTab(),
+            SizedBox(height: 200.0, child: trendingTab()),
           ],
         ));
   }
 
   ListView trendingTab() {
     return ListView(
-      // This next line does the trick.
-      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.all(8),
       children: <Widget>[
         Container(
-          width: 160.0,
-          color: Colors.red,
+          height: 50,
+          width: 300,
+          color: Colors.amber[600],
+          child: const Center(child: Text('Entry A')),
         ),
         Container(
-          width: 160.0,
-          color: Colors.blue,
+          width: 300,
+          height: 50,
+          color: Colors.amber[500],
+          child: const Center(child: Text('Entry B')),
         ),
         Container(
-          width: 160.0,
-          color: Colors.green,
-        ),
-        Container(
-          width: 160.0,
-          color: Colors.yellow,
-        ),
-        Container(
-          width: 160.0,
-          color: Colors.orange,
+          width: 300,
+          height: 50,
+          color: Colors.amber[100],
+          child: const Center(child: Text('Entry C')),
         ),
       ],
+      scrollDirection: Axis.horizontal,
     );
   }
 
