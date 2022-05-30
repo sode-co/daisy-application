@@ -12,6 +12,20 @@ class BodyLandingPageWeb extends StatefulWidget {
 
 class _BodyLandingWebState extends State<BodyLandingPageWeb> {
   int colorIndex = 0;
+
+  @override
+  initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 10), (timer) {
+      if (colorIndex == colors.length - 1) {
+        setColorIndex(0);
+      } else {
+        colorIndex++;
+        setColorIndex(colorIndex);
+      }
+    });
+  }
+
   List<int> colors = [
     0xFF5022B8,
     0xFF1C1B1A,
@@ -61,15 +75,6 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Timer.periodic(const Duration(seconds: 10), (timer) {
-      if (colorIndex == colors.length - 1) {
-        setColorIndex(0);
-      } else {
-        colorIndex++;
-        setColorIndex(colorIndex);
-      }
-    });
-
     return Padding(
         padding: EdgeInsets.all(size.width * 0.05),
         child: Column(
@@ -99,8 +104,18 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
     imageItem.forEach((k, v) => {title = k, imgSrc = v});
     return SizedBox(
         width: pageWidth * 0.1,
-        child: Column(
-            children: [Image.asset(imgSrc, height: imgHeight), Text(title)]));
+        child: Column(children: [
+          InkWell(
+              onHover: (isHovering) {
+                if (isHovering) {
+                  setState(() => imgHeight = 250);
+                } else {
+                  setState(() => imgHeight = 150);
+                }
+              },
+              child: Image.asset(imgSrc, height: imgHeight)),
+          Text(title)
+        ]));
   }
 
   ListView trendingTab(pageWidth) {

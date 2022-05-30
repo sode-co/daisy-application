@@ -12,6 +12,20 @@ class BodyLandingPageMobile extends StatefulWidget {
 
 class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
   int colorIndex = 0;
+
+  @override
+  initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 10), (timer) {
+      if (colorIndex == colors.length - 1) {
+        setColorIndex(0);
+      } else {
+        colorIndex++;
+        setColorIndex(colorIndex);
+      }
+    });
+  }
+
   List<int> colors = [
     0xFF5022B8,
     0xFF1C1B1A,
@@ -60,15 +74,6 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    Timer.periodic(const Duration(seconds: 10), (timer) {
-      if (colorIndex == colors.length - 1) {
-        setColorIndex(0);
-      } else {
-        colorIndex++;
-        setColorIndex(colorIndex);
-      }
-    });
 
     return Padding(
         padding: EdgeInsets.all(size.width * 0.03),
