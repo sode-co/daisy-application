@@ -11,7 +11,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
       title: (Responsive.isDesktop(context))
           ? Row(children: <Widget>[
               const SizedBox(width: 150),
-              Image.asset('/images/logo.png', width: 150),
+              Image.asset('assets/images/logo.png', width: 150),
               TextButton(
                   child: const Text('Categories', style: Style.stringBold),
                   onPressed: () {}),
@@ -22,7 +22,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                   child: const Text('Find a designer', style: Style.stringBold),
                   onPressed: () {}),
             ])
-          : Center(child: Image.asset('/images/logo.png', width: 150)),
+          : Center(child: Image.asset('assets/images/logo.png', width: 150)),
       actions: <Widget>[
         if (Responsive.isDesktop(context))
           TextButton.icon(
@@ -46,7 +46,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
               child: Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Image.asset('/images/google.png', width: 20),
+                  Image.asset('assets/images/google.png', width: 20),
                   const SizedBox(width: 5),
                   if (Responsive.isDesktop(context))
                     const Text('Login in with FPT mail',
