@@ -40,7 +40,6 @@ flutter:
 
   assets:
     - images/
-
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
