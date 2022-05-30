@@ -62,9 +62,47 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
             const SizedBox(height: 20),
             searchCategoriesTextField(
                 size.width * 0.89, Color(colors[colorIndex])),
-            renderImageCarousel()
+            renderImageCarousel(),
+            introDescription(size.width),
+            trendingTab(),
           ],
         ));
+  }
+
+  ListView trendingTab() {
+    return ListView(
+      // This next line does the trick.
+      scrollDirection: Axis.horizontal,
+      children: <Widget>[
+        Container(
+          width: 160.0,
+          color: Colors.red,
+        ),
+        Container(
+          width: 160.0,
+          color: Colors.blue,
+        ),
+        Container(
+          width: 160.0,
+          color: Colors.green,
+        ),
+        Container(
+          width: 160.0,
+          color: Colors.yellow,
+        ),
+        Container(
+          width: 160.0,
+          color: Colors.orange,
+        ),
+      ],
+    );
+  }
+
+  Padding introDescription(pageWidth) {
+    return Padding(
+        padding: EdgeInsets.all(pageWidth * 0.03),
+        child: const Text(
+            'Daisy is the go-to graphic design service by my Group. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'));
   }
 
   Column renderImageCarousel() {
