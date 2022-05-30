@@ -39,7 +39,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/
+    - assets/images/
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
