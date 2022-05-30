@@ -4,6 +4,8 @@ import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 
 class BodyLandingPageWeb extends StatefulWidget {
+  const BodyLandingPageWeb({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _BodyLandingWebState();
 }
@@ -18,11 +20,11 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
     0xFF009697
   ];
   List<String> images = [
-    '/images/intro/clothes.png',
-    '/images/intro/brand.png',
-    '/images/intro/packaging.png',
-    '/images/intro/logo.png',
-    '/images/intro/packaging2.png',
+    'images/intro/clothes.png',
+    'images/intro/brand.png',
+    'images/intro/packaging.png',
+    'images/intro/logo.png',
+    'images/intro/packaging2.png',
   ];
 
   setColorIndex(value) {

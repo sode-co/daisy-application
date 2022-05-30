@@ -4,6 +4,8 @@ import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 
 class BodyLandingPageMobile extends StatefulWidget {
+  const BodyLandingPageMobile({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _BodyLandingMobileState();
 }
@@ -18,11 +20,11 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
     0xFF009697
   ];
   List<String> images = [
-    '/images/intro/clothes.png',
-    '/images/intro/brand.png',
-    '/images/intro/packaging.png',
-    '/images/intro/logo.png',
-    '/images/intro/packaging2.png',
+    'images/intro/clothes.png',
+    'images/intro/brand.png',
+    'images/intro/packaging.png',
+    'images/intro/logo.png',
+    'images/intro/packaging2.png',
   ];
 
   setColorIndex(value) {
@@ -82,35 +84,35 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
           icon: const Icon(Icons.circle,
               color: Color.fromARGB(255, 190, 188, 188), size: 10),
           onPressed: () {
-              setColorIndex(0);
+            setColorIndex(0);
           },
         ),
         IconButton(
           icon: const Icon(Icons.circle,
               color: Color.fromARGB(255, 190, 188, 188), size: 10),
           onPressed: () {
-              setColorIndex(1);
+            setColorIndex(1);
           },
         ),
         IconButton(
           icon: const Icon(Icons.circle,
               color: Color.fromARGB(255, 190, 188, 188), size: 10),
           onPressed: () {
-              setColorIndex(2);
+            setColorIndex(2);
           },
         ),
         IconButton(
           icon: const Icon(Icons.circle,
               color: Color.fromARGB(255, 190, 188, 188), size: 10),
           onPressed: () {
-              setColorIndex(3);
+            setColorIndex(3);
           },
         ),
         IconButton(
           icon: const Icon(Icons.circle,
               color: Color.fromARGB(255, 190, 188, 188), size: 10),
           onPressed: () {
-              setColorIndex(4);
+            setColorIndex(4);
           },
         )
       ]),
