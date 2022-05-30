@@ -85,6 +85,7 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
                     size.width * 0.3, Color(colors[colorIndex])),
               ]),
             ]),
+            const Text('Trending', style: Style.stringBold),
             SizedBox(
                 height: 200.0, width: 1500.0, child: trendingTab(size.width)),
           ],
