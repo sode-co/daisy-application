@@ -27,6 +27,30 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
     'images/intro/packaging2.png',
   ];
 
+  List<Map<String, String>> trendingItems = [
+    {'Branding design': 'assets/images/intro/trending/branding-design.png'},
+    {
+      'Logo & website':
+          'assets/images/intro/trending/logo-website-squarespace.png'
+    },
+    {'Website builders': 'assets/images/intro/trending/web-builder.png'},
+    {
+      'Logo & brand identity pack':
+          'assets/images/intro/trending/brand-identity-pack.png'
+    },
+    {
+      'Product packaging':
+          'assets/images/intro/trending/product-packaging-design.png'
+    },
+    {'T-shirt': 'assets/images/intro/trending/t-shirt-design.png'},
+    {
+      'Illustration or graphics':
+          'assets/images/intro/trending/illustrations.png'
+    },
+    {'Book cover': 'assets/images/intro/trending/book-cover-design.png'},
+    {'Show more': 'assets/images/intro/trending/categories.png'}
+  ];
+
   setColorIndex(value) {
     if (mounted) {
       setState(() => colorIndex = value);
@@ -61,8 +85,30 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
                     size.width * 0.3, Color(colors[colorIndex])),
               ]),
             ]),
+            SizedBox(
+                height: 200.0, width: 1500.0, child: trendingTab(size.width)),
           ],
         ));
+  }
+
+  SizedBox renderTrendingImageItem(pageWidth, imageItem) {
+    String title = '';
+    String imgSrc = '';
+    double imgHeight = 150;
+    imageItem.forEach((k, v) => {title = k, imgSrc = v});
+    return SizedBox(
+        width: pageWidth * 0.1,
+        child: Column(
+            children: [Image.asset(imgSrc, height: imgHeight), Text(title)]));
+  }
+
+  ListView trendingTab(pageWidth) {
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: trendingItems
+          .map((item) => renderTrendingImageItem(pageWidth, item))
+          .toList(),
+    );
   }
 
   Column renderImageCarousel() {
