@@ -11,7 +11,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
       title: (Responsive.isDesktop(context))
           ? Row(children: <Widget>[
               const SizedBox(width: 150),
-              Image.asset('assets/images/logo.png', width: 150),
+              Image.asset('assets/images/weblogo.png', width: 150),
               TextButton(
                   child: const Text('Categories', style: Style.stringBold),
                   onPressed: () {}),
@@ -22,7 +22,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                   child: const Text('Find a designer', style: Style.stringBold),
                   onPressed: () {}),
             ])
-          : Center(child: Image.asset('assets/images/logo.png', width: 150)),
+          : Center(child: Image.asset('assets/images/weblogo.png', width: 150)),
       actions: <Widget>[
         if (Responsive.isDesktop(context))
           TextButton.icon(
