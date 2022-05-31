@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BodyLandingPageMobile extends StatefulWidget {
   const BodyLandingPageMobile({Key? key}) : super(key: key);
@@ -75,28 +76,83 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Padding(
-        padding: EdgeInsets.all(size.width * 0.03),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-                padding: EdgeInsets.only(left: size.width * 0.035),
-                child: introText(size.width, Color(colors[colorIndex]))),
-            Divider(
-                thickness: 6,
-                indent: size.width * 0.05,
-                endIndent: size.width * 0.85,
-                color: Color(colors[colorIndex])),
-            const SizedBox(height: 20),
-            searchCategoriesTextField(
-                size.width * 0.89, Color(colors[colorIndex])),
-            renderImageCarousel(),
-            introDescription(size.width),
-            const Text('Trending', style: Style.stringBold),
-            SizedBox(height: 200.0, child: trendingTab(size.width)),
-          ],
-        ));
+    return Column(
+      children: [
+        Padding(
+            padding: EdgeInsets.all(size.width * 0.03),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(left: size.width * 0.035),
+                    child: introText(size.width, Color(colors[colorIndex]))),
+                Divider(
+                    thickness: 6,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.85,
+                    color: Color(colors[colorIndex])),
+                const SizedBox(height: 20),
+                searchCategoriesTextField(
+                    size.width * 0.89, Color(colors[colorIndex])),
+                renderImageCarousel(),
+                introDescription(size.width),
+                const Text('Trending', style: Style.stringBold),
+                SizedBox(height: 200.0, child: trendingTab(size.width)),
+              ],
+            )),
+        Container(
+            decoration:
+                const BoxDecoration(color: Color.fromARGB(255, 220, 220, 220)),
+            child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: size.width * 0.05, horizontal: size.width * 0.1),
+                child: renderFooter())),
+      ],
+    );
+  }
+
+  Column renderFooter() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        renderCopyright(),
+        Padding(
+            padding: const EdgeInsets.only(left: 60),
+            child: renderSocialMediaButton()),
+      ],
+    );
+  }
+
+  Row renderSocialMediaButton() {
+    return Row(children: [
+      IconButton(
+          onPressed: () {},
+          icon: const FaIcon(FontAwesomeIcons.facebook, size: 20)),
+      IconButton(
+          onPressed: () {},
+          icon: const FaIcon(FontAwesomeIcons.instagram, size: 20)),
+      IconButton(
+          onPressed: () {},
+          icon: const FaIcon(FontAwesomeIcons.linkedin, size: 20)),
+      IconButton(
+          onPressed: () {},
+          icon: const FaIcon(FontAwesomeIcons.twitter, size: 20)),
+    ]);
+  }
+
+  Row renderCopyright() {
+    return Row(children: const [
+      Text('© Daisy'),
+      Text(' | '),
+      Text('by Sode'),
+      Text(' | '),
+      Text('Term'),
+      Text(' | '),
+      Text('Privacy'),
+      Text('  '),
+      Icon(Icons.public),
+      Text('English'),
+    ]);
   }
 
   SizedBox renderTrendingImageItem(pageWidth, imageItem) {
