@@ -79,27 +79,29 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
     return Column(
       children: [
         Padding(
-            padding: EdgeInsets.all(size.width * 0.03),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(left: size.width * 0.035),
-                    child: introText(size.width, Color(colors[colorIndex]))),
-                Divider(
-                    thickness: 6,
-                    indent: size.width * 0.05,
-                    endIndent: size.width * 0.85,
-                    color: Color(colors[colorIndex])),
-                const SizedBox(height: 20),
-                searchCategoriesTextField(
-                    size.width * 0.89, Color(colors[colorIndex])),
-                renderImageCarousel(),
-                introDescription(size.width),
-                const Text('Trending', style: Style.stringBold),
-                SizedBox(height: 200.0, child: trendingTab(size.width)),
-              ],
-            )),
+          padding: EdgeInsets.all(size.width * 0.03),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                  padding: EdgeInsets.only(left: size.width * 0.035),
+                  child: introText(size.width, Color(colors[colorIndex]))),
+              Divider(
+                  thickness: 6,
+                  indent: size.width * 0.05,
+                  endIndent: size.width * 0.85,
+                  color: Color(colors[colorIndex])),
+              const SizedBox(height: 20),
+              searchCategoriesTextField(
+                  size.width * 0.89, Color(colors[colorIndex])),
+              renderImageCarousel(),
+              introDescription(size.width),
+              const Text('Trending', style: Style.h6Bold),
+              SizedBox(height: 200.0, child: trendingTab(size.width)),
+              const Text('Boost your income', style: Style.h6Bold),
+            ],
+          ),
+        ),
         Container(
             decoration:
                 const BoxDecoration(color: Color.fromARGB(255, 220, 220, 220)),
