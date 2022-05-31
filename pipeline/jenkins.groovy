@@ -1,3 +1,4 @@
+/* groovylint-disable UnnecessaryGString */
 /* groovylint-disable-next-line LineLength */
 /* groovylint-disable CompileStatic, DuplicateStringLiteral, NestedBlockDepth, NoDef, VariableName, VariableTypeRequired */
 /* groovylint-disable-next-line NoDef, VariableName, VariableTypeRequired */
@@ -7,6 +8,8 @@ def _MOBILE_GRPC_PORT
 def _API_PORT
 def _WEB_APP_PORT
 def _TARGET_BRANCH
+def _SUB_NAME
+def _ENV
 
 pipeline {
   agent any
@@ -50,8 +53,17 @@ pipeline {
           }
 
           _TARGET_BRANCH = env.BRANCH_NAME
-          echo "Checked out the branch ${_TARGET_BRANCH}"
-          echo "Git commit short hash: ${GIT_COMMIT_SHORT}"
+          if (_TARGET_BRANCH == "main") {
+            println 'Current branch is main switch to production environment'
+            _ENV = 'production'
+          }
+          else {
+            println "Current branch is ${_TARGET_BRANCH} switch to test environment"
+            _ENV = 'test'
+          }
+
+          println "Checked out the branch ${_TARGET_BRANCH}"
+          println "Git commit short hash: ${GIT_COMMIT_SHORT}"
         }
       }
     }
@@ -77,6 +89,8 @@ pipeline {
             _WEB_APP_PORT = WEB_APP_PORT
           }
 
+          _SUB_NAME = "${_TARGET_BRANCH}_${GIT_COMMIT_SHORT}"
+
           dir('./') {
             sh """
               mkdir -p pipeline/env
@@ -86,15 +100,24 @@ pipeline {
             """
           }
 
-          sh """
-            echo 'BUILD VARIABLES'
-            echo '==================================='
-            echo 'WEB_APP_PORT: ${_WEB_APP_PORT}'
-            echo 'API_PORT: ${_API_PORT}'
-            echo 'WEB_GRPC_PORT: ${_WEB_GRPC_PORT}'
-            echo 'MOBILE_GRPC_PORT: ${_MOBILE_GRPC_PORT}'
-            echo '==================================='
-          """
+          println "BUILD VARIABLES"
+          println "==================================="
+          println "WEB_APP_PORT: ${_WEB_APP_PORT}"
+          println "API_PORT: ${_API_PORT}"
+          println "WEB_GRPC_PORT: ${_WEB_GRPC_PORT}"
+          println "MOBILE_GRPC_PORT: ${_MOBILE_GRPC_PORT}"
+          println "SUB_NAME: ${_SUB_NAME}"
+          println "==================================="
+
+          if (!(_WEB_APP_PORT?.trim() &&
+                _API_PORT?.trim() &&
+                _WEB_GRPC_PORT?.trim() &&
+                _MOBILE_GRPC_PORT?.trim())) {
+
+            println 'Skipping pipeline due to not found any parameters'
+            currentBuild.currentResult = 'UNSTABLE'
+            return
+          }
         }
       }
     }
@@ -148,92 +171,129 @@ pipeline {
     stage('Database Migration') {
       steps {
          dir('daisy-core-services') {
-          sh 'dotnet ef database update --startup-project DataAccess'
+          sh """
+            export ASPNETCORE_ENVIRONMENT=${_ENV}
+            dotnet ef database update --startup-project DataAccess
+          """
          }
       }
     }
     stage('Push to DockerHub') {
       steps {
         script {
-          if (_TARGET_BRANCH == main) {
+          if (_ENV == production) {
+            println "Pushing tiendvlp/daisy_api:${_SUB_NAME}..."
             sh """
-              echo 'Pushing tiendvlp/daisy_api:${GIT_COMMIT_SHORT}...'
-              docker push tiendvlp/daisy_api:${GIT_COMMIT_SHORT}
+              docker push tiendvlp/daisy_api:${_SUB_NAME}
               docker push tiendvlp/daisy_api:latest
-
-              echo 'Pushed tiendvlp/daisy_api:${GIT_COMMIT_SHORT} into docker hub successfully'
-              echo 'Pushing tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}...'
-              docker push tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}
-
-              docker push tiendvlp/daisy_grpc:latest
-              echo 'Pushed tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT} into docker hub successfully'
-              echo 'Pushing tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}...'
-
-              docker push tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}
-              docker push tiendvlp/daisy_flutter_web:latest
-              echo 'Pushed tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT} into docker hub successfully'
-
-              echo 'All services has been pushed into docker hub with tag ${GIT_COMMIT_SHORT}'
-
-              echo 'Cleaning up image...'
-              docker image rm tiendvlp/daisy_api:${GIT_COMMIT_SHORT}
-              docker image rm tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}
-              docker image rm tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}
             """
+            println "Pushed tiendvlp/daisy_api:${_SUB_NAME} into docker hub successfully"
+
+            println "Pushing tiendvlp/daisy_grpc:${_SUB_NAME}..."
+            sh """
+              docker push tiendvlp/daisy_grpc:${_SUB_NAME}
+              docker push tiendvlp/daisy_grpc:latest
+            """
+            println "Pushed tiendvlp/daisy_grpc:${_SUB_NAME} into docker hub successfully"
+
+            println "Pushing tiendvlp/daisy_flutter_web:${_SUB_NAME}..."
+            sh """
+              docker push tiendvlp/daisy_flutter_web:${_SUB_NAME}
+              docker push tiendvlp/daisy_flutter_web:latest
+            """
+            /* groovylint-disable-next-line LineLength */
+            println "Pushed tiendvlp/daisy_flutter_web:${_SUB_NAME} into docker hub successfully"
+
+            println "All services has been pushed into docker hub with tag ${_SUB_NAME}"
           }
         }
       }
     }
     stage('Launch Api') {
       steps {
-        sh """
-          echo 'Stopping daisy-api...'
-          docker stop daisy-api || echo 'skipping error...'
-          echo 'Running daisy-api...'
-          docker run -d \
-            -p ${_API_PORT}:2433 \
-            --rm --network DaisyInternal \
-            --name daisy-api tiendvlp/daisy_api:latest
-        """
+        script {
+          def containerName = "daisy_api_${_TARGET_BRANCH}"
+          println "Stopping ${containerName}..."
+          sh "docker stop ${containerName} || echo 'skipping error while stopping ${containerName}...'"
+
+          println "Running ${containerName}..."
+          sh """
+            docker run -d \
+              -p ${_API_PORT}:2433 \
+              --rm --network DaisyInternal \
+              -e ASPNETCORE_ENVIRONMENT=${_ENV} \
+              --name ${containerName} tiendvlp/daisy_api:latest
+          """
+        }
       }
     }
     stage('Launch gRPC Web') {
       steps {
-        sh """
-          echo 'Stopping daisy-grpc-web...'
-          docker stop daisy-grpc-web || echo 'skipping error...'
-          echo 'Running daisy-grpc-web...'
-          docker run -d --rm -p ${_WEB_GRPC_PORT}:50052 \
-            --network DaisyInternal \
-            --name daisy-grpc-web \
-            -it tiendvlp/daisy_grpc:latest GrpcServices.dll
-        """
+        script {
+          def containerName = "daisy_grpc_web_${_TARGET_BRANCH}"
+          println "Stopping ${containerName}..."
+          sh "docker stop ${containerName} || echo 'skipping error while stopping ${containerName}...'"
+
+          println "Running ${containerName}"
+          sh """
+            docker run -d --rm -p ${_WEB_GRPC_PORT}:50052 \
+              --network DaisyInternal \
+              --name ${containerName} \
+              -e ASPNETCORE_ENVIRONMENT=${_ENV} \
+              -it tiendvlp/daisy_grpc:${_SUB_NAME} GrpcServices.dll
+          """
+        }
       }
     }
     stage('Launch gRPC Mobile') {
       steps {
-        sh """
-          echo 'Stopping daisy-grpc-mobile...'
-          docker stop daisy-grpc-mobile || echo 'skipping error...'
-          echo 'Running daisy-grpc-mobile...'
-          docker run -d --rm -p ${_MOBILE_GRPC_PORT}:50152 \
-            --network DaisyInternal \
-            --name daisy-grpc-mobile \
-            -it tiendvlp/daisy_grpc:latest MobileGrpcServices.dll
-        """
+        script {
+          def containerName = "daisy_grpc_mobile_${_TARGET_BRANCH}"
+          println "Stopping ${containerName}..."
+          sh "docker stop ${containerName} || echo 'skipping error while stopping ${containerName}...'"
+
+          println "Running ${containerName}..."
+          sh """
+            docker run -d --rm -p ${_MOBILE_GRPC_PORT}:50152 \
+              --network DaisyInternal \
+              --name ${containerName} \
+              -e ASPNETCORE_ENVIRONMENT=${_ENV} \
+              -it tiendvlp/daisy_grpc:${_SUB_NAME} MobileGrpcServices.dll
+          """
+        }
       }
     }
     stage('Launch Web') {
       steps {
-        sh """
-          echo 'Stopping daisy-flutter-web...'
-          docker stop daisy-flutter-web || echo 'skipping error...'
-          echo 'Running daisy-flutter-web...'
-          docker run -d --rm -p ${_WEB_APP_PORT}:8081 \
-            --network DaisyInternal \
-            --name daisy-flutter-web \
-            tiendvlp/daisy_flutter_web:latest
-        """
+        script {
+          def containerName = "daisy_flutter_web_${_TARGET_BRANCH}"
+          println "Stopping ${containerName}..."
+          sh "docker stop ${containerName} || echo 'skipping error while stopping ${containerName}...'"
+
+          println "Running ${containerName}..."
+          sh """
+            docker run -d --rm -p ${_WEB_APP_PORT}:8081 \
+              --network DaisyInternal \
+              --name ${containerName} \
+              tiendvlp/daisy_flutter_web:${_SUB_NAME}
+          """
+        }
+      }
+    }
+    stage('Clean Up') {
+      steps {
+        script {
+          println 'Cleaning up stopped docker contaner...'
+          sh 'docker container prune -f'
+
+          println 'Cleaning up unused docker images...'
+          sh 'docker image prune -af'
+
+          println 'Cleaning up unused docker network...'
+          sh 'docker network prune -f'
+
+          println 'Clean up success.'
+        }
       }
     }
   }
