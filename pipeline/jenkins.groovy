@@ -115,7 +115,7 @@ pipeline {
                 _MOBILE_GRPC_PORT?.trim())) {
 
             println 'Skipping pipeline due to not found any parameters'
-            currentBuild.currentResult = 'UNSTABLE'
+            currentBuild.currentResult = 'SUCCESS'
             return
           }
         }
