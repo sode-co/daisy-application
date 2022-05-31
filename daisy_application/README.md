@@ -34,6 +34,7 @@
                   "--dart-define=PROTOCOL=http",
                   "--dart-define=GRPC_HOST=10.0.2.2",
                   "--dart-define=GRPC_PORT=50052",
+                  "--dart-define=GRPC_MOBILE_PORT="500152",
                   "--dart-define=ENVIRONMENT=dev"
               ],
           }
