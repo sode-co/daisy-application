@@ -20,6 +20,8 @@ namespace DataAccess.MssqlServerIntegration
                 Config.Load();
             }
 
+            Config.AdaptEnv(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+
             string connectionString =
                 $"server={Config.Get().DB_HOST_NAME},{Config.Get().DB_PORT};" +
                 $"Database={ Config.Get().DB_NAME};User={Config.Get().DB_USER};" +
