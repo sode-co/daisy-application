@@ -11,22 +11,29 @@ namespace GrpcServices
 {
     public class Program
     {
-        private static Server server;
-
         public static void Main(string[] args)
         {
             Config.Load();
-            CreateHostBuilder(args).Build().Run();
+            CreateWebServertBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHostBuilder CreateWebServertBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                    .UseUrls($"{Config.Get().PROTOCOL}://{Config.Get().GRPC_HOST}:{Config.Get().GRPC_PORT}")
+                    .UseUrls($"{Config.Get().PROTOCOL}://{Config.Get().GRPC_HOST}:{Config.Get().GRPC_MOBILE_PORT}")
+                     .ConfigureKestrel(options =>
+                     {
+                         options.AddServerHeader = true;
+                         options.Listen(IPAddress.Loopback, Config.Get().GRPC_MOBILE_PORT, x =>
+                         {
+                             x.Protocols = HttpProtocols.Http2;
+                         });
+                     })
                     .UseIISIntegration()
                     .UseStartup<Startup>();
+
                 })
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
