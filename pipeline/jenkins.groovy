@@ -103,20 +103,20 @@ pipeline {
       stage('Push to DockerHub') {
         steps {
           sh """
-              echo 'Pushing tiendvlp/daisy-api:${GIT_COMMIT_SHORT}...'
-              docker push tiendvlp/daisy-api:${GIT_COMMIT_SHORT}
-              docker push tiendvlp/daisy-api:latest
-              echo 'Pushed tiendvlp/daisy-api:${GIT_COMMIT_SHORT} into docker hub successfully'
+              echo 'Pushing tiendvlp/daisy_api:${GIT_COMMIT_SHORT}...'
+              docker push tiendvlp/daisy_api:${GIT_COMMIT_SHORT}
+              docker push tiendvlp/daisy_api:latest
+              echo 'Pushed tiendvlp/daisy_api:${GIT_COMMIT_SHORT} into docker hub successfully'
 
-              echo 'Pushing tiendvlp/daisy-grpc:${GIT_COMMIT_SHORT}...'
-              docker push tiendvlp/daisy-grpc:${GIT_COMMIT_SHORT}
-              docker push tiendvlp/daisy-grpc:latest'
-              echo 'Pushed tiendvlp/daisy-grpc:${GIT_COMMIT_SHORT} into docker hub successfully'
+              echo 'Pushing tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}...'
+              docker push tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}
+              docker push tiendvlp/daisy_grpc:latest'
+              echo 'Pushed tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT} into docker hub successfully'
 
-              echo 'Pushing tiendvlp/daisy-flutter-web:${GIT_COMMIT_SHORT}...'
-              docker push tiendvlp/daisy-flutter-web:${GIT_COMMIT_SHORT}
-              docker push tiendvlp/daisy-flutter-web:latest
-              echo 'Pushed tiendvlp/daisy-flutter-web:${GIT_COMMIT_SHORT} into docker hub successfully'
+              echo 'Pushing tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}...'
+              docker push tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}
+              docker push tiendvlp/daisy_flutter_web:latest
+              echo 'Pushed tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT} into docker hub successfully'
 
               echo 'All services has been pushed into docker hub with tag ${GIT_COMMIT_SHORT}'
           """
