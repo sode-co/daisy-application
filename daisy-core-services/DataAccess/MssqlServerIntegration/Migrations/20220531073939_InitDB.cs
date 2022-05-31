@@ -8,7 +8,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ArtWorkTypes",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -16,13 +16,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArtWorkTypes", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,31 +39,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     TotalAmount = table.Column<int>(type: "int", nullable: false),
                     Commission = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Resources",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FileType = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    WorkStatus = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Resources", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,17 +58,16 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     LastName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     DisplayName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Role = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Settings = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Settings = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Avatar = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Phone = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,9 +86,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -133,9 +114,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -164,9 +145,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Biography = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FreelancerId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -180,81 +161,35 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    FreelancerId = table.Column<int>(type: "int", nullable: true),
-                    ArtWorkTypeId = table.Column<int>(type: "int", nullable: true),
-                    ResolvedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PreferredLanguage = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ReferenceFile = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Timeline = table.Column<long>(type: "bigint", nullable: false),
-                    Budget = table.Column<int>(type: "int", nullable: false),
-                    IsAllowedPublic = table.Column<bool>(type: "bit", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    PaymentId = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Projects_ArtWorkTypes_ArtWorkTypeId",
-                        column: x => x.ArtWorkTypeId,
-                        principalTable: "ArtWorkTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Projects_Payments_PaymentId",
-                        column: x => x.PaymentId,
-                        principalTable: "Payments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Projects_Users_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Projects_Users_FreelancerId",
-                        column: x => x.FreelancerId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Requests",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
-                    ArtWorkTypeId = table.Column<int>(type: "int", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ParentRequestId = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Requests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Requests_ArtWorkTypes_ArtWorkTypeId",
-                        column: x => x.ArtWorkTypeId,
-                        principalTable: "ArtWorkTypes",
+                        name: "FK_Requests_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Requests_Requests_ParentRequestId",
+                        column: x => x.ParentRequestId,
+                        principalTable: "Requests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -274,20 +209,20 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Image = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     PortfolioId = table.Column<int>(type: "int", nullable: true),
-                    ArtWorkTypeId = table.Column<int>(type: "int", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ArtWorks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ArtWorks_ArtWorkTypes_ArtWorkTypeId",
-                        column: x => x.ArtWorkTypeId,
-                        principalTable: "ArtWorkTypes",
+                        name: "FK_ArtWorks_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -299,43 +234,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectResourceMaps",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProjectId = table.Column<int>(type: "int", nullable: true),
-                    ResourceId = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProjectResourceMaps", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProjectResourceMaps_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProjectResourceMaps_Resources_ResourceId",
-                        column: x => x.ResourceId,
-                        principalTable: "Resources",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "JobApplications",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FreelancerId = table.Column<int>(type: "int", nullable: true),
-                    ResolvedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ResolvedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RequestId = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     PreferredLanguage = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
@@ -344,9 +249,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -366,31 +271,55 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ArtWorkResourceMaps",
+                name: "Projects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ArtWorkId = table.Column<int>(type: "int", nullable: true),
-                    ResourceId = table.Column<int>(type: "int", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    FreelancerId = table.Column<int>(type: "int", nullable: true),
+                    ResolvedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PreferredLanguage = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ReferenceFile = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Timeline = table.Column<long>(type: "bigint", nullable: false),
+                    Budget = table.Column<int>(type: "int", nullable: false),
+                    IsAllowedPublic = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    PaymentId = table.Column<int>(type: "int", nullable: true),
+                    RequestId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArtWorkResourceMaps", x => x.Id);
+                    table.PrimaryKey("PK_Projects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ArtWorkResourceMaps_ArtWorks_ArtWorkId",
-                        column: x => x.ArtWorkId,
-                        principalTable: "ArtWorks",
+                        name: "FK_Projects_Payments_PaymentId",
+                        column: x => x.PaymentId,
+                        principalTable: "Payments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ArtWorkResourceMaps_Resources_ResourceId",
-                        column: x => x.ResourceId,
-                        principalTable: "Resources",
+                        name: "FK_Projects_Requests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Projects_Users_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Projects_Users_FreelancerId",
+                        column: x => x.FreelancerId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -406,11 +335,12 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtWorkId = table.Column<int>(type: "int", nullable: true),
                     Like = table.Column<bool>(type: "bit", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ObjectId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -435,25 +365,143 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtWorkResourceMaps_ArtWorkId",
-                table: "ArtWorkResourceMaps",
-                column: "ArtWorkId");
+            migrationBuilder.CreateTable(
+                name: "Workspaces",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    RequestId = table.Column<int>(type: "int", nullable: true),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workspaces", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Workspaces_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Workspaces_Requests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Discussions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SenderId = table.Column<int>(type: "int", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkspaceId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Discussions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Discussions_Users_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Discussions_Workspaces_WorkspaceId",
+                        column: x => x.WorkspaceId,
+                        principalTable: "Workspaces",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Resources",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileType = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    WorkStatus = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    WorkspaceId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ObjectId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Resources", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Resources_Workspaces_WorkspaceId",
+                        column: x => x.WorkspaceId,
+                        principalTable: "Workspaces",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArtWorkResource",
+                columns: table => new
+                {
+                    ArtWorksId = table.Column<int>(type: "int", nullable: false),
+                    ResourcesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtWorkResource", x => new { x.ArtWorksId, x.ResourcesId });
+                    table.ForeignKey(
+                        name: "FK_ArtWorkResource_ArtWorks_ArtWorksId",
+                        column: x => x.ArtWorksId,
+                        principalTable: "ArtWorks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArtWorkResource_Resources_ResourcesId",
+                        column: x => x.ResourcesId,
+                        principalTable: "Resources",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtWorkResourceMaps_ResourceId",
-                table: "ArtWorkResourceMaps",
-                column: "ResourceId");
+                name: "IX_ArtWorkResource_ResourcesId",
+                table: "ArtWorkResource",
+                column: "ResourcesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtWorks_ArtWorkTypeId",
+                name: "IX_ArtWorks_CategoryId",
                 table: "ArtWorks",
-                column: "ArtWorkTypeId");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtWorks_PortfolioId",
                 table: "ArtWorks",
                 column: "PortfolioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Discussions_SenderId",
+                table: "Discussions",
+                column: "SenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Discussions_WorkspaceId",
+                table: "Discussions",
+                column: "WorkspaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobApplications_FreelancerId",
@@ -486,21 +534,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 column: "FreelancerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectResourceMaps_ProjectId",
-                table: "ProjectResourceMaps",
-                column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProjectResourceMaps_ResourceId",
-                table: "ProjectResourceMaps",
-                column: "ResourceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Projects_ArtWorkTypeId",
-                table: "Projects",
-                column: "ArtWorkTypeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Projects_CustomerId",
                 table: "Projects",
                 column: "CustomerId");
@@ -516,14 +549,29 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 column: "PaymentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_ArtWorkTypeId",
+                name: "IX_Projects_RequestId",
+                table: "Projects",
+                column: "RequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_CategoryId",
                 table: "Requests",
-                column: "ArtWorkTypeId");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Requests_CustomerId",
                 table: "Requests",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_ParentRequestId",
+                table: "Requests",
+                column: "ParentRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resources_WorkspaceId",
+                table: "Resources",
+                column: "WorkspaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_ArtWorkId",
@@ -545,12 +593,25 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 table: "Users",
                 column: "Email",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workspaces_ProjectId",
+                table: "Workspaces",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workspaces_RequestId",
+                table: "Workspaces",
+                column: "RequestId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ArtWorkResourceMaps");
+                name: "ArtWorkResource");
+
+            migrationBuilder.DropTable(
+                name: "Discussions");
 
             migrationBuilder.DropTable(
                 name: "JobApplications");
@@ -562,16 +623,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 name: "PaymentActions");
 
             migrationBuilder.DropTable(
-                name: "ProjectResourceMaps");
-
-            migrationBuilder.DropTable(
                 name: "Reviews");
-
-            migrationBuilder.DropTable(
-                name: "Requests");
-
-            migrationBuilder.DropTable(
-                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "Resources");
@@ -580,13 +632,22 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 name: "ArtWorks");
 
             migrationBuilder.DropTable(
-                name: "Payments");
-
-            migrationBuilder.DropTable(
-                name: "ArtWorkTypes");
+                name: "Workspaces");
 
             migrationBuilder.DropTable(
                 name: "Portfolios");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
+
+            migrationBuilder.DropTable(
+                name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Users");

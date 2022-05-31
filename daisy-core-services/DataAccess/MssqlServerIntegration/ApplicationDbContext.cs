@@ -12,7 +12,7 @@ namespace DataAccess.MssqlServerIntegration
         {
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<ArtWorkType> ArtWorkTypes { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<ArtWork> ArtWorks { get; set; }
         public DbSet<JobApplication> JobApplications { get; set; }
         public DbSet<Notification> Notifications { get; set; }
@@ -23,6 +23,8 @@ namespace DataAccess.MssqlServerIntegration
         public DbSet<Request> Requests { get; set; }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Discussion> Discussions { get; set; }
+        public DbSet<Workspace> Workspaces { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

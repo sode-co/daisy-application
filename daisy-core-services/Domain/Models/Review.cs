@@ -29,18 +29,20 @@ namespace Domain.Models
         [Required]
         public bool Like { get; set; }
 
+        public int Rating { get; set; }
+
         [Required]
         public virtual User User { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        [Required]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public DateTime? DeletedAt { get; set; }
 
         [Required]
+        [MaxLength(255)]
         public String ObjectId { get; set; }
 
         public Review() { }
