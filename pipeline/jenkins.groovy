@@ -130,7 +130,6 @@ pipeline {
             println "Building grpc image with name: tiendvlp/daisy_api:${_SUB_NAME}"
             sh """
               docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:${_SUB_NAME} .
-              docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:latest .
             """
           }
         }
@@ -143,7 +142,6 @@ pipeline {
             println "Building grpc image with name: tiendvlp/daisy_grpc:${_SUB_NAME}"
             sh """
               docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:${_SUB_NAME} .
-              docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:latest .
             """
           }
         }
@@ -156,9 +154,14 @@ pipeline {
             println "Building flutter image with name: tiendvlp/daisy_flutter_web:${_SUB_NAME}"
             sh """
               docker build --no-cache \
-              -f pipeline/FlutterWeb.Dockerfile \
-              -t tiendvlp/daisy_flutter_web:${_SUB_NAME} .
-              docker build --no-cache -f pipeline/FlutterWeb.Dockerfile -t tiendvlp/daisy_flutter_web:latest .
+                -f pipeline/FlutterWeb.Dockerfile \
+                --build-arg ENVIRONMENT='${_ENV}' \
+                --build-arg API_HOST=${_HOST} \
+                --build-arg API_PORT=${_API_PORT} \
+                --build-arg GRPC_HOST=${_HOST} \
+                --build-arg MOBILE_GRPC_PORT=${_MOBILE_GRPC_PORT} \
+                --build-arg GRPC_PORT=${_WEB_GRPC_PORT} \
+                -t tiendvlp/daisy_flutter_web:${_SUB_NAME} .
             """
           }
         }
@@ -190,21 +193,18 @@ pipeline {
             println "Pushing tiendvlp/daisy_api:${_SUB_NAME}..."
             sh """
               docker push tiendvlp/daisy_api:${_SUB_NAME}
-              docker push tiendvlp/daisy_api:latest
             """
             println "Pushed tiendvlp/daisy_api:${_SUB_NAME} into docker hub successfully"
 
             println "Pushing tiendvlp/daisy_grpc:${_SUB_NAME}..."
             sh """
               docker push tiendvlp/daisy_grpc:${_SUB_NAME}
-              docker push tiendvlp/daisy_grpc:latest
             """
             println "Pushed tiendvlp/daisy_grpc:${_SUB_NAME} into docker hub successfully"
 
             println "Pushing tiendvlp/daisy_flutter_web:${_SUB_NAME}..."
             sh """
               docker push tiendvlp/daisy_flutter_web:${_SUB_NAME}
-              docker push tiendvlp/daisy_flutter_web:latest
             """
             /* groovylint-disable-next-line LineLength */
             println "Pushed tiendvlp/daisy_flutter_web:${_SUB_NAME} into docker hub successfully"
@@ -227,7 +227,7 @@ pipeline {
               -p ${_API_PORT}:2433 \
               --rm --network DaisyInternal \
               -e ASPNETCORE_ENVIRONMENT=${_ENV} \
-              --name ${containerName} tiendvlp/daisy_api:latest
+              --name ${containerName} tiendvlp/daisy_api:${_SUB_NAME}
           """
         }
       }
@@ -280,12 +280,6 @@ pipeline {
             docker run -d --rm -p ${_WEB_APP_PORT}:8081 \
               --network DaisyInternal \
               --name ${containerName} \
-              -e ENVIRONMENT='${_ENV}' \
-              -e API_HOST=${_HOST} \
-              -e API_PORT=${_API_PORT} \
-              -e GRPC_HOST=${_HOST} \
-              -e MOBILE_GRPC_PORT=${_MOBILE_GRPC_PORT} \
-              -e GRPC_PORT=${_WEB_GRPC_PORT} \
               tiendvlp/daisy_flutter_web:${_SUB_NAME}
           """
         }
