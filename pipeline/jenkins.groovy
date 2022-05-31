@@ -110,7 +110,7 @@ pipeline {
 
               echo 'Pushing tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}...'
               docker push tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}
-              docker push tiendvlp/daisy_grpc:latest'
+              docker push tiendvlp/daisy_grpc:latest
               echo 'Pushed tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT} into docker hub successfully'
 
               echo 'Pushing tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}...'
