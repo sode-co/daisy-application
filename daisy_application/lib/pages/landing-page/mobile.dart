@@ -105,6 +105,12 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
               Padding(
                   padding: EdgeInsets.only(left: size.width * 0.2),
                   child: renderWelcomeToLogin()),
+              Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: size.width * 0.01,
+                      vertical: size.width * 0.05),
+                  child: renderSeeAllCategories(size.width)),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -117,6 +123,41 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
                 child: renderFooter())),
       ],
     );
+  }
+
+  Column renderSeeAllCategories(pageWidth) {
+    return Column(children: [
+      const Text('Logos, websites, book covers & more!', style: Style.h5Bold),
+      Divider(
+        height: 5,
+        thickness: 4,
+        indent: pageWidth * 0.004,
+        endIndent: pageWidth * 0.75,
+        color: Colors.black,
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: pageWidth * 0.05, vertical: pageWidth * 0.05),
+        child: const Text(
+            'Get the perfect logo design - or any design in over 90 categories! Whatever your business need or budget, we’ll help get it done.'),
+      ),
+      Container(
+        height: 50,
+        width: 200,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.black,
+            border: Border.all(color: Colors.black, style: BorderStyle.solid)),
+        child: TextButton(
+          onPressed: () {},
+          child: const Text('See all categories',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18)),
+        ),
+      ),
+    ]);
   }
 
   CarouselSlider renderIntroCarouselImages() {
