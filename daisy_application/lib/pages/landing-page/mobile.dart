@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:daisy_application/pages/common/color.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -99,6 +101,10 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
               const Text('Trending', style: Style.h6Bold),
               SizedBox(height: 200.0, child: trendingTab(size.width)),
               const Text('Boost your income', style: Style.h6Bold),
+              renderIntroCarouselImages(),
+              Padding(
+                  padding: EdgeInsets.only(left: size.width * 0.2),
+                  child: renderWelcomeToLogin()),
             ],
           ),
         ),
@@ -109,6 +115,79 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
                 padding: EdgeInsets.symmetric(
                     vertical: size.width * 0.05, horizontal: size.width * 0.1),
                 child: renderFooter())),
+      ],
+    );
+  }
+
+  CarouselSlider renderIntroCarouselImages() {
+    return CarouselSlider(
+      options: CarouselOptions(height: 400.0, autoPlay: true),
+      items: ['9,920,123 designs', '11,123 3D designs', '221,021 connections']
+          .map((i) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/intro/mobile_map.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Center(
+                  child: Text(
+                '$i',
+                style: const TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.w900,
+                    color: MyColor.orange),
+              )),
+            );
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  Column renderWelcomeToLogin() {
+    return Column(
+      children: [
+        Container(
+          height: 50,
+          width: 200,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: MyColor.orange,
+              border:
+                  Border.all(color: MyColor.orange, style: BorderStyle.solid)),
+          child: TextButton(
+            onPressed: () {},
+            child: const Text('Find your talent',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18)),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          height: 50,
+          width: 200,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+              border:
+                  Border.all(color: MyColor.orange, style: BorderStyle.solid)),
+          child: TextButton(
+            onPressed: () {},
+            child: const Text('Designer, join now',
+                style: TextStyle(
+                    color: MyColor.orange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18)),
+          ),
+        ),
       ],
     );
   }
