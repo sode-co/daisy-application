@@ -41,7 +41,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ArtWorkTypeId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -62,7 +62,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("PortfolioId")
                         .HasColumnType("int");
@@ -72,19 +73,19 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtWorkTypeId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("PortfolioId");
 
                     b.ToTable("ArtWorks");
                 });
 
-            modelBuilder.Entity("Domain.Models.ArtWorkType", b =>
+            modelBuilder.Entity("Domain.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,14 +110,63 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ArtWorkTypes");
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Domain.Models.Discussion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ObjectId")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("WorkspaceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId");
+
+                    b.HasIndex("WorkspaceId");
+
+                    b.ToTable("Discussions");
                 });
 
             modelBuilder.Entity("Domain.Models.JobApplication", b =>
@@ -147,7 +197,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("PreferredLanguage")
                         .IsRequired()
@@ -157,7 +208,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<int?>("RequestId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ResolvedAt")
+                    b.Property<DateTime?>("ResolvedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
@@ -166,7 +217,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<long>("Timeline")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -201,7 +252,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("ReceiverId")
                         .HasColumnType("int");
@@ -216,7 +268,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -258,7 +310,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -266,7 +319,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<int>("TotalAmount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -295,7 +348,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
@@ -309,7 +363,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("UserId")
@@ -349,9 +403,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -367,9 +422,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ArtWorkTypeId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Budget")
                         .HasColumnType("int");
@@ -404,7 +456,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
@@ -419,7 +472,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("ResolvedAt")
+                    b.Property<int?>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ResolvedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
@@ -433,13 +489,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtWorkTypeId");
-
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("FreelancerId");
 
                     b.HasIndex("PaymentId");
+
+                    b.HasIndex("RequestId");
 
                     b.ToTable("Projects");
                 });
@@ -451,7 +507,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ArtWorkTypeId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -470,7 +526,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("ParentRequestId")
                         .HasColumnType("int");
@@ -483,12 +540,12 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtWorkTypeId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("CustomerId");
 
@@ -517,9 +574,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("WorkStatus")
@@ -527,7 +585,12 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int?>("WorkspaceId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WorkspaceId");
 
                     b.ToTable("Resources");
                 });
@@ -561,12 +624,16 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("PortfolioId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("UserId")
@@ -631,10 +698,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -645,10 +708,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Settings")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -659,19 +721,43 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ProjectResource", b =>
+            modelBuilder.Entity("Domain.Models.Workspace", b =>
                 {
-                    b.Property<int>("ProjectsId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ObjectId")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ResourcesId")
+                    b.Property<int?>("RequestId")
                         .HasColumnType("int");
 
-                    b.HasKey("ProjectsId", "ResourcesId");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ResourcesId");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("ProjectResource");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("Workspaces");
                 });
 
             modelBuilder.Entity("ArtWorkResource", b =>
@@ -691,17 +777,34 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
             modelBuilder.Entity("Domain.Models.ArtWork", b =>
                 {
-                    b.HasOne("Domain.Models.ArtWorkType", "ArtWorkType")
+                    b.HasOne("Domain.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("ArtWorkTypeId");
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Domain.Models.Portfolio", "Portfolio")
                         .WithMany()
                         .HasForeignKey("PortfolioId");
 
-                    b.Navigation("ArtWorkType");
+                    b.Navigation("Category");
 
                     b.Navigation("Portfolio");
+                });
+
+            modelBuilder.Entity("Domain.Models.Discussion", b =>
+                {
+                    b.HasOne("Domain.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId");
+
+                    b.HasOne("Domain.Models.Workspace", "Workspace")
+                        .WithMany("Discussions")
+                        .HasForeignKey("WorkspaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("Workspace");
                 });
 
             modelBuilder.Entity("Domain.Models.JobApplication", b =>
@@ -754,10 +857,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
             modelBuilder.Entity("Domain.Models.Project", b =>
                 {
-                    b.HasOne("Domain.Models.ArtWorkType", "ArtWorkType")
-                        .WithMany()
-                        .HasForeignKey("ArtWorkTypeId");
-
                     b.HasOne("Domain.Models.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
@@ -770,20 +869,24 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .WithMany()
                         .HasForeignKey("PaymentId");
 
-                    b.Navigation("ArtWorkType");
+                    b.HasOne("Domain.Models.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId");
 
                     b.Navigation("Customer");
 
                     b.Navigation("Freelancer");
 
                     b.Navigation("Payment");
+
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("Domain.Models.Request", b =>
                 {
-                    b.HasOne("Domain.Models.ArtWorkType", "ArtWorkType")
+                    b.HasOne("Domain.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("ArtWorkTypeId");
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Domain.Models.User", "Customer")
                         .WithMany()
@@ -793,11 +896,20 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .WithMany("Items")
                         .HasForeignKey("ParentRequestId");
 
-                    b.Navigation("ArtWorkType");
+                    b.Navigation("Category");
 
                     b.Navigation("Customer");
 
                     b.Navigation("ParentRequest");
+                });
+
+            modelBuilder.Entity("Domain.Models.Resource", b =>
+                {
+                    b.HasOne("Domain.Models.Workspace", "Workspace")
+                        .WithMany("Resources")
+                        .HasForeignKey("WorkspaceId");
+
+                    b.Navigation("Workspace");
                 });
 
             modelBuilder.Entity("Domain.Models.Review", b =>
@@ -821,24 +933,38 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProjectResource", b =>
+            modelBuilder.Entity("Domain.Models.Workspace", b =>
                 {
-                    b.HasOne("Domain.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectsId")
+                    b.HasOne("Domain.Models.Project", "Project")
+                        .WithMany("Workspaces")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.Resource", null)
+                    b.HasOne("Domain.Models.Request", "Request")
                         .WithMany()
-                        .HasForeignKey("ResourcesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RequestId");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("Domain.Models.Project", b =>
+                {
+                    b.Navigation("Workspaces");
                 });
 
             modelBuilder.Entity("Domain.Models.Request", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Domain.Models.Workspace", b =>
+                {
+                    b.Navigation("Discussions");
+
+                    b.Navigation("Resources");
                 });
 #pragma warning restore 612, 618
         }

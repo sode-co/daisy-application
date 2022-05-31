@@ -26,7 +26,7 @@ namespace Domain.Models
         public virtual Portfolio Portfolio { get; set; }
 
         [Required]
-        public virtual ArtWorkType ArtWorkType { get; set; }
+        public virtual Category Category { get; set; }
 
         [MaxLength(255)]
         [Required]
@@ -35,12 +35,12 @@ namespace Domain.Models
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        [Required]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public DateTime? DeletedAt { get; set; }
 
         [Required]
+        [MaxLength(255)]
         public String ObjectId { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }

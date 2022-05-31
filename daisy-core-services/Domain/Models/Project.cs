@@ -20,10 +20,7 @@ namespace Domain.Models
         [Required]
         public virtual User Freelancer { get; set; }
 
-        [Required]
-        public virtual ArtWorkType ArtWorkType { get; set; }
-
-        public DateTime ResolvedAt { get; set; }
+        public DateTime? ResolvedAt { get; set; }
 
         public String Data { get; set; }
 
@@ -57,6 +54,13 @@ namespace Domain.Models
 
         public virtual Payment Payment { get; set; }
 
+        public virtual ICollection<Workspace> Workspaces { get; set; }
+
+        [Required]
+        public virtual Request Request { get; set; }
+        
+
+
         [Required]
         public DateTime CreatedAt { get; set; }
 
@@ -66,8 +70,8 @@ namespace Domain.Models
         public DateTime? DeletedAt { get; set; }
 
         [Required]
+        [MaxLength(255)]
         public String ObjectId { get; set; }
-        public virtual ICollection<Resource> Resources { get; set; }
         public Project() { }
     }
 }

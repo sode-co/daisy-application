@@ -17,7 +17,7 @@ namespace Domain.Models
         [Required]
         public virtual User Freelancer { get; set; }
 
-        public DateTime ResolvedAt { get; set; }
+        public DateTime? ResolvedAt { get; set; }
 
         [Required]
         public virtual Request Request { get; set; }
@@ -41,12 +41,12 @@ namespace Domain.Models
         public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        [Required]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public DateTime? DeletedAt { get; set; }
 
         [Required]
+        [MaxLength(255)]
         public String ObjectId { get; set; }
 
         public JobApplication() { }

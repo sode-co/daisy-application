@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    public class Resource
+    public class Workspace
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(255)]
-        public String FileType { get; set; }
+        public int Status { get; set; }
 
         [Required]
-        [MaxLength(255)]
-        public String WorkStatus { get; set; }
+        public virtual Request Request { get; set; }
 
-        public virtual ICollection<ArtWork> ArtWorks { get; set; }
+        [Required]
+        public virtual Project Project { get; set; }
 
-        public virtual Workspace Workspace { get; set; }
+        public virtual ICollection<Discussion> Discussions { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
@@ -36,7 +36,5 @@ namespace Domain.Models
         [Required]
         [MaxLength(255)]
         public String ObjectId { get; set; }
-
-        public Resource() { }
     }
 }
