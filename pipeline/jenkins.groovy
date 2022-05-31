@@ -185,7 +185,7 @@ pipeline {
     stage('Push to DockerHub') {
       steps {
         script {
-          if (_ENV == production) {
+          if (_ENV == 'production') {
             println "Pushing tiendvlp/daisy_api:${_SUB_NAME}..."
             sh """
               docker push tiendvlp/daisy_api:${_SUB_NAME}
