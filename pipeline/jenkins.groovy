@@ -1,6 +1,12 @@
-/* groovylint-disable CompileStatic, DuplicateStringLiteral, NestedBlockDepth, NoDef, VariableTypeRequired */
+/* groovylint-disable-next-line LineLength */
+/* groovylint-disable CompileStatic, DuplicateStringLiteral, NestedBlockDepth, NoDef, VariableName, VariableTypeRequired */
 /* groovylint-disable-next-line NoDef, VariableName, VariableTypeRequired */
 final APPSETTINGS_FILE_PATH = '/var/jenkins_home/workspace/var-environment-all/daisy-appsettings.json'
+def WEB_GRPC_PORT
+def MOBILE_GRPC_PORT
+def API_PORT
+def WEB_APP_PORT
+def TARGET_BRANCH
 
 pipeline {
   agent any
@@ -21,30 +27,19 @@ pipeline {
     )
   }
   stages {
-    stage('Parameterize') {
-      steps {
-        script {
-          properties([parameters([
-            string(description: 'The branch of URL that you want to deploy', name: 'TARGET_BRANCH', trim: true),
-            string(name: 'WEB_GRPC_PORT', trim: true),
-            string(name: 'MOBILE_GRPC_PORT', trim: true),
-            string(name: 'API_PORT', trim: true),
-            string(name: 'WEB_APP_PORT', trim: true)
-          ])])
-        }
-      }
-    }
     stage('Checking out') {
       steps {
         script {
-          def repo = checkout([$class: 'GitSCM', branches: [[name: TARGET_BRANCH]],
-            userRemoteConfigs: [[url: 'https://github.com/sode-co/daisy-application']]])
+          def repo = checkout scm
           dir('daisy-application') {
             GIT_COMMIT_SHORT = sh(
               script: "printf \$(git rev-parse --short ${repo.GIT_COMMIT})",
               returnStdout: true)
           }
 
+          TARGET_BRANCH = repo.BRANCH_NAME
+          echo "Checked out the branch ${repo.BRANCH_NAME}"
+          echo "BRANCH NAME from env, ${env.BRANCH_NAME}"
           echo "Git commit short hash: ${GIT_COMMIT_SHORT}"
         }
       }
@@ -52,6 +47,18 @@ pipeline {
     stage('Setup environment') {
       steps {
         script {
+          if (TARGET_BRANCH == 'main') {
+            WEB_APP_PORT = 8081
+            API_PORT = 2433
+            WEB_GRPC_PORT = 50052
+            MOBILE_GRPC_PORT = 50152
+          }
+          else if (TARGET_BRANCH == 'test') {
+            WEB_APP_PORT = 8091
+            API_PORT = 2443
+            WEB_GRPC_PORT = 50062
+            MOBILE_GRPC_PORT = 50162
+          }
           dir('./') {
             sh """
               mkdir -p pipeline/env
