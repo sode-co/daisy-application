@@ -286,6 +286,7 @@ pipeline {
               -e GRPC_HOST=${_HOST} \
               -e MOBILE_GRPC_PORT=${_MOBILE_GRPC_PORT} \
               -e GRPC_PORT=${_WEB_GRPC_PORT} \
+              -e PROTOCOL=http \
               tiendvlp/daisy_flutter_web:${_SUB_NAME}
           """
         }
