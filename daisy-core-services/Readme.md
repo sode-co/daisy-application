@@ -10,7 +10,9 @@
   ### 1. Launch Restful Api service:
   - Right click on `Api` project choose `Debug` -> `Run`
   ### 2. Launch gRPC service:
-  - Right click on `Grpc` project choose `Debug` -> `Run`
+  - Right click on `GrpcServices` project choose `Debug` -> `Run`
+  ### 3. (For mobile only) Launch Mobile gRPC service:
+  - Right click on `MobileGrpcServices` project choose `Debug` -> `Run`
   
   #### Expected result: both Api and Grpc are running on two window terminal.
   <img width="1434" alt="Pasted Graphic 1" src="https://user-images.githubusercontent.com/27767477/170809761-fe662e5f-9e25-493f-a48b-1ccaa740c6ae.png">
