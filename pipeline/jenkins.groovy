@@ -125,8 +125,9 @@ pipeline {
       steps {
         script {
           dir('./') {
+            println "Building grpc image with name: tiendvlp/daisy_api:${_SUB_NAME}"
             sh """
-              docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:${GIT_COMMIT_SHORT} .
+              docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:${_SUB_NAME} .
               docker build --no-cache -f pipeline/Api.Dockerfile -t tiendvlp/daisy_api:latest .
             """
           }
@@ -137,8 +138,9 @@ pipeline {
       steps {
         script {
           dir('./') {
+            println "Building grpc image with name: tiendvlp/daisy_grpc:${_SUB_NAME}"
             sh """
-              docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT} .
+              docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:${_SUB_NAME} .
               docker build --no-cache -f pipeline/gRPC.Dockerfile -t tiendvlp/daisy_grpc:latest .
             """
           }
@@ -149,10 +151,11 @@ pipeline {
       steps {
         script {
           dir('./') {
+            println "Building flutter image with name: tiendvlp/daisy_flutter_web:${_SUB_NAME}"
             sh """
               docker build --no-cache \
               -f pipeline/FlutterWeb.Dockerfile \
-              -t tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT} .
+              -t tiendvlp/daisy_flutter_web:${_SUB_NAME} .
               docker build --no-cache -f pipeline/FlutterWeb.Dockerfile -t tiendvlp/daisy_flutter_web:latest .
             """
           }
