@@ -97,6 +97,7 @@ pipeline {
               mkdir -p daisy-core-services/Shared
               cp ${APPSETTINGS_FILE_PATH} pipeline/env/appsettings.json
               cp ${APPSETTINGS_FILE_PATH} daisy-core-services/Shared/appsettings.json
+              cp ${APPSETTINGS_FILE_PATH} daisy-core-services/DataAccess/appsettings.json
             """
           }
 
