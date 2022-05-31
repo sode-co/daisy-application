@@ -26,6 +26,7 @@
   #### 7. `API_HOST`: Host that you want the api service to running on
   #### 8. `GRPC_HOST`: Host that you want the gRPC service to running on
   #### 9. `GRPC_PORT`: Port that you want the gRPC service to running on (5 digits)
+  #### 10. `GRPC_MOBILE_PORT: Port for mobile device to connect with gRPC, it must be different with the `GRPC_PORT` (5 digits)
   #### 10. `Protocol`: `http` or `https`
   
   ### Example of `appsettings.json` file
@@ -39,6 +40,7 @@
         "API_HOST": "localhost",
         "GRPC_HOST": "localhost",
         "GRPC_PORT": 50052,
+        "GRPC_MOBILE_PORT": 50152,
         "PROTOCOL": "http",
         "LogLevel": "Warning",
         "AllowedHosts": "*"
