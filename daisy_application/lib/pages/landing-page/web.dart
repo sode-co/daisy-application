@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:daisy_application/pages/common/color.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BodyLandingPageWeb extends StatefulWidget {
   const BodyLandingPageWeb({Key? key}) : super(key: key);
@@ -75,26 +78,162 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Padding(
-        padding: EdgeInsets.all(size.width * 0.05),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(children: <Widget>[
-              renderImageCarousel(),
-              const SizedBox(width: 100),
-              Column(children: <Widget>[
-                introText(size.width, Color(colors[colorIndex])),
-                const SizedBox(height: 20),
-                searchCategoriesTextField(
-                    size.width * 0.3, Color(colors[colorIndex])),
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(size.width * 0.05),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(children: <Widget>[
+                renderImageCarousel(),
+                const SizedBox(width: 100),
+                Column(children: <Widget>[
+                  introText(size.width, Color(colors[colorIndex])),
+                  const SizedBox(height: 20),
+                  searchCategoriesTextField(
+                      size.width * 0.3, Color(colors[colorIndex])),
+                ]),
               ]),
-            ]),
-            const Text('Trending', style: Style.stringBold),
-            SizedBox(
-                height: 200.0, width: 1500.0, child: trendingTab(size.width)),
-          ],
-        ));
+              const Text('Trending', style: Style.h6Bold),
+              SizedBox(
+                  height: 200.0, width: 1500.0, child: trendingTab(size.width)),
+              const Text('Boost your income', style: Style.h6Bold),
+              renderIntroCarouselImages(),
+              Padding(
+                  padding: EdgeInsets.only(left: size.width * 0.35),
+                  child: renderWelcomeToLogin()),
+            ],
+          ),
+        ),
+        Container(
+          decoration:
+              const BoxDecoration(color: Color.fromARGB(255, 220, 220, 220)),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: size.width * 0.05, horizontal: size.width * 0.1),
+            child: renderFooter(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row renderSocialMediaButton() {
+    return Row(children: [
+      IconButton(
+          onPressed: () {},
+          icon: const FaIcon(FontAwesomeIcons.facebook, size: 20)),
+      IconButton(
+          onPressed: () {},
+          icon: const FaIcon(FontAwesomeIcons.instagram, size: 20)),
+      IconButton(
+          onPressed: () {},
+          icon: const FaIcon(FontAwesomeIcons.linkedin, size: 20)),
+      IconButton(
+          onPressed: () {},
+          icon: const FaIcon(FontAwesomeIcons.twitter, size: 20)),
+    ]);
+  }
+
+  Row renderCopyright() {
+    return Row(children: const [
+      Text('© Daisy'),
+      Text(' | '),
+      Text('by Sode'),
+      Text(' | '),
+      Text('Term'),
+      Text(' | '),
+      Text('Privacy'),
+      Text('  '),
+      Icon(Icons.public),
+      Text('English'),
+    ]);
+  }
+
+  Column renderFooter() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        renderCopyright(),
+        Padding(
+            padding: const EdgeInsets.only(left: 60),
+            child: renderSocialMediaButton()),
+      ],
+    );
+  }
+
+  Column renderWelcomeToLogin() {
+    return Column(
+      children: [
+        Container(
+          height: 50,
+          width: 300,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: MyColor.orange,
+              border:
+                  Border.all(color: MyColor.orange, style: BorderStyle.solid)),
+          child: TextButton(
+            onPressed: () {},
+            child: const Text('Find your talent',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18)),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          height: 50,
+          width: 300,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+              border:
+                  Border.all(color: MyColor.orange, style: BorderStyle.solid)),
+          child: TextButton(
+            onPressed: () {},
+            child: const Text('Designer, join now',
+                style: TextStyle(
+                    color: MyColor.orange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18)),
+          ),
+        ),
+      ],
+    );
+  }
+
+  CarouselSlider renderIntroCarouselImages() {
+    return CarouselSlider(
+      options: CarouselOptions(height: 400.0, autoPlay: true),
+      items: ['9,920,123 designs', '11,123 3D designs', '221,021 connections']
+          .map((i) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.symmetric(horizontal: 10.0),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/intro/map.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Center(
+                  child: Text(
+                '$i',
+                style: const TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.w900,
+                    color: MyColor.orange),
+              )),
+            );
+          },
+        );
+      }).toList(),
+    );
   }
 
   SizedBox renderTrendingImageItem(pageWidth, imageItem) {
