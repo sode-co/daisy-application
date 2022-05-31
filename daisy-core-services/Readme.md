@@ -10,7 +10,9 @@
   ### 1. Launch Restful Api service:
   - Right click on `Api` project choose `Debug` -> `Run`
   ### 2. Launch gRPC service:
-  - Right click on `Grpc` project choose `Debug` -> `Run`
+  - Right click on `GrpcServices` project choose `Debug` -> `Run`
+  ### 3. (For mobile only) Launch Mobile gRPC service:
+  - Right click on `MobileGrpcServices` project choose `Debug` -> `Run`
   
   #### Expected result: both Api and Grpc are running on two window terminal.
   <img width="1434" alt="Pasted Graphic 1" src="https://user-images.githubusercontent.com/27767477/170809761-fe662e5f-9e25-493f-a48b-1ccaa740c6ae.png">
@@ -26,7 +28,8 @@
   #### 7. `API_HOST`: Host that you want the api service to running on
   #### 8. `GRPC_HOST`: Host that you want the gRPC service to running on
   #### 9. `GRPC_PORT`: Port that you want the gRPC service to running on (5 digits)
-  #### 10. `Protocol`: `http` or `https`
+  #### 10. `GRPC_MOBILE_PORT`: Port for mobile device to connect with gRPC, it must be different with the `GRPC_PORT` (5 digits)
+  #### 11. `Protocol`: `http` or `https`
   
   ### Example of `appsettings.json` file
     {
@@ -39,6 +42,7 @@
         "API_HOST": "localhost",
         "GRPC_HOST": "localhost",
         "GRPC_PORT": 50052,
+        "GRPC_MOBILE_PORT": 50152,
         "PROTOCOL": "http",
         "LogLevel": "Warning",
         "AllowedHosts": "*"
