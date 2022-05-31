@@ -37,9 +37,8 @@ pipeline {
               returnStdout: true)
           }
 
-          TARGET_BRANCH = repo.BRANCH_NAME
-          echo "Checked out the branch ${repo.BRANCH_NAME}"
-          echo "BRANCH NAME from env, ${env.BRANCH_NAME}"
+          TARGET_BRANCH = env.BRANCH_NAME
+          echo "Checked out the branch ${TARGET_BRANCH}"
           echo "Git commit short hash: ${GIT_COMMIT_SHORT}"
         }
       }
@@ -47,7 +46,7 @@ pipeline {
     stage('Setup environment') {
       steps {
         script {
-          if (TARGET_BRANCH == 'main') {
+          if (TARGET_BRANCH == null || TARGET_BRANCH == 'main') {
             WEB_APP_PORT = 8081
             API_PORT = 2433
             WEB_GRPC_PORT = 50052
