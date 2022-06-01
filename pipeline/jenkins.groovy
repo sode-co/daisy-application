@@ -111,10 +111,10 @@ pipeline {
           println "SUB_NAME: ${_SUB_NAME}"
           println "==================================="
 
-          if (!(_WEB_APP_PORT?.trim() &&
-                _API_PORT?.trim() &&
-                _WEB_GRPC_PORT?.trim() &&
-                _MOBILE_GRPC_PORT?.trim())) {
+          if (!(_WEB_APP_PORT?.toString().trim() &&
+                _API_PORT?.toString().trim() &&
+                _WEB_GRPC_PORT?.toString().trim() &&
+                _MOBILE_GRPC_PORT?.toString().trim())) {
 
             println 'Skipping pipeline due to not found any parameters'
             currentBuild.currentResult = 'SUCCESS'
