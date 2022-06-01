@@ -34,6 +34,7 @@
                   "--dart-define=PROTOCOL=http",
                   "--dart-define=GRPC_HOST=10.0.2.2",
                   "--dart-define=GRPC_PORT=50052",
+                  "--dart-define=GRPC_MOBILE_PORT="50152",
                   "--dart-define=ENVIRONMENT=dev"
               ],
           }
@@ -51,4 +52,5 @@
    - Use `10.0.2.2` when run on Android Emulator
    - Use `localhost` when run on Web brower
   #### 5.`GRPC_PORT`: The port of gRPC service
+  #### 6.`GRPC_MOBILE_PORT`: The port of gRPC service that will serve mobile device
   
