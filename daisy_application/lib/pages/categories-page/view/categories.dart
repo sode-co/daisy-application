@@ -1,5 +1,5 @@
-import 'package:daisy_application/pages/categories-page/mobile.dart';
-import 'package:daisy_application/pages/categories-page/web.dart';
+import 'package:daisy_application/pages/categories-page/view/mobile.dart';
+import 'package:daisy_application/pages/categories-page/view/web.dart';
 import 'package:daisy_application/pages/common/header.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/sidebar.dart';
