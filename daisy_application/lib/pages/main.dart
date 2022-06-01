@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
-import 'package:daisy_application/pages/categories-page/categories.dart';
+import 'package:daisy_application/pages/categories-page/view/categories.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

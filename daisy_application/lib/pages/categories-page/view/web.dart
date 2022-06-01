@@ -1,6 +1,8 @@
+import 'package:daisy_application/pages/categories-page/model/categories-page-model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
 class BodyCategoriesPageWeb extends StatefulWidget {
   const BodyCategoriesPageWeb({Key? key}) : super(key: key);
@@ -10,39 +12,19 @@ class BodyCategoriesPageWeb extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<BodyCategoriesPageWeb> {
-  List<Map<String, bool>> categoriesList = [
-    {'logo': true}
-  ];
-  static List<String> requestCategories = [];
-
   @override
   Widget build(BuildContext context) {
-    var _isSelected = true;
-    return Column(
-      children: [
-        LabeledCheckbox(
-          label: 'This is the label text',
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          value: _isSelected,
-          onChanged: (bool newValue) {
-            setState(() {
-              _isSelected = newValue;
-            });
-          },
-          data: 'test',
-        ),
-        LabeledCheckbox(
-          label: 'This is the abc text',
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          value: _isSelected,
-          onChanged: (bool newValue) {
-            setState(() {
-              _isSelected = newValue;
-            });
-          },
-          data: 'abc',
-        )
-      ],
+    return ChangeNotifierProvider<CategoriesPageModel>(
+      create: (context) => CategoriesPageModel(),
+      child: Column(
+        children: [
+          LabeledCheckbox(
+            label: 'This is the label text',
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            data: 'test',
+          ),
+        ],
+      ),
     );
   }
 }
@@ -54,43 +36,38 @@ class LabeledCheckbox extends StatelessWidget {
     required this.label,
     required this.data,
     required this.padding,
-    required this.value,
-    required this.onChanged,
   }) : super(key: key);
 
   final String label;
   final String data;
   final EdgeInsets padding;
-  final bool value;
-  final ValueChanged<bool> onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onChanged(!value);
-      },
-      child: Padding(
-        padding: padding,
-        child: Row(
-          children: <Widget>[
-            Expanded(child: Text(label)),
-            Checkbox(
-              value: value,
-              onChanged: (bool? newValue) {
-                onChanged(newValue!);
-                if (newValue!) {
-                  _MyWidgetState.requestCategories.add(data);
-                } else {
-                  var idx = _MyWidgetState.requestCategories.indexOf(data);
-                  _MyWidgetState.requestCategories.removeAt(idx);
-                }
-                print(_MyWidgetState.requestCategories);
-              },
+    List<String> cateList = context.watch().selectedCategoriesList;
+    var isSelected = cateList.indexOf(label) > -1;
+    return Consumer<CategoriesPageModel>(
+      builder: (context, mymodel, child) {
+        return InkWell(
+          onTap: () {
+            mymodel.updateSelectedCategoriesList(isSelected, label);
+          },
+          child: Padding(
+            padding: padding,
+            child: Row(
+              children: <Widget>[
+                Expanded(child: Text(label)),
+                Checkbox(
+                  value: isSelected,
+                  onChanged: (bool? newValue) {
+                    mymodel.updateSelectedCategoriesList(isSelected, label);
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
