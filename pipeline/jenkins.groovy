@@ -217,7 +217,7 @@ pipeline {
     stage('Pre-Launch Prepare') {
       steps {
         script {
-          if (_ENV != 'production' || _ENV != 'test') {
+          if (_ENV != 'production' && _ENV != 'test') {
             println 'Not Product or Test env, Let cleaning up current running container...'
             sh """
               docker stop daisy_api_${_TARGET_BRANCH} || \
