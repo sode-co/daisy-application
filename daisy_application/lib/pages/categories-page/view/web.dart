@@ -18,22 +18,13 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
     Size size = MediaQuery.of(context).size;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ChangeNotifierProvider<CategoriesPageModel>(
-          create: (context) => CategoriesPageModel(),
-          child: SizedBox(
-            width: 500,
-            child: Column(
-              children: [
-                renderExpansionCategory(LogoIdentity.parent),
-                renderExpansionCategory(WebAppDesign.parent),
-                renderExpansionCategory(BusinessAdvertising.parent),
-                renderExpansionCategory(ClothingMerchandise.parent),
-                renderExpansionCategory(ArtIllustration.parent),
-                renderExpansionCategory(PackagingLabel.parent),
-                renderExpansionCategory(BookMagazine.parent),
-              ],
-            ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+          child: ChangeNotifierProvider<CategoriesPageModel>(
+            create: (context) => CategoriesPageModel(),
+            child: CategoriesPageComponent.renderCategoriesCheckbox(),
           ),
         ),
         Container(
@@ -64,41 +55,6 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
           ],
         ),
       ],
-    );
-  }
-
-  ExpansionTile renderExpansionCategory(categoryName) {
-    List<String> categories = [];
-    if (categoryName == LogoIdentity.parent) categories = LogoIdentity.children;
-    if (categoryName == WebAppDesign.parent) categories = WebAppDesign.children;
-    if (categoryName == BusinessAdvertising.parent) {
-      categories = BusinessAdvertising.children;
-    }
-    if (categoryName == ClothingMerchandise.parent) {
-      categories = ClothingMerchandise.children;
-    }
-    if (categoryName == ArtIllustration.parent) {
-      categories = ArtIllustration.children;
-    }
-    if (categoryName == PackagingLabel.parent) {
-      categories = PackagingLabel.children;
-    }
-    if (categoryName == BookMagazine.parent) categories = BookMagazine.children;
-    return ExpansionTile(
-      title: renderChildLabelCheckbox(categoryName, categoryName),
-      controlAffinity: ListTileControlAffinity.leading,
-      children: categories
-          .map((item) => renderChildLabelCheckbox(item, categoryName))
-          .toList(),
-    );
-  }
-
-  LabeledCheckbox renderChildLabelCheckbox(label, parentLabelName,
-      {isParent = false}) {
-    return LabeledCheckbox(
-      label: label,
-      parentLabelName: parentLabelName,
-      isParent: isParent,
     );
   }
 }
@@ -145,6 +101,60 @@ class LabeledCheckbox extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CategoriesPageComponent {
+  static SizedBox renderCategoriesCheckbox() {
+    return SizedBox(
+      width: 500,
+      child: Column(
+        children: [
+          renderExpansionCategory(LogoIdentity.parent),
+          renderExpansionCategory(WebAppDesign.parent),
+          renderExpansionCategory(BusinessAdvertising.parent),
+          renderExpansionCategory(ClothingMerchandise.parent),
+          renderExpansionCategory(ArtIllustration.parent),
+          renderExpansionCategory(PackagingLabel.parent),
+          renderExpansionCategory(BookMagazine.parent),
+        ],
+      ),
+    );
+  }
+
+  static ExpansionTile renderExpansionCategory(categoryName) {
+    List<String> categories = [];
+    if (categoryName == LogoIdentity.parent) categories = LogoIdentity.children;
+    if (categoryName == WebAppDesign.parent) categories = WebAppDesign.children;
+    if (categoryName == BusinessAdvertising.parent) {
+      categories = BusinessAdvertising.children;
+    }
+    if (categoryName == ClothingMerchandise.parent) {
+      categories = ClothingMerchandise.children;
+    }
+    if (categoryName == ArtIllustration.parent) {
+      categories = ArtIllustration.children;
+    }
+    if (categoryName == PackagingLabel.parent) {
+      categories = PackagingLabel.children;
+    }
+    if (categoryName == BookMagazine.parent) categories = BookMagazine.children;
+    return ExpansionTile(
+      title: renderChildLabelCheckbox(categoryName, categoryName),
+      controlAffinity: ListTileControlAffinity.leading,
+      children: categories
+          .map((item) => renderChildLabelCheckbox(item, categoryName))
+          .toList(),
+    );
+  }
+
+  static LabeledCheckbox renderChildLabelCheckbox(label, parentLabelName,
+      {isParent = false}) {
+    return LabeledCheckbox(
+      label: label,
+      parentLabelName: parentLabelName,
+      isParent: isParent,
     );
   }
 }
