@@ -36,7 +36,7 @@ namespace Api
                     var sharedFolder = Path.Combine(env.ContentRootPath, "..", "shared");
 
                     config
-                        .AddJsonFile(Path.Combine(sharedFolder, "appsettings.json"), optional: false);
+                        .AddJsonFile(Path.Combine(sharedFolder, "appsettings.json"), optional: true);
 
                     config.AddEnvironmentVariables();
                 });
