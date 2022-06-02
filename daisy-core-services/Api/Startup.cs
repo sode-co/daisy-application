@@ -51,6 +51,7 @@ namespace Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
                 c.RoutePrefix = string.Empty;
             });
+
             app.UseRouting();
             app.UseCors("AllowAll");
             app.UseAuthorization();
