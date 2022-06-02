@@ -16,19 +16,24 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CategoriesPageModel>(
       create: (context) => CategoriesPageModel(),
-      child: Column(
-        children: [
-          ExpansionTile(
-            title:
-                renderChildLabelCheckbox('Logo & Identity', 'Logo & Identity'),
-            controlAffinity: ListTileControlAffinity.leading,
-            children: LogoIdentityCategories.children
-                .map((item) => renderChildLabelCheckbox(
-                    item, LogoIdentityCategories.parent))
-                .toList(),
-          ),
-        ],
+      child: SizedBox(
+        width: 500,
+        child: Column(
+          children: [
+            renderExpansionCategory('Logo & Identity'),
+          ],
+        ),
       ),
+    );
+  }
+
+  ExpansionTile renderExpansionCategory(categoryName) {
+    return ExpansionTile(
+      title: renderChildLabelCheckbox(categoryName, categoryName),
+      controlAffinity: ListTileControlAffinity.leading,
+      children: LogoIdentity.children
+          .map((item) => renderChildLabelCheckbox(item, LogoIdentity.parent))
+          .toList(),
     );
   }
 

@@ -16,7 +16,7 @@ class CategoriesPageModel with ChangeNotifier {
       // if it is parent label, we will deselect all children label names
       if (label == parentLabelName) {
         if (parentLabelName == 'Logo & Identity') {
-          for (var item in LogoIdentityCategories.children) {
+          for (var item in LogoIdentity.children) {
             removeIfExisted(labelSelectedCategories, item);
           }
         }
@@ -34,7 +34,7 @@ class CategoriesPageModel with ChangeNotifier {
   }
 }
 
-class LogoIdentityCategories {
+class LogoIdentity {
   static var parent = 'Logo & Identity';
   static List<String> children = [
     'Logo design',
@@ -45,5 +45,76 @@ class LogoIdentityCategories {
     'Brand guide',
     'Stationery',
     'Product packaging'
+  ];
+}
+
+class WebAppDesign {
+  static var parent = 'Web & app design';
+  static List<String> children = [
+    'Web page design',
+    'WordPress theme design',
+    'Landing page design',
+    'Icon or button',
+    'App design',
+    'Facebook cover',
+    'Social media page',
+    'Banner ad'
+  ];
+}
+
+class BusinessAdvertising {
+  static var parent = 'Business & advertising';
+  static List<String> children = [
+    'Postcard, flyer or print',
+    'Poster',
+    'Infographic',
+    'Brochure',
+    'Car, truck or van wrap',
+    'Signage',
+    'Email',
+    'PowerPoint template',
+    'Menu',
+    'Album Cover',
+    'Podcast',
+  ];
+}
+
+class ClothingMerchandise {
+  static var parent = 'Clothing & merchandise';
+  static List<String> children = [
+    'T-shirt',
+    'Clothing or apparel',
+    'Merchandise',
+    'Cup or mug',
+    'Sticker',
+  ];
+}
+
+class ArtIllustration {
+  static var parent = 'Art & illustration';
+  static List<String> children = [
+    'Illustration or graphics',
+    'Card or invitation',
+    'Character or mascot',
+    'Tattoo',
+    '3D',
+  ];
+}
+
+class PackagingLabel {
+  static var parent = 'Packaging & label';
+  static List<String> children = [
+    'Product packaging',
+    'Product label',
+  ];
+}
+
+class BookMagazine {
+  static var parent = 'Book & magazine';
+  static List<String> children = [
+    'Book cover',
+    'Magazine cover',
+    'Typesetting',
+    'Typesetting with imagery',
   ];
 }
