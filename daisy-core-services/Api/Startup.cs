@@ -52,6 +52,7 @@ namespace Api
                 c.RoutePrefix = string.Empty;
             });
 
+            Config.AdaptEnv(env.EnvironmentName);
             app.UseRouting();
             app.UseCors("AllowAll");
             app.UseAuthorization();

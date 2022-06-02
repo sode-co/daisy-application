@@ -41,6 +41,7 @@ namespace GrpcServices
             {
                 app.UseDeveloperExceptionPage();
             }
+            Config.AdaptEnv(env.EnvironmentName);
 
             app.UseRouting();
             app.UseGrpcWeb();
