@@ -22,12 +22,10 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
             title:
                 renderChildLabelCheckbox('Logo & Identity', 'Logo & Identity'),
             controlAffinity: ListTileControlAffinity.leading,
-            children: <Widget>[
-              renderChildLabelCheckbox('Logo design', 'Logo & Identity'),
-              renderChildLabelCheckbox(
-                  'Brand identity pack', 'Logo & Identity'),
-              renderChildLabelCheckbox('Social media pack', 'Logo & Identity'),
-            ],
+            children: LogoIdentityCategories.children
+                .map((item) => renderChildLabelCheckbox(
+                    item, LogoIdentityCategories.parent))
+                .toList(),
           ),
         ],
       ),
@@ -72,7 +70,7 @@ class LabeledCheckbox extends StatelessWidget {
       child: Padding(
         padding: (label == parentLabelName)
             ? const EdgeInsets.symmetric(horizontal: 15)
-            : const EdgeInsets.symmetric(horizontal: 10),
+            : const EdgeInsets.only(left: 80, right: 30),
         child: Row(
           children: <Widget>[
             Expanded(child: Text(label)),

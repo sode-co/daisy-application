@@ -43,7 +43,6 @@ class LogoIdentityCategories {
     'Hosted website',
     'Business card',
     'Brand guide',
-    'Business card',
     'Stationery',
     'Product packaging'
   ];
