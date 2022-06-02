@@ -26,8 +26,8 @@ namespace Domain.Models
         [Required]
         public String DisplayName { get; set; }
         
-        [MaxLength(255)]
         [Required]
+        [EmailAddress]
         public String Email { get; set; }
         
         [Range(0,9)]
@@ -45,9 +45,9 @@ namespace Domain.Models
         
         [MaxLength(255)]
         public String Address { get; set; }
-        
-        [Range(0,9999999999)]
-        public int Phone { get; set; }
+
+        [Phone]
+        public String Phone { get; set; }
         
         [Required]
         public DateTime CreatedAt { get; set; }

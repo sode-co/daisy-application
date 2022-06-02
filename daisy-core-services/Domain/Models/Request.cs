@@ -33,7 +33,8 @@ namespace Domain.Models
         public virtual ICollection<Request> Items { get; set; }
 
         [Required]
-        public int Status { get; set; }
+        [MaxLength(255)]
+        public String Status { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }

@@ -38,7 +38,8 @@ namespace Domain.Models
         public String Data { get; set; }
 
         [Required]
-        public int Status { get; set; }
+        [MaxLength(255)]
+        public String Status { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

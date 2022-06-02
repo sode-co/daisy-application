@@ -29,7 +29,7 @@ namespace Domain.Models
         [Required]
         public bool Like { get; set; }
 
-        public int Rating { get; set; }
+        public float Rating { get; set; }
 
         [Required]
         public virtual User User { get; set; }

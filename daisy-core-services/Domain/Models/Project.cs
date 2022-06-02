@@ -47,13 +47,14 @@ namespace Domain.Models
         public long Timeline { get; set; }
 
         [Required]
-        public int Budget { get; set; }
+        public decimal Budget { get; set; }
 
         [Required]
         public bool IsAllowedPublic { get; set; }
 
         [Required]
-        public int Status { get; set; }
+        [MaxLength(255)]
+        public String Status { get; set; }
 
         public virtual Payment Payment { get; set; }
 
@@ -61,8 +62,6 @@ namespace Domain.Models
 
         [Required]
         public virtual Request Request { get; set; }
-        
-
 
         [Required]
         public DateTime CreatedAt { get; set; }
