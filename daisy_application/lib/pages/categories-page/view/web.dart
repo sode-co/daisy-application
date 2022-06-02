@@ -18,20 +18,28 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
       create: (context) => CategoriesPageModel(),
       child: Column(
         children: [
-          renderLabelCheckbox('Logo & identity', 'logo'),
-          renderLabelCheckbox('Branding', 'branding'),
-          renderLabelCheckbox('Fine Art', 'art'),
-          renderLabelCheckbox('Ngoc', 'ngoc'),
+          ExpansionTile(
+            title:
+                renderChildLabelCheckbox('Logo & Identity', 'Logo & Identity'),
+            controlAffinity: ListTileControlAffinity.leading,
+            children: <Widget>[
+              renderChildLabelCheckbox('Logo design', 'Logo & Identity'),
+              renderChildLabelCheckbox(
+                  'Brand identity pack', 'Logo & Identity'),
+              renderChildLabelCheckbox('Social media pack', 'Logo & Identity'),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  LabeledCheckbox renderLabelCheckbox(label, data) {
+  LabeledCheckbox renderChildLabelCheckbox(label, parentLabelName,
+      {isParent = false}) {
     return LabeledCheckbox(
       label: label,
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      data: data,
+      parentLabelName: parentLabelName,
+      isParent: isParent,
     );
   }
 }
@@ -41,34 +49,38 @@ class LabeledCheckbox extends StatelessWidget {
   const LabeledCheckbox({
     Key? key,
     required this.label,
-    required this.data,
-    required this.padding,
+    required this.parentLabelName,
+    required this.isParent,
   }) : super(key: key);
 
   final String label;
-  final String data;
-  final EdgeInsets padding;
+  final bool isParent;
+  final String? parentLabelName;
 
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<CategoriesPageModel>(context);
     var isSelected = context
         .watch<CategoriesPageModel>()
-        .selectedCategoriesList
-        .contains(data);
+        .labelSelectedCategories
+        .contains(label);
     return InkWell(
       onTap: () {
-        provider.updateSelectedCategoriesList(isSelected, data);
+        provider.updateSelectedCategoriesList(
+            isSelected, label, parentLabelName);
       },
       child: Padding(
-        padding: padding,
+        padding: (label == parentLabelName)
+            ? const EdgeInsets.symmetric(horizontal: 15)
+            : const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           children: <Widget>[
             Expanded(child: Text(label)),
             Checkbox(
               value: isSelected,
               onChanged: (bool? newValue) {
-                provider.updateSelectedCategoriesList(isSelected, data);
+                provider.updateSelectedCategoriesList(
+                    isSelected, label, parentLabelName);
               },
             ),
           ],
