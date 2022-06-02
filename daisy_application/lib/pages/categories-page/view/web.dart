@@ -17,19 +17,21 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
     return ChangeNotifierProvider<CategoriesPageModel>(
       create: (context) => CategoriesPageModel(),
       child: Column(
-        children: const [
-          LabeledCheckbox(
-            label: 'This is the label text',
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            data: 'test',
-          ),
-          LabeledCheckbox(
-            label: 'Tao neeee',
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            data: 'test',
-          ),
+        children: [
+          renderLabelCheckbox('Logo & identity', 'logo'),
+          renderLabelCheckbox('Branding', 'branding'),
+          renderLabelCheckbox('Fine Art', 'art'),
+          renderLabelCheckbox('Ngoc', 'ngoc'),
         ],
       ),
+    );
+  }
+
+  LabeledCheckbox renderLabelCheckbox(label, data) {
+    return LabeledCheckbox(
+      label: label,
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      data: data,
     );
   }
 }
@@ -53,10 +55,10 @@ class LabeledCheckbox extends StatelessWidget {
     var isSelected = context
         .watch<CategoriesPageModel>()
         .selectedCategoriesList
-        .contains(label);
+        .contains(data);
     return InkWell(
       onTap: () {
-        provider.updateSelectedCategoriesList(isSelected, label);
+        provider.updateSelectedCategoriesList(isSelected, data);
       },
       child: Padding(
         padding: padding,
@@ -66,7 +68,7 @@ class LabeledCheckbox extends StatelessWidget {
             Checkbox(
               value: isSelected,
               onChanged: (bool? newValue) {
-                provider.updateSelectedCategoriesList(isSelected, label);
+                provider.updateSelectedCategoriesList(isSelected, data);
               },
             ),
           ],
