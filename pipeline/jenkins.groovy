@@ -215,30 +215,34 @@ pipeline {
       }
     }
     stage('Pre-Launch Prepare') {
-      if (_ENV != 'production' || _ENV != 'test') {
-        println 'Not Product or Test env, Let cleaning up current running container...'
-        sh """
-          docker stop daisy_api_${_TARGET_BRANCH} || \
-          echo 'skipping error while stopping daisy_api_${_TARGET_BRANCH}...'
-        """
+      steps {
+        script {
+          if (_ENV != 'production' || _ENV != 'test') {
+            println 'Not Product or Test env, Let cleaning up current running container...'
+            sh """
+              docker stop daisy_api_${_TARGET_BRANCH} || \
+              echo 'skipping error while stopping daisy_api_${_TARGET_BRANCH}...'
+            """
 
-        sh """
-          docker stop daisy_grpc_web_${_TARGET_BRANCH} || \
-          echo 'skipping error while stopping daisy_grpc_web_${_TARGET_BRANCH}...'
-        """
+            sh """
+              docker stop daisy_grpc_web_${_TARGET_BRANCH} || \
+              echo 'skipping error while stopping daisy_grpc_web_${_TARGET_BRANCH}...'
+            """
 
-        sh """
-          docker stop daisy_flutter_web_${_TARGET_BRANCH} || \
-          echo 'skipping error while stopping daisy_flutter_web_${_TARGET_BRANCH}...'
-        """
+            sh """
+              docker stop daisy_flutter_web_${_TARGET_BRANCH} || \
+              echo 'skipping error while stopping daisy_flutter_web_${_TARGET_BRANCH}...'
+            """
 
-        sh """
-          docker stop daisy_grpc_mobile_${_TARGET_BRANCH} || \
-          echo 'skipping error while stopping daisy_grpc_mobile_${_TARGET_BRANCH}...'
-        """
-      }
-      else {
-        println "Detect ${_ENV} environment, skipping..."
+            sh """
+              docker stop daisy_grpc_mobile_${_TARGET_BRANCH} || \
+              echo 'skipping error while stopping daisy_grpc_mobile_${_TARGET_BRANCH}...'
+            """
+          }
+          else {
+            println "Detect ${_ENV} environment, skipping..."
+          }
+        }
       }
     }
     stage('Launch Api') {
