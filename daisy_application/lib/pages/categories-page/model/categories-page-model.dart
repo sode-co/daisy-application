@@ -9,12 +9,44 @@ class CategoriesPageModel with ChangeNotifier {
     }
   }
 
+  void updateSelectedCategoriesListOnSearchBar(categoryName) {
+    if (!labelSelectedCategories.contains(categoryName)) {
+      labelSelectedCategories.add(categoryName);
+    }
+
+    List<String> childrenCategoriesList = [];
+    if (categoryName == LogoIdentity.parent) {
+      childrenCategoriesList = LogoIdentity.children;
+    }
+    if (categoryName == WebAppDesign.parent) {
+      childrenCategoriesList = WebAppDesign.children;
+    }
+    if (categoryName == BusinessAdvertising.parent) {
+      childrenCategoriesList = BusinessAdvertising.children;
+    }
+    if (categoryName == ClothingMerchandise.parent) {
+      childrenCategoriesList = ClothingMerchandise.children;
+    }
+    if (categoryName == ArtIllustration.parent) {
+      childrenCategoriesList = ArtIllustration.children;
+    }
+    if (categoryName == PackagingLabel.parent) {
+      childrenCategoriesList = PackagingLabel.children;
+    }
+    if (categoryName == BookMagazine.parent) {
+      childrenCategoriesList = BookMagazine.children;
+    }
+
+    for (var item in childrenCategoriesList) {
+      removeIfExisted(labelSelectedCategories, item);
+    }
+  }
+
   void updateSelectedCategoriesList(isSelected, categoryName, parentLabelName) {
     if (!isSelected) {
       labelSelectedCategories.add(categoryName);
 
       // if it is parent label, we will deselect all children label names
-
       if (categoryName == parentLabelName) {
         List<String> childrenCategoriesList = [];
         if (categoryName == LogoIdentity.parent) {
