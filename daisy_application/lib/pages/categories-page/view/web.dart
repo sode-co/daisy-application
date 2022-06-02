@@ -37,14 +37,18 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
     List<String> categories = [];
     if (categoryName == LogoIdentity.parent) categories = LogoIdentity.children;
     if (categoryName == WebAppDesign.parent) categories = WebAppDesign.children;
-    if (categoryName == BusinessAdvertising.parent)
+    if (categoryName == BusinessAdvertising.parent) {
       categories = BusinessAdvertising.children;
-    if (categoryName == ClothingMerchandise.parent)
+    }
+    if (categoryName == ClothingMerchandise.parent) {
       categories = ClothingMerchandise.children;
-    if (categoryName == ArtIllustration.parent)
+    }
+    if (categoryName == ArtIllustration.parent) {
       categories = ArtIllustration.children;
-    if (categoryName == PackagingLabel.parent)
+    }
+    if (categoryName == PackagingLabel.parent) {
       categories = PackagingLabel.children;
+    }
     if (categoryName == BookMagazine.parent) categories = BookMagazine.children;
     return ExpansionTile(
       title: renderChildLabelCheckbox(categoryName, categoryName),

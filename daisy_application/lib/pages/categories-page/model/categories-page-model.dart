@@ -9,16 +9,38 @@ class CategoriesPageModel with ChangeNotifier {
     }
   }
 
-  void updateSelectedCategoriesList(isSelected, label, parentLabelName) {
+  void updateSelectedCategoriesList(isSelected, categoryName, parentLabelName) {
     if (!isSelected) {
-      labelSelectedCategories.add(label);
+      labelSelectedCategories.add(categoryName);
 
       // if it is parent label, we will deselect all children label names
-      if (label == parentLabelName) {
-        if (parentLabelName == 'Logo & Identity') {
-          for (var item in LogoIdentity.children) {
-            removeIfExisted(labelSelectedCategories, item);
-          }
+
+      if (categoryName == parentLabelName) {
+        List<String> childrenCategoriesList = [];
+        if (categoryName == LogoIdentity.parent) {
+          childrenCategoriesList = LogoIdentity.children;
+        }
+        if (categoryName == WebAppDesign.parent) {
+          childrenCategoriesList = WebAppDesign.children;
+        }
+        if (categoryName == BusinessAdvertising.parent) {
+          childrenCategoriesList = BusinessAdvertising.children;
+        }
+        if (categoryName == ClothingMerchandise.parent) {
+          childrenCategoriesList = ClothingMerchandise.children;
+        }
+        if (categoryName == ArtIllustration.parent) {
+          childrenCategoriesList = ArtIllustration.children;
+        }
+        if (categoryName == PackagingLabel.parent) {
+          childrenCategoriesList = PackagingLabel.children;
+        }
+        if (categoryName == BookMagazine.parent) {
+          childrenCategoriesList = BookMagazine.children;
+        }
+
+        for (var item in childrenCategoriesList) {
+          removeIfExisted(labelSelectedCategories, item);
         }
       }
       // if it is child label, we will deselect its parent label
@@ -26,7 +48,7 @@ class CategoriesPageModel with ChangeNotifier {
         removeIfExisted(labelSelectedCategories, parentLabelName);
       }
     } else {
-      var index = labelSelectedCategories.indexOf(label);
+      var index = labelSelectedCategories.indexOf(categoryName);
       labelSelectedCategories.removeAt(index);
     }
     print(labelSelectedCategories);
