@@ -172,124 +172,18 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
     );
   }
 
-  Row renderSocialMediaButton() {
-    return Row(
-      children: [
-        IconButton(
-            onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.facebook, size: 20)),
-        IconButton(
-            onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.instagram, size: 20)),
-        IconButton(
-            onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.linkedin, size: 20)),
-        IconButton(
-            onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.twitter, size: 20)),
-      ],
-    );
-  }
-
-  Row renderCopyright() {
-    return Row(
-      children: const [
-        Text('© Daisy'),
-        Text(' | '),
-        Text('by Sode'),
-        Text(' | '),
-        Text('Term'),
-        Text(' | '),
-        Text('Privacy'),
-        Text('  '),
-        Icon(Icons.public),
-        Text('English'),
-      ],
-    );
-  }
-
-  Row renderResourceFooter() {
-    return Row(children: [
-      SizedBox(
-        width: 500,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset('assets/images/weblogo.png', width: 300),
-            Row(
-              children: [
-                Image.asset('assets/images/appstore.png', scale: 3),
-                Image.asset('assets/images/chplay.png', scale: 4),
-              ],
-            ),
-            const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula efficitur nibh non commodo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In nibh neque, commodo eget dui ac, hendrerit commodo risus. In lobortis rutrum velit, eget efficitur nibh laoreet vitae. Duis vel elit mollis nulla tincidunt auctor at in justo. Sed viverra diam arcu, eu elementum quam porttitor commodo.'),
-          ],
-        ),
-      ),
-      const SizedBox(
-        width: 120,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Company', style: Style.stringBold),
-          Text('About'),
-          Text('Contact'),
-          Text('Careers'),
-          Text('Team'),
-          Text('Press releases'),
-          Text('In the media'),
-          Text('Testimonials'),
-        ],
-      ),
-      const SizedBox(
-        width: 120,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Design services', style: Style.stringBold),
-          Text('Find a designer'),
-          Text('Discover inspiration'),
-          Text('Pricing'),
-          Text('Agencies'),
-          Text('Designer resources'),
-          Text('Featured partners'),
-          Text('Help'),
-        ],
-      ),
-      const SizedBox(
-        width: 120,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Get a design', style: Style.stringBold),
-          Text('Logo design'),
-          Text('Business card'),
-          Text('Web page design'),
-          Text('Brand guide'),
-          Text('Packaging design'),
-          Text('T-shirt design'),
-          Text('Book cover design'),
-        ],
-      ),
-    ]);
-  }
-
   Column renderFooter(pageWidth) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        renderResourceFooter(),
+        Footer.renderResourceFooter(),
         Row(
           children: [
             SizedBox(width: pageWidth * 0.41),
-            renderCopyright(),
+            Footer.renderCopyright(),
             Padding(
                 padding: EdgeInsets.only(left: pageWidth * 0.05),
-                child: renderSocialMediaButton()),
+                child: Footer.renderSocialMediaButton()),
           ],
         ),
       ],
@@ -539,4 +433,112 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
           ),
         ],
       );
+}
+
+class Footer {
+  static Row renderSocialMediaButton() {
+    return Row(
+      children: [
+        IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.facebook, size: 20)),
+        IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.instagram, size: 20)),
+        IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.linkedin, size: 20)),
+        IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.twitter, size: 20)),
+      ],
+    );
+  }
+
+  static Row renderCopyright() {
+    return Row(
+      children: const [
+        Text('© Daisy'),
+        Text(' | '),
+        Text('by Sode'),
+        Text(' | '),
+        Text('Term'),
+        Text(' | '),
+        Text('Privacy'),
+        Text('  '),
+        Icon(Icons.public),
+        Text('English'),
+      ],
+    );
+  }
+
+  static Row renderResourceFooter() {
+    return Row(children: [
+      SizedBox(
+        width: 500,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset('assets/images/weblogo.png', width: 300),
+            Row(
+              children: [
+                Image.asset('assets/images/appstore.png', scale: 3),
+                Image.asset('assets/images/chplay.png', scale: 4),
+              ],
+            ),
+            const Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula efficitur nibh non commodo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In nibh neque, commodo eget dui ac, hendrerit commodo risus. In lobortis rutrum velit, eget efficitur nibh laoreet vitae. Duis vel elit mollis nulla tincidunt auctor at in justo. Sed viverra diam arcu, eu elementum quam porttitor commodo.'),
+          ],
+        ),
+      ),
+      const SizedBox(
+        width: 120,
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Company', style: Style.stringBold),
+          Text('About'),
+          Text('Contact'),
+          Text('Careers'),
+          Text('Team'),
+          Text('Press releases'),
+          Text('In the media'),
+          Text('Testimonials'),
+        ],
+      ),
+      const SizedBox(
+        width: 120,
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Design services', style: Style.stringBold),
+          Text('Find a designer'),
+          Text('Discover inspiration'),
+          Text('Pricing'),
+          Text('Agencies'),
+          Text('Designer resources'),
+          Text('Featured partners'),
+          Text('Help'),
+        ],
+      ),
+      const SizedBox(
+        width: 120,
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Get a design', style: Style.stringBold),
+          Text('Logo design'),
+          Text('Business card'),
+          Text('Web page design'),
+          Text('Brand guide'),
+          Text('Packaging design'),
+          Text('T-shirt design'),
+          Text('Book cover design'),
+        ],
+      ),
+    ]);
+  }
 }

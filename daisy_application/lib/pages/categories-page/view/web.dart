@@ -1,4 +1,5 @@
 import 'package:daisy_application/pages/categories-page/model/categories-page-model.dart';
+import 'package:daisy_application/pages/landing-page/web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -14,22 +15,55 @@ class BodyCategoriesPageWeb extends StatefulWidget {
 class _MyWidgetState extends State<BodyCategoriesPageWeb> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CategoriesPageModel>(
-      create: (context) => CategoriesPageModel(),
-      child: SizedBox(
-        width: 500,
-        child: Column(
+    Size size = MediaQuery.of(context).size;
+
+    return Column(
+      children: [
+        ChangeNotifierProvider<CategoriesPageModel>(
+          create: (context) => CategoriesPageModel(),
+          child: SizedBox(
+            width: 500,
+            child: Column(
+              children: [
+                renderExpansionCategory(LogoIdentity.parent),
+                renderExpansionCategory(WebAppDesign.parent),
+                renderExpansionCategory(BusinessAdvertising.parent),
+                renderExpansionCategory(ClothingMerchandise.parent),
+                renderExpansionCategory(ArtIllustration.parent),
+                renderExpansionCategory(PackagingLabel.parent),
+                renderExpansionCategory(BookMagazine.parent),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          decoration:
+              const BoxDecoration(color: Color.fromARGB(255, 220, 220, 220)),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: size.width * 0.05, horizontal: size.width * 0.05),
+            child: renderFooter(size.width),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column renderFooter(pageWidth) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Footer.renderResourceFooter(),
+        Row(
           children: [
-            renderExpansionCategory(LogoIdentity.parent),
-            renderExpansionCategory(WebAppDesign.parent),
-            renderExpansionCategory(BusinessAdvertising.parent),
-            renderExpansionCategory(ClothingMerchandise.parent),
-            renderExpansionCategory(ArtIllustration.parent),
-            renderExpansionCategory(PackagingLabel.parent),
-            renderExpansionCategory(BookMagazine.parent),
+            SizedBox(width: pageWidth * 0.41),
+            Footer.renderCopyright(),
+            Padding(
+                padding: EdgeInsets.only(left: pageWidth * 0.05),
+                child: Footer.renderSocialMediaButton()),
           ],
         ),
-      ),
+      ],
     );
   }
 
