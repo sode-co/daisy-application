@@ -38,7 +38,7 @@ namespace Api
             }));
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Daisy-Core-Service Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
         }
 
@@ -51,9 +51,10 @@ namespace Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => {
+                app.UseSwaggerUI(c =>
+                {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                    c.RoutePrefix = string.Empty;
+                    c.RoutePrefix = String.Empty;
                 });
             }
 
