@@ -19,18 +19,20 @@ namespace Domain.Models
         public String Description { get; set; }
 
         [Required]
-        public int Status { get; set; }
+        [MaxLength(255)]
+        public String Status { get; set; }
 
         [Required]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
         [Required]
-        public int Currency { get; set; }
+        [MaxLength(255)]
+        public String Currency { get; set; }
 
         public String Data { get; set; }
 
         [Required]
-        public int TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
 
         [Required]
         public int Commission { get; set; }

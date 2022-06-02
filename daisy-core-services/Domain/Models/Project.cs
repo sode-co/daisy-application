@@ -20,6 +20,9 @@ namespace Domain.Models
         [Required]
         public virtual User Freelancer { get; set; }
 
+        [Required]
+        public virtual Category Category { get; set; }
+
         public DateTime? ResolvedAt { get; set; }
 
         public String Data { get; set; }
@@ -44,27 +47,24 @@ namespace Domain.Models
         public long Timeline { get; set; }
 
         [Required]
-        public int Budget { get; set; }
+        public decimal Budget { get; set; }
 
         [Required]
         public bool IsAllowedPublic { get; set; }
 
         [Required]
-        public int Status { get; set; }
+        [MaxLength(255)]
+        public String Status { get; set; }
 
         public virtual Payment Payment { get; set; }
-
-        public virtual ICollection<Workspace> Workspaces { get; set; }
+	    public virtual ICollection<Workspace> Workspaces { get; set; }
 
         [Required]
         public virtual Request Request { get; set; }
-        
-
 
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        [Required]
         public DateTime UpdatedAt { get; set; }
 
         public DateTime? DeletedAt { get; set; }

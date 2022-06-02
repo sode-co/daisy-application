@@ -146,8 +146,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<int?>("SenderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -176,8 +178,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Budget")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -211,8 +213,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<DateTime?>("ResolvedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<long>("Timeline")
                         .HasColumnType("bigint");
@@ -285,8 +289,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Commission")
                         .HasColumnType("int");
@@ -294,8 +298,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Currency")
-                        .HasColumnType("int");
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Data")
                         .HasColumnType("nvarchar(max)");
@@ -313,11 +319,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("TotalAmount")
-                        .HasColumnType("int");
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -423,7 +431,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Budget")
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -478,8 +489,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<DateTime?>("ResolvedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<long>("Timeline")
                         .HasColumnType("bigint");
@@ -488,6 +501,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("CustomerId");
 
@@ -532,8 +547,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<int?>("ParentRequestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -630,8 +647,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<int?>("PortfolioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -683,8 +700,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -701,8 +717,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -745,8 +761,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<int?>("RequestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -857,6 +875,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
             modelBuilder.Entity("Domain.Models.Project", b =>
                 {
+                    b.HasOne("Domain.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
                     b.HasOne("Domain.Models.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
@@ -872,6 +894,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.HasOne("Domain.Models.Request", "Request")
                         .WithMany()
                         .HasForeignKey("RequestId");
+
+                    b.Navigation("Category");
 
                     b.Navigation("Customer");
 

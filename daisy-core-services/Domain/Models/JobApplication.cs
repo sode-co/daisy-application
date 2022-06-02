@@ -33,12 +33,13 @@ namespace Domain.Models
         public long Timeline { get; set; }
 
         [Required]
-        public int Budget { get; set; }
+        public decimal Budget { get; set; }
 
         public String Data { get; set; }
 
         [Required]
-        public int Status { get; set; }
+        [MaxLength(255)]
+        public String Status { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

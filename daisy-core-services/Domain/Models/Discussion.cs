@@ -28,7 +28,8 @@ namespace Domain.Models
         public virtual Workspace Workspace { get; set; }
 
         [Required]
-        public int Status { get; set; }
+        [MaxLength(255)]
+        public String Status { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }

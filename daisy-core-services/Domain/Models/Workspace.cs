@@ -15,7 +15,8 @@ namespace Domain.Models
         public int Id { get; set; }
 
         [Required]
-        public int Status { get; set; }
+        [MaxLength(255)]
+        public String Status { get; set; }
 
         [Required]
         public virtual Request Request { get; set; }

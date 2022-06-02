@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccess.MssqlServerIntegration.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class InitDB_v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,11 +32,11 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false),
-                    Currency = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Currency = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TotalAmount = table.Column<int>(type: "int", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Commission = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -57,13 +57,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     DisplayName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Role = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Settings = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Avatar = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Phone = table.Column<int>(type: "int", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -171,7 +171,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ParentRequestId = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -245,9 +245,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     PreferredLanguage = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Timeline = table.Column<long>(type: "bigint", nullable: false),
-                    Budget = table.Column<int>(type: "int", nullable: false),
+                    Budget = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -278,6 +278,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
                     FreelancerId = table.Column<int>(type: "int", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
                     ResolvedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PreferredLanguage = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
@@ -285,9 +286,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ReferenceFile = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Timeline = table.Column<long>(type: "bigint", nullable: false),
-                    Budget = table.Column<int>(type: "int", nullable: false),
+                    Budget = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsAllowedPublic = table.Column<bool>(type: "bit", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     PaymentId = table.Column<int>(type: "int", nullable: true),
                     RequestId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -298,6 +299,12 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Projects_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Projects_Payments_PaymentId",
                         column: x => x.PaymentId,
@@ -335,7 +342,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtWorkId = table.Column<int>(type: "int", nullable: true),
                     Like = table.Column<bool>(type: "bit", nullable: false),
-                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<float>(type: "real", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -371,7 +378,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     RequestId = table.Column<int>(type: "int", nullable: true),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -406,7 +413,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     Type = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WorkspaceId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -532,6 +539,11 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 name: "IX_Portfolios_FreelancerId",
                 table: "Portfolios",
                 column: "FreelancerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_CategoryId",
+                table: "Projects",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_CustomerId",
