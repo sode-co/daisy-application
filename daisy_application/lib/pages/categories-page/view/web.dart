@@ -20,7 +20,13 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
         width: 500,
         child: Column(
           children: [
-            renderExpansionCategory('Logo & Identity'),
+            renderExpansionCategory(LogoIdentity.parent),
+            renderExpansionCategory(WebAppDesign.parent),
+            renderExpansionCategory(BusinessAdvertising.parent),
+            renderExpansionCategory(ClothingMerchandise.parent),
+            renderExpansionCategory(ArtIllustration.parent),
+            renderExpansionCategory(PackagingLabel.parent),
+            renderExpansionCategory(BookMagazine.parent),
           ],
         ),
       ),
@@ -28,11 +34,23 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
   }
 
   ExpansionTile renderExpansionCategory(categoryName) {
+    List<String> categories = [];
+    if (categoryName == LogoIdentity.parent) categories = LogoIdentity.children;
+    if (categoryName == WebAppDesign.parent) categories = WebAppDesign.children;
+    if (categoryName == BusinessAdvertising.parent)
+      categories = BusinessAdvertising.children;
+    if (categoryName == ClothingMerchandise.parent)
+      categories = ClothingMerchandise.children;
+    if (categoryName == ArtIllustration.parent)
+      categories = ArtIllustration.children;
+    if (categoryName == PackagingLabel.parent)
+      categories = PackagingLabel.children;
+    if (categoryName == BookMagazine.parent) categories = BookMagazine.children;
     return ExpansionTile(
       title: renderChildLabelCheckbox(categoryName, categoryName),
       controlAffinity: ListTileControlAffinity.leading,
-      children: LogoIdentity.children
-          .map((item) => renderChildLabelCheckbox(item, LogoIdentity.parent))
+      children: categories
+          .map((item) => renderChildLabelCheckbox(item, categoryName))
           .toList(),
     );
   }

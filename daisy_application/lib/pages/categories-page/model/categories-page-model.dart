@@ -35,7 +35,7 @@ class CategoriesPageModel with ChangeNotifier {
 }
 
 class LogoIdentity {
-  static var parent = 'Logo & Identity';
+  static String parent = 'Logo & Identity';
   static List<String> children = [
     'Logo design',
     'Brand identity pack',
@@ -49,7 +49,7 @@ class LogoIdentity {
 }
 
 class WebAppDesign {
-  static var parent = 'Web & app design';
+  static String parent = 'Web & app design';
   static List<String> children = [
     'Web page design',
     'WordPress theme design',
@@ -63,7 +63,7 @@ class WebAppDesign {
 }
 
 class BusinessAdvertising {
-  static var parent = 'Business & advertising';
+  static String parent = 'Business & advertising';
   static List<String> children = [
     'Postcard, flyer or print',
     'Poster',
@@ -80,7 +80,7 @@ class BusinessAdvertising {
 }
 
 class ClothingMerchandise {
-  static var parent = 'Clothing & merchandise';
+  static String parent = 'Clothing & merchandise';
   static List<String> children = [
     'T-shirt',
     'Clothing or apparel',
@@ -91,7 +91,7 @@ class ClothingMerchandise {
 }
 
 class ArtIllustration {
-  static var parent = 'Art & illustration';
+  static String parent = 'Art & illustration';
   static List<String> children = [
     'Illustration or graphics',
     'Card or invitation',
@@ -102,7 +102,7 @@ class ArtIllustration {
 }
 
 class PackagingLabel {
-  static var parent = 'Packaging & label';
+  static String parent = 'Packaging & label';
   static List<String> children = [
     'Product packaging',
     'Product label',
@@ -110,7 +110,7 @@ class PackagingLabel {
 }
 
 class BookMagazine {
-  static var parent = 'Book & magazine';
+  static String parent = 'Book & magazine';
   static List<String> children = [
     'Book cover',
     'Magazine cover',
