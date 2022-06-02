@@ -17,10 +17,15 @@ class _MyWidgetState extends State<BodyCategoriesPageWeb> {
     return ChangeNotifierProvider<CategoriesPageModel>(
       create: (context) => CategoriesPageModel(),
       child: Column(
-        children: [
+        children: const [
           LabeledCheckbox(
             label: 'This is the label text',
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            data: 'test',
+          ),
+          LabeledCheckbox(
+            label: 'Tao neeee',
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             data: 'test',
           ),
         ],
@@ -44,30 +49,29 @@ class LabeledCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> cateList = context.watch().selectedCategoriesList;
-    var isSelected = cateList.indexOf(label) > -1;
-    return Consumer<CategoriesPageModel>(
-      builder: (context, mymodel, child) {
-        return InkWell(
-          onTap: () {
-            mymodel.updateSelectedCategoriesList(isSelected, label);
-          },
-          child: Padding(
-            padding: padding,
-            child: Row(
-              children: <Widget>[
-                Expanded(child: Text(label)),
-                Checkbox(
-                  value: isSelected,
-                  onChanged: (bool? newValue) {
-                    mymodel.updateSelectedCategoriesList(isSelected, label);
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
+    var provider = Provider.of<CategoriesPageModel>(context);
+    var isSelected = context
+        .watch<CategoriesPageModel>()
+        .selectedCategoriesList
+        .contains(label);
+    return InkWell(
+      onTap: () {
+        provider.updateSelectedCategoriesList(isSelected, label);
       },
+      child: Padding(
+        padding: padding,
+        child: Row(
+          children: <Widget>[
+            Expanded(child: Text(label)),
+            Checkbox(
+              value: isSelected,
+              onChanged: (bool? newValue) {
+                provider.updateSelectedCategoriesList(isSelected, label);
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
