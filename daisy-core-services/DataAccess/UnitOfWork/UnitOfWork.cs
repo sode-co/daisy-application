@@ -1,5 +1,6 @@
 ﻿using DataAccess.MssqlServerIntegration;
 using DataAccess.Repositories.ArtWorks;
+using DataAccess.Repositories.AuthTokens;
 using DataAccess.Repositories.Categories;
 using DataAccess.Repositories.Discussions;
 using DataAccess.Repositories.JobApplications;
@@ -14,10 +15,6 @@ using DataAccess.Repositories.Reviews;
 using DataAccess.Repositories.Users;
 using DataAccess.Repositories.Workspaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.UnitOfWork
 {
@@ -36,6 +33,7 @@ namespace DataAccess.UnitOfWork
         private IResourceRepository _resourceRepository;
         private IReviewRepository _reviewRepository;
         private IUserRepository _userRepository;
+        private IAuthTokenRepository _authTokenRepository;
         private IWorkspaceRepository _workspaceRepository;
 
         private ApplicationDbContext _db;
@@ -56,6 +54,7 @@ namespace DataAccess.UnitOfWork
             _resourceRepository = new ResourceRepository(db);
             _reviewRepository = new ReviewRepository(db);
             _userRepository = new UserRepository(db);
+            _authTokenRepository = new AuthTokenRepository(db);
             _workspaceRepository = new WorkspaceRepository(db);
         }
 
@@ -85,6 +84,8 @@ namespace DataAccess.UnitOfWork
 
         public IUserRepository UserRepository => _userRepository;
 
+        public IAuthTokenRepository AuthTokenRepository => _authTokenRepository;
+
         public IWorkspaceRepository WorkspaceRepository => _workspaceRepository;
 
         public void Dispose()
@@ -93,7 +94,7 @@ namespace DataAccess.UnitOfWork
             _db.Dispose();
         }
 
-            public void Save()
+        public void Save()
         {
             Console.WriteLine("Unit of work has been dispose");
             _db.Dispose();

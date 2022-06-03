@@ -34,15 +34,20 @@
     <None Remove="Models\" />
     <None Remove="Models\Authenticationn\" />
     <None Remove="Common\" />
-    <None Remove="Models\User\" />
+    <None Remove="Middlewares\Authentication\" />
+    <None Remove="Response\" />
+    <None Remove="Response\Authentication\" />
+    <None Remove="Response\User\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Middlewares\" />
     <Folder Include="Controllers\User\" />
     <Folder Include="Controllers\Authentication\" />
     <Folder Include="Models\" />
-    <Folder Include="Models\Authentication\" />
     <Folder Include="Common\" />
-    <Folder Include="Models\User\" />
+    <Folder Include="Middlewares\Authentication\" />
+    <Folder Include="Response\" />
+    <Folder Include="Response\Authentication\" />
+    <Folder Include="Response\User\" />
   </ItemGroup>
 </Project>

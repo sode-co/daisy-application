@@ -9,6 +9,7 @@ namespace DataAccess.MssqlServerIntegration
     public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<AuthToken> AuthTokens { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ArtWork> ArtWorks { get; set; }
         public DbSet<JobApplication> JobApplications { get; set; }

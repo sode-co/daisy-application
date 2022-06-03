@@ -15,11 +15,11 @@
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
-    <None Remove="MssqlServerIntegration\Migrations\" />
+    <None Remove="Repositories\AuthTokens\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MssqlServerIntegration\" />
-    <Folder Include="MssqlServerIntegration\Migrations\" />
+    <Folder Include="Repositories\AuthTokens\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />

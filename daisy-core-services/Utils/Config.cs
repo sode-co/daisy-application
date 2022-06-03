@@ -13,6 +13,8 @@ namespace Utils
             public string DB_HOST_NAME { get; set; }
             public int DB_PORT { get; set; }
             public string DB_NAME { get; set; }
+            public string ACCESS_TOKEN_SECRET { get; set; }
+            public string REFRESH_TOKEN_SECRET { get; set; }
             public string DB_USER { get; set; }
             public string DB_PASSWORD { get; set; }
             public string API_HOST { get; set; }
