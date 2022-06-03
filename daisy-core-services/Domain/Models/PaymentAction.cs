@@ -25,7 +25,7 @@ namespace Domain.Models
         public virtual Payment Payment { get; set; }
 
         [Required]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public String Data { get; set; }
 

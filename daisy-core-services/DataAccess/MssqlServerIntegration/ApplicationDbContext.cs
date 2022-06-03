@@ -8,9 +8,6 @@ namespace DataAccess.MssqlServerIntegration
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext()
-        {
-        }
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ArtWork> ArtWorks { get; set; }
@@ -26,7 +23,9 @@ namespace DataAccess.MssqlServerIntegration
         public DbSet<Discussion> Discussions { get; set; }
         public DbSet<Workspace> Workspaces { get; set; }
 
-
+        public ApplicationDbContext()
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // when using dotnet command to generate db, we can not load connection string in

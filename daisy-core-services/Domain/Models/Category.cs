@@ -22,6 +22,10 @@ namespace Domain.Models
         [Required]
         public String Name { get; set; }
 
+        [MaxLength(255)]
+        [Required]
+        public String Type { get; set; }
+
         [Required]
         public DateTime CreatedAt { get; set; }
         
