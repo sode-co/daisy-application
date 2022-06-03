@@ -100,6 +100,33 @@ pipeline {
            }
         }
       }
+      stage('Push to DockerHub') {
+        steps {
+          sh """
+              echo 'Pushing tiendvlp/daisy_api:${GIT_COMMIT_SHORT}...'
+              docker push tiendvlp/daisy_api:${GIT_COMMIT_SHORT}
+              docker push tiendvlp/daisy_api:latest
+              echo 'Pushed tiendvlp/daisy_api:${GIT_COMMIT_SHORT} into docker hub successfully'
+
+              echo 'Pushing tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}...'
+              docker push tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}
+              docker push tiendvlp/daisy_grpc:latest
+              echo 'Pushed tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT} into docker hub successfully'
+
+              echo 'Pushing tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}...'
+              docker push tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}
+              docker push tiendvlp/daisy_flutter_web:latest
+              echo 'Pushed tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT} into docker hub successfully'
+
+              echo 'All services has been pushed into docker hub with tag ${GIT_COMMIT_SHORT}'
+
+              echo 'Cleaning up image...'
+              docker image rm tiendvlp/daisy_api:${GIT_COMMIT_SHORT}
+              docker image rm tiendvlp/daisy_grpc:${GIT_COMMIT_SHORT}
+              docker image rm tiendvlp/daisy_flutter_web:${GIT_COMMIT_SHORT}
+          """
+        }
+      }
       stage('Launch Api') {
         steps {
           sh """
@@ -110,13 +137,23 @@ pipeline {
           """
         }
       }
-      stage('Launch gRPC') {
+      stage('Launch gRPC Web') {
         steps {
           sh """
-              echo 'Stopping daisy-grpc...'
-              docker stop daisy-grpc || echo 'skipping error...'
-              echo 'Running daisy-grpc...'
-              docker run -d -p 50052:50052 --rm --network DaisyInternal --name daisy-grpc tiendvlp/daisy_grpc:latest
+              echo 'Stopping daisy-grpc-web...'
+              docker stop daisy-grpc-web || echo 'skipping error...'
+              echo 'Running daisy-grpc-web...'
+              docker run -d -p 50052:50052 --rm --network DaisyInternal --name daisy-grpc-web -it tiendvlp/daisy_grpc:latest GrpcServices.dll
+          """
+        }
+      }
+      stage('Launch gRPC Mobile') {
+        steps {
+          sh """
+              echo 'Stopping daisy-grpc-mobile...'
+              docker stop daisy-grpc-mobile || echo 'skipping error...'
+              echo 'Running daisy-grpc-mobile...'
+              docker run -d -p 50152:50152 --rm --network DaisyInternal --name daisy-grpc-mobile -it tiendvlp/daisy_grpc:latest MobileGrpcServices.dll
           """
         }
       }

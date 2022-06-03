@@ -11,7 +11,7 @@ class UniversalLocator {
   static void _initGrpcService() {
     locator.registerFactory<ClientChannelBase>(() => ClientChannel(
         Config.GRPC_HOST,
-        port: Config.GRPC_PORT,
+        port: Config.GRPC_MOBILE_PORT,
         options:
             const ChannelOptions(credentials: ChannelCredentials.insecure())));
   }

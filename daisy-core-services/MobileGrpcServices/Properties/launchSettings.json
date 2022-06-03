@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Custom": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:26658;http://localhost:31837",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "MobileGrpcServices": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:3137;https://localhost:57404",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
