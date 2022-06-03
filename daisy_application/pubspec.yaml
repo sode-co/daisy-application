@@ -25,6 +25,7 @@ dependencies:
   json_serializable: '^6.2.0'
   grpc: ^3.0.2
   json_annotation: ^4.5.0
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:
@@ -37,15 +38,9 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-    # - images/
-
-  #  fonts:
-  #   - family: Butler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  assets:
+    - assets/images/
+    - assets/images/intro/
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

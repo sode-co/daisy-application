@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -26,6 +26,7 @@ namespace DataAccess.MssqlServerIntegration
         public ApplicationDbContext()
         {
         }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // when using dotnet command to generate db, we can not load connection string in
@@ -34,6 +35,8 @@ namespace DataAccess.MssqlServerIntegration
             {
                 Config.Load();
             }
+
+            Config.AdaptEnv(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
 
             string connectionString =
                 $"server={Config.Get().DB_HOST_NAME},{Config.Get().DB_PORT};" +
