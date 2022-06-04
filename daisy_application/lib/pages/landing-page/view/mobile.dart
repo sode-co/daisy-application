@@ -17,6 +17,7 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
         Introduction(size: size),
         const TrendingTab(),
         const StatisticInfoSlider(),
+        const WelcomeToLogin(),
       ],
     );
   }

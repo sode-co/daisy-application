@@ -310,3 +310,64 @@ class StatisticInfoSlider extends StatelessWidget {
     );
   }
 }
+
+class WelcomeToLogin extends StatelessWidget {
+  const WelcomeToLogin({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    bool isDesktop = Responsive.isDesktop(context);
+    return Column(
+      children: [
+        findYourTalentBtn(isDesktop),
+        const SizedBox(height: 10),
+        designerJoinNowBtn(isDesktop),
+      ],
+    );
+  }
+
+  Container designerJoinNowBtn(isDesktop) {
+    return Container(
+      height: 50,
+      width: isDesktop ? 500 : 200,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+          border: Border.all(
+              color: const Color(MyColors.blue_gradient_01),
+              style: BorderStyle.solid)),
+      child: TextButton(
+        onPressed: () {},
+        child: const Text(
+          'Designer, join now',
+          style: TextStyle(
+              color: Color(MyColors.blue_gradient_01),
+              fontWeight: FontWeight.bold,
+              fontSize: 18),
+        ),
+      ),
+    );
+  }
+
+  Container findYourTalentBtn(isDesktop) {
+    return Container(
+      height: 55,
+      width: isDesktop ? 500 : 200,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: const Color(MyColors.blue_gradient_01),
+          border: Border.all(
+              color: const Color(MyColors.blue_gradient_01),
+              style: BorderStyle.solid)),
+      child: TextButton(
+        onPressed: () {},
+        child: const Text(
+          'Find your talent',
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+      ),
+    );
+  }
+}
