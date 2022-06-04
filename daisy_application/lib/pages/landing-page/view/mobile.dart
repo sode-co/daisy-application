@@ -12,7 +12,9 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Introduction(size: size);
+    return Column(
+      children: [Introduction(size: size), const TrendingTab()],
+    );
   }
 }
 

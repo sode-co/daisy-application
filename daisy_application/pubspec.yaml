@@ -38,6 +38,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/intro/
+    - assets/images/intro/trending/
 
   #  fonts:
   #   - family: Butler

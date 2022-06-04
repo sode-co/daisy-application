@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
+import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -185,6 +186,80 @@ class IntroText extends StatelessWidget {
               fontSize: fontSize,
             )),
       ],
+    );
+  }
+}
+
+class TrendingTab extends StatelessWidget {
+  const TrendingTab({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    List<Map<String, String>> trendingItems = [
+      {'Branding design': 'assets/images/intro/trending/branding-design.png'},
+      {
+        'Logo & website':
+            'assets/images/intro/trending/logo-website-squarespace.png'
+      },
+      {'Website builders': 'assets/images/intro/trending/web-builder.png'},
+      {
+        'Logo & brand identity pack':
+            'assets/images/intro/trending/brand-identity-pack.png'
+      },
+      {
+        'Product packaging':
+            'assets/images/intro/trending/product-packaging-design.png'
+      },
+      {'T-shirt': 'assets/images/intro/trending/t-shirt-design.png'},
+      {
+        'Illustration or graphics':
+            'assets/images/intro/trending/illustrations.png'
+      },
+      {'Book cover': 'assets/images/intro/trending/book-cover-design.png'},
+      {'Show more': 'assets/images/intro/trending/categories.png'}
+    ];
+    var width = Responsive.isDesktop(context) ? 1920.0 : 450.0;
+    var imgHeight = Responsive.isDesktop(context) ? 150 : 100;
+    var paddingHorizontal = Responsive.isDesktop(context) ? 35.0 : 1.0;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Trending', style: Style.h6Bold),
+          SizedBox(
+            height: 200.0,
+            width: width,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: trendingItems
+                  .map((item) =>
+                      renderTrendingImageItem(size.width, item, imgHeight))
+                  .toList(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding renderTrendingImageItem(pageWidth, imageItem, imgHeight) {
+    String title = '';
+    String imgSrc = '';
+    imageItem.forEach((k, v) => {title = k, imgSrc = v});
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 1.0),
+      child: SizedBox(
+        height: imgHeight,
+        child: Column(
+          children: [
+            InkWell(child: Image.asset(imgSrc, height: imgHeight)),
+            Text(title),
+          ],
+        ),
+      ),
     );
   }
 }

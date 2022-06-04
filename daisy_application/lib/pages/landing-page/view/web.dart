@@ -13,7 +13,12 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Introduction(size: size);
+    return Column(
+      children: [
+        Introduction(size: size),
+        const TrendingTab(),
+      ],
+    );
   }
 }
 
@@ -34,8 +39,7 @@ class Introduction extends StatelessWidget {
           fit: BoxFit.fitWidth,
         ),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(size.width * 0.05),
+      child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
