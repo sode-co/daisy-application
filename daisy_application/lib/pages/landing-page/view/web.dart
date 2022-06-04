@@ -17,8 +17,9 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
       children: [
         Introduction(size: size),
         const TrendingTab(),
-        const StatisticInfoSlider(),
         const WelcomeToLogin(),
+        const StatisticInfoSlider(),
+        const Footer(),
       ],
     );
   }

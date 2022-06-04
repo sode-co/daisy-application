@@ -7,6 +7,7 @@ import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SearchCategoriesTextField extends StatelessWidget {
   const SearchCategoriesTextField({Key? key}) : super(key: key);
@@ -369,5 +370,151 @@ class WelcomeToLogin extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class Footer extends StatelessWidget {
+  const Footer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: [
+          const Divider(
+            color: Color(MyColors.dark_blue),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                FooterComponent.renderResourceFooter(),
+                Row(
+                  children: [
+                    SizedBox(width: size.width * 0.41),
+                    FooterComponent.renderCopyright(),
+                    Padding(
+                        padding: EdgeInsets.only(left: size.width * 0.05),
+                        child: FooterComponent.renderSocialMediaButton()),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FooterComponent {
+  static Row renderSocialMediaButton() {
+    return Row(
+      children: [
+        IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.facebook, size: 20)),
+        IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.instagram, size: 20)),
+        IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.linkedin, size: 20)),
+        IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.twitter, size: 20)),
+      ],
+    );
+  }
+
+  static Row renderCopyright() {
+    return Row(
+      children: const [
+        Text('© Daisy'),
+        Text(' | '),
+        Text('by Sode'),
+        Text(' | '),
+        Text('Term'),
+        Text(' | '),
+        Text('Privacy'),
+        Text('  '),
+        Icon(Icons.public),
+        Text('English'),
+      ],
+    );
+  }
+
+  static Row renderResourceFooter() {
+    return Row(children: [
+      SizedBox(
+        width: 500,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset('assets/images/weblogo.png', width: 300),
+            Row(
+              children: [
+                Image.asset('assets/images/appstore.png', scale: 3),
+                Image.asset('assets/images/chplay.png', scale: 4),
+              ],
+            ),
+            const Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula efficitur nibh non commodo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In nibh neque, commodo eget dui ac, hendrerit commodo risus. In lobortis rutrum velit, eget efficitur nibh laoreet vitae. Duis vel elit mollis nulla tincidunt auctor at in justo. Sed viverra diam arcu, eu elementum quam porttitor commodo.'),
+          ],
+        ),
+      ),
+      const SizedBox(
+        width: 120,
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Company', style: Style.stringBold),
+          Text('About'),
+          Text('Contact'),
+          Text('Careers'),
+          Text('Team'),
+          Text('Press releases'),
+          Text('In the media'),
+          Text('Testimonials'),
+        ],
+      ),
+      const SizedBox(
+        width: 120,
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Design services', style: Style.stringBold),
+          Text('Find a designer'),
+          Text('Discover inspiration'),
+          Text('Pricing'),
+          Text('Agencies'),
+          Text('Designer resources'),
+          Text('Featured partners'),
+          Text('Help'),
+        ],
+      ),
+      const SizedBox(
+        width: 120,
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Get a design', style: Style.stringBold),
+          Text('Logo design'),
+          Text('Business card'),
+          Text('Web page design'),
+          Text('Brand guide'),
+          Text('Packaging design'),
+          Text('T-shirt design'),
+          Text('Book cover design'),
+        ],
+      ),
+    ]);
   }
 }
