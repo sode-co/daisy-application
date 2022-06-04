@@ -7,6 +7,9 @@ class BodyLandingPageMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('BodyLandingPageMobile');
+    return SizedBox(
+      height: 1000,
+      child: const Text('BodyLandingPageMobile'),
+    );
   }
 }

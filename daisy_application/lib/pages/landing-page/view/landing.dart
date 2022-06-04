@@ -1,3 +1,4 @@
+import 'package:daisy_application/pages/common/bottomnavbar.dart';
 import 'package:daisy_application/pages/common/header.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/landing-page/view/mobile.dart';
@@ -10,10 +11,12 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context) ? const Header() : null,
+      appBar: const Header(),
       body: Responsive.isDesktop(context)
           ? const SingleChildScrollView(child: BodyLandingPageWeb())
           : const SingleChildScrollView(child: BodyLandingPageMobile()),
+      bottomNavigationBar:
+          !Responsive.isDesktop(context) ? const BottomNavBar() : null,
     );
   }
 }
