@@ -13,6 +13,20 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    return Introduction(size: size);
+  }
+}
+
+class Introduction extends StatelessWidget {
+  const Introduction({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(

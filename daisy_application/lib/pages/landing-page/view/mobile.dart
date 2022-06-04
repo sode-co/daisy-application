@@ -1,4 +1,3 @@
-import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/landing-page/view/common.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +12,20 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    return Introduction(size: size);
+  }
+}
+
+class Introduction extends StatelessWidget {
+  const Introduction({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -42,55 +55,5 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
         ),
       ),
     );
-  }
-
-  Column searchCategoriesTextField(width, color) {
-    return Column(children: [
-      SizedBox(
-        width: width,
-        child: const TextField(
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 1.0),
-            ),
-            border: OutlineInputBorder(),
-            prefixIcon: Icon(Icons.search, color: Colors.white),
-            labelText: 'Logo, website, branding...',
-            labelStyle: TextStyle(color: Colors.white),
-          ),
-        ),
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      SizedBox(
-          height: 50,
-          width: width,
-          child: TextButton(
-            onPressed: () {},
-            style:
-                ButtonStyle(backgroundColor: MaterialStateProperty.all(color)),
-            child: const Center(
-              child: Text(
-                'Get started',
-                style: TextStyle(
-                    color: Color(MyColors.blue_gradient_01),
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-          )),
-      const SizedBox(
-        height: 10,
-      ),
-      Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        SizedBox(width: width * 0.3),
-        Icon(Icons.play_circle,
-            color:
-                color), // sometimes it causes bug not in dom tree??? sometimes not
-        const SizedBox(width: 7),
-        Text('See creativity at work',
-            style: TextStyle(color: color, fontWeight: FontWeight.w600)),
-      ]),
-    ]);
   }
 }
