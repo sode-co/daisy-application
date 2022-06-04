@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
@@ -259,6 +260,52 @@ class TrendingTab extends StatelessWidget {
             Text(title),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class StatisticInfoSlider extends StatelessWidget {
+  const StatisticInfoSlider({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    var height = Responsive.isDesktop(context) ? 400.0 : 300.0;
+    var width = size.width;
+    var fontSize = Responsive.isDesktop(context) ? 50.0 : 20.0;
+    return SizedBox(
+      height: height,
+      width: width,
+      child: CarouselSlider(
+        options: CarouselOptions(height: 400.0, autoPlay: true),
+        items: ['9,920,123 designs', '11,123 3D designs', '221,021 connections']
+            .map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/intro/map.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    '$i',
+                    style: TextStyle(
+                        fontSize: fontSize,
+                        fontWeight: FontWeight.w900,
+                        color: const Color(MyColors.blue_gradient_01)),
+                  ),
+                ),
+              );
+            },
+          );
+        }).toList(),
       ),
     );
   }

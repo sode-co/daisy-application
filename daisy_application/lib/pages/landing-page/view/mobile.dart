@@ -13,7 +13,11 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Column(
-      children: [Introduction(size: size), const TrendingTab()],
+      children: [
+        Introduction(size: size),
+        const TrendingTab(),
+        const StatisticInfoSlider(),
+      ],
     );
   }
 }
@@ -50,8 +54,6 @@ class Introduction extends StatelessWidget {
                 color: Colors.white),
             const SizedBox(height: 20),
             const SearchCategoriesTextField(),
-            // searchCategoriesTextField(
-            //     size.width * 0.89, Color(colors[colorIndex])),
             const IntroCarouselImage()
           ],
         ),
