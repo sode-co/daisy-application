@@ -22,7 +22,9 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                   child: const Text('Find a designer', style: Style.stringBold),
                   onPressed: () {}),
             ])
-          : Center(child: Image.asset('assets/images/weblogo.png', width: 100)),
+          : Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Image.asset('assets/images/weblogo.png', width: 100)),
       actions: <Widget>[
         if (Responsive.isDesktop(context))
           TextButton.icon(
