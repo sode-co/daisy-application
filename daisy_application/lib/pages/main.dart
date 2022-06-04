@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Container(
-        color: Colors.white,
         child: LandingPage(),
       ),
     );
