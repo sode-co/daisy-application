@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:daisy_application/pages/common/colors.dart';
+import 'package:daisy_application/pages/landing-page/view/common.dart';
 import 'package:flutter/material.dart';
 
 class BodyLandingPageMobile extends StatefulWidget {
@@ -70,8 +71,9 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
                 endIndent: size.width * 0.85,
                 color: Color(colors[colorIndex])),
             const SizedBox(height: 20),
-            searchCategoriesTextField(
-                size.width * 0.89, Color(colors[colorIndex])),
+            const SearchCategoriesTextField(),
+            // searchCategoriesTextField(
+            //     size.width * 0.89, Color(colors[colorIndex])),
             renderImageCarousel()
           ],
         ),
