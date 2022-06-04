@@ -30,10 +30,10 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
                 const IntroCarouselImage(),
                 const SizedBox(width: 100),
                 Column(
-                  children: <Widget>[
-                    introText(size.width, Colors.white),
-                    const SizedBox(height: 20),
-                    const SearchCategoriesTextField(),
+                  children: const <Widget>[
+                    IntroText(),
+                    SizedBox(height: 20),
+                    SearchCategoriesTextField(),
                   ],
                 ),
               ],
@@ -43,28 +43,4 @@ class _BodyLandingWebState extends State<BodyLandingPageWeb> {
       ),
     );
   }
-
-  Column introText(pageWidth, color) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('World-class design',
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w900,
-                fontSize: pageWidth * 0.035,
-              )),
-          Text('At your service',
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w900,
-                fontSize: pageWidth * 0.035,
-              )),
-          Divider(
-            thickness: 6,
-            indent: pageWidth * 0.005,
-            endIndent: pageWidth * 0.085,
-            color: Colors.white,
-          ),
-        ],
-      );
 }

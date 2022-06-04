@@ -27,7 +27,7 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
           children: [
             Padding(
                 padding: EdgeInsets.only(left: size.width * 0.035),
-                child: introText(size.width, Colors.white)),
+                child: IntroText()),
             Divider(
                 thickness: 6,
                 indent: size.width * 0.05,
@@ -93,20 +93,4 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
       ]),
     ]);
   }
-
-  Column introText(pageWidth, color) =>
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text('World-class design',
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.w900,
-              fontSize: pageWidth * 0.1,
-            )),
-        Text('At your service',
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.w900,
-              fontSize: pageWidth * 0.1,
-            )),
-      ]);
 }

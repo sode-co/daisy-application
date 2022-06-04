@@ -159,3 +159,32 @@ class _IntroCarouselImageState extends State<IntroCarouselImage> {
     ]);
   }
 }
+
+class IntroText extends StatelessWidget {
+  const IntroText({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    var pageWidth = size.width;
+    var fontSize =
+        Responsive.isDesktop(context) ? pageWidth * 0.035 : pageWidth * 0.1;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('World-class design',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w900,
+              fontSize: fontSize,
+            )),
+        Text('At your service',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w900,
+              fontSize: fontSize,
+            )),
+      ],
+    );
+  }
+}
