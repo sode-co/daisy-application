@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/landing-page/view/common.dart';
 import 'package:flutter/material.dart';
@@ -12,41 +10,6 @@ class BodyLandingPageMobile extends StatefulWidget {
 }
 
 class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
-  int colorIndex = 0;
-  List<int> colors = [
-    MyColors.white,
-    MyColors.white,
-    MyColors.white,
-    MyColors.white,
-    MyColors.white,
-  ];
-  List<String> images = [
-    'assets/images/intro/clothes.png',
-    'assets/images/intro/brand.png',
-    'assets/images/intro/packaging.png',
-    'assets/images/intro/logo.png',
-    'assets/images/intro/packaging2.png',
-  ];
-
-  setColorIndex(value) {
-    if (mounted) {
-      setState(() => colorIndex = value);
-    }
-  }
-
-  @override
-  initState() {
-    super.initState();
-    Timer.periodic(const Duration(seconds: 10), (timer) {
-      if (colorIndex == colors.length - 1) {
-        setColorIndex(0);
-      } else {
-        colorIndex++;
-        setColorIndex(colorIndex);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -64,73 +27,21 @@ class _BodyLandingMobileState extends State<BodyLandingPageMobile> {
           children: [
             Padding(
                 padding: EdgeInsets.only(left: size.width * 0.035),
-                child: introText(size.width, Color(colors[colorIndex]))),
+                child: introText(size.width, Colors.white)),
             Divider(
                 thickness: 6,
                 indent: size.width * 0.05,
                 endIndent: size.width * 0.85,
-                color: Color(colors[colorIndex])),
+                color: Colors.white),
             const SizedBox(height: 20),
             const SearchCategoriesTextField(),
             // searchCategoriesTextField(
             //     size.width * 0.89, Color(colors[colorIndex])),
-            renderImageCarousel()
+            const IntroCarouselImage()
           ],
         ),
       ),
     );
-  }
-
-  Column renderImageCarousel() {
-    return Column(children: <Widget>[
-      AnimatedSwitcher(
-        duration: const Duration(milliseconds: 1000),
-        transitionBuilder: (Widget child, Animation<double> animation) {
-          return ScaleTransition(scale: animation, child: child);
-        },
-        child: SizedBox(
-            width: 500,
-            height: 400,
-            child: Image.asset(images[colorIndex], width: 450)),
-      ),
-      Row(children: [
-        IconButton(
-          icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
-          onPressed: () {
-            setColorIndex(0);
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
-          onPressed: () {
-            setColorIndex(1);
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
-          onPressed: () {
-            setColorIndex(2);
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
-          onPressed: () {
-            setColorIndex(3);
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
-          onPressed: () {
-            setColorIndex(4);
-          },
-        )
-      ]),
-    ]);
   }
 
   Column searchCategoriesTextField(width, color) {

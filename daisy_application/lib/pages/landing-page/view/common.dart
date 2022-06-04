@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +65,96 @@ class SearchCategoriesTextField extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
         ),
+      ]),
+    ]);
+  }
+}
+
+class IntroCarouselImage extends StatefulWidget {
+  const IntroCarouselImage({Key? key}) : super(key: key);
+
+  @override
+  State<IntroCarouselImage> createState() => _IntroCarouselImageState();
+}
+
+class _IntroCarouselImageState extends State<IntroCarouselImage> {
+  int imgIndex = 0;
+  List<String> images = [
+    'assets/images/intro/clothes.png',
+    'assets/images/intro/brand.png',
+    'assets/images/intro/packaging.png',
+    'assets/images/intro/logo.png',
+    'assets/images/intro/packaging2.png',
+  ];
+
+  setImgIndex(value) {
+    if (mounted) {
+      setState(() => imgIndex = value);
+    }
+  }
+
+  @override
+  initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 10), (timer) {
+      if (imgIndex == images.length - 1) {
+        setImgIndex(0);
+      } else {
+        imgIndex++;
+        setImgIndex(imgIndex);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: <Widget>[
+      AnimatedSwitcher(
+        duration: const Duration(milliseconds: 1000),
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          return ScaleTransition(scale: animation, child: child);
+        },
+        child: SizedBox(
+            width: 650,
+            height: 350,
+            child: Image.asset(images[imgIndex], width: 450)),
+      ),
+      Row(children: [
+        IconButton(
+          icon: const Icon(Icons.circle,
+              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+          onPressed: () {
+            setImgIndex(0);
+          },
+        ),
+        IconButton(
+          icon: const Icon(Icons.circle,
+              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+          onPressed: () {
+            setImgIndex(1);
+          },
+        ),
+        IconButton(
+          icon: const Icon(Icons.circle,
+              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+          onPressed: () {
+            setImgIndex(2);
+          },
+        ),
+        IconButton(
+          icon: const Icon(Icons.circle,
+              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+          onPressed: () {
+            setImgIndex(3);
+          },
+        ),
+        IconButton(
+          icon: const Icon(Icons.circle,
+              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+          onPressed: () {
+            setImgIndex(4);
+          },
+        )
       ]),
     ]);
   }
