@@ -1,15 +1,27 @@
+import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import '../common/debuger/logger.dart';
+import '../common/platform_helper.dart';
+import '../core_services/google/google_sign_in.dart';
 import '../service_locator/locator.dart';
 import 'dart:async';
+import '../core_services/google/firebase_options.dart';
 
-void main() {
-  Debug.log('init-client', 'Client start healthcheck');
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (!PlatformHelper.isPlatform(PLATFORM.Web)) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
+
   setupDependencies();
+  Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
   Timer.periodic(const Duration(seconds: 10), (Timer t) async {
     HealthCheckGrpcClient client = locator.get();
@@ -29,6 +41,7 @@ void main() {
     }
   });
 
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -44,7 +57,18 @@ class MyApp extends StatelessWidget {
       ),
       home: Container(
         color: Colors.white,
-        child: Container(),
+        child: Center(
+          child: SizedBox(
+            width: 200,
+            height: 100,
+            child: MaterialButton(
+              onPressed: () {
+                GoogleSignIn().signIn();
+              },
+              child: const Text('Sign in with Google'),
+            ),
+          ),
+        ),
       ),
     );
   }
