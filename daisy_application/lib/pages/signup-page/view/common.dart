@@ -33,7 +33,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('SignUp', style: Style.h2blueStringBold),
+        const Text('Sign up', style: Style.h2blueStringBold),
         Line(
             width: 40,
             height: 5,
@@ -105,7 +105,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                   Image.asset('assets/images/google.png', width: 16),
                   const SizedBox(width: 5),
                   Text(
-                    'SignUp with FPT email',
+                    'Sign up with Fpt email',
                     style: TextStyle(
                         color: textColor,
                         fontWeight: FontWeight.w800,

@@ -5,10 +5,8 @@ class Style {
   // Text
   static const stringBold =
       TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black);
-  static const mediumStringBold = TextStyle(
-      fontWeight: FontWeight.w600,
-      fontSize: 15,
-      color: Color.fromARGB(255, 101, 101, 101));
+  static const mediumStringBold =
+      TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: Colors.black);
   static const h6Bold =
       TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Colors.black);
   static const whiteStringBold =
