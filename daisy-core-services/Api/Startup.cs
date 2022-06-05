@@ -52,6 +52,7 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
+            Config.AdaptEnv(env.EnvironmentName);
             app.UseRouting();
             app.UseCors("AllowAll");
             app.UseAuthorization();
