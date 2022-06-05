@@ -25,6 +25,7 @@ namespace MobileGrpcServices
                 app.UseDeveloperExceptionPage();
             }
 
+            Config.AdaptEnv(env.EnvironmentName);
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

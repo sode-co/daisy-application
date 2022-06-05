@@ -47,7 +47,7 @@ class Introduction extends StatelessWidget {
           children: [
             Padding(
                 padding: EdgeInsets.only(left: size.width * 0.035),
-                child: IntroText()),
+                child: const IntroText()),
             Divider(
                 thickness: 6,
                 indent: size.width * 0.05,

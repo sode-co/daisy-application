@@ -4,10 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
-import 'package:daisy_application/pages/landing-page/listener/LandingPageListener.dart';
+import 'package:daisy_application/pages/landing-page/listener/landing_page_listener.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -302,7 +300,7 @@ class StatisticInfoSlider extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    '$i',
+                    i,
                     style: TextStyle(
                         fontSize: fontSize,
                         fontWeight: FontWeight.w900,
@@ -323,7 +321,6 @@ class WelcomeToLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     bool isDesktop = Responsive.isDesktop(context);
     return Column(
       children: [
@@ -522,5 +519,42 @@ class FooterComponent {
         ],
       ),
     ]);
+  }
+}
+
+class SignUpButton extends StatelessWidget {
+  const SignUpButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(context, '/signup');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 255, 255, 255),
+          border: Border.all(
+            color: const Color(MyColors.blue_gradient_01),
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(2),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Image.asset('assets/images/google.png', width: 16),
+              const SizedBox(width: 5),
+              if (Responsive.isDesktop(context))
+                const Text('Sign up with Fpt email', style: Style.stringBold),
+              if (!Responsive.isDesktop(context))
+                const Text('Sign up', style: Style.stringBold),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
