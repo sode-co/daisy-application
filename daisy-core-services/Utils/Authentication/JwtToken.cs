@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -15,15 +17,29 @@ namespace Utils.Authentication
 
         private Claim[] _getClaims(UserExposeModel user) => new[] {
             new Claim("id", user.Id.ToString()),
-            new Claim("email", user.Email.ToString()),
-            new Claim("firstName", user.FirstName.ToString()),
-            new Claim("lastName", user.LastName.ToString()),
-            new Claim("phone", user.Phone.ToString()),
-            new Claim("role", user.Role.ToString()),
-            new Claim("address", user.Address.ToString()),
-            new Claim("displayName", user.DisplayName.ToString()),
-            new Claim("avatar", user.Avatar.ToString()),
-            new Claim("settings", user.Settings.ToString()),
+            new Claim("email", user.Email.Or("")),
+            new Claim("firstName", user.FirstName.Or("")),
+            new Claim("lastName", user.LastName.Or("")),
+            new Claim("phone", user.Phone.Or("")),
+            new Claim("role", user.Role.Or("")),
+            new Claim("address", user.Address.Or("")),
+            new Claim("displayName", user.DisplayName),
+            new Claim("avatar", user.Avatar.Or("")),
+            new Claim("settings", user.Settings.Or("{}")),
+        };
+
+        private UserExposeModel _getUser(IEnumerable<Claim> claims) => new UserExposeModel()
+        {
+            Id = int.Parse(claims.First(c => c.Type == "id").Value),
+            Email = claims.First(c => c.Type == "email").Value,
+            FirstName = claims.First(c => c.Type == "firstName").Value,
+            LastName = claims.First(c => c.Type == "lastName").Value,
+            Phone = claims.First(c => c.Type == "phone").Value,
+            Role = claims.First(c => c.Type == "role").Value,
+            Address = claims.First(c => c.Type == "address").Value,
+            DisplayName = claims.First(c => c.Type == "displayName").Value,
+            Avatar = claims.First(c => c.Type == "avatar").Value,
+            Settings = claims.First(c => c.Type == "settings").Value,
         };
 
         public string GenerateAccessToken(UserExposeModel user)
@@ -54,6 +70,64 @@ namespace Utils.Authentication
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public UserExposeModel ValidateAccessToken(string token)
+        {
+            if (token == null)
+                return null;
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(Config.Get().ACCESS_TOKEN_SECRET);
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+
+                return _getUser(jwtToken.Claims);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public UserExposeModel ValidateRefreshToken(string token)
+        {
+            if (token == null)
+                return null;
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(Config.Get().REFRESH_TOKEN_SECRET);
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+
+                return _getUser(jwtToken.Claims);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

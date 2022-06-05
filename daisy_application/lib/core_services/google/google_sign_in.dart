@@ -1,6 +1,10 @@
 import 'package:daisy_application/common/debuger/logger.dart';
+import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
+import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
+import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart' as signin_services;
+import '../common/response_handler.dart';
 
 class GoogleSignIn {
   final _service = signin_services.GoogleSignIn(
@@ -11,7 +15,12 @@ class GoogleSignIn {
       ],
       clientId:
           '947734464395-hb4v5ckgh3vfbaskfm0hcv1kf451i3ef.apps.googleusercontent.com');
+  final AuthenticationRestApi _authRestClient;
+  final AuthenticationPersistent _authService;
   GoogleSignInAccount? _account;
+
+  GoogleSignIn(this._authRestClient, this._authService);
+
   GoogleSignInAccount? get account => _account;
 
   Future signIn() async {
@@ -21,13 +30,18 @@ class GoogleSignIn {
       Debug.log('google-signin', 'Failed to signin with google with error', ex,
           'Skipping...');
     }
-    if (_account == null) {
-      Debug.log('google-signin', 'login failed');
-      return;
-    }
+    if (_account == null) return;
 
     final googleAuth = await _account!.authentication;
-    Debug.log(
-        'google-signin', 'success with accessToken', googleAuth.accessToken);
+    Debug.log('google-signin', 'success with accessToken', googleAuth.idToken);
+
+    final result =
+        (await _authRestClient.signUp('Bearer ${googleAuth.idToken}'));
+    if (result.FailureType() == FAILURE_TYPE.NONE) {
+      AuthenticationModel auth = result.Data(AuthenticationModel.fromJson);
+      _authService.setAuth(auth);
+      Debug.log(
+          'google-signin', 'success with server response', auth.accessToken);
+    }
   }
 }

@@ -24,20 +24,20 @@ namespace Api.Controllers.Authentication
         public string PhoneNumber;
     }
 
-    public class SignupController : Controller
+    public partial class AuthenticationController : Controller
     {
         private readonly UnitOfWorkFactory _unitOfWorkFactory;
         private readonly JwtToken _jwtToken;
         private readonly IMapper _mapper;
 
-        public SignupController(UnitOfWorkFactory unitOfWorkFactory, JwtToken jwtToken, IMapper mapper)
+        public AuthenticationController(UnitOfWorkFactory unitOfWorkFactory, JwtToken jwtToken, IMapper mapper)
         {
             _unitOfWorkFactory = unitOfWorkFactory;
             _jwtToken = jwtToken;
             _mapper = mapper;
         }
 
-        [HttpPost("v1/signup")]
+        [HttpPost("v1/auth/signup")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Index([FromHeader] string authorization, [FromBody] _SignupRequest body)
@@ -63,13 +63,6 @@ namespace Api.Controllers.Authentication
                 });
             string avatar = payload.Picture;
 
-            Console.WriteLine("Create user with info: " +
-                "email: " + email +
-                "lastName: " + lastName +
-                "firstName: " + firstName +
-                "displayName: " + displayName +
-                "settings:" + settings);
-
             User addedUser;
             using (var work = _unitOfWorkFactory.Get)
             {
@@ -87,12 +80,9 @@ namespace Api.Controllers.Authentication
                     Role = ROLE.CUSTOMER
                 };
 
-                Console.WriteLine("Creating data to write into db " + newUser.ObjectId);
-
                 work.UserRepository.Add(newUser);
 
                 work.Save();
-                Console.WriteLine("Added user into Db ");
             }
 
             using (var work = _unitOfWorkFactory.Get)
@@ -104,9 +94,7 @@ namespace Api.Controllers.Authentication
 
             string accessToken = _jwtToken.GenerateAccessToken(_mapper.Map<User, UserExposeModel>(addedUser));
             string refreshToken = _jwtToken.GenerateRefreshToken(_mapper.Map<User, UserExposeModel>(addedUser));
-            Console.WriteLine("AccessToken: " + accessToken + " refreshtoken: " + refreshToken);
             return AuthenticationResponse.Success(refreshToken, accessToken);
-
         }
     }
 }
