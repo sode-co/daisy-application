@@ -530,22 +530,33 @@ class SignUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(MyColors.primaryColor),
-        border: Border.all(
-          color: const Color(MyColors.white),
-          width: 1,
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(context, '/signup');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 255, 255, 255),
+          border: Border.all(
+            color: const Color(MyColors.blue_gradient_01),
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(2),
         ),
-        borderRadius: BorderRadius.circular(3),
-      ),
-      child: TextButton.icon(
-        onPressed: () {
-          Navigator.pushNamed(context, '/signup');
-        },
-        label: const Text('Sign Up',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900)),
-        icon: const Icon(Icons.login, color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Image.asset('assets/images/google.png', width: 16),
+              const SizedBox(width: 5),
+              if (Responsive.isDesktop(context))
+                const Text('SignUp with FPT email', style: Style.stringBold),
+              if (!Responsive.isDesktop(context))
+                const Text('SignUp', style: Style.stringBold),
+            ],
+          ),
+        ),
       ),
     );
   }

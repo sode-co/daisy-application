@@ -1,4 +1,3 @@
-import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:daisy_application/pages/landing-page/view/common.dart';
@@ -9,6 +8,8 @@ class Header extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return AppBar(
       title: (Responsive.isDesktop(context))
           ? Row(children: <Widget>[
@@ -36,37 +37,16 @@ class Header extends StatelessWidget with PreferredSizeWidget {
               icon: const Icon(Icons.phone, color: Colors.black),
               label: const Text('1900 8989', style: Style.stringBold)),
         if (Responsive.isDesktop(context)) const SizedBox(width: 5),
-        InkWell(
-          onTap: () {},
-          child: Ink(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 255, 255, 255),
-              border: Border.all(
-                color: const Color(MyColors.blue_gradient_01),
-                width: 0.5,
-              ),
-              borderRadius: BorderRadius.circular(2),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Image.asset('assets/images/google.png', width: 16),
-                  const SizedBox(width: 5),
-                  if (Responsive.isDesktop(context))
-                    const Text('Login in with FPT mail',
-                        style: Style.stringBold),
-                  if (!Responsive.isDesktop(context))
-                    const Text('Login', style: Style.stringBold),
-                ],
-              ),
-            ),
-          ),
-        ),
         const SizedBox(width: 1),
         const SignUpButton(),
-        if (Responsive.isDesktop(context)) const SizedBox(width: 150),
+        if (Responsive.isDesktop(context)) const SizedBox(width: 10),
+        Center(child: const Text('or')),
+        TextButton(
+            child: const Text('SignIn', style: Style.stringBold),
+            onPressed: () {
+              // Navigator.pushNamed(context, '/login');
+            }),
+        if (Responsive.isDesktop(context)) SizedBox(width: size.width * 0.1),
       ],
       backgroundColor: Colors.white,
       foregroundColor: Colors.black,

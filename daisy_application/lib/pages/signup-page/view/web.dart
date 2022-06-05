@@ -14,15 +14,19 @@ class BodySignUpWeb extends StatefulWidget {
 class _BodySignUpWebState extends State<BodySignUpWeb> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 100),
+          padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.25, vertical: size.height * 0.1),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              SignUpImageDecoration(),
-              SignUpSelectBox(),
+            children: [
+              const SignUpImageDecoration(),
+              SizedBox(width: size.width * 0.1),
+              const SignUpSelectBox(),
             ],
           ),
         ),
