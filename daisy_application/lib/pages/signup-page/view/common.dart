@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
@@ -32,10 +34,8 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Sign up', style: Style.h2blueStringBold),
-        Line(
-            width: 40,
-            height: 5,
-            color: const Color(MyColors.blue_gradient_01)),
+        const Line(
+            width: 40, height: 5, color: Color(MyColors.blue_gradient_01)),
         const SizedBox(height: 20),
         SizedBox(
           width: 300,
@@ -120,7 +120,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
 }
 
 class Line extends StatelessWidget {
-  Line({Key? key, this.width, this.height, this.color}) : super(key: key);
+  const Line({Key? key, this.width, this.height, this.color}) : super(key: key);
   final width;
   final height;
   final color;

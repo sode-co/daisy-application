@@ -300,7 +300,7 @@ class StatisticInfoSlider extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    '$i',
+                    i,
                     style: TextStyle(
                         fontSize: fontSize,
                         fontWeight: FontWeight.w900,
@@ -321,7 +321,6 @@ class WelcomeToLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     bool isDesktop = Responsive.isDesktop(context);
     return Column(
       children: [

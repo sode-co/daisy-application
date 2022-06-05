@@ -28,7 +28,7 @@ class _BodySignUpWebState extends State<BodySignUpWeb> {
             ],
           ),
         ),
-        Footer(),
+        const Footer(),
       ],
     );
   }

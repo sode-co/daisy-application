@@ -79,7 +79,7 @@ class IconButtomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(icon, size: 30, color: Color(0xff262626));
+    return Icon(icon, size: 30, color: const Color(0xff262626));
     // return Icon(icon, size: 29, color: const Color(MyColors.blue_gradient_01));
   }
 }
