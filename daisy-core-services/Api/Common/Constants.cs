@@ -11,5 +11,11 @@ namespace Api.Common
             public static readonly int NOT_FOUND = 404;
             public static readonly int SERVER_ERROR = 500;
         }
+
+        public static class ROLE
+        {
+            public static readonly string CUSTOMER = "CUSTOMER";
+            public static readonly string DESIGNER = "DESIGNER";
+        }
     }
 }

@@ -9,6 +9,6 @@ namespace DataAccess.UnitOfWork
 {
     public class UnitOfWorkFactory
     {
-        public UnitOfWork UnitOfWork { get { return new UnitOfWork(new ApplicationDbContext()); } }
+        public UnitOfWork Get { get { return new UnitOfWork(new ApplicationDbContext()); } }
     }
 }

@@ -96,8 +96,8 @@ namespace DataAccess.UnitOfWork
 
         public void Save()
         {
-            Console.WriteLine("Unit of work has been dispose");
-            _db.Dispose();
+            Console.WriteLine("Unit of work has been saved");
+            _db.SaveChanges();
         }
     }
 }

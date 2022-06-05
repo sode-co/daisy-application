@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessObject;
 
 namespace Domain.Models
 {
-    public class Payment
+    public class Payment : Entity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        [Required]
-        [MaxLength(255)]
+        [MaxLength(int.MaxValue)]
         public String Description { get; set; }
 
         [Required]
@@ -29,7 +21,9 @@ namespace Domain.Models
         [MaxLength(255)]
         public String Currency { get; set; }
 
-        public String Data { get; set; }
+        [MaxLength(int.MaxValue)]
+        [Required]
+        public String Data { get; set; } = "{}";
 
         [Required]
         public decimal TotalAmount { get; set; }
@@ -37,16 +31,7 @@ namespace Domain.Models
         [Required]
         public int Commission { get; set; }
 
-        [Required]
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
-
-        public DateTime? DeletedAt { get; set; }
-
-        [Required]
-        [MaxLength(255)]
-        public String ObjectId { get; set; }
+        public override string TableName => "Payments";
 
         public Payment() { }
     }

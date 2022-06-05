@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Utils;
 using Utils.Authentication;
+using Utils.DataMapper;
 
 namespace Api
 {
@@ -31,6 +33,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -38,13 +41,24 @@ namespace Api
                     .AllowAnyHeader()
                     .AllowAnyOrigin();
             }));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
 
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Config.Get().GOOGLE_CLIENT_ID;
+                googleOptions.ClientSecret = Config.Get().GOOGLE_CLIENT_SECRET;
+            });
+
             services.AddSingleton<UnitOfWorkFactory>();
             services.AddSingleton<JwtToken>();
+            services.AddSingleton<IMapper>(new MapperConfiguration(cfg =>
+            {
+                MapperConfig.CreateUserMap(cfg);
+            }).CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

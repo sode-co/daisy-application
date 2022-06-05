@@ -23,14 +23,39 @@ namespace Utils
             public int GRPC_MOBILE_PORT { get; set; }
             public string PROTOCOL { get; set; }
             public int GRPC_PORT { get; set; }
+            public string GOOGLE_CLIENT_ID { get; set; }
+            public string GOOGLE_CLIENT_SECRET { get; set; }
             public string ENVIRONMENT { get { return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"); } }
             public bool isProduction { get { return (ENVIRONMENT != null && ENVIRONMENT.ToLower() == "Production".ToLower()); } }
             public bool isDevelopment { get { return !isProduction; } }
+            public string DB_CONNECTION_STRING
+            {
+                get
+                {
+                    string connectionString =
+                       $"provider connection string server={Config.Get().DB_HOST_NAME},{Config.Get().DB_PORT};" +
+                       $"Database={ Config.Get().DB_NAME};User={Config.Get().DB_USER};" +
+                       $"Password={Config.Get().DB_PASSWORD};" +
+                       $"Trusted_Connection=False;" +
+                       $"MultipleActiveResultSets=True";
+                    Console.WriteLine("database-connect-connection-string " + connectionString);
+
+                    return connectionString;
+                }
+            }
         }
 
         private static _Config Value = new _Config();
 
-        public static _Config Get() => Value;
+        public static _Config Get()
+        {
+            if (Value.DB_HOST_NAME == null || Value.DB_HOST_NAME == "")
+            {
+                Load();
+            }
+
+            return Value;
+        }
 
         public static void Load()
         {
@@ -67,5 +92,8 @@ namespace Utils
                 throw;
             }
         }
+
+
     }
+
 }

@@ -21,6 +21,7 @@ namespace Api.Controllers.Authentication
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Index()
         {
+
             return View();
         }
     }

@@ -13,7 +13,7 @@ namespace Utils.Authentication
         {
         }
 
-        private Claim[] _getClaims(User user) => new[] {
+        private Claim[] _getClaims(UserExposeModel user) => new[] {
             new Claim("id", user.Id.ToString()),
             new Claim("email", user.Email.ToString()),
             new Claim("firstName", user.FirstName.ToString()),
@@ -26,7 +26,7 @@ namespace Utils.Authentication
             new Claim("settings", user.Settings.ToString()),
         };
 
-        public string GenerateAccessToken(User user)
+        public string GenerateAccessToken(UserExposeModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Config.Get().ACCESS_TOKEN_SECRET);
@@ -41,7 +41,7 @@ namespace Utils.Authentication
             return tokenHandler.WriteToken(token);
         }
 
-        public string GenerateRefreshToken(User user)
+        public string GenerateRefreshToken(UserExposeModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Config.Get().REFRESH_TOKEN_SECRET);
