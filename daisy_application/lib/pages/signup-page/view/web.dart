@@ -1,8 +1,6 @@
 import 'package:daisy_application/pages/landing-page/view/common.dart';
 import 'package:daisy_application/pages/signup-page/view/common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BodySignUpWeb extends StatefulWidget {
   const BodySignUpWeb({Key? key}) : super(key: key);

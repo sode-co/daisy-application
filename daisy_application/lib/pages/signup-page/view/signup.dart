@@ -1,14 +1,12 @@
 import 'package:daisy_application/pages/common/bottomnavbar.dart';
 import 'package:daisy_application/pages/common/header.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
-import 'package:daisy_application/pages/signup-page/controller/SignUpPageController.dart';
-import 'package:daisy_application/pages/signup-page/listener/SignUpPageListener.dart';
-import 'package:daisy_application/pages/signup-page/model/SignUpPageState.dart';
+import 'package:daisy_application/pages/signup-page/controller/sign_up_page_controller.dart';
+import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
+import 'package:daisy_application/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:daisy_application/pages/signup-page/view/mobile.dart';
 import 'package:daisy_application/pages/signup-page/view/web.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {

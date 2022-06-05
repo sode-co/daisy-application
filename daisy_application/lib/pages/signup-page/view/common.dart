@@ -2,8 +2,6 @@ import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class SignUpImageDecoration extends StatelessWidget {
   const SignUpImageDecoration({Key? key}) : super(key: key);
