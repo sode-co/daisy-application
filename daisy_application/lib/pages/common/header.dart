@@ -14,7 +14,9 @@ class Header extends StatelessWidget with PreferredSizeWidget {
               Image.asset('assets/images/weblogo.png', width: 100),
               TextButton(
                   child: const Text('Categories', style: Style.stringBold),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/categories');
+                  }),
               TextButton(
                   child: const Text('How it works', style: Style.stringBold),
                   onPressed: () {}),

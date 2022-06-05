@@ -38,7 +38,9 @@ class BottomNavBar extends StatelessWidget {
                         tooltip: 'Find your talent',
                         icon: const IconButtomItem(
                             icon: Icons.person_search_outlined),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/categories');
+                        },
                       ),
                       IconButton(
                         tooltip: 'Home',

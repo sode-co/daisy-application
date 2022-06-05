@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
+import 'package:daisy_application/pages/discovery-page/discovery.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:dio/dio.dart';
@@ -45,9 +46,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(
-        child: LandingPage(),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/categories': (context) => const DiscoveryPage(),
+      },
+      home: const LandingPage(),
     );
   }
 }
