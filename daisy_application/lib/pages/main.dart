@@ -4,6 +4,7 @@ import 'package:daisy_application/core_services/grpc/healthcheck/health_check_gr
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/pages/discovery-page/discovery.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
+import 'package:daisy_application/pages/signup-page/view/signup.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/categories': (context) => const DiscoveryPage(),
+        '/signup': (context) => const SignUp(),
       },
       home: LandingPage(),
     );

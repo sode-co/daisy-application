@@ -540,7 +540,9 @@ class SignUpButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(3),
       ),
       child: TextButton.icon(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/signup');
+        },
         label: const Text('Sign Up',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900)),
         icon: const Icon(Icons.login, color: Colors.white),
