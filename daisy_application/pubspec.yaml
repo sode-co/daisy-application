@@ -1,19 +1,18 @@
 name: daisy_application
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
 
 scripts:
-   run: "flutter run --dart-define=DB_HOST_NAME=$DAISY_DB_HOST_NAME -t lib/pages/main.dart"
-
+  run: "flutter run --dart-define=DB_HOST_NAME=$DAISY_DB_HOST_NAME -t lib/pages/main.dart"
 
 dependencies:
   flutter:
     sdk: flutter
-  retrofit: '3.0.1'
+  retrofit: "3.0.1"
   logger: any
   provider: ^6.0.3
   uuid: ^3.0.6
@@ -22,7 +21,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   ionicons: ^0.1.2
-  json_serializable: '^6.2.0'
+  json_serializable: "^6.2.0"
   grpc: ^3.0.2
   json_annotation: ^4.5.0
   firebase_core: ^1.17.1
@@ -31,20 +30,23 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   hive: ^2.2.1
   hive_flutter: ^1.1.0
-  
+  carousel_slider: ^4.1.1
+  font_awesome_flutter: ^10.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  retrofit_generator: '^3.0.1'
-  build_runner: '^2.1.11'
+  retrofit_generator: "^3.0.1"
+  build_runner: "^2.1.11"
   flutter_lints: ^2.0.0
 
 flutter:
-
   uses-material-design: true
 
-  # assets:
-    # - images/
+  assets:
+    - assets/images/
+    - assets/images/intro/
+    - assets/images/intro/trending/
 
   #  fonts:
   #   - family: Butler

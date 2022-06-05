@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
@@ -11,7 +12,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../common/debuger/logger.dart';
 import '../common/platform_helper.dart';
 import '../service_locator/locator.dart';
-import 'dart:async';
 import '../core_services/google/firebase_options.dart';
 import '../core_services/common/response_handler.dart';
 
@@ -62,21 +62,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(
-        color: Colors.white,
-        child: Center(
-          child: SizedBox(
-            width: 200,
-            height: 100,
-            child: MaterialButton(
-              onPressed: () {
-                _signInService.signIn();
-              },
-              child: const Text('Sign in with Google'),
-            ),
-          ),
-        ),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/categories': (context) => const DiscoveryPage(),
+      },
+      home: LandingPage(),
     );
   }
 }
