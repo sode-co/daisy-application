@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/categories': (context) => const DiscoveryPage(),
       },
-      home: const LandingPage(),
+      home: LandingPage(),
     );
   }
 }
