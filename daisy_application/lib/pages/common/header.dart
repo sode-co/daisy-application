@@ -31,18 +31,13 @@ class Header extends StatelessWidget with PreferredSizeWidget {
               padding: const EdgeInsets.only(left: 5),
               child: Image.asset('assets/images/weblogo.png', width: 100)),
       actions: <Widget>[
-        if (Responsive.isDesktop(context))
-          TextButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.phone, color: Colors.black),
-              label: const Text('1900 8989', style: Style.stringBold)),
         if (Responsive.isDesktop(context)) const SizedBox(width: 5),
         const SizedBox(width: 1),
         const SignUpButton(),
         if (Responsive.isDesktop(context)) const SizedBox(width: 10),
-        Center(child: const Text('or')),
+        const Center(child: Text('or')),
         TextButton(
-            child: const Text('SignIn', style: Style.stringBold),
+            child: const Text('Sign in', style: Style.mediumStringBold),
             onPressed: () {
               // Navigator.pushNamed(context, '/login');
             }),

@@ -551,9 +551,9 @@ class SignUpButton extends StatelessWidget {
               Image.asset('assets/images/google.png', width: 16),
               const SizedBox(width: 5),
               if (Responsive.isDesktop(context))
-                const Text('SignUp with FPT email', style: Style.stringBold),
+                const Text('Sign up with FPT email', style: Style.stringBold),
               if (!Responsive.isDesktop(context))
-                const Text('SignUp', style: Style.stringBold),
+                const Text('Sign up', style: Style.stringBold),
             ],
           ),
         ),
