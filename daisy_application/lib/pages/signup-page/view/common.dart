@@ -1,4 +1,5 @@
 import 'package:daisy_application/pages/common/colors.dart';
+import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -78,7 +79,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
           onHover: (hovering) {
             hovering
                 ? setState(() {
-                    btnColor = Color(MyColors.blue_gradient_01);
+                    btnColor = const Color(MyColors.blue_gradient_01);
                     textColor = Colors.white;
                   })
                 : setState(() {
@@ -92,7 +93,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
               color: btnColor,
               border: Border.all(
                 color: const Color(MyColors.blue_gradient_01),
-                width: 0.5,
+                width: Responsive.isDesktop(context) ? 0.5 : 1.0,
               ),
               borderRadius: BorderRadius.circular(4),
             ),
