@@ -47,18 +47,22 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(455)
+                        .HasColumnType("nvarchar(455)");
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
@@ -70,8 +74,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(455)
+                        .HasColumnType("nvarchar(455)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -83,6 +87,42 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.HasIndex("PortfolioId");
 
                     b.ToTable("ArtWorks");
+                });
+
+            modelBuilder.Entity("Domain.Models.AuthToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ObjectId")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AuthTokens");
                 });
 
             modelBuilder.Entity("Domain.Models.Category", b =>
@@ -99,14 +139,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(455)
+                        .HasColumnType("nvarchar(455)");
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
@@ -135,6 +174,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -190,14 +230,16 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("FreelancerId")
                         .HasColumnType("int");
@@ -249,6 +291,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -256,8 +300,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
@@ -309,15 +353,16 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ObjectId")
                         .IsRequired()
@@ -354,6 +399,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -400,6 +447,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("Biography")
                         .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -449,6 +497,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -456,8 +506,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("FreelancerId")
                         .HasColumnType("int");
@@ -502,7 +552,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<long>("Timeline")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -629,13 +679,15 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -694,9 +746,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
@@ -725,10 +776,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Settings")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -811,6 +865,15 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Portfolio");
+                });
+
+            modelBuilder.Entity("Domain.Models.AuthToken", b =>
+                {
+                    b.HasOne("Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Models.Discussion", b =>

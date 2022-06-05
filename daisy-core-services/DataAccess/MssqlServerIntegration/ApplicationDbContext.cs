@@ -1,14 +1,18 @@
-﻿using System;
+﻿
+using System;
+using System.Linq;
+using BusinessObject;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Utils;
+using static Utils.Utils;
 
 namespace DataAccess.MssqlServerIntegration
 {
     public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<AuthToken> AuthTokens { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ArtWork> ArtWorks { get; set; }
         public DbSet<JobApplication> JobApplications { get; set; }
@@ -23,9 +27,8 @@ namespace DataAccess.MssqlServerIntegration
         public DbSet<Discussion> Discussions { get; set; }
         public DbSet<Workspace> Workspaces { get; set; }
 
-        public ApplicationDbContext()
-        {
-        }
+        public ApplicationDbContext() { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // when using dotnet command to generate db, we can not load connection string in
@@ -46,16 +49,42 @@ namespace DataAccess.MssqlServerIntegration
             Console.WriteLine("database-connect " + "connecting to db...");
 
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.DetachedLazyLoadingWarning));
+            optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.DetachedLazyLoadingWarning));
 
             optionsBuilder.UseSqlServer(@connectionString);
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                    .HasIndex(u => u.Email)
-                    .IsUnique();
+                   .HasIndex(u => u.Email)
+                   .IsUnique();
+        }
+
+
+        public override int SaveChanges()
+        {
+            var entities = ChangeTracker.Entries()
+            .Where(x => x.Entity is Entity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            foreach (var entity in entities)
+            {
+                var now = DateTime.UtcNow;
+                var target = (Entity)entity.Entity;
+
+                if (entity.State == EntityState.Added)
+                {
+                    target.CreatedAt = now;
+                    target.ObjectId = GenerateObjectId(target);
+                }
+                else if (entity.State == EntityState.Modified)
+                {
+                    ((Entity)entity.Entity).UpdatedAt = now;
+                }
+            }
+
+            return base.SaveChanges();
         }
     }
 }

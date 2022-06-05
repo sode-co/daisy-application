@@ -13,6 +13,8 @@ namespace Utils
             public string DB_HOST_NAME { get; set; }
             public int DB_PORT { get; set; }
             public string DB_NAME { get; set; }
+            public string ACCESS_TOKEN_SECRET { get; set; }
+            public string REFRESH_TOKEN_SECRET { get; set; }
             public string DB_USER { get; set; }
             public string DB_PASSWORD { get; set; }
             public string API_HOST { get; set; }
@@ -21,6 +23,8 @@ namespace Utils
             public int GRPC_MOBILE_PORT { get; set; }
             public string PROTOCOL { get; set; }
             public int GRPC_PORT { get; set; }
+            public string GOOGLE_CLIENT_ID { get; set; }
+            public string GOOGLE_CLIENT_SECRET { get; set; }
             public string ENVIRONMENT { get { return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"); } }
             public bool IsProduction { get { return (ENVIRONMENT != null && ENVIRONMENT.ToLower() == "Production".ToLower()); } }
             public bool IsTest { get { return (ENVIRONMENT != null && ENVIRONMENT.ToLower() == "Test".ToLower()); } }
@@ -29,7 +33,15 @@ namespace Utils
 
         private static _Config Value = new _Config();
 
-        public static _Config Get() => Value;
+        public static _Config Get()
+        {
+            if (Value.DB_HOST_NAME == null || Value.DB_HOST_NAME == "")
+            {
+                Load();
+            }
+
+            return Value;
+        }
 
         public static void AdaptEnv(string EnvName)
         {
@@ -75,5 +87,8 @@ namespace Utils
                 throw;
             }
         }
+
+
     }
+
 }

@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessObject;
 
 namespace Domain.Models
 {
-    public class Project
+    public class Project : Entity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [Required]
         public virtual User Customer { get; set; }
 
@@ -25,7 +19,9 @@ namespace Domain.Models
 
         public DateTime? ResolvedAt { get; set; }
 
-        public String Data { get; set; }
+        [MaxLength(int.MaxValue)]
+        [Required]
+        public String Data { get; set; } = "{}";
 
         [Required]
         [MaxLength(255)]
@@ -36,7 +32,7 @@ namespace Domain.Models
         public String Name { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(int.MaxValue)]
         public String Description { get; set; }
 
         [Required]
@@ -57,21 +53,13 @@ namespace Domain.Models
         public String Status { get; set; }
 
         public virtual Payment Payment { get; set; }
-	    public virtual ICollection<Workspace> Workspaces { get; set; }
+        public virtual ICollection<Workspace> Workspaces { get; set; }
 
         [Required]
         public virtual Request Request { get; set; }
 
-        [Required]
-        public DateTime CreatedAt { get; set; }
+        public override string TableName => "Projects";
 
-        public DateTime UpdatedAt { get; set; }
-
-        public DateTime? DeletedAt { get; set; }
-
-        [Required]
-        [MaxLength(255)]
-        public String ObjectId { get; set; }
         public Project() { }
     }
 }

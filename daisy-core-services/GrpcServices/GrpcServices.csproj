@@ -23,6 +23,7 @@
     </PackageReference>
     <PackageReference Include="Google.Protobuf" Version="3.21.0" />
     <PackageReference Include="Grpc.AspNetCore.Web" Version="2.46.0" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,7 @@
     <None Remove="Grpc.Tools" />
     <None Remove="Google.Protobuf" />
     <None Remove="Grpc.AspNetCore.Web" />
+    <None Remove="AutoMapper" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

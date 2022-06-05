@@ -52,9 +52,8 @@
 
   ### 1. `Update Models and Add Migrations`:
 
-  - In Developer PowerShell, cd `daisy-application\daisy-core-services\DataAccess`, run  <br/> 
-    `dotnet ef migrations add <migration-name> --output-dir MssqlServerIntegration/Migrations`.
-
+  - In Developer PowerShell, cd `daisy-application\daisy-core-services\DataAccess`, run  <br/>
+    `dotnet ef migrations add <migration-name> --output-dir MssqlIntegration/Migrations`.
   ### 2. `Update Database follow new changes`:
   - In Developer PowerShell, cd `daisy-application\daisy-core-services\DataAccess`, run
     `dotnet ef database update`.

@@ -13,6 +13,10 @@
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.57.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.17" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,5 +32,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Microsoft.Extensions.Configuration.Json" />
+    <None Remove="Middlewares\" />
+    <None Remove="Controllers\User\" />
+    <None Remove="Controllers\Authentication\" />
+    <None Remove="Models\" />
+    <None Remove="Models\Authenticationn\" />
+    <None Remove="Common\" />
+    <None Remove="Middlewares\Authentication\" />
+    <None Remove="Response\" />
+    <None Remove="Response\Authentication\" />
+    <None Remove="Response\User\" />
+    <None Remove="Google.Apis.Auth" />
+    <None Remove="Microsoft.AspNetCore.Authentication.Google" />
+    <None Remove="AutoMapper" />
+    <None Remove="Newtonsoft.Json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Middlewares\" />
+    <Folder Include="Controllers\User\" />
+    <Folder Include="Controllers\Authentication\" />
+    <Folder Include="Models\" />
+    <Folder Include="Common\" />
+    <Folder Include="Middlewares\Authentication\" />
+    <Folder Include="Response\" />
+    <Folder Include="Response\Authentication\" />
+    <Folder Include="Response\User\" />
   </ItemGroup>
 </Project>

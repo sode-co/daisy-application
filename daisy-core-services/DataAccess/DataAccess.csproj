@@ -15,11 +15,13 @@
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
-    <None Remove="MssqlServerIntegration\Migrations\" />
+    <None Remove="Repositories\AuthTokens\" />
+    <None Remove="AutoMapper" />
+    <None Remove="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MssqlServerIntegration\" />
-    <Folder Include="MssqlServerIntegration\Migrations\" />
+    <Folder Include="Repositories\AuthTokens\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
@@ -37,6 +39,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.17" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.17" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj" />
