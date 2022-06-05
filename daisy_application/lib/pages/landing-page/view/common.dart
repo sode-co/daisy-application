@@ -524,3 +524,27 @@ class FooterComponent {
     ]);
   }
 }
+
+class SignUpButton extends StatelessWidget {
+  const SignUpButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(MyColors.primaryColor),
+        border: Border.all(
+          color: const Color(MyColors.white),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(3),
+      ),
+      child: TextButton.icon(
+        onPressed: () {},
+        label: const Text('Sign Up',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900)),
+        icon: const Icon(Icons.login, color: Colors.white),
+      ),
+    );
+  }
+}

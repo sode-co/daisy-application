@@ -1,5 +1,7 @@
+import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
+import 'package:daisy_application/pages/landing-page/view/common.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget with PreferredSizeWidget {
@@ -40,17 +42,17 @@ class Header extends StatelessWidget with PreferredSizeWidget {
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),
               border: Border.all(
-                color: const Color.fromARGB(255, 188, 188, 188),
+                color: const Color(MyColors.blue_gradient_01),
                 width: 0.5,
               ),
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(2),
             ),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Image.asset('assets/images/google.png', width: 20),
+                  Image.asset('assets/images/google.png', width: 16),
                   const SizedBox(width: 5),
                   if (Responsive.isDesktop(context))
                     const Text('Login in with FPT mail',
@@ -62,6 +64,8 @@ class Header extends StatelessWidget with PreferredSizeWidget {
             ),
           ),
         ),
+        const SizedBox(width: 1),
+        const SignUpButton(),
         if (Responsive.isDesktop(context)) const SizedBox(width: 150),
       ],
       backgroundColor: Colors.white,
