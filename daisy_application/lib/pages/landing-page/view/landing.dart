@@ -1,16 +1,16 @@
 import 'package:daisy_application/pages/common/bottomnavbar.dart';
 import 'package:daisy_application/pages/common/header.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
-import 'package:daisy_application/pages/landing-page/controller/LandingPageController.dart';
-import 'package:daisy_application/pages/landing-page/listener/LandingPageListener.dart';
-import 'package:daisy_application/pages/landing-page/model/LandingPageState.dart';
+import 'package:daisy_application/pages/landing-page/controller/landing_page_controller.dart';
+import 'package:daisy_application/pages/landing-page/listener/landing_page_listener.dart';
+import 'package:daisy_application/pages/landing-page/model/landing_page_state.dart';
 import 'package:daisy_application/pages/landing-page/view/mobile.dart';
 import 'package:daisy_application/pages/landing-page/view/web.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
-  LandingPage({Key? key}) : super(key: key);
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
   State<LandingPage> createState() => _LandingPageState();

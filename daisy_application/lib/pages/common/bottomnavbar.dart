@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     Size size = MediaQuery.of(context).size;
 
     return BottomAppBar(
@@ -80,7 +79,7 @@ class IconButtomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(icon, size: 30, color: Color(0xff262626));
+    return Icon(icon, size: 30, color: const Color(0xff262626));
     // return Icon(icon, size: 29, color: const Color(MyColors.blue_gradient_01));
   }
 }

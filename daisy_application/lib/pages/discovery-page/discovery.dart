@@ -10,7 +10,7 @@ class DiscoveryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Header(),
-      body: Text('Discovery'),
+      body: const Text('Discovery'),
       bottomNavigationBar:
           !Responsive.isDesktop(context) ? const BottomNavBar() : null,
     );
