@@ -4,16 +4,20 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
+import 'package:daisy_application/pages/landing-page/listener/LandingPageListener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class SearchCategoriesTextField extends StatelessWidget {
   const SearchCategoriesTextField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final listener = context.read<LandingPageListener>();
+
     Size size = MediaQuery.of(context).size;
     var width =
         Responsive.isDesktop(context) ? size.width * 0.3 : size.width * 0.94;
@@ -41,7 +45,9 @@ class SearchCategoriesTextField extends StatelessWidget {
           height: 50,
           width: width,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              listener.submitTextfieldForSelectingCategories();
+            },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white)),
             child: const Center(
