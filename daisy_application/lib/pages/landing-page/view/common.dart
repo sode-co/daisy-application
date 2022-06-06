@@ -227,7 +227,7 @@ class TrendingTab extends StatelessWidget {
       {'Show more': 'assets/images/intro/trending/categories.png'}
     ];
     var width = Responsive.isDesktop(context) ? 1920.0 : 450.0;
-    var imgHeight = Responsive.isDesktop(context) ? 150 : 100;
+    var imgHeight = Responsive.isDesktop(context) ? 150.0 : 100.0;
     var paddingHorizontal = Responsive.isDesktop(context) ? 35.0 : 1.0;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),

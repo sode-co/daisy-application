@@ -6,6 +6,7 @@ import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listen
 import 'package:daisy_application/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:daisy_application/pages/signup-page/view/mobile.dart';
 import 'package:daisy_application/pages/signup-page/view/web.dart';
+import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,8 @@ class _SignUpState extends State<SignUp> {
   @override
   initState() {
     _signUpPageState = SignUpPageState();
-    _signUpPageListener = SignUpPageController(_signUpPageState);
+    _signUpPageListener =
+        locator.get<SignUpPageController>(param1: _signUpPageState);
     super.initState();
   }
 
