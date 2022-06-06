@@ -49,11 +49,11 @@ class Introduction extends StatelessWidget {
             Row(
               children: <Widget>[
                 const IntroCarouselImage(),
-                const SizedBox(width: 100),
+                const SizedBox(width: 100.0),
                 Column(
                   children: const <Widget>[
                     IntroText(),
-                    SizedBox(height: 20),
+                    SizedBox(height: 20.0),
                     SearchCategoriesTextField(),
                   ],
                 ),

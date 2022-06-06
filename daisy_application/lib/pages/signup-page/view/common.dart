@@ -11,7 +11,8 @@ class SignUpImageDecoration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 300, child: Image.asset('assets/images/signup_decoration.jpg'));
+        width: 300.0,
+        child: Image.asset('assets/images/signup_decoration.jpg'));
   }
 }
 
@@ -35,11 +36,11 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
       children: [
         const Text('Sign up', style: Style.h2blueStringBold),
         const Line(
-            width: 40, height: 5, color: Color(MyColors.blue_gradient_01)),
-        const SizedBox(height: 20),
+            width: 40.0, height: 5.0, color: Color(MyColors.blue_gradient_01)),
+        const SizedBox(height: 20.0),
         SizedBox(
-          width: 300,
-          height: 30,
+          width: 300.0,
+          height: 30.0,
           child: ListTile(
             title: const Text('I need something designed',
                 style: Style.blueStringBold),
@@ -56,8 +57,8 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
           ),
         ),
         SizedBox(
-          width: 300,
-          height: 30,
+          width: 300.0,
+          height: 30.0,
           child: ListTile(
             title: const Text('I\'m a designer', style: Style.blueStringBold),
             leading: Radio<UserRole>(
@@ -72,7 +73,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
             ),
           ),
         ),
-        const SizedBox(height: 40),
+        const SizedBox(height: 40.0),
         InkWell(
           onHover: (hovering) {
             hovering
@@ -93,7 +94,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                 color: const Color(MyColors.blue_gradient_01),
                 width: Responsive.isDesktop(context) ? 0.5 : 1.0,
               ),
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(4.0),
             ),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -107,7 +108,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                     style: TextStyle(
                         color: textColor,
                         fontWeight: FontWeight.w800,
-                        fontSize: 15),
+                        fontSize: 15.0),
                   ),
                 ],
               ),
@@ -134,7 +135,7 @@ class Line extends StatelessWidget {
           color: color,
           border: Border.all(
             color: color,
-            width: 1,
+            width: 1.0,
           ),
         ),
       ),
