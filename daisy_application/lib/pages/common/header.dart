@@ -1,7 +1,12 @@
+import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:daisy_application/pages/landing-page/view/common.dart';
+import 'package:daisy_application/pages/listeners/WidgetListener.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget with PreferredSizeWidget {
   const Header({Key? key}) : super(key: key);
@@ -9,7 +14,8 @@ class Header extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    ApplicationState appState = context.watch();
+    final isLoggedIn = appState.isLoggedIn;
     return AppBar(
       title: (Responsive.isDesktop(context))
           ? Row(children: <Widget>[
@@ -33,14 +39,25 @@ class Header extends StatelessWidget with PreferredSizeWidget {
       actions: <Widget>[
         if (Responsive.isDesktop(context)) const SizedBox(width: 5),
         const SizedBox(width: 1),
-        const SignUpButton(),
-        if (Responsive.isDesktop(context)) const SizedBox(width: 10),
-        const Center(child: Text('or')),
-        TextButton(
-            child: const Text('Sign in', style: Style.mediumStringBold),
-            onPressed: () {
-              // Navigator.pushNamed(context, '/login');
-            }),
+        if (!isLoggedIn) ...[
+          const SignUpButton(),
+          if (Responsive.isDesktop(context)) const SizedBox(width: 10),
+          const Center(child: Text('or')),
+          TextButton(
+              child: const Text('Sign in', style: Style.mediumStringBold),
+              onPressed: () {}),
+        ],
+        if (isLoggedIn)
+          TextButton(
+              child: const Text('Sign out', style: Style.mediumStringBold),
+              onPressed: () async {
+                // appState.isLoggedIn = false;
+                // if (!Hive.isBoxOpen(AuthenticationPersistent.BOX_NAME)) {
+                //   await Hive.openBox(AuthenticationPersistent.BOX_NAME);
+                // }
+
+                // await Hive.box(AuthenticationPersistent.BOX_NAME).clear();
+              }),
         if (Responsive.isDesktop(context)) SizedBox(width: size.width * 0.1),
       ],
       backgroundColor: Colors.white,
