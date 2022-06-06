@@ -1,16 +1,15 @@
+import 'package:daisy_application/common/Debuger/logger.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
+import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
+import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/listeners/WidgetListener.dart';
 import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
 import 'package:daisy_application/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:flutter/material.dart';
-
-import '../../../common/Debuger/logger.dart';
-import '../../../core_services/models/authentication/authentication_model.dart';
-import '../../../core_services/persistent/authentication_persistent.dart';
 
 class SignUpPageController implements SignUpPageListener, WidgetListener {
   final SignUpPageState _signUpPageState;

@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../common/Debuger/logger.dart';
-import '../../../common/constants.dart';
 
 class SignUpImageDecoration extends StatelessWidget {
   const SignUpImageDecoration({Key? key}) : super(key: key);

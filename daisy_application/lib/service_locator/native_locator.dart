@@ -1,6 +1,6 @@
+import 'package:daisy_application/common/config.dart';
 import 'package:grpc/grpc.dart';
 import 'package:grpc/grpc_connection_interface.dart';
-import '../common/config.dart';
 import 'locator.dart';
 
 class UniversalLocator {

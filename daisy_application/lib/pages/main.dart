@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/common/Debuger/logger.dart';
 import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/common/platform_helper.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
+import 'package:daisy_application/core_services/google/firebase_options.dart';
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
@@ -14,11 +17,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import '../common/debuger/logger.dart';
-import '../common/platform_helper.dart';
-import '../service_locator/locator.dart';
-import '../core_services/google/firebase_options.dart';
-import '../core_services/common/response_handler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

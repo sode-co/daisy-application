@@ -1,6 +1,6 @@
+import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import '../../models/authentication/authentication_model.dart';
 part 'authentication_rest_api.g.dart';
 
 @RestApi()
