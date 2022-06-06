@@ -39,7 +39,7 @@ namespace DataAccess.MssqlServerIntegration
             }
 
             string connectionString =
-                $"server={Config.Get().DB_HOST_NAME},{Config.Get().DB_PORT};" +
+                $"server={Config.Get().SERVER_NAME.Or($"{Config.Get().DB_HOST_NAME},{Config.Get().DB_PORT}")};" +
                 $"Database={ Config.Get().DB_NAME};User={Config.Get().DB_USER};" +
                 $"Password={Config.Get().DB_PASSWORD};" +
                 $"Trusted_Connection=False;" +
@@ -48,7 +48,7 @@ namespace DataAccess.MssqlServerIntegration
             Console.WriteLine("database-connect-connection-string " + connectionString);
             Console.WriteLine("database-connect " + "connecting to db...");
 
-            optionsBuilder.UseLazyLoadingProxies();
+            //optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.DetachedLazyLoadingWarning));
 
             optionsBuilder.UseSqlServer(@connectionString);

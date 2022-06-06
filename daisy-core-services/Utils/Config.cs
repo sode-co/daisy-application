@@ -10,6 +10,7 @@ namespace Utils
     {
         public class _Config
         {
+            public string SERVER_NAME { get; set; }
             public string DB_HOST_NAME { get; set; }
             public int DB_PORT { get; set; }
             public string DB_NAME { get; set; }
