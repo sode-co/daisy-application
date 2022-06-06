@@ -22,18 +22,27 @@ class AuthenticationAdapter extends TypeAdapter<AuthenticationModel> {
 class AuthenticationPersistent {
   static const BOX_NAME = 'AUTHENTICATION_BOX';
   Future<AuthenticationModel?> getCurrentAuth() async {
-    await Hive.openBox(BOX_NAME);
+    if (!Hive.isBoxOpen(BOX_NAME)) {
+      await Hive.openBox(BOX_NAME);
+    }
+
     var box = Hive.box(BOX_NAME);
     return box.containsKey(0) ? box.get(0) : null;
   }
 
   Future<void> removeAuth() async {
-    await Hive.openBox(BOX_NAME);
+    if (!Hive.isBoxOpen(BOX_NAME)) {
+      await Hive.openBox(BOX_NAME);
+    }
+
     Hive.box(BOX_NAME).clear();
   }
 
   Future<void> setAuth(AuthenticationModel auth) async {
-    await Hive.openBox(BOX_NAME);
+    if (!Hive.isBoxOpen(BOX_NAME)) {
+      await Hive.openBox(BOX_NAME);
+    }
+
     final box = Hive.box(BOX_NAME);
     AuthenticationModel currentAuth = box.get(0, defaultValue: auth);
 

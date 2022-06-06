@@ -90,7 +90,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                   });
           },
           onTap: () {
-            listener.onBtnSignupClicked(_role!);
+            listener.onBtnSignupClicked(_role!, context);
           },
           child: Ink(
             decoration: BoxDecoration(
