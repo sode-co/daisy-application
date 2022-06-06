@@ -95,8 +95,8 @@ namespace Api.Controllers.Authentication
 
             if (addedUser == null) return AuthenticationResponse.Failed();
 
-            string accessToken = _jwtToken.GenerateAccessToken(_mapper.Map<User, UserExposeModel>(addedUser));
-            string refreshToken = _jwtToken.GenerateRefreshToken(_mapper.Map<User, UserExposeModel>(addedUser));
+            string accessToken = _jwtToken.GenerateAccessToken(_mapper.Map<User, UserVM>(addedUser));
+            string refreshToken = _jwtToken.GenerateRefreshToken(_mapper.Map<User, UserVM>(addedUser));
             return AuthenticationResponse.Success(refreshToken, accessToken);
         }
     }

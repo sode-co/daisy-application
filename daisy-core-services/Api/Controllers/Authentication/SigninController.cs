@@ -39,8 +39,8 @@ namespace Api.Controllers.Authentication
                 User user = work.UserRepository.GetFirstOrDefault((u) => u.Email == email);
                 if (user != null)
                 {
-                    string accessToken = _jwtToken.GenerateAccessToken(_mapper.Map<User, UserExposeModel>(user));
-                    string refreshToken = _jwtToken.GenerateRefreshToken(_mapper.Map<User, UserExposeModel>(user));
+                    string accessToken = _jwtToken.GenerateAccessToken(_mapper.Map<User, UserVM>(user));
+                    string refreshToken = _jwtToken.GenerateRefreshToken(_mapper.Map<User, UserVM>(user));
                     return AuthenticationResponse.Success(refreshToken, accessToken);
                 }
             }
