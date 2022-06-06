@@ -1,10 +1,10 @@
+import 'package:daisy_application/common/Debuger/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
+import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
+import 'package:daisy_application/service_locator/locator.dart';
 import 'package:dio/dio.dart';
-import '../common/Debuger/logger.dart';
-import '../core_services/models/authentication/authentication_model.dart';
-import '../service_locator/locator.dart';
 
 class AuthenticationInterceptor extends InterceptorsWrapper {
   AuthenticationInterceptor();
@@ -47,7 +47,6 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
       await authServices.setAuth(auth);
     }
 
-    Debug.log(ns, 'current authorization', auth);
     options.headers['Authorization'] ??= auth.accessToken;
   }
 }
