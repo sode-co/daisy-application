@@ -1,12 +1,9 @@
 ﻿using DataAccess.UnitOfWork;
+using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Utils.Authentication;
 using Utils.Models;
 
@@ -25,7 +22,7 @@ namespace Api.Controllers.UserController
         }
 
         [HttpPost("update-profile")]
-        public IActionResult UpdateDesignerProfile([FromHeader] string authorization, [FromBody]UserVM userVM)
+        public IActionResult UpdateDesignerProfile([FromHeader][Required] string authorization, [FromBody]UserVM userVM)
         {
             JwtToken jwt = new JwtToken();
             int designerId = jwt.ValidateAccessToken(authorization).Id;
@@ -43,6 +40,32 @@ namespace Api.Controllers.UserController
 
                     work.Save();
                     return Ok(user);
+                }
+
+                return NotFound();
+            }
+        }
+
+        [HttpPost("create-portfolio")]
+        public IActionResult CreatePortfolio([FromHeader][Required] string authorization, [FromBody] PortfolioVM portfolioVM)
+        {
+            JwtToken jwt = new JwtToken();
+            int designerId = jwt.ValidateAccessToken(authorization).Id;
+
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                User freelancer = work.UserRepository.Get(designerId);
+                if (freelancer != null)
+                {
+                    work.PortfolioRepository.Add(new Portfolio()
+                    {
+                        Freelancer = freelancer,
+                        Biography = portfolioVM.biography,
+                        CreatedAt = DateTime.Now
+                    });
+                    work.Save();
+
+                    return Ok();
                 }
 
                 return NotFound();
