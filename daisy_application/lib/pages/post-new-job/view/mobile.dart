@@ -1,3 +1,4 @@
+import 'package:daisy_application/pages/post-new-job/view/common.dart';
 import 'package:flutter/material.dart';
 
 class BodyPostNewJobMobile extends StatefulWidget {
@@ -10,6 +11,6 @@ class BodyPostNewJobMobile extends StatefulWidget {
 class _BodyPostNewJobMobileState extends State<BodyPostNewJobMobile> {
   @override
   Widget build(BuildContext context) {
-    return const Text('mobile');
+    return const CreateJobForm();
   }
 }

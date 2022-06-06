@@ -6,6 +6,7 @@ import 'package:daisy_application/pages/landing-page/listener/landing_page_liste
 import 'package:daisy_application/pages/landing-page/model/landing_page_state.dart';
 import 'package:daisy_application/pages/landing-page/view/mobile.dart';
 import 'package:daisy_application/pages/landing-page/view/web.dart';
+import 'package:daisy_application/pages/post-new-job/view/common.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,8 @@ class _LandingPageState extends State<LandingPage> {
         body: Responsive.isDesktop(context)
             ? const SingleChildScrollView(child: BodyLandingPageWeb())
             : const SingleChildScrollView(child: BodyLandingPageMobile()),
+        floatingActionButton:
+            Responsive.isDesktop(context) ? null : const MobileCreateJobBtn(),
         bottomNavigationBar:
             !Responsive.isDesktop(context) ? const BottomNavBar() : null,
       ),
