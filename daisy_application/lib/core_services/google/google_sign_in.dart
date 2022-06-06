@@ -15,33 +15,21 @@ class GoogleSignIn {
       ],
       clientId:
           '947734464395-hb4v5ckgh3vfbaskfm0hcv1kf451i3ef.apps.googleusercontent.com');
-  final AuthenticationRestApi _authRestClient;
-  final AuthenticationPersistent _authService;
   GoogleSignInAccount? _account;
-
-  GoogleSignIn(this._authRestClient, this._authService);
 
   GoogleSignInAccount? get account => _account;
 
-  Future signIn() async {
+  Future<String> signIn() async {
     try {
       _account = await _service.signIn();
     } catch (ex) {
       Debug.log('google-signin', 'Failed to signin with google with error', ex,
           'Skipping...');
     }
-    if (_account == null) return;
+    if (_account == null) return '';
 
     final googleAuth = await _account!.authentication;
     Debug.log('google-signin', 'success with accessToken', googleAuth.idToken);
-
-    final result =
-        (await _authRestClient.signUp('Bearer ${googleAuth.idToken}'));
-    if (result.FailureType() == FAILURE_TYPE.NONE) {
-      AuthenticationModel auth = result.Data(AuthenticationModel.fromJson);
-      _authService.setAuth(auth);
-      Debug.log(
-          'google-signin', 'success with server response', auth.accessToken);
-    }
+    return googleAuth.idToken ?? '';
   }
 }
