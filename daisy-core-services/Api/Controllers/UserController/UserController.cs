@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace Api.Controllers.CustomerController
 {
     [ApiController]
-    [Route("users")]
-    public class UserController : Controller
+    [Route("v1/users")]
+    public partial class UserController : Controller
     {
 
         private UnitOfWorkFactory _unitOfWorkFactory;

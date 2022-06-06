@@ -20,7 +20,7 @@ namespace DataAccess.Repositories.Users
         public IEnumerable<User> GetDesignersByCategory(int categoryId)
         {
             var artWorks = _dbContext.ArtWorks.ToList();
-            var category = _dbContext.Categories.ToList().Where(cate => cate.Id == categoryId).SingleOrDefault();
+            var category = _dbContext.Categories.Find(categoryId);
             var artWorkList = artWorks.Where(art => art.Category.Id == categoryId).ToList();
             var portfolioList = _dbContext.Portfolios.ToList();
             var userList = _dbContext.Users.ToList();

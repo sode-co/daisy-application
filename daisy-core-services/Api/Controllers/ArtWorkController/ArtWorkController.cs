@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace Api.Controllers.ArtWorkController
 {
     [ApiController]
-    [Route("artworks")]
-    public class ArtWorkController : Controller
+    [Route("v1/artworks")]
+    public partial class ArtWorkController : Controller
     {
 
         private UnitOfWorkFactory _unitOfWorkFactory;

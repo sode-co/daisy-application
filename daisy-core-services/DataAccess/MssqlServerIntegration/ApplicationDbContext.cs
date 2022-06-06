@@ -39,7 +39,7 @@ namespace DataAccess.MssqlServerIntegration
             }
 
             string connectionString =
-                $"server={Config.Get().DB_HOST_NAME};" +
+                $"server={Config.Get().SERVER_NAME.Or($"{Config.Get().DB_HOST_NAME},{Config.Get().DB_PORT}")};" +
                 $"Database={ Config.Get().DB_NAME};User={Config.Get().DB_USER};" +
                 $"Password={Config.Get().DB_PASSWORD};" +
                 $"Trusted_Connection=False;" +

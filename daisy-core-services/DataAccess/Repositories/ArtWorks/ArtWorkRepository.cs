@@ -21,7 +21,7 @@ namespace DataAccess.Repositories.ArtWorks
         public IEnumerable<ArtWork> GetArtWorksByCategory(int id)
         {
             var artWorks = _dbContext.ArtWorks.ToList();
-            var category = _dbContext.Categories.ToList().Where(cate => cate.Id == id).SingleOrDefault();
+            var category = _dbContext.Categories.Find(id);
             var artWorksByCategory = artWorks.Where(aw => aw.Category.Id == id).ToList();
 
             return artWorksByCategory;
