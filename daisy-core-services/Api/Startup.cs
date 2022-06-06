@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Api.Middlewares;
 using AutoMapper;
 using DataAccess.UnitOfWork;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +15,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Utils;
 using Utils.Authentication;
 using Utils.DataMapper;
+using static Api.Common.Constants;
 
 namespace Api
 {
@@ -32,11 +37,40 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                var key = Encoding.UTF8.GetBytes(Config.Get().ACCESS_TOKEN_SECRET);
+                o.SaveToken = true;
+                o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                };
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(ROLE.CUSTOMER, policy =>
+                {
+                    policy.RequireClaim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", ROLE.CUSTOMER);
+                });
+
+                options.AddPolicy(ROLE.DESIGNER, policy =>
+                {
+                    policy.RequireClaim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", ROLE.DESIGNER);
+                });
+            });
+
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
-                builder.AllowAnyOrigin()
+                builder
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowAnyOrigin();
@@ -65,7 +99,6 @@ namespace Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             Config.Load(Configuration);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -81,7 +114,9 @@ namespace Api
             Config.AdaptEnv(env.EnvironmentName);
             app.UseRouting();
             app.UseCors("AllowAll");
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.useAuthenticationMiddleWare();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

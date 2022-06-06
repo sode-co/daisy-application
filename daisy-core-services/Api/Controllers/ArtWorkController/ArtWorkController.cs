@@ -1,13 +1,12 @@
 ﻿using DataAccess.UnitOfWork;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Api.Controllers.ArtWorkController
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("v1/artworks")]
     public partial class ArtWorkController : Controller

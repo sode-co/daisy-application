@@ -12,10 +12,10 @@ namespace Api.Common
             public static readonly int SERVER_ERROR = 500;
         }
 
-        public static class ROLE
+        public class ROLE
         {
-            public static readonly string CUSTOMER = "CUSTOMER";
-            public static readonly string DESIGNER = "DESIGNER";
+            public const string CUSTOMER = "CUSTOMER";
+            public const string DESIGNER = "DESIGNER";
         }
     }
 }

@@ -1,3 +1,4 @@
+import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
@@ -10,6 +11,7 @@ import 'package:daisy_application/pages/listeners/WidgetListener.dart';
 import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
 import 'package:daisy_application/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPageController implements SignUpPageListener, WidgetListener {
   final SignUpPageState _signUpPageState;
@@ -27,13 +29,14 @@ class SignUpPageController implements SignUpPageListener, WidgetListener {
       Debug.log(ns, 'signing in');
 
       final googleIdToken = await _googleSignIn.signIn();
-
+      ApplicationState state = context.read();
       final result = await _authRestClient
           .signUp('Bearer $googleIdToken', {'role': selectedRole.name}).Value();
       Debug.log('Receive result', result);
       if (result.failureType == FAILURE_TYPE.NONE) {
         AuthenticationModel auth = result.data;
         _authService.setAuth(auth);
+        state.isLoggedIn = true;
         Debug.log(ns, 'success with server response', auth.refreshToken);
         LandingPage.start(context);
       }

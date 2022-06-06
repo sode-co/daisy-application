@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.17" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +47,8 @@
     <None Remove="Microsoft.AspNetCore.Authentication.Google" />
     <None Remove="AutoMapper" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Controllers\Designer\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Middlewares\" />
@@ -57,5 +60,6 @@
     <Folder Include="Response\" />
     <Folder Include="Response\Authentication\" />
     <Folder Include="Response\User\" />
+    <Folder Include="Controllers\Designer\" />
   </ItemGroup>
 </Project>

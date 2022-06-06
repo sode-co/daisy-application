@@ -23,7 +23,7 @@ namespace DataAccess.Repositories
             dbSet.Add(t);
         }
 
-        public T Get(string Id)
+        public T Get(int Id)
         {
             return dbSet.Find(Id);
         }

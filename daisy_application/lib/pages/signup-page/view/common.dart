@@ -29,7 +29,7 @@ class SignUpSelectBox extends StatefulWidget {
 class _SignUpSelectBoxState extends State<SignUpSelectBox> {
   UserRole? _role = UserRole.CUSTOMER;
   var btnColor = const Color.fromARGB(255, 255, 255, 255);
-  var textColor = const Color(MyColors.blue_gradient_01);
+  var textColor = const Color(BuiltinColor.blue_gradient_01);
   @override
   Widget build(BuildContext context) {
     SignUpPageListener listener = context.read();
@@ -39,7 +39,9 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
       children: [
         const Text('Sign up', style: Style.h2blueStringBold),
         const Line(
-            width: 40.0, height: 5.0, color: Color(MyColors.blue_gradient_01)),
+            width: 40.0,
+            height: 5.0,
+            color: Color(BuiltinColor.blue_gradient_01)),
         const SizedBox(height: 20.0),
         SizedBox(
           width: 300.0,
@@ -49,7 +51,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                 style: Style.blueStringBold),
             leading: Radio<UserRole>(
               value: UserRole.CUSTOMER,
-              activeColor: const Color(MyColors.blue_gradient_01),
+              activeColor: const Color(BuiltinColor.blue_gradient_01),
               groupValue: _role,
               onChanged: (UserRole? value) {
                 setState(() {
@@ -66,7 +68,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
             title: const Text('I\'m a designer', style: Style.blueStringBold),
             leading: Radio<UserRole>(
               value: UserRole.DESIGNER,
-              activeColor: const Color(MyColors.blue_gradient_01),
+              activeColor: const Color(BuiltinColor.blue_gradient_01),
               groupValue: _role,
               onChanged: (UserRole? value) {
                 setState(() {
@@ -81,12 +83,12 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
           onHover: (hovering) {
             hovering
                 ? setState(() {
-                    btnColor = const Color(MyColors.blue_gradient_01);
+                    btnColor = const Color(BuiltinColor.blue_gradient_01);
                     textColor = Colors.white;
                   })
                 : setState(() {
                     btnColor = Colors.white;
-                    textColor = const Color(MyColors.blue_gradient_01);
+                    textColor = const Color(BuiltinColor.blue_gradient_01);
                   });
           },
           onTap: () {
@@ -96,7 +98,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
             decoration: BoxDecoration(
               color: btnColor,
               border: Border.all(
-                color: const Color(MyColors.blue_gradient_01),
+                color: const Color(BuiltinColor.blue_gradient_01),
                 width: Responsive.isDesktop(context) ? 0.5 : 1.0,
               ),
               borderRadius: BorderRadius.circular(4.0),

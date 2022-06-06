@@ -1,4 +1,4 @@
-class MyColors {
+class BuiltinColor {
   static const primaryColor = 0xff0146AB;
   static const secondaryColor = 0xff0099CF;
   static const tertiaryColor = 0xff01BBE1;

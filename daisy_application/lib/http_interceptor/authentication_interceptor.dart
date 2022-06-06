@@ -22,33 +22,33 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
 
     AuthenticationPersistent authServices = locator.get();
     AuthenticationModel? _auth = await authServices.getCurrentAuth();
-    Debug.log('asdf', _auth);
+    if (_auth == null) {
+      handler.next(options);
+      return;
+    }
+
+    AuthenticationModel auth = _auth;
+    if (auth.refreshToken == '' || auth.isRefreshTokenExpired()) {
+      handler.next(options);
+      return;
+    }
+
+    if (auth.accessToken == '' || auth.isAccessTokenExpired() || true) {
+      AuthenticationRestApi authClient = locator.get();
+      var result = await authClient
+          .generateAccessToken('Bearer ${auth.refreshToken}')
+          .Value();
+      if (result.failureType != FAILURE_TYPE.NONE) {
+        handler.next(options);
+        return;
+      }
+
+      auth.accessToken = result.data.accessToken;
+      Debug.log(ns, 'Found access token', result.data.accessToken);
+      await authServices.setAuth(auth);
+    }
+
+    options.headers['Authorization'] ??= auth.accessToken;
     handler.next(options);
-    // if (_auth == null) {
-    //   handler.reject(DioError(requestOptions: options));
-    //   return;
-    // }
-
-    // AuthenticationModel auth = _auth;
-    // if (auth.refreshToken == '' || auth.isRefreshTokenExpired()) {
-    //   handler.reject(DioError(requestOptions: options));
-    //   return;
-    // }
-
-    // if (auth.accessToken == '' || auth.isAccessTokenExpired() || true) {
-    //   AuthenticationRestApi authClient = locator.get();
-    //   var result = await authClient
-    //       .generateAccessToken('Bearer ${auth.refreshToken}')
-    //       .Value();
-    //   if (result.failureType != FAILURE_TYPE.NONE) {
-    //     handler.reject(DioError(requestOptions: options));
-    //     return;
-    //   }
-
-    //   auth.accessToken = result.data.accessToken;
-    //   await authServices.setAuth(auth);
-    // }
-
-    // options.headers['Authorization'] ??= auth.accessToken;
   }
 }
