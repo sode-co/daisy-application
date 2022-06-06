@@ -9,5 +9,6 @@ namespace DataAccess.Repositories.Users
 {
     public interface IUserRepository : IRepository<User>
     {
+        IEnumerable<User> GetDesignersByCategory(int categoryId);
     }
 }
