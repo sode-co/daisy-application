@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:daisy_application/app_state/application_state.dart';
-import 'package:daisy_application/common/Debuger/logger.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/platform_helper.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
