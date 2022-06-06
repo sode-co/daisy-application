@@ -26,6 +26,11 @@ class Header extends StatelessWidget with PreferredSizeWidget {
               TextButton(
                   child: const Text('Find a designer', style: Style.stringBold),
                   onPressed: () {}),
+              TextButton(
+                  child: const Text('Post new job', style: Style.stringBold),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/postnewjob');
+                  }),
             ])
           : Padding(
               padding: const EdgeInsets.only(left: 5),

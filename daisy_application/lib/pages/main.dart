@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
@@ -7,16 +8,18 @@ import 'package:daisy_application/core_services/http/health_check/health_check_r
 import 'package:daisy_application/core_services/models/health_check_response_model.dart';
 import 'package:daisy_application/pages/discovery-page/discovery.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
+import 'package:daisy_application/pages/post-new-job/view/post_new_job.dart';
 import 'package:daisy_application/pages/signup-page/view/signup.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import '../common/debuger/logger.dart';
 import '../common/platform_helper.dart';
-import '../service_locator/locator.dart';
-import '../core_services/google/firebase_options.dart';
 import '../core_services/common/response_handler.dart';
+import '../core_services/google/firebase_options.dart';
+import '../service_locator/locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,6 +72,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/categories': (context) => const DiscoveryPage(),
         '/signup': (context) => const SignUp(),
+        '/postnewjob': (context) => const PostNewJob(),
       },
       home: const LandingPage(),
     );
