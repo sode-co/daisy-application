@@ -1,6 +1,5 @@
+import 'package:daisy_application/pages/post-new-job/view/common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BodyPostNewJobWeb extends StatefulWidget {
   const BodyPostNewJobWeb({Key? key}) : super(key: key);
@@ -12,6 +11,6 @@ class BodyPostNewJobWeb extends StatefulWidget {
 class _BodyPostNewJobWebState extends State<BodyPostNewJobWeb> {
   @override
   Widget build(BuildContext context) {
-    return const Text('Web');
+    return const CreateJobForm();
   }
 }

@@ -17,12 +17,12 @@ class PostNewJob extends StatefulWidget {
 }
 
 class _PostNewJobState extends State<PostNewJob> {
-  late PostNewJobState _signUpState;
-  late PostNewJobListener _signUpListener;
+  late PostNewJobState _postNewJobState;
+  late PostNewJobListener _postNewJobListener;
   @override
   initState() {
-    _signUpState = PostNewJobState();
-    _signUpListener = PostNewJobController(_signUpState);
+    _postNewJobState = PostNewJobState();
+    _postNewJobListener = PostNewJobController(_postNewJobState);
     super.initState();
   }
 
@@ -32,10 +32,10 @@ class _PostNewJobState extends State<PostNewJob> {
       providers: [
         ChangeNotifierProvider(
           create: (_) {
-            return _signUpState;
+            return _postNewJobState;
           },
         ),
-        Provider(create: (_) => _signUpListener),
+        Provider(create: (_) => _postNewJobListener),
       ],
       child: Scaffold(
         appBar: const Header(),
