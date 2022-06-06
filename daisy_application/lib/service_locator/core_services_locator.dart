@@ -44,7 +44,6 @@ class CoreServiceLocator {
   }
 
   static void _initGoogleService() {
-    locator.registerFactory<GoogleSignIn>(
-        () => GoogleSignIn(locator.get(), locator.get()));
+    locator.registerFactory<GoogleSignIn>(() => GoogleSignIn());
   }
 }
