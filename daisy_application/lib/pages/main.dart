@@ -39,8 +39,8 @@ Future<void> main() async {
     HealthCheckRestApi healthCheckApi = locator.get();
     final response = (await healthCheckApi.get().Value());
     if (response.failureType != FAILURE_TYPE.NONE) {
-      Error.log('$ns-http', 'Failed when perform network check with status',
-          response.failureType.name);
+      // Error.log('$ns-http', 'Failed when perform network check with status',
+      // response.failureType.name);
     } else {
       final data = response.data;
       // Debug.log('$ns-http', 'Network check with result', data.message);
