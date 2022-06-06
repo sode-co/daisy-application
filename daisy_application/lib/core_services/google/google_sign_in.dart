@@ -4,7 +4,6 @@ import 'package:daisy_application/core_services/models/authentication/authentica
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart' as signin_services;
-import '../common/response_handler.dart';
 
 class GoogleSignIn {
   final _service = signin_services.GoogleSignIn(
