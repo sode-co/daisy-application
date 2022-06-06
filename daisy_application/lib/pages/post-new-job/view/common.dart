@@ -34,6 +34,7 @@ class _CreateJobFormState extends State<CreateJobForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Job name field
                       const Text('Give a name for your job'),
                       TextFormField(
                         controller: jobNameController,
@@ -52,13 +53,46 @@ class _CreateJobFormState extends State<CreateJobForm> {
                           model.title = value;
                         },
                       ),
+
+                      // Categories dropdown menu
+                      const Text('Select your job\'s output type'),
+                      TextButton.icon(
+                        icon: const Icon(Icons.arrow_drop_down,
+                            color: Colors.black),
+                        label: const Text('Select your desired output type',
+                            style: TextStyle(color: Colors.black)),
+                        onPressed: () {
+                          showDialog<String>(
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('AlertDialog Title'),
+                                  content:
+                                      const Text('AlertDialog description'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'Cancel'),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                              context: context);
+                        },
+                      ),
+
                       ElevatedButton(
                           onPressed: () {
                             model.title = jobNameController.text;
                             if (_createJobForm.currentState!.validate()) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(model.title),
+                                const SnackBar(
+                                  content: Text('Your job is in proccessing'),
                                 ),
                               );
                             }
