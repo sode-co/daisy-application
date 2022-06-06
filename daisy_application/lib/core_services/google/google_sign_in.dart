@@ -22,13 +22,13 @@ class GoogleSignIn {
     try {
       _account = await _service.signIn();
     } catch (ex) {
-      Debug.log('google-signin', 'Failed to signin with google with error', ex,
-          'Skipping...');
+      // Debug.log('google-signin', 'Failed to signin with google with error', ex,
+      // 'Skipping...');
     }
     if (_account == null) return '';
 
     final googleAuth = await _account!.authentication;
-    Debug.log('google-signin', 'success with accessToken', googleAuth.idToken);
+    // Debug.log('google-signin', 'success with accessToken', googleAuth.idToken);
     return googleAuth.idToken ?? '';
   }
 }

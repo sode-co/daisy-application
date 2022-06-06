@@ -24,17 +24,17 @@ class SignUpPageController implements SignUpPageListener, WidgetListener {
   void onBtnSignupClicked(UserRole selectedRole, BuildContext context) {
     Future<void>.sync(() async {
       const ns = 'signup-with-google';
-      Debug.log(ns, 'signing in');
+      // Debug.log(ns, 'signing in');
 
       final googleIdToken = await _googleSignIn.signIn();
 
       final result = await _authRestClient
           .signUp('Bearer $googleIdToken', {'role': selectedRole.name}).Value();
-      Debug.log('Receive result', result);
+      // Debug.log('Receive result', result);
       if (result.failureType == FAILURE_TYPE.NONE) {
         AuthenticationModel auth = result.data;
         _authService.setAuth(auth);
-        Debug.log(ns, 'success with server response', auth.refreshToken);
+        // Debug.log(ns, 'success with server response', auth.refreshToken);
         LandingPage.start(context);
       }
     });

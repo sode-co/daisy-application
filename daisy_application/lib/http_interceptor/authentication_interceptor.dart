@@ -13,7 +13,7 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     const ns = 'authentication-interceptor';
-    Debug.log(ns, 'fetching access token');
+    // Debug.log(ns, 'fetching access token');
 
     if (options.headers.containsKey('Authorization')) {
       handler.next(options);
