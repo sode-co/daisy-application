@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/dio.dart';
 
@@ -20,6 +21,7 @@ class Result<T> {
 
 extension ConvertToResult on Future<HttpResponse> {
   Future<Result<T>> Value<T>() async {
+    const ns = 'send-request-result-handling';
     try {
       final result = await then((value) {
         return Result<T>(data: value.data, failureType: FAILURE_TYPE.NONE);
@@ -27,6 +29,12 @@ extension ConvertToResult on Future<HttpResponse> {
 
       return result;
     } on DioError catch (err) {
+      if (err.response == null) {
+        Debug.log(ns,
+            'Parsing request failed due to response not found with error', err);
+        throw UnsupportedError('Null response');
+      }
+
       FAILURE_TYPE failureType;
       switch (err.response!.statusCode) {
         case 200:
