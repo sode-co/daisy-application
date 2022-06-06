@@ -14,6 +14,7 @@ using Domain.Models;
 using AutoMapper;
 using Utils.Models;
 using static Api.Common.Constants;
+using Newtonsoft.Json.Linq;
 
 namespace Api.Controllers.Authentication
 {
@@ -24,6 +25,7 @@ namespace Api.Controllers.Authentication
         public string PhoneNumber;
     }
 
+    [ApiController]
     public partial class AuthenticationController : Controller
     {
         private readonly UnitOfWorkFactory _unitOfWorkFactory;
@@ -40,10 +42,10 @@ namespace Api.Controllers.Authentication
         [HttpPost("v1/auth/signup")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Index([FromHeader] string authorization, [FromBody] _SignupRequest body)
+        public async Task<IActionResult> Index([FromHeader] string authorization, [FromBody] JObject body)
         {
             var token = authorization.Split(' ')[1];
-            Console.WriteLine("Received token " + token);
+            Console.WriteLine("Received token " + body);
             var validationSettings = new GoogleJsonWebSignature.ValidationSettings
             {
                 Audience = new string[] { Config.Get().GOOGLE_CLIENT_ID }
@@ -57,7 +59,7 @@ namespace Api.Controllers.Authentication
 
             string lastName = payload.FamilyName;
             string firstName = payload.Name.Split(' ').Offset<string>(-1).Or(payload.GivenName);
-            string displayName = body.DisplayName.Or(payload.GivenName).Or(payload.Name);
+            string displayName = body["DisplayName"].Or(payload.GivenName).Or(payload.Name).ToString();
             string settings = JsonConvert.SerializeObject(new Dictionary<string, string>() {
                     { "locale", payload.Locale }
                 });
@@ -77,7 +79,7 @@ namespace Api.Controllers.Authentication
                     DisplayName = displayName,
                     Settings = settings,
                     Avatar = avatar,
-                    Role = ROLE.CUSTOMER
+                    Role = body["role"].ToString()
                 };
 
                 work.UserRepository.Add(newUser);

@@ -31,7 +31,6 @@ namespace Api.Controllers.Authentication
                 Audience = new string[] { Config.Get().GOOGLE_CLIENT_ID }
             };
 
-
             GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(token, validationSettings);
             string email = payload.Email;
 

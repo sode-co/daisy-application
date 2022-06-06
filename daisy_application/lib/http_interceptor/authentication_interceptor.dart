@@ -35,9 +35,10 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
 
     if (auth.accessToken == '' || auth.isAccessTokenExpired() || true) {
       AuthenticationRestApi authClient = locator.get();
-      var result =
-          await authClient.generateAccessToken('Bearer ${auth.refreshToken}');
-      if (result.FailureType() != FAILURE_TYPE.NONE) {
+      var result = await authClient
+          .generateAccessToken('Bearer ${auth.refreshToken}')
+          .Value();
+      if (result.failureType != FAILURE_TYPE.NONE) {
         handler.reject(DioError(requestOptions: options));
         return;
       }

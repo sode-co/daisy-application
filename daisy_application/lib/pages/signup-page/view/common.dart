@@ -3,7 +3,11 @@
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
+import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../common/Debuger/logger.dart';
+import '../../../common/constants.dart';
 
 class SignUpImageDecoration extends StatelessWidget {
   const SignUpImageDecoration({Key? key}) : super(key: key);
@@ -15,8 +19,6 @@ class SignUpImageDecoration extends StatelessWidget {
   }
 }
 
-enum UserRole { customer, designer }
-
 class SignUpSelectBox extends StatefulWidget {
   const SignUpSelectBox({Key? key}) : super(key: key);
 
@@ -25,17 +27,19 @@ class SignUpSelectBox extends StatefulWidget {
 }
 
 class _SignUpSelectBoxState extends State<SignUpSelectBox> {
-  UserRole? _role = UserRole.customer;
+  UserRole? _role = UserRole.CUSTOMER;
   var btnColor = const Color.fromARGB(255, 255, 255, 255);
   var textColor = const Color(MyColors.blue_gradient_01);
   @override
   Widget build(BuildContext context) {
+    SignUpPageListener listener = context.read();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Sign up', style: Style.h2blueStringBold),
         const Line(
-            width: 40, height: 5, color: Color(MyColors.blue_gradient_01)),
+            width: 40.0, height: 5.0, color: Color(MyColors.blue_gradient_01)),
         const SizedBox(height: 20),
         SizedBox(
           width: 300,
@@ -44,7 +48,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
             title: const Text('I need something designed',
                 style: Style.blueStringBold),
             leading: Radio<UserRole>(
-              value: UserRole.customer,
+              value: UserRole.CUSTOMER,
               activeColor: const Color(MyColors.blue_gradient_01),
               groupValue: _role,
               onChanged: (UserRole? value) {
@@ -61,7 +65,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
           child: ListTile(
             title: const Text('I\'m a designer', style: Style.blueStringBold),
             leading: Radio<UserRole>(
-              value: UserRole.designer,
+              value: UserRole.DESIGNER,
               activeColor: const Color(MyColors.blue_gradient_01),
               groupValue: _role,
               onChanged: (UserRole? value) {
@@ -85,7 +89,9 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                     textColor = const Color(MyColors.blue_gradient_01);
                   });
           },
-          onTap: () {},
+          onTap: () {
+            listener.onBtnSignupClicked(_role!);
+          },
           child: Ink(
             decoration: BoxDecoration(
               color: btnColor,

@@ -10,7 +10,8 @@ abstract class AuthenticationRestApi {
 
   @POST('/signup')
   Future<HttpResponse<AuthenticationModel>> signUp(
-      @Header('Authorization') String googleAccessToken);
+      @Header('Authorization') String googleAccessToken,
+      @Body() Map<String, dynamic> body);
 
   @GET('/access-token')
   Future<HttpResponse<AuthenticationModel>> generateAccessToken(
