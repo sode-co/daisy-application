@@ -1,4 +1,3 @@
-import 'package:daisy_application/common/Debuger/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
