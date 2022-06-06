@@ -1,8 +1,17 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
+
 namespace Utils
 {
     public static partial class Utils
     {
+        public static T Get<T>(this JObject json, string key)
+        {
+            var result = json[key.ToUpper()] ?? json[key.ToLower()];
+
+            return ((T)(object)result);
+        }
+
         public static T Or<T>(this T obj, T replacement)
         {
             if (obj == null) return replacement;

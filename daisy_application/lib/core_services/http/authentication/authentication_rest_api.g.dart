@@ -14,12 +14,14 @@ class _AuthenticationRestApi implements AuthenticationRestApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<AuthenticationModel>> signUp(googleAccessToken) async {
+  Future<HttpResponse<AuthenticationModel>> signUp(
+      googleAccessToken, body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': googleAccessToken};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
+    _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<AuthenticationModel>>(
             Options(method: 'POST', headers: _headers, extra: _extra)

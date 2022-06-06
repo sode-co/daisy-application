@@ -10,6 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
+  static void start(BuildContext context) {
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+      builder: (_) {
+        return const LandingPage();
+      },
+    ), (r) => false);
+  }
+
   const LandingPage({Key? key}) : super(key: key);
 
   @override

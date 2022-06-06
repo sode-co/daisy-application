@@ -3,7 +3,11 @@
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
+import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../common/constants.dart';
 
 class SignUpImageDecoration extends StatelessWidget {
   const SignUpImageDecoration({Key? key}) : super(key: key);
@@ -11,11 +15,10 @@ class SignUpImageDecoration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 300, child: Image.asset('assets/images/signup_decoration.jpg'));
+        width: 300.0,
+        child: Image.asset('assets/images/signup_decoration.jpg'));
   }
 }
-
-enum UserRole { customer, designer }
 
 class SignUpSelectBox extends StatefulWidget {
   const SignUpSelectBox({Key? key}) : super(key: key);
@@ -25,26 +28,28 @@ class SignUpSelectBox extends StatefulWidget {
 }
 
 class _SignUpSelectBoxState extends State<SignUpSelectBox> {
-  UserRole? _role = UserRole.customer;
+  UserRole? _role = UserRole.CUSTOMER;
   var btnColor = const Color.fromARGB(255, 255, 255, 255);
   var textColor = const Color(MyColors.blue_gradient_01);
   @override
   Widget build(BuildContext context) {
+    SignUpPageListener listener = context.read();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Sign up', style: Style.h2blueStringBold),
         const Line(
-            width: 40, height: 5, color: Color(MyColors.blue_gradient_01)),
-        const SizedBox(height: 20),
+            width: 40.0, height: 5.0, color: Color(MyColors.blue_gradient_01)),
+        const SizedBox(height: 20.0),
         SizedBox(
-          width: 300,
-          height: 30,
+          width: 300.0,
+          height: 30.0,
           child: ListTile(
             title: const Text('I need something designed',
                 style: Style.blueStringBold),
             leading: Radio<UserRole>(
-              value: UserRole.customer,
+              value: UserRole.CUSTOMER,
               activeColor: const Color(MyColors.blue_gradient_01),
               groupValue: _role,
               onChanged: (UserRole? value) {
@@ -56,12 +61,12 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
           ),
         ),
         SizedBox(
-          width: 300,
-          height: 30,
+          width: 300.0,
+          height: 30.0,
           child: ListTile(
             title: const Text('I\'m a designer', style: Style.blueStringBold),
             leading: Radio<UserRole>(
-              value: UserRole.designer,
+              value: UserRole.DESIGNER,
               activeColor: const Color(MyColors.blue_gradient_01),
               groupValue: _role,
               onChanged: (UserRole? value) {
@@ -72,7 +77,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
             ),
           ),
         ),
-        const SizedBox(height: 40),
+        const SizedBox(height: 40.0),
         InkWell(
           onHover: (hovering) {
             hovering
@@ -85,7 +90,9 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                     textColor = const Color(MyColors.blue_gradient_01);
                   });
           },
-          onTap: () {},
+          onTap: () {
+            listener.onBtnSignupClicked(_role!, context);
+          },
           child: Ink(
             decoration: BoxDecoration(
               color: btnColor,
@@ -93,7 +100,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                 color: const Color(MyColors.blue_gradient_01),
                 width: Responsive.isDesktop(context) ? 0.5 : 1.0,
               ),
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(4.0),
             ),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -107,7 +114,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                     style: TextStyle(
                         color: textColor,
                         fontWeight: FontWeight.w800,
-                        fontSize: 15),
+                        fontSize: 15.0),
                   ),
                 ],
               ),
@@ -134,7 +141,7 @@ class Line extends StatelessWidget {
           color: color,
           border: Border.all(
             color: color,
-            width: 1,
+            width: 1.0,
           ),
         ),
       ),

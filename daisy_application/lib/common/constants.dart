@@ -7,3 +7,5 @@ class SCREEN_TYPE {
 }
 
 enum PLATFORM { iOS, Android, Web }
+
+enum UserRole { CUSTOMER, DESIGNER }

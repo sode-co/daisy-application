@@ -40,7 +40,7 @@ class SearchCategoriesTextField extends StatelessWidget {
         height: 10,
       ),
       SizedBox(
-          height: 50,
+          height: 50.0,
           width: width,
           child: TextButton(
             onPressed: () {
@@ -64,9 +64,9 @@ class SearchCategoriesTextField extends StatelessWidget {
         Icon(Icons.play_circle,
             color: Colors
                 .white), // sometimes it causes bug not in dom tree??? sometimes not
-        SizedBox(width: 7),
+        SizedBox(width: 7.0),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 3),
+          padding: EdgeInsets.symmetric(vertical: 3.0),
           child: Text(
             'See creativity at work',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
@@ -124,40 +124,40 @@ class _IntroCarouselImageState extends State<IntroCarouselImage> {
         child: SizedBox(
             width: 650,
             height: 350,
-            child: Image.asset(images[imgIndex], width: 450)),
+            child: Image.asset(images[imgIndex], width: 450.0)),
       ),
       Row(children: [
         IconButton(
           icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+              color: Color.fromARGB(255, 190, 188, 188), size: 10.0),
           onPressed: () {
             setImgIndex(0);
           },
         ),
         IconButton(
           icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+              color: Color.fromARGB(255, 190, 188, 188), size: 10.0),
           onPressed: () {
             setImgIndex(1);
           },
         ),
         IconButton(
           icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+              color: Color.fromARGB(255, 190, 188, 188), size: 10.0),
           onPressed: () {
             setImgIndex(2);
           },
         ),
         IconButton(
           icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+              color: Color.fromARGB(255, 190, 188, 188), size: 10.0),
           onPressed: () {
             setImgIndex(3);
           },
         ),
         IconButton(
           icon: const Icon(Icons.circle,
-              color: Color.fromARGB(255, 190, 188, 188), size: 10),
+              color: Color.fromARGB(255, 190, 188, 188), size: 10.0),
           onPressed: () {
             setImgIndex(4);
           },
@@ -227,7 +227,7 @@ class TrendingTab extends StatelessWidget {
       {'Show more': 'assets/images/intro/trending/categories.png'}
     ];
     var width = Responsive.isDesktop(context) ? 1920.0 : 450.0;
-    var imgHeight = Responsive.isDesktop(context) ? 150 : 100;
+    var imgHeight = Responsive.isDesktop(context) ? 150.0 : 100.0;
     var paddingHorizontal = Responsive.isDesktop(context) ? 35.0 : 1.0;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),
@@ -333,10 +333,10 @@ class WelcomeToLogin extends StatelessWidget {
 
   Container designerJoinNowBtn(isDesktop) {
     return Container(
-      height: 50,
-      width: isDesktop ? 500 : 200,
+      height: 50.0,
+      width: isDesktop ? 500.0 : 200.0,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(5.0),
           color: Colors.white,
           border: Border.all(
               color: const Color(MyColors.blue_gradient_01),
@@ -356,10 +356,10 @@ class WelcomeToLogin extends StatelessWidget {
 
   Container findYourTalentBtn(isDesktop) {
     return Container(
-      height: 55,
-      width: isDesktop ? 500 : 200,
+      height: 55.0,
+      width: isDesktop ? 500.0 : 200.0,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(5.0),
           color: const Color(MyColors.blue_gradient_01),
           border: Border.all(
               color: const Color(MyColors.blue_gradient_01),
@@ -420,16 +420,16 @@ class FooterComponent {
       children: [
         IconButton(
             onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.facebook, size: 20)),
+            icon: const FaIcon(FontAwesomeIcons.facebook, size: 20.0)),
         IconButton(
             onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.instagram, size: 20)),
+            icon: const FaIcon(FontAwesomeIcons.instagram, size: 20.0)),
         IconButton(
             onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.linkedin, size: 20)),
+            icon: const FaIcon(FontAwesomeIcons.linkedin, size: 20.0)),
         IconButton(
             onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.twitter, size: 20)),
+            icon: const FaIcon(FontAwesomeIcons.twitter, size: 20.0)),
       ],
     );
   }
@@ -458,11 +458,11 @@ class FooterComponent {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset('assets/images/weblogo.png', width: 300),
+            Image.asset('assets/images/weblogo.png', width: 300.0),
             Row(
               children: [
-                Image.asset('assets/images/appstore.png', scale: 3),
-                Image.asset('assets/images/chplay.png', scale: 4),
+                Image.asset('assets/images/appstore.png', scale: 3.0),
+                Image.asset('assets/images/chplay.png', scale: 4.0),
               ],
             ),
             const Text(
@@ -471,7 +471,7 @@ class FooterComponent {
         ),
       ),
       const SizedBox(
-        width: 120,
+        width: 120.0,
       ),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -487,7 +487,7 @@ class FooterComponent {
         ],
       ),
       const SizedBox(
-        width: 120,
+        width: 120.0,
       ),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -503,7 +503,7 @@ class FooterComponent {
         ],
       ),
       const SizedBox(
-        width: 120,
+        width: 120.0,
       ),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -538,15 +538,15 @@ class SignUpButton extends StatelessWidget {
             color: const Color(MyColors.blue_gradient_01),
             width: 0.5,
           ),
-          borderRadius: BorderRadius.circular(2),
+          borderRadius: BorderRadius.circular(2.0),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Image.asset('assets/images/google.png', width: 16),
-              const SizedBox(width: 5),
+              Image.asset('assets/images/google.png', width: 16.0),
+              const SizedBox(width: 5.0),
               if (Responsive.isDesktop(context))
                 const Text('Sign up with Fpt email', style: Style.stringBold),
               if (!Responsive.isDesktop(context))
