@@ -33,7 +33,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
-
+            services.AddSingleton<UnitOfWorkFactory>();
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
                 builder.AllowAnyOrigin()

@@ -10,5 +10,7 @@ namespace DataAccess.UnitOfWork
     public class UnitOfWorkFactory
     {
         public UnitOfWork Get { get { return new UnitOfWork(new ApplicationDbContext()); } }
+
+        public IDisposable UnitOfWork { get; set; }
     }
 }
