@@ -24,7 +24,7 @@ namespace Utils
                 return value.IsNotBlank() ? (T)(object)value : replacement;
             }
 
-            return obj; 
+            return obj;
         }
 
         public static T Index<T>(this Array obj, int index)
@@ -44,7 +44,7 @@ namespace Utils
             }
             else
             {
-                index = obj.Length - offset;
+                index = obj.Length + offset;
             }
 
             return (T)(object)obj.Index<T>(index);
