@@ -21,9 +21,12 @@ class Header extends StatelessWidget {
             onPressed: context.read<MenuController>().controlMenu,
           ),
         if (!Responsive.isMobile(context))
-          Text(
+          const Text(
             'Báo cáo tiến độ',
-            style: Theme.of(context).textTheme.headline6,
+            style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Open Sans'),
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
