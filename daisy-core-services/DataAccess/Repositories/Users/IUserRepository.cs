@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,12 @@ namespace DataAccess.Repositories.Users
     public interface IUserRepository : IRepository<User>
     {
         IEnumerable<User> GetDesignersByCategory(int categoryId);
+
+        void CreateUser(User user);
+        User GetUser(int id);
+        IEnumerable<User> GetUsers();
+        void UpdateUser(User user);
+        void DeleteUser(int id);
+
     }
 }

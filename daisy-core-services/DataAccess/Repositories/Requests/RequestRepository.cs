@@ -20,7 +20,7 @@ namespace DataAccess.Repositories.Requests
 
         public void CreateRequest(Request request)
         {
-            _dbContext.Requests.ToList().Add(request);
+            _dbContext.Requests.Add(request);
         }
     }
 }

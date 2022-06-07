@@ -92,6 +92,7 @@ namespace Api
             services.AddSingleton<IMapper>(new MapperConfiguration(cfg =>
             {
                 MapperConfig.CreateUserMap(cfg);
+                MapperConfig.CreateRequestMap(cfg);
             }).CreateMapper());
         }
 
