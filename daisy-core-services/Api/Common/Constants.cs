@@ -17,5 +17,12 @@ namespace Api.Common
             public const string CUSTOMER = "CUSTOMER";
             public const string DESIGNER = "DESIGNER";
         }
+
+        public class PROJECT_STATUS
+        {
+            public const string DONE = "DONE";
+            public const string IN_PROGRESS = "IN_PROGRESS";
+            public const string CANCELED = "CANCELED";
+        }
     }
 }

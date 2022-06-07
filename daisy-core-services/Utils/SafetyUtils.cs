@@ -44,7 +44,7 @@ namespace Utils
             }
             else
             {
-                index = obj.Length - offset;
+                index = obj.Length + offset;
             }
 
             return (T)(object)obj.Index<T>(index);
