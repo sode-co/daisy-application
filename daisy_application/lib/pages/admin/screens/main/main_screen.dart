@@ -1,6 +1,7 @@
 import 'package:daisy_application/pages/admin/controllers/MenuController.dart';
 import 'package:daisy_application/pages/admin/responsive.dart';
 import 'package:daisy_application/pages/admin/screens/dashboard/dashboard_screen.dart';
+import 'package:daisy_application/pages/admin/screens/main/components/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +32,8 @@ class MainScreen extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar:
+          !Responsive.isDesktop(context) ? const AdminBottomNavBar() : null,
     );
   }
 }

@@ -1,8 +1,6 @@
-import 'package:daisy_application/pages/admin/controllers/MenuController.dart';
 import 'package:daisy_application/pages/admin/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 
@@ -16,18 +14,18 @@ class Header extends StatelessWidget {
     return Row(
       children: [
         if (!Responsive.isDesktop(context))
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: context.read<MenuController>().controlMenu,
-          ),
-        if (!Responsive.isMobile(context))
-          const Text(
-            'Báo cáo tiến độ',
-            style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Open Sans'),
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.menu),
+          //   onPressed: context.read<MenuController>().controlMenu,
+          // ),
+          if (!Responsive.isMobile(context))
+            const Text(
+              'Báo cáo tiến độ',
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Open Sans'),
+            ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         const Expanded(child: SearchField()),
@@ -82,7 +80,8 @@ class SearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-        hintText: 'Search',
+        hintStyle: TextStyle(color: primaryColor),
+        hintText: 'Search...',
         fillColor: secondaryColor,
         filled: true,
         border: const OutlineInputBorder(
