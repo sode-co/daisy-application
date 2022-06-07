@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
@@ -7,8 +8,8 @@ import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
+import 'package:daisy_application/pages/admin/admin.dart';
 import 'package:daisy_application/pages/discovery-page/discovery.dart';
-import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/signup-page/view/signup.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
           '/categories': (context) => const DiscoveryPage(),
           '/signup': (context) => const SignUp(),
         },
-        home: const LandingPage(),
+        home: const Admin(),
       ),
     );
   }
