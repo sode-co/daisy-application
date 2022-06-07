@@ -18,6 +18,11 @@ namespace Api.Common
             public const string DESIGNER = "DESIGNER";
         }
 
+        public static class STATUS_JOB_APPLICATION
+        {
+            public static readonly string PENDING = "PENDING";
+            public static readonly string APPROVE = "APPROVE";
+            public static readonly string REJECT = "REJECT";
         public class PROJECT_STATUS
         {
             public const string DONE = "DONE";
