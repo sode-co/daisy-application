@@ -74,27 +74,27 @@ namespace Api.Controllers.CustomerController
             }
         }
 
-        //[HttpPut("{id}")]
-        //public ActionResult UpdateUser(int id, User newUser)
-        //{
-        //    using (var work = _unitOfWorkFactory.Get)
-        //    {
-        //        var existingUser = work.UserRepository.Get(id);
-        //        if (existingUser is null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        User updateUser = existingUser with
-        //        {
-        //            FirstName = newUser.Name,
-        //            Price = newUser.Price
-        //        };
+        [HttpPut("{id}")]
+        public ActionResult UpdateUser(int id, User newUser)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var existingUser = work.UserRepository.Get(id);
+                if (existingUser is null)
+                {
+                    return NotFound();
+                }
+                User updateUser = existingUser with
+                {
+                    FirstName = newUser.Name,
+                    Price = newUser.Price
+                };
 
-        //        work.UserRepository.UpdateUser(updateUser);
+                work.UserRepository.UpdateUser(updateUser);
 
-        //    }
-        //    return NoContent();
-        //}
+            }
+            return NoContent();
+        }
 
         [HttpDelete("delete/{id}")]
         public ActionResult DeleteItem(int id)
