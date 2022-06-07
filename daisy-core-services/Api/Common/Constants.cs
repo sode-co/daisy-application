@@ -23,6 +23,11 @@ namespace Api.Common
             public static readonly string PENDING = "PENDING";
             public static readonly string APPROVE = "APPROVE";
             public static readonly string REJECT = "REJECT";
+        public class PROJECT_STATUS
+        {
+            public const string DONE = "DONE";
+            public const string IN_PROGRESS = "IN_PROGRESS";
+            public const string CANCELED = "CANCELED";
         }
     }
 }
