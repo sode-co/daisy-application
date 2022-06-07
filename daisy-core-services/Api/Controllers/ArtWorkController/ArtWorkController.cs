@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Api.Controllers.ArtWorkController
 {
-    [AllowAnonymous]
+    [Authorize]
     [ApiController]
     [Route("v1/artworks")]
     public partial class ArtWorkController : Controller
