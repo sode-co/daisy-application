@@ -27,7 +27,7 @@ class DashboardScreen extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      const MyFiles(),
+                      const MyFields(),
                       const SizedBox(height: defaultPadding),
                       const RecentFiles(),
                       if (Responsive.isMobile(context))
