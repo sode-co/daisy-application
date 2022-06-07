@@ -22,7 +22,7 @@ class RecentFiles extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Recent Files',
+            'Báo cáo gần đây',
             style: Theme.of(context).textTheme.subtitle1,
           ),
           SizedBox(
@@ -32,13 +32,13 @@ class RecentFiles extends StatelessWidget {
               minWidth: 600,
               columns: const [
                 DataColumn(
-                  label: Text('File Name'),
+                  label: Text('Tên tập tin'),
                 ),
                 DataColumn(
-                  label: Text('Date'),
+                  label: Text('Ngày tạo'),
                 ),
                 DataColumn(
-                  label: Text('Size'),
+                  label: Text('Dung lượng'),
                 ),
               ],
               rows: List.generate(

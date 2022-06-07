@@ -26,6 +26,11 @@ class SideMenu extends StatelessWidget {
                   pageUrl: '/admin',
                 ),
                 DrawerItem(
+                  icon: Icons.paid,
+                  content: 'Quản lí giao dịch',
+                  pageUrl: '/',
+                ),
+                DrawerItem(
                   icon: Icons.manage_accounts,
                   content: 'Quản lí tài khoản',
                   pageUrl: '/',
@@ -83,7 +88,7 @@ class DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 18.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
       child: TextButton.icon(
         icon: Icon(icon, color: Colors.white),
         label: Text(
