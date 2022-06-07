@@ -24,7 +24,7 @@ namespace Utils
                 return value.IsNotBlank() ? (T)(object)value : replacement;
             }
 
-            return obj; 
+            return obj;
         }
 
         public static T Index<T>(this Array obj, int index)
