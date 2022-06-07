@@ -9,8 +9,8 @@ namespace Utils.DataMapper
     {
         public static void CreateUserMap(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<User, UserVM>();
-            cfg.CreateMap<UserVM, User>();
+            cfg.CreateMap<User, UserExposeModel>();
+            cfg.CreateMap<UserExposeModel, User>();
         }
     }
 }

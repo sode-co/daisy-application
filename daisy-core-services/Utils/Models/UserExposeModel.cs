@@ -1,6 +1,6 @@
 ﻿namespace Utils.Models
 {
-    public partial class UserVM
+    public partial class UserExposeModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

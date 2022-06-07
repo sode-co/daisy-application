@@ -15,7 +15,7 @@ namespace Utils.Authentication
         {
         }
 
-        public Claim[] GetClaims(UserVM user) => new[] {
+        public Claim[] GetClaims(UserExposeModel user) => new[] {
             new Claim("id", user.Id.ToString()),
             new Claim("email", user.Email.Or("")),
             new Claim("firstName", user.FirstName.Or("")),
@@ -28,7 +28,7 @@ namespace Utils.Authentication
             new Claim("settings", user.Settings.Or("{}")),
         };
 
-        public UserVM GetUser(IEnumerable<Claim> claims) => new UserVM()
+        public UserExposeModel GetUser(IEnumerable<Claim> claims) => new UserExposeModel()
         {
             Id = int.Parse(claims.First(c => c.Type == "id").Value),
             Email = claims.First(c => c.Type == "email").Value,
@@ -42,7 +42,7 @@ namespace Utils.Authentication
             Settings = claims.First(c => c.Type == "settings").Value,
         };
 
-        public string GenerateAccessToken(UserVM user)
+        public string GenerateAccessToken(UserExposeModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Config.Get().ACCESS_TOKEN_SECRET);
@@ -57,7 +57,7 @@ namespace Utils.Authentication
             return tokenHandler.WriteToken(token);
         }
 
-        public string GenerateRefreshToken(UserVM user)
+        public string GenerateRefreshToken(UserExposeModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Config.Get().REFRESH_TOKEN_SECRET);
@@ -72,7 +72,7 @@ namespace Utils.Authentication
             return tokenHandler.WriteToken(token);
         }
 
-        public UserVM ValidateAccessToken(string token)
+        public UserExposeModel ValidateAccessToken(string token)
         {
             if (token == null)
                 return null;
@@ -101,7 +101,7 @@ namespace Utils.Authentication
             }
         }
 
-        public UserVM ValidateRefreshToken(string token)
+        public UserExposeModel ValidateRefreshToken(string token)
         {
             if (token == null)
                 return null;
