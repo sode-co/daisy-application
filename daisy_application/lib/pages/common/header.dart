@@ -51,12 +51,8 @@ class Header extends StatelessWidget with PreferredSizeWidget {
           TextButton(
               child: const Text('Sign out', style: Style.mediumStringBold),
               onPressed: () async {
-                // appState.isLoggedIn = false;
-                // if (!Hive.isBoxOpen(AuthenticationPersistent.BOX_NAME)) {
-                //   await Hive.openBox(AuthenticationPersistent.BOX_NAME);
-                // }
-
-                // await Hive.box(AuthenticationPersistent.BOX_NAME).clear();
+                appState.isLoggedIn = false;
+                await Hive.box(AuthenticationPersistent.BOX_NAME).clear();
               }),
         if (Responsive.isDesktop(context)) SizedBox(width: size.width * 0.1),
       ],

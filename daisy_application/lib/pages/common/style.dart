@@ -14,7 +14,7 @@ class Style {
   static const h2blueStringBold = TextStyle(
       fontWeight: FontWeight.w900,
       fontSize: 37,
-      color: Color(MyColors.blue_gradient_01));
+      color: Color(BuiltinColor.blue_gradient_01));
   static const h2StringBold = TextStyle(
     fontWeight: FontWeight.w900,
     fontSize: 37,
@@ -22,5 +22,5 @@ class Style {
   static const blueStringBold = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 16,
-      color: Color(MyColors.blue_gradient_01));
+      color: Color(BuiltinColor.blue_gradient_01));
 }

@@ -15,7 +15,7 @@ namespace Utils.Authentication
         {
         }
 
-        private Claim[] _getClaims(UserExposeModel user) => new[] {
+        public Claim[] GetClaims(UserExposeModel user) => new[] {
             new Claim("id", user.Id.ToString()),
             new Claim("email", user.Email.Or("")),
             new Claim("firstName", user.FirstName.Or("")),
@@ -28,7 +28,7 @@ namespace Utils.Authentication
             new Claim("settings", user.Settings.Or("{}")),
         };
 
-        private UserExposeModel _getUser(IEnumerable<Claim> claims) => new UserExposeModel()
+        public UserExposeModel GetUser(IEnumerable<Claim> claims) => new UserExposeModel()
         {
             Id = int.Parse(claims.First(c => c.Type == "id").Value),
             Email = claims.First(c => c.Type == "email").Value,
@@ -48,7 +48,7 @@ namespace Utils.Authentication
             var key = Encoding.ASCII.GetBytes(Config.Get().ACCESS_TOKEN_SECRET);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(_getClaims(user)),
+                Subject = new ClaimsIdentity(GetClaims(user)),
                 Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -63,7 +63,7 @@ namespace Utils.Authentication
             var key = Encoding.ASCII.GetBytes(Config.Get().REFRESH_TOKEN_SECRET);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(_getClaims(user)),
+                Subject = new ClaimsIdentity(GetClaims(user)),
                 Expires = DateTime.UtcNow.AddYears(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -93,7 +93,7 @@ namespace Utils.Authentication
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
 
-                return _getUser(jwtToken.Claims);
+                return GetUser(jwtToken.Claims);
             }
             catch
             {
@@ -122,7 +122,7 @@ namespace Utils.Authentication
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
 
-                return _getUser(jwtToken.Claims);
+                return GetUser(jwtToken.Claims);
             }
             catch
             {

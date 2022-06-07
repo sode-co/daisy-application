@@ -15,6 +15,7 @@ using AutoMapper;
 using Utils.Models;
 using static Api.Common.Constants;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers.Authentication
 {
@@ -26,6 +27,7 @@ namespace Api.Controllers.Authentication
     }
 
     [ApiController]
+    [AllowAnonymous]
     public partial class AuthenticationController : Controller
     {
         private readonly UnitOfWorkFactory _unitOfWorkFactory;
@@ -83,7 +85,6 @@ namespace Api.Controllers.Authentication
                 };
 
                 work.UserRepository.Add(newUser);
-
                 work.Save();
             }
 

@@ -1,3 +1,4 @@
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
@@ -21,13 +22,13 @@ class GoogleSignIn {
     try {
       _account = await _service.signIn();
     } catch (ex) {
-      // Debug.log('google-signin', 'Failed to signin with google with error', ex,
-      // 'Skipping...');
+      Debug.log('google-signin', 'Failed to signin with google with error', ex,
+          'Skipping...');
     }
     if (_account == null) return '';
 
     final googleAuth = await _account!.authentication;
-    // Debug.log('google-signin', 'success with accessToken', googleAuth.idToken);
+    Debug.log('google-signin', 'success with accessToken', googleAuth.idToken);
     return googleAuth.idToken ?? '';
   }
 }

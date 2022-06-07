@@ -52,7 +52,7 @@ class SearchCategoriesTextField extends StatelessWidget {
               child: Text(
                 'Get started',
                 style: TextStyle(
-                    color: Color(MyColors.blue_gradient_01),
+                    color: Color(BuiltinColor.blue_gradient_01),
                     fontWeight: FontWeight.w900),
               ),
             ),
@@ -304,7 +304,7 @@ class StatisticInfoSlider extends StatelessWidget {
                     style: TextStyle(
                         fontSize: fontSize,
                         fontWeight: FontWeight.w900,
-                        color: const Color(MyColors.blue_gradient_01)),
+                        color: const Color(BuiltinColor.blue_gradient_01)),
                   ),
                 ),
               );
@@ -339,14 +339,14 @@ class WelcomeToLogin extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
           color: Colors.white,
           border: Border.all(
-              color: const Color(MyColors.blue_gradient_01),
+              color: const Color(BuiltinColor.blue_gradient_01),
               style: BorderStyle.solid)),
       child: TextButton(
         onPressed: () {},
         child: const Text(
           'Designer, join now',
           style: TextStyle(
-              color: Color(MyColors.blue_gradient_01),
+              color: Color(BuiltinColor.blue_gradient_01),
               fontWeight: FontWeight.bold,
               fontSize: 18),
         ),
@@ -360,9 +360,9 @@ class WelcomeToLogin extends StatelessWidget {
       width: isDesktop ? 500.0 : 200.0,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: const Color(MyColors.blue_gradient_01),
+          color: const Color(BuiltinColor.blue_gradient_01),
           border: Border.all(
-              color: const Color(MyColors.blue_gradient_01),
+              color: const Color(BuiltinColor.blue_gradient_01),
               style: BorderStyle.solid)),
       child: TextButton(
         onPressed: () {},
@@ -388,7 +388,7 @@ class Footer extends StatelessWidget {
       child: Column(
         children: [
           const Divider(
-            color: Color(MyColors.dark_blue),
+            color: Color(BuiltinColor.dark_blue),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
@@ -535,7 +535,7 @@ class SignUpButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 255, 255, 255),
           border: Border.all(
-            color: const Color(MyColors.blue_gradient_01),
+            color: const Color(BuiltinColor.blue_gradient_01),
             width: 0.5,
           ),
           borderRadius: BorderRadius.circular(2.0),

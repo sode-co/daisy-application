@@ -22,8 +22,10 @@ class AuthenticationModel extends JsonSerializable with HiveObjectMixin {
   Map<String, dynamic> toJson() => _$AuthenticationModelToJson(this);
 
   bool isAccessTokenExpired() =>
+      accessTokenExpiredAt != null &&
       DateTime.now().millisecondsSinceEpoch >= accessTokenExpiredAt!;
 
   bool isRefreshTokenExpired() =>
+      refreshTokenExpiredAt != null &&
       DateTime.now().millisecondsSinceEpoch >= refreshTokenExpiredAt!;
 }
