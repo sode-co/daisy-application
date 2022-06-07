@@ -1,8 +1,8 @@
 import 'package:daisy_application/pages/common/bottomnavbar.dart';
 import 'package:daisy_application/pages/common/header.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
+import 'package:daisy_application/pages/listeners/WidgetListener.dart';
 import 'package:daisy_application/pages/signup-page/controller/sign_up_page_controller.dart';
-import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
 import 'package:daisy_application/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:daisy_application/pages/signup-page/view/mobile.dart';
 import 'package:daisy_application/pages/signup-page/view/web.dart';
@@ -19,11 +19,11 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   late SignUpPageState _signUpPageState;
-  late SignUpPageListener _signUpPageListener;
+  late WidgetListener _widgetListener;
   @override
   initState() {
     _signUpPageState = SignUpPageState();
-    _signUpPageListener =
+    _widgetListener =
         locator.get<SignUpPageController>(param1: _signUpPageState);
     super.initState();
   }
@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
             return _signUpPageState;
           },
         ),
-        Provider(create: (_) => _signUpPageListener),
+        Provider(create: (_) => _widgetListener),
       ],
       child: Scaffold(
         appBar: const Header(),

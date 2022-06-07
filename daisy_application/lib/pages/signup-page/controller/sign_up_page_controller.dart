@@ -8,12 +8,11 @@ import 'package:daisy_application/core_services/models/authentication/authentica
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/listeners/WidgetListener.dart';
-import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
 import 'package:daisy_application/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SignUpPageController implements SignUpPageListener, WidgetListener {
+class SignUpPageController with WidgetListener {
   final SignUpPageState _signUpPageState;
   final GoogleSignIn _googleSignIn;
   final AuthenticationRestApi _authRestClient;

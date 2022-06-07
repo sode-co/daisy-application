@@ -3,7 +3,9 @@ import 'package:daisy_application/core_services/grpc/healthcheck/health_check_gr
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
+import 'package:daisy_application/core_services/persistent/user_persistent.dart';
 import 'package:daisy_application/http_interceptor/authentication_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -43,6 +45,10 @@ class CoreServiceLocator {
     Hive.registerAdapter<AuthenticationModel>(AuthenticationAdapter());
     locator.registerFactory(() => AuthenticationPersistent());
     Hive.openBox(AuthenticationPersistent.BOX_NAME);
+
+    Hive.registerAdapter<UserModel>(UserAdapter());
+    locator.registerFactory(() => UserPersistent());
+    Hive.openBox(UserPersistent.BOX_NAME);
   }
 
   static void _initGoogleService() {
