@@ -96,7 +96,7 @@ namespace Api.Controllers.UserController
                             PreferredLanguage = jobApplicationVM.PreferedLanguage,
                             Timeline = jobApplicationVM.Timeline,
                             Status = Constants.STATUS_JOB_APPLICATION.PENDING,
-                            Budget = jobApplicationVM.Budget
+                            OfferedPrice = jobApplicationVM.Budget
                         });
                         work.Save();
                         return Ok();
