@@ -30,25 +30,21 @@ class StarageDetails extends StatelessWidget {
           SizedBox(height: defaultPadding),
           Chart(),
           StorageInfoCard(
-            svgSrc: 'assets/icons/Documents.svg',
             title: 'Bìa đóng tài liệu',
             amountOfFiles: '1.3GB',
             numOfFiles: 1328,
           ),
           StorageInfoCard(
-            svgSrc: 'assets/icons/media.svg',
             title: 'Video giới thiệu',
             amountOfFiles: '15.3GB',
             numOfFiles: 1328,
           ),
           StorageInfoCard(
-            svgSrc: 'assets/icons/folder.svg',
             title: 'Banner và quảng cáo',
             amountOfFiles: '1.3GB',
             numOfFiles: 1328,
           ),
           StorageInfoCard(
-            svgSrc: 'assets/icons/unknown.svg',
             title: 'Thiết kế giao diện front-end',
             amountOfFiles: '1.3GB',
             numOfFiles: 140,

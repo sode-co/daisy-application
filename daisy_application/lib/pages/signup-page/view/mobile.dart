@@ -15,6 +15,7 @@ class _BodySignUpMobileState extends State<BodySignUpMobile> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    // ignore: unused_local_variable
     SignUpPageListener listener = context.read();
 
     return Padding(

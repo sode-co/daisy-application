@@ -80,7 +80,7 @@ class SearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-        hintStyle: TextStyle(color: primaryColor),
+        hintStyle: const TextStyle(color: primaryColor),
         hintText: 'Search...',
         fillColor: secondaryColor,
         filled: true,

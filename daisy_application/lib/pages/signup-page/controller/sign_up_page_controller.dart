@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SignUpPageController implements SignUpPageListener, WidgetListener {
+  // ignore: unused_field
   final SignUpPageState _signUpPageState;
   final GoogleSignIn _googleSignIn;
   final AuthenticationRestApi _authRestClient;

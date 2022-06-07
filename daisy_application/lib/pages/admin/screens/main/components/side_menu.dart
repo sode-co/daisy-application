@@ -1,4 +1,5 @@
 import 'package:daisy_application/pages/admin/constants.dart';
+import 'package:daisy_application/pages/admin/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -89,8 +90,10 @@ class DrawerItem extends StatelessWidget {
   final String pageUrl;
   @override
   Widget build(BuildContext context) {
+    double verticalPadding = Responsive.isDesktop(context) ? 15.0 : 5.0;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+      padding:
+          EdgeInsets.symmetric(horizontal: 10.0, vertical: verticalPadding),
       child: TextButton.icon(
         icon: Icon(icon, color: Colors.white),
         label: Text(
