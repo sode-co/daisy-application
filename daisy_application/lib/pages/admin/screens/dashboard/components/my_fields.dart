@@ -24,6 +24,7 @@ class MyFiles extends StatelessWidget {
             ),
             ElevatedButton.icon(
               style: TextButton.styleFrom(
+                backgroundColor: primaryColor,
                 padding: EdgeInsets.symmetric(
                   horizontal: defaultPadding * 1.5,
                   vertical:

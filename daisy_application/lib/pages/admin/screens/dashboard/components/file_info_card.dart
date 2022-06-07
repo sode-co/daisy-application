@@ -40,7 +40,7 @@ class FileInfoCard extends StatelessWidget {
             ],
           ),
           Text(
-            info.title!,
+            info.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -59,7 +59,7 @@ class FileInfoCard extends StatelessWidget {
                     .copyWith(color: Colors.black),
               ),
               Text(
-                info.totalStorage!,
+                info.totalStorage,
                 style: Theme.of(context)
                     .textTheme
                     .caption!
