@@ -9,52 +9,94 @@ class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DrawerHeader(
             child: Image.asset('assets/images/admin_logo.png'),
           ),
-          DrawerListTile(
-            title: 'Dashboard',
-            svgSrc: 'assets/icons/menu_dashbord.svg',
-            press: () {},
-          ),
-          DrawerListTile(
-            title: 'Transaction',
-            svgSrc: 'assets/icons/menu_tran.svg',
-            press: () {},
-          ),
-          DrawerListTile(
-            title: 'Task',
-            svgSrc: 'assets/icons/menu_task.svg',
-            press: () {},
-          ),
-          DrawerListTile(
-            title: 'Documents',
-            svgSrc: 'assets/icons/menu_doc.svg',
-            press: () {},
-          ),
-          DrawerListTile(
-            title: 'Store',
-            svgSrc: 'assets/icons/menu_store.svg',
-            press: () {},
-          ),
-          DrawerListTile(
-            title: 'Notification',
-            svgSrc: 'assets/icons/menu_notification.svg',
-            press: () {},
-          ),
-          DrawerListTile(
-            title: 'Profile',
-            svgSrc: 'assets/icons/menu_profile.svg',
-            press: () {},
-          ),
-          DrawerListTile(
-            title: 'Settings',
-            svgSrc: 'assets/icons/menu_setting.svg',
-            press: () {},
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                DrawerItem(
+                  icon: Icons.widgets,
+                  content: 'Báo cáo tiến độ',
+                  pageUrl: '/admin',
+                ),
+                DrawerItem(
+                  icon: Icons.manage_accounts,
+                  content: 'Quản lí tài khoản',
+                  pageUrl: '/',
+                ),
+                DrawerItem(
+                  icon: Icons.category,
+                  content: 'Quản lí danh mục',
+                  pageUrl: '/',
+                ),
+                DrawerItem(
+                  icon: Icons.photo_library,
+                  content: 'Quản lí sản phẩm',
+                  pageUrl: '/',
+                ),
+                DrawerItem(
+                  icon: Icons.category,
+                  content: 'Quản lí dự án',
+                  pageUrl: '/',
+                ),
+                DrawerItem(
+                  icon: Icons.gavel,
+                  content: 'Quản lí hợp đồng',
+                  pageUrl: '/',
+                ),
+                DrawerItem(
+                  icon: Icons.perm_phone_msg,
+                  content: 'Hỗ trợ khách hàng',
+                  pageUrl: '/',
+                ),
+                DrawerItem(
+                  icon: Icons.feedback,
+                  content: 'Xem phản hồi',
+                  pageUrl: '/',
+                ),
+              ],
+            ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class DrawerItem extends StatelessWidget {
+  const DrawerItem({
+    Key? key,
+    required this.content,
+    required this.icon,
+    required this.pageUrl,
+  }) : super(key: key);
+
+  final String content;
+  final IconData icon;
+  final String pageUrl;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 18.0),
+      child: TextButton.icon(
+        icon: Icon(icon, color: Colors.white),
+        label: Text(
+          content,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w300,
+              fontFamily: 'Roboto'),
+        ),
+        onPressed: () {
+          Navigator.pushNamed(context, pageUrl);
+        },
       ),
     );
   }
@@ -84,7 +126,7 @@ class DrawerListTile extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: TextStyle(color: Colors.white54),
+        style: TextStyle(color: Colors.black),
       ),
     );
   }
