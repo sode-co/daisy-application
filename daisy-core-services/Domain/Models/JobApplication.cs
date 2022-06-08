@@ -26,7 +26,7 @@ namespace Domain.Models
         public long Timeline { get; set; }
 
         [Required]
-        public decimal Budget { get; set; }
+        public decimal OfferedPrice { get; set; }
 
         [MaxLength(int.MaxValue)]
         [Required]

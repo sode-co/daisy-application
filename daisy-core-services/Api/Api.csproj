@@ -57,7 +57,6 @@
     <Folder Include="Models\" />
     <Folder Include="Common\" />
     <Folder Include="Middlewares\Authentication\" />
-    <Folder Include="Response\" />
     <Folder Include="Response\Authentication\" />
     <Folder Include="Response\User\" />
     <Folder Include="Controllers\Designer\" />
