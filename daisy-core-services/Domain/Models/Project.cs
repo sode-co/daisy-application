@@ -36,7 +36,6 @@ namespace Domain.Models
         public String Description { get; set; }
 
         [Required]
-        [Required]
         public long Timeline { get; set; }
 
         [Required]
