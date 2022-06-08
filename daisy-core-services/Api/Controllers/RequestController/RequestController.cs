@@ -35,22 +35,19 @@ namespace Api.Controllers.RequestController
             using (var work = _unitOfWorkFactory.Get)
             {
                 var user = (UserExposeModel)HttpContext.Items["User"];
-                (ICollection<Request>)
-                (ICollection<Request>) requestVM.Items.ToList().ForEach(
-                    requestItem => );
 
                 Request requestParent = new()
                 {
-                    Customer = new User() { Id = user.Id},
+                    Customer = new User() { Id = user.Id },
                     Category = new Category() { Id = requestVM.CategoryId },
                     Title = requestVM.Title,
                     Description = requestVM.Description,
                     ParentRequest = null,
                     Items = listRequest,
                 };
-           
-            work.RequestRepository.Add(requestParent);
-            work.Save();
+
+                work.RequestRepository.Add(requestParent);
+                work.Save();
 
             return Ok();
 

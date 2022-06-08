@@ -33,7 +33,7 @@ namespace Api.Controllers.CustomerController
                 }
                 return designers;
             }
-            
+
         }
 
         [HttpGet("{id}")]
@@ -49,9 +49,9 @@ namespace Api.Controllers.CustomerController
                 }
 
                 return user;
-            }   
+            }
         }
-        [HttpGet]
+        [HttpGet("list")]
         public IEnumerable<User> GetUsers()
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -69,28 +69,38 @@ namespace Api.Controllers.CustomerController
             using (var work = _unitOfWorkFactory.Get)
             {
                 work.UserRepository.Add(user);
+                work.Save();
 
                 return Created(nameof(GetUser), user);
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public ActionResult UpdateUser(int id, User newUser)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                var existingUser = work.UserRepository.Get(id);
+                User existingUser = work.UserRepository.Get(id);
                 if (existingUser is null)
                 {
                     return NotFound();
                 }
-                User updateUser = existingUser with
-                {
-                    FirstName = newUser.Name,
-                    Price = newUser.Price
-                };
 
-                work.UserRepository.UpdateUser(updateUser);
+                existingUser.Id = existingUser.Id;
+                existingUser.FirstName = newUser.FirstName;
+                existingUser.LastName = newUser.LastName;
+                existingUser.DisplayName = newUser.DisplayName;
+                existingUser.Email = newUser.Email;
+                existingUser.Role = newUser.Role;
+                existingUser.Description = newUser.Description;
+                existingUser.Settings = newUser.Settings;
+                existingUser.Avatar = newUser.Avatar;
+                existingUser.Address = newUser.Address;
+                existingUser.Phone = newUser.Phone;
+                existingUser.ObjectId = newUser.ObjectId;
+
+                work.UserRepository.UpdateUser(existingUser);
+                work.Save();
 
             }
             return NoContent();
@@ -109,8 +119,9 @@ namespace Api.Controllers.CustomerController
                 }
 
                 work.UserRepository.Remove(id);
+                work.Save();
                 return NoContent();
-            }               
+            }
         }
 
     }

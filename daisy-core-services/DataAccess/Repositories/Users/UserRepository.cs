@@ -64,8 +64,8 @@ namespace DataAccess.Repositories.Users
         public void UpdateUser(User user)
         {
             var userList = _dbContext.Users.ToList();
-            var indexUser = userList.FindIndex(existUser => existUser.Id == user.Id);
-            userList[indexUser] = user;
+            _dbContext.Users.Update(user);
+            
         }
 
     }
