@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Models;
@@ -15,7 +11,7 @@ namespace Api.Controllers.UserController
     {
 
         [Authorize]
-        [HttpGet("/v1/user/info")]
+        [HttpGet("/v1/user")]
         public IActionResult GetPersonalInfo()
         {
             UserExposeModel model = (UserExposeModel)HttpContext.Items["User"];

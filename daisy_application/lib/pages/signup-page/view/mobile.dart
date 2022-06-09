@@ -1,7 +1,4 @@
-import 'package:daisy_application/pages/listeners/WidgetListener.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'common.dart';
 
 class BodySignUpMobile extends StatefulWidget {

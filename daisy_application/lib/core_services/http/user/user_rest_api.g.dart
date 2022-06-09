@@ -21,8 +21,8 @@ class _UserRestApi implements UserRestApi {
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<UserModel>>(
-            Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/info',
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserModel.fromJson(_result.data!);

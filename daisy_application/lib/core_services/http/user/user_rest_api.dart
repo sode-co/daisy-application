@@ -7,6 +7,6 @@ part 'user_rest_api.g.dart';
 abstract class UserRestApi {
   factory UserRestApi(Dio dio, {String baseUrl}) = _UserRestApi;
 
-  @POST('/info')
+  @GET('')
   Future<HttpResponse<UserModel>> getCurrentUser();
 }

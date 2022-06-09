@@ -28,14 +28,14 @@ class UserPersistent {
     Hive.box(BOX_NAME).clear();
   }
 
+  void set(UserModel user) async {
+    final box = Hive.box(BOX_NAME);
+    remove();
+    box.add(user);
+  }
+
   UserModel? get() {
     final box = Hive.box(BOX_NAME);
     return box.containsKey(0) ? box.get(0) : null;
-  }
-
-  void set(UserModel model) async {
-    final box = Hive.box(BOX_NAME);
-    remove();
-    box.add(model);
   }
 }
