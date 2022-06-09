@@ -23,7 +23,6 @@ namespace Api.Controllers.ArtWorkController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                work.ArtWorkRepository.GetAll((x) => true, null, "freelancerId");
                 IEnumerable<ArtWork> artWorks = work.ArtWorkRepository.GetArtWorksByCategory(id);
                 if (artWorks is null)
                 {
