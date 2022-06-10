@@ -8,6 +8,7 @@ import 'package:daisy_application/pages/landing-page/model/landing_page_state.da
 import 'package:daisy_application/pages/landing-page/view/mobile.dart';
 import 'package:daisy_application/pages/landing-page/view/web.dart';
 import 'package:daisy_application/pages/listeners/WidgetListener.dart';
+import 'package:daisy_application/pages/post-new-job/view/components.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,6 +64,9 @@ class _LandingPageState extends State<LandingPage> with WidgetListener {
         body: Responsive.isDesktop(context)
             ? const SingleChildScrollView(child: BodyLandingPageWeb())
             : const SingleChildScrollView(child: BodyLandingPageMobile()),
+        floatingActionButton: Responsive.isDesktop(context)
+            ? null
+            : const CreateNewJobMobileBtn(),
         bottomNavigationBar:
             !Responsive.isDesktop(context) ? const BottomNavBar() : null,
       ),
