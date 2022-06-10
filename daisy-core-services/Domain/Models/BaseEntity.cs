@@ -8,7 +8,7 @@ namespace BusinessObject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; protected set; }
+        public int Id { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }

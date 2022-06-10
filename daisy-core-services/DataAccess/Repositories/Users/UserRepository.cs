@@ -1,5 +1,6 @@
 ﻿using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace DataAccess.Repositories.Users
             _dbContext = dbContext;
         }
 
+        public void CreateUser(User user)
+        {
+            _dbContext.Users.Add(user);
+        }     
+
         public IEnumerable<User> GetDesignersByCategory(int categoryId)
         {
             var artWorks = _dbContext.ArtWorks.ToList();
@@ -30,7 +36,7 @@ namespace DataAccess.Repositories.Users
 
             foreach (var artWork in artWorkList)
             {
-                portfolio= portfolioList.Where(port => port.Id == artWork.Portfolio.Id).SingleOrDefault();
+                portfolio = portfolioList.Where(port => port.Id == artWork.Portfolio.Id).SingleOrDefault();
                 user = userList.Where(user => user.Id == portfolio.Freelancer.Id).SingleOrDefault();
                 designerList.Add(user);
             }
@@ -39,5 +45,26 @@ namespace DataAccess.Repositories.Users
 
             return designerList;
         }
+
+        public User GetUser(int id)
+        {
+            return _dbContext.Users.Find(id);
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return _dbContext.Users.ToList();
+        }
+        public void DeleteUser(User user)
+        {          
+            user.DeletedAt = DateTime.Now;
+            _dbContext.Users.Update(user);
+        }
+        public void UpdateUser(User user)
+        {
+            _dbContext.Users.Update(user);
+            
+        }
+
     }
 }

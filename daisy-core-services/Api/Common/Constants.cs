@@ -30,5 +30,10 @@ namespace Api.Common
             public const string IN_PROGRESS = "IN_PROGRESS";
             public const string CANCELED = "CANCELED";
         }
+        public class REQUEST_STATUS
+        {
+            public const string AVAILABLE = "AVAILABLE";
+            public const string TAKEN = "TAKEN";
+        }
     }
 }

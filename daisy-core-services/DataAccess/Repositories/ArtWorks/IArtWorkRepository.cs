@@ -10,5 +10,7 @@ namespace DataAccess.Repositories.ArtWorks
     public interface IArtWorkRepository : IRepository<ArtWork>
     {
         IEnumerable<ArtWork> GetArtWorksByCategory(int id);
+
+
     }
 }
