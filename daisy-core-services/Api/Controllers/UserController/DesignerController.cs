@@ -10,7 +10,7 @@ using System.Linq;
 namespace Api.Controllers.UserController
 {
 
-    [Route("api/designer")]
+    [Route("v1/designer")]
     [ApiController]
     public class DesignerController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace Api.Controllers.UserController
         }
 
         [Authorize]
-        [HttpPost("update-profile")]
+        [HttpPut("profile")]
         public IActionResult UpdateDesignerProfile([FromHeader]string authorization, [FromBody]UserExposeModel userVM)
         {
             int designerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
@@ -47,7 +47,7 @@ namespace Api.Controllers.UserController
         }
 
         [Authorize]
-        [HttpPost("create-portfolio")]
+        [HttpPost("portfolio")]
         public IActionResult CreatePortfolio([FromHeader]string authorization, [FromBody] PortfolioVM portfolioVM)
         {
             int designerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
@@ -73,7 +73,7 @@ namespace Api.Controllers.UserController
         }
 
         [Authorize]
-        [HttpPost("create-job-application")]
+        [HttpPost("job-application")]
         public IActionResult CreateJobApplication([FromBody]JobApplicationVM jobApplicationVM)
         {
             int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
@@ -108,7 +108,7 @@ namespace Api.Controllers.UserController
         }
 
         [Authorize]
-        [HttpGet("find-requests-by-category-Id/{categoryId}")]
+        [HttpGet("requests/{categoryId}")]
         public IActionResult FindRequestsByCategoryId(int categoryId)
         {
             int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
