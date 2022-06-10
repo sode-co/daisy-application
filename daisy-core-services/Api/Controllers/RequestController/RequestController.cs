@@ -52,16 +52,13 @@ namespace Api.Controllers.RequestController
                     var item = _mapper.Map<RequestJobPostVM, Request>(request);
                     item.Customer = customer;
                     item.Category = category;
+                    item.ParentRequest = parentRequest;
                     return item;
                 }).ToList();
-
-                parentRequest.Items = requestItemList;
-                requestItemList.ForEach(request => request.ParentRequest = parentRequest);
                 parentRequest.Items = requestItemList;
 
                 work.RequestRepository.Add(parentRequest);
                 work.Save();
-
                 return Ok();
             }
         }
