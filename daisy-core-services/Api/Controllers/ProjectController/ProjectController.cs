@@ -58,25 +58,47 @@ namespace Api.Controllers.ProjectController
         [Authorize(Policy = ROLE.CUSTOMER)]
         public JsonResult CreateProjectAndWorkspaceWhenApproveJobApplication(JObject project)
         {
-            using (var work = _unitOfWorkFactory.Get)
+            try
             {
-                int applicationId = (int)project["jobApplicationId"];
-                bool IsAllowedPublic = (bool)project["isAllowedPublic"];
-                work.ProjectRepository.CreateProjectAndWorkspace(applicationId, IsAllowedPublic, PROJECT_STATUS.IN_PROGRESS, REQUEST_STATUS.TAKEN, REQUEST_STATUS.TAKEN);
-                work.Save();
-                return Json(new { message = "ok" });
+                UserExposeModel loginUser = (UserExposeModel)HttpContext.Items["User"];
+                using (var work = _unitOfWorkFactory.Get)
+                {
+                    int applicationId = (int)project["jobApplicationId"];
+                    bool IsAllowedPublic = (bool)project["isAllowedPublic"];
+                    work.ProjectRepository.CreateProjectAndWorkspace(applicationId, IsAllowedPublic, PROJECT_STATUS.IN_PROGRESS, REQUEST_STATUS.TAKEN, REQUEST_STATUS.TAKEN, loginUser.Id);
+                    work.Save();
+                    return Json(new { message = "ok" });
+                }
+            } catch (Exception er)
+            {
+                return Json(new { 
+                    message = "Something went wrong!!!",
+                    detail = er.Message
+                });
             }
+
         }
 
         // DELETE v1/project
         [HttpDelete]
         public JsonResult DeactivateProject(int projectId)
         {
-            using (var work = _unitOfWorkFactory.Get)
+            UserExposeModel loginUser = (UserExposeModel)HttpContext.Items["User"];
+            try
             {
-                work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED);
-                work.Save();
-                return Json(new { message = "ok" });
+                using (var work = _unitOfWorkFactory.Get)
+                {
+                    work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED, loginUser.Id);
+                    work.Save();
+                    return Json(new { message = "ok" });
+                }
+            } catch (Exception er)
+            {
+                return Json(new
+                {
+                    message = "Something went wrong!!!",
+                    detail = er.Message
+                });
             }
         }
 
