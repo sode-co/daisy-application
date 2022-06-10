@@ -56,29 +56,39 @@ namespace Api.Controllers.ProjectController
         // POST v1/project
         [HttpPost]
         [Authorize(Policy = ROLE.CUSTOMER)]
-        public void CreateProjectAndWorkspaceWhenApproveJobApplication(JObject project)
+        public JsonResult CreateProjectAndWorkspaceWhenApproveJobApplication(JObject project)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                int applicationId = (int)project["jobApplicationId"];
+                bool IsAllowedPublic = (bool)project["isAllowedPublic"];
+                work.ProjectRepository.CreateProjectAndWorkspace(applicationId, IsAllowedPublic, PROJECT_STATUS.IN_PROGRESS, REQUEST_STATUS.TAKEN, REQUEST_STATUS.TAKEN);
+                work.Save();
+                return Json(new { message = "ok" });
+            }
+        }
+
+        // DELETE v1/project
+        [HttpDelete]
+        public JsonResult DeactivateProject(int projectId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED);
+                work.Save();
+                return Json(new { message = "ok" });
+            }
+        }
+
+        // PUT v1/project
+        [HttpPut]
+        public JsonResult UpdateProject(int projectId)
         {
             //using (var work = _unitOfWorkFactory.Get)
             //{
-            //    int applicationId = (int) project["jobApplicationId"];
-            //    JobApplication jobApplication = work.JobApplicationRepository.GetFirstOrDefault(j => j.Id == applicationId, "Freelancer,Request");
-            //    Request request = work.RequestRepository.GetFirstOrDefault(r => r.Id == jobApplication.Request.Id, "Customer,Category");
-            //    Project pro = new Project()
-            //    {
-            //        Customer = work.UserRepository.Get(request.Customer.Id),
-            //        Freelancer = jobApplication.Freelancer,
-            //        Category = request.Category,
-            //        Data = jobApplication.Data,
-            //        PreferredLanguage = jobApplication.PreferredLanguage,
-            //        Name = request.Title,
-            //        Description = request.Description,
-            //        Timeline = jobApplication.Timeline,
-            //        Budget = request.Budget ?? jobApplication.OfferedPrice,
-            //        IsAllowedPublic = (bool) project["IsAllowedPublic"],
-            //        Status = PROJECT_STATUS.IN_PROGRESS,
-            //    };
-            //    work.ProjectRepository.Add(pro);
+            //    work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED);
             //    work.Save();
+                return Json(new { message = "ok" });
             //}
         }
     }
