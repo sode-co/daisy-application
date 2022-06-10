@@ -17,36 +17,40 @@ class RecentFiles extends StatelessWidget {
         color: secondaryColor,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Báo cáo gần đây',
-            style: Theme.of(context).textTheme.subtitle1,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: DataTable2(
-              columnSpacing: defaultPadding,
-              minWidth: 600,
-              columns: const [
-                DataColumn(
-                  label: Text('Tên tập tin'),
+      child: SizedBox(
+        width: 1000,
+        height: 1000,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Báo cáo gần đây',
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: DataTable2(
+                columnSpacing: defaultPadding,
+                minWidth: 600,
+                columns: const [
+                  DataColumn(
+                    label: Text('Tên tập tin'),
+                  ),
+                  DataColumn(
+                    label: Text('Ngày tạo'),
+                  ),
+                  DataColumn(
+                    label: Text('Dung lượng'),
+                  ),
+                ],
+                rows: List.generate(
+                  demoRecentFiles.length,
+                  (index) => recentFileDataRow(demoRecentFiles[index]),
                 ),
-                DataColumn(
-                  label: Text('Ngày tạo'),
-                ),
-                DataColumn(
-                  label: Text('Dung lượng'),
-                ),
-              ],
-              rows: List.generate(
-                demoRecentFiles.length,
-                (index) => recentFileDataRow(demoRecentFiles[index]),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

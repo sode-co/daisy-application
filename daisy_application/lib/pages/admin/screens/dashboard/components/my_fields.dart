@@ -13,42 +13,47 @@ class MyFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Thống kê',
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-            ElevatedButton.icon(
-              style: TextButton.styleFrom(
-                backgroundColor: primaryColor,
-                padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 1.5,
-                  vertical:
-                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
-                ),
+    return SizedBox(
+      width: 1000,
+      height: 1000,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Thống kê',
+                style: Theme.of(context).textTheme.subtitle1,
               ),
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              label: const Text('Thêm báo cáo mới'),
+              ElevatedButton.icon(
+                style: TextButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: defaultPadding * 1.5,
+                    vertical:
+                        defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                  ),
+                ),
+                onPressed: () {},
+                icon: const Icon(Icons.add),
+                label: const Text('Thêm báo cáo mới'),
+              ),
+            ],
+          ),
+          const SizedBox(height: defaultPadding),
+          Responsive(
+            mobile: FileInfoCardGridView(
+              crossAxisCount: _size.width < 650 ? 2 : 4,
+              childAspectRatio:
+                  _size.width < 650 && _size.width > 350 ? 1.3 : 1,
             ),
-          ],
-        ),
-        const SizedBox(height: defaultPadding),
-        Responsive(
-          mobile: FileInfoCardGridView(
-            crossAxisCount: _size.width < 650 ? 2 : 4,
-            childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
+            tablet: const FileInfoCardGridView(),
+            desktop: FileInfoCardGridView(
+              childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
+            ),
           ),
-          tablet: const FileInfoCardGridView(),
-          desktop: FileInfoCardGridView(
-            childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
