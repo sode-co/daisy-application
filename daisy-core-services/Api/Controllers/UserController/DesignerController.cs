@@ -23,7 +23,7 @@ namespace Api.Controllers.UserController
 
         [Authorize]
         [HttpPut("profile")]
-        public IActionResult UpdateDesignerProfile([FromHeader]string authorization, [FromBody]UserExposeModel userVM)
+        public IActionResult UpdateDesignerProfile([FromBody]UserExposeModel userVM)
         {
             int designerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
 
@@ -48,7 +48,7 @@ namespace Api.Controllers.UserController
 
         [Authorize]
         [HttpPost("portfolio")]
-        public IActionResult CreatePortfolio([FromHeader]string authorization, [FromBody] PortfolioVM portfolioVM)
+        public IActionResult CreatePortfolio([FromBody] PortfolioVM portfolioVM)
         {
             int designerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
 
@@ -105,24 +105,6 @@ namespace Api.Controllers.UserController
                 }
                 return NotFound();
             }
-        }
-
-        [Authorize]
-        [HttpGet("requests/{categoryId}")]
-        public IActionResult FindRequestsByCategoryId(int categoryId)
-        {
-            int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
-            using (var work = _unitOfWorkFactory.Get)
-            {
-                User freelancer = work.UserRepository.Get(freelancerId);
-                if (freelancer != null)
-                {
-                    //System.Collections.ArrayList<RequestVM> arrayListRequestVM = new ArrayList<RequestVM>();
-                    System.Collections.Generic.IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByCategoryId(categoryId);
-                    return Ok(requestVMs);
-                }
-            }
-            return NotFound();
         }
 
     }
