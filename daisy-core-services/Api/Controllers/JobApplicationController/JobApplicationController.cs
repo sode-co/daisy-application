@@ -15,7 +15,7 @@ using static Api.Common.Constants;
 
 namespace Api.Controllers.JobApplicationController
 {
-    [Route("v1/applications")]
+    [Route("v1/application")]
     [ApiController]
     public partial class JobApplicationController : Controller
     {
