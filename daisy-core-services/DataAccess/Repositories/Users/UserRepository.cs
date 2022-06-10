@@ -55,15 +55,13 @@ namespace DataAccess.Repositories.Users
         {
             return _dbContext.Users.ToList();
         }
-        public void DeleteUser(int id)
-        {
-            var userList = _dbContext.Users.ToList();
-            var indexUser = userList.FindIndex(existUser => existUser.Id == id);
-            userList.Remove(userList[indexUser]);
+        public void DeleteUser(User user)
+        {          
+            user.DeletedAt = DateTime.Now;
+            _dbContext.Users.Update(user);
         }
         public void UpdateUser(User user)
         {
-            var userList = _dbContext.Users.ToList();
             _dbContext.Users.Update(user);
             
         }

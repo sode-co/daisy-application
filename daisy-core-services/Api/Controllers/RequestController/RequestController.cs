@@ -27,33 +27,47 @@ namespace Api.Controllers.RequestController
             this._mapper = mapper;
         }
 
-        [HttpPost("create")]
+        [HttpPost()]
         [Authorize(Policy = ROLE.CUSTOMER)]
-        public IActionResult CreateRequest([FromBody] RequestVM requestVM)
+        public IActionResult CreateRequest([FromBody] RequestJobPostVM requestJobPostVM)
         {
 
             using (var work = _unitOfWorkFactory.Get)
             {
                 var user = (UserExposeModel)HttpContext.Items["User"];
+                List<RequestJobPostVM> requestJobPostVmList = requestJobPostVM.Items;
+                User customer = work.UserRepository.Get(user.Id);
+                Category category = work.CategoryRepository.Get(requestJobPostVM.CategoryId);
 
                 Request requestParent = new()
                 {
-                    Customer = new User() { Id = user.Id },
-                    Category = new Category() { Id = requestVM.CategoryId },
-                    Title = requestVM.Title,
-                    Description = requestVM.Description,
+                    Customer = customer,
+                    Category = category,
+                    Title = requestJobPostVM.Title,
+                    Description = requestJobPostVM.Description,
+                    Budget = requestJobPostVM.Budget,
                     ParentRequest = null,
-                    Items = listRequest,
+                    Status = REQUEST_STATUS.AVAILABLE,
+
                 };
+
+                var requestItemList = requestJobPostVmList.Select(
+                        request => _mapper.Map<RequestJobPostVM, Request>(request)).ToList();
+                foreach (var request in requestItemList)
+                {
+                    request.Customer = customer;
+                    request.Category = category;
+                }
+
+                requestParent.Items = requestItemList;
+                requestItemList.ForEach(request => request.ParentRequest = requestParent);
+                requestParent.Items = requestItemList;
 
                 work.RequestRepository.Add(requestParent);
                 work.Save();
 
-            return Ok();
-
-
+                return Ok();
+            }
         }
     }
-
-}
 }

@@ -15,6 +15,8 @@ namespace Utils.DataMapper
         {
             cfg.CreateMap<Request, RequestVM>();
             cfg.CreateMap<RequestVM, Request>();
+            cfg.CreateMap<Request, RequestJobPostVM>();
+            cfg.CreateMap<RequestJobPostVM, Request>();
         }
     }
 }

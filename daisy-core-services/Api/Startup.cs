@@ -117,6 +117,7 @@ namespace Api
             {
                 MapperConfig.CreateUserMap(cfg);
                 MapperConfig.CreateProjectMap(cfg);
+                MapperConfig.CreateRequestMap(cfg);
             }).CreateMapper());
         }
 

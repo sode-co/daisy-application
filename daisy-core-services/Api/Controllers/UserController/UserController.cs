@@ -36,7 +36,7 @@ namespace Api.Controllers.CustomerController
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}/detail")]
         public ActionResult<User> GetUser(int id)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -51,7 +51,7 @@ namespace Api.Controllers.CustomerController
                 return user;
             }
         }
-        [HttpGet("list")]
+        [HttpGet()]
         public IEnumerable<User> GetUsers()
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -63,7 +63,7 @@ namespace Api.Controllers.CustomerController
 
         }
 
-        [HttpPost("create")]
+        [HttpPost()]
         public IActionResult CreateUser(User user)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -75,7 +75,7 @@ namespace Api.Controllers.CustomerController
             }
         }
 
-        [HttpPut("update/{id}")]
+        [HttpPut("{id}")]
         public ActionResult UpdateUser(int id, User newUser)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -106,7 +106,7 @@ namespace Api.Controllers.CustomerController
             return NoContent();
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult DeleteItem(int id)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -118,7 +118,7 @@ namespace Api.Controllers.CustomerController
                     return NotFound();
                 }
 
-                work.UserRepository.Remove(id);
+                work.UserRepository.DeleteUser(deletedUser);
                 work.Save();
                 return NoContent();
             }
