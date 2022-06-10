@@ -1,5 +1,6 @@
 ﻿using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace DataAccess.Repositories.Requests
         public RequestRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public void CreateRequest(Request request)
+        {
+            _dbContext.Requests.Add(request);
         }
 
         public IEnumerable<RequestVM> GetRequestsByCategoryId(int categoryId)

@@ -79,7 +79,7 @@ namespace DataAccess.Repositories
             dbSet.Remove(t);
         }
 
-        public void Remove(string id)
+        public void Remove(int id)
         {
             T deletedDto = dbSet.Find(id);
             if (deletedDto != null)

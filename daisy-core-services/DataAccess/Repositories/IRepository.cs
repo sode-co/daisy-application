@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
 
         void Add(T t);
         void Remove(T t);
-        void Remove(String id);
+        void Remove(int id);
         void RemoveRange(IEnumerable<T> t);
     }
 }

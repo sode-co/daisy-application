@@ -4,7 +4,7 @@ import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
-import 'package:daisy_application/pages/signup-page/listener/sign_up_page_listener.dart';
+import 'package:daisy_application/pages/listeners/WidgetListener.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +32,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
   var textColor = const Color(BuiltinColor.blue_gradient_01);
   @override
   Widget build(BuildContext context) {
-    SignUpPageListener listener = context.read();
+    WidgetListener listener = context.read();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +92,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                   });
           },
           onTap: () {
-            listener.onBtnSignupClicked(_role!, context);
+            listener.onBtnSignupClicked(_role!);
           },
           child: Ink(
             decoration: BoxDecoration(

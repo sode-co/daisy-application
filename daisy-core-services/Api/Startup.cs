@@ -67,7 +67,7 @@ namespace Api
             });
 
             services.AddControllers().AddNewtonsoftJson();
-
+            services.AddSingleton<UnitOfWorkFactory>();
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
                 builder
@@ -117,6 +117,7 @@ namespace Api
             {
                 MapperConfig.CreateUserMap(cfg);
                 MapperConfig.CreateProjectMap(cfg);
+                MapperConfig.CreateRequestMap(cfg);
             }).CreateMapper());
         }
 

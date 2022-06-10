@@ -33,7 +33,7 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
       return;
     }
 
-    if (auth.accessToken == '' || auth.isAccessTokenExpired() || true) {
+    if (auth.accessToken == '' || auth.isAccessTokenExpired()) {
       AuthenticationRestApi authClient = locator.get();
       var result = await authClient
           .generateAccessToken('Bearer ${auth.refreshToken}')
@@ -48,7 +48,7 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
       await authServices.setAuth(auth);
     }
 
-    options.headers['Authorization'] ??= auth.accessToken;
+    options.headers['Authorization'] ??= 'bearer ${auth.accessToken}';
     handler.next(options);
   }
 }
