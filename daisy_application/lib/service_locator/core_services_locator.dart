@@ -2,9 +2,12 @@ import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
+import 'package:daisy_application/core_services/http/user/user_rest_api.dart';
+import 'package:daisy_application/core_services/http_interceptor/authentication_interceptor.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
-import 'package:daisy_application/http_interceptor/authentication_interceptor.dart';
+import 'package:daisy_application/core_services/persistent/user_persistent.dart';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../common/config.dart';
@@ -37,12 +40,19 @@ class CoreServiceLocator {
     locator.registerFactory<AuthenticationRestApi>(() => AuthenticationRestApi(
         locator.get(),
         baseUrl: '${Config.API_URL}/v1/auth'));
+
+    locator.registerFactory<UserRestApi>(
+        () => UserRestApi(locator.get(), baseUrl: '${Config.API_URL}/v1/user'));
   }
 
   static void _initPersistentService() {
     Hive.registerAdapter<AuthenticationModel>(AuthenticationAdapter());
     locator.registerFactory(() => AuthenticationPersistent());
     Hive.openBox(AuthenticationPersistent.BOX_NAME);
+
+    Hive.registerAdapter<UserModel>(UserAdapter());
+    locator.registerFactory(() => UserPersistent());
+    Hive.openBox(UserPersistent.BOX_NAME);
   }
 
   static void _initGoogleService() {

@@ -1,7 +1,4 @@
 import 'package:daisy_application/common/debugging/logger.dart';
-import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
-import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
-import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart' as signin_services;
 
