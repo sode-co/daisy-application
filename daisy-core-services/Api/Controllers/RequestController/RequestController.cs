@@ -48,14 +48,13 @@ namespace Api.Controllers.RequestController
                     Status = REQUEST_STATUS.AVAILABLE,
                 };
 
-                var requestItemList = requestJobPostVmList.Select(request => {
+                parentRequest.Items = requestJobPostVmList.Select(request => {
                     var item = _mapper.Map<RequestJobPostVM, Request>(request);
                     item.Customer = customer;
                     item.Category = category;
                     item.ParentRequest = parentRequest;
                     return item;
                 }).ToList();
-                parentRequest.Items = requestItemList;
 
                 work.RequestRepository.Add(parentRequest);
                 work.Save();
