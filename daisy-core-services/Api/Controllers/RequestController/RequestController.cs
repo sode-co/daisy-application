@@ -18,7 +18,6 @@ namespace Api.Controllers.RequestController
     [Route("v1/requests")]
     public partial class RequestController : Controller
     {
-
         private UnitOfWorkFactory _unitOfWorkFactory;
         private IMapper _mapper;
         public RequestController(UnitOfWorkFactory unitOfWorkFactory, IMapper mapper)
@@ -31,15 +30,14 @@ namespace Api.Controllers.RequestController
         [Authorize(Policy = ROLE.CUSTOMER)]
         public IActionResult CreateRequest([FromBody] RequestJobPostVM requestJobPostVM)
         {
-
             using (var work = _unitOfWorkFactory.Get)
             {
-                var user = (UserExposeModel)HttpContext.Items["User"];
+                var user = (UserExposeModel) HttpContext.Items["User"];
                 List<RequestJobPostVM> requestJobPostVmList = requestJobPostVM.Items;
                 User customer = work.UserRepository.Get(user.Id);
                 Category category = work.CategoryRepository.Get(requestJobPostVM.CategoryId);
 
-                Request requestParent = new()
+                Request parentRequest = new()
                 {
                     Customer = customer,
                     Category = category,
@@ -48,22 +46,20 @@ namespace Api.Controllers.RequestController
                     Budget = requestJobPostVM.Budget,
                     ParentRequest = null,
                     Status = REQUEST_STATUS.AVAILABLE,
-
                 };
 
-                var requestItemList = requestJobPostVmList.Select(
-                        request => _mapper.Map<RequestJobPostVM, Request>(request)).ToList();
-                foreach (var request in requestItemList)
-                {
-                    request.Customer = customer;
-                    request.Category = category;
-                }
+                var requestItemList = requestJobPostVmList.Select(request => {
+                    var item = _mapper.Map<RequestJobPostVM, Request>(request);
+                    item.Customer = customer;
+                    item.Category = category;
+                    return item;
+                }).ToList();
 
-                requestParent.Items = requestItemList;
-                requestItemList.ForEach(request => request.ParentRequest = requestParent);
-                requestParent.Items = requestItemList;
+                parentRequest.Items = requestItemList;
+                requestItemList.ForEach(request => request.ParentRequest = parentRequest);
+                parentRequest.Items = requestItemList;
 
-                work.RequestRepository.Add(requestParent);
+                work.RequestRepository.Add(parentRequest);
                 work.Save();
 
                 return Ok();

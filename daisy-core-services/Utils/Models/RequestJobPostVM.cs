@@ -14,6 +14,5 @@ namespace Utils.Models
         public string Status { get; set; }
         public decimal Budget { get; set; }
         public List<RequestJobPostVM> Items { get; set; }
-
     }
 }

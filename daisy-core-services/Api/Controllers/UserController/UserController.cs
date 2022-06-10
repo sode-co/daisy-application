@@ -81,10 +81,7 @@ namespace Api.Controllers.CustomerController
             using (var work = _unitOfWorkFactory.Get)
             {
                 User existingUser = work.UserRepository.Get(id);
-                if (existingUser is null)
-                {
-                    return NotFound();
-                }
+                if (existingUser is null) return NotFound();
 
                 existingUser.Id = existingUser.Id;
                 existingUser.FirstName = newUser.FirstName;
@@ -101,7 +98,6 @@ namespace Api.Controllers.CustomerController
 
                 work.UserRepository.UpdateUser(existingUser);
                 work.Save();
-
             }
             return NoContent();
         }
