@@ -10,68 +10,127 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double horizontalPadding = Responsive.isDesktop(context) ? 16.0 : 38.0;
+
     return Drawer(
       backgroundColor: primaryColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          DrawerHeader(
-            child: Image.asset('assets/images/admin_logo.png'),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                DrawerItem(
-                  icon: Icons.widgets,
-                  content: 'Báo cáo tiến độ',
-                  pageUrl: '/admin',
-                ),
-                DrawerItem(
-                  icon: Icons.paid,
-                  content: 'Quản lí giao dịch',
-                  pageUrl: '/',
-                ),
-                DrawerItem(
-                  icon: Icons.manage_accounts,
-                  content: 'Quản lí tài khoản',
-                  pageUrl: '/',
-                ),
-                DrawerItem(
-                  icon: Icons.category,
-                  content: 'Quản lí danh mục',
-                  pageUrl: '/',
-                ),
-                DrawerItem(
-                  icon: Icons.photo_library,
-                  content: 'Quản lí sản phẩm',
-                  pageUrl: '/',
-                ),
-                DrawerItem(
-                  icon: Icons.business_center,
-                  content: 'Quản lí dự án',
-                  pageUrl: '/',
-                ),
-                DrawerItem(
-                  icon: Icons.gavel,
-                  content: 'Quản lí hợp đồng',
-                  pageUrl: '/',
-                ),
-                DrawerItem(
-                  icon: Icons.perm_phone_msg,
-                  content: 'Hỗ trợ khách hàng',
-                  pageUrl: '/',
-                ),
-                DrawerItem(
-                  icon: Icons.feedback,
-                  content: 'Xem phản hồi',
-                  pageUrl: '/',
-                ),
-              ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DrawerHeader(
+              child: Image.asset('assets/images/admin_logo.png'),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    child: const DrawerItem(
+                      icon: Icons.widgets,
+                      content: 'Tổng quan',
+                      pageUrl: '/admin',
+                    ),
+                  ),
+                  ExpansionTile(
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    title: const DrawerItem(
+                      icon: Icons.business_center,
+                      content: 'Quản lí dự án       ',
+                      pageUrl: '/',
+                    ),
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          DrawerItem(
+                            content: 'Giao dịch',
+                            pageUrl: '/',
+                          ),
+                          DrawerItem(
+                            content: 'Dự án mới',
+                            pageUrl: '/',
+                          ),
+                          DrawerItem(
+                            content: 'Dự án đã hoàn thành',
+                            pageUrl: '/',
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  ExpansionTile(
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    title: const DrawerItem(
+                      icon: Icons.manage_accounts,
+                      content: 'Quản lí tài khoản',
+                      pageUrl: '/',
+                    ),
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          DrawerItem(
+                            pageUrl: '/designer',
+                            content: 'Nhà thiết kế        ',
+                          ),
+                          DrawerItem(
+                            pageUrl: '/customer',
+                            content: 'Khách hàng          ',
+                          ),
+                          DrawerItem(
+                            pageUrl: '/admin',
+                            content: 'Quản trị viên          ',
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    child: const DrawerItem(
+                      icon: Icons.photo_library,
+                      content: 'Quản lí sản phẩm',
+                      pageUrl: '/',
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    child: const DrawerItem(
+                      icon: Icons.category,
+                      content: 'Quản lí danh mục',
+                      pageUrl: '/',
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    child: const DrawerItem(
+                      icon: Icons.perm_phone_msg,
+                      content: 'Hỗ trợ khách hàng',
+                      pageUrl: '/',
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    child: const DrawerItem(
+                      icon: Icons.feedback,
+                      content: 'Xem phản hồi',
+                      pageUrl: '/',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -81,19 +140,18 @@ class DrawerItem extends StatelessWidget {
   const DrawerItem({
     Key? key,
     required this.content,
-    required this.icon,
+    this.icon,
     required this.pageUrl,
   }) : super(key: key);
 
   final String content;
-  final IconData icon;
+  final IconData? icon;
   final String pageUrl;
   @override
   Widget build(BuildContext context) {
     double verticalPadding = Responsive.isDesktop(context) ? 15.0 : 5.0;
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: 10.0, vertical: verticalPadding),
+      padding: EdgeInsets.symmetric(vertical: verticalPadding, horizontal: 0),
       child: TextButton.icon(
         icon: Icon(icon, color: Colors.white),
         label: Text(
@@ -136,7 +194,7 @@ class DrawerListTile extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: TextStyle(color: Colors.black),
+        style: const TextStyle(color: Colors.black),
       ),
     );
   }
