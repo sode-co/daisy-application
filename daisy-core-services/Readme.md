@@ -44,6 +44,10 @@
         "GRPC_PORT": 50052,
         "GRPC_MOBILE_PORT": 50152,
         "PROTOCOL": "http",
+        "ACCESS_TOKEN_SECRET": <string>,
+        "REFRESH_TOKEN_SECRET": <string>,
+        "GOOGLE_CLIENT_SECRET": <string>,
+        "GOOGLE_CLIENT_ID": <string>,
         "LogLevel": "Warning",
         "AllowedHosts": "*"
     }
@@ -59,3 +63,4 @@
     `dotnet ef database update`.
   - If you need to revert your database to the older version, run
     `dotnet ef database update <previous-migration-name>` instead.
+  - ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID: Ask @TienDang to get those secret keys

@@ -15,6 +15,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
     Size size = MediaQuery.of(context).size;
     ApplicationState appState = context.watch();
     final isLoggedIn = appState.isLoggedIn;
+    WidgetListener listener = context.read();
     return AppBar(
       title: (Responsive.isDesktop(context))
           ? Row(children: <Widget>[
@@ -43,8 +44,8 @@ class Header extends StatelessWidget with PreferredSizeWidget {
           if (Responsive.isDesktop(context)) const SizedBox(width: 10),
           const Center(child: Text('or')),
           TextButton(
-              child: const Text('Sign in', style: Style.mediumStringBold),
-              onPressed: () {}),
+              onPressed: () => listener.onBtnSigninClicked(),
+              child: const Text('Sign in', style: Style.mediumStringBold)),
         ],
         if (isLoggedIn)
           TextButton(

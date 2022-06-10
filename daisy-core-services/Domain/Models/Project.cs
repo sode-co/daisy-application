@@ -36,10 +36,6 @@ namespace Domain.Models
         public String Description { get; set; }
 
         [Required]
-        [MaxLength(255)]
-        public String ReferenceFile { get; set; }
-
-        [Required]
         public long Timeline { get; set; }
 
         [Required]

@@ -16,4 +16,8 @@ abstract class AuthenticationRestApi {
   @GET('/access-token')
   Future<HttpResponse<AuthenticationModel>> generateAccessToken(
       @Header('Authorization') String refreshToken);
+
+  @POST('/signin')
+  Future<HttpResponse<AuthenticationModel>> signin(
+      @Header('Authorization') String googleAccessToken);
 }

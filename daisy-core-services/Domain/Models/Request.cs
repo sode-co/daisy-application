@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using BusinessObject;
 
 namespace Domain.Models
@@ -21,6 +22,8 @@ namespace Domain.Models
         [MaxLength(255)]
         [Required]
         public String Description { get; set; }
+
+        public decimal? Budget { get; set; }
 
         public virtual Request ParentRequest { get; set; }
 

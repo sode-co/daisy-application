@@ -223,9 +223,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Budget")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -248,6 +245,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<decimal>("OfferedPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PreferredLanguage")
                         .IsRequired()
@@ -533,11 +533,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("ReferenceFile")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
                     b.Property<int?>("RequestId")
                         .HasColumnType("int");
 
@@ -576,6 +571,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal?>("Budget")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
