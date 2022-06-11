@@ -8,12 +8,13 @@ import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
-import 'package:daisy_application/pages/admin/admin.dart';
-import 'package:daisy_application/pages/discovery-page/discovery.dart';
-import 'package:daisy_application/pages/signup-page/view/signup.dart';
+import 'package:daisy_application/pages/admin/constants.dart';
+import 'package:daisy_application/pages/admin/screens/main/main_screen.dart';
+import 'package:daisy_application/pages/user-management/user_management.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -62,15 +63,16 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (ctx) => ApplicationState())],
       child: MaterialApp(
         title: 'Daisy',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: bgColor,
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+              .apply(bodyColor: Colors.black),
         ),
         initialRoute: '/',
         routes: {
-          '/categories': (context) => const DiscoveryPage(),
-          '/signup': (context) => const SignUp(),
+          '/usermanagement': (context) => const UserManagement(),
         },
-        home: const Admin(),
+        home: const AdminMainScreen(),
       ),
     );
   }

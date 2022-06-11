@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatelessWidget with PreferredSizeWidget {
   const Header({
     Key? key,
   }) : super(key: key);
@@ -33,6 +33,9 @@ class Header extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class ProfileCard extends StatelessWidget {

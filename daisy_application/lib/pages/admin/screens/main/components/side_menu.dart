@@ -68,7 +68,7 @@ class SideMenu extends StatelessWidget {
                     title: const DrawerItem(
                       icon: Icons.manage_accounts,
                       content: 'Quản lí tài khoản',
-                      pageUrl: '/',
+                      pageUrl: '/usermanagement',
                     ),
                     children: [
                       Column(
@@ -163,6 +163,7 @@ class DrawerItem extends StatelessWidget {
               fontFamily: 'Roboto'),
         ),
         onPressed: () {
+          print('test');
           Navigator.pushNamed(context, pageUrl);
         },
       ),

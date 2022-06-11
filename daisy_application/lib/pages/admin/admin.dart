@@ -25,7 +25,7 @@ class Admin extends StatelessWidget {
             create: (context) => MenuController(),
           ),
         ],
-        child: const MainScreen(),
+        child: const AdminMainScreen(),
       ),
     );
   }
