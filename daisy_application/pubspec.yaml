@@ -37,6 +37,7 @@ dependencies:
   fl_chart: ^0.51.0
   data_table_2: ^2.2.3
   colorize_text_avatar: ^1.0.2
+  syncfusion_flutter_datagrid: ^20.1.59
 
 dev_dependencies:
   flutter_test:

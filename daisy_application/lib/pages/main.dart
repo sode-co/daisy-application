@@ -11,7 +11,8 @@ import 'package:daisy_application/core_services/http/health_check/health_check_r
 import 'package:daisy_application/pages/admin/constants.dart';
 import 'package:daisy_application/pages/admin/controllers/MenuController.dart';
 import 'package:daisy_application/pages/admin/screens/main/main_screen.dart';
-import 'package:daisy_application/pages/user-management/user_management.dart';
+import 'package:daisy_application/pages/user-management/model/user_management_state.dart';
+import 'package:daisy_application/pages/user-management/view/user_management.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => MenuController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserManagementState(),
         ),
       ],
       child: MaterialApp(

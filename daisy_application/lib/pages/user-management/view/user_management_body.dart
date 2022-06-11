@@ -1,7 +1,10 @@
 import 'package:colorize_text_avatar/colorize_text_avatar.dart';
 import 'package:daisy_application/pages/admin/constants.dart';
+import 'package:daisy_application/pages/admin/responsive.dart';
 import 'package:daisy_application/pages/admin/screens/dashboard/components/header.dart';
+import 'package:daisy_application/pages/user-management/model/user_management_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserManagementBody extends StatefulWidget {
   const UserManagementBody({Key? key}) : super(key: key);
@@ -107,87 +110,93 @@ class _UserManagementBodyState extends State<UserManagementBody> {
 
   @override
   Widget build(BuildContext context) {
+    var paddingTable = Responsive.isDesktop(context) ? 50.0 : 0.0;
+    var model = context.read<UserManagementState>();
     return SafeArea(
-      child: SingleChildScrollView(
-        primary: false,
-        padding: const EdgeInsets.all(defaultPadding),
-        child: Column(
-          children: [
-            const Header(),
-            const SizedBox(height: defaultPadding),
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: SizedBox(
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    horizontalMargin: 0,
-                    columnSpacing: defaultPadding,
-                    columns: [
-                      DataColumn(
-                        label: Text(
-                          'Họ tên',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black.withOpacity(0.6),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingTable),
+        child: SingleChildScrollView(
+          primary: false,
+          padding: const EdgeInsets.all(defaultPadding),
+          child: Column(
+            children: [
+              const Header(),
+              const SizedBox(height: defaultPadding),
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      horizontalMargin: 0,
+                      columnSpacing: defaultPadding,
+                      columns: [
+                        DataColumn(
+                          label: Text(
+                            'Họ tên',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
                           ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Chức danh',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black.withOpacity(0.6),
+                        DataColumn(
+                          label: Text(
+                            'Chức danh',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
                           ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'E-mail',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black.withOpacity(0.6),
+                        DataColumn(
+                          label: Text(
+                            'E-mail',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
                           ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Ngày đăng kí',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black.withOpacity(0.6),
+                        DataColumn(
+                          label: Text(
+                            'Ngày đăng kí',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
                           ),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Lượt thích',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black.withOpacity(0.6),
+                        DataColumn(
+                          label: Text(
+                            'Lượt thích',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
                           ),
                         ),
+                        const DataColumn(
+                          label: Text(''),
+                        ),
+                      ],
+                      rows: List.generate(
+                        model.pageCount * 10,
+                        (index) =>
+                            recentUserDataRow(recentUsers[index], context),
                       ),
-                      const DataColumn(
-                        label: Text(''),
-                      ),
-                    ],
-                    rows: List.generate(
-                      recentUsers.length,
-                      (index) => recentUserDataRow(recentUsers[index], context),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
