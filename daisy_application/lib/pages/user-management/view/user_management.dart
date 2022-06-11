@@ -1,8 +1,10 @@
 import 'package:daisy_application/pages/admin/responsive.dart';
 import 'package:daisy_application/pages/admin/screens/main/components/bottom_nav_bar.dart';
 import 'package:daisy_application/pages/admin/screens/main/components/side_menu.dart';
+import 'package:daisy_application/pages/user-management/model/user_management_state.dart';
 import 'package:daisy_application/pages/user-management/view/user_management_body.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserManagement extends StatefulWidget {
   const UserManagement({Key? key}) : super(key: key);
@@ -14,6 +16,8 @@ class UserManagement extends StatefulWidget {
 class _UserManagementState extends State<UserManagement> {
   @override
   Widget build(BuildContext context) {
+    var model = context.read<UserManagementState>();
+
     return Scaffold(
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

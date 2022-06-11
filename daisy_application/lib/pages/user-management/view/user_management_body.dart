@@ -19,6 +19,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'My Nguyen',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '01-03-2021',
       posts: '4',
     ),
@@ -26,6 +27,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Phuong Anh',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '27-02-2021',
       posts: '19',
     ),
@@ -33,6 +35,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Dan Linh',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '27-02-2021',
       posts: '19',
     ),
@@ -40,6 +43,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Anh Ngoc',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '23-02-2021',
       posts: '32',
     ),
@@ -47,6 +51,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'ChiPu',
       role: 'Khách hàng',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '21-02-2021',
       posts: '3',
     ),
@@ -54,6 +59,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Bao Chau',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '23-02-2021',
       posts: '32',
     ),
@@ -61,6 +67,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Vu Thanh Van',
       role: 'Khách hàng',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '23-02-2021',
       posts: '2',
     ),
@@ -68,6 +75,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Tuyet Lan',
       role: 'Khách hàng',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '25-02-2021',
       posts: '3',
     ),
@@ -75,6 +83,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Linh Le',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '23-02-2021',
       posts: '32',
     ),
@@ -82,6 +91,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Xuan Anh',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '23-02-2021',
       posts: '32',
     ),
@@ -89,6 +99,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Chau Duyen',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '23-02-2021',
       posts: '32',
     ),
@@ -96,6 +107,7 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Quynh Anh',
       role: 'Khách hàng',
       email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '25-02-2021',
       posts: '34',
     ),
@@ -103,6 +115,23 @@ class _UserManagementBodyState extends State<UserManagementBody> {
       name: 'Emma Le',
       role: 'Nhà thiết kế',
       email: 'abc@gmail.com',
+      phone: '0898234567',
+      date: '23-02-2021',
+      posts: '32',
+    ),
+    RecentUser(
+      name: 'Quynh Anh',
+      role: 'Khách hàng',
+      email: 'abc@gmail.com',
+      phone: '0898234567',
+      date: '25-02-2021',
+      posts: '34',
+    ),
+    RecentUser(
+      name: 'Emma Le',
+      role: 'Nhà thiết kế',
+      email: 'abc@gmail.com',
+      phone: '0898234567',
       date: '23-02-2021',
       posts: '32',
     ),
@@ -110,8 +139,16 @@ class _UserManagementBodyState extends State<UserManagementBody> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     var paddingTable = Responsive.isDesktop(context) ? 50.0 : 0.0;
-    var model = context.read<UserManagementState>();
+    var model = context.watch<UserManagementState>();
+    var firstIndex = model.pageCount * 13 <= recentUsers.length - 12
+        ? model.pageCount * 13
+        : recentUsers.length - 12;
+    var secondIndex = (model.pageCount * 13) + 12 <= recentUsers.length - 1
+        ? (model.pageCount * 13) + 12
+        : recentUsers.length - 1;
+
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingTable),
@@ -128,72 +165,104 @@ class _UserManagementBodyState extends State<UserManagementBody> {
                   width: double.infinity,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      horizontalMargin: 0,
-                      columnSpacing: defaultPadding,
-                      columns: [
-                        DataColumn(
-                          label: Text(
-                            'Họ tên',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black.withOpacity(0.6),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: paddingTable),
+                      child: DataTable(
+                        horizontalMargin: 0,
+                        columnSpacing: defaultPadding,
+                        columns: [
+                          DataColumn(
+                            label: Text(
+                              'Họ tên',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black.withOpacity(0.6),
+                              ),
                             ),
                           ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            'Chức danh',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black.withOpacity(0.6),
+                          DataColumn(
+                            label: Text(
+                              'Vai trò',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black.withOpacity(0.6),
+                              ),
                             ),
                           ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            'E-mail',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black.withOpacity(0.6),
+                          DataColumn(
+                            label: Text(
+                              'E-mail',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black.withOpacity(0.6),
+                              ),
                             ),
                           ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            'Ngày đăng kí',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black.withOpacity(0.6),
+                          DataColumn(
+                            label: Text(
+                              'Số điện thoại',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black.withOpacity(0.6),
+                              ),
                             ),
                           ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            'Lượt thích',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black.withOpacity(0.6),
+                          DataColumn(
+                            label: Text(
+                              'Ngày đăng kí',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black.withOpacity(0.6),
+                              ),
                             ),
                           ),
-                        ),
-                        const DataColumn(
-                          label: Text(''),
-                        ),
-                      ],
-                      rows: List.generate(
-                        model.pageCount * 10,
-                        (index) =>
-                            recentUserDataRow(recentUsers[index], context),
+                          DataColumn(
+                            label: Text(
+                              'Lượt thích',
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black.withOpacity(0.6),
+                              ),
+                            ),
+                          ),
+                          const DataColumn(
+                            label: Text(''),
+                          ),
+                        ],
+                        rows: recentUsers
+                            .sublist(firstIndex, secondIndex)
+                            .map((user) => recentUserDataRow(user, context))
+                            .toList(),
                       ),
                     ),
                   ),
                 ),
+              ),
+              Row(
+                mainAxisAlignment: Responsive.isMobile(context)
+                    ? MainAxisAlignment.spaceBetween
+                    : MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+                    onPressed: () {
+                      model.previousPage();
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios,
+                        color: Colors.black),
+                    onPressed: () {
+                      model.nextPage();
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -204,10 +273,17 @@ class _UserManagementBodyState extends State<UserManagementBody> {
 }
 
 class RecentUser {
-  final String? icon, name, date, posts, role, email;
+  final String? icon, name, phone, date, posts, role, email;
 
-  RecentUser(
-      {this.icon, this.name, this.date, this.posts, this.role, this.email});
+  RecentUser({
+    this.icon,
+    this.name,
+    this.phone,
+    this.date,
+    this.posts,
+    this.role,
+    this.email,
+  });
 }
 
 DataRow recentUserDataRow(RecentUser userInfo, BuildContext context) {
@@ -255,6 +331,11 @@ DataRow recentUserDataRow(RecentUser userInfo, BuildContext context) {
       DataCell(
         Text(
           userInfo.email!,
+        ),
+      ),
+      DataCell(
+        Text(
+          userInfo.phone!,
         ),
       ),
       DataCell(
@@ -324,8 +405,9 @@ DataRow recentUserDataRow(RecentUser userInfo, BuildContext context) {
                                 children: [
                                   Text(
                                       "Are you sure want to delete '${userInfo.name}'?"),
-                                  const SizedBox(
-                                    height: 30,
+                                  SizedBox(
+                                    height:
+                                        Responsive.isDesktop(context) ? 30 : 10,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
