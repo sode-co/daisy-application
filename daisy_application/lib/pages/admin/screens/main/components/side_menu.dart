@@ -33,7 +33,7 @@ class SideMenu extends StatelessWidget {
                     child: const DrawerItem(
                       icon: Icons.widgets,
                       content: 'Tổng quan',
-                      pageUrl: '/admin',
+                      pageUrl: '/',
                     ),
                   ),
                   ExpansionTile(

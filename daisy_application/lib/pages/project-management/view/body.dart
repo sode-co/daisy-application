@@ -1,3 +1,4 @@
+import 'package:daisy_application/pages/admin/screens/dashboard/components/header.dart';
 import 'package:flutter/material.dart';
 
 class ProjectManagementBody extends StatefulWidget {
@@ -10,6 +11,15 @@ class ProjectManagementBody extends StatefulWidget {
 class _ProjectManagementBodyState extends State<ProjectManagementBody> {
   @override
   Widget build(BuildContext context) {
-    return Text('Project management');
+    return SafeArea(
+      child: SingleChildScrollView(
+        primary: false,
+        child: Column(
+          children: const [
+            Header(),
+          ],
+        ),
+      ),
+    );
   }
 }
