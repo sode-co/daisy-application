@@ -9,6 +9,7 @@ import 'package:daisy_application/core_services/google/firebase_options.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/pages/admin/constants.dart';
+import 'package:daisy_application/pages/admin/controllers/MenuController.dart';
 import 'package:daisy_application/pages/admin/screens/main/main_screen.dart';
 import 'package:daisy_application/pages/user-management/user_management.dart';
 import 'package:daisy_application/service_locator/locator.dart';
@@ -60,7 +61,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (ctx) => ApplicationState())],
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => ApplicationState(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MenuController(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Daisy',
         theme: ThemeData.dark().copyWith(
@@ -70,7 +78,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/usermanagement': (context) => const UserManagement(),
+          '/user-management': (context) => const UserManagement(),
         },
         home: const AdminMainScreen(),
       ),

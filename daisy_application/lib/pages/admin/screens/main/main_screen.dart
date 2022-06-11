@@ -1,7 +1,9 @@
+import 'package:daisy_application/pages/admin/controllers/MenuController.dart';
 import 'package:daisy_application/pages/admin/responsive.dart';
 import 'package:daisy_application/pages/admin/screens/dashboard/dashboard_screen.dart';
 import 'package:daisy_application/pages/admin/screens/main/components/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'components/side_menu.dart';
 
@@ -11,6 +13,7 @@ class AdminMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: context.read<MenuController>().scaffoldKey,
       drawer: const SideMenu(),
       body: SafeArea(
         child: Row(

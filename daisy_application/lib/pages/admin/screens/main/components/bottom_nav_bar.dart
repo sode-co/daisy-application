@@ -52,7 +52,9 @@ class AdminBottomNavBar extends StatelessWidget {
                         IconButton(
                           tooltip: 'Home',
                           icon: const IconButtomItem(icon: Icons.home),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/');
+                          },
                         ),
                         IconButton(
                           tooltip: 'Favorite',

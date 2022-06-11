@@ -68,7 +68,7 @@ class SideMenu extends StatelessWidget {
                     title: const DrawerItem(
                       icon: Icons.manage_accounts,
                       content: 'Quản lí tài khoản',
-                      pageUrl: '/usermanagement',
+                      pageUrl: '/user-management',
                     ),
                     children: [
                       Column(
