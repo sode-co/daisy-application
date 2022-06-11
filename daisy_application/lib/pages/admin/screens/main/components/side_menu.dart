@@ -41,7 +41,7 @@ class SideMenu extends StatelessWidget {
                     title: const DrawerItem(
                       icon: Icons.business_center,
                       content: 'Quản lí dự án       ',
-                      pageUrl: '/',
+                      pageUrl: '/project-management',
                     ),
                     children: [
                       Column(

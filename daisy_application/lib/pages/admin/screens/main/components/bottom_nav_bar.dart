@@ -48,7 +48,7 @@ class AdminBottomNavBar extends StatelessWidget {
                           icon:
                               const IconButtomItem(icon: Icons.business_center),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/project');
+                            Navigator.pushNamed(context, '/project-management');
                           },
                         ),
                         IconButton(
