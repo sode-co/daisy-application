@@ -37,36 +37,39 @@ class AdminBottomNavBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         IconButton(
-                          tooltip: 'Menu',
-                          icon: const IconButtomItem(icon: Icons.menu_outlined),
-                          onPressed: context.read<MenuController>().controlMenu,
-                        ),
-                        IconButton(
-                          tooltip: 'Find your talent',
-                          icon: const IconButtomItem(
-                              icon: Icons.person_search_outlined),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/categories');
-                          },
-                        ),
-                        IconButton(
-                          tooltip: 'Home',
-                          icon: const IconButtomItem(icon: Icons.home),
+                          tooltip: 'Tổng quan',
+                          icon: const IconButtomItem(icon: Icons.widgets),
                           onPressed: () {
                             Navigator.pushNamed(context, '/');
                           },
                         ),
                         IconButton(
-                          tooltip: 'Favorite',
+                          tooltip: 'Quản lí dự án',
                           icon:
-                              const IconButtomItem(icon: Icons.favorite_border),
+                              const IconButtomItem(icon: Icons.business_center),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/project');
+                          },
+                        ),
+                        IconButton(
+                          tooltip: 'Quản lí tài khoản',
+                          icon:
+                              const IconButtomItem(icon: Icons.manage_accounts),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/user-management');
+                          },
+                        ),
+                        IconButton(
+                          tooltip: 'Quản lí sản phẩm',
+                          icon: const IconButtomItem(icon: Icons.photo_library),
                           onPressed: () {},
                         ),
                         IconButton(
-                          tooltip: 'Notifications',
-                          icon: const IconButtomItem(
-                              icon: Icons.notifications_outlined),
-                          onPressed: () {},
+                          tooltip: 'Quản lí danh mục',
+                          icon: const IconButtomItem(icon: Icons.category),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/category');
+                          },
                         ),
                       ],
                     ),
