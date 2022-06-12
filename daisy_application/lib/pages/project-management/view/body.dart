@@ -1,3 +1,4 @@
+import 'package:daisy_application/pages/admin/responsive.dart';
 import 'package:daisy_application/pages/admin/screens/dashboard/components/header.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,8 @@ class _ProjectManagementBodyState extends State<ProjectManagementBody> {
 
   @override
   Widget build(BuildContext context) {
+    var horizontalPadding = Responsive.isDesktop(context) ? 20.0 : 0.0;
+    var verticalPadding = Responsive.isDesktop(context) ? 25.0 : 0.0;
     return SafeArea(
       child: SingleChildScrollView(
         primary: false,
@@ -30,75 +33,81 @@ class _ProjectManagementBodyState extends State<ProjectManagementBody> {
           children: [
             const Header(),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
+              padding: EdgeInsets.symmetric(
+                  horizontal: horizontalPadding, vertical: verticalPadding),
               child: Container(
                 decoration:
                     BoxDecoration(border: Border.all(color: Colors.black)),
-                child: SfDataGridTheme(
-                  data: SfDataGridThemeData(
-                      headerColor: const Color(BuiltinColor.blue_gradient_01),
-                      gridLineColor: Colors.black),
-                  child: SfDataGrid(
-                    allowSorting: true,
-                    allowMultiColumnSorting: true,
-                    source: _projectDataSource,
-                    columnWidthMode: ColumnWidthMode.fill,
-                    columns: <GridColumn>[
-                      GridColumn(
-                        columnName: 'name',
-                        label: Container(
-                          padding: const EdgeInsets.all(16.0),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Tên dự án',
+                child: SizedBox(
+                  height: 800,
+                  child: SfDataGridTheme(
+                    data: SfDataGridThemeData(
+                        headerColor: const Color(BuiltinColor.blue_gradient_01),
+                        gridLineColor: Colors.black),
+                    child: SfDataGrid(
+                      allowSorting: true,
+                      allowMultiColumnSorting: true,
+                      rowsPerPage: 10,
+                      source: _projectDataSource,
+                      columnWidthMode: Responsive.isDesktop(context)
+                          ? ColumnWidthMode.fill
+                          : ColumnWidthMode.fitByCellValue,
+                      columns: <GridColumn>[
+                        GridColumn(
+                          columnName: 'name',
+                          label: Container(
+                            padding: const EdgeInsets.all(16.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'Tên dự án',
+                            ),
                           ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'category',
-                        label: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          alignment: Alignment.center,
-                          child: const Text('Thể loại'),
-                        ),
-                      ),
-                      GridColumn(
-                        columnName: 'resolvedAt',
-                        label: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Lần cập nhật cuối',
-                            overflow: TextOverflow.ellipsis,
+                        GridColumn(
+                          columnName: 'category',
+                          label: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            alignment: Alignment.center,
+                            child: const Text('Thể loại'),
                           ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'language',
-                        label: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          alignment: Alignment.center,
-                          child: const Text('Ngôn ngữ'),
+                        GridColumn(
+                          columnName: 'resolvedAt',
+                          label: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'Lần cập nhật cuối',
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'description',
-                        label: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          alignment: Alignment.center,
-                          child: const Text('Mô tả'),
+                        GridColumn(
+                          columnName: 'language',
+                          label: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            alignment: Alignment.center,
+                            child: const Text('Ngôn ngữ'),
+                          ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'budget',
-                        label: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          alignment: Alignment.center,
-                          child: const Text('Ngân sách'),
+                        GridColumn(
+                          columnName: 'description',
+                          label: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            alignment: Alignment.center,
+                            child: const Text('Mô tả'),
+                          ),
                         ),
-                      ),
-                    ],
+                        GridColumn(
+                          columnName: 'budget',
+                          label: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            alignment: Alignment.center,
+                            child: const Text('Ngân sách'),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -137,11 +146,11 @@ class _ProjectManagementBodyState extends State<ProjectManagementBody> {
           'Description Lorem Ipsum Lorem Ipsum Lorem Ipsum', 221099.0),
       Project('Thiet ke logo', 'Logo & Webdesign', '22/10/2001', 'en',
           'Description Lorem Ipsum Lorem Ipsum Lorem Ipsum', 221099.0),
-      Project('Thiet ke logo', 'Logo & Webdesign', '22/10/2001', 'en',
+      Project('Thiet ke banner', 'Logo & Webdesign', '22/10/2001', 'en',
           'Description Lorem Ipsum Lorem Ipsum Lorem Ipsum', 221099.0),
-      Project('Thiet ke logo', 'Logo & Webdesign', '22/10/2001', 'en',
+      Project('Thiet ke banner', 'Logo & Webdesign', '22/10/2001', 'en',
           'Description Lorem Ipsum Lorem Ipsum Lorem Ipsum', 221099.0),
-      Project('Thiet ke logo', 'Logo & Webdesign', '22/10/2001', 'en',
+      Project('Thiet ke banner', 'Logo & Webdesign', '22/10/2001', 'en',
           'Description Lorem Ipsum Lorem Ipsum Lorem Ipsum', 221099.0),
     ];
   }
