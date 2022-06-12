@@ -1,6 +1,7 @@
 import 'package:daisy_application/pages/admin/responsive.dart';
 import 'package:daisy_application/pages/admin/screens/dashboard/components/header.dart';
 import 'package:daisy_application/pages/common/colors.dart';
+import 'package:daisy_application/pages/project-management/view/project_info_management.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -42,9 +43,21 @@ class _ProjectManagementBodyState extends State<ProjectManagementBody> {
                   height: 800,
                   child: SfDataGridTheme(
                     data: SfDataGridThemeData(
+                        selectionColor: Colors.grey.withOpacity(0.5),
                         headerColor: const Color(BuiltinColor.blue_gradient_01),
                         gridLineColor: Colors.black),
                     child: SfDataGrid(
+                      selectionMode: SelectionMode.single,
+                      onCellTap: (DataGridCellTapDetails details) {
+                        Project project =
+                            projects[details.rowColumnIndex.rowIndex - 1];
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectInfoManagement(project: project),
+                          ),
+                        );
+                      },
                       allowSorting: true,
                       allowMultiColumnSorting: true,
                       rowsPerPage: 10,
@@ -172,17 +185,22 @@ class Project {
 class ProjectDataSource extends DataGridSource {
   ProjectDataSource({required List<Project> projectData}) {
     _projectData = projectData
-        .map<DataGridRow>((e) => DataGridRow(cells: [
-              DataGridCell<String>(columnName: 'name', value: e.name),
-              DataGridCell<String>(columnName: 'category', value: e.category),
+        .map<DataGridRow>(
+          (p) => DataGridRow(
+            cells: [
+              DataGridCell<String>(columnName: 'name', value: p.name),
+              // DataGridCell<String>(columnName: 'name', value: p.name),
+              DataGridCell<String>(columnName: 'category', value: p.category),
               DataGridCell<String>(
-                  columnName: 'resolvedAt', value: e.resolvedAt),
+                  columnName: 'resolvedAt', value: p.resolvedAt),
               DataGridCell<String>(
-                  columnName: 'language', value: e.preferredLanguage),
+                  columnName: 'language', value: p.preferredLanguage),
               DataGridCell<String>(
-                  columnName: 'description', value: e.description),
-              DataGridCell<double>(columnName: 'budget', value: e.budget),
-            ]))
+                  columnName: 'description', value: p.description),
+              DataGridCell<double>(columnName: 'budget', value: p.budget),
+            ],
+          ),
+        )
         .toList();
   }
 
