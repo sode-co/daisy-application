@@ -31,7 +31,7 @@ class SearchCategoriesTextField extends StatelessWidget {
             ),
             border: const OutlineInputBorder(),
             prefixIcon: const Icon(Icons.search, color: Colors.white),
-            labelText: 'Logo, website, branding...',
+            labelText: 'Logo, website, thương hiệu...',
             labelStyle: const TextStyle(color: Colors.white),
           ),
         ),
@@ -50,7 +50,7 @@ class SearchCategoriesTextField extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all(Colors.white)),
             child: const Center(
               child: Text(
-                'Get started',
+                'Bắt đầu',
                 style: TextStyle(
                     color: Color(BuiltinColor.blue_gradient_01),
                     fontWeight: FontWeight.w900),
@@ -68,7 +68,7 @@ class SearchCategoriesTextField extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 3.0),
           child: Text(
-            'See creativity at work',
+            'Khám phá vùng trời sáng tạo',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
         ),
@@ -204,45 +204,50 @@ class TrendingTab extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     List<Map<String, String>> trendingItems = [
-      {'Branding design': 'assets/images/intro/trending/branding-design.png'},
       {
-        'Logo & website':
+        'Thiết kế thương hiệu':
+            'assets/images/intro/trending/branding-design.png'
+      },
+      {
+        'Thiết kế logo':
             'assets/images/intro/trending/logo-website-squarespace.png'
       },
-      {'Website builders': 'assets/images/intro/trending/web-builder.png'},
+      {'Thiết kế website': 'assets/images/intro/trending/web-builder.png'},
       {
-        'Logo & brand identity pack':
+        'Logo và thương hiệu':
             'assets/images/intro/trending/brand-identity-pack.png'
       },
       {
-        'Product packaging':
+        'Thiết kế bao bì':
             'assets/images/intro/trending/product-packaging-design.png'
       },
-      {'T-shirt': 'assets/images/intro/trending/t-shirt-design.png'},
-      {
-        'Illustration or graphics':
-            'assets/images/intro/trending/illustrations.png'
-      },
-      {'Book cover': 'assets/images/intro/trending/book-cover-design.png'},
-      {'Show more': 'assets/images/intro/trending/categories.png'}
+      {'Thiết kế áo': 'assets/images/intro/trending/t-shirt-design.png'},
+      {'Hình minh họa': 'assets/images/intro/trending/illustrations.png'},
+      {'Bìa sách': 'assets/images/intro/trending/book-cover-design.png'},
+      {'Xem thêm': 'assets/images/intro/trending/categories.png'}
     ];
     var width = Responsive.isDesktop(context) ? 1920.0 : 450.0;
-    var imgHeight = Responsive.isDesktop(context) ? 150.0 : 100.0;
-    var paddingHorizontal = Responsive.isDesktop(context) ? 35.0 : 1.0;
+    var imgHeight = Responsive.isDesktop(context) ? 80.0 : 50.0;
+    var paddingHorizontal = Responsive.isDesktop(context) ? 60.0 : 1.0;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Trending', style: Style.h6Bold),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context) ? 22.0 : 5.0),
+            child: Text('Xu hướng', style: Style.h6Bold),
+          ),
           SizedBox(
             height: 200.0,
             width: width,
             child: ListView(
+              shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               children: trendingItems
-                  .map((item) =>
-                      renderTrendingImageItem(size.width, item, imgHeight))
+                  .map((item) => renderTrendingImageItem(
+                      context, size.width, item, imgHeight))
                   .toList(),
             ),
           )
@@ -251,18 +256,31 @@ class TrendingTab extends StatelessWidget {
     );
   }
 
-  Padding renderTrendingImageItem(pageWidth, imageItem, imgHeight) {
+  Padding renderTrendingImageItem(context, pageWidth, imageItem, imgHeight) {
     String title = '';
     String imgSrc = '';
     imageItem.forEach((k, v) => {title = k, imgSrc = v});
+    double horizontalPadding = Responsive.isDesktop(context) ? 25.0 : 10.0;
+    double verticalPadding = Responsive.isDesktop(context) ? 25.0 : 10.0;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 1.0),
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding, vertical: verticalPadding),
       child: SizedBox(
         height: imgHeight,
         child: Column(
           children: [
-            InkWell(child: Image.asset(imgSrc, height: imgHeight)),
-            Text(title),
+            InkWell(
+              child: Image.asset(imgSrc, height: imgHeight),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.7),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -285,8 +303,11 @@ class StatisticInfoSlider extends StatelessWidget {
       width: width,
       child: CarouselSlider(
         options: CarouselOptions(height: 400.0, autoPlay: true),
-        items: ['9,920,123 designs', '11,123 3D designs', '221,021 connections']
-            .map((i) {
+        items: [
+          '9,920,123 thiết kế',
+          '11,123 thiết kế 3D',
+          '221,021 cuộc trò chuyện'
+        ].map((i) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
@@ -344,7 +365,7 @@ class WelcomeToLogin extends StatelessWidget {
       child: TextButton(
         onPressed: () {},
         child: const Text(
-          'Designer, join now',
+          'Designer, tham gia ngay',
           style: TextStyle(
               color: Color(BuiltinColor.blue_gradient_01),
               fontWeight: FontWeight.bold,
@@ -367,7 +388,7 @@ class WelcomeToLogin extends StatelessWidget {
       child: TextButton(
         onPressed: () {},
         child: const Text(
-          'Find your talent',
+          'Tìm kiếm designer',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
         ),
@@ -452,73 +473,60 @@ class FooterComponent {
   }
 
   static Row renderResourceFooter() {
-    return Row(children: [
-      SizedBox(
-        width: 500,
-        child: Column(
+    return Row(
+      children: [
+        SizedBox(
+          width: 500,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset('assets/images/weblogo.png', width: 300.0),
+              Row(
+                children: [
+                  Image.asset('assets/images/appstore.png', scale: 3.0),
+                  Image.asset('assets/images/chplay.png', scale: 4.0),
+                ],
+              ),
+              const Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula efficitur nibh non commodo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In nibh neque, commodo eget dui ac, hendrerit commodo risus. In lobortis rutrum velit, eget efficitur nibh laoreet vitae. Duis vel elit mollis nulla tincidunt auctor at in justo. Sed viverra diam arcu, eu elementum quam porttitor commodo.'),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 120.0,
+        ),
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset('assets/images/weblogo.png', width: 300.0),
-            Row(
-              children: [
-                Image.asset('assets/images/appstore.png', scale: 3.0),
-                Image.asset('assets/images/chplay.png', scale: 4.0),
-              ],
-            ),
-            const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula efficitur nibh non commodo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In nibh neque, commodo eget dui ac, hendrerit commodo risus. In lobortis rutrum velit, eget efficitur nibh laoreet vitae. Duis vel elit mollis nulla tincidunt auctor at in justo. Sed viverra diam arcu, eu elementum quam porttitor commodo.'),
+          children: const [
+            Text('Công ty', style: Style.stringBold),
+            Text('Về chúng tôi'),
+            Text('Hợp đồng'),
+            Text('Giao dịch'),
+            Text('Mô hình trước đó'),
+            Text('Trên truyền thông'),
+            Text('Lời xác thực'),
           ],
         ),
-      ),
-      const SizedBox(
-        width: 120.0,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Company', style: Style.stringBold),
-          Text('About'),
-          Text('Contact'),
-          Text('Careers'),
-          Text('Team'),
-          Text('Press releases'),
-          Text('In the media'),
-          Text('Testimonials'),
-        ],
-      ),
-      const SizedBox(
-        width: 120.0,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Design services', style: Style.stringBold),
-          Text('Find a designer'),
-          Text('Discover inspiration'),
-          Text('Pricing'),
-          Text('Agencies'),
-          Text('Designer resources'),
-          Text('Featured partners'),
-          Text('Help'),
-        ],
-      ),
-      const SizedBox(
-        width: 120.0,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Get a design', style: Style.stringBold),
-          Text('Logo design'),
-          Text('Business card'),
-          Text('Web page design'),
-          Text('Brand guide'),
-          Text('Packaging design'),
-          Text('T-shirt design'),
-          Text('Book cover design'),
-        ],
-      ),
-    ]);
+        const SizedBox(
+          width: 120.0,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text('Dịch vụ thiết kế', style: Style.stringBold),
+            Text('Tìm kiếm nhà thiết kế của bạn'),
+            Text('Khám phá sản phẩm sáng tạo'),
+            Text('Giá cả'),
+            Text('Tài nguyên thiết kế'),
+            Text('Đối tác'),
+            Text('Trợ giúp'),
+          ],
+        ),
+        const SizedBox(
+          width: 120.0,
+        ),
+      ],
+    );
   }
 }
 
@@ -548,9 +556,9 @@ class SignUpButton extends StatelessWidget {
               Image.asset('assets/images/google.png', width: 16.0),
               const SizedBox(width: 5.0),
               if (Responsive.isDesktop(context))
-                const Text('Sign up with Fpt email', style: Style.stringBold),
+                const Text('Đăng kí qua email Fpt', style: Style.stringBold),
               if (!Responsive.isDesktop(context))
-                const Text('Sign up', style: Style.stringBold),
+                const Text('Đăng kí', style: Style.stringBold),
             ],
           ),
         ),
