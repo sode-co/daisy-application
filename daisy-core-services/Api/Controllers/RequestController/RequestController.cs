@@ -72,11 +72,11 @@ namespace Api.Controllers.RequestController
                 User freelancer = work.UserRepository.Get(freelancerId);
                 if (freelancer != null)
                 {
-                    //System.Collections.ArrayList<RequestVM> arrayListRequestVM = new ArrayList<RequestVM>();
-                    System.Collections.Generic.IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByCategoryId(categoryId);
+                    IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByCategoryId(categoryId);
                     return Ok(requestVMs);
                 }
             }
+
             return NotFound();
         }
 

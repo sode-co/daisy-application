@@ -23,9 +23,9 @@ namespace Api.Controllers.UserController
 
         [Authorize]
         [HttpPut("profile")]
-        public IActionResult UpdateDesignerProfile([FromBody]UserExposeModel userVM)
+        public IActionResult UpdateDesignerProfile([FromBody] UserExposeModel userVM)
         {
-            int designerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
+            int designerId = ((UserExposeModel) HttpContext.Items["User"]).Id;
 
             using (var work = _unitOfWorkFactory.Get)
             {
@@ -50,7 +50,7 @@ namespace Api.Controllers.UserController
         [HttpPost("portfolio")]
         public IActionResult CreatePortfolio([FromBody] PortfolioVM portfolioVM)
         {
-            int designerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
+            int designerId = ((UserExposeModel) HttpContext.Items["User"]).Id;
 
             using (var work = _unitOfWorkFactory.Get)
             {
@@ -74,9 +74,9 @@ namespace Api.Controllers.UserController
 
         [Authorize]
         [HttpPost("job-application")]
-        public IActionResult CreateJobApplication([FromBody]JobApplicationVM jobApplicationVM)
+        public IActionResult CreateJobApplication([FromBody] JobApplicationVM jobApplicationVM)
         {
-            int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
+            int freelancerId = ((UserExposeModel) HttpContext.Items["User"]).Id;
 
             using (var work = _unitOfWorkFactory.Get)
             {
@@ -101,8 +101,9 @@ namespace Api.Controllers.UserController
                         work.Save();
                         return Ok();
                     }
-                    return NotFound();
+
                 }
+
                 return NotFound();
             }
         }
