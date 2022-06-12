@@ -36,5 +36,11 @@ namespace DataAccess.Repositories.Requests
             }));
             return requestVMs;
         }
+
+        public IEnumerable<Request> GetRequestsByTitle(string title)
+        {
+            List<Request> requests = new List<Request>();
+            return _dbContext.Requests.Where(req => req.Title.Equals(title)).ToList();
+        }
     }
 }

@@ -83,5 +83,25 @@ namespace Api.Controllers.RequestController
                 
             return Ok();
         }
+
+        [HttpGet("/{title}")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        [Authorize(Policy = ROLE.DESIGNER)]
+        public IActionResult FindRequestsByTitle(string title)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                // Get All Requests which given title 
+                IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByTitle(title).Select(reqObj => new RequestVM()
+                {
+                    categoryId = reqObj.Category.Id,
+                    title = reqObj.Title,
+                    description = reqObj.Description,
+                    status = reqObj.Status
+                });
+
+                return Ok(requestVMs);
+            }
+        }
     }
 }
