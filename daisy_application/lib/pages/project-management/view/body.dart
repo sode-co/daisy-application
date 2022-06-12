@@ -35,6 +35,19 @@ class _ProjectManagementBodyState extends State<ProjectManagementBody> {
             const Header(),
             Padding(
               padding: EdgeInsets.symmetric(
+                  horizontal: horizontalPadding,
+                  vertical: verticalPadding * 0.2),
+              child: const Text(
+                'Quản lí dự án',
+                style: TextStyle(
+                  fontSize: 16.5,
+                  color: Color(BuiltinColor.blue_gradient_01),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
                   horizontal: horizontalPadding, vertical: verticalPadding),
               child: Container(
                 decoration:
@@ -133,7 +146,7 @@ class _ProjectManagementBodyState extends State<ProjectManagementBody> {
 
   List<Project> getEmployeeData() {
     return [
-      Project('Thiet ke logo', 'Logo & Webdesign', '22/10/2001', 'en',
+      Project('Thiet ke logo ne', 'Logo & Webdesign', '22/10/2001', 'en',
           'Description Lorem Ipsum Lorem Ipsum Lorem Ipsum', 221099.0),
       Project('Thiet ke logo', 'Logo & Webdesign', '22/10/2001', 'en',
           'Description Lorem Ipsum Lorem Ipsum Lorem Ipsum', 221099.0),

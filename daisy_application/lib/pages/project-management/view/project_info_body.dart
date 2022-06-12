@@ -1,4 +1,8 @@
+import 'package:daisy_application/pages/admin/responsive.dart';
+import 'package:daisy_application/pages/admin/screens/dashboard/components/header.dart';
+import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/project-management/view/body.dart';
+import 'package:daisy_application/pages/project-management/view/project_info_update_form.dart';
 import 'package:flutter/material.dart';
 
 class ProjectInfoBody extends StatefulWidget {
@@ -16,18 +20,40 @@ class _ProjectInfoBodyState extends State<ProjectInfoBody> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 1000,
-      width: 200,
-      child: Column(
-        children: [
-          Text(_project.name),
-          Text(_project.category),
-          Text(_project.description),
-          Text(
-            _project.budget.toString(),
+    var horizontalPadding = Responsive.isDesktop(context) ? 20.0 : 0.0;
+    var verticalPadding = Responsive.isDesktop(context) ? 25.0 : 5.0;
+
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: horizontalPadding, vertical: verticalPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Header(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: horizontalPadding, vertical: verticalPadding),
+                child: Column(
+                  children: [
+                    Text(
+                      'Thông tin dự án ${_project.name}',
+                      style: const TextStyle(
+                          fontSize: 16.5,
+                          fontWeight: FontWeight.w600,
+                          color: Color(BuiltinColor.blue_gradient_01)),
+                    ),
+                    SizedBox(height: verticalPadding),
+                    ProjectInfoUpdateForm(
+                      project: _project,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
