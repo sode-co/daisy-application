@@ -61,5 +61,27 @@ namespace Api.Controllers.RequestController
                 return Ok();
             }
         }
+
+        [HttpPut("/{requestId}")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public IActionResult UpdateRequest([FromBody] RequestVM requestVM, int requestId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                // Get Request obj from DB
+                Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
+                
+                // Update data of each field
+                request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
+                request.Description = requestVM.description;
+                request.Title = requestVM.title;
+                request.Status = requestVM.status;
+
+                // Save
+                work.Save();
+            }
+                
+            return Ok();
+        }
     }
 }
