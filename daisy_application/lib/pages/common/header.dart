@@ -28,7 +28,8 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                     Navigator.pushNamed(context, '/categories');
                   }),
               TextButton(
-                  child: const Text('Cách hoạt động', style: Style.stringBold),
+                  child: const Text('Cách thức hoạt động',
+                      style: Style.stringBold),
                   onPressed: () {}),
               TextButton(
                   child:

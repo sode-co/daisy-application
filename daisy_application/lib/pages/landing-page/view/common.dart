@@ -214,11 +214,11 @@ class TrendingTab extends StatelessWidget {
       },
       {'Thiết kế website': 'assets/images/intro/trending/web-builder.png'},
       {
-        'Bộ logo và thương hiệu':
+        'Logo và thương hiệu':
             'assets/images/intro/trending/brand-identity-pack.png'
       },
       {
-        'Thiết kế sản phẩm':
+        'Thiết kế bao bì':
             'assets/images/intro/trending/product-packaging-design.png'
       },
       {'Thiết kế áo': 'assets/images/intro/trending/t-shirt-design.png'},
@@ -556,7 +556,7 @@ class SignUpButton extends StatelessWidget {
               Image.asset('assets/images/google.png', width: 16.0),
               const SizedBox(width: 5.0),
               if (Responsive.isDesktop(context))
-                const Text('Đăng kí với Fpt email', style: Style.stringBold),
+                const Text('Đăng kí qua email Fpt', style: Style.stringBold),
               if (!Responsive.isDesktop(context))
                 const Text('Đăng kí', style: Style.stringBold),
             ],

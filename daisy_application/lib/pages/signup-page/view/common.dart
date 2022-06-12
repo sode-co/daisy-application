@@ -111,7 +111,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                   Image.asset('assets/images/google.png', width: 16),
                   const SizedBox(width: 5),
                   Text(
-                    'Đăng kí với Fpt email',
+                    'Đăng kí qua email Fpt',
                     style: TextStyle(
                         color: textColor,
                         fontWeight: FontWeight.w800,
