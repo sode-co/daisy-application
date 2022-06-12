@@ -32,7 +32,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                   onPressed: () {}),
               TextButton(
                   child:
-                      const Text('Tìm kiếm tài năng', style: Style.stringBold),
+                      const Text('Tìm kiếm designer', style: Style.stringBold),
                   onPressed: () {}),
             ])
           : Padding(

@@ -34,7 +34,7 @@ class BottomNavBar extends StatelessWidget {
                         onPressed: () {},
                       ),
                       IconButton(
-                        tooltip: 'Tìm kiếm tài năng của bạn',
+                        tooltip: 'Tìm kiếm designer',
                         icon: const IconButtomItem(
                             icon: Icons.person_search_outlined),
                         onPressed: () {
