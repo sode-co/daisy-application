@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class Style {
   // Text
-  static const stringBold =
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black);
+  static const stringBold = TextStyle(
+      fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black87);
   static const mediumStringBold =
       TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: Colors.black);
   static var h6Bold = TextStyle(

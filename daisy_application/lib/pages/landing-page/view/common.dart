@@ -224,8 +224,7 @@ class TrendingTab extends StatelessWidget {
       {'Thiết kế áo': 'assets/images/intro/trending/t-shirt-design.png'},
       {'Hình minh họa': 'assets/images/intro/trending/illustrations.png'},
       {'Bìa sách': 'assets/images/intro/trending/book-cover-design.png'},
-      // {'Xem thêm': 'assets/images/intro/trending/categories.png'}
-      {'Xem thêm': 'assets/images/intro/trending/product-packaging-design.png'}
+      {'Xem thêm': 'assets/images/intro/trending/categories.png'}
     ];
     var width = Responsive.isDesktop(context) ? 1920.0 : 450.0;
     var imgHeight = Responsive.isDesktop(context) ? 80.0 : 50.0;
@@ -304,8 +303,11 @@ class StatisticInfoSlider extends StatelessWidget {
       width: width,
       child: CarouselSlider(
         options: CarouselOptions(height: 400.0, autoPlay: true),
-        items: ['9,920,123 designs', '11,123 3D designs', '221,021 connections']
-            .map((i) {
+        items: [
+          '9,920,123 thiết kế',
+          '11,123 thiết kế 3D',
+          '221,021 cuộc trò chuyện'
+        ].map((i) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
@@ -471,73 +473,60 @@ class FooterComponent {
   }
 
   static Row renderResourceFooter() {
-    return Row(children: [
-      SizedBox(
-        width: 500,
-        child: Column(
+    return Row(
+      children: [
+        SizedBox(
+          width: 500,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset('assets/images/weblogo.png', width: 300.0),
+              Row(
+                children: [
+                  Image.asset('assets/images/appstore.png', scale: 3.0),
+                  Image.asset('assets/images/chplay.png', scale: 4.0),
+                ],
+              ),
+              const Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula efficitur nibh non commodo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In nibh neque, commodo eget dui ac, hendrerit commodo risus. In lobortis rutrum velit, eget efficitur nibh laoreet vitae. Duis vel elit mollis nulla tincidunt auctor at in justo. Sed viverra diam arcu, eu elementum quam porttitor commodo.'),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 120.0,
+        ),
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset('assets/images/weblogo.png', width: 300.0),
-            Row(
-              children: [
-                Image.asset('assets/images/appstore.png', scale: 3.0),
-                Image.asset('assets/images/chplay.png', scale: 4.0),
-              ],
-            ),
-            const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula efficitur nibh non commodo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In nibh neque, commodo eget dui ac, hendrerit commodo risus. In lobortis rutrum velit, eget efficitur nibh laoreet vitae. Duis vel elit mollis nulla tincidunt auctor at in justo. Sed viverra diam arcu, eu elementum quam porttitor commodo.'),
+          children: const [
+            Text('Công ty', style: Style.stringBold),
+            Text('Về chúng tôi'),
+            Text('Hợp đồng'),
+            Text('Giao dịch'),
+            Text('Mô hình trước đó'),
+            Text('Trên truyền thông'),
+            Text('Lời xác thực'),
           ],
         ),
-      ),
-      const SizedBox(
-        width: 120.0,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Company', style: Style.stringBold),
-          Text('About'),
-          Text('Contact'),
-          Text('Careers'),
-          Text('Team'),
-          Text('Press releases'),
-          Text('In the media'),
-          Text('Testimonials'),
-        ],
-      ),
-      const SizedBox(
-        width: 120.0,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Design services', style: Style.stringBold),
-          Text('Find a designer'),
-          Text('Discover inspiration'),
-          Text('Pricing'),
-          Text('Agencies'),
-          Text('Designer resources'),
-          Text('Featured partners'),
-          Text('Help'),
-        ],
-      ),
-      const SizedBox(
-        width: 120.0,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Get a design', style: Style.stringBold),
-          Text('Logo design'),
-          Text('Business card'),
-          Text('Web page design'),
-          Text('Brand guide'),
-          Text('Packaging design'),
-          Text('T-shirt design'),
-          Text('Book cover design'),
-        ],
-      ),
-    ]);
+        const SizedBox(
+          width: 120.0,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text('Dịch vụ thiết kế', style: Style.stringBold),
+            Text('Tìm kiếm nhà thiết kế của bạn'),
+            Text('Khám phá sản phẩm sáng tạo'),
+            Text('Giá cả'),
+            Text('Tài nguyên thiết kế'),
+            Text('Đối tác'),
+            Text('Trợ giúp'),
+          ],
+        ),
+        const SizedBox(
+          width: 120.0,
+        ),
+      ],
+    );
   }
 }
 
