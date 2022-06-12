@@ -58,11 +58,11 @@ namespace Api.Controllers.RequestController
 
                 work.RequestRepository.Add(parentRequest);
                 work.Save();
-                return Ok();
+                return Json(new { message = "ok" });
             }
         }
 
-        [HttpPut("/{requestId}")]
+        [HttpPut("v1/requests/{requestId}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
         public IActionResult UpdateRequest([FromBody] RequestVM requestVM, int requestId)
         {
@@ -80,11 +80,11 @@ namespace Api.Controllers.RequestController
                 // Save
                 work.Save();
             }
-                
-            return Ok();
+
+            return Json(new { message = "ok" });
         }
 
-        [HttpGet("/{title}")]
+        [HttpGet("v1/requests/{title}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
         [Authorize(Policy = ROLE.DESIGNER)]
         public IActionResult FindRequestsByTitle(string title)
@@ -100,8 +100,10 @@ namespace Api.Controllers.RequestController
                     status = reqObj.Status
                 });
 
-                return Ok(requestVMs);
+                return Json(requestVMs);
             }
         }
+
+
     }
 }
