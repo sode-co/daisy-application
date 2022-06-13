@@ -106,6 +106,23 @@ namespace Api.Controllers.RequestController
             }
         }
 
+        [Authorize]
+        [HttpGet("requests/{categoryId}")]
+        public IActionResult FindRequestsByCategoryId(int categoryId)
+        {
+            int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                User freelancer = work.UserRepository.Get(freelancerId);
+                if (freelancer != null)
+                {
+                    IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByCategoryId(categoryId);
+                    return Ok(requestVMs);
+                }
+            }
+
+            return NotFound();
+        }
 
     }
 }
