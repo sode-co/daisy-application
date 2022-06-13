@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GrpcServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -48,6 +49,7 @@ namespace GrpcServices
             app.UseCors("AllowAll");
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGrpcService<UploadFileService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
                 endpoints.MapGrpcService<HealthCheckServiceImp>().EnableGrpcWeb().RequireCors("AllowAll"); ;
                 endpoints.MapGet("/", async context =>
                 {
