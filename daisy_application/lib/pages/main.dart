@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/common/platform_helper.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
+import 'package:daisy_application/core_services/grpc/file_transfer/file_upload_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/pages/discovery-page/discovery.dart';
@@ -13,7 +15,9 @@ import 'package:daisy_application/pages/signup-page/view/signup.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -26,6 +30,7 @@ Future<void> main() async {
   }
 
   setupDependencies();
+
   Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
   Timer.periodic(const Duration(seconds: 10), (Timer t) async {
@@ -49,12 +54,26 @@ Future<void> main() async {
   });
 
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
+
+  Future _pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
+      await FileUploadGrpcClient().performUpload(imageTemp);
+    } on PlatformException catch (e) {
+      Debug.log(
+          'File picker', 'An error occurs while picking image', e.message);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -69,7 +88,14 @@ class MyApp extends StatelessWidget {
           '/categories': (context) => const DiscoveryPage(),
           '/signup': (context) => const SignUp(),
         },
-        home: const LandingPage(),
+        home: MaterialButton(
+            child: Text(
+              'Upload',
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: (() async {
+              await _pickImage();
+            })),
       ),
     );
   }
