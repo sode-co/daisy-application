@@ -3,6 +3,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using static Api.Common.Constants;
 
 namespace Api.Controllers.ArtWorkController
 {
@@ -30,6 +31,19 @@ namespace Api.Controllers.ArtWorkController
                 }
 
                 return artWorks;
+            }
+        }
+
+        [HttpDelete("v1/artworks/{id}")]
+        [Authorize(Policy = ROLE.DESIGNER)]
+        public IActionResult DeleteArtworkById(int id)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(wa => wa.Id == id);
+                artWork.DeletedAt = System.DateTime.Now;
+                work.Save();
+                return Json(new { message = "ok" });
             }
         }
     }

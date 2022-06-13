@@ -76,6 +76,7 @@ namespace Api.Controllers.RequestController
                 request.Description = requestVM.description;
                 request.Title = requestVM.title;
                 request.Status = requestVM.status;
+                request.Budget = requestVM.budget;
 
                 // Save
                 work.Save();
@@ -97,7 +98,8 @@ namespace Api.Controllers.RequestController
                     categoryId = reqObj.Category.Id,
                     title = reqObj.Title,
                     description = reqObj.Description,
-                    status = reqObj.Status
+                    status = reqObj.Status,
+                    budget = reqObj.Budget
                 });
 
                 return Json(requestVMs);
