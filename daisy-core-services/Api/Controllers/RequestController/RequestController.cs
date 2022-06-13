@@ -62,15 +62,38 @@ namespace Api.Controllers.RequestController
             }
         }
 
-        [HttpPut("v1/requests/{requestId}")]
+        [HttpPatch("v1/requests/{requestId}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
-        public IActionResult UpdateRequest([FromBody] RequestVM requestVM, int requestId)
+        public IActionResult UpdateAllFieldRequest([FromBody] RequestVM requestVM, int requestId)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
                 // Get Request obj from DB
                 Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
                 
+                // Update data of each field
+                request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
+                request.Description = requestVM.description != null ? requestVM.description : request.Description;
+                request.Title = requestVM.title != null ? requestVM.title : request.Title;
+                request.Status = requestVM.status != null ? requestVM.status : request.Status;
+                request.Budget = requestVM.budget != null ? requestVM.budget : request.Budget;
+
+                // Save
+                work.Save();
+            }
+
+            return Json(new { message = "ok" });
+        }
+
+        [HttpPut("v1/requests/{requestId}")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public IActionResult UpdateFieldsRequest([FromBody] RequestVM requestVM, int requestId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                // Get Request obj from DB
+                Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
+
                 // Update data of each field
                 request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
                 request.Description = requestVM.description;
@@ -85,7 +108,7 @@ namespace Api.Controllers.RequestController
             return Json(new { message = "ok" });
         }
 
-        [HttpGet("v1/requests/{title}")]
+        [HttpGet("v1/title/{title}/requests")]
         [Authorize(Policy = ROLE.CUSTOMER)]
         [Authorize(Policy = ROLE.DESIGNER)]
         public IActionResult FindRequestsByTitle(string title)
@@ -107,7 +130,7 @@ namespace Api.Controllers.RequestController
         }
 
         [Authorize]
-        [HttpGet("requests/{categoryId}")]
+        [HttpGet("v1/category/{categoryId}/requests")]
         public IActionResult FindRequestsByCategoryId(int categoryId)
         {
             int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
