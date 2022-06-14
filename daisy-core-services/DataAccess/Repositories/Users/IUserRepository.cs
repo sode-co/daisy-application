@@ -15,8 +15,9 @@ namespace DataAccess.Repositories.Users
         void CreateUser(User user);
         User GetUser(int id);
         IEnumerable<User> GetUsers();
+        IEnumerable<User> GetUsersByName(string name);
         void UpdateUser(User user);
         void DeleteUser(User user);
-        IEnumerable<User> GetUsersByName(string name);
+       
     }
 }
