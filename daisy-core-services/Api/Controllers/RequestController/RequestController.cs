@@ -68,7 +68,6 @@ namespace Api.Controllers.RequestController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                // Get Request obj from DB
                 Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
                 
                 request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
