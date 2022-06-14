@@ -89,7 +89,6 @@ namespace Api.Controllers.RequestController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                // Get Request obj from DB
                 Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
 
                 // Update data of each field
