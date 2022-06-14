@@ -71,7 +71,6 @@ namespace Api.Controllers.RequestController
                 // Get Request obj from DB
                 Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
                 
-                // Update data of each field
                 request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
                 request.Description = requestVM.description != null ? requestVM.description : request.Description;
                 request.Title = requestVM.title != null ? requestVM.title : request.Title;
