@@ -62,7 +62,7 @@ namespace Api.Controllers.RequestController
             }
         }
 
-        [HttpPatch("v1/requests/{requestId}")]
+        [HttpPatch("{requestId}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
         public IActionResult UpdateAllFieldRequest([FromBody] RequestVM requestVM, int requestId)
         {
@@ -82,7 +82,7 @@ namespace Api.Controllers.RequestController
             return Json(new { message = "ok" });
         }
 
-        [HttpPut("v1/requests/{requestId}")]
+        [HttpPut("{requestId}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
         public IActionResult UpdateFieldsRequest([FromBody] RequestVM requestVM, int requestId)
         {
@@ -103,7 +103,7 @@ namespace Api.Controllers.RequestController
             return Json(new { message = "ok" });
         }
 
-        [HttpGet("v1/title/{title}/requests")]
+        [HttpGet("title/{title}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
         [Authorize(Policy = ROLE.DESIGNER)]
         public IActionResult FindRequestsByTitle(string title)
@@ -124,7 +124,7 @@ namespace Api.Controllers.RequestController
         }
 
         [Authorize]
-        [HttpGet("v1/category/{categoryId}/requests")]
+        [HttpGet("category/{categoryId}")]
         public IActionResult FindRequestsByCategoryId(int categoryId)
         {
             int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;

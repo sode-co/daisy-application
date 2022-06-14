@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Api.Common;
+using AutoMapper;
 using DataAccess.UnitOfWork;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,43 @@ namespace Api.Controllers.JobApplicationController
             _unitOfWorkFactory = unitOfWorkFactory;
             _mapper = mapper;
         }
+
+        [Authorize]
+        [HttpPost()]
+        public IActionResult CreateJobApplication([FromBody] JobApplicationVM jobApplicationVM)
+        {
+            int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
+
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                User freelancer = work.UserRepository.Get(freelancerId);
+                Request request;
+                if (freelancer != null)
+                {
+                    request = work.RequestRepository.Get(jobApplicationVM.RequestId);
+                    if (request != null)
+                    {
+                        work.JobApplicationRepository.Add(new JobApplication()
+                        {
+                            CreatedAt = DateTime.Now,
+                            Request = request,
+                            Freelancer = freelancer,
+                            Description = jobApplicationVM.Description,
+                            PreferredLanguage = jobApplicationVM.PreferedLanguage,
+                            Timeline = jobApplicationVM.Timeline,
+                            Status = Constants.STATUS_JOB_APPLICATION.PENDING,
+                            OfferedPrice = jobApplicationVM.Budget
+                        });
+                        work.Save();
+                        return Ok();
+                    }
+
+                }
+
+                return NotFound();
+            }
+        }
+
         // GET: v1/applications/list
         [HttpGet("list")]
         [Authorize(Policy = ROLE.DESIGNER)]

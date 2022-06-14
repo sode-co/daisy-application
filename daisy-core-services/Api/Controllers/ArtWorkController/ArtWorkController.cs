@@ -34,14 +34,14 @@ namespace Api.Controllers.ArtWorkController
             }
         }
 
-        [HttpDelete("v1/artworks/{id}")]
+        [HttpDelete("{artworkId}")]
         [Authorize(Policy = ROLE.DESIGNER)]
         public IActionResult DeleteArtworkById(int id)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
                 ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(wa => wa.Id == id);
-                if (artwork is null) return NotFound();
+                if (artWork is null) return NotFound();
                 
                 artWork.DeletedAt = System.DateTime.Now;
                 work.Save();
