@@ -112,7 +112,6 @@ namespace Api.Controllers.RequestController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                // Get All Requests which given title 
                 IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByTitle(title).Select(reqObj => new RequestVM()
                 {
                     categoryId = reqObj.Category.Id,
