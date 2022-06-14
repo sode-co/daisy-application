@@ -41,6 +41,8 @@ namespace Api.Controllers.ArtWorkController
             using (var work = _unitOfWorkFactory.Get)
             {
                 ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(wa => wa.Id == id);
+                if (artwork is null) return NotFound();
+                
                 artWork.DeletedAt = System.DateTime.Now;
                 work.Save();
                 return Json(new { message = "ok" });
