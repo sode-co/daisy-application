@@ -1,16 +1,15 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:io' as nativeFile;
+// import 'dart:html' as webFile;
+import 'dart:typed_data';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/common/file_utils.dart';
 import 'package:daisy_application/common/platform_helper.dart';
-import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
 import 'package:daisy_application/core_services/grpc/file_transfer/file_upload_grpc_client.dart';
-import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
-import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/pages/discovery-page/discovery.dart';
-import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/signup-page/view/signup.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,7 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker_web/image_picker_web.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,25 +34,25 @@ Future<void> main() async {
 
   Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
-  Timer.periodic(const Duration(seconds: 10), (Timer t) async {
-    HealthCheckGrpcClient client = locator.get();
-    final result = await client.performNetworkCheck();
-    if (result.failureType == FAILURE_TYPE.NONE) {
-      Debug.log('$ns-grpc', 'Grpc connection ok');
-    } else {
-      Error.log('$ns-grpc', 'Grpc connection error');
-    }
+  // Timer.periodic(const Duration(seconds: 10), (Timer t) async {
+  //   HealthCheckGrpcClient client = locator.get();
+  //   final result = await client.performNetworkCheck();
+  //   if (result.failureType == FAILURE_TYPE.NONE) {
+  //     Debug.log('$ns-grpc', 'Grpc connection ok');
+  //   } else {
+  //     Error.log('$ns-grpc', 'Grpc connection error');
+  //   }
 
-    HealthCheckRestApi healthCheckApi = locator.get();
-    final response = (await healthCheckApi.get().Value());
-    if (response.failureType != FAILURE_TYPE.NONE) {
-      Error.log('$ns-http', 'Failed when perform network check with status',
-          response.failureType.name);
-    } else {
-      final data = response.data;
-      Debug.log('$ns-http', 'Network check with result', data.message);
-    }
-  });
+  //   HealthCheckRestApi healthCheckApi = locator.get();
+  //   final response = (await healthCheckApi.get().Value());
+  //   if (response.failureType != FAILURE_TYPE.NONE) {
+  //     Error.log('$ns-http', 'Failed when perform network check with status',
+  //         response.failureType.name);
+  //   } else {
+  //     final data = response.data;
+  //     Debug.log('$ns-http', 'Network check with result', data.message);
+  //   }
+  // });
 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -63,11 +64,18 @@ class MyApp extends StatelessWidget {
 
   Future _pickImage() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
+      Uint8List? bytes;
+      if (kIsWeb) {
+        // bytes = await ImagePickerWeb.getImageAsBytes();
+      } else {
+        final xFile =
+            await ImagePicker().pickImage(source: ImageSource.gallery);
+        if (xFile == null) return;
 
-      final imageTemp = File(image.path);
-      await FileUploadGrpcClient().performUpload(imageTemp);
+        bytes = nativeFile.File(xFile.path).toBytes();
+      }
+
+      await FileUploadGrpcClient().performUpload(bytes!);
     } on PlatformException catch (e) {
       Debug.log(
           'File picker', 'An error occurs while picking image', e.message);
