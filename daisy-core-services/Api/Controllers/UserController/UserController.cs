@@ -120,5 +120,18 @@ namespace Api.Controllers.CustomerController
             }
         }
 
+        [HttpGet("{name}")]
+        public IEnumerable<User> GetUsersByName(string name)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var users = work.UserRepository.GetUsersByName(name);
+                if (users is null)
+                {
+                    return (IEnumerable<User>)NotFound();
+                }
+                return users;
+            }
+        }
     }
 }

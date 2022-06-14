@@ -66,5 +66,11 @@ namespace DataAccess.Repositories.Users
             
         }
 
+        public IEnumerable<User> GetUsersByName(string name)
+        {
+            var userList = _dbContext.Users.ToList().
+                Where(user => user.DisplayName.ToUpper().Contains(name.ToUpper())).ToList();
+            return userList;
+        }
     }
 }
