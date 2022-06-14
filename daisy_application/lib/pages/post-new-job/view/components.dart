@@ -29,13 +29,14 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
   String dropdownValue = 'One';
   List<String> categories = ['One', 'Two', 'Three', 'Four'];
   final _formKey = GlobalKey<FormState>();
+  List<Widget> requestChildren = [];
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      width: 800,
+      width: size.width,
       height: 3000,
       child: Form(
         key: _formKey,
@@ -44,18 +45,18 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('image'),
+                Image.asset('assets/images/post-new-job/general.png',
+                    width: size.width * 0.18),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Việc cần tuyển designer', style: Style.h6Bold),
                     renderDropdownList(
                         'Chọn lĩnh vực cần tuyển', categories, size),
-                    renderTitleTextField(
-                      'Đặt tên cụ thể cho công việc bạn cần tuyển',
-                      'Tên dự án',
-                      1,
-                      size,
+                    const CustomTextField(
+                      fieldName: 'Đặt tên cụ thể cho công việc bạn cần tuyển',
+                      label: 'Tên dự án',
+                      maxLines: 1,
                     ),
                   ],
                 ),
@@ -64,7 +65,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('image'),
+                Image.asset('assets/images/post-new-job/description.png',
+                    width: size.width * 0.2),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,18 +77,17 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                             style: Style.h6Bold),
                       ),
                     ),
-                    renderTitleTextField(
-                      'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
-                      'Mô tả dự án',
-                      12,
-                      size,
+                    const CustomTextField(
+                      fieldName:
+                          'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
+                      label: 'Mô tả dự án',
+                      maxLines: 12,
                     ),
-                    renderTitleTextField(
-                      'Ngân sách dự án',
-                      'Ngân sách',
-                      1,
-                      size,
-                      (value) {
+                    CustomTextField(
+                      fieldName: 'Ngân sách dự án',
+                      label: 'Ngân sách',
+                      maxLines: 1,
+                      validation: (value) {
                         if (value == null) {
                           return 'Giá trị nhập vào phải là số thập phân???';
                         }
@@ -96,6 +97,17 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                   ],
                 ),
               ],
+            ),
+            IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                setState(
+                  () => {requestChildren.add(const ChildRequestForm())},
+                );
+              },
+            ),
+            Column(
+              children: requestChildren,
             ),
             ElevatedButton(
               onPressed: () {
@@ -113,31 +125,6 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
           ],
         ),
       ),
-    );
-  }
-
-  Column renderTitleTextField(
-      String fieldName, String label, int maxLines, Size size,
-      [String? Function(String?)? validation]) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-            width: size.width * 0.8,
-            child: Flexible(child: Text(fieldName, style: Style.stringText))),
-        SizedBox(
-          width: size.width * 0.8,
-          height: 100,
-          child: TextFormField(
-            validator: validation,
-            maxLines: maxLines,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              labelText: label,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -180,5 +167,60 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
         ),
       ],
     );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final String fieldName;
+  final String label;
+  final int maxLines;
+  final String? Function(String?)? validation;
+
+  const CustomTextField({
+    Key? key,
+    required this.fieldName,
+    required this.label,
+    required this.maxLines,
+    this.validation,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+            width: size.width * 0.8,
+            child: Flexible(child: Text(fieldName, style: Style.stringText))),
+        SizedBox(
+          width: size.width * 0.8,
+          height: 100,
+          child: TextFormField(
+            validator: validation,
+            maxLines: maxLines,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: label,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ChildRequestForm extends StatefulWidget {
+  const ChildRequestForm({Key? key}) : super(key: key);
+
+  @override
+  State<ChildRequestForm> createState() => _ChildRequestFormState();
+}
+
+class _ChildRequestFormState extends State<ChildRequestForm> {
+  @override
+  Widget build(BuildContext context) {
+    return const Text('ChildRequestFormState');
   }
 }

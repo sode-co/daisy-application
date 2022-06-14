@@ -38,7 +38,7 @@ class _PostNewJobState extends State<PostNewJob> with WidgetListener {
       ],
       child: Scaffold(
         appBar: const Header(),
-        body: const PostNewJobForm(),
+        body: const SingleChildScrollView(child: PostNewJobForm()),
         bottomNavigationBar:
             !Responsive.isDesktop(context) ? const BottomNavBar() : null,
       ),
