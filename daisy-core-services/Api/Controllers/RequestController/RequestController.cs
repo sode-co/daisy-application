@@ -98,7 +98,6 @@ namespace Api.Controllers.RequestController
                 request.Status = requestVM.status;
                 request.Budget = requestVM.budget;
 
-                // Save
                 work.Save();
             }
 
