@@ -10,9 +10,23 @@ class CreateNewJobMobileBtn extends StatelessWidget {
       backgroundColor: Colors.white,
       tooltip: 'Find your new talent',
       onPressed: () {
-        Navigator.pushNamed(context, '/postnewjob');
+        Navigator.pushNamed(context, '/post-new-job');
       },
       child: const Icon(Icons.add, size: 28),
     );
+  }
+}
+
+class PostNewJobForm extends StatefulWidget {
+  const PostNewJobForm({Key? key}) : super(key: key);
+
+  @override
+  State<PostNewJobForm> createState() => _PostNewJobFormState();
+}
+
+class _PostNewJobFormState extends State<PostNewJobForm> {
+  @override
+  Widget build(BuildContext context) {
+    return Text('Form');
   }
 }
