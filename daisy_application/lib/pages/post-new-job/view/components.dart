@@ -46,17 +46,14 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset('assets/images/post-new-job/general.png',
-                    width: size.width * 0.18),
+                    width: size.width * 0.2),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Việc cần tuyển designer', style: Style.h6Bold),
-                    renderDropdownList(
-                        'Chọn lĩnh vực cần tuyển', categories, size),
-                    const CustomTextField(
-                      fieldName: 'Đặt tên cụ thể cho công việc bạn cần tuyển',
-                      label: 'Tên dự án',
-                      maxLines: 1,
+                    DropdownList(
+                      categories: categories,
+                      label: 'Chọn lĩnh vực cần tuyển',
                     ),
                   ],
                 ),
@@ -127,12 +124,36 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
       ),
     );
   }
+}
 
-  Column renderDropdownList(String label, List<String> categoris, Size size) {
+class DropdownList extends StatefulWidget {
+  const DropdownList({Key? key, required this.label, required this.categories})
+      : super(key: key);
+  final String label;
+  final List<String> categories;
+
+  @override
+  State<DropdownList> createState() => _DropdownListState(label, categories);
+}
+
+class _DropdownListState extends State<DropdownList> {
+  late String _label;
+  late List<String> _categories;
+  late String dropdownValue;
+  _DropdownListState(label, categories) {
+    _label = label;
+    _categories = categories;
+    dropdownValue = _categories[0];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: Style.stringText),
+        Text(_label, style: Style.stringText),
         SizedBox(
           width: size.width * 0.8,
           height: 50,
@@ -153,7 +174,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                     },
                   );
                 },
-                items: categories.map<DropdownMenuItem<String>>(
+                items: _categories.map<DropdownMenuItem<String>>(
                   (String value) {
                     return DropdownMenuItem<String>(
                       value: value,
