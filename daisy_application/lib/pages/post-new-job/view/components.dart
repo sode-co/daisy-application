@@ -1,4 +1,5 @@
 import 'package:daisy_application/pages/common/colors.dart';
+import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 
@@ -44,119 +45,134 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    double imgWidth =
+        Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.18;
+    double childItemPadding =
+        Responsive.isDesktop(context) ? size.width * 0.0 : size.width * 0.18;
+    double formPaddingHorizontal =
+        Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.005;
+    double formPaddingVertical =
+        Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.08;
     return SizedBox(
       width: size.width,
       height: 3000,
       child: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset('assets/images/post-new-job/general.png',
-                    width: size.width * 0.2),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Việc cần tuyển designer', style: Style.h6Bold),
-                    CustomTextField(
-                      fieldName: 'Đặt tên cụ thể cho công việc cần tuyển',
-                      label: 'Tên dự án',
-                      maxLines: 1,
-                      validation: (value) {
-                        if (value == null) {
-                          return 'Giá trị nhập vào phải là số thập phân???';
-                        }
-                        return null;
-                      },
-                    ),
-                    DropdownList(
-                      categories: categories,
-                      label: 'Chọn lĩnh vực cần tuyển',
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset('assets/images/post-new-job/description.png',
-                    width: size.width * 0.2),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: size.width * 0.8,
-                      child: Flexible(
-                        child: Text('Thông tin đầy đủ về yêu cầu tuyển dụng',
-                            style: Style.h6Bold),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: formPaddingHorizontal, vertical: formPaddingVertical),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: Responsive.isDesktop(context)
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/images/post-new-job/general.png',
+                      width: imgWidth),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Việc cần tuyển designer', style: Style.h6Bold),
+                      CustomTextField(
+                        fieldName: 'Đặt tên cụ thể cho công việc cần tuyển',
+                        label: 'Tên dự án',
+                        maxLines: 1,
+                        validation: (value) {
+                          if (value == null) {
+                            return 'Giá trị nhập vào phải là số thập phân???';
+                          }
+                          return null;
+                        },
                       ),
-                    ),
-                    const CustomTextField(
-                      fieldName:
-                          'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
-                      label: 'Mô tả dự án',
-                      maxLines: 5,
-                    ),
-                    CustomTextField(
-                      fieldName: 'Ngân sách dự án',
-                      label: 'Ngân sách',
-                      maxLines: 1,
-                      validation: (value) {
-                        if (value == null) {
-                          return 'Giá trị nhập vào phải là số thập phân???';
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: () {
-                setState(
-                  () => {
-                    indexRequestChild++,
-                    requestChildren.add(
-                      ChildRequestForm(
-                        index: indexRequestChild,
+                      DropdownList(
+                        categories: categories,
+                        label: 'Chọn lĩnh vực cần tuyển',
                       ),
-                    )
-                  },
-                );
-              },
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: size.width * 0.2),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: requestChildren,
+                    ],
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(height: 20.0),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(130.0, 50.0),
-                primary: const Color(BuiltinColor.blue_gradient_01),
+              Row(
+                crossAxisAlignment: Responsive.isDesktop(context)
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/images/post-new-job/description.png',
+                      width: imgWidth),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.8,
+                        child: Flexible(
+                          child: Text('Thông tin đầy đủ về yêu cầu tuyển dụng',
+                              style: Style.h6Bold),
+                        ),
+                      ),
+                      const CustomTextField(
+                        fieldName:
+                            'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
+                        label: 'Mô tả dự án',
+                        maxLines: 5,
+                      ),
+                      CustomTextField(
+                        fieldName: 'Ngân sách dự án',
+                        label: 'Ngân sách',
+                        maxLines: 1,
+                        validation: (value) {
+                          if (value == null) {
+                            return 'Giá trị nhập vào phải là số thập phân???';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
+              IconButton(
+                icon: const Icon(Icons.add),
+                onPressed: () {
+                  setState(
+                    () => {
+                      indexRequestChild++,
+                      requestChildren.add(
+                        ChildRequestForm(
+                          index: indexRequestChild,
+                        ),
+                      )
+                    },
                   );
-                }
-              },
-              child: const Text('Đăng việc'),
-            ),
-          ],
+                },
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: childItemPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: requestChildren,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(130.0, 50.0),
+                  primary: const Color(BuiltinColor.blue_gradient_01),
+                ),
+                onPressed: () {
+                  // Validate returns true if the form is valid, or false otherwise.
+                  if (_formKey.currentState!.validate()) {
+                    // If the form is valid, display a snackbar. In the real world,
+                    // you'd often call a server or save the information in a database.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')),
+                    );
+                  }
+                },
+                child: const Text('Đăng việc'),
+              ),
+            ],
+          ),
         ),
       ),
     );
