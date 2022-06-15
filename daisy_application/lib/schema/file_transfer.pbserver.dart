@@ -17,10 +17,12 @@ export 'file_transfer.pb.dart';
 
 abstract class UploadServiceBase extends $pb.GeneratedService {
   $async.Future<$0.TransferStatus> upload($pb.ServerContext ctx, $0.Chunk request);
+  $async.Future<$0.DownloadModel> download($pb.ServerContext ctx, $0.DownloadRequest request);
 
   $pb.GeneratedMessage createRequest($core.String method) {
     switch (method) {
       case 'Upload': return $0.Chunk();
+      case 'Download': return $0.DownloadRequest();
       default: throw $core.ArgumentError('Unknown method: $method');
     }
   }
@@ -28,6 +30,7 @@ abstract class UploadServiceBase extends $pb.GeneratedService {
   $async.Future<$pb.GeneratedMessage> handleCall($pb.ServerContext ctx, $core.String method, $pb.GeneratedMessage request) {
     switch (method) {
       case 'Upload': return this.upload(ctx, request as $0.Chunk);
+      case 'Download': return this.download(ctx, request as $0.DownloadRequest);
       default: throw $core.ArgumentError('Unknown method: $method');
     }
   }

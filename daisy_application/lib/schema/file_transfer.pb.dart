@@ -122,6 +122,100 @@ class TransferStatus extends $pb.GeneratedMessage {
   void clearMessage() => clearField(2);
 }
 
+class DownloadModel extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DownloadModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'filetransfer'), createEmptyInstance: create)
+    ..aOM<TransferStatus>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', subBuilder: TransferStatus.create)
+    ..aOM<Chunk>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'data', subBuilder: Chunk.create)
+    ..hasRequiredFields = false
+  ;
+
+  DownloadModel._() : super();
+  factory DownloadModel({
+    TransferStatus? status,
+    Chunk? data,
+  }) {
+    final _result = create();
+    if (status != null) {
+      _result.status = status;
+    }
+    if (data != null) {
+      _result.data = data;
+    }
+    return _result;
+  }
+  factory DownloadModel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DownloadModel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DownloadModel clone() => DownloadModel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DownloadModel copyWith(void Function(DownloadModel) updates) => super.copyWith((message) => updates(message as DownloadModel)) as DownloadModel; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DownloadModel create() => DownloadModel._();
+  DownloadModel createEmptyInstance() => create();
+  static $pb.PbList<DownloadModel> createRepeated() => $pb.PbList<DownloadModel>();
+  @$core.pragma('dart2js:noInline')
+  static DownloadModel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadModel>(create);
+  static DownloadModel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  TransferStatus get status => $_getN(0);
+  @$pb.TagNumber(1)
+  set status(TransferStatus v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
+  @$pb.TagNumber(1)
+  TransferStatus ensureStatus() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  Chunk get data => $_getN(1);
+  @$pb.TagNumber(2)
+  set data(Chunk v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasData() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearData() => clearField(2);
+  @$pb.TagNumber(2)
+  Chunk ensureData() => $_ensure(1);
+}
+
+class DownloadRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DownloadRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'filetransfer'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  DownloadRequest._() : super();
+  factory DownloadRequest() => create();
+  factory DownloadRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DownloadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DownloadRequest clone() => DownloadRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DownloadRequest copyWith(void Function(DownloadRequest) updates) => super.copyWith((message) => updates(message as DownloadRequest)) as DownloadRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DownloadRequest create() => DownloadRequest._();
+  DownloadRequest createEmptyInstance() => create();
+  static $pb.PbList<DownloadRequest> createRepeated() => $pb.PbList<DownloadRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DownloadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DownloadRequest>(create);
+  static DownloadRequest? _defaultInstance;
+}
+
 class UploadServiceApi {
   $pb.RpcClient _client;
   UploadServiceApi(this._client);
@@ -129,6 +223,10 @@ class UploadServiceApi {
   $async.Future<TransferStatus> upload($pb.ClientContext? ctx, Chunk request) {
     var emptyResponse = TransferStatus();
     return _client.invoke<TransferStatus>(ctx, 'UploadService', 'Upload', request, emptyResponse);
+  }
+  $async.Future<DownloadModel> download($pb.ClientContext? ctx, DownloadRequest request) {
+    var emptyResponse = DownloadModel();
+    return _client.invoke<DownloadModel>(ctx, 'UploadService', 'Download', request, emptyResponse);
   }
 }
 
