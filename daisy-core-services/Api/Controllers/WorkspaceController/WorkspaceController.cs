@@ -51,5 +51,17 @@ namespace Api.Controllers.WorkspaceController
                 return result;
             }
         }
+
+        // GET v1/workspaces/project/:projectId
+        [HttpGet("project/{projectId}")]
+        public IEnumerable<WorkspaceVM> GetListWorkspaceOfProject(int projectId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var workspace = work.WorkspaceRepository.GetAll(j => j.Project.Id == projectId, null, "Project,Request,Discussions,Resources");
+                var result = _mapper.Map<IEnumerable<Workspace>, IEnumerable<WorkspaceVM>>(workspace);
+                return result;
+            }
+        }
     }
 }

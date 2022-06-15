@@ -88,7 +88,7 @@ namespace Api.Controllers.ProjectController
             {
                 using (var work = _unitOfWorkFactory.Get)
                 {
-                    work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED, loginUser.Id);
+                    work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED, REQUEST_STATUS.AVAILABLE, loginUser.Id);
                     work.Save();
                     return Json(new { message = "ok" });
                 }
@@ -112,6 +112,30 @@ namespace Api.Controllers.ProjectController
             //    work.Save();
                 return Json(new { message = "ok" });
             //}
+        }
+
+        // GET v1/project/list
+        [HttpGet("list")]
+        public IEnumerable<ProjectVM> GetListAllProject()
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var project = work.ProjectRepository.GetAll(null, null,"Customer,Freelancer,Category,Payment,Request");
+                var result = _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectVM>>(project);
+                return result;
+            }
+        }
+
+        // GET v1/project/title
+        [HttpGet("title/{keyword}")]
+        public IEnumerable<ProjectVM> SearchListProjectByTitle(string keyword)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var project = work.ProjectRepository.GetAll(pro => pro.Request.Title.ToLower().Contains(keyword.ToLower()), null, "Customer,Freelancer,Category,Payment,Request");
+                var result = _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectVM>>(project);
+                return result;
+            }
         }
     }
 }

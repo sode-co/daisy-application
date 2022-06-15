@@ -10,6 +10,6 @@ namespace DataAccess.Repositories.Projects
     public interface IProjectRepository : IRepository<Project>
     {
         public void CreateProjectAndWorkspace(int jobApplicationId, bool isAllowedPublic, string projectStatus, string requestStatus, string parentRequestStatus, int loginUserId);
-        public void DeactivateProject(int projectId, string projectStatus, int loginUserId);
+        public void DeactivateProject(int projectId, string projectStatus, string requestStatus, int loginUserId);
     }
 }

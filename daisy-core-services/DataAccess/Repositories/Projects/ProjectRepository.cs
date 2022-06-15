@@ -74,7 +74,7 @@ namespace DataAccess.Repositories.Projects
             transaction.Commit();
         }
 
-        public void DeactivateProject (int projectId, string projectStatus, int loginUserId)
+        public void DeactivateProject (int projectId, string projectStatus, string requestStatus, int loginUserId)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
             Project pro = _dbContext.Projects.Include(p => p.Request).FirstOrDefault(p => p.Id == projectId);
@@ -84,12 +84,19 @@ namespace DataAccess.Repositories.Projects
             }
             Request req = _dbContext.Requests
                     .Include(r => r.Customer)
+                    .Include(r => r.Items)
                     .FirstOrDefault(r => r.Id == pro.Request.Id);
             if (req.Customer.Id != loginUserId)
             {
                 throw new Exception("You are not the customer of this project!");
             }
             pro.Status = projectStatus;
+            foreach (Request requestItem in req.Items)
+            {
+                requestItem.Status = requestStatus;
+                _dbContext.Requests.Update(requestItem);
+            }
+            req.Status = requestStatus;
             _dbContext.Projects.Update(pro);
             _dbContext.SaveChanges();
             transaction.Commit();

@@ -12,8 +12,8 @@ namespace Utils.Models
     {
         public int Id { get; set; }
         public String Status { get; set; }
-        public virtual Request Request { get; set; }
-        public virtual Project Project { get; set; }
+        public virtual string RequestId { get; set; }
+        public virtual string ProjectId { get; set; }
         public virtual ICollection<Discussion> Discussions { get; set; }
         public virtual ICollection<Resource> Resources { get; set; }
     }
