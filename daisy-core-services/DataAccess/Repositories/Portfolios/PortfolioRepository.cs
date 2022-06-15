@@ -16,5 +16,11 @@ namespace DataAccess.Repositories.Portfolios
         {
             _dbContext = dbContext;
         }
+
+        public void DeletePortfolio(Portfolio portfolio)
+        {
+            portfolio.DeletedAt = DateTime.Now;
+            _dbContext.Portfolios.Update(portfolio);
+        }
     }
 }

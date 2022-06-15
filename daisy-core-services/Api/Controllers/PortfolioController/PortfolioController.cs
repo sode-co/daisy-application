@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Utils.Models;
+using static Api.Common.Constants;
 
 namespace Api.Controllers.PortfolioController
 {
@@ -44,6 +45,25 @@ namespace Api.Controllers.PortfolioController
                 }
 
                 return NotFound();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Policy = ROLE.DESIGNER)]
+        public ActionResult DeletePortfolio(int id)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var deletedPort = work.PortfolioRepository.Get(id);
+
+                if (deletedPort is null)
+                {
+                    return NotFound();
+                }
+
+                work.PortfolioRepository.DeletePortfolio(deletedPort);
+                work.Save();
+                return NoContent();
             }
         }
     }

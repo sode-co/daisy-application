@@ -9,5 +9,6 @@ namespace DataAccess.Repositories.Portfolios
 {
     public interface IPortfolioRepository : IRepository<Portfolio>
     {
+        void DeletePortfolio(Portfolio portfolio);
     }
 }
