@@ -39,29 +39,24 @@ namespace Api.Controllers.JobApplicationController
             {
                 User freelancer = work.UserRepository.Get(freelancerId);
                 Request request;
-                if (freelancer != null)
+                if (freelancer == null) return NotFound();
+
+                request = work.RequestRepository.Get(jobApplicationVM.RequestId);
+                if (request == null) return NotFound();
+
+                work.JobApplicationRepository.Add(new JobApplication()
                 {
-                    request = work.RequestRepository.Get(jobApplicationVM.RequestId);
-                    if (request != null)
-                    {
-                        work.JobApplicationRepository.Add(new JobApplication()
-                        {
-                            CreatedAt = DateTime.Now,
-                            Request = request,
-                            Freelancer = freelancer,
-                            Description = jobApplicationVM.Description,
-                            PreferredLanguage = jobApplicationVM.PreferedLanguage,
-                            Timeline = jobApplicationVM.Timeline,
-                            Status = Constants.STATUS_JOB_APPLICATION.PENDING,
-                            OfferedPrice = jobApplicationVM.Budget
-                        });
-                        work.Save();
-                        return Ok();
-                    }
+                    Request = request,
+                    Freelancer = freelancer,
+                    Description = jobApplicationVM.Description,
+                    PreferredLanguage = jobApplicationVM.PreferedLanguage,
+                    Timeline = jobApplicationVM.Timeline,
+                    Status = Constants.STATUS_JOB_APPLICATION.PENDING,
+                    OfferedPrice = jobApplicationVM.Budget
+                });
 
-                }
-
-                return NotFound();
+                work.Save();
+                return Ok();
             }
         }
 
@@ -72,7 +67,7 @@ namespace Api.Controllers.JobApplicationController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                UserExposeModel user = (UserExposeModel) HttpContext.Items["User"];
+                UserExposeModel user = (UserExposeModel)HttpContext.Items["User"];
                 var jobApplications = work.JobApplicationRepository.GetAll(j => j.Freelancer.Id == user.Id, null, "Freelancer,Request");
                 var result = _mapper.Map<IEnumerable<JobApplication>, IEnumerable<JobApplicationVM>>(jobApplications);
                 return result;

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Utils.Models;
 using static Api.Common.Constants;
 using System.Collections.Generic;
+using Utils;
 
 namespace Api.Controllers.RequestController
 {
@@ -71,10 +72,10 @@ namespace Api.Controllers.RequestController
                 Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
                 
                 request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
-                request.Description = requestVM.description != null ? requestVM.description : request.Description;
-                request.Title = requestVM.title != null ? requestVM.title : request.Title;
-                request.Status = requestVM.status != null ? requestVM.status : request.Status;
-                request.Budget = requestVM.budget != null ? requestVM.budget : request.Budget;
+                request.Description = requestVM.description.Or(request.Description);
+                request.Title = requestVM.title.Or(request.Title);
+                request.Status = requestVM.status.Or(request.Status);
+                request.Budget = requestVM.budget.Or(request.Budget);
 
                 work.Save();
             }

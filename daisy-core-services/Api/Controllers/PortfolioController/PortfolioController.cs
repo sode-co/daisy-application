@@ -35,9 +35,9 @@ namespace Api.Controllers.PortfolioController
                     work.PortfolioRepository.Add(new Portfolio()
                     {
                         Freelancer = freelancer,
-                        Biography = portfolioVM.biography,
-                        CreatedAt = DateTime.Now
+                        Biography = portfolioVM.biography
                     });
+
                     work.Save();
 
                     return Ok();
