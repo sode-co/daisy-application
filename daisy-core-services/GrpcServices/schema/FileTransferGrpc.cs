@@ -49,6 +49,10 @@ namespace Filetransfer {
     static readonly grpc::Marshaller<global::Filetransfer.Chunk> __Marshaller_filetransfer_Chunk = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Filetransfer.Chunk.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Filetransfer.TransferStatus> __Marshaller_filetransfer_TransferStatus = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Filetransfer.TransferStatus.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Filetransfer.DownloadRequestModel> __Marshaller_filetransfer_DownloadRequestModel = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Filetransfer.DownloadRequestModel.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Filetransfer.DownloadModel> __Marshaller_filetransfer_DownloadModel = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Filetransfer.DownloadModel.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Filetransfer.Chunk, global::Filetransfer.TransferStatus> __Method_Upload = new grpc::Method<global::Filetransfer.Chunk, global::Filetransfer.TransferStatus>(
@@ -57,6 +61,14 @@ namespace Filetransfer {
         "Upload",
         __Marshaller_filetransfer_Chunk,
         __Marshaller_filetransfer_TransferStatus);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Filetransfer.DownloadRequestModel, global::Filetransfer.DownloadModel> __Method_Download = new grpc::Method<global::Filetransfer.DownloadRequestModel, global::Filetransfer.DownloadModel>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "Download",
+        __Marshaller_filetransfer_DownloadRequestModel,
+        __Marshaller_filetransfer_DownloadModel);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -70,6 +82,12 @@ namespace Filetransfer {
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Filetransfer.TransferStatus> Upload(grpc::IAsyncStreamReader<global::Filetransfer.Chunk> requestStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task Download(global::Filetransfer.DownloadRequestModel request, grpc::IServerStreamWriter<global::Filetransfer.DownloadModel> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -113,6 +131,16 @@ namespace Filetransfer {
       {
         return CallInvoker.AsyncClientStreamingCall(__Method_Upload, null, options);
       }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Filetransfer.DownloadModel> Download(global::Filetransfer.DownloadRequestModel request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Download(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Filetransfer.DownloadModel> Download(global::Filetransfer.DownloadRequestModel request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_Download, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override UploadServiceClient NewInstance(ClientBaseConfiguration configuration)
@@ -127,7 +155,8 @@ namespace Filetransfer {
     public static grpc::ServerServiceDefinition BindService(UploadServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Upload, serviceImpl.Upload).Build();
+          .AddMethod(__Method_Upload, serviceImpl.Upload)
+          .AddMethod(__Method_Download, serviceImpl.Download).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -138,6 +167,7 @@ namespace Filetransfer {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, UploadServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Upload, serviceImpl == null ? null : new grpc::ClientStreamingServerMethod<global::Filetransfer.Chunk, global::Filetransfer.TransferStatus>(serviceImpl.Upload));
+      serviceBinder.AddMethod(__Method_Download, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Filetransfer.DownloadRequestModel, global::Filetransfer.DownloadModel>(serviceImpl.Download));
     }
 
   }

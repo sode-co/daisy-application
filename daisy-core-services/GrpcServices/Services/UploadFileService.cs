@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Domain.Models;
 using Filetransfer;
+using Google.Protobuf;
 using Grpc.Core;
+using Microsoft.AspNetCore.Mvc;
 using static Filetransfer.UploadService;
 
 namespace GrpcServices.Services
@@ -16,13 +19,13 @@ namespace GrpcServices.Services
             var response = new TransferStatus();
             try
             {
-                using var stream = new FileStream("/Users/tiendang/grpc_cached/image1.png", FileMode.Append);
-
-                while (await requestStream.MoveNext())
+                while(await requestStream.MoveNext())
                 {
-                    var length = requestStream.Current.Content.Length;
-                    Console.WriteLine("Client file streaming " + length);
-                    stream.Write(requestStream.Current.Content.ToByteArray(), 0, length);
+                    using (var stream = new FileStream("/Users/minhtiendang/cached/image1.png", FileMode.Append))
+                    {
+                        var length = requestStream.Current.Content.Length;
+                        stream.Write(requestStream.Current.Content.ToByteArray(), 0, length);
+                    };
                     response.Status = Filetransfer.Status.Success;
                 }
             }
@@ -34,6 +37,18 @@ namespace GrpcServices.Services
             }
 
             return response;
+        }
+
+        public override async Task Download(DownloadRequestModel request, IServerStreamWriter<DownloadModel> responseStream, ServerCallContext context)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _ = responseStream.WriteAsync(new DownloadModel()
+                {
+                    Status = new TransferStatus() { Status = Filetransfer.Status.Success, Message = "ok" },
+                    Data = new Chunk() { Content = ByteString.CopyFrom(File.ReadAllBytes("/image/image"+i+".png"))}
+                });
+            }
         }
     }
 }

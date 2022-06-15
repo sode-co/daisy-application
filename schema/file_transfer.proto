@@ -16,6 +16,12 @@ message TransferStatus {
   string Message = 2;
 }
 
+message DownloadModel {
+  TransferStatus status = 1;
+  Chunk data = 2;
+}
+
 service UploadService {
   rpc Upload(stream Chunk) returns (TransferStatus) {};
+  rpc Download() returns (stream DownloadModel) {};
 }

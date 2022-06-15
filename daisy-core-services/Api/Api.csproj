@@ -49,6 +49,7 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <None Remove="Controllers\Designer\" />
+    <None Remove="Controllers\resource\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Middlewares\" />
@@ -61,5 +62,6 @@
     <Folder Include="Response\Authentication\" />
     <Folder Include="Response\User\" />
     <Folder Include="Controllers\Designer\" />
+    <Folder Include="Controllers\resource\" />
   </ItemGroup>
 </Project>
