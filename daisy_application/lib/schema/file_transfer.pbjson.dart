@@ -40,3 +40,18 @@ const TransferStatus$json = const {
 
 /// Descriptor for `TransferStatus`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List transferStatusDescriptor = $convert.base64Decode('Cg5UcmFuc2ZlclN0YXR1cxIsCgZTdGF0dXMYASABKA4yFC5maWxldHJhbnNmZXIuU3RhdHVzUgZTdGF0dXMSGAoHTWVzc2FnZRgCIAEoCVIHTWVzc2FnZQ==');
+const $core.Map<$core.String, $core.dynamic> UploadServiceBase$json = const {
+  '1': 'UploadService',
+  '2': const [
+    const {'1': 'Upload', '2': '.filetransfer.Chunk', '3': '.filetransfer.TransferStatus', '4': const {}, '5': true},
+  ],
+};
+
+@$core.Deprecated('Use uploadServiceDescriptor instead')
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> UploadServiceBase$messageJson = const {
+  '.filetransfer.Chunk': Chunk$json,
+  '.filetransfer.TransferStatus': TransferStatus$json,
+};
+
+/// Descriptor for `UploadService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
+final $typed_data.Uint8List uploadServiceDescriptor = $convert.base64Decode('Cg1VcGxvYWRTZXJ2aWNlEj8KBlVwbG9hZBITLmZpbGV0cmFuc2Zlci5DaHVuaxocLmZpbGV0cmFuc2Zlci5UcmFuc2ZlclN0YXR1cyIAKAE=');

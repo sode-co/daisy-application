@@ -5,6 +5,7 @@
 // @dart = 2.12
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
+import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
@@ -119,5 +120,15 @@ class TransferStatus extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(1);
   @$pb.TagNumber(2)
   void clearMessage() => clearField(2);
+}
+
+class UploadServiceApi {
+  $pb.RpcClient _client;
+  UploadServiceApi(this._client);
+
+  $async.Future<TransferStatus> upload($pb.ClientContext? ctx, Chunk request) {
+    var emptyResponse = TransferStatus();
+    return _client.invoke<TransferStatus>(ctx, 'UploadService', 'Upload', request, emptyResponse);
+  }
 }
 
