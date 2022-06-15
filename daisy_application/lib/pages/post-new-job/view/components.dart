@@ -105,10 +105,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                     children: [
                       SizedBox(
                         width: size.width * 0.8,
-                        child: Flexible(
-                          child: Text('Thông tin đầy đủ về yêu cầu tuyển dụng',
-                              style: Style.h6Bold),
-                        ),
+                        child: Text('Thông tin đầy đủ về yêu cầu tuyển dụng',
+                            style: Style.h6Bold),
                       ),
                       const CustomTextField(
                         fieldName:
@@ -277,8 +275,11 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-            width: size.width * 0.8,
-            child: Flexible(child: Text(fieldName, style: Style.stringText))),
+          width: size.width * 0.8,
+          // child: Flexible(
+          child: Text(fieldName, style: Style.stringText),
+          // ),
+        ),
         SizedBox(
           width: size.width * 0.8,
           child: TextFormField(
