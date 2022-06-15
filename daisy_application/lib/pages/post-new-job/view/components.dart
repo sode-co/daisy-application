@@ -48,11 +48,11 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
     double imgWidth =
         Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.18;
     double childItemPadding =
-        Responsive.isDesktop(context) ? size.width * 0.0 : size.width * 0.18;
+        Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.18;
     double formPaddingHorizontal =
-        Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.005;
+        Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.005;
     double formPaddingVertical =
-        Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.08;
+        Responsive.isDesktop(context) ? size.width * 0.02 : size.width * 0.08;
     return SizedBox(
       width: size.width,
       height: 3000,
@@ -131,21 +131,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                   ),
                 ],
               ),
-              IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: () {
-                  setState(
-                    () => {
-                      indexRequestChild++,
-                      requestChildren.add(
-                        ChildRequestForm(
-                          index: indexRequestChild,
-                        ),
-                      )
-                    },
-                  );
-                },
-              ),
+              const SizedBox(height: 20.0),
               Padding(
                 padding: EdgeInsets.only(left: childItemPadding),
                 child: Column(
@@ -153,10 +139,32 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                   children: requestChildren,
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(
+                    right: Responsive.isDesktop(context)
+                        ? size.width * 0.62
+                        : size.width * 0.33),
+                child: TextButton.icon(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    setState(
+                      () => {
+                        indexRequestChild++,
+                        requestChildren.add(
+                          ChildRequestForm(
+                            index: indexRequestChild,
+                          ),
+                        )
+                      },
+                    );
+                  },
+                  label: const Text('Thêm đầu việc'),
+                ),
+              ),
               const SizedBox(height: 20.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(130.0, 50.0),
+                  minimumSize: const Size(140.0, 60.0),
                   primary: const Color(BuiltinColor.blue_gradient_01),
                 ),
                 onPressed: () {
@@ -169,7 +177,10 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                     );
                   }
                 },
-                child: const Text('Đăng việc'),
+                child: const Text(
+                  'Đăng việc',
+                  style: TextStyle(fontSize: 16.5),
+                ),
               ),
             ],
           ),
@@ -313,10 +324,10 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Item thứ $_index:',
+          'Đầu việc thứ $_index:',
           style: TextStyle(
-            fontSize: 16,
-            color: Colors.black.withOpacity(0.6),
+            fontSize: 17.0,
+            color: Colors.black.withOpacity(0.68),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -340,6 +351,7 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
           label: 'Mô tả',
           maxLines: 3,
         ),
+        const SizedBox(height: 20.0),
       ],
     );
   }
