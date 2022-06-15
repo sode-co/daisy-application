@@ -18,18 +18,26 @@ namespace DataAccess.Repositories.Projects
             _dbContext = dbContext;
         }
 
-        public void CreateProjectAndWorkspace (int jobApplicationId, bool isAllowedPublic, string projectStatus, string requestStatus, string parentRequestStatus)
+        public void CreateProjectAndWorkspace (int jobApplicationId, bool isAllowedPublic, string projectStatus, string requestStatus, string parentRequestStatus, int loginUserId)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
             JobApplication job = _dbContext.JobApplications
                             .Include(j => j.Request)
                             .Include(j => j.Freelancer)
                             .FirstOrDefault(j => j.Id == jobApplicationId);
+            if (job == null) {
+                throw new Exception("Job application not found!");
+            }
+
             Request req = _dbContext.Requests
-                        .Include(r => r.Customer)
-                        .Include(r => r.Category)
-                        .Include(r => r.Items)
-                        .FirstOrDefault(r => r.Id == job.Request.Id);
+                    .Include(r => r.Customer)
+                    .Include(r => r.Category)
+                    .Include(r => r.Items)
+                    .FirstOrDefault(r => r.Id == job.Request.Id);
+            if (req.Customer.Id != loginUserId)
+            {
+                throw new Exception("You are not the requester of this request!");
+            }
             Project pro = new Project()
             {
                 Customer = req.Customer,
@@ -66,11 +74,29 @@ namespace DataAccess.Repositories.Projects
             transaction.Commit();
         }
 
-        public void DeactivateProject (int projectId, string projectStatus)
+        public void DeactivateProject (int projectId, string projectStatus, string requestStatus, int loginUserId)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
-            Project pro = _dbContext.Projects.Find(projectId);
+            Project pro = _dbContext.Projects.Include(p => p.Request).FirstOrDefault(p => p.Id == projectId);
+            if (pro == null)
+            {
+                throw new Exception("Project is not found!");
+            }
+            Request req = _dbContext.Requests
+                    .Include(r => r.Customer)
+                    .Include(r => r.Items)
+                    .FirstOrDefault(r => r.Id == pro.Request.Id);
+            if (req.Customer.Id != loginUserId)
+            {
+                throw new Exception("You are not the customer of this project!");
+            }
             pro.Status = projectStatus;
+            foreach (Request requestItem in req.Items)
+            {
+                requestItem.Status = requestStatus;
+                _dbContext.Requests.Update(requestItem);
+            }
+            req.Status = requestStatus;
             _dbContext.Projects.Update(pro);
             _dbContext.SaveChanges();
             transaction.Commit();

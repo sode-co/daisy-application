@@ -58,25 +58,47 @@ namespace Api.Controllers.ProjectController
         [Authorize(Policy = ROLE.CUSTOMER)]
         public JsonResult CreateProjectAndWorkspaceWhenApproveJobApplication(JObject project)
         {
-            using (var work = _unitOfWorkFactory.Get)
+            try
             {
-                int applicationId = (int)project["jobApplicationId"];
-                bool IsAllowedPublic = (bool)project["isAllowedPublic"];
-                work.ProjectRepository.CreateProjectAndWorkspace(applicationId, IsAllowedPublic, PROJECT_STATUS.IN_PROGRESS, REQUEST_STATUS.TAKEN, REQUEST_STATUS.TAKEN);
-                work.Save();
-                return Json(new { message = "ok" });
+                UserExposeModel loginUser = (UserExposeModel)HttpContext.Items["User"];
+                using (var work = _unitOfWorkFactory.Get)
+                {
+                    int applicationId = (int)project["jobApplicationId"];
+                    bool IsAllowedPublic = (bool)project["isAllowedPublic"];
+                    work.ProjectRepository.CreateProjectAndWorkspace(applicationId, IsAllowedPublic, PROJECT_STATUS.IN_PROGRESS, REQUEST_STATUS.TAKEN, REQUEST_STATUS.TAKEN, loginUser.Id);
+                    work.Save();
+                    return Json(new { message = "ok" });
+                }
+            } catch (Exception er)
+            {
+                return Json(new { 
+                    message = "Something went wrong!!!",
+                    detail = er.Message
+                });
             }
+
         }
 
         // DELETE v1/project
         [HttpDelete]
         public JsonResult DeactivateProject(int projectId)
         {
-            using (var work = _unitOfWorkFactory.Get)
+            UserExposeModel loginUser = (UserExposeModel)HttpContext.Items["User"];
+            try
             {
-                work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED);
-                work.Save();
-                return Json(new { message = "ok" });
+                using (var work = _unitOfWorkFactory.Get)
+                {
+                    work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED, REQUEST_STATUS.AVAILABLE, loginUser.Id);
+                    work.Save();
+                    return Json(new { message = "ok" });
+                }
+            } catch (Exception er)
+            {
+                return Json(new
+                {
+                    message = "Something went wrong!!!",
+                    detail = er.Message
+                });
             }
         }
 
@@ -90,6 +112,30 @@ namespace Api.Controllers.ProjectController
             //    work.Save();
                 return Json(new { message = "ok" });
             //}
+        }
+
+        // GET v1/project/list
+        [HttpGet("list")]
+        public IEnumerable<ProjectVM> GetListAllProject()
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var project = work.ProjectRepository.GetAll(null, null,"Customer,Freelancer,Category,Payment,Request");
+                var result = _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectVM>>(project);
+                return result;
+            }
+        }
+
+        // GET v1/project/title
+        [HttpGet("title/{keyword}")]
+        public IEnumerable<ProjectVM> SearchListProjectByTitle(string keyword)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var project = work.ProjectRepository.GetAll(pro => pro.Request.Title.ToLower().Contains(keyword.ToLower()), null, "Customer,Freelancer,Category,Payment,Request");
+                var result = _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectVM>>(project);
+                return result;
+            }
         }
     }
 }
