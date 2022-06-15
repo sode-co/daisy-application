@@ -21,7 +21,9 @@ message DownloadModel {
   Chunk data = 2;
 }
 
+message DownloadRequest {}
+
 service UploadService {
   rpc Upload(stream Chunk) returns (TransferStatus) {};
-  rpc Download() returns (stream DownloadModel) {};
+  rpc Download(DownloadRequest) returns (stream DownloadModel) {};
 }
