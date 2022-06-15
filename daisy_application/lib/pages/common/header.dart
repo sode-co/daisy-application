@@ -23,15 +23,17 @@ class Header extends StatelessWidget with PreferredSizeWidget {
               const SizedBox(width: 150),
               Image.asset('assets/images/weblogo.png', width: 100),
               TextButton(
-                  child: const Text('Categories', style: Style.stringBold),
+                  child: const Text('Danh mục', style: Style.stringBold),
                   onPressed: () {
                     Navigator.pushNamed(context, '/categories');
                   }),
               TextButton(
-                  child: const Text('How it works', style: Style.stringBold),
+                  child: const Text('Cách thức hoạt động',
+                      style: Style.stringBold),
                   onPressed: () {}),
               TextButton(
-                  child: const Text('Find a designer', style: Style.stringBold),
+                  child:
+                      const Text('Tìm kiếm designer', style: Style.stringBold),
                   onPressed: () {}),
             ])
           : Padding(
@@ -43,14 +45,14 @@ class Header extends StatelessWidget with PreferredSizeWidget {
         if (!isLoggedIn) ...[
           const SignUpButton(),
           if (Responsive.isDesktop(context)) const SizedBox(width: 10),
-          const Center(child: Text('or')),
+          const Center(child: Text('  ')),
           TextButton(
               onPressed: () => listener.onBtnSigninClicked(),
-              child: const Text('Sign in', style: Style.mediumStringBold)),
+              child: const Text('Đăng nhập', style: Style.mediumStringBold)),
         ],
         if (isLoggedIn)
           TextButton(
-              child: const Text('Sign out', style: Style.mediumStringBold),
+              child: const Text('Đăng xuất', style: Style.mediumStringBold),
               onPressed: () async {
                 appState.isLoggedIn = false;
                 await Hive.box(AuthenticationPersistent.BOX_NAME).clear();

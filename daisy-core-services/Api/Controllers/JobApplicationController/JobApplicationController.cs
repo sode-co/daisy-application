@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Api.Common;
+using AutoMapper;
 using DataAccess.UnitOfWork;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,38 @@ namespace Api.Controllers.JobApplicationController
             _unitOfWorkFactory = unitOfWorkFactory;
             _mapper = mapper;
         }
+
+        [Authorize]
+        [HttpPost()]
+        public IActionResult CreateJobApplication([FromBody] JobApplicationVM jobApplicationVM)
+        {
+            int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
+
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                User freelancer = work.UserRepository.Get(freelancerId);
+                Request request;
+                if (freelancer == null) return NotFound();
+
+                request = work.RequestRepository.Get(jobApplicationVM.RequestId);
+                if (request == null) return NotFound();
+
+                work.JobApplicationRepository.Add(new JobApplication()
+                {
+                    Request = request,
+                    Freelancer = freelancer,
+                    Description = jobApplicationVM.Description,
+                    PreferredLanguage = jobApplicationVM.PreferedLanguage,
+                    Timeline = jobApplicationVM.Timeline,
+                    Status = Constants.STATUS_JOB_APPLICATION.PENDING,
+                    OfferedPrice = jobApplicationVM.Budget
+                });
+
+                work.Save();
+                return Ok();
+            }
+        }
+
         // GET: v1/applications/list
         [HttpGet("list")]
         [Authorize(Policy = ROLE.DESIGNER)]
@@ -34,7 +67,7 @@ namespace Api.Controllers.JobApplicationController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                UserExposeModel user = (UserExposeModel) HttpContext.Items["User"];
+                UserExposeModel user = (UserExposeModel)HttpContext.Items["User"];
                 var jobApplications = work.JobApplicationRepository.GetAll(j => j.Freelancer.Id == user.Id, null, "Freelancer,Request");
                 var result = _mapper.Map<IEnumerable<JobApplication>, IEnumerable<JobApplicationVM>>(jobApplications);
                 return result;
