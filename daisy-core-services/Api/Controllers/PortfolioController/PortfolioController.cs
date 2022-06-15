@@ -55,11 +55,7 @@ namespace Api.Controllers.PortfolioController
             using (var work = _unitOfWorkFactory.Get)
             {
                 var deletedPort = work.PortfolioRepository.Get(id);
-
-                if (deletedPort is null)
-                {
-                    return NotFound();
-                }
+                if (deletedPort is null) return NotFound();
 
                 work.PortfolioRepository.DeletePortfolio(deletedPort);
                 work.Save();
