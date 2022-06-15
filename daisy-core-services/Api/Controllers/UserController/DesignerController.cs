@@ -10,7 +10,7 @@ using System.Linq;
 namespace Api.Controllers.UserController
 {
 
-    [Route("v1/designer")]
+    [Route("v1/designers")]
     [ApiController]
     public class DesignerController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace Api.Controllers.UserController
         }
 
         [Authorize]
-        [HttpPut("profile")]
+        [HttpPut()]
         public IActionResult UpdateDesignerProfile([FromBody] UserExposeModel userVM)
         {
             int designerId = ((UserExposeModel) HttpContext.Items["User"]).Id;
@@ -45,68 +45,5 @@ namespace Api.Controllers.UserController
                 return Ok(designerId);
             }
         }
-
-        [Authorize]
-        [HttpPost("portfolio")]
-        public IActionResult CreatePortfolio([FromBody] PortfolioVM portfolioVM)
-        {
-            int designerId = ((UserExposeModel) HttpContext.Items["User"]).Id;
-
-            using (var work = _unitOfWorkFactory.Get)
-            {
-                User freelancer = work.UserRepository.Get(designerId);
-                if (freelancer != null)
-                {
-                    work.PortfolioRepository.Add(new Portfolio()
-                    {
-                        Freelancer = freelancer,
-                        Biography = portfolioVM.biography,
-                        CreatedAt = DateTime.Now
-                    });
-                    work.Save();
-
-                    return Ok();
-                }
-
-                return NotFound();
-            }
-        }
-
-        [Authorize]
-        [HttpPost("job-application")]
-        public IActionResult CreateJobApplication([FromBody] JobApplicationVM jobApplicationVM)
-        {
-            int freelancerId = ((UserExposeModel) HttpContext.Items["User"]).Id;
-
-            using (var work = _unitOfWorkFactory.Get)
-            {
-                User freelancer = work.UserRepository.Get(freelancerId);
-                Request request;
-                if (freelancer != null)
-                {
-                    request = work.RequestRepository.Get(jobApplicationVM.RequestId);
-                    if (request != null)
-                    {
-                        work.JobApplicationRepository.Add(new JobApplication()
-                        {
-                            CreatedAt = DateTime.Now,
-                            Request = request,
-                            Freelancer = freelancer,
-                            Description = jobApplicationVM.Description,
-                            PreferredLanguage = jobApplicationVM.PreferedLanguage,
-                            Timeline = jobApplicationVM.Timeline,
-                            Status = Constants.STATUS_JOB_APPLICATION.PENDING,
-                            OfferedPrice = jobApplicationVM.Budget
-                        });
-                        work.Save();
-                        return Ok();
-                    }
-
-                }
-
-                return NotFound();
-            }
-        }
-
     }
 }

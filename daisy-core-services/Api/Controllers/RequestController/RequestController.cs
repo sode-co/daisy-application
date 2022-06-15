@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Utils.Models;
 using static Api.Common.Constants;
 using System.Collections.Generic;
+using Utils;
 
 namespace Api.Controllers.RequestController
 {
@@ -58,12 +59,73 @@ namespace Api.Controllers.RequestController
 
                 work.RequestRepository.Add(parentRequest);
                 work.Save();
-                return Ok();
+                return Json(new { message = "ok" });
+            }
+        }
+
+        [HttpPatch("{requestId}")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public IActionResult UpdateAllFieldRequest([FromBody] RequestVM requestVM, int requestId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
+                
+                request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
+                request.Description = requestVM.description.Or(request.Description);
+                request.Title = requestVM.title.Or(request.Title);
+                request.Status = requestVM.status.Or(request.Status);
+                request.Budget = requestVM.budget.Or(request.Budget);
+
+                work.Save();
+            }
+
+            return Json(new { message = "ok" });
+        }
+
+        [HttpPut("{requestId}")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public IActionResult UpdateFieldsRequest([FromBody] RequestVM requestVM, int requestId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
+
+                // Update data of each field
+                request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
+                request.Description = requestVM.description;
+                request.Title = requestVM.title;
+                request.Status = requestVM.status;
+                request.Budget = requestVM.budget;
+
+                work.Save();
+            }
+
+            return Json(new { message = "ok" });
+        }
+
+        [HttpGet("title/{title}")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        [Authorize(Policy = ROLE.DESIGNER)]
+        public IActionResult FindRequestsByTitle(string title)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByTitle(title).Select(reqObj => new RequestVM()
+                {
+                    categoryId = reqObj.Category.Id,
+                    title = reqObj.Title,
+                    description = reqObj.Description,
+                    status = reqObj.Status,
+                    budget = reqObj.Budget
+                });
+
+                return Json(requestVMs);
             }
         }
 
         [Authorize]
-        [HttpGet("requests/{categoryId}")]
+        [HttpGet("category/{categoryId}")]
         public IActionResult FindRequestsByCategoryId(int categoryId)
         {
             int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
