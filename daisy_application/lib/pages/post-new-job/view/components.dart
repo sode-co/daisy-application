@@ -1,3 +1,4 @@
+import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 
@@ -26,10 +27,19 @@ class PostNewJobForm extends StatefulWidget {
 }
 
 class _PostNewJobFormState extends State<PostNewJobForm> {
-  String dropdownValue = 'One';
-  List<String> categories = ['One', 'Two', 'Three', 'Four'];
+  List<String> categories = [
+    'Web & app design',
+    'Logo & identity',
+    'Business & advertising',
+    'Clothing & merchandise',
+    'Book & magazine',
+    'Packaging & label',
+  ];
+  String dropdownValue = 'Web & app design';
+
   final _formKey = GlobalKey<FormState>();
   List<Widget> requestChildren = [];
+  int indexRequestChild = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +61,17 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Việc cần tuyển designer', style: Style.h6Bold),
+                    CustomTextField(
+                      fieldName: 'Đặt tên cụ thể cho công việc cần tuyển',
+                      label: 'Tên dự án',
+                      maxLines: 1,
+                      validation: (value) {
+                        if (value == null) {
+                          return 'Giá trị nhập vào phải là số thập phân???';
+                        }
+                        return null;
+                      },
+                    ),
                     DropdownList(
                       categories: categories,
                       label: 'Chọn lĩnh vực cần tuyển',
@@ -78,7 +99,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       fieldName:
                           'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
                       label: 'Mô tả dự án',
-                      maxLines: 12,
+                      maxLines: 5,
                     ),
                     CustomTextField(
                       fieldName: 'Ngân sách dự án',
@@ -99,14 +120,30 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
               icon: const Icon(Icons.add),
               onPressed: () {
                 setState(
-                  () => {requestChildren.add(const ChildRequestForm())},
+                  () => {
+                    indexRequestChild++,
+                    requestChildren.add(
+                      ChildRequestForm(
+                        index: indexRequestChild,
+                      ),
+                    )
+                  },
                 );
               },
             ),
-            Column(
-              children: requestChildren,
+            Padding(
+              padding: EdgeInsets.only(left: size.width * 0.2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: requestChildren,
+              ),
             ),
+            const SizedBox(height: 20.0),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(130.0, 50.0),
+                primary: const Color(BuiltinColor.blue_gradient_01),
+              ),
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
@@ -117,7 +154,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                   );
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Đăng việc'),
             ),
           ],
         ),
@@ -217,7 +254,6 @@ class CustomTextField extends StatelessWidget {
             child: Flexible(child: Text(fieldName, style: Style.stringText))),
         SizedBox(
           width: size.width * 0.8,
-          height: 100,
           child: TextFormField(
             validator: validation,
             maxLines: maxLines,
@@ -233,15 +269,62 @@ class CustomTextField extends StatelessWidget {
 }
 
 class ChildRequestForm extends StatefulWidget {
-  const ChildRequestForm({Key? key}) : super(key: key);
+  const ChildRequestForm({Key? key, required this.index}) : super(key: key);
+  final int index;
 
   @override
-  State<ChildRequestForm> createState() => _ChildRequestFormState();
+  State<ChildRequestForm> createState() => _ChildRequestFormState(index);
 }
 
 class _ChildRequestFormState extends State<ChildRequestForm> {
+  late int _index;
+  _ChildRequestFormState(int index) {
+    _index = index;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Text('ChildRequestFormState');
+    List<String> categories = [
+      'Logo design',
+      'Brand guide',
+      'Business card',
+      'Postcard, flyer or print',
+      'Car, truck or van wrap',
+      'PowerPoint template',
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Item thứ $_index:',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.black.withOpacity(0.6),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        DropdownList(
+          categories: categories,
+          label: 'Chọn lĩnh vực cần tuyển',
+        ),
+        CustomTextField(
+          fieldName: 'Đặt tên cụ thể cho item $_index',
+          label: 'Tên dự án',
+          maxLines: 1,
+          validation: (value) {
+            if (value == null) {
+              return 'Giá trị nhập vào phải là số thập phân???';
+            }
+            return null;
+          },
+        ),
+        const CustomTextField(
+          fieldName: 'Nội dung chi tiết',
+          label: 'Mô tả',
+          maxLines: 3,
+        ),
+      ],
+    );
   }
 }
