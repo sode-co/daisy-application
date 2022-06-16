@@ -84,11 +84,126 @@ class _PortfolioTabBarState extends State<PortfolioTabBar>
             controller: _controller,
             children: const <Widget>[
               PortfolioTab(),
-              Text('About'),
+              AboutTab(),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class AboutTab extends StatelessWidget {
+  const AboutTab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: EdgeInsets.only(left: size.width * 0.02, top: 10.0),
+        child: SizedBox(
+          width: size.width,
+          height: size.height,
+          child: Column(
+            children: [
+              SizedBox(
+                width: size.width * 0.8,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: size.width * 0.2,
+                      child: const Text(
+                        'About',
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.5,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: size.width * 0.6,
+                            child: const Flexible(
+                              child: Text(
+                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.6,
+                            child: const Flexible(
+                              child: Text(
+                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.6,
+                            child: const Flexible(
+                              child: Text(
+                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Divider(thickness: 2.0),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: size.width * 0.2,
+                    child: const Text(
+                      'Reviews',
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    ),
+                  ),
+                  SizedBox(
+                    width: size.width * 0.5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: size.width * 0.6,
+                          child: const Flexible(
+                            child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                          ),
+                        ),
+                        SizedBox(
+                          width: size.width * 0.6,
+                          child: const Flexible(
+                            child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                          ),
+                        ),
+                        SizedBox(
+                          width: size.width * 0.6,
+                          child: const Flexible(
+                            child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -113,6 +228,14 @@ class _PortfolioTabState extends State<PortfolioTab> {
   ];
 
   List<String> images = [
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
     'assets/images/portfolio/avatar.png',
     'assets/images/portfolio/avatar.png',
     'assets/images/portfolio/avatar.png',
