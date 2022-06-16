@@ -50,6 +50,8 @@ class _PortfolioState extends State<Portfolio> with WidgetListener {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -61,7 +63,17 @@ class _PortfolioState extends State<Portfolio> with WidgetListener {
       ],
       child: Scaffold(
         appBar: const Header(),
-        body: const SingleChildScrollView(child: PortfolioBody()),
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(color: Colors.grey.shade100),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal:
+                      Responsive.isDesktop(context) ? size.width * 0.12 : 0.0),
+              child: const PortfolioBody(),
+            ),
+          ),
+        ),
         bottomNavigationBar:
             !Responsive.isDesktop(context) ? const BottomNavBar() : null,
       ),
