@@ -112,8 +112,21 @@ class _PortfolioTabState extends State<PortfolioTab> {
     'Packaging & label',
   ];
 
+  List<String> images = [
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/avatar.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -125,6 +138,14 @@ class _PortfolioTabState extends State<PortfolioTab> {
             child: DropdownList(
               categories: categories,
               label: '',
+            ),
+          ),
+          SizedBox(
+            width: size.width * 0.8,
+            height: size.height * 0.8,
+            child: GridView.count(
+              crossAxisCount: Responsive.isDesktop(context) ? 4 : 2,
+              children: images.map((img) => Image.asset(img)).toList(),
             ),
           ),
         ],
@@ -247,7 +268,9 @@ class _DropdownListState extends State<DropdownList> {
       children: [
         Text(_label, style: Style.stringText),
         SizedBox(
-          width: size.width * 0.2,
+          width: Responsive.isDesktop(context)
+              ? size.width * 0.2
+              : size.width * 0.6,
           height: 50,
           child: InputDecorator(
             decoration: const InputDecoration(
