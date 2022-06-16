@@ -131,10 +131,28 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
               ),
               const SizedBox(height: 20.0),
               Padding(
-                padding: EdgeInsets.only(left: childItemPadding),
+                padding: EdgeInsets.only(left: 0.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: requestChildren,
+                  children: requestChildren.map(
+                    (child) {
+                      var index = requestChildren.indexOf(child) + 1;
+                      return Row(
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              setState(
+                                  () => {requestChildren.removeAt(index - 1)});
+                            },
+                            child: Text(
+                              'Xóa đầu việc $index',
+                            ),
+                          ),
+                          child,
+                        ],
+                      );
+                    },
+                  ).toList(),
                 ),
               ),
               Padding(
