@@ -1,3 +1,4 @@
+import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:flutter/material.dart';
 
@@ -13,13 +14,100 @@ class _PortfolioBodyState extends State<PortfolioBody> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    return Column(
+      children: const [
+        CoverAndAvatar(),
+        PortfolioTabBar(),
+      ],
+    );
+  }
+}
+
+class PortfolioTabBar extends StatefulWidget {
+  const PortfolioTabBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<PortfolioTabBar> createState() => _PortfolioTabBarState();
+}
+
+class _PortfolioTabBarState extends State<PortfolioTabBar>
+    with TickerProviderStateMixin {
+  late TabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade50,
+              border: Border.all(color: Colors.grey.shade100),
+            ),
+            child: TabBar(
+              labelColor: Colors.black.withOpacity(0.6),
+              indicatorColor:
+                  const Color(BuiltinColor.blue_gradient_01).withOpacity(0.6),
+              controller: _controller,
+              tabs: const [
+                Tab(
+                  child: Text(
+                    'Portfolio',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'About',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 80.0,
+          child: TabBarView(
+            controller: _controller,
+            children: <Widget>[
+              Text('Portfolio'),
+              Text('About'),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CoverAndAvatar extends StatelessWidget {
+  const CoverAndAvatar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Stack(
       alignment: Alignment.topLeft,
       children: <Widget>[
         // background image and bottom contents
         SizedBox(
           width: size.width,
-          height: size.height,
+          height: Responsive.isDesktop(context)
+              ? size.height * 0.4
+              : size.height * 0.33,
           child: Column(
             children: <Widget>[
               Container(
@@ -30,14 +118,6 @@ class _PortfolioBodyState extends State<PortfolioBody> {
                       fit: BoxFit.fill),
                 ),
               ),
-              Expanded(
-                child: Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text('Content goes here'),
-                  ),
-                ),
-              )
             ],
           ),
         ),
@@ -60,7 +140,7 @@ class _PortfolioBodyState extends State<PortfolioBody> {
           top: 205.0,
           left: Responsive.isDesktop(context)
               ? 170.0
-              : 10.0, // (background container size) - (circle height / 2)
+              : 155.0, // (background container size) - (circle height / 2)
           child: SizedBox(
             height: 100.0,
             child: Column(
