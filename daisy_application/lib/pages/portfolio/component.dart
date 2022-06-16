@@ -1,5 +1,6 @@
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
+import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 
 class PortfolioBody extends StatefulWidget {
@@ -44,6 +45,8 @@ class _PortfolioTabBarState extends State<PortfolioTabBar>
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Column(
       children: [
         Container(
@@ -76,16 +79,56 @@ class _PortfolioTabBarState extends State<PortfolioTabBar>
           ),
         ),
         SizedBox(
-          height: 80.0,
+          height: size.height,
           child: TabBarView(
             controller: _controller,
-            children: <Widget>[
-              Text('Portfolio'),
+            children: const <Widget>[
+              PortfolioTab(),
               Text('About'),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class PortfolioTab extends StatefulWidget {
+  const PortfolioTab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<PortfolioTab> createState() => _PortfolioTabState();
+}
+
+class _PortfolioTabState extends State<PortfolioTab> {
+  List<String> categories = [
+    'Web & app design',
+    'Logo & identity',
+    'Business & advertising',
+    'Clothing & merchandise',
+    'Book & magazine',
+    'Packaging & label',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 2.0),
+            child: DropdownList(
+              categories: categories,
+              label: '',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -164,6 +207,74 @@ class CoverAndAvatar extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// After merge the https://github.com/sode-co/daisy-application/pull/69/files
+// I will use dropdown list class of
+// daisy_application/lib/pages/post-new-job/view/components.dart
+class DropdownList extends StatefulWidget {
+  const DropdownList({Key? key, required this.label, required this.categories})
+      : super(key: key);
+  final String label;
+  final List<String> categories;
+
+  @override
+  State<DropdownList> createState() => _DropdownListState(label, categories);
+}
+
+class _DropdownListState extends State<DropdownList> {
+  late String _label;
+  late List<String> _categories;
+  late String dropdownValue;
+  _DropdownListState(label, categories) {
+    _label = label;
+    _categories = categories;
+    dropdownValue = _categories[0];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(_label, style: Style.stringText),
+        SizedBox(
+          width: size.width * 0.2,
+          height: 50,
+          child: InputDecorator(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                icon: const Icon(Icons.expand_more),
+                elevation: 16,
+                style: Style.placeHolderText,
+                onChanged: (String? newValue) {
+                  setState(
+                    () {
+                      dropdownValue = newValue!;
+                    },
+                  );
+                },
+                items: _categories.map<DropdownMenuItem<String>>(
+                  (String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  },
+                ).toList(),
+              ),
             ),
           ),
         ),
