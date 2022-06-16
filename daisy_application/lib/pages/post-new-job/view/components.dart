@@ -48,7 +48,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
     double imgWidth =
         Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.18;
     double childItemPadding =
-        Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.18;
+        Responsive.isDesktop(context) ? size.width * 0.072 : size.width * 0.08;
     double formPaddingHorizontal =
         Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.005;
     double formPaddingVertical =
@@ -131,21 +131,25 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
               ),
               const SizedBox(height: 20.0),
               Padding(
-                padding: EdgeInsets.only(left: 0.0),
+                padding: EdgeInsets.only(left: childItemPadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: requestChildren.map(
                     (child) {
-                      var index = requestChildren.indexOf(child) + 1;
+                      var index = requestChildren.indexOf(child);
                       return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextButton(
+                          IconButton(
+                            tooltip: 'Xóa đầu việc này',
                             onPressed: () {
-                              setState(
-                                  () => {requestChildren.removeAt(index - 1)});
+                              setState(() => {
+                                    requestChildren.removeAt(index),
+                                  });
                             },
-                            child: Text(
-                              'Xóa đầu việc $index',
+                            icon: const Icon(
+                              Icons.remove_circle_outline,
+                              color: Color(BuiltinColor.blue_gradient_01),
                             ),
                           ),
                           child,
