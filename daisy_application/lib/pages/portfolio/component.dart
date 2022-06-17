@@ -105,10 +105,13 @@ class AboutTab extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: Padding(
-        padding: EdgeInsets.only(left: size.width * 0.02, top: 10.0),
+        padding: EdgeInsets.only(
+            left: Responsive.isDesktop(context)
+                ? size.width * 0.02
+                : size.width * 0.01,
+            top: 10.0),
         child: SizedBox(
           width: size.width,
-          height: size.height,
           child: Column(
             children: [
               SizedBox(
@@ -124,30 +127,38 @@ class AboutTab extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: size.width * 0.5,
+                      width: Responsive.isDesktop(context)
+                          ? size.width * 0.5
+                          : size.width * 0.6,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: size.width * 0.6,
-                            child: const Flexible(
-                              child: Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
-                            ),
+                            width: Responsive.isDesktop(context)
+                                ? size.width * 0.6
+                                : size.width * 0.8,
+                            // child: const Flexible(
+                            child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            // ),
                           ),
                           SizedBox(
-                            width: size.width * 0.6,
-                            child: const Flexible(
-                              child: Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
-                            ),
+                            width: Responsive.isDesktop(context)
+                                ? size.width * 0.6
+                                : size.width * 0.8,
+                            // child: const Flexible(
+                            child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            // ),
                           ),
                           SizedBox(
-                            width: size.width * 0.6,
-                            child: const Flexible(
-                              child: Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
-                            ),
+                            width: Responsive.isDesktop(context)
+                                ? size.width * 0.6
+                                : size.width * 0.8,
+                            // child: const Flexible(
+                            child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            // ),
                           ),
                         ],
                       ),
@@ -155,50 +166,70 @@ class AboutTab extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.0),
                 child: Divider(thickness: 2.0),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: size.width * 0.2,
-                    child: const Text(
-                      'Reviews',
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+              SizedBox(
+                width: size.width * 0.8,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: size.width * 0.2,
+                      child: const Text(
+                        'Review',
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: size.width * 0.5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: size.width * 0.6,
-                          child: const Flexible(
+                    SizedBox(
+                      width: Responsive.isDesktop(context)
+                          ? size.width * 0.5
+                          : size.width * 0.6,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: Responsive.isDesktop(context)
+                                ? size.width * 0.6
+                                : size.width * 0.8,
+                            // child: const Flexible(
                             child: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            // ),
                           ),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.6,
-                          child: const Flexible(
+                          SizedBox(
+                            width: Responsive.isDesktop(context)
+                                ? size.width * 0.6
+                                : size.width * 0.8,
+                            // child: const Flexible(
                             child: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            // ),
                           ),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.6,
-                          child: const Flexible(
+                          SizedBox(
+                            width: Responsive.isDesktop(context)
+                                ? size.width * 0.6
+                                : size.width * 0.8,
+                            // child: const Flexible(
                             child: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            // ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                          SizedBox(
+                            width: Responsive.isDesktop(context)
+                                ? size.width * 0.6
+                                : size.width * 0.8,
+                            // child: const Flexible(
+                            child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
+                            // ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
@@ -263,12 +294,17 @@ class _PortfolioTabState extends State<PortfolioTab> {
               label: '',
             ),
           ),
-          SizedBox(
-            width: size.width * 0.8,
-            height: size.height * 0.8,
-            child: GridView.count(
-              crossAxisCount: Responsive.isDesktop(context) ? 4 : 2,
-              children: images.map((img) => Image.asset(img)).toList(),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context) ? 0.0 : 15.0),
+            child: SizedBox(
+              width:
+                  Responsive.isDesktop(context) ? size.width * 0.8 : size.width,
+              height: size.height * 0.8,
+              child: GridView.count(
+                crossAxisCount: Responsive.isDesktop(context) ? 4 : 3,
+                children: images.map((img) => Image.asset(img)).toList(),
+              ),
             ),
           ),
         ],
@@ -394,7 +430,7 @@ class _DropdownListState extends State<DropdownList> {
           width: Responsive.isDesktop(context)
               ? size.width * 0.2
               : size.width * 0.6,
-          height: 50,
+          height: Responsive.isDesktop(context) ? 50 : 60,
           child: InputDecorator(
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
