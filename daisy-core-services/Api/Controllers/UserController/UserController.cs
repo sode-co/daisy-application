@@ -36,7 +36,7 @@ namespace Api.Controllers.CustomerController
 
         }
 
-        [HttpGet("{id}/detail")]
+        [HttpGet("{id}")]
         public ActionResult<User> GetUser(int id)
         {
             using (var work = _unitOfWorkFactory.Get)
