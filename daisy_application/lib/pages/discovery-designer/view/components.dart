@@ -1,5 +1,6 @@
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
+import 'package:daisy_application/pages/discovery-designer/view/stateless_components.dart';
 import 'package:flutter/material.dart';
 
 class DiscoverDesignerBody extends StatefulWidget {
@@ -224,7 +225,7 @@ class _ContactSideBarState extends State<ContactSideBar> {
         ),
         const VerticalDivider(thickness: 1, width: 1),
         // This is the main content.
-        if (_selectedIndex == 0) const Text('Tất cả liên lạc'),
+        if (_selectedIndex == 0) const MyContact(),
         if (_selectedIndex == 1) const Text('Dự án đang hoạt động'),
         if (_selectedIndex == 2) const Text('Tất cả dự án'),
       ],
@@ -232,42 +233,34 @@ class _ContactSideBarState extends State<ContactSideBar> {
   }
 }
 
-class LabelAndIcon extends StatelessWidget {
-  const LabelAndIcon(
-      {Key? key,
-      required this.icondata,
-      required this.label,
-      required this.isActive})
-      : super(key: key);
-  final IconData icondata;
-  final String label;
-  final bool isActive;
+class MyContact extends StatefulWidget {
+  const MyContact({Key? key}) : super(key: key);
 
   @override
+  State<MyContact> createState() => _MyContactState();
+}
+
+class _MyContactState extends State<MyContact> {
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      height: 50,
+    Size size = MediaQuery.of(context).size;
+
+    return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Row(
-          children: [
-            Icon(
-              icondata,
-              color: isActive
-                  ? const Color(BuiltinColor.blue_gradient_01)
-                  : Colors.black.withOpacity(0.8),
+        padding: EdgeInsets.only(
+            bottom: Responsive.isDesktop(context) ? 680.0 : 770, left: 10.0),
+        child: SizedBox(
+          width: Responsive.isDesktop(context)
+              ? size.width * 0.8
+              : size.width * 0.7,
+          child: Column(children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                SearchByNameTextField(),
+              ],
             ),
-            const SizedBox(width: 5.0),
-            Text(
-              label,
-              style: TextStyle(
-                color: isActive
-                    ? const Color(BuiltinColor.blue_gradient_01)
-                    : Colors.black.withOpacity(0.8),
-              ),
-            ),
-          ],
+          ]),
         ),
       ),
     );
