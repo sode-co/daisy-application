@@ -11,7 +11,7 @@ namespace Utils.Models
     {
         public String Description { get; set; }
 
-        public virtual Category Category { get; set; }
+        public int CategoryId { get; set; }
 
         public String Title { get; set; }
     }

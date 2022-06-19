@@ -21,7 +21,6 @@ namespace Api.Controllers.ArtWorkController
         }
 
         [HttpGet("{artworkId}")]
-
         public IActionResult GetArtworkById(int artworkId)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -37,6 +36,7 @@ namespace Api.Controllers.ArtWorkController
         }
 
         [HttpGet("category/{id}")]
+        [Authorize(Policy = ROLE.DESIGNER)]
         public IEnumerable<ArtWork> GetArtWorksByCategory(int id)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -59,12 +59,33 @@ namespace Api.Controllers.ArtWorkController
             {
                 ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(wa => wa.Id == id);
                 if (artWork is null) return NotFound();
-                
+
                 artWork.DeletedAt = System.DateTime.Now;
                 work.Save();
                 return Json(new { message = "ok" });
             }
         }
+
+        [HttpPut("{artworkId}")]
+        [Authorize(Policy = ROLE.DESIGNER)]
+        public IActionResult UpdateArtWorkById(int artworkId, [FromBody] ArtWorkVM artWorkVM)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(art => art.Id.Equals(artworkId));
+                if (artWork != null)
+                {
+                    artWork.Description = artWorkVM.Description;
+                    artWork.Title = artWorkVM.Title;
+                    artWork.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id.Equals(artWorkVM.CategoryId));
+                    return Json(new { message = "ok" });
+                }
+
+                return NotFound();
+            }
+            
+        }
+
     }
 
 }
