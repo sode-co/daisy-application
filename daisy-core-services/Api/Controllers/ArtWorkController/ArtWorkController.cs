@@ -3,6 +3,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Utils.Models;
 using static Api.Common.Constants;
 
 namespace Api.Controllers.ArtWorkController
@@ -17,6 +18,22 @@ namespace Api.Controllers.ArtWorkController
         public ArtWorkController(UnitOfWorkFactory unitOfWorkFactory)
         {
             this._unitOfWorkFactory = unitOfWorkFactory;
+        }
+
+        [HttpGet("{artworkId}")]
+
+        public IActionResult GetArtworkById(int artworkId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(art => art.Id.Equals(artworkId));
+                if (artWork != null)
+                {
+                    return Json(artWork);
+                }
+
+                return NotFound();
+            }
         }
 
         [HttpGet("category/{id}")]
