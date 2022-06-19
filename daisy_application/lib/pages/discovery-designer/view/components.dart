@@ -1,4 +1,5 @@
 import 'package:daisy_application/pages/common/colors.dart';
+import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:flutter/material.dart';
 
 class DiscoverDesignerBody extends StatefulWidget {
@@ -110,7 +111,7 @@ class ContactTab extends StatefulWidget {
 class _ContactTabState extends State<ContactTab> {
   @override
   Widget build(BuildContext context) {
-    return Text('Contact Tab');
+    return const ContactSideBar();
   }
 }
 
@@ -124,6 +125,134 @@ class FindNewDesignerTab extends StatefulWidget {
 class _FindNewDesignerTabState extends State<FindNewDesignerTab> {
   @override
   Widget build(BuildContext context) {
-    return Text('FindNewDesignerTab');
+    return const Text('FindNewDesignerTab');
+  }
+}
+
+class ContactSideBar extends StatefulWidget {
+  const ContactSideBar({Key? key}) : super(key: key);
+
+  @override
+  State<ContactSideBar> createState() => _ContactSideBarState();
+}
+
+class _ContactSideBarState extends State<ContactSideBar> {
+  int _selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        NavigationRail(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          labelType: NavigationRailLabelType.selected,
+          destinations: <NavigationRailDestination>[
+            NavigationRailDestination(
+              icon: Responsive.isDesktop(context)
+                  ? const LabelAndIcon(
+                      icondata: Icons.list_outlined,
+                      isActive: false,
+                      label: 'Tất cả liên lạc',
+                    )
+                  : const Icon(Icons.list_outlined),
+              selectedIcon: Responsive.isDesktop(context)
+                  ? const LabelAndIcon(
+                      icondata: Icons.list,
+                      isActive: true,
+                      label: 'Tất cả liên lạc',
+                    )
+                  : const Icon(Icons.list),
+              label: Responsive.isDesktop(context)
+                  ? const SizedBox(height: 0)
+                  : const Text('Tất cả liên lạc'),
+            ),
+            NavigationRailDestination(
+              icon: Responsive.isDesktop(context)
+                  ? const LabelAndIcon(
+                      icondata: Icons.local_mall_outlined,
+                      isActive: false,
+                      label: 'Dự án đang hoạt động',
+                    )
+                  : const Icon(Icons.local_mall_outlined),
+              selectedIcon: Responsive.isDesktop(context)
+                  ? const LabelAndIcon(
+                      icondata: Icons.local_mall,
+                      isActive: true,
+                      label: 'Dự án đang hoạt động',
+                    )
+                  : const Icon(Icons.local_mall),
+              label: Responsive.isDesktop(context)
+                  ? const SizedBox(height: 0)
+                  : const Text('Dự án đang hoạt động'),
+            ),
+            NavigationRailDestination(
+              icon: Responsive.isDesktop(context)
+                  ? const LabelAndIcon(
+                      icondata: Icons.cases_outlined,
+                      isActive: false,
+                      label: 'Tất cả dự án',
+                    )
+                  : const Icon(Icons.cases_outlined),
+              selectedIcon: Responsive.isDesktop(context)
+                  ? const LabelAndIcon(
+                      icondata: Icons.cases,
+                      isActive: true,
+                      label: 'Tất cả dự án',
+                    )
+                  : const Icon(Icons.cases),
+              label: Responsive.isDesktop(context)
+                  ? const SizedBox(height: 0)
+                  : const Text('Tất cả dự án'),
+            ),
+          ],
+        ),
+        const VerticalDivider(thickness: 1, width: 1),
+        // This is the main content.
+        if (_selectedIndex == 0) const Text('Tất cả liên lạc'),
+        if (_selectedIndex == 1) const Text('Dự án đang hoạt động'),
+        if (_selectedIndex == 2) const Text('Tất cả dự án'),
+      ],
+    );
+  }
+}
+
+class LabelAndIcon extends StatelessWidget {
+  const LabelAndIcon(
+      {Key? key,
+      required this.icondata,
+      required this.label,
+      required this.isActive})
+      : super(key: key);
+  final IconData icondata;
+  final String label;
+  final bool isActive;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      height: 50,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: Row(
+          children: [
+            Icon(
+              icondata,
+              color: isActive ? Colors.blue : Colors.black.withOpacity(0.8),
+            ),
+            const SizedBox(width: 5.0),
+            Text(
+              label,
+              style: TextStyle(color: isActive ? Colors.blue : Colors.grey),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
