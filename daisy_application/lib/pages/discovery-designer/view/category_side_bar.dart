@@ -51,8 +51,9 @@ class LabeledCheckbox extends StatelessWidget {
 class CategoriesPageComponent {
   static SizedBox renderCategoriesCheckbox() {
     return SizedBox(
-      width: 500,
+      width: 350,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           renderExpansionCategory(LogoIdentity.parent),
           renderExpansionCategory(WebAppDesign.parent),
@@ -153,33 +154,43 @@ class AutocompleteBasic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey,
-          width: 1,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Tìm kiếm theo thể loại:',
+          style: TextStyle(fontSize: 16.0),
         ),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      width: 450,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Autocomplete<String>(
-          optionsBuilder: (TextEditingValue textEditingValue) {
-            if (textEditingValue.text == '') {
-              return const Iterable<String>.empty();
-            }
-            return _kOptions.where((String option) {
-              return option
-                  .toLowerCase()
-                  .contains(textEditingValue.text.toLowerCase());
-            });
-          },
-          onSelected: (String selection) {
-            debugPrint('You just selected $selection');
-          },
+        const SizedBox(height: 5.0),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          width: 300,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Autocomplete<String>(
+              optionsBuilder: (TextEditingValue textEditingValue) {
+                if (textEditingValue.text == '') {
+                  return const Iterable<String>.empty();
+                }
+                return _kOptions.where((String option) {
+                  return option
+                      .toLowerCase()
+                      .contains(textEditingValue.text.toLowerCase());
+                });
+              },
+              onSelected: (String selection) {
+                debugPrint('You just selected $selection');
+              },
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

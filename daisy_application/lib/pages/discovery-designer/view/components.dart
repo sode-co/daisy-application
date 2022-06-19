@@ -23,6 +23,7 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
     _controller = TabController(
       length: 2,
       vsync: this,
+      initialIndex: 1,
     );
   }
 
@@ -128,14 +129,27 @@ class FindNewDesignerTab extends StatefulWidget {
 class _FindNewDesignerTabState extends State<FindNewDesignerTab> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const AutocompleteBasic(),
-        ChangeNotifierProvider<CategoriesPageModel>(
-          create: (context) => CategoriesPageModel(),
-          child: CategoriesPageComponent.renderCategoriesCheckbox(),
-        ),
-      ],
+    Size size = MediaQuery.of(context).size;
+
+    return SizedBox(
+      width: size.width,
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: AutocompleteBasic(),
+              ),
+              ChangeNotifierProvider<CategoriesPageModel>(
+                create: (context) => CategoriesPageModel(),
+                child: CategoriesPageComponent.renderCategoriesCheckbox(),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
