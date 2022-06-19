@@ -38,7 +38,7 @@ class BottomNavBar extends StatelessWidget {
                         icon: const IconButtomItem(
                             icon: Icons.person_search_outlined),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/portfolio');
+                          Navigator.pushNamed(context, '/categories');
                         },
                       ),
                       IconButton(
@@ -49,7 +49,9 @@ class BottomNavBar extends StatelessWidget {
                       IconButton(
                         tooltip: 'Favorite',
                         icon: const IconButtomItem(icon: Icons.favorite_border),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/portfolio');
+                        },
                       ),
                       IconButton(
                         tooltip: 'Notifications',
