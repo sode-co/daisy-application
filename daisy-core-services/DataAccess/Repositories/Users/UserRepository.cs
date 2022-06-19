@@ -68,5 +68,15 @@ namespace DataAccess.Repositories.Users
 
         public IEnumerable<User> GetUsersByName(string name) => _dbContext.Users.ToList().
                 Where(user => user.DisplayName.ToUpper().Contains(name.ToUpper())).ToList();
+
+        public IEnumerable<User> GetDesignersByCustomerId(int customerId, IQueryable<Project> projectList)
+        {
+            List<User> designerList = new();
+            var customerProject = projectList.Where(pro => pro.Customer.Id == customerId).ToList();
+            customerProject.ForEach(project => designerList.Add(project.Freelancer));
+            designerList.Distinct();
+
+            return designerList;
+        }
     }
 }
