@@ -38,7 +38,7 @@ class BottomNavBar extends StatelessWidget {
                         icon: const IconButtomItem(
                             icon: Icons.person_search_outlined),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/categories');
+                          Navigator.pushNamed(context, '/discover-designers');
                         },
                       ),
                       IconButton(
