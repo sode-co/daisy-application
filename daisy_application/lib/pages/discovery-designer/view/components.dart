@@ -46,13 +46,15 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
             width: size.width,
             height: 160,
             child: Padding(
-              padding: EdgeInsets.only(left: size.width * 0.015, top: 70),
+              padding: EdgeInsets.only(
+                  left: Responsive.isDesktop(context) ? 80 : size.width * 0.015,
+                  top: 70),
               child: Text(
                 'Designers',
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: Responsive.isDesktop(context) ? 23.0 : 20.0,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black.withOpacity(0.65),
+                  color: Colors.black.withOpacity(0.6),
                 ),
               ),
             ),
@@ -131,24 +133,41 @@ class _FindNewDesignerTabState extends State<FindNewDesignerTab> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return SizedBox(
-      width: size.width,
-      child: Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 12.0),
-                child: AutocompleteBasic(),
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.isDesktop(context) ? 70.0 : 10.0,
+        vertical: Responsive.isDesktop(context) ? 20.0 : 10.0,
+      ),
+      child: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 12.0),
+                  child: AutocompleteBasic(),
+                ),
+                ChangeNotifierProvider<CategoriesPageModel>(
+                  create: (context) => CategoriesPageModel(),
+                  child: CategoriesPageComponent.renderCategoriesCheckbox(),
+                ),
+              ],
+            ),
+            SingleChildScrollView(
+              child: Column(
+                children: const [
+                  DesignerInfoCard(),
+                  DesignerInfoCard(),
+                  DesignerInfoCard(),
+                  DesignerInfoCard(),
+                ],
               ),
-              ChangeNotifierProvider<CategoriesPageModel>(
-                create: (context) => CategoriesPageModel(),
-                child: CategoriesPageComponent.renderCategoriesCheckbox(),
-              ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -121,3 +121,59 @@ class NoActiveProjectInfo extends StatelessWidget {
     );
   }
 }
+
+class DesignerInfoCard extends StatelessWidget {
+  const DesignerInfoCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const DesignerInfo(),
+          Image.asset('assets/images/portfolio/artwork.jpg',
+              width: 160, height: 160),
+          const SizedBox(width: 15.0),
+          Image.asset('assets/images/portfolio/artwork.jpg',
+              width: 160, height: 160),
+          const SizedBox(width: 15.0),
+          Image.asset('assets/images/portfolio/artwork.jpg',
+              width: 160, height: 160),
+        ],
+      ),
+    );
+  }
+}
+
+class DesignerInfo extends StatelessWidget {
+  const DesignerInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 300,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: const [
+              CircleAvatar(
+                backgroundImage:
+                    NetworkImage('assets/images/portfolio/avatar.png'),
+              ),
+              SizedBox(width: 5.0),
+              Text(
+                'Merci Desgn',
+              ),
+            ],
+          ),
+          const SizedBox(height: 10.0),
+          const Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean scelerisque neque mi, non pulvinar ipsum egestas eu. Suspendisse vulputate imperdiet lorem, hendrerit tempus velit mollis in.'),
+        ],
+      ),
+    );
+  }
+}
