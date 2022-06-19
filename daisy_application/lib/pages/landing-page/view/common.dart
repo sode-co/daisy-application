@@ -345,7 +345,7 @@ class WelcomeToLogin extends StatelessWidget {
     bool isDesktop = Responsive.isDesktop(context);
     return Column(
       children: [
-        findYourTalentBtn(isDesktop),
+        findYourTalentBtn(isDesktop, context),
         const SizedBox(height: 10),
         designerJoinNowBtn(isDesktop),
       ],
@@ -375,7 +375,7 @@ class WelcomeToLogin extends StatelessWidget {
     );
   }
 
-  Container findYourTalentBtn(isDesktop) {
+  Container findYourTalentBtn(isDesktop, context) {
     return Container(
       height: 55.0,
       width: isDesktop ? 500.0 : 200.0,
@@ -386,7 +386,9 @@ class WelcomeToLogin extends StatelessWidget {
               color: const Color(BuiltinColor.blue_gradient_01),
               style: BorderStyle.solid)),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/discover-designers');
+        },
         child: const Text(
           'Tìm kiếm designer',
           style: TextStyle(
