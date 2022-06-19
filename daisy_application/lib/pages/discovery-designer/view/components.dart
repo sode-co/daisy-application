@@ -226,8 +226,8 @@ class _ContactSideBarState extends State<ContactSideBar> {
         const VerticalDivider(thickness: 1, width: 1),
         // This is the main content.
         if (_selectedIndex == 0) const MyContact(),
-        if (_selectedIndex == 1) const Text('Dự án đang hoạt động'),
-        if (_selectedIndex == 2) const Text('Tất cả dự án'),
+        if (_selectedIndex == 1) const ActiveProject(),
+        if (_selectedIndex == 2) const ActiveProject(),
       ],
     );
   }
@@ -248,19 +248,52 @@ class _MyContactState extends State<MyContact> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
-            bottom: Responsive.isDesktop(context) ? 680.0 : 770, left: 10.0),
+            bottom: Responsive.isDesktop(context) ? 600.0 : 450, left: 10.0),
         child: SizedBox(
           width: Responsive.isDesktop(context)
-              ? size.width * 0.8
+              ? size.width * 0.7
               : size.width * 0.7,
-          child: Column(children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                SearchByNameTextField(),
-              ],
-            ),
-          ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              SearchByNameTextField(),
+              SizedBox(height: 10.0),
+              NoContactInfo(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ActiveProject extends StatefulWidget {
+  const ActiveProject({Key? key}) : super(key: key);
+
+  @override
+  State<ActiveProject> createState() => _ActiveProjectState();
+}
+
+class _ActiveProjectState extends State<ActiveProject> {
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(
+            bottom: Responsive.isDesktop(context) ? 600.0 : 450, left: 10.0),
+        child: SizedBox(
+          width: Responsive.isDesktop(context)
+              ? size.width * 0.7
+              : size.width * 0.7,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              SearchByNameTextField(),
+              SizedBox(height: 10.0),
+              NoActiveProjectInfo(),
+            ],
+          ),
         ),
       ),
     );

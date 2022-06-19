@@ -77,3 +77,47 @@ class SearchByNameTextField extends StatelessWidget {
     );
   }
 }
+
+class NoContactInfo extends StatelessWidget {
+  const NoContactInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Bạn chưa có liên lạc nào trước đây',
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+              color: Colors.black.withOpacity(0.5)),
+        ),
+        const Text(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor dui et arcu porttitor rutrum. Integer elementum pretium nisi, ac cursus mi blandit vitae. Ut maximus felis id ligula volutpat faucibus. Integer a lorem vulputate, vulputate odio sed, tristique enim. Integer quam turpis, viverra ut tellus id, placerat porta purus. In maximus quam ac enim ultricies, sed rhoncus neque ornare. Nulla mi mauris, feugiat eget arcu non, interdum tincidunt magna. Aenean a est bibendum, convallis est in, volutpat arcu. Morbi malesuada porttitor quam, eu condimentum est dictum vel. Maecenas ultricies ullamcorper purus.!'),
+      ],
+    );
+  }
+}
+
+class NoActiveProjectInfo extends StatelessWidget {
+  const NoActiveProjectInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Bạn chưa có dự án nào đang hoạt động',
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+              color: Colors.black.withOpacity(0.5)),
+        ),
+        const Text(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porttitor dui et arcu porttitor rutrum. Integer elementum pretium nisi, ac cursus mi blandit vitae. Ut maximus felis id ligula volutpat faucibus. Integer a lorem vulputate, vulputate odio sed, tristique enim. Integer quam turpis, viverra ut tellus id, placerat porta purus. In maximus quam ac enim ultricies, sed rhoncus neque ornare. Nulla mi mauris, feugiat eget arcu non, interdum tincidunt magna. Aenean a est bibendum, convallis est in, volutpat arcu. Morbi malesuada porttitor quam, eu condimentum est dictum vel. Maecenas ultricies ullamcorper purus.!'),
+      ],
+    );
+  }
+}
