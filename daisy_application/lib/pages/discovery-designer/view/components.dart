@@ -41,28 +41,27 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
             width: size.width,
             height: 160,
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.05, vertical: 70),
+              padding: EdgeInsets.only(left: size.width * 0.015, top: 70),
               child: Text(
                 'Designers',
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black.withOpacity(0.5),
+                  color: Colors.black.withOpacity(0.65),
                 ),
               ),
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: size.width * 0.05),
+          padding: EdgeInsets.only(left: 0.0),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
               border: Border.all(color: Colors.grey.shade100),
             ),
             child: SizedBox(
-              width: 350.0,
+              width: Responsive.isDesktop(context) ? 430.0 : size.width,
               child: TabBar(
                 labelColor: Colors.black.withOpacity(0.6),
                 indicatorColor:
@@ -155,21 +154,25 @@ class _ContactSideBarState extends State<ContactSideBar> {
             NavigationRailDestination(
               icon: Responsive.isDesktop(context)
                   ? const LabelAndIcon(
-                      icondata: Icons.list_outlined,
+                      icondata: Icons.list,
                       isActive: false,
                       label: 'Tất cả liên lạc',
                     )
-                  : const Icon(Icons.list_outlined),
+                  : const Tooltip(
+                      message: 'Tất cả liên lạc',
+                      child: Icon(Icons.list),
+                    ),
               selectedIcon: Responsive.isDesktop(context)
                   ? const LabelAndIcon(
                       icondata: Icons.list,
                       isActive: true,
                       label: 'Tất cả liên lạc',
                     )
-                  : const Icon(Icons.list),
-              label: Responsive.isDesktop(context)
-                  ? const SizedBox(height: 0)
-                  : const Text('Tất cả liên lạc'),
+                  : const Tooltip(
+                      message: 'Tất cả liên lạc',
+                      child: Icon(Icons.list),
+                    ),
+              label: const SizedBox(height: 0),
             ),
             NavigationRailDestination(
               icon: Responsive.isDesktop(context)
@@ -178,17 +181,21 @@ class _ContactSideBarState extends State<ContactSideBar> {
                       isActive: false,
                       label: 'Dự án đang hoạt động',
                     )
-                  : const Icon(Icons.local_mall_outlined),
+                  : const Tooltip(
+                      message: 'Dự án đang hoạt động',
+                      child: Icon(Icons.local_mall_outlined),
+                    ),
               selectedIcon: Responsive.isDesktop(context)
                   ? const LabelAndIcon(
-                      icondata: Icons.local_mall,
+                      icondata: Icons.local_mall_outlined,
                       isActive: true,
                       label: 'Dự án đang hoạt động',
                     )
-                  : const Icon(Icons.local_mall),
-              label: Responsive.isDesktop(context)
-                  ? const SizedBox(height: 0)
-                  : const Text('Dự án đang hoạt động'),
+                  : const Tooltip(
+                      message: 'Dự án đang hoạt động',
+                      child: Icon(Icons.local_mall_outlined),
+                    ),
+              label: const SizedBox(height: 0),
             ),
             NavigationRailDestination(
               icon: Responsive.isDesktop(context)
@@ -197,17 +204,21 @@ class _ContactSideBarState extends State<ContactSideBar> {
                       isActive: false,
                       label: 'Tất cả dự án',
                     )
-                  : const Icon(Icons.cases_outlined),
+                  : const Tooltip(
+                      message: 'Tất cả dự án',
+                      child: Icon(Icons.cases_outlined),
+                    ),
               selectedIcon: Responsive.isDesktop(context)
                   ? const LabelAndIcon(
-                      icondata: Icons.cases,
+                      icondata: Icons.cases_outlined,
                       isActive: true,
                       label: 'Tất cả dự án',
                     )
-                  : const Icon(Icons.cases),
-              label: Responsive.isDesktop(context)
-                  ? const SizedBox(height: 0)
-                  : const Text('Tất cả dự án'),
+                  : const Tooltip(
+                      message: 'Tất cả dự án',
+                      child: Icon(Icons.cases_outlined),
+                    ),
+              label: const SizedBox(height: 0),
             ),
           ],
         ),
@@ -243,12 +254,18 @@ class LabelAndIcon extends StatelessWidget {
           children: [
             Icon(
               icondata,
-              color: isActive ? Colors.blue : Colors.black.withOpacity(0.8),
+              color: isActive
+                  ? const Color(BuiltinColor.blue_gradient_01)
+                  : Colors.black.withOpacity(0.8),
             ),
             const SizedBox(width: 5.0),
             Text(
               label,
-              style: TextStyle(color: isActive ? Colors.blue : Colors.grey),
+              style: TextStyle(
+                color: isActive
+                    ? const Color(BuiltinColor.blue_gradient_01)
+                    : Colors.black.withOpacity(0.8),
+              ),
             ),
           ],
         ),
