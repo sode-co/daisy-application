@@ -65,16 +65,8 @@ class _DiscoverDesignerState extends State<DiscoverDesigner>
       ],
       child: Scaffold(
         appBar: const Header(),
-        body: SingleChildScrollView(
-          child: Container(
-            decoration: BoxDecoration(color: Colors.grey.shade100),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal:
-                      Responsive.isDesktop(context) ? size.width * 0.12 : 0.0),
-              child: const DiscoverDesignerBody(),
-            ),
-          ),
+        body: const SingleChildScrollView(
+          child: DiscoverDesignerBody(),
         ),
         bottomNavigationBar:
             !Responsive.isDesktop(context) ? const BottomNavBar() : null,

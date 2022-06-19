@@ -9,4 +9,5 @@ class BuiltinColor {
   static const dark_blue = 0xff000c49;
   static const black = 0xff000000;
   static const white = 0xffffffff;
+  static const pastel_blue = 0xffe9efff;
 }
