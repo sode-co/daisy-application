@@ -1,7 +1,10 @@
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
+import 'package:daisy_application/pages/discovery-designer/model/category.dart';
+import 'package:daisy_application/pages/discovery-designer/view/category_side_bar.dart';
 import 'package:daisy_application/pages/discovery-designer/view/stateless_components.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DiscoverDesignerBody extends StatefulWidget {
   const DiscoverDesignerBody({Key? key}) : super(key: key);
@@ -125,7 +128,15 @@ class FindNewDesignerTab extends StatefulWidget {
 class _FindNewDesignerTabState extends State<FindNewDesignerTab> {
   @override
   Widget build(BuildContext context) {
-    return const Text('FindNewDesignerTab');
+    return Column(
+      children: [
+        const AutocompleteBasic(),
+        ChangeNotifierProvider<CategoriesPageModel>(
+          create: (context) => CategoriesPageModel(),
+          child: CategoriesPageComponent.renderCategoriesCheckbox(),
+        ),
+      ],
+    );
   }
 }
 
