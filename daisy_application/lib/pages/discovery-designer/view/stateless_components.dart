@@ -122,8 +122,8 @@ class NoActiveProjectInfo extends StatelessWidget {
   }
 }
 
-class DesignerInfoCard extends StatelessWidget {
-  const DesignerInfoCard({Key? key}) : super(key: key);
+class DesignerInfoCardWeb extends StatelessWidget {
+  const DesignerInfoCardWeb({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +141,40 @@ class DesignerInfoCard extends StatelessWidget {
           const SizedBox(width: 15.0),
           Image.asset('assets/images/portfolio/artwork.jpg',
               width: 160, height: 160),
+        ],
+      ),
+    );
+  }
+}
+
+class DesignerInfoCardMobile extends StatelessWidget {
+  const DesignerInfoCardMobile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+            child: DesignerInfo(),
+          ),
+          SizedBox(
+            height: 90,
+            child: GridView.count(
+              crossAxisCount: 3,
+              children: [
+                Image.asset('assets/images/portfolio/artwork.jpg',
+                    width: 160, height: 160),
+                Image.asset('assets/images/portfolio/artwork.jpg',
+                    width: 160, height: 160),
+                Image.asset('assets/images/portfolio/artwork.jpg',
+                    width: 160, height: 160),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -83,7 +83,6 @@ class CategoriesPageModel with ChangeNotifier {
       var index = labelSelectedCategories.indexOf(categoryName);
       labelSelectedCategories.removeAt(index);
     }
-    print(labelSelectedCategories);
     notifyListeners();
   }
 }

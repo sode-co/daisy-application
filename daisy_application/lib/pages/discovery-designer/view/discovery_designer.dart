@@ -52,8 +52,6 @@ class _DiscoverDesignerState extends State<DiscoverDesigner>
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

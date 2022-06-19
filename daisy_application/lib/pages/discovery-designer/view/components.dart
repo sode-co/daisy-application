@@ -47,12 +47,13 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
             height: 160,
             child: Padding(
               padding: EdgeInsets.only(
-                  left: Responsive.isDesktop(context) ? 80 : size.width * 0.015,
-                  top: 70),
+                left: Responsive.isDesktop(context) ? 80.0 : 70.0,
+                top: 70.0,
+              ),
               child: Text(
                 'Designers',
                 style: TextStyle(
-                  fontSize: Responsive.isDesktop(context) ? 23.0 : 20.0,
+                  fontSize: Responsive.isDesktop(context) ? 23.0 : 21.0,
                   fontWeight: FontWeight.w600,
                   color: Colors.black.withOpacity(0.6),
                 ),
@@ -61,7 +62,7 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 0.0),
+          padding: const EdgeInsets.only(left: 0.0),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
@@ -96,9 +97,11 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
           height: size.height,
           child: TabBarView(
             controller: _controller,
-            children: const <Widget>[
-              ContactTab(),
-              FindNewDesignerTab(),
+            children: <Widget>[
+              const ContactTab(),
+              Responsive.isDesktop(context)
+                  ? const FindNewDesignerTabWeb()
+                  : const FindNewDesignerTabMobile(),
             ],
           ),
         ),
@@ -121,14 +124,14 @@ class _ContactTabState extends State<ContactTab> {
   }
 }
 
-class FindNewDesignerTab extends StatefulWidget {
-  const FindNewDesignerTab({Key? key}) : super(key: key);
+class FindNewDesignerTabWeb extends StatefulWidget {
+  const FindNewDesignerTabWeb({Key? key}) : super(key: key);
 
   @override
-  State<FindNewDesignerTab> createState() => _FindNewDesignerTabState();
+  State<FindNewDesignerTabWeb> createState() => _FindNewDesignerTabWebState();
 }
 
-class _FindNewDesignerTabState extends State<FindNewDesignerTab> {
+class _FindNewDesignerTabWebState extends State<FindNewDesignerTabWeb> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -159,14 +162,57 @@ class _FindNewDesignerTabState extends State<FindNewDesignerTab> {
             SingleChildScrollView(
               child: Column(
                 children: const [
-                  DesignerInfoCard(),
-                  DesignerInfoCard(),
-                  DesignerInfoCard(),
-                  DesignerInfoCard(),
+                  DesignerInfoCardWeb(),
+                  DesignerInfoCardWeb(),
+                  DesignerInfoCardWeb(),
+                  DesignerInfoCardWeb(),
                 ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class FindNewDesignerTabMobile extends StatefulWidget {
+  const FindNewDesignerTabMobile({Key? key}) : super(key: key);
+
+  @override
+  State<FindNewDesignerTabMobile> createState() =>
+      _FindNewDesignerTabMobileState();
+}
+
+class _FindNewDesignerTabMobileState extends State<FindNewDesignerTabMobile> {
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: Responsive.isDesktop(context) ? 70.0 : 10.0,
+          vertical: Responsive.isDesktop(context) ? 20.0 : 10.0,
+        ),
+        child: SizedBox(
+          width: size.width,
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: AutocompleteBasic(),
+              ),
+              ChangeNotifierProvider<CategoriesPageModel>(
+                create: (context) => CategoriesPageModel(),
+                child: CategoriesPageComponent.renderCategoriesCheckbox(),
+              ),
+              const DesignerInfoCardMobile(),
+              const DesignerInfoCardMobile(),
+              const DesignerInfoCardMobile(),
+              const DesignerInfoCardMobile(),
+            ],
+          ),
         ),
       ),
     );
@@ -319,6 +365,7 @@ class ActiveProject extends StatefulWidget {
 }
 
 class _ActiveProjectState extends State<ActiveProject> {
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
