@@ -131,5 +131,16 @@ namespace Api.Controllers.CustomerController
                 return users;
             }
         }
+        [HttpGet("designers/{customerId}")]
+        public IEnumerable<User> GetDesignersByCustomerId(int customerId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var projectList = work.ProjectRepository.GetAll(null, null, "Customer,Freelancer,Category,Payment,Request");
+                IEnumerable<User> designers = work.UserRepository.GetDesignersByCustomerId(customerId, projectList);
+
+                return designers;
+            }
+        }
     }
 }
