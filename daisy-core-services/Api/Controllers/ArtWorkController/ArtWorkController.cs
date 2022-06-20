@@ -26,10 +26,7 @@ namespace Api.Controllers.ArtWorkController
             using (var work = _unitOfWorkFactory.Get)
             {
                 ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(art => art.Id.Equals(artworkId));
-                if (artWork != null)
-                {
-                    return Json(artWork);
-                }
+                if (artWork != null) return Json(artWork);
 
                 return NotFound();
             }
