@@ -22,8 +22,7 @@ namespace Domain.Models
         [MaxLength(255)]
         public String PreferredLanguage { get; set; }
 
-        [Required]
-        public long Timeline { get; set; }
+        public DateTime? Timeline { get; set; }
 
         [Required]
         public decimal OfferedPrice { get; set; }

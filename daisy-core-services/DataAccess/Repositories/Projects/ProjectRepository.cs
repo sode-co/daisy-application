@@ -47,7 +47,7 @@ namespace DataAccess.Repositories.Projects
                 PreferredLanguage = job.PreferredLanguage,
                 Name = req.Title,
                 Description = req.Description,
-                Timeline = job.Timeline,
+                Timeline = job.Timeline ?? req.Timeline,
                 Budget = req.Budget ?? job.OfferedPrice,
                 IsAllowedPublic = isAllowedPublic,
                 Status = projectStatus,

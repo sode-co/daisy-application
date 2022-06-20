@@ -36,7 +36,7 @@ namespace Domain.Models
         public String Description { get; set; }
 
         [Required]
-        public long Timeline { get; set; }
+        public DateTime Timeline { get; set; }
 
         [Required]
         public decimal Budget { get; set; }
