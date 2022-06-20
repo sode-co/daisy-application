@@ -101,5 +101,8 @@ namespace DataAccess.Repositories.Projects
             _dbContext.SaveChanges();
             transaction.Commit();
         }
+
+        public IEnumerable<Project> GetProjectsByStatus(int customerId, IQueryable<Project> projectList, string projectStatus)
+                    => projectList.Where(pro => pro.Customer.Id == customerId && pro.Status.Equals(projectStatus)).ToList();
     }
 }
