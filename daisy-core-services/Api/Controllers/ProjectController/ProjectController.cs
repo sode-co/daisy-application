@@ -137,5 +137,20 @@ namespace Api.Controllers.ProjectController
                 return result;
             }
         }
+
+        [HttpGet("customer/status")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public IEnumerable<Project> GetProjectByStatus(string projectStatus)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                UserExposeModel loginUser = (UserExposeModel)HttpContext.Items["User"];
+                var projectList = work.ProjectRepository.GetAll(null, null, "Customer,Freelancer,Category,Payment,Request");
+                int customerId = loginUser.Id;
+                IEnumerable<Project> projects = work.ProjectRepository.GetProjectsByStatus(customerId, projectList, projectStatus);
+
+                return projects;
+            }
+        }
     }
 }

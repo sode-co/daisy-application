@@ -26,4 +26,12 @@ class Style {
       fontWeight: FontWeight.bold,
       fontSize: 16,
       color: Color(BuiltinColor.blue_gradient_01));
+  static var stringText = TextStyle(
+    fontSize: 16,
+    color: Colors.black.withOpacity(0.7),
+  );
+  static var placeHolderText = TextStyle(
+    fontSize: 16,
+    color: Colors.black.withOpacity(0.5),
+  );
 }

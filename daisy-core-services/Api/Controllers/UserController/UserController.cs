@@ -36,7 +36,7 @@ namespace Api.Controllers.CustomerController
 
         }
 
-        [HttpGet("{id}/detail")]
+        [HttpGet("{id}")]
         public ActionResult<User> GetUser(int id)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -129,6 +129,17 @@ namespace Api.Controllers.CustomerController
                 if (users is null) return (IEnumerable<User>)NotFound();
 
                 return users;
+            }
+        }
+        [HttpGet("designers/customer/{customerId}")]
+        public IEnumerable<User> GetDesignersByCustomerId(int customerId)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var projectList = work.ProjectRepository.GetAll(null, null, "Customer,Freelancer,Category,Payment,Request");
+                IEnumerable<User> designers = work.UserRepository.GetDesignersByCustomerId(customerId, projectList);
+
+                return designers;
             }
         }
     }
