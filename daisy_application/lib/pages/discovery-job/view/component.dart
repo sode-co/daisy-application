@@ -22,28 +22,54 @@ class _JobInfoColumnState extends State<JobInfoColumn> {
     1,
     'firstname',
     'lastname',
-    'displayname',
+    'Select Technology, LLC ',
     'email',
     'role',
     'setting',
-    'avatar',
-    'address',
+    'assets/images/portfolio/avatar.png',
+    'District 7, Ho Chi Minh City, Vietnam ',
     'phone',
   );
   late RequestModel request = RequestModel(
     1,
     user,
     category,
-    '1',
+    'Mobile Application Developer (iOS or/and Android)',
     '1',
     1.0,
     '1',
   );
   @override
   Widget build(BuildContext context) {
-    return IntroJobCard(
-      img: 'assets/images/portfolio/avatar.png',
-      request: request,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          IntroJobCard(
+            img: 'assets/images/portfolio/avatar.png',
+            request: request,
+          ),
+          IntroJobCard(
+            img: 'assets/images/portfolio/avatar.png',
+            request: request,
+          ),
+          IntroJobCard(
+            img: 'assets/images/portfolio/avatar.png',
+            request: request,
+          ),
+          IntroJobCard(
+            img: 'assets/images/portfolio/avatar.png',
+            request: request,
+          ),
+          IntroJobCard(
+            img: 'assets/images/portfolio/avatar.png',
+            request: request,
+          ),
+          IntroJobCard(
+            img: 'assets/images/portfolio/avatar.png',
+            request: request,
+          ),
+        ],
+      ),
     );
   }
 }
