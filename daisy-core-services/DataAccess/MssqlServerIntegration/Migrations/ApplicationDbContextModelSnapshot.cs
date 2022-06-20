@@ -560,7 +560,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Timeline")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -622,7 +621,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Timeline")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
