@@ -141,7 +141,7 @@ namespace Api.Controllers.ProjectController
             }
         }
 
-        [HttpGet("customer")]
+        [HttpGet("customer/status")]
         [Authorize(Policy = ROLE.CUSTOMER)]
         public IEnumerable<Project> GetProjectByStatus(string projectStatus)
         {          
