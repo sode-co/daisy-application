@@ -138,7 +138,7 @@ class AboutTab extends StatelessWidget {
                                 ? size.width * 0.6
                                 : size.width * 0.8,
                             // child: const Flexible(
-                            child: Text(
+                            child: const Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
                             // ),
                           ),
@@ -147,7 +147,7 @@ class AboutTab extends StatelessWidget {
                                 ? size.width * 0.6
                                 : size.width * 0.8,
                             // child: const Flexible(
-                            child: Text(
+                            child: const Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
                             // ),
                           ),
@@ -156,7 +156,7 @@ class AboutTab extends StatelessWidget {
                                 ? size.width * 0.6
                                 : size.width * 0.8,
                             // child: const Flexible(
-                            child: Text(
+                            child: const Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
                             // ),
                           ),
@@ -194,7 +194,7 @@ class AboutTab extends StatelessWidget {
                                 ? size.width * 0.6
                                 : size.width * 0.8,
                             // child: const Flexible(
-                            child: Text(
+                            child: const Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
                             // ),
                           ),
@@ -203,7 +203,7 @@ class AboutTab extends StatelessWidget {
                                 ? size.width * 0.6
                                 : size.width * 0.8,
                             // child: const Flexible(
-                            child: Text(
+                            child: const Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
                             // ),
                           ),
@@ -212,7 +212,7 @@ class AboutTab extends StatelessWidget {
                                 ? size.width * 0.6
                                 : size.width * 0.8,
                             // child: const Flexible(
-                            child: Text(
+                            child: const Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
                             // ),
                           ),
@@ -221,7 +221,7 @@ class AboutTab extends StatelessWidget {
                                 ? size.width * 0.6
                                 : size.width * 0.8,
                             // child: const Flexible(
-                            child: Text(
+                            child: const Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor odio vel sem hendrerit, a pellentesque nunc euismod. Praesent convallis fringilla mauris a convallis. Phasellus ultricies augue id mollis scelerisque. Pellentesque ut ligula orci. Maecenas varius vel quam in hendrerit. Pellentesque dapibus nulla nibh, non mattis risus placerat eu. Morbi suscipit eu lorem quis congue. Ut rhoncus, neque eget tristique luctus, ligula mauris tempus neque, eu gravida lorem ex rhoncus sem. Curabitur pharetra aliquet felis, quis ultricies libero sodales sit amet.'),
                             // ),
                           ),

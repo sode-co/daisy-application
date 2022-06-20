@@ -14,6 +14,7 @@ namespace DataAccess.Repositories.Users
         IEnumerable<User> GetUsers();
         IEnumerable<User> GetUsersByName(string name);
         IEnumerable<User> GetDesignersByCategory(int categoryId);
+        IEnumerable<User> GetDesignersByCustomerId(int customerId, IQueryable<Project> projectList);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);

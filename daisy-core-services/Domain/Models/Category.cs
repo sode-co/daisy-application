@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using BusinessObject;
 
@@ -16,6 +17,10 @@ namespace Domain.Models
         [MaxLength(255)]
         [Required]
         public String Type { get; set; }
+
+        public virtual ICollection<Category> ParentCategory { get; set; }
+
+        public virtual ICollection<Category> ChildrenCategory { get; set; }
 
         public override string TableName => "Categories";
 
