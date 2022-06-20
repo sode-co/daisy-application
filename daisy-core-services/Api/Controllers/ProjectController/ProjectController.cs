@@ -69,9 +69,11 @@ namespace Api.Controllers.ProjectController
                     work.Save();
                     return Json(new { message = "ok" });
                 }
-            } catch (Exception er)
+            }
+            catch (Exception er)
             {
-                return Json(new { 
+                return Json(new
+                {
                     message = "Something went wrong!!!",
                     detail = er.Message
                 });
@@ -92,7 +94,8 @@ namespace Api.Controllers.ProjectController
                     work.Save();
                     return Json(new { message = "ok" });
                 }
-            } catch (Exception er)
+            }
+            catch (Exception er)
             {
                 return Json(new
                 {
@@ -110,7 +113,7 @@ namespace Api.Controllers.ProjectController
             //{
             //    work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED);
             //    work.Save();
-                return Json(new { message = "ok" });
+            return Json(new { message = "ok" });
             //}
         }
 
@@ -120,7 +123,7 @@ namespace Api.Controllers.ProjectController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                var project = work.ProjectRepository.GetAll(null, null,"Customer,Freelancer,Category,Payment,Request");
+                var project = work.ProjectRepository.GetAll(null, null, "Customer,Freelancer,Category,Payment,Request");
                 var result = _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectVM>>(project);
                 return result;
             }
@@ -136,6 +139,22 @@ namespace Api.Controllers.ProjectController
                 var result = _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectVM>>(project);
                 return result;
             }
+        }
+
+        [HttpGet("customer")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public IEnumerable<Project> GetProjectByStatus(string projectStatus)
+        {          
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                UserExposeModel loginUser = (UserExposeModel)HttpContext.Items["User"];
+                var projectList = work.ProjectRepository.GetAll(null, null, "Customer,Freelancer,Category,Payment,Request");
+                int customerId = loginUser.Id;
+                IEnumerable<Project> projects = work.ProjectRepository.GetProjectsByStatus(customerId, projectList, projectStatus);
+
+                return projects;
+            }
+
         }
     }
 }

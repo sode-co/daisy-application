@@ -18,14 +18,15 @@ namespace DataAccess.Repositories.Projects
             _dbContext = dbContext;
         }
 
-        public void CreateProjectAndWorkspace (int jobApplicationId, bool isAllowedPublic, string projectStatus, string requestStatus, string parentRequestStatus, int loginUserId)
+        public void CreateProjectAndWorkspace(int jobApplicationId, bool isAllowedPublic, string projectStatus, string requestStatus, string parentRequestStatus, int loginUserId)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
             JobApplication job = _dbContext.JobApplications
                             .Include(j => j.Request)
                             .Include(j => j.Freelancer)
                             .FirstOrDefault(j => j.Id == jobApplicationId);
-            if (job == null) {
+            if (job == null)
+            {
                 throw new Exception("Job application not found!");
             }
 
@@ -74,7 +75,7 @@ namespace DataAccess.Repositories.Projects
             transaction.Commit();
         }
 
-        public void DeactivateProject (int projectId, string projectStatus, string requestStatus, int loginUserId)
+        public void DeactivateProject(int projectId, string projectStatus, string requestStatus, int loginUserId)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
             Project pro = _dbContext.Projects.Include(p => p.Request).FirstOrDefault(p => p.Id == projectId);
@@ -101,5 +102,8 @@ namespace DataAccess.Repositories.Projects
             _dbContext.SaveChanges();
             transaction.Commit();
         }
+
+        public IEnumerable<Project> GetProjectsByStatus(int customerId, IQueryable<Project> projectList, string projectStatus)
+            => projectList.Where(pro => pro.Customer.Id == customerId && pro.Status.Equals(projectStatus)).ToList();
     }
 }
