@@ -25,7 +25,7 @@ namespace Api.Controllers.ArtWorkController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(art => art.Id.Equals(artworkId));
+                ArtWork artWork = work.ArtWorkRepository.Get(artworkId);
                 if (artWork != null) return Json(artWork);
 
                 return NotFound();
@@ -69,12 +69,13 @@ namespace Api.Controllers.ArtWorkController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(art => art.Id.Equals(artworkId));
-                if (artWork is null) return NotFound();
-                
+                ArtWork artWork = work.ArtWorkRepository.Get(artworkId);
+                if (artWork is null) return NotFound();               
                 artWork.Description = artWorkVM.Description;
                 artWork.Title = artWorkVM.Title;
-                artWork.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id.Equals(artWorkVM.CategoryId));
+                artWork.Category = work.CategoryRepository.Get(artWorkVM.CategoryId);
+                work.Save();
+
                 return Json(new { message = "ok" });
             }
             
