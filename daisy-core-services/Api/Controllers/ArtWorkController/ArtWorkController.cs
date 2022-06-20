@@ -70,15 +70,12 @@ namespace Api.Controllers.ArtWorkController
             using (var work = _unitOfWorkFactory.Get)
             {
                 ArtWork artWork = work.ArtWorkRepository.GetFirstOrDefault(art => art.Id.Equals(artworkId));
-                if (artWork != null)
-                {
-                    artWork.Description = artWorkVM.Description;
-                    artWork.Title = artWorkVM.Title;
-                    artWork.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id.Equals(artWorkVM.CategoryId));
-                    return Json(new { message = "ok" });
-                }
-
-                return NotFound();
+                if (artWork is null) return NotFound();
+                
+                artWork.Description = artWorkVM.Description;
+                artWork.Title = artWorkVM.Title;
+                artWork.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id.Equals(artWorkVM.CategoryId));
+                return Json(new { message = "ok" });
             }
             
         }
