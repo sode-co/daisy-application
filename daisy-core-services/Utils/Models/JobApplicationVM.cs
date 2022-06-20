@@ -11,7 +11,7 @@ namespace Utils.Models
         public int RequestId { get; set; }
         public string Description { get; set; }
         public string PreferedLanguage { get; set; }
-        public long Timeline { get; set; }
-        public decimal Budget { get; set; }
+        public DateTime? Timeline { get; set; }
+        public decimal OfferedPrice { get; set; }
     }
 }
