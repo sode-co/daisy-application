@@ -49,7 +49,9 @@ class BottomNavBar extends StatelessWidget {
                       IconButton(
                         tooltip: 'Favorite',
                         icon: const IconButtomItem(icon: Icons.favorite_border),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/portfolio');
+                        },
                       ),
                       IconButton(
                         tooltip: 'Notifications',

@@ -11,6 +11,7 @@ import 'package:daisy_application/core_services/http/health_check/health_check_r
 import 'package:daisy_application/pages/discovery-designer/view/discovery_designer.dart';
 import 'package:daisy_application/pages/discovery-page/discovery.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
+import 'package:daisy_application/pages/portfolio/portfolio.dart';
 import 'package:daisy_application/pages/signup-page/view/signup.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
           '/categories': (context) => const DiscoveryPage(),
           '/signup': (context) => const SignUp(),
           '/discover-designers': (context) => const DiscoverDesigner(),
+          '/portfolio': (context) => const Portfolio(),
         },
         home: const LandingPage(),
       ),
