@@ -186,27 +186,32 @@ class DesignerInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: const [
-              CircleAvatar(
-                backgroundImage:
-                    NetworkImage('assets/images/portfolio/avatar.png'),
-              ),
-              SizedBox(width: 5.0),
-              Text(
-                'Merci Desgn',
-              ),
-            ],
-          ),
-          const SizedBox(height: 10.0),
-          const Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean scelerisque neque mi, non pulvinar ipsum egestas eu. Suspendisse vulputate imperdiet lorem, hendrerit tempus velit mollis in.'),
-        ],
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/portfolio');
+      },
+      child: SizedBox(
+        width: 300,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: const [
+                CircleAvatar(
+                  backgroundImage:
+                      NetworkImage('assets/images/portfolio/avatar.png'),
+                ),
+                SizedBox(width: 5.0),
+                Text(
+                  'Merci Desgn',
+                ),
+              ],
+            ),
+            const SizedBox(height: 10.0),
+            const Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean scelerisque neque mi, non pulvinar ipsum egestas eu. Suspendisse vulputate imperdiet lorem, hendrerit tempus velit mollis in.'),
+          ],
+        ),
       ),
     );
   }

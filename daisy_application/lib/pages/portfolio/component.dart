@@ -259,21 +259,21 @@ class _PortfolioTabState extends State<PortfolioTab> {
   ];
 
   List<String> images = [
+    'assets/images/portfolio/artwork.jpg',
+    'assets/images/portfolio/artwork.jpg',
+    'assets/images/portfolio/artwork.jpg',
     'assets/images/portfolio/avatar.png',
     'assets/images/portfolio/avatar.png',
     'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/artwork.jpg',
+    'assets/images/portfolio/artwork.jpg',
+    'assets/images/portfolio/artwork.jpg',
     'assets/images/portfolio/avatar.png',
     'assets/images/portfolio/avatar.png',
     'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
-    'assets/images/portfolio/avatar.png',
+    'assets/images/portfolio/artwork.jpg',
+    'assets/images/portfolio/artwork.jpg',
+    'assets/images/portfolio/artwork.jpg',
     'assets/images/portfolio/avatar.png',
   ];
 
