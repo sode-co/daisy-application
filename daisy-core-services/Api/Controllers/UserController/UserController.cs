@@ -131,7 +131,7 @@ namespace Api.Controllers.CustomerController
                 return users;
             }
         }
-        [HttpGet("designers/{customerId}")]
+        [HttpGet("designers/customer/{customerId}")]
         public IEnumerable<User> GetDesignersByCustomerId(int customerId)
         {
             using (var work = _unitOfWorkFactory.Get)
