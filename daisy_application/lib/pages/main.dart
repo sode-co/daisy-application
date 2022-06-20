@@ -8,7 +8,7 @@ import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
-import 'package:daisy_application/pages/discovery-page/discovery.dart';
+import 'package:daisy_application/pages/discovery-job/view/discovery_job.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/portfolio/portfolio.dart';
 import 'package:daisy_application/pages/post-new-job/view/post_new_job.dart';
@@ -69,10 +69,10 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/categories': (context) => const DiscoveryPage(),
           '/signup': (context) => const SignUp(),
           '/portfolio': (context) => const Portfolio(),
           '/post-new-job': (context) => const PostNewJob(),
+          '/find-freelance-job': (context) => const DiscoverJob(),
         },
         home: const LandingPage(),
       ),
