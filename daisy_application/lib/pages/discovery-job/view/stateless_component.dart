@@ -1,13 +1,11 @@
-import 'package:daisy_application/core_services/models/user/user_model.dart';
+import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class IntroJobCard extends StatelessWidget {
-  const IntroJobCard({Key? key, required this.img, required this.user})
+  const IntroJobCard({Key? key, required this.img, required this.request})
       : super(key: key);
   final String img;
-  final UserModel user;
+  final RequestModel request;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +15,13 @@ class IntroJobCard extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(img),
+          Column(
+            children: [
+              Text(
+                request.title.toString(),
+              ),
+            ],
+          ),
         ],
       ),
     );
