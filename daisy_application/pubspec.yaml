@@ -48,6 +48,7 @@ flutter:
     - assets/images/intro/
     - assets/images/intro/trending/
     - assets/images/portfolio/
+    - assets/images/post-new-job/
 
   #  fonts:
   #   - family: Butler

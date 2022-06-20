@@ -26,9 +26,6 @@ class Style {
       fontWeight: FontWeight.bold,
       fontSize: 16,
       color: Color(BuiltinColor.blue_gradient_01));
-
-  // After merge the https://github.com/sode-co/daisy-application/pull/69/files
-// I will reuse it
   static var stringText = TextStyle(
     fontSize: 16,
     color: Colors.black.withOpacity(0.7),
