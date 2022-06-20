@@ -25,6 +25,9 @@ namespace Domain.Models
 
         public decimal? Budget { get; set; }
 
+        [Required]
+        public DateTime TimeLine { get; set; }
+
         public virtual Request ParentRequest { get; set; }
 
         public virtual ICollection<Request> Items { get; set; }
