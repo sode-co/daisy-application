@@ -10,6 +10,7 @@ import 'package:daisy_application/core_services/grpc/healthcheck/health_check_gr
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/pages/discovery-page/discovery.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
+import 'package:daisy_application/pages/portfolio/portfolio.dart';
 import 'package:daisy_application/pages/post-new-job/view/post_new_job.dart';
 import 'package:daisy_application/pages/signup-page/view/signup.dart';
 import 'package:daisy_application/service_locator/locator.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/categories': (context) => const DiscoveryPage(),
           '/signup': (context) => const SignUp(),
+          '/portfolio': (context) => const Portfolio(),
           '/post-new-job': (context) => const PostNewJob(),
         },
         home: const LandingPage(),
