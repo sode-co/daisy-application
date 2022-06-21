@@ -7,4 +7,5 @@ class PostNewJobState with ChangeNotifier {
   late List<CategoryModel> parentCategories;
   CategoryModel parentCategory = CategoryModel.init()
     ..name = 'Nhận diện thương hiệu';
+  RequestModel requestTest = RequestModel.init();
 }

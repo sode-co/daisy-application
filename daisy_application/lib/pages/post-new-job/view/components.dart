@@ -2,6 +2,7 @@ import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/models/category/category_model.dart';
+import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
@@ -46,6 +47,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
   int indexRequestChild = 0;
 
   String datetimedisplay = DateTime.now().toString();
+  RequestModel newRequest = RequestModel.init();
 
   @override
   Widget build(BuildContext context) {
@@ -84,16 +86,10 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      CustomTextField(
+                      const CustomTextField(
                         fieldName: 'Đặt tên cụ thể cho công việc cần tuyển',
                         label: 'Tên dự án',
                         maxLines: 1,
-                        validation: (value) {
-                          if (value == null) {
-                            return 'Giá trị nhập vào phải là số thập phân???';
-                          }
-                          return null;
-                        },
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -415,7 +411,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    var model = context.watch<PostNewJobState>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -429,6 +425,9 @@ class CustomTextField extends StatelessWidget {
               ? size.width * 0.6
               : size.width * 0.7,
           child: TextFormField(
+            onFieldSubmitted: (value) {
+              model.requestTest.title = value;
+            },
             validator: validation,
             maxLines: maxLines,
             decoration: InputDecoration(
