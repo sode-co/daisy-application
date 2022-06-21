@@ -11,6 +11,7 @@ class CategoryService {
       print(result.data.parentCategories[0]['name']);
       print('--------------');
     }
+
     return result;
   }
 

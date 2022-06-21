@@ -8,6 +8,7 @@ import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
+import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:daisy_application/pages/discovery-job/view/discovery_job.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/portfolio/portfolio.dart';
@@ -22,6 +23,10 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  if (!Hive.isBoxOpen(AuthenticationPersistent.BOX_NAME)) {
+    await Hive.openBox(AuthenticationPersistent.BOX_NAME);
+  }
+
   if (!PlatformHelper.isPlatform(PLATFORM.Web)) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

@@ -1,6 +1,10 @@
+import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/core_services/common/response_handler.dart';
+import 'package:daisy_application/domain-services/category_service.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
+import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
@@ -29,6 +33,22 @@ class PostNewJobForm extends StatefulWidget {
 }
 
 class _PostNewJobFormState extends State<PostNewJobForm> {
+  List<dynamic> _categories = [];
+
+  @override
+  initState() {
+    super.initState();
+    _initData();
+  }
+
+  _initData() async {
+    CategoryService _categoryService = locator.get();
+    Result result = await _categoryService.getAllParentCategories();
+    setState(() {
+      _categories = result.data.parentCategories;
+    });
+  }
+
   List<String> categories = [
     'Web & app design',
     'Logo & identity',
@@ -47,6 +67,9 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
 
   @override
   Widget build(BuildContext context) {
+    Debug.log('---------------------hkjbkgdjnbkgd----');
+
+    print(_categories);
     Size size = MediaQuery.of(context).size;
     double imgWidth =
         Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.18;
