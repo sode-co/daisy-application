@@ -28,7 +28,7 @@ class Style {
       color: Color(BuiltinColor.blue_gradient_01));
   static var stringText = TextStyle(
     fontSize: 16,
-    color: Colors.black.withOpacity(0.7),
+    color: Colors.black.withOpacity(0.8),
   );
   static var placeHolderText = TextStyle(
     fontSize: 16,

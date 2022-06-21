@@ -48,7 +48,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
     double imgWidth =
         Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.18;
     double childItemPadding =
-        Responsive.isDesktop(context) ? size.width * 0.072 : size.width * 0.08;
+        Responsive.isDesktop(context) ? size.width * 0.028 : size.width * 0.08;
     double formPaddingHorizontal =
         Responsive.isDesktop(context) ? size.width * 0.15 : size.width * 0.005;
     double formPaddingVertical =
@@ -405,18 +405,24 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
         Text(
           'Đầu việc thứ $_index:',
           style: TextStyle(
-            fontSize: 17.0,
-            color: Colors.black.withOpacity(0.68),
+            fontSize: 17.5,
+            color: Colors.black.withOpacity(0.8),
             fontWeight: FontWeight.bold,
           ),
+        ),
+        const SizedBox(
+          height: 10.0,
         ),
         DropdownList(
           categories: categories,
           label: 'Chọn lĩnh vực cần tuyển',
         ),
+        const SizedBox(
+          height: 5.0,
+        ),
         CustomTextField(
           fieldName: 'Đặt tên cụ thể cho item $_index',
-          label: 'Tên dự án',
+          label: 'Tên đầu việc',
           maxLines: 1,
           validation: (value) {
             if (value == null) {
@@ -425,12 +431,20 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
             return null;
           },
         ),
+        const SizedBox(
+          height: 5.0,
+        ),
         const CustomTextField(
           fieldName: 'Nội dung chi tiết',
-          label: 'Mô tả',
+          label: 'Mô tả đầu việc',
           maxLines: 3,
         ),
-        const SizedBox(height: 20.0),
+        const SizedBox(height: 10.0),
+        Container(
+          color: Colors.grey.shade500,
+          child: const SizedBox(height: 1.0, width: 200.0),
+        ),
+        const SizedBox(height: 25.0),
       ],
     );
   }
