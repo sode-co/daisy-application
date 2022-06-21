@@ -149,7 +149,7 @@ class InfoJobCard extends StatelessWidget {
                   child: const SizedBox(width: 600, height: 1.0),
                 ),
                 const SizedBox(
-                  height: 10.0,
+                  height: 18.0,
                 ),
               ],
             ),
