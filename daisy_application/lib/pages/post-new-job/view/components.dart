@@ -43,6 +43,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
   List<Widget> requestChildren = [];
   int indexRequestChild = 0;
 
+  String datetimedisplay = DateTime.now().toString();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -95,7 +97,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       ),
                       DropdownList(
                         categories: categories,
-                        label: 'Chọn lĩnh vực cần tuyển',
+                        label: 'Chọn lĩnh vực cụ thể',
                       ),
                     ],
                   ),
@@ -148,7 +150,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       ),
                       SizedBox(
                         height: 50.0,
-                        width: 200.0,
+                        width: 700.0,
                         child: TextButton(
                             onPressed: () {
                               DatePicker.showDateTimePicker(context,
@@ -159,21 +161,29 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                 // print('abc');
                               }, onConfirm: (date) {
                                 print('confirm $date');
+                                setState(() {
+                                  datetimedisplay = date.toString();
+                                });
                               }, locale: LocaleType.vi);
                             },
                             child: SizedBox(
                               width: size.width * 0.5,
-                              height: 100.0,
+                              height: 300.0,
                               child: Row(
-                                children: const [
-                                  Icon(Icons.schedule, color: Colors.black),
-                                  SizedBox(
+                                children: [
+                                  const Icon(Icons.schedule,
+                                      color: Colors.black),
+                                  const SizedBox(
                                     width: 10.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Chọn thời hạn dự án',
                                     style: TextStyle(color: Colors.black),
                                   ),
+                                  const SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  Text(datetimedisplay),
                                 ],
                               ),
                             )),
@@ -451,7 +461,7 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
         ),
         DropdownList(
           categories: categories,
-          label: 'Chọn lĩnh vực cần tuyển',
+          label: 'Chọn lĩnh vực cụ thể cho đầu việc',
         ),
         const SizedBox(
           height: 5.0,
