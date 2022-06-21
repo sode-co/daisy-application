@@ -2,6 +2,7 @@ import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CreateNewJobMobileBtn extends StatelessWidget {
   const CreateNewJobMobileBtn({Key? key}) : super(key: key);
@@ -141,6 +142,41 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                           }
                           return null;
                         },
+                      ),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                        width: 200.0,
+                        child: TextButton(
+                            onPressed: () {
+                              DatePicker.showDateTimePicker(context,
+                                  showTitleActions: true,
+                                  minTime: DateTime.now(),
+                                  maxTime: DateTime(2025, 6, 7, 05, 09),
+                                  onChanged: (date) {
+                                // print('abc');
+                              }, onConfirm: (date) {
+                                print('confirm $date');
+                              }, locale: LocaleType.vi);
+                            },
+                            child: SizedBox(
+                              width: size.width * 0.5,
+                              height: 100.0,
+                              child: Row(
+                                children: const [
+                                  Icon(Icons.schedule, color: Colors.black),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Text(
+                                    'Chọn thời hạn dự án',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            )),
                       ),
                     ],
                   ),
