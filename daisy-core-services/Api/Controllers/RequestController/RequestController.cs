@@ -45,6 +45,7 @@ namespace Api.Controllers.RequestController
                     Title = requestJobPostVM.Title,
                     Description = requestJobPostVM.Description,
                     Budget = requestJobPostVM.Budget,
+                    Timeline = requestJobPostVM.Timeline,
                     ParentRequest = null,
                     Status = REQUEST_STATUS.AVAILABLE,
                 };
