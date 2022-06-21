@@ -46,11 +46,11 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double imgWidth =
-        Responsive.isDesktop(context) ? size.width * 0.1 : size.width * 0.18;
+        Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.18;
     double childItemPadding =
         Responsive.isDesktop(context) ? size.width * 0.072 : size.width * 0.08;
     double formPaddingHorizontal =
-        Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.005;
+        Responsive.isDesktop(context) ? size.width * 0.15 : size.width * 0.005;
     double formPaddingVertical =
         Responsive.isDesktop(context) ? size.width * 0.02 : size.width * 0.08;
     return SizedBox(
@@ -59,21 +59,25 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
       child: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: formPaddingHorizontal, vertical: formPaddingVertical),
+          padding: EdgeInsets.only(
+              left: formPaddingHorizontal, top: formPaddingVertical),
           child: Column(
             children: [
               Row(
                 crossAxisAlignment: Responsive.isDesktop(context)
-                    ? CrossAxisAlignment.center
+                    ? CrossAxisAlignment.start
                     : CrossAxisAlignment.start,
                 children: [
                   Image.asset('assets/images/post-new-job/general.png',
                       width: imgWidth),
+                  const SizedBox(width: 10.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Việc cần tuyển designer', style: Style.h6Bold),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                       CustomTextField(
                         fieldName: 'Đặt tên cụ thể cho công việc cần tuyển',
                         label: 'Tên dự án',
@@ -85,6 +89,9 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                           return null;
                         },
                       ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                       DropdownList(
                         categories: categories,
                         label: 'Chọn lĩnh vực cần tuyển',
@@ -93,26 +100,36 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 20.0,
+              ),
               Row(
                 crossAxisAlignment: Responsive.isDesktop(context)
-                    ? CrossAxisAlignment.center
+                    ? CrossAxisAlignment.start
                     : CrossAxisAlignment.start,
                 children: [
                   Image.asset('assets/images/post-new-job/description.png',
-                      width: imgWidth),
+                      width: imgWidth * 0.95),
+                  const SizedBox(width: 10.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: size.width * 0.8,
+                        width: size.width * 0.6,
                         child: Text('Thông tin đầy đủ về yêu cầu tuyển dụng',
                             style: Style.h6Bold),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
                       ),
                       const CustomTextField(
                         fieldName:
                             'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
-                        label: 'Mô tả dự án',
+                        label: 'Mô tả dự án ...',
                         maxLines: 5,
+                      ),
+                      const SizedBox(
+                        height: 10.0,
                       ),
                       CustomTextField(
                         fieldName: 'Ngân sách dự án',
@@ -182,25 +199,58 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(140.0, 60.0),
-                  primary: const Color(BuiltinColor.blue_gradient_01),
-                ),
-                onPressed: () {
-                  // Validate returns true if the form is valid, or false otherwise.
-                  if (_formKey.currentState!.validate()) {
-                    // If the form is valid, display a snackbar. In the real world,
-                    // you'd often call a server or save the information in a database.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
-                },
-                child: const Text(
-                  'Đăng việc',
-                  style: TextStyle(fontSize: 16.5),
-                ),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: Responsive.isDesktop(context) ? 80.0 : 70.0,
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(140.0, 60.0),
+                        primary: Colors.white,
+                      ),
+                      onPressed: () {
+                        // Cancel post job.
+                      },
+                      child: const Text(
+                        'Hủy bỏ',
+                        style: TextStyle(
+                          fontSize: 16.5,
+                          color: Color(BuiltinColor.blue_gradient_01),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20.0,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: Responsive.isDesktop(context) ? 50.0 : 0.0,
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(140.0, 60.0),
+                        primary: const Color(BuiltinColor.blue_gradient_01),
+                      ),
+                      onPressed: () {
+                        // Validate returns true if the form is valid, or false otherwise.
+                        if (_formKey.currentState!.validate()) {
+                          // If the form is valid, display a snackbar. In the real world,
+                          // you'd often call a server or save the information in a database.
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data')),
+                          );
+                        }
+                      },
+                      child: const Text(
+                        'Đăng việc',
+                        style: TextStyle(fontSize: 16.5),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -238,8 +288,11 @@ class _DropdownListState extends State<DropdownList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(_label, style: Style.stringText),
+        const SizedBox(height: 5.0),
         SizedBox(
-          width: size.width * 0.8,
+          width: Responsive.isDesktop(context)
+              ? size.width * 0.6
+              : size.width * 0.7,
           height: 50,
           child: InputDecorator(
             decoration: const InputDecoration(
@@ -297,13 +350,16 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: size.width * 0.8,
+          width: size.width * 0.5,
           // child: Flexible(
           child: Text(fieldName, style: Style.stringText),
           // ),
         ),
+        const SizedBox(height: 5.0),
         SizedBox(
-          width: size.width * 0.8,
+          width: Responsive.isDesktop(context)
+              ? size.width * 0.6
+              : size.width * 0.7,
           child: TextFormField(
             validator: validation,
             maxLines: maxLines,
