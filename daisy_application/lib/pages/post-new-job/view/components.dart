@@ -1,6 +1,6 @@
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
-import 'package:daisy_application/domain-services/category_service.dart';
+import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
@@ -42,8 +42,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
   }
 
   _initData() async {
-    CategoryService _categoryService = locator.get();
-    Result result = await _categoryService.getAllParentCategories();
+    CategoryRestApi _categoryClient = locator.get();
+    Result result = await _categoryClient.getParentCategories().Value();
     setState(() {
       _categories = result.data.parentCategories;
     });
@@ -67,9 +67,11 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
 
   @override
   Widget build(BuildContext context) {
-    Debug.log('---------------------hkjbkgdjnbkgd----');
+    Debug.log('---------------------1111111111----');
 
-    print(_categories);
+    Debug.log(_categories);
+    Debug.log('---------------------22222222----');
+
     Size size = MediaQuery.of(context).size;
     double imgWidth =
         Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.18;

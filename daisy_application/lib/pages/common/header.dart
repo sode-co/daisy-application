@@ -1,6 +1,8 @@
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/core_services/common/response_handler.dart';
+import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
-import 'package:daisy_application/domain-services/category_service.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:daisy_application/pages/landing-page/view/common.dart';
@@ -51,10 +53,15 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                   child: const Text('Test api call all parents category',
                       style: Style.stringBold),
                   onPressed: () async {
-                    CategoryService _categoryService = locator.get();
-                    await _categoryService.getAllParentCategories();
-                    await _categoryService.getChildrenCategoriesByParentName(
-                        'Nhận diện thương hiệu');
+                    CategoryRestApi _categoryClient = locator.get();
+                    Result result =
+                        await _categoryClient.getParentCategories().Value();
+                    Debug.log(result.data.parentCategories[0]['name']);
+                    String parentName = 'Nhận diện thương hiệu';
+                    result = await (_categoryClient
+                        .getChildrenCategoriesByParentName(parentName)
+                        .Value());
+                    Debug.log(result.data.childCategories);
                   },
                 ),
               ],
