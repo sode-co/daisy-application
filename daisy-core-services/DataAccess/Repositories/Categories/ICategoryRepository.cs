@@ -9,5 +9,7 @@ namespace DataAccess.Repositories.Categories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
+        IEnumerable<Category> GetParentCategories();
+        IEnumerable<Category> GetChildCategories(string parentName);
     }
 }
