@@ -52,7 +52,7 @@ namespace Api.Controllers.JobApplicationController
                     PreferredLanguage = jobApplicationVM.PreferedLanguage,
                     Timeline = jobApplicationVM.Timeline,
                     Status = Constants.STATUS_JOB_APPLICATION.PENDING,
-                    OfferedPrice = jobApplicationVM.Budget
+                    OfferedPrice = jobApplicationVM.OfferedPrice
                 });
 
                 work.Save();

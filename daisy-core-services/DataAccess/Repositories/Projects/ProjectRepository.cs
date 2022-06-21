@@ -47,7 +47,7 @@ namespace DataAccess.Repositories.Projects
                 PreferredLanguage = job.PreferredLanguage,
                 Name = req.Title,
                 Description = req.Description,
-                Timeline = job.Timeline,
+                Timeline = job.Timeline ?? req.Timeline,
                 Budget = req.Budget ?? job.OfferedPrice,
                 IsAllowedPublic = isAllowedPublic,
                 Status = projectStatus,
@@ -101,5 +101,8 @@ namespace DataAccess.Repositories.Projects
             _dbContext.SaveChanges();
             transaction.Commit();
         }
+
+        public IEnumerable<Project> GetProjectsByStatus(int customerId, IQueryable<Project> projectList, string projectStatus)
+                    => projectList.Where(pro => pro.Customer.Id == customerId && pro.Status.Equals(projectStatus)).ToList();
     }
 }

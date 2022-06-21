@@ -4,14 +4,16 @@ using DataAccess.MssqlServerIntegration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.MssqlServerIntegration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220620160626_UpdateTimeLineTEMP")]
+    partial class UpdateTimeLineTEMP
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,8 +282,11 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime?>("Timeline")
+                    b.Property<DateTime?>("TimeLineTemp")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("Timeline")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -559,7 +564,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("Timeline")
+                    b.Property<long>("Timeline")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("TimelineTemp")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -620,7 +628,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("Timeline")
+                    b.Property<DateTime>("TimeLine")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
