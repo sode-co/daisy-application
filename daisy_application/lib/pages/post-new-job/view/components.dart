@@ -179,7 +179,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
               Padding(
                 padding: EdgeInsets.only(
                     right: Responsive.isDesktop(context)
-                        ? size.width * 0.62
+                        ? size.width * 0.665
                         : size.width * 0.33),
                 child: TextButton.icon(
                   icon: const Icon(Icons.add),
