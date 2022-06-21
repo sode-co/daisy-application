@@ -58,6 +58,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
         Responsive.isDesktop(context) ? size.width * 0.15 : size.width * 0.005;
     double formPaddingVertical =
         Responsive.isDesktop(context) ? size.width * 0.02 : size.width * 0.08;
+
     return SizedBox(
       width: size.width,
       height: 3000,
@@ -158,9 +159,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                   showTitleActions: true,
                                   minTime: DateTime.now(),
                                   maxTime: DateTime(2025, 6, 7, 05, 09),
-                                  onChanged: (date) {
-                                // print('abc');
-                              }, onConfirm: (date) {
+                                  onChanged: (date) {}, onConfirm: (date) {
                                 Debug.log('confirm $date');
                                 setState(() {
                                   datetimedisplay = date.toString();
@@ -352,9 +351,8 @@ class _DropdownListState extends State<DropdownList> {
   @override
   Widget build(BuildContext context) {
     var model = context.watch<PostNewJobState>();
-
     Size size = MediaQuery.of(context).size;
-    // return Text('Dropdown');
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -460,6 +458,8 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
 
   @override
   Widget build(BuildContext context) {
+    var model = context.watch<PostNewJobState>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -474,10 +474,10 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
         const SizedBox(
           height: 10.0,
         ),
-        // DropdownList(
-        //   categories: categories,
-        //   label: 'Chọn lĩnh vực cụ thể cho đầu việc',
-        // ),
+        DropdownChildrenList(
+          parentName: model.parentCategory.name!,
+          label: 'Chọn lĩnh vực cụ thể cho đầu việc',
+        ),
         const SizedBox(
           height: 5.0,
         ),
@@ -506,6 +506,99 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
           child: const SizedBox(height: 1.0, width: 200.0),
         ),
         const SizedBox(height: 25.0),
+      ],
+    );
+  }
+}
+
+class DropdownChildrenList extends StatefulWidget {
+  const DropdownChildrenList(
+      {Key? key, required this.label, required this.parentName})
+      : super(key: key);
+  final String label;
+  final String parentName;
+  @override
+  State<DropdownChildrenList> createState() =>
+      _DropdownChildrenListState(label, parentName);
+}
+
+class _DropdownChildrenListState extends State<DropdownChildrenList> {
+  List<CategoryModel> _categories = [];
+
+  @override
+  initState() {
+    super.initState();
+    _initData();
+  }
+
+  _initData() async {
+    CategoryRestApi _categoryClient = locator.get();
+    Result result = await _categoryClient
+        .getChildrenCategoriesByParentName(_parentName)
+        .Value();
+    setState(() {
+      _categories = result.data.childCategories;
+      dropdownValue = _categories[0];
+    });
+  }
+
+  late String _label;
+  late String _parentName;
+  CategoryModel dropdownValue = CategoryModel.init()..name = '';
+
+  _DropdownChildrenListState(
+    label,
+    parentName,
+  ) {
+    _label = label;
+    _parentName = parentName;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var model = context.watch<PostNewJobState>();
+    Size size = MediaQuery.of(context).size;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(_label, style: Style.stringText),
+        const SizedBox(height: 5.0),
+        SizedBox(
+          width: Responsive.isDesktop(context)
+              ? size.width * 0.6
+              : size.width * 0.7,
+          height: 50,
+          child: InputDecorator(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<CategoryModel>(
+                value: dropdownValue,
+                icon: const Icon(Icons.expand_more),
+                elevation: 16,
+                style: Style.placeHolderText,
+                onChanged: (CategoryModel? newValue) {
+                  model.parentCategory = newValue!;
+                  setState(
+                    () {
+                      dropdownValue = newValue;
+                    },
+                  );
+                },
+                items: _categories.map<DropdownMenuItem<CategoryModel>>(
+                  (CategoryModel value) {
+                    return DropdownMenuItem<CategoryModel>(
+                      value: value,
+                      child: Text(value.name!),
+                    );
+                  },
+                ).toList(),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

@@ -9,7 +9,9 @@ part of 'category_children_list_model.dart';
 CategoryChildrenListModel _$CategoryChildrenListModelFromJson(
         Map<String, dynamic> json) =>
     CategoryChildrenListModel(
-      json['childCategories'] as List<dynamic>?,
+      (json['childCategories'] as List<dynamic>?)
+          ?.map((e) => CategoryModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$CategoryChildrenListModelToJson(

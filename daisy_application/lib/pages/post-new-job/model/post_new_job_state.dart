@@ -5,5 +5,6 @@ import 'package:flutter/material.dart';
 class PostNewJobState with ChangeNotifier {
   late List<RequestModel> requests;
   late List<CategoryModel> parentCategories;
-  late CategoryModel parentCategory;
+  CategoryModel parentCategory = CategoryModel.init()
+    ..name = 'Nhận diện thương hiệu';
 }
