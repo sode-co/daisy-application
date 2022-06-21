@@ -52,5 +52,16 @@ namespace Api.Controllers.CategoryController
                 return new JsonResult(new { childCategories = childCategories });
             }
         }
+
+        [HttpGet("/detail/name")]
+        public IActionResult GetCategoryByName(string name)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var category = work.CategoryRepository.GetCategoryByName(name);
+
+                return new JsonResult(new { category = category });
+            }
+        }
     }
 }

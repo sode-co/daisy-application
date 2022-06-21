@@ -11,5 +11,6 @@ namespace DataAccess.Repositories.Categories
     {
         IEnumerable<Category> GetParentCategories();
         IEnumerable<Category> GetChildCategories(string parentName);
+        Category GetCategoryByName(string name);
     }
 }

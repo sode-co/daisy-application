@@ -51,9 +51,10 @@ namespace Api.Controllers.RequestController
                 };
 
                 parentRequest.Items = requestJobPostVmList.Select(request => {
+                    var childCategory = work.CategoryRepository.Get(request.CategoryId);
                     var item = _mapper.Map<RequestJobPostVM, Request>(request);
                     item.Customer = customer;
-                    item.Category = category;
+                    item.Category = childCategory;
                     item.ParentRequest = parentRequest;
                     return item;
                 }).ToList();
