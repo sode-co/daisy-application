@@ -12,6 +12,7 @@ import 'package:daisy_application/pages/discovery-job/view/discovery_job.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/portfolio/portfolio.dart';
 import 'package:daisy_application/pages/post-new-job/view/post_new_job.dart';
+import 'package:daisy_application/pages/requests-page/view/requests.dart';
 import 'package:daisy_application/pages/signup-page/view/signup.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
           '/signup': (context) => const SignUp(),
           '/portfolio': (context) => const Portfolio(),
           '/post-new-job': (context) => const PostNewJob(),
+          '/my-requests': (context) => const RequestPage(),
           '/find-freelance-job': (context) => const DiscoverJob(),
         },
         home: const LandingPage(),
