@@ -176,9 +176,9 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                   const SizedBox(
                                     width: 10.0,
                                   ),
-                                  const Text(
-                                    'Chọn thời hạn dự án',
-                                    style: TextStyle(color: Colors.black),
+                                  Text(
+                                    'Chọn thời hạn dự án:',
+                                    style: Style.stringText,
                                   ),
                                   const SizedBox(
                                     width: 20.0,
@@ -186,6 +186,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                   Text(
                                     datetimedisplay,
                                     style: const TextStyle(
+                                      fontSize: 15.5,
                                       color:
                                           Color(BuiltinColor.blue_gradient_01),
                                     ),
