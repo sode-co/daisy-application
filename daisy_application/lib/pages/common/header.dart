@@ -19,24 +19,34 @@ class Header extends StatelessWidget with PreferredSizeWidget {
     WidgetListener listener = context.read();
     return AppBar(
       title: (Responsive.isDesktop(context))
-          ? Row(children: <Widget>[
-              const SizedBox(width: 150),
-              Image.asset('assets/images/weblogo.png', width: 100),
-              TextButton(
-                  child: const Text('Danh mục', style: Style.stringBold),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/categories');
-                  }),
-              TextButton(
-                  child: const Text('Đăng tin', style: Style.stringBold),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/post-new-job');
-                  }),
-              TextButton(
+          ? Row(
+              children: <Widget>[
+                const SizedBox(width: 150),
+                Image.asset('assets/images/weblogo.png', width: 100),
+                TextButton(
+                    child: const Text('Danh mục', style: Style.stringBold),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/categories');
+                    }),
+                TextButton(
+                    child: const Text('Đăng tin', style: Style.stringBold),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/post-new-job');
+                    }),
+                TextButton(
                   child:
                       const Text('Tìm kiếm designer', style: Style.stringBold),
-                  onPressed: () {}),
-            ])
+                  onPressed: () {},
+                ),
+                TextButton(
+                  child:
+                      const Text('Tìm việc freelance', style: Style.stringBold),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/find-freelance-job');
+                  },
+                ),
+              ],
+            )
           : Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Image.asset('assets/images/weblogo.png', width: 100)),
