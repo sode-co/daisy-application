@@ -8,6 +8,7 @@ import 'package:daisy_application/pages/common/header.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/listeners/WidgetListener.dart';
+import 'package:daisy_application/pages/requests-page/view/body.dart';
 import 'package:daisy_application/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class _RequestPageState extends State<RequestPage> with WidgetListener {
       ],
       child: Scaffold(
         appBar: const Header(),
-        body: Text('Request Page'),
+        body: MyWorkSpace(),
         bottomNavigationBar:
             !Responsive.isDesktop(context) ? const BottomNavBar() : null,
       ),
