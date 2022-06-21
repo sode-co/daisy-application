@@ -1,6 +1,7 @@
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
+import 'package:daisy_application/core_services/models/category/category_model.dart';
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
@@ -48,16 +49,6 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
       _categories = result.data.parentCategories;
     });
   }
-
-  List<String> categories = [
-    'Web & app design',
-    'Logo & identity',
-    'Business & advertising',
-    'Clothing & merchandise',
-    'Book & magazine',
-    'Packaging & label',
-  ];
-  String dropdownValue = 'Web & app design';
 
   final _formKey = GlobalKey<FormState>();
   List<Widget> requestChildren = [];
@@ -120,8 +111,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      DropdownList(
-                        categories: categories,
+                      const DropdownList(
                         label: 'Chọn lĩnh vực cụ thể',
                       ),
                     ],
@@ -185,7 +175,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                   onChanged: (date) {
                                 // print('abc');
                               }, onConfirm: (date) {
-                                print('confirm $date');
+                                Debug.log('confirm $date');
                                 setState(() {
                                   datetimedisplay = date.toString();
                                 });
@@ -339,29 +329,44 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
 }
 
 class DropdownList extends StatefulWidget {
-  const DropdownList({Key? key, required this.label, required this.categories})
-      : super(key: key);
+  const DropdownList({Key? key, required this.label}) : super(key: key);
   final String label;
-  final List<String> categories;
 
   @override
-  State<DropdownList> createState() => _DropdownListState(label, categories);
+  State<DropdownList> createState() => _DropdownListState(label);
 }
 
 class _DropdownListState extends State<DropdownList> {
+  List<CategoryModel> _categories = [];
+
+  @override
+  initState() {
+    super.initState();
+    _initData();
+  }
+
+  _initData() async {
+    CategoryRestApi _categoryClient = locator.get();
+    Result result = await _categoryClient.getParentCategories().Value();
+    setState(() {
+      _categories = result.data.parentCategories;
+      dropdownValue = _categories[0];
+    });
+  }
+
   late String _label;
-  late List<String> _categories;
-  late String dropdownValue;
-  _DropdownListState(label, categories) {
+  CategoryModel dropdownValue = CategoryModel.init()..name = '';
+
+  _DropdownListState(
+    label,
+  ) {
     _label = label;
-    _categories = categories;
-    dropdownValue = _categories[0];
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    // return Text('Dropdown');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -377,23 +382,23 @@ class _DropdownListState extends State<DropdownList> {
               border: OutlineInputBorder(),
             ),
             child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
+              child: DropdownButton<CategoryModel>(
                 value: dropdownValue,
                 icon: const Icon(Icons.expand_more),
                 elevation: 16,
                 style: Style.placeHolderText,
-                onChanged: (String? newValue) {
+                onChanged: (CategoryModel? newValue) {
                   setState(
                     () {
                       dropdownValue = newValue!;
                     },
                   );
                 },
-                items: _categories.map<DropdownMenuItem<String>>(
-                  (String value) {
-                    return DropdownMenuItem<String>(
+                items: _categories.map<DropdownMenuItem<CategoryModel>>(
+                  (CategoryModel value) {
+                    return DropdownMenuItem<CategoryModel>(
                       value: value,
-                      child: Text(value),
+                      child: Text(value.name!),
                     );
                   },
                 ).toList(),
@@ -429,9 +434,7 @@ class CustomTextField extends StatelessWidget {
       children: [
         SizedBox(
           width: size.width * 0.5,
-          // child: Flexible(
           child: Text(fieldName, style: Style.stringText),
-          // ),
         ),
         const SizedBox(height: 5.0),
         SizedBox(
@@ -468,15 +471,6 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> categories = [
-      'Logo design',
-      'Brand guide',
-      'Business card',
-      'Postcard, flyer or print',
-      'Car, truck or van wrap',
-      'PowerPoint template',
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -491,10 +485,10 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
         const SizedBox(
           height: 10.0,
         ),
-        DropdownList(
-          categories: categories,
-          label: 'Chọn lĩnh vực cụ thể cho đầu việc',
-        ),
+        // DropdownList(
+        //   categories: categories,
+        //   label: 'Chọn lĩnh vực cụ thể cho đầu việc',
+        // ),
         const SizedBox(
           height: 5.0,
         ),
