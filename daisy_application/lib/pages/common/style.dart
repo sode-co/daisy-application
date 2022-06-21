@@ -34,4 +34,9 @@ class Style {
     fontSize: 16,
     color: Colors.black.withOpacity(0.5),
   );
+  static var lightSmallString = TextStyle(
+    color: Colors.black.withOpacity(0.7),
+    fontSize: 15.0,
+    fontWeight: FontWeight.w500,
+  );
 }
