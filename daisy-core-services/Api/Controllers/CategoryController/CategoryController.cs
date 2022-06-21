@@ -42,15 +42,15 @@ namespace Api.Controllers.CategoryController
             }
         }
 
-        //[HttpGet()]
-        //public IActionResult GetChildCategories(string parentName)
-        //{
-        //    using (var work = _unitOfWorkFactory.Get)
-        //    {
-        //        var childCategories = work.CategoryRepository.GetAll(null, null, "ChildrenCategory").ToList();
+        [HttpGet("/childrens/parent")]
+        public IActionResult GetChildCategories(string parentName)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var childCategories = work.CategoryRepository.GetChildCategories(parentName);
 
-        //        return new JsonResult(new { childCategories = childCategories });
-        //    }
-        //}
+                return new JsonResult(new { childCategories = childCategories });
+            }
+        }
     }
 }

@@ -3,7 +3,6 @@ using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +20,18 @@ namespace DataAccess.Repositories.Categories
 
         public IEnumerable<Category> GetChildCategories(string parentName)
         {
-            throw new NotImplementedException();
+            var parentCatgories = _dbContext.Categories
+                .Include(p => p.ParentCategory)
+                .Include(p => p.ChildrenCategory)
+                .Where(p => p.ChildrenCategory.Count > 0).ToList();
+
+            return parentCatgories.FirstOrDefault(c => c.Name.Equals(parentName)).ChildrenCategory;
         }
 
         public IEnumerable<Category> GetParentCategories()
-        {
-            var list =  _dbContext.Categories
+            => _dbContext.Categories
                 .Include(p => p.ParentCategory)
                 .Include(p => p.ChildrenCategory)
-                .Where(p => p.ChildrenCategory.Count > 0)
-                .ToList();
-            return list;
-        }
+                .Where(p => p.ChildrenCategory.Count > 0).ToList();
     }
 }
