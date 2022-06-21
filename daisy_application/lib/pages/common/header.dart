@@ -1,9 +1,11 @@
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
+import 'package:daisy_application/domain-services/category_service.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:daisy_application/pages/landing-page/view/common.dart';
 import 'package:daisy_application/pages/listeners/WidgetListener.dart';
+import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +45,14 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                       const Text('Tìm việc freelance', style: Style.stringBold),
                   onPressed: () {
                     Navigator.pushNamed(context, '/find-freelance-job');
+                  },
+                ),
+                TextButton(
+                  child: const Text('Test api call all parents category',
+                      style: Style.stringBold),
+                  onPressed: () async {
+                    CategoryService _categoryService = locator.get();
+                    await _categoryService.getAllParentCategories();
                   },
                 ),
               ],
