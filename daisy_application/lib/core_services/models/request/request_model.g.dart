@@ -18,6 +18,9 @@ RequestModel _$RequestModelFromJson(Map<String, dynamic> json) => RequestModel(
       json['description'] as String?,
       (json['budget'] as num?)?.toDouble(),
       json['status'] as String?,
+      json['timeline'] == null
+          ? null
+          : DateTime.parse(json['timeline'] as String),
     );
 
 Map<String, dynamic> _$RequestModelToJson(RequestModel instance) =>
@@ -29,4 +32,5 @@ Map<String, dynamic> _$RequestModelToJson(RequestModel instance) =>
       'description': instance.description,
       'budget': instance.budget,
       'status': instance.status,
+      'timeline': instance.timeline?.toIso8601String(),
     };

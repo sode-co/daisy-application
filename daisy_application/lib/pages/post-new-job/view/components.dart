@@ -183,7 +183,13 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                   const SizedBox(
                                     width: 20.0,
                                   ),
-                                  Text(datetimedisplay),
+                                  Text(
+                                    datetimedisplay,
+                                    style: const TextStyle(
+                                      color:
+                                          Color(BuiltinColor.blue_gradient_01),
+                                    ),
+                                  ),
                                 ],
                               ),
                             )),
