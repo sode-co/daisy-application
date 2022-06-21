@@ -1,4 +1,5 @@
 import 'package:daisy_application/pages/common/responsive.dart';
+import 'package:daisy_application/pages/requests-page/view/stateful_component.dart';
 import 'package:daisy_application/pages/requests-page/view/stateless_component.dart';
 import 'package:flutter/material.dart';
 
@@ -136,7 +137,7 @@ class _MyWorkSpaceState extends State<MyWorkSpace> {
                 ),
                 const VerticalDivider(thickness: 1, width: 1),
                 // This is the main content.
-                if (_selectedIndex == 0) const Text('Dự án đã đăng'),
+                if (_selectedIndex == 0) const PostedJob(),
                 if (_selectedIndex == 1) const Text('Dự án đang hoạt động'),
                 if (_selectedIndex == 2) const Text('Dự án đã hủy'),
                 if (_selectedIndex == 3) const Text('Dự án hoàn thành'),
