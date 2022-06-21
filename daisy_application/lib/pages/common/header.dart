@@ -53,6 +53,8 @@ class Header extends StatelessWidget with PreferredSizeWidget {
                   onPressed: () async {
                     CategoryService _categoryService = locator.get();
                     await _categoryService.getAllParentCategories();
+                    await _categoryService.getChildrenCategoriesByParentName(
+                        'Nhận diện thương hiệu');
                   },
                 ),
               ],

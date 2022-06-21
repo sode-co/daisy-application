@@ -1,4 +1,5 @@
-import 'package:daisy_application/core_services/models/category/category_list_model.dart';
+import 'package:daisy_application/core_services/models/category/category_children_list_model.dart';
+import 'package:daisy_application/core_services/models/category/category_parent_list_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -10,4 +11,10 @@ abstract class CategoryRestApi {
 
   @GET('/parents')
   Future<HttpResponse<CategoryParentListModel>> getParentCategories();
+
+  @GET('/childrens/parent')
+  Future<HttpResponse<CategoryChildrenListModel>>
+      getChildrenCategoriesByParentName(
+    @Query('parentName') String parentName,
+  );
 }

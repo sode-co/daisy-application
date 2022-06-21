@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'category_list_model.g.dart';
+part 'category_parent_list_model.g.dart';
 
 @HiveType(typeId: 0)
 @JsonSerializable()

@@ -8,7 +8,19 @@ class CategoryService {
   Future<Result> getAllParentCategories() async {
     final result = await (_categoryClient.getParentCategories().Value());
     if (result.failureType == FAILURE_TYPE.NONE) {
-      print(result.data.parentCategories[1]['name']);
+      print(result.data.parentCategories[0]['name']);
+      print('--------------');
+    }
+    return result;
+  }
+
+  Future<Result> getChildrenCategoriesByParentName(String parentName) async {
+    final result = await (_categoryClient
+        .getChildrenCategoriesByParentName(parentName)
+        .Value());
+    if (result.failureType == FAILURE_TYPE.NONE) {
+      print(result.data.childCategories);
+      print('--------------');
     }
     return result;
   }
