@@ -5,9 +5,11 @@ import 'package:daisy_application/core_services/models/category/category_model.d
 import 'package:daisy_application/pages/common/colors.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
+import 'package:daisy_application/pages/post-new-job/model/post_new_job_state.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:provider/provider.dart';
 
 class CreateNewJobMobileBtn extends StatelessWidget {
   const CreateNewJobMobileBtn({Key? key}) : super(key: key);
@@ -34,20 +36,9 @@ class PostNewJobForm extends StatefulWidget {
 }
 
 class _PostNewJobFormState extends State<PostNewJobForm> {
-  List<dynamic> _categories = [];
-
   @override
   initState() {
     super.initState();
-    _initData();
-  }
-
-  _initData() async {
-    CategoryRestApi _categoryClient = locator.get();
-    Result result = await _categoryClient.getParentCategories().Value();
-    setState(() {
-      _categories = result.data.parentCategories;
-    });
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -58,11 +49,6 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
 
   @override
   Widget build(BuildContext context) {
-    Debug.log('---------------------1111111111----');
-
-    Debug.log(_categories);
-    Debug.log('---------------------22222222----');
-
     Size size = MediaQuery.of(context).size;
     double imgWidth =
         Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.18;
@@ -365,6 +351,8 @@ class _DropdownListState extends State<DropdownList> {
 
   @override
   Widget build(BuildContext context) {
+    var model = context.watch<PostNewJobState>();
+
     Size size = MediaQuery.of(context).size;
     // return Text('Dropdown');
     return Column(
@@ -388,9 +376,10 @@ class _DropdownListState extends State<DropdownList> {
                 elevation: 16,
                 style: Style.placeHolderText,
                 onChanged: (CategoryModel? newValue) {
+                  model.parentCategory = newValue!;
                   setState(
                     () {
-                      dropdownValue = newValue!;
+                      dropdownValue = newValue;
                     },
                   );
                 },
