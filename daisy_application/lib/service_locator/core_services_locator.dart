@@ -3,6 +3,7 @@ import 'package:daisy_application/core_services/grpc/healthcheck/health_check_gr
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
+import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/http/user/user_rest_api.dart';
 import 'package:daisy_application/core_services/http_interceptor/authentication_interceptor.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
@@ -48,6 +49,9 @@ class CoreServiceLocator {
 
     locator.registerFactory<CategoryRestApi>(
         () => CategoryRestApi(locator.get(), baseUrl: Config.API_URL));
+
+    locator.registerFactory<RequestRestApi>(() => RequestRestApi(locator.get(),
+        baseUrl: '${Config.API_URL}​/v1​/requests'));
   }
 
   static void _initPersistentService() {

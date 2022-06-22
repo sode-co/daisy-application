@@ -1,6 +1,7 @@
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
+import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/models/category/category_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/pages/common/colors.dart';
@@ -290,17 +291,38 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         primary: const Color(BuiltinColor.blue_gradient_01),
                       ),
                       onPressed: () {
-                        Debug.log('Ngan sach');
-                        Debug.log(model.parentRequest.budget);
-                        Debug.log('title');
-                        Debug.log(model.parentRequest.title);
                         model.parentRequest.items = model.childrenRequest;
-                        if (model.childrenRequest.isNotEmpty) {
-                          Debug.log('item con');
-
-                          model.parentRequest.items![0].title;
-                          model.parentRequest.items![0].category!.name;
-                        }
+                        Debug.log(model.parentRequest.toJson);
+                        RequestRestApi _requestClient = locator.get();
+                        _requestClient.createNewRequest({
+                          "categoryId": 1,
+                          "description": "string",
+                          "title": "string",
+                          "status": "string",
+                          "budget": 10,
+                          "timeline": "2022-06-21T16:37:44.239Z",
+                          "items": [
+                            {
+                              "categoryId": 2,
+                              "description": "string",
+                              "title": "requestChild1",
+                              "status": "string",
+                              "budget": 0,
+                              "timeline": "2022-06-21T16:37:44.239Z",
+                              "items": null
+                            },
+                            {
+                              "categoryId": 3,
+                              "description": "string",
+                              "title": "requestChild2",
+                              "status": "string",
+                              "budget": 0,
+                              "timeline": "2022-06-21T16:37:44.239Z",
+                              "items": null
+                            }
+                          ]
+                        });
+                        // _requestClient.createNewRequest(model.parentRequest);
                         // Validate returns true if the form is valid, or false otherwise.
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.

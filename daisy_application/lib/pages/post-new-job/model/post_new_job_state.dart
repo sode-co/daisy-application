@@ -9,5 +9,5 @@ class PostNewJobState with ChangeNotifier {
   List<RequestModel> childrenRequest = [];
   RequestModel parentRequest = RequestModel.init()
     ..status = ''
-    ..items = null;
+    ..timeline = DateTime.now();
 }
