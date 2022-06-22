@@ -39,6 +39,7 @@ class _JobInfoColumnState extends State<JobInfoColumn> {
     1.0,
     '1',
     DateTime.now(),
+    null,
   );
   @override
   Widget build(BuildContext context) {
@@ -112,6 +113,7 @@ class RequestIntroList extends StatelessWidget {
       1.0,
       '1',
       DateTime.now(),
+      null,
     );
     return SingleChildScrollView(
       child: Padding(

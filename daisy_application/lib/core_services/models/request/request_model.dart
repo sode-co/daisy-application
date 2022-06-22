@@ -16,6 +16,7 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
   double? budget;
   String? status;
   DateTime? timeline;
+  List<RequestModel>? items;
 
   RequestModel(
     this.id,
@@ -26,6 +27,7 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
     this.budget,
     this.status,
     this.timeline,
+    this.items,
   );
 
   RequestModel.init();

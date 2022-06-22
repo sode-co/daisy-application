@@ -3,9 +3,11 @@ import 'package:daisy_application/core_services/models/request/request_model.dar
 import 'package:flutter/material.dart';
 
 class PostNewJobState with ChangeNotifier {
-  late List<RequestModel> requests;
-  late List<CategoryModel> parentCategories;
   CategoryModel parentCategory = CategoryModel.init()
     ..name = 'Nhận diện thương hiệu';
-  RequestModel requestTest = RequestModel.init();
+  int numOfChildrenReq = 0;
+  List<RequestModel> childrenRequest = [];
+  RequestModel parentRequest = RequestModel.init()
+    ..status = ''
+    ..items = null;
 }

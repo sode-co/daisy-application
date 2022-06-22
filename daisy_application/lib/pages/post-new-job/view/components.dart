@@ -51,6 +51,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
 
   @override
   Widget build(BuildContext context) {
+    var model = context.watch<PostNewJobState>();
     Size size = MediaQuery.of(context).size;
     double imgWidth =
         Responsive.isDesktop(context) ? size.width * 0.05 : size.width * 0.18;
@@ -126,8 +127,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       const CustomTextField(
                         fieldName:
                             'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
-                        label: 'Mô tả dự án ...',
-                        maxLines: 5,
+                        label: 'Mô tả dự án',
+                        maxLines: 1,
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -157,6 +158,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                   maxTime: DateTime(2025, 6, 7, 05, 09),
                                   onChanged: (date) {}, onConfirm: (date) {
                                 Debug.log('confirm $date');
+                                model.parentRequest.timeline = date;
                                 setState(() {
                                   datetimedisplay = date.toString();
                                 });
@@ -209,9 +211,12 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                           IconButton(
                             tooltip: 'Xóa đầu việc này',
                             onPressed: () {
-                              setState(() => {
-                                    requestChildren.removeAt(index),
-                                  });
+                              setState(
+                                () => {
+                                  requestChildren.removeAt(index),
+                                },
+                              );
+                              model.numOfChildrenReq = requestChildren.length;
                             },
                             icon: const Icon(
                               Icons.remove_circle_outline,
@@ -240,9 +245,10 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                           ChildRequestForm(
                             index: indexRequestChild,
                           ),
-                        )
+                        ),
                       },
                     );
+                    model.numOfChildrenReq = requestChildren.length;
                   },
                   label: const Text('Thêm đầu việc'),
                 ),
@@ -260,7 +266,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         primary: Colors.white,
                       ),
                       onPressed: () {
-                        // Cancel post job.
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         'Hủy bỏ',
@@ -284,14 +290,26 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         primary: const Color(BuiltinColor.blue_gradient_01),
                       ),
                       onPressed: () {
+                        Debug.log('Ngan sach');
+                        Debug.log(model.parentRequest.budget);
+                        Debug.log('title');
+                        Debug.log(model.parentRequest.title);
+                        Debug.log('category');
+                        Debug.log(model.parentRequest.category!.name!);
+                        Debug.log('description');
+                        Debug.log(model.parentRequest.description);
+                        Debug.log('timeline');
+                        Debug.log(model.parentRequest.timeline);
+                        Debug.log('item');
+                        model.parentRequest.items = model.childrenRequest;
+                        Debug.log(model.parentRequest.items!.length);
                         // Validate returns true if the form is valid, or false otherwise.
-                        if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
-                        }
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data')));
+                        //   );
+                        // }
                       },
                       child: const Text(
                         'Đăng việc',
@@ -371,6 +389,7 @@ class _DropdownListState extends State<DropdownList> {
                 style: Style.placeHolderText,
                 onChanged: (CategoryModel? newValue) {
                   model.parentCategory = newValue!;
+                  model.parentRequest.category = newValue;
                   setState(
                     () {
                       dropdownValue = newValue;
@@ -399,6 +418,7 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final int maxLines;
   final String? Function(String?)? validation;
+  final int? index;
 
   const CustomTextField({
     Key? key,
@@ -406,6 +426,7 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     required this.maxLines,
     this.validation,
+    this.index,
   }) : super(key: key);
 
   @override
@@ -426,7 +447,32 @@ class CustomTextField extends StatelessWidget {
               : size.width * 0.7,
           child: TextFormField(
             onFieldSubmitted: (value) {
-              model.requestTest.title = value;
+              if (label == 'Tên dự án') {
+                model.parentRequest.title = value;
+              }
+              if (label == 'Mô tả dự án') {
+                model.parentRequest.description = value;
+              }
+              if (label == 'Ngân sách') {
+                model.parentRequest.budget = double.parse(value);
+              }
+              if (index != null) {
+                if (model.childrenRequest.length < index!) {
+                  model.childrenRequest.add(
+                    RequestModel.init()
+                      ..status = ''
+                      ..budget = 0
+                      ..timeline = DateTime.now()
+                      ..items = null,
+                  );
+                }
+                if (label == 'Tên đầu việc') {
+                  model.childrenRequest[index! - 1].title = value;
+                }
+                if (label == 'Mô tả đầu việc') {
+                  model.childrenRequest[index! - 1].description = value;
+                }
+              }
             },
             validator: validation,
             maxLines: maxLines,
@@ -490,6 +536,7 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
             }
             return null;
           },
+          index: _index,
         ),
         const SizedBox(
           height: 5.0,
