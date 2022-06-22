@@ -46,7 +46,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
   List<Widget> requestChildren = [];
   int indexRequestChild = 0;
 
-  String datetimedisplay = DateTime.now().toString();
+  String datetimedisplay =
+      DateTime.now().add(const Duration(days: 3)).toString();
   RequestModel newRequest = RequestModel.init();
 
   @override
@@ -154,7 +155,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                             onPressed: () {
                               DatePicker.showDateTimePicker(context,
                                   showTitleActions: true,
-                                  minTime: DateTime.now(),
+                                  minTime: DateTime.now()
+                                      .add(const Duration(days: 3)),
                                   maxTime: DateTime(2025, 6, 7, 05, 09),
                                   onChanged: (date) {}, onConfirm: (date) {
                                 Debug.log('confirm $date');
@@ -473,7 +475,7 @@ class CustomTextField extends StatelessWidget {
                     RequestModel.init()
                       ..status = ''
                       ..budget = 0
-                      ..timeline = DateTime.now()
+                      ..timeline = DateTime.now().add(const Duration(days: 3))
                       ..items = null,
                   );
                 }
@@ -630,7 +632,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
         RequestModel.init()
           ..status = ''
           ..budget = 0
-          ..timeline = DateTime.now()
+          ..timeline = DateTime.now().add(const Duration(days: 3))
           ..items = null,
       );
     }
