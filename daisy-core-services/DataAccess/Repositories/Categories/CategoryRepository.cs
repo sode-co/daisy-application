@@ -18,12 +18,6 @@ namespace DataAccess.Repositories.Categories
             _dbContext = dbContext;
         }
 
-        public Category GetCategoryByName(string name) 
-            => _dbContext.Categories
-                .Include(p => p.ParentCategory)
-                .Include(p => p.ChildrenCategory).ToList()
-                .FirstOrDefault(c => c.Name.Equals(name));
-
         public IEnumerable<Category> GetChildCategories(string parentName)
         {
             var parentCatgories = _dbContext.Categories
