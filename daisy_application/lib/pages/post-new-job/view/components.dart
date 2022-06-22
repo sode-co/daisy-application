@@ -1,7 +1,6 @@
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
-import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/models/category/category_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/pages/common/colors.dart';
@@ -217,7 +216,6 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                   requestChildren.removeAt(index),
                                 },
                               );
-                              model.numOfChildrenReq = requestChildren.length;
                             },
                             icon: const Icon(
                               Icons.remove_circle_outline,
@@ -249,7 +247,6 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         ),
                       },
                     );
-                    model.numOfChildrenReq = requestChildren.length;
                   },
                   label: const Text('Thêm đầu việc'),
                 ),
@@ -291,10 +288,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         primary: const Color(BuiltinColor.blue_gradient_01),
                       ),
                       onPressed: () {
-                        // model.parentRequest.items = model.childrenRequest;
-                        // Debug.log(model.parentRequest.toJson);
-                        RequestRestApi _requestClient = locator.get();
-                        _requestClient.getRequestsByTitle('abc');
+                        // RequestRestApi _requestClient = locator.get();
+                        // _requestClient.getRequestsByTitle('abc');
                         // _requestClient.createNewRequest({
                         //   'categoryId': 1,
                         //   'description': 'string',
@@ -324,13 +319,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         //   ]
                         // });
                         // _requestClient.createNewRequest(model.parentRequest);
-                        // Validate returns true if the form is valid, or false otherwise.
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')));
-                        //   );
-                        // }
                       },
                       child: const Text(
                         'Đăng việc',
@@ -409,7 +399,7 @@ class _DropdownListState extends State<DropdownList> {
                 elevation: 16,
                 style: Style.placeHolderText,
                 onChanged: (CategoryModel? newValue) {
-                  model.parentCategory = newValue!;
+                  model.parentRequest.category = newValue!;
                   model.parentRequest.category = newValue;
                   setState(
                     () {
@@ -467,7 +457,7 @@ class CustomTextField extends StatelessWidget {
               ? size.width * 0.6
               : size.width * 0.7,
           child: TextFormField(
-            onFieldSubmitted: (value) {
+            onChanged: (value) {
               if (label == 'Tên dự án') {
                 model.parentRequest.title = value;
               }
@@ -478,8 +468,8 @@ class CustomTextField extends StatelessWidget {
                 model.parentRequest.budget = double.parse(value);
               }
               if (index != null) {
-                if (model.childrenRequest.length < index!) {
-                  model.childrenRequest.add(
+                if (model.parentRequest.items!.length < index!) {
+                  model.parentRequest.items!.add(
                     RequestModel.init()
                       ..status = ''
                       ..budget = 0
@@ -488,10 +478,10 @@ class CustomTextField extends StatelessWidget {
                   );
                 }
                 if (label == 'Tên đầu việc') {
-                  model.childrenRequest[index! - 1].title = value;
+                  model.parentRequest.items![index! - 1].title = value;
                 }
                 if (label == 'Mô tả đầu việc') {
-                  model.childrenRequest[index! - 1].description = value;
+                  model.parentRequest.items![index! - 1].description = value;
                 }
               }
             },
@@ -541,7 +531,7 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
           height: 10.0,
         ),
         DropdownChildrenList(
-          parentName: model.parentCategory.name!,
+          parentName: model.parentRequest.category!.name!,
           label: 'Chọn lĩnh vực cụ thể cho đầu việc',
           index: _index,
         ),
@@ -635,6 +625,17 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
     var model = context.watch<PostNewJobState>();
     Size size = MediaQuery.of(context).size;
 
+    if (model.parentRequest.items!.length < _index) {
+      model.parentRequest.items!.add(
+        RequestModel.init()
+          ..status = ''
+          ..budget = 0
+          ..timeline = DateTime.now()
+          ..items = null,
+      );
+    }
+    model.parentRequest.items![_index - 1].category = dropdownValue;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -656,16 +657,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
                 elevation: 16,
                 style: Style.placeHolderText,
                 onChanged: (CategoryModel? newValue) {
-                  if (model.childrenRequest.length < _index) {
-                    model.childrenRequest.add(
-                      RequestModel.init()
-                        ..status = ''
-                        ..budget = 0
-                        ..timeline = DateTime.now()
-                        ..items = null,
-                    );
-                  }
-                  model.childrenRequest[_index - 1].category = newValue;
+                  model.parentRequest.items![_index - 1].category = newValue;
                   setState(
                     () {
                       dropdownValue = newValue!;
