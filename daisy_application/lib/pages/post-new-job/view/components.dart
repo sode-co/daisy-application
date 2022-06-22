@@ -291,37 +291,38 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         primary: const Color(BuiltinColor.blue_gradient_01),
                       ),
                       onPressed: () {
-                        model.parentRequest.items = model.childrenRequest;
-                        Debug.log(model.parentRequest.toJson);
+                        // model.parentRequest.items = model.childrenRequest;
+                        // Debug.log(model.parentRequest.toJson);
                         RequestRestApi _requestClient = locator.get();
-                        _requestClient.createNewRequest({
-                          "categoryId": 1,
-                          "description": "string",
-                          "title": "string",
-                          "status": "string",
-                          "budget": 10,
-                          "timeline": "2022-06-21T16:37:44.239Z",
-                          "items": [
-                            {
-                              "categoryId": 2,
-                              "description": "string",
-                              "title": "requestChild1",
-                              "status": "string",
-                              "budget": 0,
-                              "timeline": "2022-06-21T16:37:44.239Z",
-                              "items": null
-                            },
-                            {
-                              "categoryId": 3,
-                              "description": "string",
-                              "title": "requestChild2",
-                              "status": "string",
-                              "budget": 0,
-                              "timeline": "2022-06-21T16:37:44.239Z",
-                              "items": null
-                            }
-                          ]
-                        });
+                        _requestClient.getRequestsByTitle('abc');
+                        // _requestClient.createNewRequest({
+                        //   'categoryId': 1,
+                        //   'description': 'string',
+                        //   'title': 'string',
+                        //   'status': 'string',
+                        //   'budget': 10,
+                        //   'timeline': '2022-06-21T16:37:44.239Z',
+                        //   'items': [
+                        //     {
+                        //       'categoryId': 2,
+                        //       'description': 'string',
+                        //       'title': 'requestChild1',
+                        //       'status': 'string',
+                        //       'budget': 0,
+                        //       'timeline': '2022-06-21T16:37:44.239Z',
+                        //       'items': null
+                        //     },
+                        //     {
+                        //       'categoryId': 3,
+                        //       'description': 'string',
+                        //       'title': 'requestChild2',
+                        //       'status': 'string',
+                        //       'budget': 0,
+                        //       'timeline': '2022-06-21T16:37:44.239Z',
+                        //       'items': null
+                        //     }
+                        //   ]
+                        // });
                         // _requestClient.createNewRequest(model.parentRequest);
                         // Validate returns true if the form is valid, or false otherwise.
                         // If the form is valid, display a snackbar. In the real world,
