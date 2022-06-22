@@ -45,14 +45,16 @@ namespace Api.Controllers.RequestController
                     Title = requestJobPostVM.Title,
                     Description = requestJobPostVM.Description,
                     Budget = requestJobPostVM.Budget,
+                    Timeline = requestJobPostVM.Timeline,
                     ParentRequest = null,
                     Status = REQUEST_STATUS.AVAILABLE,
                 };
 
                 parentRequest.Items = requestJobPostVmList.Select(request => {
+                    var childCategory = work.CategoryRepository.Get(request.CategoryId);
                     var item = _mapper.Map<RequestJobPostVM, Request>(request);
                     item.Customer = customer;
-                    item.Category = category;
+                    item.Category = childCategory;
                     item.ParentRequest = parentRequest;
                     return item;
                 }).ToList();

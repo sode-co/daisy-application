@@ -13,6 +13,7 @@ namespace Utils.Models
         public string Title { get; set; }
         public string Status { get; set; }
         public decimal Budget { get; set; }
+        public DateTime Timeline { get; set; }
         public List<RequestJobPostVM> Items { get; set; }
     }
 }
