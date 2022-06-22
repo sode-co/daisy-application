@@ -294,15 +294,13 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         Debug.log(model.parentRequest.budget);
                         Debug.log('title');
                         Debug.log(model.parentRequest.title);
-                        Debug.log('category');
-                        Debug.log(model.parentRequest.category!.name!);
-                        Debug.log('description');
-                        Debug.log(model.parentRequest.description);
-                        Debug.log('timeline');
-                        Debug.log(model.parentRequest.timeline);
-                        Debug.log('item');
                         model.parentRequest.items = model.childrenRequest;
-                        Debug.log(model.parentRequest.items!.length);
+                        if (model.childrenRequest.isNotEmpty) {
+                          Debug.log('item con');
+
+                          model.parentRequest.items![0].title;
+                          model.parentRequest.items![0].category!.name;
+                        }
                         // Validate returns true if the form is valid, or false otherwise.
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
@@ -522,6 +520,7 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
         DropdownChildrenList(
           parentName: model.parentCategory.name!,
           label: 'Chọn lĩnh vực cụ thể cho đầu việc',
+          index: _index,
         ),
         const SizedBox(
           height: 5.0,
@@ -541,10 +540,11 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
         const SizedBox(
           height: 5.0,
         ),
-        const CustomTextField(
+        CustomTextField(
           fieldName: 'Nội dung chi tiết',
           label: 'Mô tả đầu việc',
-          maxLines: 3,
+          maxLines: 1,
+          index: _index,
         ),
         const SizedBox(height: 10.0),
         Container(
@@ -559,13 +559,17 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
 
 class DropdownChildrenList extends StatefulWidget {
   const DropdownChildrenList(
-      {Key? key, required this.label, required this.parentName})
+      {Key? key,
+      required this.label,
+      required this.parentName,
+      required this.index})
       : super(key: key);
   final String label;
   final String parentName;
+  final int index;
   @override
   State<DropdownChildrenList> createState() =>
-      _DropdownChildrenListState(label, parentName);
+      _DropdownChildrenListState(label, parentName, index);
 }
 
 class _DropdownChildrenListState extends State<DropdownChildrenList> {
@@ -590,14 +594,17 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
 
   late String _label;
   late String _parentName;
+  late int _index;
   CategoryModel dropdownValue = CategoryModel.init()..name = '';
 
   _DropdownChildrenListState(
     label,
     parentName,
+    index,
   ) {
     _label = label;
     _parentName = parentName;
+    _index = index;
   }
 
   @override
@@ -626,10 +633,19 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
                 elevation: 16,
                 style: Style.placeHolderText,
                 onChanged: (CategoryModel? newValue) {
-                  model.parentCategory = newValue!;
+                  if (model.childrenRequest.length < _index) {
+                    model.childrenRequest.add(
+                      RequestModel.init()
+                        ..status = ''
+                        ..budget = 0
+                        ..timeline = DateTime.now()
+                        ..items = null,
+                    );
+                  }
+                  model.childrenRequest[_index - 1].category = newValue;
                   setState(
                     () {
-                      dropdownValue = newValue;
+                      dropdownValue = newValue!;
                     },
                   );
                 },
