@@ -14,7 +14,7 @@ namespace Utils.Models
         public String Status { get; set; }
         public virtual string RequestId { get; set; }
         public virtual string ProjectId { get; set; }
-        public virtual ICollection<Discussion> Discussions { get; set; }
+        public virtual ICollection<DiscussionVM> Discussions { get; set; }
         public virtual ICollection<Resource> Resources { get; set; }
     }
 }

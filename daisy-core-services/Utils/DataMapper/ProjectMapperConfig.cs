@@ -15,6 +15,8 @@ namespace Utils.DataMapper
             cfg.CreateMap<Workspace, WorkspaceVM>();
             cfg.CreateMap<ProjectVM, Project>();
             cfg.CreateMap<Project, ProjectVM>();
+            cfg.CreateMap<Discussion, DiscussionVM>();
+            cfg.CreateMap<DiscussionVM, Discussion>();
         }
     }
 }
