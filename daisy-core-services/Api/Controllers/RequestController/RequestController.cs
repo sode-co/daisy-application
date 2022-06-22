@@ -11,6 +11,7 @@ using Utils.Models;
 using static Api.Common.Constants;
 using System.Collections.Generic;
 using Utils;
+using System;
 
 namespace Api.Controllers.RequestController
 {
@@ -25,6 +26,13 @@ namespace Api.Controllers.RequestController
         {
             this._unitOfWorkFactory = unitOfWorkFactory;
             this._mapper = mapper;
+        }
+
+        [HttpGet]
+        public IActionResult GetRequest()
+        {
+            using var work = _unitOfWorkFactory.Get;
+            return Json(work.RequestRepository.GetAll(null, null, "Customer,Category").ToList());
         }
 
         [HttpPost()]

@@ -14,5 +14,6 @@ namespace DataAccess.Repositories.Requests
         void CreateRequest(Request request);
         IEnumerable<RequestVM> GetRequestsByCategoryId(int categoryId);
         IEnumerable<Request> GetRequestsByTitle(string title);
+        IEnumerable<Request> RequestPaging(DateTime timeOffset, int count);
     }
 }

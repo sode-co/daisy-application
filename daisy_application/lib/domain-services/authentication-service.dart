@@ -35,6 +35,7 @@ class AuthenticationService {
     final result =
         await (_authRestClient.signin('Bearer $googleIdToken').Value());
     if (result.failureType == FAILURE_TYPE.NONE) {
+      Debug.log('signin', 'success save result');
       await _saveUserDataAndAuthenticationIntoLocal(result.data);
     }
 

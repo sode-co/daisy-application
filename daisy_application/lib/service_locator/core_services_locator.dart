@@ -1,5 +1,6 @@
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
+import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/core_services/http/user/user_rest_api.dart';
@@ -27,6 +28,7 @@ class CoreServiceLocator {
     universal_locator.UniversalLocator.init();
     locator
         .registerFactory<HealthCheckGrpcClient>(() => HealthCheckGrpcClient());
+    locator.registerFactory<RequestGrpcClient>(() => RequestGrpcClient());
   }
 
   static void _initHttpService() {

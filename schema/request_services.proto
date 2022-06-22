@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package daisy;
+
+import "models.proto";
+
+message CreateRequestStreamingRequestModel {
+    int64 TimeOffset = 1;
+}
+
+message CreateRequestStreamingResponseModel {
+    repeated Request Requests = 1;
+}
+
+service RequestService {
+    rpc CreateRequestStreaming(CreateRequestStreamingRequestModel) returns (stream CreateRequestStreamingResponseModel);
+}

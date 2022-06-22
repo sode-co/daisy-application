@@ -12,4 +12,6 @@ mixin WidgetListener {
 
   Future<void> submitTextfieldForSelectingCategories() async =>
       _defaultImplementation();
+
+  Future<void> onLoadMoreRequestEvent() async => _defaultImplementation();
 }

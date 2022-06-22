@@ -48,6 +48,6 @@ class AuthenticationPersistent {
           DateTime.now().add(const Duration(days: 100)).millisecondsSinceEpoch;
     }
 
-    currentAuth.save();
+    await currentAuth.save();
   }
 }

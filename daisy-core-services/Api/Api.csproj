@@ -18,6 +18,7 @@
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,9 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\GrpcServices\GrpcServices.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
@@ -49,6 +53,8 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <None Remove="Controllers\Designer\" />
+    <None Remove="Microsoft.AspNetCore.SignalR" />
+    <None Remove="Hub\Requests\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Middlewares\" />
@@ -60,5 +66,6 @@
     <Folder Include="Response\Authentication\" />
     <Folder Include="Response\User\" />
     <Folder Include="Controllers\Designer\" />
+    <Folder Include="Hubs\Requests\" />
   </ItemGroup>
 </Project>

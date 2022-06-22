@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using DataAccess.UnitOfWork;
 using GrpcServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,7 @@ namespace MobileGrpcServices
         public void ConfigureServices(IServiceCollection services)
         {
             Config.Load();
+            services.AddSingleton<UnitOfWorkFactory>();
             services.AddGrpc();
         }
 

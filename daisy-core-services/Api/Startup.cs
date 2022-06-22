@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Api.Hubs.Requests;
 using Api.Middlewares;
 using AutoMapper;
 using DataAccess.UnitOfWork;
@@ -66,7 +67,7 @@ namespace Api
                 });
             });
 
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSingleton<UnitOfWorkFactory>();
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
@@ -75,6 +76,8 @@ namespace Api
                     .AllowAnyHeader()
                     .AllowAnyOrigin();
             }));
+
+            services.AddSignalR();
 
             services.AddSwaggerGen(c =>
             {
@@ -146,6 +149,7 @@ namespace Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<RequestHub>("/hub/requests");
             });
         }
     }

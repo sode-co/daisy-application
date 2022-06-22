@@ -1,4 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
+import 'package:daisy_application/common/varargs_function.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:logger/logger.dart' as tool;
 import 'dart:convert';
@@ -8,7 +9,7 @@ import 'package:logger/logger.dart';
 class Debug {
   static final _debug = tool.Logger(
       level: tool.Level.debug, printer: _printer, filter: _Filter());
-  static dynamic log = _VarargsFunction(Debug._invoked);
+  static dynamic log = VarargsFunction(Debug._invoked);
 
   static void _invoked(List arguments) {
     String rootMessage = '';
@@ -27,7 +28,7 @@ class Debug {
 class Error {
   static final _error = tool.Logger(
       level: tool.Level.error, printer: _printer, filter: _Filter());
-  static dynamic log = _VarargsFunction(Error._invoked);
+  static dynamic log = VarargsFunction(Error._invoked);
 
   static void _invoked(List arguments) {
     String rootMessage = '';
@@ -58,21 +59,3 @@ var _printer = PrettyPrinter(
     printEmojis: false, // Print an emoji for each log message
     printTime: true // Should each log print contain a timestamp
     );
-
-typedef OnCall = dynamic Function(List arguments);
-
-class _VarargsFunction {
-  _VarargsFunction(this._onCall);
-
-  final OnCall _onCall;
-
-  @override
-  noSuchMethod(Invocation invocation) {
-    if (!invocation.isMethod || invocation.namedArguments.isNotEmpty) {
-      super.noSuchMethod(invocation);
-    }
-
-    final arguments = invocation.positionalArguments;
-    return _onCall(arguments);
-  }
-}

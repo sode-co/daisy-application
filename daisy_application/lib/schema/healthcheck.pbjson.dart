@@ -8,13 +8,15 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+
 @$core.Deprecated('Use healthCheckRequestDescriptor instead')
 const HealthCheckRequest$json = const {
   '1': 'HealthCheckRequest',
 };
 
 /// Descriptor for `HealthCheckRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List healthCheckRequestDescriptor = $convert.base64Decode('ChJIZWFsdGhDaGVja1JlcXVlc3Q=');
+final $typed_data.Uint8List healthCheckRequestDescriptor =
+    $convert.base64Decode('ChJIZWFsdGhDaGVja1JlcXVlc3Q=');
 @$core.Deprecated('Use healthCheckResponseDescriptor instead')
 const HealthCheckResponse$json = const {
   '1': 'HealthCheckResponse',
@@ -24,4 +26,6 @@ const HealthCheckResponse$json = const {
 };
 
 /// Descriptor for `HealthCheckResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List healthCheckResponseDescriptor = $convert.base64Decode('ChNIZWFsdGhDaGVja1Jlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
+final $typed_data.Uint8List healthCheckResponseDescriptor =
+    $convert.base64Decode(
+        'ChNIZWFsdGhDaGVja1Jlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');

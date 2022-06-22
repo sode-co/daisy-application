@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'category_model.g.dart';
 
-@HiveType(typeId: 0)
 @JsonSerializable()
 class CategoryModel extends JsonSerializable with HiveObjectMixin {
   int? id;

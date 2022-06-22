@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers.HealthCheck
 {
 
-    [AllowAnonymous]
+    [Authorize]
     [ApiController]
     public class HealthCheck : Controller
     {

@@ -1,3 +1,4 @@
+import 'package:daisy_application/schema/models.pb.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -35,4 +36,16 @@ class UserModel extends JsonSerializable with HiveObjectMixin {
       _$UserModelFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  UserModel.fromProto(User proto) {
+    id = proto.id;
+    firstName = proto.firstName;
+    lastName = proto.lastName;
+    displayName = proto.displayName;
+    email = proto.email;
+    role = proto.role;
+    phone = proto.phone;
+    avatar = proto.avatar;
+    address = proto.address;
+  }
 }
