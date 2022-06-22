@@ -4,10 +4,7 @@ import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/common/platform_helper.dart';
-import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
-import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
-import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/pages/discovery-job/view/discovery_job.dart';
 import 'package:daisy_application/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/pages/portfolio/portfolio.dart';
@@ -22,9 +19,6 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  // if (!Hive.isBoxOpen(AuthenticationPersistent.BOX_NAME)) {
-  // await Hive.openBox(AuthenticationPersistent.BOX_NAME);
-  // }
 
   if (!PlatformHelper.isPlatform(PLATFORM.Web)) {
     await Firebase.initializeApp(
@@ -35,25 +29,25 @@ Future<void> main() async {
   setupDependencies();
   Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
-  Timer.periodic(const Duration(seconds: 10), (Timer t) async {
-    HealthCheckGrpcClient client = locator.get();
-    final result = await client.performNetworkCheck();
-    if (result.failureType == FAILURE_TYPE.NONE) {
-      Debug.log('$ns-grpc', 'Grpc connection ok');
-    } else {
-      Error.log('$ns-grpc', 'Grpc connection error');
-    }
+  // Timer.periodic(const Duration(seconds: 10), (Timer t) async {
+  //   HealthCheckGrpcClient client = locator.get();
+  //   final result = await client.performNetworkCheck();
+  // if (result.failureType == FAILURE_TYPE.NONE) {
+  //   Debug.log('$ns-grpc', 'Grpc connection ok');
+  // } else {
+  //   Error.log('$ns-grpc', 'Grpc connection error');
+  // }
 
-    HealthCheckRestApi healthCheckApi = locator.get();
-    final response = (await healthCheckApi.get().Value());
-    if (response.failureType != FAILURE_TYPE.NONE) {
-      Error.log('$ns-http', 'Failed when perform network check with status',
-          response.failureType.name);
-    } else {
-      final data = response.data;
-      Debug.log('$ns-http', 'Network check with result', data.message);
-    }
-  });
+  //   HealthCheckRestApi healthCheckApi = locator.get();
+  //   final response = (await healthCheckApi.get().Value());
+  //   if (response.failureType != FAILURE_TYPE.NONE) {
+  //     Error.log('$ns-http', 'Failed when perform network check with status',
+  //         response.failureType.name);
+  //   } else {
+  //     final data = response.data;
+  //     Debug.log('$ns-http', 'Network check with result', data.message);
+  //   }
+  // });
 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());

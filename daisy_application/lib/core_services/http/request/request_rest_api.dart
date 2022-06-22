@@ -8,7 +8,9 @@ abstract class RequestRestApi {
   factory RequestRestApi(Dio dio, {String baseUrl}) = _RequestRestApi;
 
   @POST('')
-  Future<void> createNewRequest(@Body() Map<String, dynamic> body);
+  Future<void> createNewRequest(
+    @Body() Map<String, dynamic> body,
+  );
 
   @GET('/title/{title}')
   Future<String> getRequestsByTitle(

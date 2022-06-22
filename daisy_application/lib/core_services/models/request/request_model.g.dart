@@ -8,9 +8,6 @@ part of 'request_model.dart';
 
 RequestModel _$RequestModelFromJson(Map<String, dynamic> json) => RequestModel(
       json['id'] as int?,
-      json['user'] == null
-          ? null
-          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
       json['category'] == null
           ? null
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
@@ -29,7 +26,6 @@ RequestModel _$RequestModelFromJson(Map<String, dynamic> json) => RequestModel(
 Map<String, dynamic> _$RequestModelToJson(RequestModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'user': instance.user,
       'category': instance.category,
       'title': instance.title,
       'description': instance.description,

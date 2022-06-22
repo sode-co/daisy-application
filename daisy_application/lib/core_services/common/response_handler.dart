@@ -24,8 +24,11 @@ extension ConvertToResult on Future<HttpResponse> {
     const ns = 'send-request-result-handling';
     try {
       final result = await then((value) {
+        Debug.log(ns, value);
         return Result<T>(data: value.data, failureType: FAILURE_TYPE.NONE);
-      }).catchError((err) => throw err);
+      }).catchError((err) {
+        Debug.log(ns, err);
+      });
 
       return result;
     } on DioError catch (err) {

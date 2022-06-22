@@ -9,7 +9,6 @@ part 'request_model.g.dart';
 @JsonSerializable()
 class RequestModel extends JsonSerializable with HiveObjectMixin {
   int? id;
-  UserModel? user;
   CategoryModel? category;
   String? title;
   String? description;
@@ -20,7 +19,6 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
 
   RequestModel(
     this.id,
-    this.user,
     this.category,
     this.title,
     this.description,

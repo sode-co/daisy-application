@@ -22,8 +22,8 @@ class AuthenticationAdapter extends TypeAdapter<AuthenticationModel> {
 class AuthenticationPersistent {
   static const BOX_NAME = 'AUTHENTICATION_BOX';
   Future<AuthenticationModel?> getCurrentAuth() async {
-    // var box = Hive.box(BOX_NAME);
-    // return box.containsKey(0) ? box.get(0) : null;
+    var box = Hive.box(BOX_NAME);
+    return box.containsKey(0) ? box.get(0) : null;
   }
 
   Future<void> removeAuth() async {

@@ -51,7 +51,7 @@ class CoreServiceLocator {
         () => CategoryRestApi(locator.get(), baseUrl: Config.API_URL));
 
     locator.registerFactory<RequestRestApi>(() => RequestRestApi(locator.get(),
-        baseUrl: '${Config.API_URL}​/v1​/requests'));
+        baseUrl: '${Config.API_URL}/v1/requests'));
   }
 
   static void _initPersistentService() {
