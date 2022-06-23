@@ -7,7 +7,6 @@ part of 'request_model.dart';
 // **************************************************************************
 
 RequestModel _$RequestModelFromJson(Map<String, dynamic> json) => RequestModel(
-      json['id'] as int?,
       json['category'] == null
           ? null
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
@@ -15,9 +14,7 @@ RequestModel _$RequestModelFromJson(Map<String, dynamic> json) => RequestModel(
       json['description'] as String?,
       (json['budget'] as num?)?.toDouble(),
       json['status'] as String?,
-      json['timeline'] == null
-          ? null
-          : DateTime.parse(json['timeline'] as String),
+      json['timeline'],
       (json['items'] as List<dynamic>?)
           ?.map((e) => RequestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -25,12 +22,13 @@ RequestModel _$RequestModelFromJson(Map<String, dynamic> json) => RequestModel(
 
 Map<String, dynamic> _$RequestModelToJson(RequestModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'category': instance.category,
+      'category': instance.category!.toJson(),
       'title': instance.title,
       'description': instance.description,
       'budget': instance.budget,
       'status': instance.status,
-      'timeline': instance.timeline?.toIso8601String(),
-      'items': instance.items,
+      'timeline': instance.timeline,
+      'items': instance.items == null
+          ? null
+          : instance.items!.map((item) => item.toJson()).toList(),
     };

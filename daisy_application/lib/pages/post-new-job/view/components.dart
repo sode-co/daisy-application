@@ -161,7 +161,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                   maxTime: DateTime(2025, 6, 7, 05, 09),
                                   onChanged: (date) {}, onConfirm: (date) {
                                 Debug.log('confirm $date');
-                                model.parentRequest.timeline = date;
+                                model.parentRequest.timeline =
+                                    '2022-06-21T16:37:44.239Z';
                                 setState(() {
                                   datetimedisplay = date.toString();
                                 });
@@ -294,37 +295,61 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         RequestRestApi _requestClient = locator.get();
                         // var x = await _requestClient.getRequestsByTitle('abc');
                         // print(x);
-                        final requestBody = model.parentRequest.toJson()
-                          ..['categoryId'] = model.parentRequest.category!.id;
-                        await _requestClient.createNewRequest(requestBody);
-                        await _requestClient.createNewRequest({
-                          'categoryId': 1,
-                          'description': 'string',
-                          'title': 'string',
-                          'status': 'string',
-                          'budget': 10,
-                          'timeline': '2022-06-21T16:37:44.239Z',
-                          'items': [
-                            {
-                              'categoryId': 2,
-                              'description': 'string',
-                              'title': 'requestChild1',
-                              'status': 'string',
-                              'budget': 0,
-                              'timeline': '2022-06-21T16:37:44.239Z',
-                              'items': null
-                            },
-                            {
-                              'categoryId': 3,
-                              'description': 'string',
-                              'title': 'requestChild2',
-                              'status': 'string',
-                              'budget': 0,
-                              'timeline': '2022-06-21T16:37:44.239Z',
-                              'items': null
-                            }
-                          ]
-                        });
+                        Debug.log(model.parentRequest.toJson());
+                        await _requestClient
+                            .createNewRequest(model.parentRequest.toJson());
+                        // await _requestClient.createNewRequest({
+                        //   'category': {
+                        //     'id': 14,
+                        //     'description': 'string',
+                        //     'name': 'Thiết kế không gian',
+                        //     'type': 'Parent'
+                        //   },
+                        //   'title': 'ten du an',
+                        //   'description': 'mtda',
+                        //   'budget': 123,
+                        //   'status': 'string',
+                        //   'timeline': '2022-06-21T16:37:44.239Z',
+                        //   'items': [
+                        //     {
+                        //       'category': {
+                        //         'id': 16,
+                        //         'description': 'string',
+                        //         'name': 'Nội thất',
+                        //         'type': 'Thiết kế không gian'
+                        //       },
+                        //       'title': 'dv1',
+                        //       'description': 'mtdv1',
+                        //       'budget': 0,
+                        //       'status': 'string',
+                        //       'timeline': '2022-06-21T16:37:44.239Z',
+                        //       'items': null,
+                        //     }
+                        //   ]
+                        // });
+                        // await _requestClient.createNewRequest({
+                        //   'category': {
+                        //     'id': 1,
+                        //   },
+                        //   'description': 'string',
+                        //   'title': 'string',
+                        //   'status': 'string',
+                        //   'budget': 10,
+                        //   'timeline': '2022-06-21T16:37:44.239Z',
+                        //   'items': [
+                        //     {
+                        //       'category': {
+                        //         'id': 3,
+                        //       },
+                        //       'description': 'string',
+                        //       'title': 'requestChild2',
+                        //       'status': 'string',
+                        //       'budget': 0,
+                        //       'timeline': '2022-06-21T16:37:44.239Z',
+                        //       'items': null
+                        //     }
+                        //   ]
+                        // });
                         // _requestClient.createNewRequest(model.parentRequest);
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')));
@@ -478,9 +503,9 @@ class CustomTextField extends StatelessWidget {
                 if (model.parentRequest.items!.length < index!) {
                   model.parentRequest.items!.add(
                     RequestModel.init()
-                      ..status = ''
+                      ..status = ' '
                       ..budget = 0
-                      ..timeline = DateTime.now().add(const Duration(days: 3))
+                      ..timeline = '2022-06-21T16:37:44.239Z'
                       ..items = null,
                   );
                 }
@@ -635,9 +660,9 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
     if (model.parentRequest.items!.length < _index) {
       model.parentRequest.items!.add(
         RequestModel.init()
-          ..status = ''
+          ..status = 'string'
           ..budget = 0
-          ..timeline = DateTime.now().add(const Duration(days: 3))
+          ..timeline = '2022-06-21T16:37:44.239Z'
           ..items = null,
       );
     }
