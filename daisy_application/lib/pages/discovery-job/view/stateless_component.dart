@@ -21,7 +21,7 @@ class IntroJobCard extends StatelessWidget {
               width: 60.0,
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
-                  request.user!.avatar.toString(),
+                  ' ',
                 ),
               ),
             ),
@@ -46,7 +46,7 @@ class IntroJobCard extends StatelessWidget {
                 SizedBox(
                   width: 280,
                   child: Text(
-                    request.user!.displayName!,
+                    ' ',
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontSize: 15.0,
@@ -57,7 +57,7 @@ class IntroJobCard extends StatelessWidget {
                 SizedBox(
                   width: 280,
                   child: Text(
-                    request.user!.address!,
+                    ' ',
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontSize: 14.0,
@@ -133,7 +133,7 @@ class JobDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  request.user!.displayName!,
+                  ' ',
                   style: TextStyle(
                     color: Colors.black.withOpacity(0.7),
                     fontSize: 15.0,
@@ -257,7 +257,7 @@ class RecruiterInfo extends StatelessWidget {
                 width: 80.0,
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(
-                    request.user!.avatar.toString(),
+                    ' ',
                   ),
                 ),
               ),
@@ -268,7 +268,7 @@ class RecruiterInfo extends StatelessWidget {
                   SizedBox(
                     width: 300,
                     child: Text(
-                      request.user!.displayName!,
+                      ' ',
                       style: const TextStyle(
                         color: Colors.black87,
                         fontSize: 16.0,
@@ -282,7 +282,7 @@ class RecruiterInfo extends StatelessWidget {
                   SizedBox(
                     width: 280,
                     child: Text(
-                      request.user!.address!,
+                      ' ',
                       style: TextStyle(
                         color: Colors.black.withOpacity(0.7),
                         fontSize: 15.0,
