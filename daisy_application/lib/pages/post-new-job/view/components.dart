@@ -150,51 +150,87 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         height: 5.0,
                       ),
                       SizedBox(
-                        height: 50.0,
-                        width: 700.0,
+                        height: Responsive.isDesktop(context) ? 50.0 : 52.0,
+                        width: Responsive.isDesktop(context) ? 700.0 : 300.0,
                         child: TextButton(
-                            onPressed: () {
-                              DatePicker.showDateTimePicker(context,
-                                  showTitleActions: true,
-                                  minTime: DateTime.now()
-                                      .add(const Duration(days: 1)),
-                                  maxTime: DateTime(2025, 6, 7, 05, 09),
-                                  onChanged: (date) {}, onConfirm: (date) {
-                                model.parentRequest.timeline =
-                                    date.toIso8601String();
-                                setState(() {
-                                  datetimedisplay = date.toString();
-                                });
-                              }, locale: LocaleType.vi);
-                            },
-                            child: SizedBox(
-                              width: size.width * 0.5,
-                              height: 300.0,
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.schedule,
-                                      color: Colors.black),
-                                  const SizedBox(
-                                    width: 10.0,
+                          onPressed: () {
+                            DatePicker.showDateTimePicker(context,
+                                showTitleActions: true,
+                                minTime:
+                                    DateTime.now().add(const Duration(days: 1)),
+                                maxTime: DateTime(2025, 6, 7, 05, 09),
+                                onChanged: (date) {}, onConfirm: (date) {
+                              model.parentRequest.timeline =
+                                  date.toIso8601String();
+                              setState(() {
+                                datetimedisplay = date.toString();
+                              });
+                            }, locale: LocaleType.vi);
+                          },
+                          child: SizedBox(
+                            width: Responsive.isDesktop(context)
+                                ? size.width * 0.5
+                                : size.width * 0.7,
+                            height: 300.0,
+                            child: Responsive.isDesktop(context)
+                                ? Row(
+                                    children: [
+                                      const Icon(Icons.schedule,
+                                          color: Colors.black),
+                                      const SizedBox(
+                                        width: 10.0,
+                                      ),
+                                      Text(
+                                        'Chọn thời hạn dự án:',
+                                        style: Style.stringText,
+                                      ),
+                                      const SizedBox(
+                                        width: 20.0,
+                                      ),
+                                      Text(
+                                        datetimedisplay,
+                                        style: const TextStyle(
+                                          fontSize: 15.5,
+                                          color: Color(
+                                              BuiltinColor.blue_gradient_01),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(height: 5.0),
+                                      Row(
+                                        children: [
+                                          const Icon(Icons.schedule,
+                                              color: Colors.black),
+                                          const SizedBox(
+                                            width: 10.0,
+                                          ),
+                                          Text(
+                                            'Chọn thời hạn dự án:',
+                                            style: Style.stringText,
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          datetimedisplay,
+                                          style: const TextStyle(
+                                            fontSize: 15.5,
+                                            color: Color(
+                                                BuiltinColor.blue_gradient_01),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'Chọn thời hạn dự án:',
-                                    style: Style.stringText,
-                                  ),
-                                  const SizedBox(
-                                    width: 20.0,
-                                  ),
-                                  Text(
-                                    datetimedisplay,
-                                    style: const TextStyle(
-                                      fontSize: 15.5,
-                                      color:
-                                          Color(BuiltinColor.blue_gradient_01),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -278,8 +314,8 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 20.0,
+                  SizedBox(
+                    width: Responsive.isDesktop(context) ? 20.0 : 10.0,
                   ),
                   Padding(
                     padding: EdgeInsets.only(
