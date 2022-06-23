@@ -46,7 +46,7 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
       auth.accessToken = result.data.accessToken;
       await authServices.setAuth(auth);
     }
-    Debug.log(ns, 'Found access token', auth.accessToken);
+
     options.headers['Authorization'] ??= 'bearer ${auth.accessToken}';
     handler.next(options);
   }
