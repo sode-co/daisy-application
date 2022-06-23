@@ -9,7 +9,8 @@ WORKDIR /src
 COPY ["daisy-core-services", "./"]
 COPY vendor-services/env/appsettings.json ./Shared/appsettings.json
 
-WORKDIR /src/DataAccess
 RUN dotnet new tool-manifest
 RUN dotnet tool install --local dotnet-ef --version 5.0.0
+WORKDIR /src/DataAccess
+
 ENTRYPOINT [""]
