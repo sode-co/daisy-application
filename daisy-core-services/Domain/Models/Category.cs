@@ -11,11 +11,9 @@ namespace Domain.Models
         public String Description { get; set; }
 
         [MaxLength(455)]
-        [Required]
         public String Name { get; set; }
 
         [MaxLength(255)]
-        [Required]
         public String Type { get; set; }
 
         public virtual ICollection<Category> ParentCategory { get; set; }

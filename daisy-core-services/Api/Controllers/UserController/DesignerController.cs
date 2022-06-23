@@ -4,7 +4,6 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using Utils.Models;
 using System.Linq;
 
 namespace Api.Controllers.UserController
@@ -23,20 +22,20 @@ namespace Api.Controllers.UserController
 
         [Authorize]
         [HttpPut()]
-        public IActionResult UpdateDesignerProfile([FromBody] UserExposeModel userVM)
+        public IActionResult UpdateDesignerProfile([FromBody] User body)
         {
-            int designerId = ((UserExposeModel) HttpContext.Items["User"]).Id;
+            int designerId = ((User) HttpContext.Items["User"]).Id;
 
             using (var work = _unitOfWorkFactory.Get)
             {
                 var user = work.UserRepository.Get(designerId);
                 if (user != null)
                 {
-                    user.FirstName = userVM.FirstName;
-                    user.LastName = userVM.LastName;
-                    user.DisplayName = userVM.DisplayName;
-                    user.Address = userVM.Address;
-                    user.Phone = userVM.Phone;
+                    user.FirstName = body.FirstName;
+                    user.LastName = body.LastName;
+                    user.DisplayName = body.DisplayName;
+                    user.Address = body.Address;
+                    user.Phone = body.Phone;
 
                     work.Save();
                     return Ok(user);
