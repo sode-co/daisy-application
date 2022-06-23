@@ -8,10 +8,8 @@ namespace Domain.Models
     public class AuthToken : Entity
     {
         [MaxLength(500)]
-        [Required]
         public String RefreshToken { get; set; }
 
-        [Required]
         public virtual User User { get; set; }
 
         public override string TableName => "AuthTokens";

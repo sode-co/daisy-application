@@ -1,7 +1,6 @@
 ﻿using System;
 using AutoMapper;
 using Domain.Models;
-using Utils.Models;
 
 namespace Utils.DataMapper
 {
@@ -9,8 +8,6 @@ namespace Utils.DataMapper
     {
         public static void CreateUserMap(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<User, UserExposeModel>();
-            cfg.CreateMap<UserExposeModel, User>();
         }
     }
 }
