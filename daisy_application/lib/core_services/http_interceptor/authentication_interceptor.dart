@@ -44,6 +44,7 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
       }
 
       auth.accessToken = result.data.accessToken;
+      Debug.log(ns, 'Found access token', result.data.accessToken);
       await authServices.setAuth(auth);
     }
 
