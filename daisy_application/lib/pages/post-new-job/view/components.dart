@@ -157,12 +157,11 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                               DatePicker.showDateTimePicker(context,
                                   showTitleActions: true,
                                   minTime: DateTime.now()
-                                      .add(const Duration(days: 3)),
+                                      .add(const Duration(days: 1)),
                                   maxTime: DateTime(2025, 6, 7, 05, 09),
                                   onChanged: (date) {}, onConfirm: (date) {
-                                Debug.log('confirm $date');
                                 model.parentRequest.timeline =
-                                    '2022-06-21T16:37:44.239Z';
+                                    date.toIso8601String();
                                 setState(() {
                                   datetimedisplay = date.toString();
                                 });
@@ -293,64 +292,9 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       ),
                       onPressed: () async {
                         RequestRestApi _requestClient = locator.get();
-                        // var x = await _requestClient.getRequestsByTitle('abc');
-                        // print(x);
                         Debug.log(model.parentRequest.toJson());
                         await _requestClient
                             .createNewRequest(model.parentRequest.toJson());
-                        // await _requestClient.createNewRequest({
-                        //   'category': {
-                        //     'id': 14,
-                        //     'description': 'string',
-                        //     'name': 'Thiết kế không gian',
-                        //     'type': 'Parent'
-                        //   },
-                        //   'title': 'ten du an',
-                        //   'description': 'mtda',
-                        //   'budget': 123,
-                        //   'status': 'string',
-                        //   'timeline': '2022-06-21T16:37:44.239Z',
-                        //   'items': [
-                        //     {
-                        //       'category': {
-                        //         'id': 16,
-                        //         'description': 'string',
-                        //         'name': 'Nội thất',
-                        //         'type': 'Thiết kế không gian'
-                        //       },
-                        //       'title': 'dv1',
-                        //       'description': 'mtdv1',
-                        //       'budget': 0,
-                        //       'status': 'string',
-                        //       'timeline': '2022-06-21T16:37:44.239Z',
-                        //       'items': null,
-                        //     }
-                        //   ]
-                        // });
-                        // await _requestClient.createNewRequest({
-                        //   'category': {
-                        //     'id': 1,
-                        //   },
-                        //   'description': 'string',
-                        //   'title': 'string',
-                        //   'status': 'string',
-                        //   'budget': 10,
-                        //   'timeline': '2022-06-21T16:37:44.239Z',
-                        //   'items': [
-                        //     {
-                        //       'category': {
-                        //         'id': 3,
-                        //       },
-                        //       'description': 'string',
-                        //       'title': 'requestChild2',
-                        //       'status': 'string',
-                        //       'budget': 0,
-                        //       'timeline': '2022-06-21T16:37:44.239Z',
-                        //       'items': null
-                        //     }
-                        //   ]
-                        // });
-                        // _requestClient.createNewRequest(model.parentRequest);
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')));
                       },
@@ -505,7 +449,7 @@ class CustomTextField extends StatelessWidget {
                     RequestModel.init()
                       ..status = ' '
                       ..budget = 0
-                      ..timeline = '2022-06-21T16:37:44.239Z'
+                      ..timeline = model.parentRequest.timeline
                       ..items = null,
                   );
                 }
@@ -662,7 +606,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
         RequestModel.init()
           ..status = 'string'
           ..budget = 0
-          ..timeline = '2022-06-21T16:37:44.239Z'
+          ..timeline = model.parentRequest.timeline
           ..items = null,
       );
     }
