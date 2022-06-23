@@ -32,13 +32,13 @@ Future<void> main() async {
   Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
   Timer.periodic(const Duration(seconds: 10), (Timer t) async {
-    // HealthCheckGrpcClient client = locator.get();
-    // final result = await client.performNetworkCheck();
-    // if (result.failureType == FAILURE_TYPE.NONE) {
-    //   Debug.log('$ns-grpc', 'Grpc connection ok');
-    // } else {
-    //   Error.log('$ns-grpc', 'Grpc connection error');
-    // }
+    HealthCheckGrpcClient client = locator.get();
+    final result = await client.performNetworkCheck();
+    if (result.failureType == FAILURE_TYPE.NONE) {
+      Debug.log('$ns-grpc', 'Grpc connection ok');
+    } else {
+      Error.log('$ns-grpc', 'Grpc connection error');
+    }
 
     HealthCheckRestApi healthCheckApi = locator.get();
     final response = (await healthCheckApi.get().Value());
