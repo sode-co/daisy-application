@@ -1,5 +1,6 @@
 ﻿using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,21 @@ namespace DataAccess.Repositories.Categories
         {
             _dbContext = dbContext;
         }
+
+        public IEnumerable<Category> GetChildCategories(string parentName)
+        {
+            var parentCatgories = _dbContext.Categories
+                .Include(p => p.ParentCategory)
+                .Include(p => p.ChildrenCategory)
+                .Where(p => p.ChildrenCategory.Count > 0).ToList();
+
+            return parentCatgories.FirstOrDefault(c => c.Name.Equals(parentName)).ChildrenCategory;
+        }
+
+        public IEnumerable<Category> GetParentCategories()
+            => _dbContext.Categories
+                .Include(p => p.ParentCategory)
+                .Include(p => p.ChildrenCategory)
+                .Where(p => p.ChildrenCategory.Count > 0).ToList();
     }
 }

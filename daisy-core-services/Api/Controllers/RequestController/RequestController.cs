@@ -30,7 +30,7 @@ namespace Api.Controllers.RequestController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                var user = (User) HttpContext.Items["User"];
+                var user = (User)HttpContext.Items["User"];
                 List<Request> requestItems = body.Items.ToList();
                 User customer = work.UserRepository.Get(user.Id);
                 Category category = work.CategoryRepository.Get(body.Category.Id);
@@ -42,14 +42,18 @@ namespace Api.Controllers.RequestController
                     Title = body.Title,
                     Description = body.Description,
                     Budget = body.Budget,
+                    Timeline = body.Timeline,
                     ParentRequest = null,
                     Status = REQUEST_STATUS.AVAILABLE,
                 };
 
-                request.Items = requestItems.Select(item => {
+                request.Items = requestItems.Select(item =>
+                {
                     item.Customer = customer;
                     item.Category = category;
                     item.ParentRequest = request;
+                    item.Category = work.CategoryRepository.Get(item.Category.Id);
+
                     return item;
                 }).ToList();
 
