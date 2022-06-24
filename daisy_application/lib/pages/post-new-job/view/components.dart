@@ -1,4 +1,5 @@
-import 'package:daisy_application/common/debugging/logger.dart';
+import 'dart:async';
+
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
@@ -150,7 +151,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         height: 5.0,
                       ),
                       SizedBox(
-                        height: Responsive.isDesktop(context) ? 50.0 : 52.0,
+                        height: Responsive.isDesktop(context) ? 50.0 : 72.0,
                         width: Responsive.isDesktop(context) ? 700.0 : 300.0,
                         child: TextButton(
                           onPressed: () {
@@ -236,7 +237,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20.0),
+              SizedBox(height: Responsive.isDesktop(context) ? 20.0 : 5.0),
               Padding(
                 padding: EdgeInsets.only(left: childItemPadding),
                 child: Column(
@@ -272,7 +273,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                 padding: EdgeInsets.only(
                     right: Responsive.isDesktop(context)
                         ? size.width * 0.665
-                        : size.width * 0.33),
+                        : size.width * 0.28),
                 child: TextButton.icon(
                   icon: const Icon(Icons.add),
                   onPressed: () {
@@ -287,7 +288,10 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       },
                     );
                   },
-                  label: const Text('Thêm đầu việc'),
+                  label: const Text(
+                    'Thêm đầu việc',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
                 ),
               ),
               const SizedBox(height: 20.0),
@@ -328,11 +332,21 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       ),
                       onPressed: () async {
                         RequestRestApi _requestClient = locator.get();
-                        Debug.log(model.parentRequest.toJson());
                         await _requestClient
                             .createNewRequest(model.parentRequest.toJson());
                         ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')));
+                          SnackBar(
+                            content: const Text(
+                                'Bài đăng của bạn đã được ghi nhận!'),
+                            backgroundColor: Colors.green.withOpacity(0.8),
+                          ),
+                        );
+                        Timer(
+                          const Duration(seconds: 1),
+                          () {
+                            Navigator.pushNamed(context, '/find-freelance-job');
+                          },
+                        );
                       },
                       child: const Text(
                         'Đăng việc',
