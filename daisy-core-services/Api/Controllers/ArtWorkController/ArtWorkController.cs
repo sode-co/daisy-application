@@ -3,7 +3,6 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Utils.Models;
 using static Api.Common.Constants;
 
 namespace Api.Controllers.ArtWorkController
@@ -65,15 +64,15 @@ namespace Api.Controllers.ArtWorkController
 
         [HttpPut("{artworkId}")]
         [Authorize(Policy = ROLE.DESIGNER)]
-        public IActionResult UpdateArtWorkById(int artworkId, [FromBody] ArtWorkVM artWorkVM)
+        public IActionResult UpdateArtWorkById(int artworkId, [FromBody] ArtWork body)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
                 ArtWork artWork = work.ArtWorkRepository.Get(artworkId);
                 if (artWork is null) return NotFound();               
-                artWork.Description = artWorkVM.Description;
-                artWork.Title = artWorkVM.Title;
-                artWork.Category = work.CategoryRepository.Get(artWorkVM.CategoryId);
+                artWork.Description = body.Description;
+                artWork.Title = body.Title;
+                artWork.Category = work.CategoryRepository.Get(body.Category.Id);
                 work.Save();
 
                 return Json(new { message = "ok" });

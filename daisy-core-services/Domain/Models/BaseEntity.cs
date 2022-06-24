@@ -10,14 +10,12 @@ namespace BusinessObject
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
 
         public DateTime? DeletedAt { get; set; }
 
-        [Required]
         [MaxLength(255)]
         public String ObjectId { get; set; }
 

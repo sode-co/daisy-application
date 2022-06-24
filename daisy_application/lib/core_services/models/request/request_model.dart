@@ -9,8 +9,7 @@ part 'request_model.g.dart';
 @HiveType(typeId: 0)
 @JsonSerializable()
 class RequestModel extends JsonSerializable with HiveObjectMixin {
-  int? id;
-  UserModel? user;
+  int? id = 0;
   CategoryModel? category;
   String? title;
   String? description;
@@ -18,16 +17,21 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
   String? status;
   DateTime? timeLine;
   DateTime? createdAt;
+  String? timeline;
+  UserModel? user;
+  List<RequestModel> items = [];
 
-  RequestModel(
-    this.id,
-    this.user,
+  RequestModel({
+    this.id = 0,
     this.category,
     this.title,
     this.description,
     this.budget,
     this.status,
-  );
+    this.timeline,
+    this.user,
+    this.items = const [],
+  });
 
   RequestModel.fromProto(Request proto) {
     id = proto.id;

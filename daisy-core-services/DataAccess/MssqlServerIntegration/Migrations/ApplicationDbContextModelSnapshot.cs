@@ -63,7 +63,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -75,7 +74,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasMaxLength(455)
                         .HasColumnType("nvarchar(455)");
 
@@ -88,7 +86,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasMaxLength(455)
                         .HasColumnType("nvarchar(455)");
 
@@ -158,7 +155,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(455)
                         .HasColumnType("nvarchar(455)");
 
@@ -168,7 +164,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -188,7 +183,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -207,19 +201,17 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WorkspaceId")
+                    b.Property<int?>("WorkspaceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -242,7 +234,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -265,7 +256,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PreferredLanguage")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -276,7 +266,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -306,7 +295,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -314,7 +302,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -327,12 +314,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -363,12 +348,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Currency")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -385,7 +368,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -414,7 +396,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -430,12 +411,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PaymentMethod")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -461,7 +440,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Biography")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -512,7 +490,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -520,7 +497,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -531,7 +507,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -544,7 +519,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PreferredLanguage")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -555,7 +529,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -603,7 +576,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -616,7 +588,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -624,7 +595,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -656,7 +626,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FileType")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -669,7 +638,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("WorkStatus")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -694,7 +662,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -702,7 +669,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -766,21 +732,17 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DisplayName")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -793,11 +755,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Settings")
-                        .IsRequired()
                         .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
@@ -807,7 +767,8 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("Users");
                 });
@@ -830,14 +791,13 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("ProjectId")
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<int?>("RequestId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -915,9 +875,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
 
                     b.HasOne("Domain.Models.Workspace", "Workspace")
                         .WithMany("Discussions")
-                        .HasForeignKey("WorkspaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WorkspaceId");
 
                     b.Navigation("Sender");
 
@@ -1060,9 +1018,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 {
                     b.HasOne("Domain.Models.Project", "Project")
                         .WithMany("Workspaces")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("Domain.Models.Request", "Request")
                         .WithMany()

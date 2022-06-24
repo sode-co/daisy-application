@@ -11,21 +11,16 @@ namespace Domain.Models
         public String Description { get; set; }
 
         [MaxLength(455)]
-        [Required]
         public String Image { get; set; }
 
-        [Required]
         public virtual Portfolio Portfolio { get; set; }
 
-        [Required]
         public virtual Category Category { get; set; }
 
         [MaxLength(455)]
-        [Required]
         public String Title { get; set; }
 
         [MaxLength(int.MaxValue)]
-        [Required]
         [System.ComponentModel.DefaultValue("{}")]
         public String Data { get; set; } = "{}";
 

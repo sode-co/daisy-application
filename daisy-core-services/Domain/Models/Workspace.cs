@@ -7,14 +7,11 @@ namespace Domain.Models
 {
     public class Workspace : Entity
     {
-        [Required]
         [MaxLength(255)]
         public String Status { get; set; }
 
-        [Required]
         public virtual Request Request { get; set; }
 
-        [Required]
         public virtual Project Project { get; set; }
 
         public virtual ICollection<Discussion> Discussions { get; set; }

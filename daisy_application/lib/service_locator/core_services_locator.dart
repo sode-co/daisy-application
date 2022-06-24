@@ -2,7 +2,9 @@ import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
+import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
+import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/http/user/user_rest_api.dart';
 import 'package:daisy_application/core_services/http_interceptor/authentication_interceptor.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
@@ -11,6 +13,7 @@ import 'package:daisy_application/core_services/persistent/authentication_persis
 import 'package:daisy_application/core_services/persistent/user_persistent.dart';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import '../common/config.dart';
 import 'locator.dart';
 import 'native_locator.dart' if (dart.library.html) 'web_locator.dart'
@@ -45,6 +48,12 @@ class CoreServiceLocator {
 
     locator.registerFactory<UserRestApi>(
         () => UserRestApi(locator.get(), baseUrl: '${Config.API_URL}/v1/user'));
+
+    locator.registerFactory<CategoryRestApi>(
+        () => CategoryRestApi(locator.get(), baseUrl: Config.API_URL));
+
+    locator.registerFactory<RequestRestApi>(() => RequestRestApi(locator.get(),
+        baseUrl: '${Config.API_URL}/v1/requests'));
   }
 
   static void _initPersistentService() {

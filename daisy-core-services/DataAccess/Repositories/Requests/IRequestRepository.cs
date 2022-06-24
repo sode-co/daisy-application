@@ -5,14 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Utils.Models;
 
 namespace DataAccess.Repositories.Requests
 {
     public interface IRequestRepository : IRepository<Request>
     {
         void CreateRequest(Request request);
-        IEnumerable<RequestVM> GetRequestsByCategoryId(int categoryId);
         IEnumerable<Request> GetRequestsByTitle(string title);
         IEnumerable<Request> RequestPaging(DateTime timeOffset, int count);
     }
