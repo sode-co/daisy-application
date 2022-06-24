@@ -25,30 +25,6 @@ namespace GrpcServices.Services
             Console.WriteLine("currentTimeline" + currentTimeline);
             while (!context.CancellationToken.IsCancellationRequested && count < 2)
             {
-                count++;
-
-
-                new Request()
-                {
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 using var work = _unitOfWorkFactory.Get;
                 var requests = work.RequestRepository.RequestPaging(currentTimeline, 2)
                     .Select(request => new Request() {
