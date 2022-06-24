@@ -10,14 +10,14 @@ import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DiscoverJob extends StatefulWidget {
-  const DiscoverJob({Key? key}) : super(key: key);
+class DiscoverJobPage extends StatefulWidget {
+  const DiscoverJobPage({Key? key}) : super(key: key);
 
   @override
-  State<DiscoverJob> createState() => _DiscoverJobState();
+  State<DiscoverJobPage> createState() => _DiscoverJobState();
 }
 
-class _DiscoverJobState extends State<DiscoverJob> with WidgetListener {
+class _DiscoverJobState extends State<DiscoverJobPage> with WidgetListener {
   late DiscoveryJobScreenState _screenState;
   late WidgetListener _widgetListener;
   late RequestGrpcClient requestGrpcClient;

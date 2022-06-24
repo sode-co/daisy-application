@@ -1,5 +1,5 @@
-import 'package:daisy_application/common/access_utils.dart';
 import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/pages/common/device_info.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +27,10 @@ ScreenType getDeviceType(MediaQueryData mediaQuery) {
 }
 
 extension BuildContextExt on BuildContext {
-  DeviceInfo getDeviceInfo() {
-    var mediaQuery = MediaQuery.of(this);
-    return DeviceInfo(mediaQuery.orientation, mediaQuery.size, getDeviceType(this),
-        Size(constrants.maxWidth, constrants.maxHeight));
+  get mediaQuery => MediaQuery.of(this);
+
+  DeviceInfo get deviceInfo => DeviceInfo(
+      mediaQuery.orientation, getDeviceType(mediaQuery), mediaQuery.size);
+
+  bool isScreenType(ScreenType type) => deviceInfo.deviceScreenType == type;
 }
