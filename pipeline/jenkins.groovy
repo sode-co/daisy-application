@@ -190,26 +190,26 @@ pipeline {
       steps {
         script {
           if (_ENV == 'production') {
-            println "Pushing tiendvlp/daisy_api:${_SUB_NAME}..."
-            sh """
-              docker push tiendvlp/daisy_api:${_SUB_NAME}
-            """
-            println "Pushed tiendvlp/daisy_api:${_SUB_NAME} into docker hub successfully"
+            // println "Pushing tiendvlp/daisy_api:${_SUB_NAME}..."
+            // sh """
+            //   docker push tiendvlp/daisy_api:${_SUB_NAME}
+            // """
+            // println "Pushed tiendvlp/daisy_api:${_SUB_NAME} into docker hub successfully"
 
-            println "Pushing tiendvlp/daisy_grpc:${_SUB_NAME}..."
-            sh """
-              docker push tiendvlp/daisy_grpc:${_SUB_NAME}
-            """
-            println "Pushed tiendvlp/daisy_grpc:${_SUB_NAME} into docker hub successfully"
+            // println "Pushing tiendvlp/daisy_grpc:${_SUB_NAME}..."
+            // sh """
+            //   docker push tiendvlp/daisy_grpc:${_SUB_NAME}
+            // """
+            // println "Pushed tiendvlp/daisy_grpc:${_SUB_NAME} into docker hub successfully"
 
-            println "Pushing tiendvlp/daisy_flutter_web:${_SUB_NAME}..."
-            sh """
-              docker push tiendvlp/daisy_flutter_web:${_SUB_NAME}
-            """
-            /* groovylint-disable-next-line LineLength */
-            println "Pushed tiendvlp/daisy_flutter_web:${_SUB_NAME} into docker hub successfully"
+            // println "Pushing tiendvlp/daisy_flutter_web:${_SUB_NAME}..."
+            // sh """
+            //   docker push tiendvlp/daisy_flutter_web:${_SUB_NAME}
+            // """
+            // /* groovylint-disable-next-line LineLength */
+            // println "Pushed tiendvlp/daisy_flutter_web:${_SUB_NAME} into docker hub successfully"
 
-            println "All services has been pushed into docker hub with tag ${_SUB_NAME}"
+            // println "All services has been pushed into docker hub with tag ${_SUB_NAME}"
           }
         }
       }
