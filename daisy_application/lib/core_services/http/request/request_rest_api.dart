@@ -1,3 +1,4 @@
+import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -9,7 +10,7 @@ abstract class RequestRestApi {
 
   @POST('')
   Future<void> createNewRequest(
-    @Body() Map<String, dynamic> body,
+    @Body() RequestModel body,
   );
 
   @GET('/title/{title}')

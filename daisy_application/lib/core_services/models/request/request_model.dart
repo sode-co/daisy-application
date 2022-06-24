@@ -7,25 +7,25 @@ part 'request_model.g.dart';
 @HiveType(typeId: 0)
 @JsonSerializable()
 class RequestModel extends JsonSerializable with HiveObjectMixin {
-  // int? id;
+  int? id = 0;
   CategoryModel? category;
   String? title;
   String? description;
   double? budget;
   String? status;
   String? timeline;
-  List<RequestModel>? items;
+  List<RequestModel> items = [];
 
-  RequestModel(
-    // this.id,
+  RequestModel({
+    this.id = 0,
     this.category,
     this.title,
     this.description,
     this.budget,
     this.status,
     this.timeline,
-    this.items,
-  );
+    this.items = const [],
+  });
 
   RequestModel.init();
 

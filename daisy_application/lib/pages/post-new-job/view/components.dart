@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
@@ -333,7 +334,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       onPressed: () async {
                         RequestRestApi _requestClient = locator.get();
                         await _requestClient
-                            .createNewRequest(model.parentRequest.toJson());
+                            .createNewRequest(model.parentRequest);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: const Text(
@@ -495,13 +496,10 @@ class CustomTextField extends StatelessWidget {
               }
               if (index != null) {
                 if (model.parentRequest.items!.length < index!) {
-                  model.parentRequest.items!.add(
-                    RequestModel.init()
-                      ..status = ' '
-                      ..budget = 0
-                      ..timeline = model.parentRequest.timeline
-                      ..items = null,
-                  );
+                  model.parentRequest.items!.add(RequestModel.init()
+                    ..status = ' '
+                    ..budget = 0
+                    ..timeline = model.parentRequest.timeline);
                 }
                 if (label == 'Tên đầu việc') {
                   model.parentRequest.items![index! - 1].title = value;
@@ -652,13 +650,10 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
     Size size = MediaQuery.of(context).size;
 
     if (model.parentRequest.items!.length < _index) {
-      model.parentRequest.items!.add(
-        RequestModel.init()
-          ..status = 'string'
-          ..budget = 0
-          ..timeline = model.parentRequest.timeline
-          ..items = null,
-      );
+      model.parentRequest.items!.add(RequestModel.init()
+        ..status = 'string'
+        ..budget = 0
+        ..timeline = model.parentRequest.timeline);
     }
     model.parentRequest.items![_index - 1].category = dropdownValue;
 
