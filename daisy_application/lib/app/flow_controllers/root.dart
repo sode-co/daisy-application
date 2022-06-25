@@ -15,20 +15,14 @@ class RootPage extends StatefulWidget {
 class RootState extends State<RootPage>
     with PopScopeHost<RootPage>
     implements PopScopeHost<RootPage> {
-  bool _isLoggedIn = false;
-
   @override
   Widget build(BuildContext context) {
-    final appState = ApplicationState();
-    _isLoggedIn = appState.isLoggedIn;
+    ApplicationState appState = context.watch();
     return WillPopScope(
         onWillPop: onWillPop,
         child: Scaffold(
-            body: MultiProvider(
-          providers: [ChangeNotifierProvider(create: (ctx) => appState)],
-          child: _isLoggedIn
-              ? const AuthenticatedFlowController()
-              : const UnAuthenticatedFlowController(),
-        )));
+            body: appState.isLoggedIn
+                ? const AuthenticatedFlowController()
+                : const AuthenticatedFlowController()));
   }
 }

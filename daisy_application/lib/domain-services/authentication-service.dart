@@ -42,6 +42,11 @@ class AuthenticationService {
     return result;
   }
 
+  Future<void> signOut() async {
+    await _userPersistent.remove();
+    await _authenticationPersistent.removeAuth();
+  }
+
   Future<Result> _saveUserDataAndAuthenticationIntoLocal(
       AuthenticationModel auth) async {
     await _authenticationPersistent.setAuth(auth);

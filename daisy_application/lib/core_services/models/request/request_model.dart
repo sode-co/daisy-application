@@ -15,10 +15,9 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
   String? description;
   double? budget;
   String? status;
-  DateTime? timeLine;
   DateTime? createdAt;
-  String? timeline;
-  UserModel? user;
+  DateTime? timeline;
+  UserModel? customer;
   List<RequestModel> items = [];
 
   RequestModel({
@@ -29,19 +28,19 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
     this.budget,
     this.status,
     this.timeline,
-    this.user,
+    this.customer,
     this.items = const [],
   });
 
   RequestModel.fromProto(Request proto) {
     id = proto.id;
-    user = UserModel.fromProto(proto.customer);
     category = CategoryModel(
         proto.category.id, null, proto.category.name, proto.category.type);
     title = proto.title;
     budget = proto.budget;
     status = proto.status;
-    timeLine = DateTime.fromMillisecondsSinceEpoch(proto.timeline.toInt());
+    customer = UserModel.fromProto(proto.customer);
+    timeline = DateTime.fromMillisecondsSinceEpoch(proto.timeline.toInt());
     createdAt = DateTime.fromMillisecondsSinceEpoch(proto.createdAt.toInt());
   }
 
@@ -51,4 +50,7 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
       _$RequestModelFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$RequestModelToJson(this);
+
+  @override
+  int get hashCode => id ?? createdAt?.millisecondsSinceEpoch ?? 0;
 }

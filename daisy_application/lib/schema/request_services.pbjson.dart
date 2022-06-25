@@ -13,11 +13,13 @@ const CreateRequestStreamingRequestModel$json = const {
   '1': 'CreateRequestStreamingRequestModel',
   '2': const [
     const {'1': 'TimeOffset', '3': 1, '4': 1, '5': 3, '10': 'TimeOffset'},
+    const {'1': 'Count', '3': 2, '4': 1, '5': 5, '10': 'Count'},
+    const {'1': 'rate', '3': 3, '4': 1, '5': 5, '10': 'rate'},
   ],
 };
 
 /// Descriptor for `CreateRequestStreamingRequestModel`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createRequestStreamingRequestModelDescriptor = $convert.base64Decode('CiJDcmVhdGVSZXF1ZXN0U3RyZWFtaW5nUmVxdWVzdE1vZGVsEh4KClRpbWVPZmZzZXQYASABKANSClRpbWVPZmZzZXQ=');
+final $typed_data.Uint8List createRequestStreamingRequestModelDescriptor = $convert.base64Decode('CiJDcmVhdGVSZXF1ZXN0U3RyZWFtaW5nUmVxdWVzdE1vZGVsEh4KClRpbWVPZmZzZXQYASABKANSClRpbWVPZmZzZXQSFAoFQ291bnQYAiABKAVSBUNvdW50EhIKBHJhdGUYAyABKAVSBHJhdGU=');
 @$core.Deprecated('Use createRequestStreamingResponseModelDescriptor instead')
 const CreateRequestStreamingResponseModel$json = const {
   '1': 'CreateRequestStreamingResponseModel',

@@ -2,10 +2,8 @@ import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/style.dart';
 import 'package:daisy_application/app/pages/post-new-job/model/post_new_job_state.dart';
-import 'dart:async';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
-import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/models/category/category_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/service_locator/locator.dart';
@@ -31,7 +29,8 @@ class CreateNewJobMobileBtn extends StatelessWidget {
 }
 
 class PostNewJobForm extends StatefulWidget {
-  const PostNewJobForm({Key? key}) : super(key: key);
+  final VoidCallback? onSubmitted;
+  const PostNewJobForm({super.key, this.onSubmitted});
 
   @override
   State<PostNewJobForm> createState() => _PostNewJobFormState();
@@ -160,8 +159,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                                     DateTime.now().add(const Duration(days: 1)),
                                 maxTime: DateTime(2025, 6, 7, 05, 09),
                                 onChanged: (date) {}, onConfirm: (date) {
-                              model.parentRequest.timeline =
-                                  date.toIso8601String();
+                              model.parentRequest.timeline = date;
                               setState(() {
                                 datetimedisplay = date.toString();
                               });
@@ -329,24 +327,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         minimumSize: const Size(140.0, 60.0),
                         primary: const Color(BuiltinColor.blue_gradient_01),
                       ),
-                      onPressed: () async {
-                        RequestRestApi _requestClient = locator.get();
-                        await _requestClient
-                            .createNewRequest(model.parentRequest);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: const Text(
-                                'Bài đăng của bạn đã được ghi nhận!'),
-                            backgroundColor: Colors.green.withOpacity(0.8),
-                          ),
-                        );
-                        Timer(
-                          const Duration(seconds: 1),
-                          () {
-                            Navigator.pushNamed(context, '/find-freelance-job');
-                          },
-                        );
-                      },
+                      onPressed: widget.onSubmitted,
                       child: const Text(
                         'Đăng việc',
                         style: TextStyle(fontSize: 16.5),
@@ -493,17 +474,17 @@ class CustomTextField extends StatelessWidget {
                 model.parentRequest.budget = double.parse(value);
               }
               if (index != null) {
-                if (model.parentRequest.items!.length < index!) {
-                  model.parentRequest.items!.add(RequestModel.init()
+                if (model.parentRequest.items.length < index!) {
+                  model.parentRequest.items.add(RequestModel.init()
                     ..status = ' '
                     ..budget = 0
                     ..timeline = model.parentRequest.timeline);
                 }
                 if (label == 'Tên đầu việc') {
-                  model.parentRequest.items![index! - 1].title = value;
+                  model.parentRequest.items[index! - 1].title = value;
                 }
                 if (label == 'Mô tả đầu việc') {
-                  model.parentRequest.items![index! - 1].description = value;
+                  model.parentRequest.items[index! - 1].description = value;
                 }
               }
             },
@@ -647,13 +628,13 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
     var model = context.watch<PostNewJobState>();
     Size size = MediaQuery.of(context).size;
 
-    if (model.parentRequest.items!.length < _index) {
-      model.parentRequest.items!.add(RequestModel.init()
+    if (model.parentRequest.items.length < _index) {
+      model.parentRequest.items.add(RequestModel.init()
         ..status = 'string'
         ..budget = 0
         ..timeline = model.parentRequest.timeline);
     }
-    model.parentRequest.items![_index - 1].category = dropdownValue;
+    model.parentRequest.items[_index - 1].category = dropdownValue;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -676,7 +657,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
                 elevation: 16,
                 style: Style.placeHolderText,
                 onChanged: (CategoryModel? newValue) {
-                  model.parentRequest.items![_index - 1].category = newValue;
+                  model.parentRequest.items[_index - 1].category = newValue;
                   setState(
                     () {
                       dropdownValue = newValue!;

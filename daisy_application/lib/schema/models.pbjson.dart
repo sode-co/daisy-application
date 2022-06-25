@@ -8,7 +8,6 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
-
 @$core.Deprecated('Use userDescriptor instead')
 const User$json = const {
   '1': 'User',
@@ -27,8 +26,7 @@ const User$json = const {
 };
 
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
-    'CgRVc2VyEg4KAklkGAEgASgFUgJJZBIaCghPYmplY3RJZBgCIAEoCVIIT2JqZWN0SWQSHAoJRmlyc3ROYW1lGAMgASgJUglGaXJzdE5hbWUSGgoITGFzdE5hbWUYBCABKAlSCExhc3ROYW1lEiAKC0Rpc3BsYXlOYW1lGAUgASgJUgtEaXNwbGF5TmFtZRISCgRSb2xlGAYgASgJUgRSb2xlEhQKBUVtYWlsGAcgASgJUgVFbWFpbBIUCgVQaG9uZRgIIAEoCVIFUGhvbmUSGAoHYWRkcmVzcxgKIAEoCVIHYWRkcmVzcxIWCgZhdmF0YXIYCyABKAlSBmF2YXRhcg==');
+final $typed_data.Uint8List userDescriptor = $convert.base64Decode('CgRVc2VyEg4KAklkGAEgASgFUgJJZBIaCghPYmplY3RJZBgCIAEoCVIIT2JqZWN0SWQSHAoJRmlyc3ROYW1lGAMgASgJUglGaXJzdE5hbWUSGgoITGFzdE5hbWUYBCABKAlSCExhc3ROYW1lEiAKC0Rpc3BsYXlOYW1lGAUgASgJUgtEaXNwbGF5TmFtZRISCgRSb2xlGAYgASgJUgRSb2xlEhQKBUVtYWlsGAcgASgJUgVFbWFpbBIUCgVQaG9uZRgIIAEoCVIFUGhvbmUSGAoHYWRkcmVzcxgKIAEoCVIHYWRkcmVzcxIWCgZhdmF0YXIYCyABKAlSBmF2YXRhcg==');
 @$core.Deprecated('Use categoryDescriptor instead')
 const Category$json = const {
   '1': 'Category',
@@ -41,8 +39,7 @@ const Category$json = const {
 };
 
 /// Descriptor for `Category`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List categoryDescriptor = $convert.base64Decode(
-    'CghDYXRlZ29yeRIOCgJJZBgBIAEoBVICSWQSGgoIT2JqZWN0SWQYAiABKAlSCE9iamVjdElkEhIKBE5hbWUYAyABKAlSBE5hbWUSEgoEVHlwZRgEIAEoCVIEVHlwZQ==');
+final $typed_data.Uint8List categoryDescriptor = $convert.base64Decode('CghDYXRlZ29yeRIOCgJJZBgBIAEoBVICSWQSGgoIT2JqZWN0SWQYAiABKAlSCE9iamVjdElkEhIKBE5hbWUYAyABKAlSBE5hbWUSEgoEVHlwZRgEIAEoCVIEVHlwZQ==');
 @$core.Deprecated('Use requestDescriptor instead')
 const Request$json = const {
   '1': 'Request',
@@ -50,22 +47,8 @@ const Request$json = const {
     const {'1': 'Id', '3': 1, '4': 1, '5': 5, '10': 'Id'},
     const {'1': 'CreatedAt', '3': 2, '4': 1, '5': 3, '10': 'CreatedAt'},
     const {'1': 'ObjectId', '3': 3, '4': 1, '5': 9, '10': 'ObjectId'},
-    const {
-      '1': 'Customer',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.daisy.User',
-      '10': 'Customer'
-    },
-    const {
-      '1': 'Category',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.daisy.Category',
-      '10': 'Category'
-    },
+    const {'1': 'Customer', '3': 4, '4': 1, '5': 11, '6': '.daisy.User', '10': 'Customer'},
+    const {'1': 'Category', '3': 5, '4': 1, '5': 11, '6': '.daisy.Category', '10': 'Category'},
     const {'1': 'Title', '3': 6, '4': 1, '5': 9, '10': 'Title'},
     const {'1': 'Description', '3': 7, '4': 1, '5': 9, '10': 'Description'},
     const {'1': 'Budget', '3': 8, '4': 1, '5': 2, '10': 'Budget'},
@@ -75,5 +58,4 @@ const Request$json = const {
 };
 
 /// Descriptor for `Request`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List requestDescriptor = $convert.base64Decode(
-    'CgdSZXF1ZXN0Eg4KAklkGAEgASgFUgJJZBIcCglDcmVhdGVkQXQYAiABKANSCUNyZWF0ZWRBdBIaCghPYmplY3RJZBgDIAEoCVIIT2JqZWN0SWQSJwoIQ3VzdG9tZXIYBCABKAsyCy5kYWlzeS5Vc2VyUghDdXN0b21lchIrCghDYXRlZ29yeRgFIAEoCzIPLmRhaXN5LkNhdGVnb3J5UghDYXRlZ29yeRIUCgVUaXRsZRgGIAEoCVIFVGl0bGUSIAoLRGVzY3JpcHRpb24YByABKAlSC0Rlc2NyaXB0aW9uEhYKBkJ1ZGdldBgIIAEoAlIGQnVkZ2V0EhoKCFRpbWVsaW5lGAkgASgDUghUaW1lbGluZRIWCgZTdGF0dXMYCiABKAlSBlN0YXR1cw==');
+final $typed_data.Uint8List requestDescriptor = $convert.base64Decode('CgdSZXF1ZXN0Eg4KAklkGAEgASgFUgJJZBIcCglDcmVhdGVkQXQYAiABKANSCUNyZWF0ZWRBdBIaCghPYmplY3RJZBgDIAEoCVIIT2JqZWN0SWQSJwoIQ3VzdG9tZXIYBCABKAsyCy5kYWlzeS5Vc2VyUghDdXN0b21lchIrCghDYXRlZ29yeRgFIAEoCzIPLmRhaXN5LkNhdGVnb3J5UghDYXRlZ29yeRIUCgVUaXRsZRgGIAEoCVIFVGl0bGUSIAoLRGVzY3JpcHRpb24YByABKAlSC0Rlc2NyaXB0aW9uEhYKBkJ1ZGdldBgIIAEoAlIGQnVkZ2V0EhoKCFRpbWVsaW5lGAkgASgDUghUaW1lbGluZRIWCgZTdGF0dXMYCiABKAlSBlN0YXR1cw==');

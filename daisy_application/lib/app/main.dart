@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:daisy_application/app/flow_controllers/authenticated/authenticcated_flow_controller.dart';
+import 'package:daisy_application/app/flow_controllers/post_new_job/post_new_job_flow_controller.dart';
 import 'package:daisy_application/app/flow_controllers/root.dart';
+import 'package:daisy_application/app/foundation/routes.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
@@ -8,6 +11,7 @@ import 'package:daisy_application/common/platform_helper.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +25,7 @@ Future<void> main() async {
     );
   }
 
+  AppRouter.setupRouter();
   setupDependencies();
   Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
@@ -60,7 +65,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const RootPage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const RootPage(),
+          '/post-new-job': (context) => const AuthenticatedFlowController()
+        },
       ),
     );
   }

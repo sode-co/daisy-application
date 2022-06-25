@@ -24,14 +24,12 @@ class UserPersistent {
     return box.containsKey(0) ? box.get(0) : null;
   }
 
-  void remove() async {
-    Hive.box(BOX_NAME).clear();
-  }
+  Future<void> remove() async => await Hive.box(BOX_NAME).clear();
 
-  void set(UserModel user) async {
+  Future<void> set(UserModel user) async {
     final box = Hive.box(BOX_NAME);
-    remove();
-    box.add(user);
+    await remove();
+    await box.add(user);
   }
 
   UserModel? get() {

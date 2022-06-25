@@ -9,12 +9,14 @@ typedef _RequestModel = CreateRequestStreamingRequestModel;
 
 class RequestGrpcClient {
   Stream<Result<List<RequestModel>>> startStreamingRequests(
-      int timeOffset) async* {
+      {required int timeOffset, int? count, int? rate}) async* {
     final ClientChannelBase channel = locator.get();
     final client = RequestServiceClient(channel);
 
     await for (var response in client.createRequestStreaming(_RequestModel()
-      ..timeOffset = $fixum.Int64.parseInt(timeOffset.toString()))) {
+      ..timeOffset = $fixum.Int64.parseInt(timeOffset.toString())
+      ..count = count ?? 10
+      ..rate = rate ?? 5)) {
       yield Result(
           data: response.requests
               .map((item) => RequestModel.fromProto(item))

@@ -11,75 +11,19 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class User extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'User',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'daisy'),
-      createEmptyInstance: create)
-    ..a<$core.int>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Id',
-        $pb.PbFieldType.O3,
-        protoName: 'Id')
-    ..aOS(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'ObjectId',
-        protoName: 'ObjectId')
-    ..aOS(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'FirstName',
-        protoName: 'FirstName')
-    ..aOS(
-        4,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'LastName',
-        protoName: 'LastName')
-    ..aOS(
-        5,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'DisplayName',
-        protoName: 'DisplayName')
-    ..aOS(
-        6,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Role',
-        protoName: 'Role')
-    ..aOS(
-        7,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Email',
-        protoName: 'Email')
-    ..aOS(
-        8,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Phone',
-        protoName: 'Phone')
-    ..aOS(
-        10,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'address')
-    ..aOS(
-        11,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'avatar')
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'User', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Id', $pb.PbFieldType.O3, protoName: 'Id')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ObjectId', protoName: 'ObjectId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'FirstName', protoName: 'FirstName')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'LastName', protoName: 'LastName')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'DisplayName', protoName: 'DisplayName')
+    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Role', protoName: 'Role')
+    ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Email', protoName: 'Email')
+    ..aOS(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Phone', protoName: 'Phone')
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address')
+    ..aOS(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'avatar')
+    ..hasRequiredFields = false
+  ;
 
   User._() : super();
   factory User({
@@ -127,39 +71,31 @@ class User extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory User.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory User.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  factory User.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory User.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   User clone() => User()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  User copyWith(void Function(User) updates) =>
-      super.copyWith((message) => updates(message as User))
-          as User; // ignore: deprecated_member_use
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  User copyWith(void Function(User) updates) => super.copyWith((message) => updates(message as User)) as User; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static User create() => User._();
   User createEmptyInstance() => create();
   static $pb.PbList<User> createRepeated() => $pb.PbList<User>();
   @$core.pragma('dart2js:noInline')
-  static User getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<User>(create);
+  static User getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<User>(create);
   static User? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set id($core.int v) {
-    $_setSignedInt32(0, v);
-  }
-
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
@@ -168,10 +104,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get objectId => $_getSZ(1);
   @$pb.TagNumber(2)
-  set objectId($core.String v) {
-    $_setString(1, v);
-  }
-
+  set objectId($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasObjectId() => $_has(1);
   @$pb.TagNumber(2)
@@ -180,10 +113,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get firstName => $_getSZ(2);
   @$pb.TagNumber(3)
-  set firstName($core.String v) {
-    $_setString(2, v);
-  }
-
+  set firstName($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasFirstName() => $_has(2);
   @$pb.TagNumber(3)
@@ -192,10 +122,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.String get lastName => $_getSZ(3);
   @$pb.TagNumber(4)
-  set lastName($core.String v) {
-    $_setString(3, v);
-  }
-
+  set lastName($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasLastName() => $_has(3);
   @$pb.TagNumber(4)
@@ -204,10 +131,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.String get displayName => $_getSZ(4);
   @$pb.TagNumber(5)
-  set displayName($core.String v) {
-    $_setString(4, v);
-  }
-
+  set displayName($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasDisplayName() => $_has(4);
   @$pb.TagNumber(5)
@@ -216,10 +140,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.String get role => $_getSZ(5);
   @$pb.TagNumber(6)
-  set role($core.String v) {
-    $_setString(5, v);
-  }
-
+  set role($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasRole() => $_has(5);
   @$pb.TagNumber(6)
@@ -228,10 +149,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.String get email => $_getSZ(6);
   @$pb.TagNumber(7)
-  set email($core.String v) {
-    $_setString(6, v);
-  }
-
+  set email($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasEmail() => $_has(6);
   @$pb.TagNumber(7)
@@ -240,10 +158,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.String get phone => $_getSZ(7);
   @$pb.TagNumber(8)
-  set phone($core.String v) {
-    $_setString(7, v);
-  }
-
+  set phone($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(8)
   $core.bool hasPhone() => $_has(7);
   @$pb.TagNumber(8)
@@ -252,10 +167,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $core.String get address => $_getSZ(8);
   @$pb.TagNumber(10)
-  set address($core.String v) {
-    $_setString(8, v);
-  }
-
+  set address($core.String v) { $_setString(8, v); }
   @$pb.TagNumber(10)
   $core.bool hasAddress() => $_has(8);
   @$pb.TagNumber(10)
@@ -264,10 +176,7 @@ class User extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   $core.String get avatar => $_getSZ(9);
   @$pb.TagNumber(11)
-  set avatar($core.String v) {
-    $_setString(9, v);
-  }
-
+  set avatar($core.String v) { $_setString(9, v); }
   @$pb.TagNumber(11)
   $core.bool hasAvatar() => $_has(9);
   @$pb.TagNumber(11)
@@ -275,41 +184,13 @@ class User extends $pb.GeneratedMessage {
 }
 
 class Category extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'Category',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'daisy'),
-      createEmptyInstance: create)
-    ..a<$core.int>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Id',
-        $pb.PbFieldType.O3,
-        protoName: 'Id')
-    ..aOS(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'ObjectId',
-        protoName: 'ObjectId')
-    ..aOS(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Name',
-        protoName: 'Name')
-    ..aOS(
-        4,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Type',
-        protoName: 'Type')
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Category', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Id', $pb.PbFieldType.O3, protoName: 'Id')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ObjectId', protoName: 'ObjectId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Name', protoName: 'Name')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Type', protoName: 'Type')
+    ..hasRequiredFields = false
+  ;
 
   Category._() : super();
   factory Category({
@@ -333,39 +214,31 @@ class Category extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory Category.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Category.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  factory Category.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Category.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   Category clone() => Category()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Category copyWith(void Function(Category) updates) =>
-      super.copyWith((message) => updates(message as Category))
-          as Category; // ignore: deprecated_member_use
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Category copyWith(void Function(Category) updates) => super.copyWith((message) => updates(message as Category)) as Category; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Category create() => Category._();
   Category createEmptyInstance() => create();
   static $pb.PbList<Category> createRepeated() => $pb.PbList<Category>();
   @$core.pragma('dart2js:noInline')
-  static Category getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Category>(create);
+  static Category getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Category>(create);
   static Category? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set id($core.int v) {
-    $_setSignedInt32(0, v);
-  }
-
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
@@ -374,10 +247,7 @@ class Category extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get objectId => $_getSZ(1);
   @$pb.TagNumber(2)
-  set objectId($core.String v) {
-    $_setString(1, v);
-  }
-
+  set objectId($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasObjectId() => $_has(1);
   @$pb.TagNumber(2)
@@ -386,10 +256,7 @@ class Category extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get name => $_getSZ(2);
   @$pb.TagNumber(3)
-  set name($core.String v) {
-    $_setString(2, v);
-  }
-
+  set name($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasName() => $_has(2);
   @$pb.TagNumber(3)
@@ -398,10 +265,7 @@ class Category extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.String get type => $_getSZ(3);
   @$pb.TagNumber(4)
-  set type($core.String v) {
-    $_setString(3, v);
-  }
-
+  set type($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasType() => $_has(3);
   @$pb.TagNumber(4)
@@ -409,80 +273,19 @@ class Category extends $pb.GeneratedMessage {
 }
 
 class Request extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      const $core.bool.fromEnvironment('protobuf.omit_message_names')
-          ? ''
-          : 'Request',
-      package: const $pb.PackageName(
-          const $core.bool.fromEnvironment('protobuf.omit_message_names')
-              ? ''
-              : 'daisy'),
-      createEmptyInstance: create)
-    ..a<$core.int>(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Id',
-        $pb.PbFieldType.O3,
-        protoName: 'Id')
-    ..aInt64(
-        2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'CreatedAt',
-        protoName: 'CreatedAt')
-    ..aOS(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'ObjectId',
-        protoName: 'ObjectId')
-    ..aOM<User>(
-        4,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Customer',
-        protoName: 'Customer',
-        subBuilder: User.create)
-    ..aOM<Category>(
-        5,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Category',
-        protoName: 'Category',
-        subBuilder: Category.create)
-    ..aOS(
-        6,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Title',
-        protoName: 'Title')
-    ..aOS(
-        7,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Description',
-        protoName: 'Description')
-    ..a<$core.double>(
-        8,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Budget',
-        $pb.PbFieldType.OF,
-        protoName: 'Budget')
-    ..aInt64(
-        9,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Timeline',
-        protoName: 'Timeline')
-    ..aOS(
-        10,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'Status',
-        protoName: 'Status')
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Id', $pb.PbFieldType.O3, protoName: 'Id')
+    ..aInt64(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'CreatedAt', protoName: 'CreatedAt')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ObjectId', protoName: 'ObjectId')
+    ..aOM<User>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Customer', protoName: 'Customer', subBuilder: User.create)
+    ..aOM<Category>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Category', protoName: 'Category', subBuilder: Category.create)
+    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Title', protoName: 'Title')
+    ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Description', protoName: 'Description')
+    ..a<$core.double>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Budget', $pb.PbFieldType.OF, protoName: 'Budget')
+    ..aInt64(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Timeline', protoName: 'Timeline')
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Status', protoName: 'Status')
+    ..hasRequiredFields = false
+  ;
 
   Request._() : super();
   factory Request({
@@ -530,39 +333,31 @@ class Request extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory Request.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Request.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  factory Request.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Request.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   Request clone() => Request()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Request copyWith(void Function(Request) updates) =>
-      super.copyWith((message) => updates(message as Request))
-          as Request; // ignore: deprecated_member_use
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Request copyWith(void Function(Request) updates) => super.copyWith((message) => updates(message as Request)) as Request; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Request create() => Request._();
   Request createEmptyInstance() => create();
   static $pb.PbList<Request> createRepeated() => $pb.PbList<Request>();
   @$core.pragma('dart2js:noInline')
-  static Request getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Request>(create);
+  static Request getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Request>(create);
   static Request? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set id($core.int v) {
-    $_setSignedInt32(0, v);
-  }
-
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
@@ -571,10 +366,7 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $fixnum.Int64 get createdAt => $_getI64(1);
   @$pb.TagNumber(2)
-  set createdAt($fixnum.Int64 v) {
-    $_setInt64(1, v);
-  }
-
+  set createdAt($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
@@ -583,10 +375,7 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get objectId => $_getSZ(2);
   @$pb.TagNumber(3)
-  set objectId($core.String v) {
-    $_setString(2, v);
-  }
-
+  set objectId($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasObjectId() => $_has(2);
   @$pb.TagNumber(3)
@@ -595,10 +384,7 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   User get customer => $_getN(3);
   @$pb.TagNumber(4)
-  set customer(User v) {
-    setField(4, v);
-  }
-
+  set customer(User v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCustomer() => $_has(3);
   @$pb.TagNumber(4)
@@ -609,10 +395,7 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   Category get category => $_getN(4);
   @$pb.TagNumber(5)
-  set category(Category v) {
-    setField(5, v);
-  }
-
+  set category(Category v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCategory() => $_has(4);
   @$pb.TagNumber(5)
@@ -623,10 +406,7 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.String get title => $_getSZ(5);
   @$pb.TagNumber(6)
-  set title($core.String v) {
-    $_setString(5, v);
-  }
-
+  set title($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasTitle() => $_has(5);
   @$pb.TagNumber(6)
@@ -635,10 +415,7 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.String get description => $_getSZ(6);
   @$pb.TagNumber(7)
-  set description($core.String v) {
-    $_setString(6, v);
-  }
-
+  set description($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasDescription() => $_has(6);
   @$pb.TagNumber(7)
@@ -647,10 +424,7 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.double get budget => $_getN(7);
   @$pb.TagNumber(8)
-  set budget($core.double v) {
-    $_setFloat(7, v);
-  }
-
+  set budget($core.double v) { $_setFloat(7, v); }
   @$pb.TagNumber(8)
   $core.bool hasBudget() => $_has(7);
   @$pb.TagNumber(8)
@@ -659,10 +433,7 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $fixnum.Int64 get timeline => $_getI64(8);
   @$pb.TagNumber(9)
-  set timeline($fixnum.Int64 v) {
-    $_setInt64(8, v);
-  }
-
+  set timeline($fixnum.Int64 v) { $_setInt64(8, v); }
   @$pb.TagNumber(9)
   $core.bool hasTimeline() => $_has(8);
   @$pb.TagNumber(9)
@@ -671,12 +442,10 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $core.String get status => $_getSZ(9);
   @$pb.TagNumber(10)
-  set status($core.String v) {
-    $_setString(9, v);
-  }
-
+  set status($core.String v) { $_setString(9, v); }
   @$pb.TagNumber(10)
   $core.bool hasStatus() => $_has(9);
   @$pb.TagNumber(10)
   void clearStatus() => clearField(10);
 }
+

@@ -18,12 +18,12 @@ class IntroJobCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
+            SizedBox(
               height: 60.0,
               width: 60.0,
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
-                  ' ',
+                  request.customer!.avatar!,
                 ),
               ),
             ),
@@ -34,7 +34,7 @@ class IntroJobCard extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: Text(
-                    request.title.toString(),
+                    '${request.id}.${request.title}',
                     style: const TextStyle(
                       color: Color(BuiltinColor.blue_gradient_01),
                       fontSize: 16.0,

@@ -15,16 +15,26 @@ import 'models.pb.dart' as $1;
 class CreateRequestStreamingRequestModel extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateRequestStreamingRequestModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
     ..aInt64(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'TimeOffset', protoName: 'TimeOffset')
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Count', $pb.PbFieldType.O3, protoName: 'Count')
+    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rate', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
   CreateRequestStreamingRequestModel._() : super();
   factory CreateRequestStreamingRequestModel({
     $fixnum.Int64? timeOffset,
+    $core.int? count,
+    $core.int? rate,
   }) {
     final _result = create();
     if (timeOffset != null) {
       _result.timeOffset = timeOffset;
+    }
+    if (count != null) {
+      _result.count = count;
+    }
+    if (rate != null) {
+      _result.rate = rate;
     }
     return _result;
   }
@@ -57,6 +67,24 @@ class CreateRequestStreamingRequestModel extends $pb.GeneratedMessage {
   $core.bool hasTimeOffset() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimeOffset() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get count => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set count($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCount() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get rate => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set rate($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRate() => clearField(3);
 }
 
 class CreateRequestStreamingResponseModel extends $pb.GeneratedMessage {

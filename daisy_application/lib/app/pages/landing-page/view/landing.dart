@@ -11,17 +11,14 @@ import 'package:daisy_application/app/pages/landing-page/view/mobile.dart';
 import 'package:daisy_application/app/pages/landing-page/view/web.dart';
 import 'package:daisy_application/app/listeners/WidgetListener.dart';
 import 'package:daisy_application/service_locator/locator.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
-  static void start(BuildContext context) {
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-      builder: (_) {
-        return const LandingPage();
-      },
-    ), (r) => false);
-  }
+  static const RouteName = '';
+  static final routeHandler =
+      Handler(handlerFunc: (context, parameters) => const LandingPage());
 
   const LandingPage({Key? key}) : super(key: key);
 
