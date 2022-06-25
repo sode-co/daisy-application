@@ -32,7 +32,7 @@ namespace DataAccess.Repositories.Requests
         public IEnumerable<Request> RequestPaging(DateTime timeOffset, int count) =>
             GetAll((request => request.CreatedAt < timeOffset), null, "Customer,Category")
                 .OrderByDescending(request => request.CreatedAt)
-                .Take(5)
+                .Take(count)
                 .ToList();
     }
 }

@@ -6,6 +6,8 @@ import "models.proto";
 
 message CreateRequestStreamingRequestModel {
     int64 TimeOffset = 1;
+    int32 Count = 2;
+    int32 rate = 3;
 }
 
 message CreateRequestStreamingResponseModel {

@@ -25,17 +25,17 @@ namespace Daisy {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChZyZXF1ZXN0X3NlcnZpY2VzLnByb3RvEgVkYWlzeRoMbW9kZWxzLnByb3Rv",
-            "IjgKIkNyZWF0ZVJlcXVlc3RTdHJlYW1pbmdSZXF1ZXN0TW9kZWwSEgoKVGlt",
-            "ZU9mZnNldBgBIAEoAyJHCiNDcmVhdGVSZXF1ZXN0U3RyZWFtaW5nUmVzcG9u",
-            "c2VNb2RlbBIgCghSZXF1ZXN0cxgBIAMoCzIOLmRhaXN5LlJlcXVlc3QygwEK",
-            "DlJlcXVlc3RTZXJ2aWNlEnEKFkNyZWF0ZVJlcXVlc3RTdHJlYW1pbmcSKS5k",
-            "YWlzeS5DcmVhdGVSZXF1ZXN0U3RyZWFtaW5nUmVxdWVzdE1vZGVsGiouZGFp",
-            "c3kuQ3JlYXRlUmVxdWVzdFN0cmVhbWluZ1Jlc3BvbnNlTW9kZWwwAWIGcHJv",
-            "dG8z"));
+            "IlUKIkNyZWF0ZVJlcXVlc3RTdHJlYW1pbmdSZXF1ZXN0TW9kZWwSEgoKVGlt",
+            "ZU9mZnNldBgBIAEoAxINCgVDb3VudBgCIAEoBRIMCgRyYXRlGAMgASgFIkcK",
+            "I0NyZWF0ZVJlcXVlc3RTdHJlYW1pbmdSZXNwb25zZU1vZGVsEiAKCFJlcXVl",
+            "c3RzGAEgAygLMg4uZGFpc3kuUmVxdWVzdDKDAQoOUmVxdWVzdFNlcnZpY2US",
+            "cQoWQ3JlYXRlUmVxdWVzdFN0cmVhbWluZxIpLmRhaXN5LkNyZWF0ZVJlcXVl",
+            "c3RTdHJlYW1pbmdSZXF1ZXN0TW9kZWwaKi5kYWlzeS5DcmVhdGVSZXF1ZXN0",
+            "U3RyZWFtaW5nUmVzcG9uc2VNb2RlbDABYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Daisy.ModelsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.CreateRequestStreamingRequestModel), global::Daisy.CreateRequestStreamingRequestModel.Parser, new[]{ "TimeOffset" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.CreateRequestStreamingRequestModel), global::Daisy.CreateRequestStreamingRequestModel.Parser, new[]{ "TimeOffset", "Count", "Rate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.CreateRequestStreamingResponseModel), global::Daisy.CreateRequestStreamingResponseModel.Parser, new[]{ "Requests" }, null, null, null, null)
           }));
     }
@@ -78,6 +78,8 @@ namespace Daisy {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CreateRequestStreamingRequestModel(CreateRequestStreamingRequestModel other) : this() {
       timeOffset_ = other.timeOffset_;
+      count_ = other.count_;
+      rate_ = other.rate_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -99,6 +101,30 @@ namespace Daisy {
       }
     }
 
+    /// <summary>Field number for the "Count" field.</summary>
+    public const int CountFieldNumber = 2;
+    private int count_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Count {
+      get { return count_; }
+      set {
+        count_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "rate" field.</summary>
+    public const int RateFieldNumber = 3;
+    private int rate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Rate {
+      get { return rate_; }
+      set {
+        rate_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -115,6 +141,8 @@ namespace Daisy {
         return true;
       }
       if (TimeOffset != other.TimeOffset) return false;
+      if (Count != other.Count) return false;
+      if (Rate != other.Rate) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -123,6 +151,8 @@ namespace Daisy {
     public override int GetHashCode() {
       int hash = 1;
       if (TimeOffset != 0L) hash ^= TimeOffset.GetHashCode();
+      if (Count != 0) hash ^= Count.GetHashCode();
+      if (Rate != 0) hash ^= Rate.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -145,6 +175,14 @@ namespace Daisy {
         output.WriteRawTag(8);
         output.WriteInt64(TimeOffset);
       }
+      if (Count != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Count);
+      }
+      if (Rate != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Rate);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -159,6 +197,14 @@ namespace Daisy {
         output.WriteRawTag(8);
         output.WriteInt64(TimeOffset);
       }
+      if (Count != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Count);
+      }
+      if (Rate != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Rate);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -171,6 +217,12 @@ namespace Daisy {
       int size = 0;
       if (TimeOffset != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(TimeOffset);
+      }
+      if (Count != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Count);
+      }
+      if (Rate != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Rate);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -186,6 +238,12 @@ namespace Daisy {
       }
       if (other.TimeOffset != 0L) {
         TimeOffset = other.TimeOffset;
+      }
+      if (other.Count != 0) {
+        Count = other.Count;
+      }
+      if (other.Rate != 0) {
+        Rate = other.Rate;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -206,6 +264,14 @@ namespace Daisy {
             TimeOffset = input.ReadInt64();
             break;
           }
+          case 16: {
+            Count = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Rate = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -223,6 +289,14 @@ namespace Daisy {
             break;
           case 8: {
             TimeOffset = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            Count = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Rate = input.ReadInt32();
             break;
           }
         }
