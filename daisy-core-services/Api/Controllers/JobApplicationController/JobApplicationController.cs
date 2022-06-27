@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Utils.Authentication;
-using Utils.Models;
 using static Api.Common.Constants;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,9 +28,9 @@ namespace Api.Controllers.JobApplicationController
 
         [Authorize]
         [HttpPost()]
-        public IActionResult CreateJobApplication([FromBody] JobApplicationVM jobApplicationVM)
+        public IActionResult CreateJobApplication([FromBody] JobApplication body)
         {
-            int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
+            int freelancerId = ((User)HttpContext.Items["User"]).Id;
 
             using (var work = _unitOfWorkFactory.Get)
             {
@@ -41,18 +38,18 @@ namespace Api.Controllers.JobApplicationController
                 Request request;
                 if (freelancer == null) return NotFound();
 
-                request = work.RequestRepository.Get(jobApplicationVM.RequestId);
+                request = work.RequestRepository.Get(body.Request.Id);
                 if (request == null) return NotFound();
 
                 work.JobApplicationRepository.Add(new JobApplication()
                 {
                     Request = request,
                     Freelancer = freelancer,
-                    Description = jobApplicationVM.Description,
-                    PreferredLanguage = jobApplicationVM.PreferedLanguage,
-                    Timeline = jobApplicationVM.Timeline,
+                    Description = body.Description,
+                    PreferredLanguage = body.PreferredLanguage,
+                    Timeline = body.Timeline,
                     Status = Constants.STATUS_JOB_APPLICATION.PENDING,
-                    OfferedPrice = jobApplicationVM.OfferedPrice
+                    OfferedPrice = body.OfferedPrice
                 });
 
                 work.Save();
@@ -63,25 +60,25 @@ namespace Api.Controllers.JobApplicationController
         // GET: v1/applications/list
         [HttpGet("list")]
         [Authorize(Policy = ROLE.DESIGNER)]
-        public IEnumerable<JobApplicationVM> GetJobApplicationByFreelancerId()
+        public IEnumerable<JobApplication> GetJobApplicationByFreelancerId()
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                UserExposeModel user = (UserExposeModel)HttpContext.Items["User"];
+                User user = (User)HttpContext.Items["User"];
                 var jobApplications = work.JobApplicationRepository.GetAll(j => j.Freelancer.Id == user.Id, null, "Freelancer,Request");
-                var result = _mapper.Map<IEnumerable<JobApplication>, IEnumerable<JobApplicationVM>>(jobApplications);
+                var result = _mapper.Map<IEnumerable<JobApplication>, IEnumerable<JobApplication>>(jobApplications);
                 return result;
             }
         }
 
         // GET v1/applications/:id
         [HttpGet("{jobApplicationId}")]
-        public JobApplicationVM GetJobApplicationByJobApplicationId(int jobApplicationId)
+        public JobApplication GetJobApplicationByJobApplicationId(int jobApplicationId)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
                 var jobApplication = work.JobApplicationRepository.GetFirstOrDefault(j => j.Id == jobApplicationId, "Freelancer,Request");
-                var result = _mapper.Map<JobApplication, JobApplicationVM>(jobApplication);
+                var result = _mapper.Map<JobApplication, JobApplication>(jobApplication);
                 return result;
             }
         }
@@ -89,12 +86,12 @@ namespace Api.Controllers.JobApplicationController
         // GET v1/applications/request/{requestId}
         [HttpGet("request/{requestId}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
-        public IEnumerable<JobApplicationVM> GetJobApplicationByRequestId(int requestId)
+        public IEnumerable<JobApplication> GetJobApplicationByRequestId(int requestId)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
                 var jobApplications = work.JobApplicationRepository.GetAll(j => j.Request.Id == requestId, null, "Freelancer,Request");
-                var result = _mapper.Map<IEnumerable<JobApplication>, IEnumerable<JobApplicationVM>>(jobApplications);
+                var result = _mapper.Map<IEnumerable<JobApplication>, IEnumerable<JobApplication>>(jobApplications);
                 return result;
             }
         }

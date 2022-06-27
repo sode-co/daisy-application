@@ -4,10 +4,7 @@ using System.Linq;
 using DataAccess.UnitOfWork;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
-
 using Microsoft.AspNetCore.Mvc;
-
-using Utils.Models;
 using static Api.Common.Constants;
 using System.Collections.Generic;
 using Utils;
@@ -29,37 +26,38 @@ namespace Api.Controllers.RequestController
 
         [HttpPost()]
         [Authorize(Policy = ROLE.CUSTOMER)]
-        public IActionResult CreateRequest([FromBody] RequestJobPostVM requestJobPostVM)
+        public IActionResult CreateRequest([FromBody] Request body)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                var user = (UserExposeModel) HttpContext.Items["User"];
-                List<RequestJobPostVM> requestJobPostVmList = requestJobPostVM.Items;
+                var user = (User)HttpContext.Items["User"];
+                List<Request> requestItems = body.Items.ToList();
                 User customer = work.UserRepository.Get(user.Id);
-                Category category = work.CategoryRepository.Get(requestJobPostVM.CategoryId);
+                Category category = work.CategoryRepository.Get(body.Category.Id);
 
-                Request parentRequest = new()
+                Request request = new()
                 {
                     Customer = customer,
                     Category = category,
-                    Title = requestJobPostVM.Title,
-                    Description = requestJobPostVM.Description,
-                    Budget = requestJobPostVM.Budget,
-                    Timeline = requestJobPostVM.Timeline,
+                    Title = body.Title,
+                    Description = body.Description,
+                    Budget = body.Budget,
+                    Timeline = body.Timeline,
                     ParentRequest = null,
                     Status = REQUEST_STATUS.AVAILABLE,
                 };
 
-                parentRequest.Items = requestJobPostVmList.Select(request => {
-                    var childCategory = work.CategoryRepository.Get(request.CategoryId);
-                    var item = _mapper.Map<RequestJobPostVM, Request>(request);
+                request.Items = requestItems.Select(item =>
+                {
                     item.Customer = customer;
-                    item.Category = childCategory;
-                    item.ParentRequest = parentRequest;
+                    item.Category = category;
+                    item.ParentRequest = request;
+                    item.Category = work.CategoryRepository.Get(item.Category.Id);
+
                     return item;
                 }).ToList();
 
-                work.RequestRepository.Add(parentRequest);
+                work.RequestRepository.Add(request);
                 work.Save();
                 return Json(new { message = "ok" });
             }
@@ -67,17 +65,17 @@ namespace Api.Controllers.RequestController
 
         [HttpPatch("{requestId}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
-        public IActionResult UpdateAllFieldRequest([FromBody] RequestVM requestVM, int requestId)
+        public IActionResult UpdateAllFieldRequest([FromBody] Request Request, int requestId)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
                 Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
                 
-                request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
-                request.Description = requestVM.description.Or(request.Description);
-                request.Title = requestVM.title.Or(request.Title);
-                request.Status = requestVM.status.Or(request.Status);
-                request.Budget = requestVM.budget.Or(request.Budget);
+                request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == Request.Category.Id);
+                request.Description = Request.Description.Or(request.Description);
+                request.Title = Request.Title.Or(request.Title);
+                request.Status = Request.Status.Or(request.Status);
+                request.Budget = Request.Budget.Or(request.Budget);
 
                 work.Save();
             }
@@ -87,18 +85,18 @@ namespace Api.Controllers.RequestController
 
         [HttpPut("{requestId}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
-        public IActionResult UpdateFieldsRequest([FromBody] RequestVM requestVM, int requestId)
+        public IActionResult UpdateFieldsRequest([FromBody] Request Request, int requestId)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
                 Request request = work.RequestRepository.GetFirstOrDefault(req => req.Id == requestId);
 
                 // Update data of each field
-                request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == requestVM.categoryId);
-                request.Description = requestVM.description;
-                request.Title = requestVM.title;
-                request.Status = requestVM.status;
-                request.Budget = requestVM.budget;
+                request.Category = work.CategoryRepository.GetFirstOrDefault(cate => cate.Id == Request.Category.Id);
+                request.Description = Request.Description;
+                request.Title = Request.Title;
+                request.Status = Request.Status;
+                request.Budget = Request.Budget;
 
                 work.Save();
             }
@@ -109,39 +107,23 @@ namespace Api.Controllers.RequestController
         [HttpGet("title/{title}")]
         [Authorize(Policy = ROLE.CUSTOMER)]
         [Authorize(Policy = ROLE.DESIGNER)]
-        public IActionResult FindRequestsByTitle(string title)
+        public IEnumerable<Request> FindRequestsByTitle(string title)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByTitle(title).Select(reqObj => new RequestVM()
-                {
-                    categoryId = reqObj.Category.Id,
-                    title = reqObj.Title,
-                    description = reqObj.Description,
-                    status = reqObj.Status,
-                    budget = reqObj.Budget
-                });
+                IEnumerable<Request> requests = work.RequestRepository.GetRequestsByTitle(title);
 
-                return Json(requestVMs);
+                return requests;
             }
         }
 
         [Authorize]
         [HttpGet("category/{categoryId}")]
-        public IActionResult FindRequestsByCategoryId(int categoryId)
+        public IEnumerable<Request> FindRequestsByCategoryId(int categoryId)
         {
-            int freelancerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
-            using (var work = _unitOfWorkFactory.Get)
-            {
-                User freelancer = work.UserRepository.Get(freelancerId);
-                if (freelancer != null)
-                {
-                    IEnumerable<RequestVM> requestVMs = work.RequestRepository.GetRequestsByCategoryId(categoryId);
-                    return Ok(requestVMs);
-                }
-            }
-
-            return NotFound();
+            int freelancerId = ((User)HttpContext.Items["User"]).Id;
+            using var work = _unitOfWorkFactory.Get;
+            return work.RequestRepository.GetAll((request => request.Category.Id == categoryId)).ToList();
         }
 
     }

@@ -3,11 +3,9 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Utils.Models;
 using static Api.Common.Constants;
 
 namespace Api.Controllers.PortfolioController
@@ -24,9 +22,9 @@ namespace Api.Controllers.PortfolioController
 
         [Authorize]
         [HttpPost()]
-        public IActionResult CreatePortfolio([FromBody] PortfolioVM portfolioVM)
+        public IActionResult CreatePortfolio([FromBody] Portfolio body)
         {
-            int designerId = ((UserExposeModel)HttpContext.Items["User"]).Id;
+            int designerId = ((User)HttpContext.Items["User"]).Id;
 
             using (var work = _unitOfWorkFactory.Get)
             {
@@ -36,7 +34,7 @@ namespace Api.Controllers.PortfolioController
                     work.PortfolioRepository.Add(new Portfolio()
                     {
                         Freelancer = freelancer,
-                        Biography = portfolioVM.biography
+                        Biography = body.Biography
                     });
 
                     work.Save();

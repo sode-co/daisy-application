@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Domain.Models;
 using AutoMapper;
-using Utils.Models;
 using static Api.Common.Constants;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
@@ -95,8 +94,8 @@ namespace Api.Controllers.Authentication
 
             if (addedUser == null) return AuthenticationResponse.Failed();
 
-            string accessToken = _jwtToken.GenerateAccessToken(_mapper.Map<User, UserExposeModel>(addedUser));
-            string refreshToken = _jwtToken.GenerateRefreshToken(_mapper.Map<User, UserExposeModel>(addedUser));
+            string accessToken = _jwtToken.GenerateAccessToken(addedUser);
+            string refreshToken = _jwtToken.GenerateRefreshToken(addedUser);
             return AuthenticationResponse.Success(refreshToken, accessToken);
         }
     }

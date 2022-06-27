@@ -1,5 +1,6 @@
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/pages/common/colors.dart';
+import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/common/style.dart';
 import 'package:flutter/material.dart';
 
@@ -12,16 +13,16 @@ class IntroJobCard extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: SizedBox(
-        width: 400,
+        width: Responsive.isDesktop(context) ? 400.0 : 380.0,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 60.0,
               width: 60.0,
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
-                  request.user!.avatar.toString(),
+                  ' ',
                 ),
               ),
             ),
@@ -46,7 +47,7 @@ class IntroJobCard extends StatelessWidget {
                 SizedBox(
                   width: 280,
                   child: Text(
-                    request.user!.displayName!,
+                    ' ',
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontSize: 15.0,
@@ -57,7 +58,7 @@ class IntroJobCard extends StatelessWidget {
                 SizedBox(
                   width: 280,
                   child: Text(
-                    request.user!.address!,
+                    ' ',
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontSize: 14.0,
@@ -133,7 +134,7 @@ class JobDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  request.user!.displayName!,
+                  ' ',
                   style: TextStyle(
                     color: Colors.black.withOpacity(0.7),
                     fontSize: 15.0,
@@ -252,12 +253,12 @@ class RecruiterInfo extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 80.0,
                 width: 80.0,
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   backgroundImage: NetworkImage(
-                    request.user!.avatar.toString(),
+                    ' ',
                   ),
                 ),
               ),
@@ -265,11 +266,11 @@ class RecruiterInfo extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 300,
                     child: Text(
-                      request.user!.displayName!,
-                      style: const TextStyle(
+                      ' ',
+                      style: TextStyle(
                         color: Colors.black87,
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -282,7 +283,7 @@ class RecruiterInfo extends StatelessWidget {
                   SizedBox(
                     width: 280,
                     child: Text(
-                      request.user!.address!,
+                      ' ',
                       style: TextStyle(
                         color: Colors.black.withOpacity(0.7),
                         fontSize: 15.0,

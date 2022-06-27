@@ -2,6 +2,7 @@ import 'package:daisy_application/pages/common/bottomnavbar.dart';
 import 'package:daisy_application/pages/common/header.dart';
 import 'package:daisy_application/pages/common/responsive.dart';
 import 'package:daisy_application/pages/listeners/WidgetListener.dart';
+import 'package:daisy_application/pages/post-new-job/model/post_new_job_state.dart';
 import 'package:daisy_application/pages/post-new-job/view/components.dart';
 import 'package:daisy_application/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,13 @@ class PostNewJob extends StatefulWidget {
 
 class _PostNewJobState extends State<PostNewJob> with WidgetListener {
   late SignUpPageState _signUpPageState;
+  late PostNewJobState _postNewJobState;
   late WidgetListener _widgetListener;
 
   @override
   initState() {
     _signUpPageState = SignUpPageState();
+    _postNewJobState = PostNewJobState();
     _widgetListener = this;
     super.initState();
   }
@@ -32,6 +35,11 @@ class _PostNewJobState extends State<PostNewJob> with WidgetListener {
         ChangeNotifierProvider(
           create: (_) {
             return _signUpPageState;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return _postNewJobState;
           },
         ),
         Provider(create: (_) => _widgetListener),

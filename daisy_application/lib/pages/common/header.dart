@@ -58,8 +58,9 @@ class Header extends StatelessWidget with PreferredSizeWidget {
           if (Responsive.isDesktop(context)) const SizedBox(width: 10),
           const Center(child: Text('  ')),
           TextButton(
-              onPressed: () => listener.onBtnSigninClicked(),
-              child: const Text('Đăng nhập', style: Style.mediumStringBold)),
+            onPressed: () => listener.onBtnSigninClicked(),
+            child: const Text('Đăng nhập', style: Style.mediumStringBold),
+          ),
         ],
         if (isLoggedIn)
           TextButton(

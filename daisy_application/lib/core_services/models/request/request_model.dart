@@ -1,5 +1,4 @@
 import 'package:daisy_application/core_services/models/category/category_model.dart';
-import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -8,23 +7,25 @@ part 'request_model.g.dart';
 @HiveType(typeId: 0)
 @JsonSerializable()
 class RequestModel extends JsonSerializable with HiveObjectMixin {
-  int? id;
-  UserModel? user;
+  int? id = 0;
   CategoryModel? category;
   String? title;
   String? description;
   double? budget;
   String? status;
+  String? timeline;
+  List<RequestModel> items = [];
 
-  RequestModel(
-    this.id,
-    this.user,
+  RequestModel({
+    this.id = 0,
     this.category,
     this.title,
     this.description,
     this.budget,
     this.status,
-  );
+    this.timeline,
+    this.items = const [],
+  });
 
   RequestModel.init();
 

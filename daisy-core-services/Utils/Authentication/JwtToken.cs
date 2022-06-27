@@ -4,8 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Domain.Models;
 using Microsoft.IdentityModel.Tokens;
-using Utils.Models;
 
 namespace Utils.Authentication
 {
@@ -15,7 +15,7 @@ namespace Utils.Authentication
         {
         }
 
-        public Claim[] GetClaims(UserExposeModel user) => new[] {
+        public Claim[] GetClaims(User user) => new[] {
             new Claim("id", user.Id.ToString()),
             new Claim("email", user.Email.Or("")),
             new Claim("firstName", user.FirstName.Or("")),
@@ -28,7 +28,7 @@ namespace Utils.Authentication
             new Claim("settings", user.Settings.Or("{}")),
         };
 
-        public UserExposeModel GetUser(IEnumerable<Claim> claims) => new UserExposeModel()
+        public User GetUser(IEnumerable<Claim> claims) => new User()
         {
             Id = int.Parse(claims.First(c => c.Type == "id").Value),
             Email = claims.First(c => c.Type == "email").Value,
@@ -42,7 +42,7 @@ namespace Utils.Authentication
             Settings = claims.First(c => c.Type == "settings").Value,
         };
 
-        public string GenerateAccessToken(UserExposeModel user)
+        public string GenerateAccessToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Config.Get().ACCESS_TOKEN_SECRET);
@@ -57,7 +57,7 @@ namespace Utils.Authentication
             return tokenHandler.WriteToken(token);
         }
 
-        public string GenerateRefreshToken(UserExposeModel user)
+        public string GenerateRefreshToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Config.Get().REFRESH_TOKEN_SECRET);
@@ -72,7 +72,7 @@ namespace Utils.Authentication
             return tokenHandler.WriteToken(token);
         }
 
-        public UserExposeModel ValidateAccessToken(string token)
+        public User ValidateAccessToken(string token)
         {
             if (token == null)
                 return null;
@@ -101,7 +101,7 @@ namespace Utils.Authentication
             }
         }
 
-        public UserExposeModel ValidateRefreshToken(string token)
+        public User ValidateRefreshToken(string token)
         {
             if (token == null)
                 return null;

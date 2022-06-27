@@ -9,30 +9,24 @@ namespace Domain.Models
 {
     public class Request : Entity
     {
-        [Required]
         public virtual User Customer { get; set; }
 
-        [Required]
         public virtual Category Category { get; set; }
 
         [MaxLength(255)]
-        [Required]
         public String Title { get; set; }
 
         [MaxLength(255)]
-        [Required]
         public String Description { get; set; }
 
         public decimal? Budget { get; set; }
 
-        [Required]
         public DateTime Timeline { get; set; }
 
         public virtual Request ParentRequest { get; set; }
 
         public virtual ICollection<Request> Items { get; set; }
 
-        [Required]
         [MaxLength(255)]
         public String Status { get; set; }
 

@@ -53,6 +53,11 @@ namespace Api
                 };
             });
 
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(ROLE.CUSTOMER, policy =>

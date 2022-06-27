@@ -8,11 +8,9 @@ namespace Domain.Models
 {
     public class Resource : Entity
     {
-        [Required]
         [MaxLength(255)]
         public String FileType { get; set; }
 
-        [Required]
         [MaxLength(255)]
         public String WorkStatus { get; set; }
 

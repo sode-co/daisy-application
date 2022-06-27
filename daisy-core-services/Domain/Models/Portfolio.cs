@@ -11,14 +11,11 @@ namespace Domain.Models
 {
     public class Portfolio : Entity
     {
-        [Required]
         public bool IsActive { get; set; }
 
-        [Required]
         [MaxLength(int.MaxValue)]
         public String Biography { get; set; }
 
-        [Required]
         public virtual User Freelancer { get; set; }
 
         public override string TableName => "Portfolios";
