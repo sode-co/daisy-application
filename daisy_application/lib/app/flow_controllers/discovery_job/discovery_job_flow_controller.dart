@@ -41,6 +41,7 @@ class _DiscoveryJobFlowControllerState extends AutoRouterState
 
     _jobScreenState?.isRequestLoading = true;
     const ns = 'load-more-request';
+    Debug.log(ns, 'Start streaming request');
     final lastLoadedRequestTimeStamp = _jobScreenState!.requests.isNotEmpty
         ? _jobScreenState!.requests.last.createdAt!.millisecondsSinceEpoch
         : DateTime.now().millisecondsSinceEpoch;
