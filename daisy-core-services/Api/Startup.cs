@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Api.Hubs.Requests;
 using Api.Middlewares;
 using AutoMapper;
 using DataAccess.UnitOfWork;
