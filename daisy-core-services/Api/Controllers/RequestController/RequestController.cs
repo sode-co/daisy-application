@@ -25,13 +25,6 @@ namespace Api.Controllers.RequestController
             this._mapper = mapper;
         }
 
-        [HttpGet]
-        public IActionResult GetRequest()
-        {
-            using var work = _unitOfWorkFactory.Get;
-            return Json(work.RequestRepository.GetAll(null, null, "Customer,Category").ToList());
-        }
-
         [HttpPost()]
         [Authorize(Policy = ROLE.CUSTOMER)]
         public IActionResult CreateRequest([FromBody] Request body)
