@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:daisy_application/app/pages/signup-page/deps/signup_page_listener.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/responsive.dart';
@@ -32,8 +33,6 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
   var textColor = const Color(BuiltinColor.blue_gradient_01);
   @override
   Widget build(BuildContext context) {
-    WidgetListener listener = context.read();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -91,7 +90,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                     textColor = const Color(BuiltinColor.blue_gradient_01);
                   });
           },
-          onTap: () {},
+          onTap: () => _listener.onBtnSignupClicked(_role!),
           child: Ink(
             decoration: BoxDecoration(
               color: btnColor,
@@ -123,6 +122,8 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
       ],
     );
   }
+
+  SignupPageListener get _listener => context.findAncestorStateOfType()!;
 }
 
 class Line extends StatelessWidget {

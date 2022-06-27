@@ -59,7 +59,9 @@ class _UnAuthenticatedFlowControllerState
   void onBtnSigninClicked() => _signIn();
 
   @override
-  void onBtnSignupClicked() {}
+  void onBtnSignupClicked() {
+    context.router.push(const Routers.SignupRoute());
+  }
 
   ApplicationState get _appState => context.read();
 

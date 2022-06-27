@@ -3,9 +3,11 @@ import 'package:daisy_application/app/flow_controllers/discovery_job/discovery_j
 import 'package:daisy_application/app/flow_controllers/navigation/header_navigation_flow_controller.dart';
 import 'package:daisy_application/app/flow_controllers/post_new_job/post_new_job_flow_controller.dart';
 import 'package:daisy_application/app/flow_controllers/root/root.dart';
+import 'package:daisy_application/app/flow_controllers/signup/signup_flow_controller.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/discovery_job_page.dart';
 import 'package:daisy_application/app/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/app/pages/post-new-job/view/post_new_job.dart';
+import 'package:daisy_application/app/pages/signup-page/view/signup.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'FlowController,Route',
@@ -35,7 +37,12 @@ import 'package:daisy_application/app/pages/post-new-job/view/post_new_job.dart'
             page: DicoveryJobFlowController,
             children: [
               AutoRoute(path: '', page: DiscoverJobPage, initial: true)
-            ])
+            ]),
+        AutoRoute(
+          path: 'signup',
+          page: SignupFlowController,
+          children: [AutoRoute(path: '', page: SignUp, initial: true)],
+        )
       ],
     ),
   ],

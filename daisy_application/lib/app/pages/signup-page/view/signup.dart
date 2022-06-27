@@ -22,9 +22,8 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState(locator.get());
 }
 
-class _SignUpState extends State<SignUp> with WidgetListener {
+class _SignUpState extends State<SignUp> {
   late SignUpPageState _signUpPageState;
-  late WidgetListener _widgetListener;
   final AuthenticationService _authService;
 
   _SignUpState(this._authService);
@@ -32,41 +31,18 @@ class _SignUpState extends State<SignUp> with WidgetListener {
   @override
   initState() {
     _signUpPageState = SignUpPageState();
-    _widgetListener = this;
     super.initState();
   }
 
   @override
-  Future<void> onBtnSignupClicked(UserRole role) async {
-    const ns = 'signup-with-google';
-    Debug.log(ns, 'signing up');
-    final result = await _authService.signUp(role);
-
-    if (result.failureType == FAILURE_TYPE.NONE) {
-      ApplicationState state = context.read();
-      state.isLoggedIn = true;
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) {
-            return _signUpPageState;
-          },
-        ),
-        Provider(create: (_) => _widgetListener),
-      ],
-      child: Scaffold(
-        appBar: const Header(),
-        body: Responsive.isDesktop(context)
-            ? const SingleChildScrollView(child: BodySignUpWeb())
-            : const SingleChildScrollView(child: BodySignUpMobile()),
-        bottomNavigationBar:
-            !Responsive.isDesktop(context) ? const BottomNavBar() : null,
-      ),
+    return Scaffold(
+      appBar: const Header(),
+      body: Responsive.isDesktop(context)
+          ? const SingleChildScrollView(child: BodySignUpWeb())
+          : const SingleChildScrollView(child: BodySignUpMobile()),
+      bottomNavigationBar:
+          !Responsive.isDesktop(context) ? const BottomNavBar() : null,
     );
   }
 }

@@ -11,19 +11,21 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i10;
 
 import '../flow_controllers/discovery_job/discovery_job_flow_controller.dart'
     as _i4;
 import '../flow_controllers/post_new_job/post_new_job_flow_controller.dart'
     as _i3;
 import '../flow_controllers/root/root.dart' as _i1;
-import '../pages/discovery-job/view/discovery_job_page.dart' as _i7;
-import '../pages/landing-page/view/landing.dart' as _i5;
-import '../pages/post-new-job/view/post_new_job.dart' as _i6;
+import '../flow_controllers/signup/signup_flow_controller.dart' as _i5;
+import '../pages/discovery-job/view/discovery_job_page.dart' as _i8;
+import '../pages/landing-page/view/landing.dart' as _i6;
+import '../pages/post-new-job/view/post_new_job.dart' as _i7;
+import '../pages/signup-page/view/signup.dart' as _i9;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
+  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -44,17 +46,25 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.DicoveryJobFlowController());
     },
+    SignupRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: _i5.SignupFlowController());
+    },
     LandingPage.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.LandingPage());
+          routeData: routeData, child: const _i6.LandingPage());
     },
     PostNewJob.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.PostNewJob());
+          routeData: routeData, child: const _i7.PostNewJob());
     },
     DiscoverJobPage.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i7.DiscoverJobPage());
+          routeData: routeData, child: const _i8.DiscoverJobPage());
+    },
+    SignUp.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i9.SignUp());
     }
   };
 
@@ -86,6 +96,12 @@ class AppRouter extends _i2.RootStackRouter {
               children: [
                 _i2.RouteConfig(DiscoverJobPage.name,
                     path: '', parent: DicoveryJobRoute.name)
+              ]),
+          _i2.RouteConfig(SignupRoute.name,
+              path: 'signup',
+              parent: RootRoute.name,
+              children: [
+                _i2.RouteConfig(SignUp.name, path: '', parent: SignupRoute.name)
               ])
         ])
       ];
@@ -130,7 +146,16 @@ class DicoveryJobRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.LandingPage]
+/// [_i5.SignupFlowController]
+class SignupRoute extends _i2.PageRouteInfo<void> {
+  const SignupRoute({List<_i2.PageRouteInfo>? children})
+      : super(SignupRoute.name, path: 'signup', initialChildren: children);
+
+  static const String name = 'SignupRoute';
+}
+
+/// generated route for
+/// [_i6.LandingPage]
 class LandingPage extends _i2.PageRouteInfo<void> {
   const LandingPage() : super(LandingPage.name, path: '');
 
@@ -138,7 +163,7 @@ class LandingPage extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.PostNewJob]
+/// [_i7.PostNewJob]
 class PostNewJob extends _i2.PageRouteInfo<void> {
   const PostNewJob() : super(PostNewJob.name, path: '');
 
@@ -146,9 +171,17 @@ class PostNewJob extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.DiscoverJobPage]
+/// [_i8.DiscoverJobPage]
 class DiscoverJobPage extends _i2.PageRouteInfo<void> {
   const DiscoverJobPage() : super(DiscoverJobPage.name, path: '');
 
   static const String name = 'DiscoverJobPage';
+}
+
+/// generated route for
+/// [_i9.SignUp]
+class SignUp extends _i2.PageRouteInfo<void> {
+  const SignUp() : super(SignUp.name, path: '');
+
+  static const String name = 'SignUp';
 }
