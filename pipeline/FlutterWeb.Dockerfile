@@ -1,4 +1,4 @@
-FROM cirrusci/flutter:3.0.1
+FROM cirrusci/flutter:3.0.2
 
 ARG API_HOST="127.0.0.1"
 ARG API_PORT=2433
