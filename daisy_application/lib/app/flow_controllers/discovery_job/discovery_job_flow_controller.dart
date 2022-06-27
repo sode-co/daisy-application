@@ -1,36 +1,24 @@
-import 'package:daisy_application/app/foundation/flow_controller.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
-import 'package:daisy_application/app/pages/discovery-job/view/discovery_job_page.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
 import 'package:daisy_application/service_locator/locator.dart';
-import 'package:fluro/src/fluro_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DicoveryJobFlowController extends StatefulWidget {
+class DicoveryJobFlowController extends AutoRouter {
   const DicoveryJobFlowController({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _DiscoveryJobFlowControllerState();
+  AutoRouterState createState() => _DiscoveryJobFlowControllerState();
 }
 
-class _DiscoveryJobFlowControllerState
-    extends FlowControllerState<DicoveryJobFlowController>
-    implements DiscoveryJobListener<DicoveryJobFlowController> {
+class _DiscoveryJobFlowControllerState extends AutoRouterState
+    implements DiscoveryJobListener<AutoRouter> {
   late RequestGrpcClient _requestGrpcClient;
   DiscoveryJobScreenState? _jobScreenState;
-  @override
-  AppPage createInitialPage() =>
-      AppPage('dicoveryPage', const DiscoverJobPage());
-
-  @override
-  List<ChangeNotifierProvider> createInitialProviders() => [
-        ChangeNotifierProvider<DiscoveryJobScreenState>(
-            create: (ctx) => _jobScreenState!)
-      ];
 
   @override
   void initState() {
@@ -69,8 +57,10 @@ class _DiscoveryJobFlowControllerState
   }
 
   @override
-  FluroRouter createInitialRoute() {
-    // TODO: implement createInitialRoute
-    throw UnimplementedError();
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (ctx) => _jobScreenState)],
+      child: super.build(context),
+    );
   }
 }

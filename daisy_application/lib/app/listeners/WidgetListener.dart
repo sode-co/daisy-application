@@ -5,9 +5,6 @@ mixin WidgetListener {
   Future<Result> _defaultImplementation() =>
       throw UnsupportedError('This function is not implement yet');
 
-  Future<void> onBtnSignupClicked(UserRole selectedRole) async =>
-      _defaultImplementation();
-
   Future<void> onBtnSigninClicked() async => _defaultImplementation();
 
   Future<void> submitTextfieldForSelectingCategories() async =>

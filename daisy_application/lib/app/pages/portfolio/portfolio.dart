@@ -1,3 +1,5 @@
+import 'package:daisy_application/app/pages/portfolio/component.dart';
+import 'package:daisy_application/app/pages/signup-page/model/sign_up_page_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
@@ -8,26 +10,23 @@ import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/app/listeners/WidgetListener.dart';
-import 'package:daisy_application/app/signup-page/model/sign_up_page_state.dart';
-import 'package:daisy_application/app/signup-page/view/mobile.dart';
-import 'package:daisy_application/app/signup-page/view/web.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class Portfolio extends StatefulWidget {
+  const Portfolio({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState(locator.get());
+  State<Portfolio> createState() => _PortfolioState(locator.get());
 }
 
-class _SignUpState extends State<SignUp> with WidgetListener {
+class _PortfolioState extends State<Portfolio> with WidgetListener {
   late SignUpPageState _signUpPageState;
   late WidgetListener _widgetListener;
   final AuthenticationService _authService;
 
-  _SignUpState(this._authService);
+  _PortfolioState(this._authService);
 
   @override
   initState() {
@@ -45,12 +44,13 @@ class _SignUpState extends State<SignUp> with WidgetListener {
     if (result.failureType == FAILURE_TYPE.NONE) {
       ApplicationState state = context.read();
       state.isLoggedIn = true;
-      LandingPage.start(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -62,9 +62,17 @@ class _SignUpState extends State<SignUp> with WidgetListener {
       ],
       child: Scaffold(
         appBar: const Header(),
-        body: Responsive.isDesktop(context)
-            ? const SingleChildScrollView(child: BodySignUpWeb())
-            : const SingleChildScrollView(child: BodySignUpMobile()),
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(color: Colors.grey.shade100),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal:
+                      Responsive.isDesktop(context) ? size.width * 0.12 : 0.0),
+              child: const PortfolioBody(),
+            ),
+          ),
+        ),
         bottomNavigationBar:
             !Responsive.isDesktop(context) ? const BottomNavBar() : null,
       ),

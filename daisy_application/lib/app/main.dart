@@ -1,17 +1,14 @@
 import 'dart:async';
 
-import 'package:daisy_application/app/flow_controllers/authenticated/authenticcated_flow_controller.dart';
-import 'package:daisy_application/app/flow_controllers/post_new_job/post_new_job_flow_controller.dart';
-import 'package:daisy_application/app/flow_controllers/root.dart';
-import 'package:daisy_application/app/foundation/routes.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/common/platform_helper.dart';
 import 'package:daisy_application/core_services/google/firebase_options.dart';
+import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -25,8 +22,7 @@ Future<void> main() async {
     );
   }
 
-  AppRouter.setupRouter();
-  setupDependencies();
+  await setupDependencies();
   Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
   Timer.periodic(const Duration(seconds: 3), (Timer t) async {
@@ -58,19 +54,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final _appRouter = AppRouter();
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (ctx) => ApplicationState())],
-      child: MaterialApp(
-        title: 'Daisy',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const RootPage(),
-          '/post-new-job': (context) => const AuthenticatedFlowController()
-        },
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider(create: (ctx) => ApplicationState())
+        ],
+        child: MaterialApp.router(
+            title: 'Daisy',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            routerDelegate: _appRouter.delegate(),
+            routeInformationParser: _appRouter.defaultRouteParser()));
   }
 }

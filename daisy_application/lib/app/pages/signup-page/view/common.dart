@@ -91,9 +91,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
                     textColor = const Color(BuiltinColor.blue_gradient_01);
                   });
           },
-          onTap: () {
-            listener.onBtnSignupClicked(_role!);
-          },
+          onTap: () {},
           child: Ink(
             decoration: BoxDecoration(
               color: btnColor,

@@ -31,7 +31,9 @@ class _HeaderState extends State<Header> {
                 const SizedBox(width: 150),
                 Image.asset('assets/images/weblogo.png', width: 100),
                 ButtonInfo(text: 'Danh mục', onPressed: () {}),
-                ButtonInfo(text: 'Đăng tin', onPressed: () {}),
+                ButtonInfo(
+                    text: 'Đăng tin',
+                    onPressed: _navigationListener.onBtnJobPostClicked),
                 ButtonInfo(
                   text: 'Tìm kiếm designer',
                   onPressed: _navigationListener.onBtnFindDesignerClicked,

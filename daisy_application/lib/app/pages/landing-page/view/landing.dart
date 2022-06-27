@@ -1,4 +1,3 @@
-import 'package:daisy_application/app/foundation/lifecycle_aware_state.dart';
 import 'package:daisy_application/app/pages/post-new-job/view/components.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
@@ -26,8 +25,7 @@ class LandingPage extends StatefulWidget {
   State<LandingPage> createState() => _LandingPageState(locator.get());
 }
 
-class _LandingPageState extends LifecycleAwareState<LandingPage>
-    with WidgetListener {
+class _LandingPageState extends State<LandingPage> with WidgetListener {
   late LandingPageState _landingPageState;
   final AuthenticationService _authenticationService;
 
@@ -71,10 +69,4 @@ class _LandingPageState extends LifecycleAwareState<LandingPage>
       ),
     );
   }
-
-  @override
-  void onPaused() {}
-
-  @override
-  void onResumed() {}
 }

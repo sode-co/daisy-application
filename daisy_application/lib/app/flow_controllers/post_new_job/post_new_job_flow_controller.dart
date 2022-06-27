@@ -1,33 +1,24 @@
 import 'dart:async';
 
-import 'package:daisy_application/app/foundation/flow_controller.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/pages/post-new-job/deps/post_new_job_deps.dart';
 import 'package:daisy_application/app/pages/post-new-job/model/post_new_job_state.dart';
-import 'package:daisy_application/app/pages/post-new-job/view/post_new_job.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/service_locator/locator.dart';
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PostNewJobFlowController extends StatefulWidget {
-  static const RouteName = '#/post-new-job';
-  static final routeHandler =
-      Handler(handlerFunc: (c, p) => const PostNewJobFlowController());
+class PostNewJobFlowController extends AutoRouter {
   const PostNewJobFlowController({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _PostNewJobFlowControllerState();
+  AutoRouterState createState() => _PostNewJobFlowControllerState();
 }
 
-class _PostNewJobFlowControllerState
-    extends FlowControllerState<PostNewJobFlowController>
-    implements PostNewJobListener<PostNewJobFlowController> {
+class _PostNewJobFlowControllerState extends AutoRouterState
+    implements PostNewJobListener<AutoRouter> {
   PostNewJobState? jobState;
-  @override
-  AppPage createInitialPage() => AppPage('', const PostNewJob());
-
   @override
   void initState() {
     jobState = PostNewJobState();
@@ -39,12 +30,6 @@ class _PostNewJobFlowControllerState
     jobState = null;
     super.dispose();
   }
-
-  @override
-  List<ChangeNotifierProvider> createInitialProviders() => [
-        ChangeNotifierProvider<PostNewJobState>(
-            create: ((context) => jobState!))
-      ];
 
   @override
   void onBtnJobPostClicked() => _postNewJob();
@@ -68,10 +53,11 @@ class _PostNewJobFlowControllerState
     // );
   }
 
-  static const String _POST_NEW_JOB_PAGE = '';
-
   @override
-  FluroRouter createInitialRoute() => FluroRouter()
-    ..define(_POST_NEW_JOB_PAGE,
-        handler: Handler(handlerFunc: (ctx, param) => const PostNewJob()));
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: ((context) => jobState!))],
+      child: super.build(context),
+    );
+  }
 }
