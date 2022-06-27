@@ -43,20 +43,16 @@ class _DiscoveryJobFlowControllerState extends AutoRouterState
     _jobScreenState?.isRequestLoading = true;
     const ns = 'load-more-request';
     Debug.log(ns, 'Start streaming request');
-    try {
-      final lastLoadedRequestTimeStamp = _jobScreenState!.requests.isNotEmpty
-          ? _jobScreenState!.requests.last.createdAt!.millisecondsSinceEpoch
-          : DateTime.now().millisecondsSinceEpoch;
+    final lastLoadedRequestTimeStamp = _jobScreenState!.requests.isNotEmpty
+        ? _jobScreenState!.requests.last.createdAt!.millisecondsSinceEpoch
+        : DateTime.now().millisecondsSinceEpoch;
 
-      await for (var singleResult in _requestGrpcClient.startStreamingRequests(
-          timeOffset: lastLoadedRequestTimeStamp)) {
-        if (singleResult.failureType == FAILURE_TYPE.NONE) {
-          Debug.log(ns, 'Drawing ${singleResult.data!.length} requests model');
-          _jobScreenState?.addRequests(singleResult.data!);
-        }
+    await for (var singleResult in _requestGrpcClient.startStreamingRequests(
+        timeOffset: lastLoadedRequestTimeStamp)) {
+      if (singleResult.failureType == FAILURE_TYPE.NONE) {
+        Debug.log(ns, 'Drawing ${singleResult.data!.length} requests model');
+        _jobScreenState?.addRequests(singleResult.data!);
       }
-    } on Exception catch (error) {
-      Debug.log('Error while streaming request', error);
     }
 
     _jobScreenState?.isRequestLoading = false;

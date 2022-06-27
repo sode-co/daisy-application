@@ -37,10 +37,10 @@ namespace GrpcServices.Services
                         {
                             Id = request.Customer.Id,
                             Email = request.Customer.Email,
-                            Phone = request.Customer.Phone,
-                            DisplayName = request.Customer.DisplayName,
-                            LastName = request.Customer.LastName,
-                            FirstName = request.Customer.FirstName,
+                            Phone = request.Customer.Phone.Or(""),
+                            DisplayName = request.Customer.DisplayName.Or(""),
+                            LastName = request.Customer.LastName.Or(""),
+                            FirstName = request.Customer.FirstName.Or(""),
                             Role = request.Customer.Role,
                             Avatar = request.Customer.Avatar,
                             Address = request.Customer.Address
