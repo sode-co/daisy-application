@@ -158,7 +158,6 @@ namespace Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<RequestHub>("/hub/requests");
             });
         }
     }

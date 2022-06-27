@@ -66,6 +66,5 @@
     <Folder Include="Response\Authentication\" />
     <Folder Include="Response\User\" />
     <Folder Include="Controllers\Designer\" />
-    <Folder Include="Hubs\Requests\" />
   </ItemGroup>
 </Project>
