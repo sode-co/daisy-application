@@ -1,5 +1,6 @@
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
+import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
@@ -19,10 +20,10 @@ import 'native_locator.dart' if (dart.library.html) 'web_locator.dart'
     as universal_locator;
 
 class CoreServiceLocator {
-  static init() {
+  static Future<void> init() async {
     _initGrpcService();
     _initHttpService();
-    _initPersistentService();
+    await _initPersistentService();
     _initGoogleService();
   }
 
@@ -30,6 +31,7 @@ class CoreServiceLocator {
     universal_locator.UniversalLocator.init();
     locator
         .registerFactory<HealthCheckGrpcClient>(() => HealthCheckGrpcClient());
+    locator.registerFactory<RequestGrpcClient>(() => RequestGrpcClient());
   }
 
   static void _initHttpService() {
@@ -54,14 +56,14 @@ class CoreServiceLocator {
         baseUrl: '${Config.API_URL}/v1/requests'));
   }
 
-  static void _initPersistentService() {
+  static Future<void> _initPersistentService() async {
     Hive.registerAdapter<AuthenticationModel>(AuthenticationAdapter());
     locator.registerFactory(() => AuthenticationPersistent());
-    Hive.openBox(AuthenticationPersistent.BOX_NAME);
+    await Hive.openBox(AuthenticationPersistent.BOX_NAME);
 
     Hive.registerAdapter<UserModel>(UserAdapter());
     locator.registerFactory(() => UserPersistent());
-    Hive.openBox(UserPersistent.BOX_NAME);
+    await Hive.openBox(UserPersistent.BOX_NAME);
   }
 
   static void _initGoogleService() {

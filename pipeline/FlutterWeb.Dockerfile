@@ -15,10 +15,10 @@ RUN mkdir /app/
 COPY daisy_application ./app
 COPY pipeline/script /app/script
 
-WORKDIR app
+WORKDIR /app
 EXPOSE 8081
 RUN ["chmod", "+x", "script/server.sh"]
-RUN flutter build web -t lib/pages/main.dart \
+RUN flutter build web -t lib/app/main.dart \
     --dart-define=API_HOST=$API_HOST \
     --dart-define=API_PORT=$API_PORT \
     --dart-define=PROTOCOL=$PROTOCOL \

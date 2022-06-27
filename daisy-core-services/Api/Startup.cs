@@ -73,7 +73,9 @@ namespace Api
 
             services
                 .AddControllers()
-                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(x => x.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore);
+
             services.AddSingleton<UnitOfWorkFactory>();
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
@@ -82,6 +84,8 @@ namespace Api
                     .AllowAnyHeader()
                     .AllowAnyOrigin();
             }));
+
+            services.AddSignalR();
 
             services.AddSwaggerGen(c =>
             {

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package daisy;
+
+message User {
+    int32 Id = 1;
+    string ObjectId = 2;
+    string FirstName = 3;
+    string LastName = 4;
+    string DisplayName = 5;
+    string Role = 6;
+    string Email = 7;
+    string Phone = 8;
+    string address = 10;
+    string avatar = 11;
+}
+
+message Category {
+    int32 Id = 1;
+    string ObjectId = 2;
+    string Name = 3;
+    string Type = 4;
+}
+
+message Request {
+    int32 Id = 1;
+    int64 CreatedAt = 2;
+    string ObjectId = 3;
+    User Customer = 4;
+    Category Category = 5;
+    string Title = 6;
+    string Description = 7;
+    float Budget = 8;
+    int64 Timeline = 9;
+    string Status = 10;
+}
+
+service None {}

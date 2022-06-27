@@ -35,10 +35,16 @@ class AuthenticationService {
     final result =
         await (_authRestClient.signin('Bearer $googleIdToken').Value());
     if (result.failureType == FAILURE_TYPE.NONE) {
+      Debug.log('signin', 'success save result');
       await _saveUserDataAndAuthenticationIntoLocal(result.data);
     }
 
     return result;
+  }
+
+  Future<void> signOut() async {
+    await _userPersistent.remove();
+    await _authenticationPersistent.removeAuth();
   }
 
   Future<Result> _saveUserDataAndAuthenticationIntoLocal(

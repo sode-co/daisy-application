@@ -1,4 +1,6 @@
 import 'package:daisy_application/core_services/models/category/category_model.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
+import 'package:daisy_application/schema/models.pb.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -13,7 +15,9 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
   String? description;
   double? budget;
   String? status;
-  String? timeline;
+  DateTime? createdAt;
+  DateTime? timeline;
+  UserModel? customer;
   List<RequestModel> items = [];
 
   RequestModel({
@@ -24,8 +28,21 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
     this.budget,
     this.status,
     this.timeline,
+    this.customer,
     this.items = const [],
   });
+
+  RequestModel.fromProto(Request proto) {
+    id = proto.id;
+    category = CategoryModel(
+        proto.category.id, null, proto.category.name, proto.category.type);
+    title = proto.title;
+    budget = proto.budget;
+    status = proto.status;
+    customer = UserModel.fromProto(proto.customer);
+    timeline = DateTime.fromMillisecondsSinceEpoch(proto.timeline.toInt());
+    createdAt = DateTime.fromMillisecondsSinceEpoch(proto.createdAt.toInt());
+  }
 
   RequestModel.init();
 
@@ -33,4 +50,7 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
       _$RequestModelFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$RequestModelToJson(this);
+
+  @override
+  int get hashCode => id ?? createdAt?.millisecondsSinceEpoch ?? 0;
 }

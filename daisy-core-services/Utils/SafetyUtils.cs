@@ -49,5 +49,14 @@ namespace Utils
 
             return (T)(object)obj.Index<T>(index);
         }
+
+        public delegate X _ExecuteSafety<T, X>(T target);
+        public static X Choose<T, X>(this T target, _ExecuteSafety<T, X> execution) {
+            Type type = typeof(X);
+
+            if (target == null) return (X)(object) null;
+
+            return execution(target);
+        }
     }
 }

@@ -1,0 +1,3 @@
+enum WidthMode { MATCH_PARENT, WRAP_CONTENT }
+
+enum HeightMode { MATCH_PARENT, WRAP_CONTENT }

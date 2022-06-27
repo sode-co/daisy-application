@@ -48,6 +48,7 @@ class AuthenticationInterceptor extends InterceptorsWrapper {
     }
     Debug.log(ns, 'Found access token', auth.accessToken);
 
+    Debug.log(ns, 'Found access token', auth.accessToken);
     options.headers['Authorization'] ??= 'bearer ${auth.accessToken}';
     handler.next(options);
   }

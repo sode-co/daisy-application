@@ -16,7 +16,7 @@
 
 //     return _auth!;
 //   }
-  
+
 //   static Future<Result<T>> inside<T extends dynamic>(Future<Result<T>> Function(Sandbox) command) async {
 //     FAILURE_TYPE type = FAILURE_TYPE.NONE;
 //     try {
@@ -25,7 +25,6 @@
 //       return result;
 //     } catch (Exception e) {
 //     }
-
 
 //   }
 
