@@ -14,10 +14,12 @@ namespace DataAccess.Repositories
             Func<IQueryable, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = null
             );
+
         T GetFirstOrDefault(
             Expression<Func<T, bool>> filter = null,
             string includeProperties = null
             );
+
         void Add(T t);
         void Remove(T t);
         void Remove(int id);
