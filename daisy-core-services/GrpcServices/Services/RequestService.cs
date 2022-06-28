@@ -43,7 +43,7 @@ namespace GrpcServices.Services
                             FirstName = request.Customer.FirstName.Or(""),
                             Role = request.Customer.Role,
                             Avatar = request.Customer.Avatar,
-                            Address = request.Customer.Address
+                            Address = request.Customer.Address.Or("")
                         },
                         Category = new Category()
                         {

@@ -28,7 +28,7 @@ Future<void> main() async {
   await setupDependencies();
   Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
-  Timer.periodic(const Duration(seconds: 10), (Timer t) async {
+  Timer.periodic(const Duration(seconds: 60), (Timer t) async {
     HealthCheckGrpcClient client = locator.get();
     final result = await client.performNetworkCheck();
     if (result.failureType == FAILURE_TYPE.NONE) {
