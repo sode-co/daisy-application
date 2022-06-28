@@ -32,10 +32,12 @@ class PaypalPayment extends StatelessWidget {
         },
         navigationDelegate: (NavigationRequest request) async {
           if (request.url.contains('http://return_url/?status=success')) {
+            // if success
             print('return url on success');
             Navigator.pop(context);
           }
           if (request.url.contains('http://cancel_url')) {
+            // fail
             Navigator.pop(context);
           }
           return NavigationDecision.navigate;
