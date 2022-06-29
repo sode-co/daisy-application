@@ -50,8 +50,6 @@ class AuthenticationService {
   Future<Result> _saveUserDataAndAuthenticationIntoLocal(
       AuthenticationModel auth) async {
     await _authenticationPersistent.setAuth(auth);
-    Debug.log('tiendang-debug', 'authorize result',
-        await _authenticationPersistent.getCurrentAuth());
     final result = await _userClient.getCurrentUser().Value();
 
     if (result.failureType == FAILURE_TYPE.NONE) {

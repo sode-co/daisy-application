@@ -127,5 +127,16 @@ namespace Api.Controllers.RequestController
             return work.RequestRepository.GetAll((request => request.Category.Id == categoryId)).ToList();
         }
 
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public IActionResult GetRequest(int id)
+        {
+
+            using var work = _unitOfWorkFactory.Get;
+            var request = work.RequestRepository.Get(id);
+
+            return NotFound();
+        }
+
     }
 }

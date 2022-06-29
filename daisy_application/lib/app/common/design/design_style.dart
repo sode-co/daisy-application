@@ -72,22 +72,36 @@ abstract class Design {
 
   static final fontColorHighEmp = colorNeutral.shade900;
   static final fontColorMediumEmp = colorNeutral.shade700;
+  static final fontColorLowEmp = colorNeutral.shade300;
   static final fontColorWhite = colorWhite.withOpacity(0.92);
+
+  static const double itemSpacing = 17;
+  static const double headerSpacing = 30;
+  static const double bodySpacing = 22;
+  static const double contentSpacing = 7;
 
   static TextStyle textHeadline() {
     return TextStyle(
         color: fontColorHighEmp,
-        fontSize: 21,
+        fontSize: 22,
         height: 1.2,
         fontWeight: FontWeight.w500);
   }
 
-  static TextStyle textTitle({Color? textColor}) {
+  static TextStyle textSmallHeadline({bool bold = false}) {
+    return TextStyle(
+        color: fontColorHighEmp,
+        fontSize: 19,
+        height: 1.2,
+        fontWeight: _toFontWeight(bold));
+  }
+
+  static TextStyle textTitle({Color? textColor, bool bold = true}) {
     return TextStyle(
         color: toTextColor(textColor: textColor),
-        fontSize: 36,
+        fontSize: 32,
         height: 1.11,
-        fontWeight: _toFontWeight(true));
+        fontWeight: _toFontWeight(bold));
   }
 
   static TextStyle textBodyBold({Color? textColor}) =>
@@ -113,7 +127,7 @@ abstract class Design {
   static TextStyle textCaption({Color? textColor, bool bold = false}) {
     return TextStyle(
         color: toTextColor(textColor: textColor, isEnabled: true),
-        fontSize: 14,
+        fontSize: 16,
         height: 1.29,
         letterSpacing: 0.02,
         fontWeight: _toFontWeight(bold));
@@ -134,6 +148,6 @@ abstract class Design {
           fontWeight: textStyle.fontWeight);
 
   static FontWeight _toFontWeight(bool isBold) {
-    return isBold ? FontWeight.w900 : FontWeight.normal;
+    return isBold ? FontWeight.w600 : FontWeight.normal;
   }
 }
