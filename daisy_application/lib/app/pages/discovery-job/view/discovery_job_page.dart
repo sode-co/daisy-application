@@ -1,11 +1,10 @@
-import 'package:daisy_application/app/dialogs/job_apply_dialog.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/component.dart';
 import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
 import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/common/responsive.dart';
-import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,6 +46,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
   Widget _createDiscoveryLayout() {
     double maxDisplayCount = (MediaQuery.of(context).size.height) / 100;
     DiscoveryJobScreenState _screenState = context.watch();
+    ApplicationState _appState = context.read();
     if (_screenState.requests.length < maxDisplayCount) {
       _onLoadMoreRequest();
     }
@@ -74,10 +74,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
                 RequestIntroList(
                   requests: _screenState.requests,
                   onItemSelected: (request) {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (ctx) => JobApplyDialog(context));
+                    _screenState.selectedRequest = request;
                   },
                   onLoadMore: _onLoadMoreRequest,
                 ),
@@ -92,7 +89,10 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
                   width: 30.0,
                 ),
                 if (selectedRequest != null)
-                  JobDetails(request: selectedRequest),
+                  JobDetails(
+                    request: selectedRequest,
+                    onApply: _listener.onBtnApplyClicked,
+                  ),
               ],
             )),
       ),

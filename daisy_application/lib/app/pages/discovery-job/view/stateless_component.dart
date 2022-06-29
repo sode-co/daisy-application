@@ -106,7 +106,9 @@ class _DisplayTime {
 }
 
 class JobDetails extends StatelessWidget {
-  const JobDetails({Key? key, required this.request}) : super(key: key);
+  final VoidCallback? onApply;
+  const JobDetails({Key? key, required this.request, this.onApply})
+      : super(key: key);
   final RequestModel request;
 
   @override
@@ -167,7 +169,9 @@ class JobDetails extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Design.headerSpacing),
-            const ApplicationButton(),
+            ApplicationButton(
+              onApply: onApply,
+            ),
             const SizedBox(height: Design.headerSpacing),
             Text(
               'Phân loại:',
@@ -271,8 +275,10 @@ class RecruiterInfo extends StatelessWidget {
 }
 
 class ApplicationButton extends StatelessWidget {
+  final VoidCallback? onApply;
   const ApplicationButton({
     Key? key,
+    this.onApply,
   }) : super(key: key);
 
   @override
@@ -298,7 +304,7 @@ class ApplicationButton extends StatelessWidget {
               color: Color(BuiltinColor.blue_gradient_01),
             ),
           ),
-          onPressed: () {},
+          onPressed: onApply,
         ),
       ),
     );

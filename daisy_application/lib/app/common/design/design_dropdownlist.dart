@@ -22,11 +22,11 @@ class DropdownList<T> extends StatefulWidget {
 }
 
 class _DropdownListState<T> extends State<DropdownList<T>> {
-  late DropDownItem<T> dropdownValue;
+  late T dropdownValue;
 
   @override
   initState() {
-    dropdownValue = widget.items[0];
+    dropdownValue = widget.items[0].value;
     super.initState();
   }
 
@@ -45,23 +45,23 @@ class _DropdownListState<T> extends State<DropdownList<T>> {
             child: DropdownButtonHideUnderline(
               child: ButtonTheme(
                 alignedDropdown: true,
-                child: DropdownButton<DropDownItem<T>>(
+                child: DropdownButton<T>(
                   value: dropdownValue,
                   icon: const Icon(Icons.expand_more),
                   elevation: 16,
                   style: Style.placeHolderText,
-                  onChanged: (DropDownItem<T>? newValue) {
+                  onChanged: (T? newValue) {
                     setState(
                       () {
                         dropdownValue = newValue!;
                       },
                     );
                   },
-                  items: widget.items.map<DropdownMenuItem<DropDownItem<T>>>(
-                    (DropDownItem<T> value) {
-                      return DropdownMenuItem<DropDownItem<T>>(
-                        value: value,
-                        child: Text(value.name),
+                  items: widget.items.map<DropdownMenuItem<T>>(
+                    (item) {
+                      return DropdownMenuItem<T>(
+                        value: item.value,
+                        child: Text(item.name),
                       );
                     },
                   ).toList(),

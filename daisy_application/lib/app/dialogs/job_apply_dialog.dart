@@ -1,11 +1,23 @@
 import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/common/utils/size_mode.dart';
+import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/core_services/models/request/request_model.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
 
 class JobApplyDialog extends Dialog {
   final BuildContext context;
+  final RequestModel request;
+  late TextEditingController descriptionController;
+  final UserModel user;
+  final Function(UserModel user, String description)? onConfirmClicked;
 
-  JobApplyDialog(this.context);
+  JobApplyDialog(this.context, this.request, this.user, this.onConfirmClicked,
+      {Key? key})
+      : super(key: key) {
+    descriptionController = TextEditingController();
+  }
 
   @override
   ShapeBorder? get shape =>
@@ -24,6 +36,8 @@ class JobApplyDialog extends Dialog {
               const SizedBox(height: Design.headerSpacing),
               _createContactInfo(),
               const SizedBox(height: Design.headerSpacing),
+              createMessageBox(),
+              const SizedBox(height: Design.bodySpacing),
               createFooter(),
               const SizedBox(height: Design.headerSpacing),
               createSubmitButton()
@@ -58,9 +72,8 @@ class JobApplyDialog extends Dialog {
                   Design.textTitle(textColor: Design.colorBlack, bold: false)),
         ),
         IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () {},
-        ),
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.of(context, rootNavigator: true).pop()),
       ]);
 
   Widget _createContactInfo() => Column(
@@ -77,11 +90,11 @@ class JobApplyDialog extends Dialog {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 65,
                     height: 65,
                     child: CircleAvatar(
-                      backgroundImage: NetworkImage(''),
+                      backgroundImage: NetworkImage(user.avatar ?? ''),
                     ),
                   ),
                   const SizedBox(
@@ -91,14 +104,14 @@ class JobApplyDialog extends Dialog {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Minh Tien Dang',
+                        user.displayName ?? '',
                         style: Design.textBodyLarge(bold: true),
                       ),
                       const SizedBox(
                         height: 14,
                       ),
                       Text(
-                        'Ho Chi Minh City, VietNam',
+                        user.address ?? '',
                         style: Design.textCaption(),
                       )
                     ],
@@ -133,8 +146,7 @@ class JobApplyDialog extends Dialog {
             height: Design.contentSpacing,
           ),
           DropdownList(
-              height: 30,
-              items: [DropDownItem('tiendang', 'tiendvlp@gmail.com')])
+              height: 30, items: [DropDownItem(user.email, user.email ?? '')])
         ],
       );
 
@@ -149,7 +161,7 @@ class JobApplyDialog extends Dialog {
             height: Design.contentSpacing,
           ),
           DropdownList(
-              height: 30, items: [DropDownItem('tiendang', '0969747887')])
+              height: 30, items: [DropDownItem(user.phone, user.phone ?? '')])
         ],
       );
 
@@ -165,7 +177,7 @@ class JobApplyDialog extends Dialog {
           ),
           DropdownList(
               height: 30,
-              items: [DropDownItem('tiendang', '730/34, Ho Chi Minh City')])
+              items: [DropDownItem(user.address, user.address ?? '')])
         ],
       );
 
@@ -190,11 +202,34 @@ class JobApplyDialog extends Dialog {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ButtonPrimary(
-            width: 60,
+            width: 120,
+            height: 45,
             fontSize: Design.textBody().fontSize,
-            text: 'Apply',
+            text: 'Ứng tuyển',
+            onPressed: onConfirmClicked == null
+                ? null
+                : () => onConfirmClicked!(user, descriptionController.text),
             textColor: Colors.white,
           )
+        ],
+      );
+
+  Widget createMessageBox() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Lời nhắn',
+            style: Design.textCaption(),
+          ),
+          const SizedBox(
+            height: Design.contentSpacing,
+          ),
+          BasicTextField(
+            widthMode: WidthMode.MATCH_PARENT,
+            controller: descriptionController,
+            maxLines: 4,
+            hintText: DEFAULT_APPLICATION_MESSAGE,
+          ),
         ],
       );
 }

@@ -21,6 +21,8 @@ class DiscoveryJobScreenState extends ChangeNotifier {
 
   void addRequest(RequestModel request) {
     requests.add(request);
+    _selectedRequest ??= requests[0];
+
     notifyListeners();
   }
 
