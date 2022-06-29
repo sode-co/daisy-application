@@ -1,6 +1,7 @@
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/style.dart';
+import 'package:daisy_application/app/common/widget/badge/custom_badge.dart';
 import 'package:daisy_application/app/pages/update-profile/model/update_profile_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
@@ -15,10 +16,38 @@ class UserAvatar extends StatelessWidget {
     ApplicationState appState = context.watch();
     UserModel currentUser = appState.currentUser;
 
-    return CircleAvatar(
-      radius: 50.0,
-      backgroundImage: NetworkImage(currentUser.avatar!),
-    );
+    return CustomizedBadge(
+        badge: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              border: Border.all(style: BorderStyle.solid)),
+          child: Padding(
+            padding: const EdgeInsets.all(1.0),
+            child: SizedBox(
+              width: 40.0,
+              child: Row(
+                children: const [
+                  Icon(Icons.edit, size: 13.0),
+                  Text(
+                    'Edit',
+                    style: TextStyle(fontSize: 13.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        bottom: 0.0,
+        left: 5.0,
+        color: Colors.transparent,
+        child: CircleAvatar(
+          radius: 60.0,
+          backgroundImage: NetworkImage(currentUser.avatar!),
+        ));
+    // return CircleAvatar(
+    //   radius: 60.0,
+    //   backgroundImage: NetworkImage(currentUser.avatar!),
+    // );
   }
 }
 
@@ -38,7 +67,7 @@ class UpdateProfileTitle extends StatelessWidget {
           Text(
             'Profile Detail',
             style: TextStyle(
-              fontSize: 17,
+              fontSize: 19,
               fontWeight: FontWeight.w600,
               color: Colors.black.withOpacity(0.6),
             ),
@@ -65,7 +94,7 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
     final _formKey = GlobalKey<FormState>();
 
     return SizedBox(
-      width: size.width * 0.8,
+      width: size.width * 0.65,
       height: 3000,
       child: Form(
         key: _formKey,

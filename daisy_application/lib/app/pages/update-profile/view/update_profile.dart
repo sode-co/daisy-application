@@ -27,12 +27,21 @@ class _UpdateProfileState extends State<UpdateProfile> with WidgetListener {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
-              left: size.width * 0.1, right: size.width * 0.1, top: 10.0),
+              left: size.width * 0.1, right: size.width * 0.05, top: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              UpdateProfileTitle(),
-              UpdateProfileForm(),
+            children: [
+              const UpdateProfileTitle(),
+              SizedBox(
+                width: size.width * 0.9,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    UpdateProfileForm(),
+                    UserAvatar(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
