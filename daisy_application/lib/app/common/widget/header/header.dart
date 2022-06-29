@@ -1,10 +1,11 @@
+import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/utils/size_mode.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
-import 'package:daisy_application/app/common/responsive.dart';
-import 'package:daisy_application/app/common/utils/widget_utils.dart';
-import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,8 @@ class _HeaderState extends State<Header> {
     Size size = MediaQuery.of(context).size;
     ApplicationState appState = context.watch();
     final isLoggedIn = appState.isLoggedIn;
+    UserModel currentUser = appState.currentUser;
+
     return AppBar(
       title: (Responsive.isDesktop(context))
           ? Row(
@@ -50,7 +53,7 @@ class _HeaderState extends State<Header> {
       actions: <Widget>[
         if (Responsive.isDesktop(context)) const SizedBox(width: 5),
         const SizedBox(width: 1),
-        ..._createAuthenButton(isLoggedIn),
+        ..._createAuthenButton(isLoggedIn, currentUser),
         if (Responsive.isDesktop(context)) SizedBox(width: size.width * 0.1),
       ],
       backgroundColor: Colors.white,
@@ -58,24 +61,33 @@ class _HeaderState extends State<Header> {
     );
   }
 
-  List<Widget> _createAuthenButton(bool isLoggedIn) => isLoggedIn
-      ? [
-          ButtonInfo(
-            text: 'Đăng xuất',
-            heightMode: HeightMode.MATCH_PARENT,
-            onPressed: _authenticationListener.onBtnSignoutClicked,
-          )
-        ]
-      : [
-          _createSignupButton(),
-          // if (Responsive.isDesktop(context)) const SizedBox(width: 10),
-          const Center(child: Text('  ')),
-          ButtonInfo(
-            heightMode: HeightMode.MATCH_PARENT,
-            text: 'Đăng nhập',
-            onPressed: _authenticationListener.onBtnSigninClicked,
-          )
-        ];
+  List<Widget> _createAuthenButton(bool isLoggedIn, UserModel currentUser) =>
+      isLoggedIn
+          ? [
+              IconButton(
+                icon: CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: NetworkImage(currentUser.avatar!),
+                ),
+                iconSize: 50,
+                onPressed: _navigationListener.onBtnProfileDetailsClicked,
+              ),
+              ButtonInfo(
+                text: 'Đăng xuất',
+                heightMode: HeightMode.MATCH_PARENT,
+                onPressed: _authenticationListener.onBtnSignoutClicked,
+              )
+            ]
+          : [
+              _createSignupButton(),
+              // if (Responsive.isDesktop(context)) const SizedBox(width: 10),
+              const Center(child: Text('  ')),
+              ButtonInfo(
+                heightMode: HeightMode.MATCH_PARENT,
+                text: 'Đăng nhập',
+                onPressed: _authenticationListener.onBtnSigninClicked,
+              )
+            ];
 
   Widget _createSignupButton() => ButtonIcon.asset(
         'assets/images/google.png',
