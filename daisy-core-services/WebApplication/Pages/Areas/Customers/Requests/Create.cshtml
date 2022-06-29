@@ -1,5 +1,5 @@
 ﻿@page "/create"
-@model WebApplication.Pages.Areas.Customers.Request.CreateModel
+@model WebApplication.Pages.Areas.Customers.Requests.CreateModel
 @{
 }
 
@@ -18,24 +18,24 @@
     
     <div class="form-group">
         <label for="projectName">Your project name</label>
-        <input type="text" class="form-control" id="projectName" aria-describedby="projectName" placeholder="Enter your project name">
+        <input type="text" class="form-control" id="projectName" aria-describedby="projectName" placeholder="Enter your project name" asp-for="request.Title">
     </div>
     <div class="form-group">
         <label for="category">Job category</label>
-        <select class="form-control" asp-items="ViewBag.CategoryId"></select>
+        <select class="form-control" asp-for="request.Category" asp-items="ViewBag.CategoryName"></select>
     </div>
 
     <div class="form-group">
         <label for="description">Your project description</label>
-        <input type="text" class="form-control" id="description" aria-describedby="projectName" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+        <input type="text" class="form-control" id="description" asp-for="request.Description" aria-describedby="projectName" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
     </div>
     <div class="form-group">
         <label for="budget">Your project budget</label>
-        <input type="number" step="0.1" class="form-control" id="budget" aria-describedby="budget" placeholder="9999.0">
+        <input type="number" step="0.1" class="form-control" id="budget" asp-for="request.Budget" aria-describedby="budget" placeholder="9999.0">
     </div>
     <div class="form-group">
         <label for="timeline">Your project timeline</label>
-        <input class="form-control" asp-for="timeline" asp-format="{0:yyyy-MM-dd}" />
+        <input class="form-control" asp-for="request.Timeline" asp-format="{0:yyyy-MM-dd}" />
     </div>
 
     <button type="submit" class="btn btn-outline-success">Submit</button>
