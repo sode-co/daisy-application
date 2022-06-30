@@ -19,7 +19,6 @@ namespace Domain.Models
         [EmailAddress]
         public String Email { get; set; }
 
-        [Range(0, 9)]
         public String Role { get; set; }
 
         [MaxLength(int.MaxValue)]
@@ -34,7 +33,6 @@ namespace Domain.Models
         [MaxLength(255)]
         public String Address { get; set; }
 
-        [Phone]
         public String Phone { get; set; }
         public override string TableName { get => "Users"; }
 
