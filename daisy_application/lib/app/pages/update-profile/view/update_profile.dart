@@ -46,8 +46,8 @@ class _UpdateProfileState extends State<UpdateProfile> with WidgetListener {
                   children: [
                     UpdateProfileForm(
                       onSubmitted: () {
-                        listener.onBtnUpdateProfileClicked(
-                            currentUser.id!, model.updatedProfile);
+                        listener
+                            .onBtnUpdateProfileClicked(model.updatedProfile);
                       },
                     ),
                     const UserAvatar(),

@@ -8,9 +8,8 @@ part 'users_rest_api.g.dart';
 abstract class UsersRestApi {
   factory UsersRestApi(Dio dio, {String baseUrl}) = _UsersRestApi;
 
-  @PUT('')
-  Future<HttpResponse<UserModel>> updateUser(
-    @Path('Id') int customerId,
+  @POST('')
+  Future<HttpResponse<void>> updateUser(
     @Body() UserModel body,
   );
 }

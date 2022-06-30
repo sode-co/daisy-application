@@ -34,13 +34,12 @@ class _UpdateProfileFlowControllerState extends AutoRouterState
   }
 
   @override
-  void onBtnUpdateProfileClicked(int id, UserModel user) =>
-      _updateProfile(id, user);
+  void onBtnUpdateProfileClicked(UserModel user) => _updateProfile(user);
 
-  Future<void> _updateProfile(int id, UserModel user) async {
+  Future<void> _updateProfile(UserModel user) async {
     UsersRestApi _usersClient = locator.get();
-    Debug.log('update profile');
-    await _usersClient.updateUser(id, user);
+    Debug.log('update profile', user);
+    await _usersClient.updateUser(user);
     context.toastSuccess('Cập nhật profile thành công');
   }
 
