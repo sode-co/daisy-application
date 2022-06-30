@@ -44,10 +44,6 @@ class UserAvatar extends StatelessWidget {
           radius: 60.0,
           backgroundImage: NetworkImage(currentUser.avatar!),
         ));
-    // return CircleAvatar(
-    //   radius: 60.0,
-    //   backgroundImage: NetworkImage(currentUser.avatar!),
-    // );
   }
 }
 
@@ -79,7 +75,8 @@ class UpdateProfileTitle extends StatelessWidget {
 }
 
 class UpdateProfileForm extends StatefulWidget {
-  const UpdateProfileForm({Key? key}) : super(key: key);
+  final VoidCallback? onSubmitted;
+  const UpdateProfileForm({super.key, this.onSubmitted});
 
   @override
   State<UpdateProfileForm> createState() => _UpdateProfileFormState();
@@ -92,6 +89,8 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
     ApplicationState appState = context.watch();
     UserModel currentUser = appState.currentUser;
     final _formKey = GlobalKey<FormState>();
+    var model = context.watch<UpdateProfileState>();
+    model.updatedProfile = currentUser;
 
     return SizedBox(
       width: size.width * 0.65,
@@ -108,14 +107,14 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
                   CustomTextField(
                     fieldName: 'Họ của bạn',
                     maxLines: 1,
-                    initialValue: currentUser.firstName,
+                    initialValue: currentUser.lastName,
                     isShortenForm: true,
                   ),
                   const SizedBox(width: 20.0),
                   CustomTextField(
                     fieldName: 'Tên của bạn',
                     maxLines: 1,
-                    initialValue: currentUser.lastName,
+                    initialValue: currentUser.firstName,
                     isShortenForm: true,
                   ),
                 ],
@@ -178,7 +177,7 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
                         minimumSize: const Size(110.0, 50.0),
                         primary: const Color(BuiltinColor.blue_gradient_01),
                       ),
-                      onPressed: () {},
+                      onPressed: widget.onSubmitted,
                       child: const Text(
                         'Cập nhật',
                         style: TextStyle(fontSize: 15.0),
@@ -217,6 +216,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     var model = context.watch<UpdateProfileState>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -230,8 +230,27 @@ class CustomTextField extends StatelessWidget {
               ? (isShortenForm ?? false ? size.width * 0.3 : size.width * 0.615)
               : size.width * 0.7,
           child: TextFormField(
+            onChanged: (value) {
+              if (fieldName == 'Họ của bạn') {
+                model.updatedProfile.lastName = value;
+              }
+              if (fieldName == 'Tên của bạn') {
+                model.updatedProfile.firstName = value;
+              }
+              if (fieldName == 'Tên hiển thị') {
+                model.updatedProfile.displayName = value;
+              }
+              if (fieldName == 'Địa chỉ email của bạn') {
+                model.updatedProfile.email = value;
+              }
+              if (fieldName == 'Số điện thoại') {
+                model.updatedProfile.phone = value;
+              }
+              if (fieldName == 'Địa chỉ của bạn') {
+                model.updatedProfile.address = value;
+              }
+            },
             initialValue: initialValue,
-            onChanged: (value) {},
             validator: validation,
             maxLines: maxLines,
             decoration: const InputDecoration(

@@ -3,8 +3,12 @@ import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart
 import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/listeners/WidgetListener.dart';
 import 'package:daisy_application/app/pages/update-profile/deps/update_profile_deps.dart';
+import 'package:daisy_application/app/pages/update-profile/model/update_profile_state.dart';
 import 'package:daisy_application/app/pages/update-profile/view/component.dart';
+import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({Key? key}) : super(key: key);
@@ -21,6 +25,9 @@ class _UpdateProfileState extends State<UpdateProfile> with WidgetListener {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    ApplicationState appState = context.watch();
+    UserModel currentUser = appState.currentUser;
+    var model = context.watch<UpdateProfileState>();
 
     return Scaffold(
       appBar: const Header(),
@@ -36,9 +43,14 @@ class _UpdateProfileState extends State<UpdateProfile> with WidgetListener {
                 width: size.width * 0.9,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    UpdateProfileForm(),
-                    UserAvatar(),
+                  children: [
+                    UpdateProfileForm(
+                      onSubmitted: () {
+                        listener.onBtnUpdateProfileClicked(
+                            currentUser.id!, model.updatedProfile);
+                      },
+                    ),
+                    const UserAvatar(),
                   ],
                 ),
               ),

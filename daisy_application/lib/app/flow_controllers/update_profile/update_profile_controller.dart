@@ -4,6 +4,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/design/design_snackbar.dart';
 import 'package:daisy_application/app/pages/update-profile/deps/update_profile_deps.dart';
 import 'package:daisy_application/app/pages/update-profile/model/update_profile_state.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/core_services/http/users/users_rest_api.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
+import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,12 +34,13 @@ class _UpdateProfileFlowControllerState extends AutoRouterState
   }
 
   @override
-  void onBtnUpdateProfileClicked() => _updateProfile();
+  void onBtnUpdateProfileClicked(int id, UserModel user) =>
+      _updateProfile(id, user);
 
-  Future<void> _updateProfile() async {
-    // RequestRestApi _userClient = locator.get();
-    // Debug.log.log('update profile');
-    // await _userClient.updateUser(profileState!.parentRequest);
+  Future<void> _updateProfile(int id, UserModel user) async {
+    UsersRestApi _usersClient = locator.get();
+    Debug.log('update profile');
+    await _usersClient.updateUser(id, user);
     context.toastSuccess('Cập nhật profile thành công');
   }
 
