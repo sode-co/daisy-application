@@ -1,10 +1,10 @@
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/utils/size_mode.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:daisy_application/app/common/utils/widget_utils.dart';
 
 class JobApplyDialog extends Dialog {
   final BuildContext context;
@@ -27,21 +27,23 @@ class JobApplyDialog extends Dialog {
   Widget? get child => Container(
         padding: const EdgeInsets.all(Design.headerSpacing),
         width: context.deviceInfo.screenSize.width * 0.6,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _createHeader(),
-              _createHeaderDivider(),
-              const SizedBox(height: Design.headerSpacing),
-              _createContactInfo(),
-              const SizedBox(height: Design.headerSpacing),
-              createMessageBox(),
-              const SizedBox(height: Design.bodySpacing),
-              createFooter(),
-              const SizedBox(height: Design.headerSpacing),
-              createSubmitButton()
-            ]),
+        child: SingleChildScrollView(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _createHeader(),
+                _createHeaderDivider(),
+                const SizedBox(height: Design.headerSpacing),
+                _createContactInfo(),
+                const SizedBox(height: Design.headerSpacing),
+                createMessageBox(),
+                const SizedBox(height: Design.bodySpacing),
+                createFooter(),
+                const SizedBox(height: Design.headerSpacing),
+                createSubmitButton()
+              ]),
+        ),
       );
 
   Widget _createDivider() => Container(

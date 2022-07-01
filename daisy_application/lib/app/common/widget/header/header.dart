@@ -1,10 +1,11 @@
+import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/utils/size_mode.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/app/common/widget/dropdown_avatar/dropdown_avatar.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
-import 'package:daisy_application/app/common/responsive.dart';
-import 'package:daisy_application/app/common/utils/widget_utils.dart';
-import 'package:daisy_application/app/common/design/design.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,8 @@ class _HeaderState extends State<Header> {
     Size size = MediaQuery.of(context).size;
     ApplicationState appState = context.watch();
     final isLoggedIn = appState.isLoggedIn;
+    // UserModel currentUser = appState.currentUser;
+
     return AppBar(
       title: (Responsive.isDesktop(context))
           ? Row(
@@ -60,6 +63,7 @@ class _HeaderState extends State<Header> {
 
   List<Widget> _createAuthenButton(bool isLoggedIn) => isLoggedIn
       ? [
+          const AvatarDropdownMenu(),
           ButtonInfo(
             text: 'Đăng xuất',
             heightMode: HeightMode.MATCH_PARENT,
