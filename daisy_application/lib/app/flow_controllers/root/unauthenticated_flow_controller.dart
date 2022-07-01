@@ -33,7 +33,9 @@ class _UnAuthenticatedFlowControllerState
   }
 
   @override
-  void onBtnFindDesignerClicked() {}
+  void onBtnWorkspaceAndFindDesignerClicked() {
+    context.router.push(const Routers.ContactAndProjectRoute());
+  }
 
   @override
   void onBtnFindJobCliked() {

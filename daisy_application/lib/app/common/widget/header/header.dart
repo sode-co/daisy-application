@@ -38,8 +38,9 @@ class _HeaderState extends State<Header> {
                     text: 'Đăng tin',
                     onPressed: _navigationListener.onBtnJobPostClicked),
                 ButtonInfo(
-                  text: 'Tìm kiếm designer',
-                  onPressed: _navigationListener.onBtnFindDesignerClicked,
+                  text: 'Workspace',
+                  onPressed:
+                      _navigationListener.onBtnWorkspaceAndFindDesignerClicked,
                 ),
                 ButtonInfo(
                   text: 'Tìm việc freelance',

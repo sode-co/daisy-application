@@ -1,7 +1,7 @@
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
+import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/listeners/WidgetListener.dart';
-import 'package:daisy_application/app/pages/admin/screens/dashboard/components/header.dart';
 import 'package:daisy_application/app/pages/discovery-designer/view/components.dart';
 import 'package:flutter/material.dart';
 
