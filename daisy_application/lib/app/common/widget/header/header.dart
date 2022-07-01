@@ -6,7 +6,6 @@ import 'package:daisy_application/app/common/widget/dropdown_avatar/dropdown_ava
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
-import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +25,7 @@ class _HeaderState extends State<Header> {
     Size size = MediaQuery.of(context).size;
     ApplicationState appState = context.watch();
     final isLoggedIn = appState.isLoggedIn;
-    UserModel currentUser = appState.currentUser;
+    // UserModel currentUser = appState.currentUser;
 
     return AppBar(
       title: (Responsive.isDesktop(context))
@@ -54,7 +53,7 @@ class _HeaderState extends State<Header> {
       actions: <Widget>[
         if (Responsive.isDesktop(context)) const SizedBox(width: 5),
         const SizedBox(width: 1),
-        ..._createAuthenButton(isLoggedIn, currentUser),
+        ..._createAuthenButton(isLoggedIn),
         if (Responsive.isDesktop(context)) SizedBox(width: size.width * 0.1),
       ],
       backgroundColor: Colors.white,
@@ -62,26 +61,25 @@ class _HeaderState extends State<Header> {
     );
   }
 
-  List<Widget> _createAuthenButton(bool isLoggedIn, UserModel currentUser) =>
-      isLoggedIn
-          ? [
-              const AvatarDropdownMenu(),
-              ButtonInfo(
-                text: 'Đăng xuất',
-                heightMode: HeightMode.MATCH_PARENT,
-                onPressed: _authenticationListener.onBtnSignoutClicked,
-              )
-            ]
-          : [
-              _createSignupButton(),
-              // if (Responsive.isDesktop(context)) const SizedBox(width: 10),
-              const Center(child: Text('  ')),
-              ButtonInfo(
-                heightMode: HeightMode.MATCH_PARENT,
-                text: 'Đăng nhập',
-                onPressed: _authenticationListener.onBtnSigninClicked,
-              )
-            ];
+  List<Widget> _createAuthenButton(bool isLoggedIn) => isLoggedIn
+      ? [
+          const AvatarDropdownMenu(),
+          ButtonInfo(
+            text: 'Đăng xuất',
+            heightMode: HeightMode.MATCH_PARENT,
+            onPressed: _authenticationListener.onBtnSignoutClicked,
+          )
+        ]
+      : [
+          _createSignupButton(),
+          // if (Responsive.isDesktop(context)) const SizedBox(width: 10),
+          const Center(child: Text('  ')),
+          ButtonInfo(
+            heightMode: HeightMode.MATCH_PARENT,
+            text: 'Đăng nhập',
+            onPressed: _authenticationListener.onBtnSigninClicked,
+          )
+        ];
 
   Widget _createSignupButton() => ButtonIcon.asset(
         'assets/images/google.png',
