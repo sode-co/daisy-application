@@ -23,7 +23,7 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
     _controller = TabController(
       length: 2,
       vsync: this,
-      initialIndex: 1,
+      initialIndex: 0,
     );
   }
 
@@ -47,15 +47,15 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
             height: 160,
             child: Padding(
               padding: EdgeInsets.only(
-                left: Responsive.isDesktop(context) ? 80.0 : 70.0,
+                left: Responsive.isDesktop(context) ? 60.0 : 70.0,
                 top: 70.0,
               ),
               child: Text(
-                'Designers',
+                'Workspace',
                 style: TextStyle(
-                  fontSize: Responsive.isDesktop(context) ? 23.0 : 21.0,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black.withOpacity(0.6),
+                  fontSize: Responsive.isDesktop(context) ? 25.0 : 21.0,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white.withOpacity(0.9),
                 ),
               ),
             ),
@@ -78,7 +78,7 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
                 tabs: const [
                   Tab(
                     child: Text(
-                      'Liên lạc',
+                      'Dự án và liên lạc',
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
