@@ -1,10 +1,8 @@
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/responsive.dart';
-import 'package:daisy_application/app/pages/discovery-designer/model/category.dart';
 import 'package:daisy_application/app/pages/discovery-designer/view/category_side_bar.dart';
 import 'package:daisy_application/app/pages/discovery-designer/view/stateless_components.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class DiscoverDesignerBody extends StatefulWidget {
   const DiscoverDesignerBody({Key? key}) : super(key: key);
@@ -148,14 +146,10 @@ class _FindNewDesignerTabWebState extends State<FindNewDesignerTabWeb> {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
+              children: const [
+                Padding(
                   padding: EdgeInsets.only(left: 12.0),
                   child: AutocompleteBasic(),
-                ),
-                ChangeNotifierProvider<CategoriesPageModel>(
-                  create: (context) => CategoriesPageModel(),
-                  child: CategoriesPageComponent.renderCategoriesCheckbox(),
                 ),
               ],
             ),
@@ -197,20 +191,27 @@ class _FindNewDesignerTabMobileState extends State<FindNewDesignerTabMobile> {
         ),
         child: SizedBox(
           width: size.width,
-          child: Column(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: AutocompleteBasic(),
               ),
-              ChangeNotifierProvider<CategoriesPageModel>(
-                create: (context) => CategoriesPageModel(),
-                child: CategoriesPageComponent.renderCategoriesCheckbox(),
+              SizedBox(width: Responsive.isDesktop(context) ? 50.0 : 10.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0, top: 0.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: const [
+                      DesignerInfoCardMobile(),
+                      DesignerInfoCardMobile(),
+                      DesignerInfoCardMobile(),
+                      DesignerInfoCardMobile(),
+                    ],
+                  ),
+                ),
               ),
-              const DesignerInfoCardMobile(),
-              const DesignerInfoCardMobile(),
-              const DesignerInfoCardMobile(),
-              const DesignerInfoCardMobile(),
             ],
           ),
         ),
