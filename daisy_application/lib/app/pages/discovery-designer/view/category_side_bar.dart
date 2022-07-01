@@ -3,51 +3,7 @@ import 'package:flutter/material.dart';
 class AutocompleteBasic extends StatelessWidget {
   const AutocompleteBasic({Key? key}) : super(key: key);
 
-  static const List<String> _kOptions = <String>[
-    'Logo design',
-    'Brand identity pack',
-    'Social media pack',
-    'Hosted website',
-    'Business card',
-    'Brand guide',
-    'Stationery',
-    'Product packaging',
-    'Web page design',
-    'WordPress theme design',
-    'Landing page design',
-    'Icon or button',
-    'App design',
-    'Facebook cover',
-    'Social media page',
-    'Banner ad',
-    'Postcard, flyer or print',
-    'Poster',
-    'Infographic',
-    'Brochure',
-    'Car, truck or van wrap',
-    'Signage',
-    'Email',
-    'PowerPoint template',
-    'Menu',
-    'Album Cover',
-    'Podcast',
-    'T-shirt',
-    'Clothing or apparel',
-    'Merchandise',
-    'Cup or mug',
-    'Sticker',
-    'Illustration or graphics',
-    'Card or invitation',
-    'Character or mascot',
-    'Tattoo',
-    '3D',
-    'Product packaging',
-    'Product label',
-    'Book cover',
-    'Magazine cover',
-    'Typesetting',
-    'Typesetting with imagery',
-  ];
+  static const List<String> _categoriesListOption = <String>[];
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +31,7 @@ class AutocompleteBasic extends StatelessWidget {
                 if (textEditingValue.text == '') {
                   return const Iterable<String>.empty();
                 }
-                return _kOptions.where((String option) {
+                return _categoriesListOption.where((String option) {
                   return option
                       .toLowerCase()
                       .contains(textEditingValue.text.toLowerCase());

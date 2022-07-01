@@ -33,28 +33,31 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-              colors: <Color>[Colors.blue, Colors.white],
-            ),
-          ),
+          decoration: BoxDecoration(
+              color: Color(BuiltinColor.blue_gradient_01),
+              border: Border.all(color: Colors.black12)),
           child: SizedBox(
             width: size.width,
             height: 160,
             child: Padding(
               padding: EdgeInsets.only(
                 left: Responsive.isDesktop(context) ? 60.0 : 70.0,
-                top: 70.0,
+                top: 10.0,
               ),
-              child: Text(
-                'Workspace',
-                style: TextStyle(
-                  fontSize: Responsive.isDesktop(context) ? 25.0 : 21.0,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white.withOpacity(0.9),
-                ),
+              child: Row(
+                children: [
+                  const Icon(Icons.business_center,
+                      color: Colors.white, size: 30.0),
+                  const SizedBox(width: 12.0),
+                  Text(
+                    'Workspace',
+                    style: TextStyle(
+                      fontSize: Responsive.isDesktop(context) ? 25.0 : 21.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
