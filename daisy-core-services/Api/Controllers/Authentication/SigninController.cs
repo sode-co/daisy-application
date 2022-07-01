@@ -36,7 +36,7 @@ namespace Api.Controllers.Authentication
 
             using (var work = _unitOfWorkFactory.Get)
             {
-                var users = work.UserRepository.GetAll((u) => u.Email.Equals(email));
+                var users = work.UserRepository.GetAll((u) => u.Email.Equals(email)).ToList();
                 if (users.Count() > 0)
                 {
                     string accessToken = _jwtToken.GenerateAccessToken(users.First());

@@ -70,7 +70,7 @@ namespace Api.Controllers.Authentication
             User addedUser;
             using (var work = _unitOfWorkFactory.Get)
             {
-                var users = work.UserRepository.GetAll((user) => user.Email.ToLower().Equals(email.ToLower()));
+                var users = work.UserRepository.GetAll((user) => user.Email.ToLower().Equals(email.ToLower())).ToList();
                 if (users.Count() > 0) return AuthenticationResponse.Failed();
 
                 User newUser = new User()
@@ -90,7 +90,7 @@ namespace Api.Controllers.Authentication
 
             using (var work = _unitOfWorkFactory.Get)
             {
-                addedUser = work.UserRepository.GetFirstOrDefault((user) => user.Email.ToLower() == email.ToLower());
+                addedUser = work.UserRepository.GetAll((user) => user.Email.ToLower().Equals(email.ToLower())).First();
             }
 
             if (addedUser == null) return AuthenticationResponse.Failed();
