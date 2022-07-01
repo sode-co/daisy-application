@@ -37,11 +37,11 @@ namespace Api.Controllers.Authentication
 
             using (var work = _unitOfWorkFactory.Get)
             {
-                User user = work.UserRepository.GetFirstOrDefault((u) => u.Email == email);
-                if (user != null)
+                var users = work.UserRepository.GetAll((u) => u.Email.Equals(email));
+                if (users.Count() > 0)
                 {
-                    string accessToken = _jwtToken.GenerateAccessToken(_mapper.Map<User, UserExposeModel>(user));
-                    string refreshToken = _jwtToken.GenerateRefreshToken(_mapper.Map<User, UserExposeModel>(user));
+                    string accessToken = _jwtToken.GenerateAccessToken(_mapper.Map<User, UserExposeModel>(users.First()));
+                    string refreshToken = _jwtToken.GenerateRefreshToken(_mapper.Map<User, UserExposeModel>(users.First()));
                     return AuthenticationResponse.Success(refreshToken, accessToken);
                 }
             }

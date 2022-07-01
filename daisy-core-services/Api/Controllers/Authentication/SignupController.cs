@@ -16,6 +16,7 @@ using Utils.Models;
 using static Api.Common.Constants;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace Api.Controllers.Authentication
 {
@@ -70,8 +71,8 @@ namespace Api.Controllers.Authentication
             User addedUser;
             using (var work = _unitOfWorkFactory.Get)
             {
-                User user = work.UserRepository.GetFirstOrDefault((user) => user.Email.ToLower() == email.ToLower());
-                if (user != null) return AuthenticationResponse.Failed();
+                var users = work.UserRepository.GetAll((user) => user.Email.ToLower().Equals(email.ToLower()));
+                if (users.Count() > 0) return AuthenticationResponse.Failed();
 
                 User newUser = new User()
                 {
