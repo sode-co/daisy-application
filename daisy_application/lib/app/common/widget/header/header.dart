@@ -2,6 +2,7 @@ import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/utils/size_mode.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/app/common/widget/dropdown_avatar/dropdown_avatar.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
@@ -64,14 +65,7 @@ class _HeaderState extends State<Header> {
   List<Widget> _createAuthenButton(bool isLoggedIn, UserModel currentUser) =>
       isLoggedIn
           ? [
-              IconButton(
-                icon: CircleAvatar(
-                  radius: 30.0,
-                  backgroundImage: NetworkImage(currentUser.avatar!),
-                ),
-                iconSize: 50,
-                onPressed: _navigationListener.onBtnProfileDetailsClicked,
-              ),
+              const AvatarDropdownMenu(),
               ButtonInfo(
                 text: 'Đăng xuất',
                 heightMode: HeightMode.MATCH_PARENT,
