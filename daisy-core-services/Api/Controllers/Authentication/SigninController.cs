@@ -36,11 +36,11 @@ namespace Api.Controllers.Authentication
 
             using (var work = _unitOfWorkFactory.Get)
             {
-                User user = work.UserRepository.GetFirstOrDefault((u) => u.Email == email);
-                if (user != null)
+                var users = work.UserRepository.GetAll((u) => u.Email.Equals(email));
+                if (users.Count() > 0)
                 {
-                    string accessToken = _jwtToken.GenerateAccessToken(user);
-                    string refreshToken = _jwtToken.GenerateRefreshToken(user);
+                    string accessToken = _jwtToken.GenerateAccessToken(users.First());
+                    string refreshToken = _jwtToken.GenerateRefreshToken(users.First());
                     return AuthenticationResponse.Success(refreshToken, accessToken);
                 }
             }
