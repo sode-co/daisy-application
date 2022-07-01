@@ -37,16 +37,8 @@ class _PostNewJobFlowControllerState extends AutoRouterState
 
   Future<void> _postNewJob() async {
     RequestRestApi _requestClient = locator.get();
-    Debug.log
-        .log('post-create-new-job', jobState!.parentRequest..description = '');
     await _requestClient.createNewRequest(jobState!.parentRequest);
     context.toastSuccess('Đăng tin tuyển dụng thành công');
-    // Timer(
-    //   const Duration(seconds: 1),
-    //   () {
-    //     Navigator.pushNamed(context, '/find-freelance-job');
-    //   },
-    // );
   }
 
   @override
