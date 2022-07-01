@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const
+
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/pages/discovery-designer/view/category_side_bar.dart';
@@ -33,9 +35,14 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          decoration: BoxDecoration(
-              color: Color(BuiltinColor.blue_gradient_01),
-              border: Border.all(color: Colors.black12)),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            border: const Border(
+              bottom: BorderSide(
+                color: const Color(BuiltinColor.blue_gradient_01),
+              ),
+            ),
+          ),
           child: SizedBox(
             width: size.width,
             height: 160,
@@ -46,15 +53,14 @@ class _DiscoverDesignerBodyState extends State<DiscoverDesignerBody>
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.business_center,
-                      color: Colors.white, size: 30.0),
+                  Image.asset('assets/images/workspace.png'),
                   const SizedBox(width: 12.0),
                   Text(
                     'Workspace',
                     style: TextStyle(
                       fontSize: Responsive.isDesktop(context) ? 25.0 : 21.0,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: const Color(BuiltinColor.blue_gradient_01),
                     ),
                   ),
                 ],
