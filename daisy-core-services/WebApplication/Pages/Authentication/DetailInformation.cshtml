@@ -1,0 +1,47 @@
+﻿@page "DetailInformation/{email}"
+@model WebApplication.Pages.Authentication.DetailInformationModel
+@{
+}
+
+<div class="">
+    <h1>Fill your information</h1>
+    <h3>Email = @Model.Email</h3>
+    <div class="row justify-content-xl-center">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
+                <div class="form-group">
+                    <label asp-for="User.FirstName" class="control-label"></label>
+                    <input type="text" asp-for="User.FirstName" class="form-control" />
+                    <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.LastName" class="control-label"></label>
+                    <input asp-for="User.LastName" class="form-control" />
+                    <span asp-validation-for="User.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Address" class="control-label"></label>
+                    <input asp-for="User.Address" class="form-control" />
+                    <span asp-validation-for="User.Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Phone" class="control-label"></label>
+                    <input asp-for="User.Phone" class="form-control" />
+                    <span asp-validation-for="User.Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Role" class="control-label">Are you looking for?</label>
+                    <select asp-for="User.Role" class="form-control">
+                        <option value="CUSTOMER">A freelancer</option>
+                        <option value="DESIGNER">A job</option>
+                    </select>
+                    <span asp-validation-for="User.Role" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

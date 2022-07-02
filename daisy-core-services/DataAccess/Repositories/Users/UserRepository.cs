@@ -78,5 +78,8 @@ namespace DataAccess.Repositories.Users
 
             return designerList;
         }
+
+        public User GetUsersByEmail(string email) 
+            => _dbContext.Users.ToList().FirstOrDefault(user => user.Email == email);
     }
 }
