@@ -1,8 +1,10 @@
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
 import 'package:daisy_application/app/common/widget/header/header.dart';
+import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
 import 'package:daisy_application/app/pages/project-details/view/component.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProjectDetailsPage extends StatefulWidget {
   const ProjectDetailsPage({Key? key}) : super(key: key);
@@ -21,8 +23,15 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Header(),
-      body: const SingleChildScrollView(
-        child: ProjectDetailsBody(),
+      body: SingleChildScrollView(
+        child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => ProjectDetailsState(),
+            ),
+          ],
+          child: const ProjectDetailsBody(),
+        ),
       ),
       bottomNavigationBar:
           !Responsive.isDesktop(context) ? const BottomNavBar() : null,

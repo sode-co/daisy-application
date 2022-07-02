@@ -2,7 +2,10 @@
 
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProjectDetailsBody extends StatefulWidget {
   const ProjectDetailsBody({Key? key}) : super(key: key);
@@ -28,6 +31,8 @@ class _ProjectDetailsBodyState extends State<ProjectDetailsBody>
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var model = context.watch<ProjectDetailsState>();
+    Debug.log('ProjectDetailsBody', model.request);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +59,7 @@ class _ProjectDetailsBodyState extends State<ProjectDetailsBody>
                   Image.asset('assets/images/project_details.png'),
                   const SizedBox(width: 12.0),
                   Text(
-                    'Chi tiết dự án',
+                    'Chi tiết dự án ${model.request.title ?? ' '}',
                     style: TextStyle(
                       fontSize: Responsive.isDesktop(context) ? 25.0 : 21.0,
                       fontWeight: FontWeight.w600,
