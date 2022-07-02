@@ -19,7 +19,6 @@ namespace Domain.Models
         [EmailAddress]
         public String Email { get; set; }
 
-        [Range(0, 9)]
         public String Role { get; set; }
 
         [MaxLength(int.MaxValue)]
