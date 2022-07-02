@@ -4,8 +4,10 @@ import 'package:daisy_application/core_services/grpc/request/request_grpc_client
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
+import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/http/user/user_rest_api.dart';
+import 'package:daisy_application/core_services/http/users/users_rest_api.dart';
 import 'package:daisy_application/core_services/http_interceptor/authentication_interceptor.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
@@ -49,11 +51,18 @@ class CoreServiceLocator {
     locator.registerFactory<UserRestApi>(
         () => UserRestApi(locator.get(), baseUrl: '${Config.API_URL}/v1/user'));
 
+    locator.registerFactory<UsersRestApi>(() =>
+        UsersRestApi(locator.get(), baseUrl: '${Config.API_URL}/v1/users'));
+
     locator.registerFactory<CategoryRestApi>(
         () => CategoryRestApi(locator.get(), baseUrl: Config.API_URL));
 
     locator.registerFactory<RequestRestApi>(() => RequestRestApi(locator.get(),
         baseUrl: '${Config.API_URL}/v1/requests'));
+
+    locator.registerFactory<JobApplicationRestApi>(() => JobApplicationRestApi(
+        locator.get(),
+        baseUrl: '${Config.API_URL}/v1/application'));
   }
 
   static Future<void> _initPersistentService() async {
