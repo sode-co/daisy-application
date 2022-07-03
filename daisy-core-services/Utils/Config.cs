@@ -26,6 +26,7 @@ namespace Utils
             public int GRPC_PORT { get; set; }
             public string GOOGLE_CLIENT_ID { get; set; }
             public string GOOGLE_CLIENT_SECRET { get; set; }
+            public string ADMIN_EMAIL { get; set; }
             public string ENVIRONMENT { get { return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"); } }
             public bool IsProduction { get { return (ENVIRONMENT != null && ENVIRONMENT.ToLower() == "Production".ToLower()); } }
             public bool IsTest { get { return (ENVIRONMENT != null && ENVIRONMENT.ToLower() == "Test".ToLower()); } }

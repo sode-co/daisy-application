@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{
+    @using System.Security.Claims;
+
+    bool isLogin = Context.User.Identity.IsAuthenticated;
+    var a = "a";
+    
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,6 +36,18 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        @{
+                            if (isLogin == false)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Authentication/Login">Login with Google</a>
+                                </li>
+                                string role = Context.User.Claims.Where(claim => claim.Type == ClaimTypes.Role).FirstOrDefault().Value;
+                                string email = Context.User.Claims.Where(claim => claim.Type == ClaimTypes.Email).FirstOrDefault().Value;
+                            }
+
+
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
