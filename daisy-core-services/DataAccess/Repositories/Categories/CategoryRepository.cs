@@ -28,6 +28,13 @@ namespace DataAccess.Repositories.Categories
             return parentCatgories.FirstOrDefault(c => c.Name.Equals(parentName)).ChildrenCategory;
         }
 
+        public Category GetCategoryByName(string categoryName)
+        {
+            var category = _dbContext.Categories.SingleOrDefault(c => c.Name.Equals(categoryName));
+
+            return category;
+        }
+
         public IEnumerable<Category> GetParentCategories()
             => _dbContext.Categories
                 .Include(p => p.ParentCategory)

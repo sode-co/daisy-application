@@ -1,4 +1,4 @@
-﻿@page "/create"
+﻿@page "/create-request"
 @model WebApplication.Pages.Areas.Customers.Requests.CreateModel
 @{
 }
@@ -22,7 +22,7 @@
     </div>
     <div class="form-group">
         <label for="category">Job category</label>
-        <select class="form-control" asp-for="request.Category" asp-items="ViewBag.CategoryName"></select>
+        <select class="form-control" asp-for="category" asp-items="ViewBag.CategoryName"></select>
     </div>
 
     <div class="form-group">

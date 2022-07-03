@@ -32,6 +32,8 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddAuthentication(options =>
+            {
                 options.DefaultScheme = GoogleDefaults.AuthenticationScheme;
             })
             .AddCookie()
@@ -48,8 +50,9 @@ namespace WebApplication
                     Expiration = TimeSpan.FromMinutes(10)
                 };
 
-                googleOptions.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
-            });
+        googleOptions.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
+    });
+
             services.AddSingleton<UnitOfWorkFactory>();
             services.AddDbContext<ApplicationDbContext>();
         }
