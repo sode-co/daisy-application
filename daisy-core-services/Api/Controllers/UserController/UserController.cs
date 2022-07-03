@@ -1,6 +1,7 @@
 ﻿using DataAccess.Repositories.Users;
 using DataAccess.UnitOfWork;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ namespace Api.Controllers.CustomerController
 
         }
 
-        [HttpPost()]
+        [HttpPut]
         public IActionResult CreateUser(User user)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -75,26 +76,25 @@ namespace Api.Controllers.CustomerController
             }
         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdateUser(int id, User newUser)
+        [Authorize]
+        [HttpPost]
+        public ActionResult UpdateUser([FromBody] User newUser)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                User existingUser = work.UserRepository.Get(id);
+                User user = (User)HttpContext.Items["User"];
+                User existingUser = work.UserRepository.Get(user.Id);
                 if (existingUser is null) return NotFound();
 
-                existingUser.Id = existingUser.Id;
                 existingUser.FirstName = newUser.FirstName;
                 existingUser.LastName = newUser.LastName;
                 existingUser.DisplayName = newUser.DisplayName;
-                existingUser.Email = newUser.Email;
                 existingUser.Role = newUser.Role;
                 existingUser.Description = newUser.Description;
                 existingUser.Settings = newUser.Settings;
                 existingUser.Avatar = newUser.Avatar;
                 existingUser.Address = newUser.Address;
                 existingUser.Phone = newUser.Phone;
-                existingUser.ObjectId = newUser.ObjectId;
 
                 work.UserRepository.UpdateUser(existingUser);
                 work.Save();

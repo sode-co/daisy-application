@@ -13,6 +13,7 @@ namespace DataAccess.Repositories.Users
         User GetUser(int id);
         IEnumerable<User> GetUsers();
         IEnumerable<User> GetUsersByName(string name);
+        User GetUsersByEmail(string email);
         IEnumerable<User> GetDesignersByCategory(int categoryId);
         IEnumerable<User> GetDesignersByCustomerId(int customerId, IQueryable<Project> projectList);
         void CreateUser(User user);

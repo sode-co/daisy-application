@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app/router/router.gr.dart' as Routers;
 import 'package:daisy_application/app_state/application_state.dart';
@@ -5,7 +6,6 @@ import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/domain-services/authentication-service.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:provider/provider.dart';
 
 class UnAuthenticatedFlowController extends StatefulWidget {
@@ -33,7 +33,9 @@ class _UnAuthenticatedFlowControllerState
   }
 
   @override
-  void onBtnFindDesignerClicked() {}
+  void onBtnWorkspaceAndFindDesignerClicked() {
+    context.router.push(const Routers.ContactAndProjectRoute());
+  }
 
   @override
   void onBtnFindJobCliked() {
@@ -67,4 +69,9 @@ class _UnAuthenticatedFlowControllerState
 
   @override
   Widget build(BuildContext context) => widget.child;
+
+  @override
+  void onBtnProfileDetailsClicked() {
+    context.router.push(const Routers.UpdateProfileRoute());
+  }
 }
