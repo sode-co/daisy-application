@@ -50,13 +50,13 @@ namespace WebApplication
                     Expiration = TimeSpan.FromMinutes(10)
                 };
 
-        googleOptions.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
-    });
-
+                googleOptions.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
+            });
             services.AddSingleton<UnitOfWorkFactory>();
             services.AddDbContext<ApplicationDbContext>();
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
