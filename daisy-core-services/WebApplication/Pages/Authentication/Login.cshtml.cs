@@ -36,7 +36,7 @@ namespace WebApplication.Pages.Authentication
         public async Task<IActionResult> OnGetGoogleResponse()
         {
             var result = await HttpContext.AuthenticateAsync();
-            var claims = (List<Claim>) result.Principal.Identities.FirstOrDefault().Claims;
+            var claims = result.Principal.Identities.FirstOrDefault().Claims.ToList();
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principle = new ClaimsPrincipal(identity);
 
@@ -88,10 +88,7 @@ namespace WebApplication.Pages.Authentication
         
         public bool IsAdminLogin(String email)
         {
-            String adminEmail = Config.Get().ADMIN_EMAIL;
-            if (email == adminEmail)
-                return true;
-            return false;
+            return Config.Get().ADMIN_EMAIL.Equals(email);
         }
     }
 }
