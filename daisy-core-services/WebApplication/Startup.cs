@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using DataAccess.UnitOfWork;
 using DataAccess.MssqlServerIntegration;
+using Api.Common;
+using System.Security.Claims;
 
 namespace WebApplication
 {
@@ -49,10 +51,18 @@ namespace WebApplication
                     Expiration = TimeSpan.FromMinutes(10)
                 };
 
-                googleOptions.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");              
+                googleOptions.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
+            });
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(100);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
             services.AddSingleton<UnitOfWorkFactory>();
             services.AddDbContext<ApplicationDbContext>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +86,8 @@ namespace WebApplication
                 MinimumSameSitePolicy = SameSiteMode.Lax,
             });
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthentication();
 

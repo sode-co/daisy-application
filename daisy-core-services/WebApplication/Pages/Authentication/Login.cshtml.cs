@@ -10,6 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DataAccess.UnitOfWork;
 using Domain.Models;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Api.Common;
+using Utils;
+using System.Threading;
+using Microsoft.AspNetCore.Http;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Authentication
 {
@@ -29,7 +36,7 @@ namespace WebApplication.Pages.Authentication
         public async Task<IActionResult> OnGetGoogleResponse()
         {
             var result = await HttpContext.AuthenticateAsync();
-            var claims = result.Principal.Identities.FirstOrDefault().Claims;
+            var claims = result.Principal.Identities.FirstOrDefault().Claims.ToList();
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principle = new ClaimsPrincipal(identity);
 
@@ -49,8 +56,11 @@ namespace WebApplication.Pages.Authentication
                 AddUserFromGoogleResponse(user);
                 return RedirectToPage("DetailInformation/", new { @email = email });
             }
-            else
-                return RedirectToPage("../Index");
+
+            var loginUser = _unitOfWorkFactory.Get.UserRepository.GetUsersByEmail(email);
+            SessionUtils.SetUser(loginUser);
+
+            return RedirectToPage("../Index");
         }
 
         public void AddUserFromGoogleResponse(User user)
@@ -69,10 +79,13 @@ namespace WebApplication.Pages.Authentication
             }
         }
 
-        public async Task<IActionResult> OnGetAsyncLogout()
+        public IActionResult OnGetLogout()
         {
-            await HttpContext.SignOutAsync();
-            return Redirect("../Index");
+            HttpContext.SignOutAsync();
+            HttpContext.Session.Clear();
+            return RedirectToPage("../Index");
         }
+        
+        public bool IsAdminLogin(String email) => Config.Get().ADMIN_EMAIL.Equals(email);
     }
 }
