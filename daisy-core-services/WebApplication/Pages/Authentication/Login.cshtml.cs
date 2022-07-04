@@ -58,7 +58,7 @@ namespace WebApplication.Pages.Authentication
             }
 
             var loginUser = _unitOfWorkFactory.Get.UserRepository.GetUsersByEmail(email);
-            HttpContext.Session.SetString("User", JsonUtil.SerializeComplexData(loginUser));
+            SessionUtils.SetUser(loginUser);
 
             return RedirectToPage("../Index");
         }

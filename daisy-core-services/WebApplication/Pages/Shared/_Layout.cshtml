@@ -66,15 +66,16 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-page="/Index">DESINGER</a>
                                     </li>
+                                    <li class="nav-item logout">
+                                        <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
+                                    </li>
                                 }
                                 else
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-page="/Authentication/DetailInformation">Add more Info</a>
                                     </li>
-                                    <li class="nav-item logout">
-                                        <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
-                                    </li>
+                                    
                                 }
                             }
                         }

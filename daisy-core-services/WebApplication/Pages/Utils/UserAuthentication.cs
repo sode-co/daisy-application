@@ -1,6 +1,7 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Utils;
+using Microsoft.AspNetCore;
 
 namespace WebApplication.Pages.Utils
 {
@@ -10,9 +11,7 @@ namespace WebApplication.Pages.Utils
         {
             get
             {
-                IHttpContextAccessor _httpContextAccessor = new HttpContextAccessor();
-                return ( _httpContextAccessor.HttpContext.Session.GetString("User") != null) ?
-                            JsonUtil.DeserializeComplexData<User>(_httpContextAccessor.HttpContext.Session.GetString("User")) : null;
+                return SessionUtils.GetUser();
             }
         }
         public static bool CheckRole(string role)
