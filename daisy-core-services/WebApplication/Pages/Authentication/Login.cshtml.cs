@@ -14,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using Api.Common;
 using Utils;
+using System.Threading;
+using Microsoft.AspNetCore.Http;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Authentication
 {
@@ -54,10 +57,9 @@ namespace WebApplication.Pages.Authentication
                 return RedirectToPage("DetailInformation/", new { @email = email });
             }
 
-            if (IsAdminLogin(email))
-            {
-                SetRoleToClaim(email, Constants.ROLE.ADMIN);
-            }    
+            var loginUser = _unitOfWorkFactory.Get.UserRepository.GetUsersByEmail(email);
+            HttpContext.Session.SetString("User", JsonUtil.SerializeComplexData(loginUser));
+
             return RedirectToPage("../Index");
         }
 
@@ -77,29 +79,19 @@ namespace WebApplication.Pages.Authentication
             }
         }
 
-        public async Task<IActionResult> OnGetAsyncLogout()
+        public IActionResult OnGetLogout()
         {
-            await HttpContext.SignOutAsync();
-            return Redirect("../Index");
+            HttpContext.SignOutAsync();
+            HttpContext.Session.Clear();
+            return RedirectToPage("../Index");
         }
+        
         public bool IsAdminLogin(String email)
         {
             String adminEmail = Config.Get().ADMIN_EMAIL;
             if (email == adminEmail)
                 return true;
             return false;
-        }
-
-        public void SetRoleToClaim(string email, string role)
-        {
-            var claimList = new List<Claim>();
-            claimList.Add(new Claim(ClaimTypes.Email, email));
-            claimList.Add(new Claim(ClaimTypes.Role, role));
-
-            var identity = new ClaimsIdentity(claimList, CookieAuthenticationDefaults.AuthenticationScheme);
-            var principal = new ClaimsPrincipal(identity);
-            var pros = new AuthenticationProperties();
-            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, pros).Wait();
         }
     }
 }

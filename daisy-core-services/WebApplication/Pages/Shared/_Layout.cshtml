@@ -1,9 +1,7 @@
 ﻿@{
-    @using System.Security.Claims;
-
+    @using Utils
     bool isLogin = Context.User.Identity.IsAuthenticated;
-    var a = "a";
-    
+    string role = UserAuthentication.Role();
 }
 
 <!DOCTYPE html>
@@ -37,26 +35,49 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @{
-                            if (isLogin == false)
+                            if (role == "")
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/Authentication/Login">Login with Google</a>
                                 </li>
-                                string role = Context.User.Claims.Where(claim => claim.Type == ClaimTypes.Role).FirstOrDefault().Value;
-                                string email = Context.User.Claims.Where(claim => claim.Type == ClaimTypes.Email).FirstOrDefault().Value;
                             }
-
-
+                            else
+                            {
+                                if (role == "ADMIN")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">ADMIN</a>
+                                    </li>
+                                    <li class="nav-item logout">
+                                        <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
+                                    </li>
+                                }
+                                else if (role == "CUSTOMER")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">CUSTOMER</a>
+                                    </li>
+                                    <li class="nav-item logout">
+                                        <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
+                                    </li>
+                                }
+                                else if (role == "DESIGNER")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">DESINGER</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Authentication/DetailInformation">Add more Info</a>
+                                    </li>
+                                    <li class="nav-item logout">
+                                        <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
+                                    </li>
+                                }
+                            }
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Authentication/Login">Login with Google</a>
-                        </li>
                     </ul>
                 </div>
             </div>
