@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using DataAccess.MssqlServerIntegration;
 using Utils;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using DataAccess.UnitOfWork;
-using DataAccess.MssqlServerIntegration;
 using Api.Common;
 using System.Security.Claims;
 
@@ -32,6 +32,7 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddAuthentication(options =>
             {
