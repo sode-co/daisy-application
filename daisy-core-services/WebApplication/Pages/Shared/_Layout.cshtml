@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    @using Utils
+    bool isLogin = Context.User.Identity.IsAuthenticated;
+    string role = UserAuthentication.Role();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,12 +34,51 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
+                        @{
+                            if (role == "")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Authentication/Login">Login with Google</a>
+                                </li>
+                            }
+                            else
+                            {
+                                if (role == "ADMIN")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">ADMIN</a>
+                                    </li>
+                                    <li class="nav-item logout">
+                                        <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
+                                    </li>
+                                }
+                                else if (role == "CUSTOMER")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">CUSTOMER</a>
+                                    </li>
+                                    <li class="nav-item logout">
+                                        <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
+                                    </li>
+                                }
+                                else if (role == "DESIGNER")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">DESINGER</a>
+                                    </li>
+                                    <li class="nav-item logout">
+                                        <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Authentication/DetailInformation">Add more Info</a>
+                                    </li>
+                                    
+                                }
+                            }
+                        }
                     </ul>
                 </div>
             </div>

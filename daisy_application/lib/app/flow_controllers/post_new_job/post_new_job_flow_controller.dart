@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:daisy_application/app/common/design/design_snackbar.dart';
 import 'package:daisy_application/app/pages/post-new-job/deps/post_new_job_deps.dart';
 import 'package:daisy_application/app/pages/post-new-job/model/post_new_job_state.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
@@ -36,21 +37,8 @@ class _PostNewJobFlowControllerState extends AutoRouterState
 
   Future<void> _postNewJob() async {
     RequestRestApi _requestClient = locator.get();
-    Debug.log
-        .log('post-create-new-job', jobState!.parentRequest..description = '');
     await _requestClient.createNewRequest(jobState!.parentRequest);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Bài đăng của bạn đã được ghi nhận!'),
-        backgroundColor: Colors.green.withOpacity(0.8),
-      ),
-    );
-    // Timer(
-    //   const Duration(seconds: 1),
-    //   () {
-    //     Navigator.pushNamed(context, '/find-freelance-job');
-    //   },
-    // );
+    context.toastSuccess('Đăng tin tuyển dụng thành công');
   }
 
   @override

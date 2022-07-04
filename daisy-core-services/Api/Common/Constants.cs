@@ -16,6 +16,7 @@ namespace Api.Common
         {
             public const string CUSTOMER = "CUSTOMER";
             public const string DESIGNER = "DESIGNER";
+            public const string ADMIN = "ADMIN";
         }
 
         public static class STATUS_JOB_APPLICATION

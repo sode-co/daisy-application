@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app/pages/post-new-job/deps/post_new_job_deps.dart';
 import 'package:daisy_application/app/router/router.gr.dart' as Routers;
 import 'package:daisy_application/domain-services/authentication-service.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
+
 import '../../../common/debugging/logger.dart';
 
 class HeaderNavigationFlowController extends AutoRouter
@@ -32,8 +33,8 @@ class _HeaderNavigationFlowControllerState extends AutoRouterState
   }
 
   @override
-  void onBtnFindDesignerClicked() {
-    // TODO: implement onBtnFindDesignerClicked
+  void onBtnWorkspaceAndFindDesignerClicked() {
+    context.router.push(const Routers.ContactAndProjectRoute());
   }
 
   @override
@@ -57,4 +58,9 @@ class _HeaderNavigationFlowControllerState extends AutoRouterState
 
   @override
   void onBtnSignupClicked() {}
+
+  @override
+  void onBtnProfileDetailsClicked() {
+    context.router.push(const Routers.UpdateProfileRoute());
+  }
 }

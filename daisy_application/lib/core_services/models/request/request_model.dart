@@ -39,6 +39,7 @@ class RequestModel extends JsonSerializable with HiveObjectMixin {
     title = proto.title;
     budget = proto.budget;
     status = proto.status;
+    description = proto.description;
     customer = UserModel.fromProto(proto.customer);
     timeline = DateTime.fromMillisecondsSinceEpoch(proto.timeline.toInt());
     createdAt = DateTime.fromMillisecondsSinceEpoch(proto.createdAt.toInt());

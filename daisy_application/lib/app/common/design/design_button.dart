@@ -43,7 +43,7 @@ class ButtonPrimary extends _BaseDesignedButton {
       required super.text,
       super.textColor,
       super.fontSize,
-      required super.fontWeight,
+      super.fontWeight,
       super.widthMode,
       super.heightMode,
       this.backgroundColor = Design.colorPrimary,
