@@ -86,9 +86,6 @@ namespace WebApplication.Pages.Authentication
             return RedirectToPage("../Index");
         }
         
-        public bool IsAdminLogin(String email)
-        {
-            return Config.Get().ADMIN_EMAIL.Equals(email);
-        }
+        public bool IsAdminLogin(String email) => Config.Get().ADMIN_EMAIL.Equals(email);
     }
 }
