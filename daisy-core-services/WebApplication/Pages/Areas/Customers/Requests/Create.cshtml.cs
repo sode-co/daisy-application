@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Customers.Requests
 {
@@ -22,13 +23,21 @@ namespace WebApplication.Pages.Areas.Customers.Requests
         [BindProperty]
         public string category { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            string role = UserAuthentication.Role();
+
+            if (role != "CUSTOMER")
+            {
+                return Redirect("/Unauthorized");
+            }
+
             using (var work = _unitOfWorkFactory.Get)
             {
                 var parentCategories = work.CategoryRepository.GetParentCategories();
                 ViewData["CategoryName"] = new SelectList(parentCategories, "Name", "Name");
             }
+            return Page();
         }
 
         public IActionResult OnPost()

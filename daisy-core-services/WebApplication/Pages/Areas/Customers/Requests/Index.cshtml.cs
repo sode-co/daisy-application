@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Customers.Requests
 {
@@ -21,11 +22,24 @@ namespace WebApplication.Pages.Areas.Customers.Requests
 
         public IList<Request> Request { get;set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            // This email will be replaced after @KhangNV7 set current user
-            var email = "ngocptse150112@fpt.edu.vn";
-            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
+            string role = UserAuthentication.Role();
+
+            if (role != "CUSTOMER" && role != "ADMIN")
+            {
+                return Redirect("/Unauthorized");
+            }
+            if(role == "CUSTOMER")
+            {
+                var email = UserAuthentication.UserLogin.Email;
+                Request = _unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
+            } 
+            else
+            {
+                Request = _unitOfWorkFactory.Get.RequestRepository.GetAll().ToList();
+            }
+            return Page();
         }
     }
 }
