@@ -29,9 +29,9 @@ namespace DataAccess.Repositories.Requests
 
         public IEnumerable<Request> GetRequestsByTitle(string title) => _dbContext.Requests.Where(req => req.Title.Equals(title)).ToList();
 
-        public IList<Request> GetRequestsByCustomerEmail(string email)
+        public IEnumerable<Request> GetRequestsByCustomerEmail(string email)
         {
-            return _dbContext.Requests.Include(req => req.Customer).Where(req => req.Customer.Email.Equals(email)).ToList();
+            return _dbContext.Requests.Include(req => req.Customer).Where(req => req.Customer.Email.Equals(email));
         }
 
         public IEnumerable<Request> RequestPaging(DateTime timeOffset, int count) =>

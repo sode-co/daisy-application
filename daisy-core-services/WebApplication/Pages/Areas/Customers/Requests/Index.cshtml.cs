@@ -9,6 +9,7 @@ using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
 using WebApplication.Pages.Utils;
+using SaleWebApp.Paging;
 
 namespace WebApplication.Pages.Areas.Customers.Requests
 {
@@ -20,9 +21,9 @@ namespace WebApplication.Pages.Areas.Customers.Requests
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public IList<Request> Request { get;set; }
+        public PaginatedList<Request> Request { get;set; }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync(int? pageIndex)
         {
             string role = UserAuthentication.Role();
 
@@ -30,15 +31,18 @@ namespace WebApplication.Pages.Areas.Customers.Requests
             {
                 return Redirect("/Unauthorized");
             }
+            IQueryable<Request> requests;
             if(role == "CUSTOMER")
             {
                 var email = UserAuthentication.UserLogin.Email;
-                Request = _unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
+                requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
             } 
             else
             {
-                Request = _unitOfWorkFactory.Get.RequestRepository.GetAll().ToList();
+                requests = _unitOfWorkFactory.Get.RequestRepository.GetAll();
             }
+            Request = await PaginatedList<Request>.CreateAsync(
+                requests.AsNoTracking(), pageIndex ?? 1, 10);
             return Page();
         }
     }
