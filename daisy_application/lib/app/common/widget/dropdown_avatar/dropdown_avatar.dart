@@ -21,12 +21,12 @@ class _AvatarDropdownMenuState extends State<AvatarDropdownMenu> {
   @override
   Widget build(BuildContext context) {
     ApplicationState appState = context.watch();
-    UserModel currentUser = appState.currentUser;
+    UserModel? currentUser = appState.currentUser;
 
     return PopupMenuButton<Menu>(
         child: CircleAvatar(
           radius: 20.0,
-          backgroundImage: NetworkImage(currentUser.avatar!),
+          backgroundImage: NetworkImage(currentUser?.avatar ?? ''),
         ),
         // Callback that sets the selected popup menu item.
         onSelected: (Menu item) {},
@@ -47,9 +47,8 @@ class _AvatarDropdownMenuState extends State<AvatarDropdownMenu> {
                 value: Menu.itemTwo,
                 child: TextButton.icon(
                   style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black54),
-                  ),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black54)),
                   icon: const Icon(Icons.settings),
                   onPressed: _navigationListener.onBtnProfileDetailsClicked,
                   label: const Text('Cài đặt'),

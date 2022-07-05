@@ -52,6 +52,57 @@ class ButtonPrimary extends _BaseDesignedButton {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.only(
+          left: Design.bodySpacing,
+          right: Design.bodySpacing,
+          top: Design.contentSpacing * 1.5,
+          bottom: Design.contentSpacing * 1.5),
+      width: widthMode == null
+          ? width
+          : (widthMode == WidthMode.WRAP_CONTENT ? null : double.infinity),
+      height: heightMode == null
+          ? height
+          : (heightMode == HeightMode.WRAP_CONTENT ? null : double.infinity),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0), color: backgroundColor),
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(
+              color: Design.toTextColor(textColor: textColor),
+              fontWeight: Design.textButton().fontWeight,
+              fontSize: Design.textButton().fontSize),
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonBorder extends _BaseDesignedButton {
+  final Color borderColor;
+
+  const ButtonBorder(
+      {super.key,
+      super.height,
+      super.width,
+      required super.text,
+      super.textColor,
+      super.fontSize,
+      super.fontWeight,
+      super.widthMode,
+      super.heightMode,
+      this.borderColor = Design.colorPrimary,
+      super.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+          left: Design.bodySpacing,
+          right: Design.bodySpacing,
+          top: 5,
+          bottom: 5),
       width: widthMode == null
           ? width
           : (widthMode == WidthMode.WRAP_CONTENT ? null : double.infinity),
@@ -60,17 +111,15 @@ class ButtonPrimary extends _BaseDesignedButton {
           : (heightMode == HeightMode.WRAP_CONTENT ? null : double.infinity),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: backgroundColor,
-          border:
-              Border.all(color: Design.colorPrimary, style: BorderStyle.solid)),
+          border: Border.all(color: borderColor, style: BorderStyle.solid)),
       child: TextButton(
         onPressed: onPressed,
         child: Text(
           text,
           style: TextStyle(
               color: Design.toTextColor(textColor: textColor),
-              fontWeight: fontWeight,
-              fontSize: fontSize),
+              fontWeight: Design.textButton().fontWeight,
+              fontSize: Design.textButton().fontSize),
         ),
       ),
     );
@@ -180,8 +229,9 @@ class ButtonInfo extends StatelessWidget {
   final HeightMode? heightMode;
   final double? width;
   final double? height;
+  late TextStyle textStyle;
 
-  const ButtonInfo(
+  ButtonInfo(
       {super.key,
       required this.text,
       this.onPressed,
@@ -190,7 +240,22 @@ class ButtonInfo extends StatelessWidget {
       this.widthMode,
       this.width,
       this.height,
-      this.heightMode});
+      this.heightMode}) {
+    textStyle = Design.textButton();
+  }
+
+  ButtonInfo.small(
+      {super.key,
+      required this.text,
+      this.onPressed,
+      this.fontWeight = FontWeight.bold,
+      this.textColor = Colors.black,
+      this.widthMode,
+      this.width,
+      this.height,
+      this.heightMode}) {
+    textStyle = Design.textBody();
+  }
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -203,7 +268,10 @@ class ButtonInfo extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           child: Text(text,
-              style: TextStyle(fontWeight: fontWeight, color: textColor)),
+              style: TextStyle(
+                  fontSize: Design.textButton().fontSize,
+                  fontWeight: Design.textButton().fontWeight,
+                  color: textColor)),
         ),
       );
 }

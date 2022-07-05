@@ -54,6 +54,7 @@ class _AuthenticatedFlowControllerState
   Future<void> _signOut() async {
     await _authService.signOut();
     _appState.isLoggedIn = false;
+    _appState.currentUser = null;
   }
 
   ApplicationState get _appState => context.read();

@@ -5,6 +5,7 @@ import 'package:daisy_application/app/common/design/design_snackbar.dart';
 import 'package:daisy_application/app/pages/post-new-job/deps/post_new_job_deps.dart';
 import 'package:daisy_application/app/pages/post-new-job/model/post_new_job_state.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +38,12 @@ class _PostNewJobFlowControllerState extends AutoRouterState
 
   Future<void> _postNewJob() async {
     RequestRestApi _requestClient = locator.get();
-    await _requestClient.createNewRequest(jobState!.parentRequest);
-    context.toastSuccess('Đăng tin tuyển dụng thành công');
+    final result =
+        await _requestClient.createNewRequest(jobState!.parentRequest).Value();
+    result.failureType == FAILURE_TYPE.NONE
+        ? context.toastSuccess('Đăng tin tuyển dụng thành công')
+        : context.toastError(
+            'Đăng tin thất bại, vui lòng kiểm tra thông tin và thử lại');
   }
 
   @override

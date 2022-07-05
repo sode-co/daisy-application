@@ -70,7 +70,7 @@ abstract class Design {
   static const Color primaryTextColor = colorBlack;
   static const Color secondaryTextColor = Colors.black87;
 
-  static final fontColorHighEmp = colorNeutral.shade900;
+  static final fontColorHighEmp = colorBlack;
   static final fontColorMediumEmp = colorNeutral.shade700;
   static final fontColorLowEmp = colorNeutral.shade300;
   static final fontColorWhite = colorWhite.withOpacity(0.92);
@@ -80,12 +80,12 @@ abstract class Design {
   static const double bodySpacing = 22;
   static const double contentSpacing = 7;
 
-  static TextStyle textHeadline() {
+  static TextStyle textHeadline({bool bold = false}) {
     return TextStyle(
         color: fontColorHighEmp,
-        fontSize: 22,
+        fontSize: 23,
         height: 1.2,
-        fontWeight: FontWeight.w500);
+        fontWeight: bold ? FontWeight.w500 : _toFontWeight(bold));
   }
 
   static TextStyle textSmallHeadline({bool bold = false}) {
@@ -104,6 +104,21 @@ abstract class Design {
         fontWeight: _toFontWeight(bold));
   }
 
+  static TextStyle textTitleFold({Color? textColor, bool bold = true}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor),
+        fontSize: 30,
+        fontWeight: FontWeight.w900);
+  }
+
+  static TextStyle textTitleLarge({Color? textColor, bool bold = true}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor),
+        fontSize: 38,
+        height: 1.11,
+        fontWeight: _toFontWeight(bold));
+  }
+
   static TextStyle textBodyBold({Color? textColor}) =>
       textBody(textColor: textColor, bold: true);
 
@@ -115,6 +130,14 @@ abstract class Design {
         fontWeight: _toFontWeight(bold));
   }
 
+  static TextStyle textBodyFold({Color? textColor, bool bold = false}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor),
+        fontSize: 22,
+        height: 1.3,
+        fontWeight: FontWeight.w500);
+  }
+
   static TextStyle textBodyLarge(
       {Color? textColor, bold = false, isEnabled = true}) {
     return TextStyle(
@@ -122,6 +145,13 @@ abstract class Design {
         fontSize: 18,
         height: 1.33,
         fontWeight: _toFontWeight(bold));
+  }
+
+  static TextStyle textButton({Color? textColor, isEnabled = true}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor, isEnabled: isEnabled),
+        fontSize: 20,
+        fontWeight: FontWeight.w900);
   }
 
   static TextStyle textCaption({Color? textColor, bool bold = false}) {

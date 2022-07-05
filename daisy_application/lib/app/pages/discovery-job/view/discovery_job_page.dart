@@ -4,11 +4,11 @@ import 'package:daisy_application/app/pages/discovery-job/view/component.dart';
 import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
 import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/common/responsive.dart';
-import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../common/design/design.dart';
 import 'stateless_component.dart';
 
 class DiscoverJobPage extends StatefulWidget {
@@ -26,7 +26,6 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
     super.initState();
   }
 
-  DiscoveryJobScreenState get _screenState => context.read();
   DiscoveryJobListener get _listener => context.findAncestorStateOfType()!;
 
   @override
@@ -46,7 +45,6 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
   Widget _createDiscoveryLayout() {
     double maxDisplayCount = (MediaQuery.of(context).size.height) / 100;
     DiscoveryJobScreenState _screenState = context.watch();
-    ApplicationState _appState = context.read();
     if (_screenState.requests.length < maxDisplayCount) {
       _onLoadMoreRequest();
     }
@@ -86,7 +84,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
                   ),
                 ),
                 const SizedBox(
-                  width: 30.0,
+                  width: Design.headerSpacing,
                 ),
                 if (selectedRequest != null)
                   JobDetails(

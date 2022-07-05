@@ -14,33 +14,19 @@ class _RequestRestApi implements RequestRestApi {
   String? baseUrl;
 
   @override
-  Future<void> createNewRequest(body) async {
+  Future<HttpResponse<void>> createNewRequest(body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    await _dio.fetch<void>(_setStreamType<void>(
+    final _result = await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(
         Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options, '',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    return null;
-  }
-
-  @override
-  Future<String> getRequestsByTitle(title) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<String>(_setStreamType<String>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/title/${title}',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
-    return value;
+    final httpResponse = HttpResponse(null, _result);
+    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

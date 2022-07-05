@@ -20,6 +20,24 @@ extension SafetyExt on JsonSerializable {
   }
 }
 
+extension SafetyUtils on dynamic {
+  bool isNone() {
+    if (this == null) return true;
+
+    if (this is String) return this == '';
+
+    return false;
+  }
+
+  bool isBlank() {
+    if (this == null) return false;
+
+    if (this is String) return toString().trim() != '';
+
+    return true;
+  }
+}
+
 bool _isNumeric(String str) {
   if (str == null) {
     return false;

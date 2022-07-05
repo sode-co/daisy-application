@@ -25,7 +25,9 @@ namespace Api.Controllers.Authentication
                 return AuthenticationResponse.Failed();
             }
 
-            var newAccessToken = _jwtToken.GenerateAccessToken(userData);
+            using var work = _unitOfWorkFactory.Get;
+            var user = work.UserRepository.GetUsersByEmail(userData.Email);
+            var newAccessToken = _jwtToken.GenerateAccessToken(user);
             return AuthenticationResponse.Success(RefreshToken: "", AccessToken: newAccessToken);
         }
     }

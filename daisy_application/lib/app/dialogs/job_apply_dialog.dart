@@ -1,10 +1,12 @@
 import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/utils/size_mode.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc_web.dart';
 
 class JobApplyDialog extends Dialog {
   final BuildContext context;
@@ -127,13 +129,17 @@ class JobApplyDialog extends Dialog {
           const SizedBox(
             height: Design.itemSpacing,
           ),
-          Row(
-            children: [
+          if (Responsive.isDesktop(context))
+            Row(children: [
               Expanded(child: createPhoneSelector()),
               const SizedBox(width: Design.contentSpacing),
               Expanded(child: createAddressSelector())
-            ],
-          )
+            ]),
+          if (!Responsive.isDesktop(context)) ...[
+            createPhoneSelector(),
+            const SizedBox(width: Design.contentSpacing),
+            createAddressSelector()
+          ]
         ],
       );
 
@@ -204,8 +210,6 @@ class JobApplyDialog extends Dialog {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ButtonPrimary(
-            width: 120,
-            height: 45,
             fontSize: Design.textBody().fontSize,
             text: 'Ứng tuyển',
             onPressed: onConfirmClicked == null

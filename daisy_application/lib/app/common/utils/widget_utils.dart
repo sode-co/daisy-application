@@ -33,4 +33,8 @@ extension BuildContextExt on BuildContext {
       mediaQuery.orientation, getDeviceType(mediaQuery), mediaQuery.size);
 
   bool isScreenType(ScreenType type) => deviceInfo.deviceScreenType == type;
+
+  void show(Dialog dialog) {
+    showDialog(context: this, builder: (context) => dialog);
+  }
 }

@@ -165,13 +165,11 @@ class JobDetails extends StatelessWidget {
               children: const [
                 Icon(Icons.tips_and_updates_outlined),
                 SizedBox(width: Design.contentSpacing),
-                Text('You match this job'),
+                Text('You match this job')
               ],
             ),
             const SizedBox(height: Design.headerSpacing),
-            ApplicationButton(
-              onApply: onApply,
-            ),
+            ApplicationButton(onApply: onApply),
             const SizedBox(height: Design.headerSpacing),
             Text(
               'Phân loại:',

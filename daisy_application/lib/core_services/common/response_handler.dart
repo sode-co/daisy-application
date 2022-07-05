@@ -24,10 +24,9 @@ extension ConvertToResult on Future<HttpResponse> {
     const ns = 'send-request-result-handling';
     try {
       final result = await then((value) {
-        Debug.log(ns, value);
         return Result<T>(data: value.data, failureType: FAILURE_TYPE.NONE);
       }).catchError((err) {
-        Debug.log(ns, err);
+        throw err;
       });
 
       return result;
@@ -44,6 +43,7 @@ extension ConvertToResult on Future<HttpResponse> {
           failureType = FAILURE_TYPE.NONE;
           break;
         case 403:
+        case 401:
           failureType = FAILURE_TYPE.AUTH_FAILED;
           break;
         case 500:

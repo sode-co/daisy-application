@@ -1,11 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
+import 'package:daisy_application/app/dialogs/alert_dialog.dart';
+import 'package:daisy_application/app/router/admin_router.gr.dart';
 import 'package:daisy_application/app/router/router.gr.dart' as Routers;
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
+import 'package:daisy_application/core_services/persistent/user_persistent.dart';
 import 'package:daisy_application/domain-services/authentication-service.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class UnAuthenticatedFlowController extends StatefulWidget {
@@ -25,17 +30,17 @@ class _UnAuthenticatedFlowControllerState
         HeaderAuthenticationListener<UnAuthenticatedFlowController>,
         HeaderNavigationListener<UnAuthenticatedFlowController> {
   late AuthenticationService _authService;
+  late UserPersistent _userPersistent;
 
   @override
   void initState() {
     super.initState();
     _authService = locator.get();
+    _userPersistent = locator.get();
   }
 
   @override
-  void onBtnWorkspaceAndFindDesignerClicked() {
-    context.router.push(const Routers.ContactAndProjectRoute());
-  }
+  void onBtnWorkspaceAndFindDesignerClicked() {}
 
   @override
   void onBtnFindJobCliked() {
@@ -43,7 +48,28 @@ class _UnAuthenticatedFlowControllerState
   }
 
   @override
-  void onBtnJobPostClicked() {}
+  void onBtnJobPostClicked() {
+    context.show(DialogAlert.error(
+      context,
+      title: 'Lỗi',
+      message:
+          'Việc đăng tin tuyển dụng yêu cầu xãc minh danh tính, xin vui lòng đăng nhập.',
+      affirmativeText: 'Login now',
+      negativeText: 'Not now',
+      onAffirmativeClicked: _onLoginDialogAffirmativeClicked,
+      onNegativeClicked: _onLoginDialogNegativeClicked,
+    ));
+  }
+
+  void _onLoginDialogAffirmativeClicked() async {
+    Navigator.of(context, rootNavigator: true).pop();
+    await _signIn();
+    context.pushRoute(const PostNewJobRoute());
+  }
+
+  void _onLoginDialogNegativeClicked() {
+    Navigator.of(context, rootNavigator: true).pop();
+  }
 
   @override
   void onBtnSignoutClicked() => _signOut();
@@ -55,6 +81,7 @@ class _UnAuthenticatedFlowControllerState
   Future<void> _signIn() async {
     var result = await _authService.signIn();
     _appState.isLoggedIn = result.failureType == FAILURE_TYPE.NONE;
+    _appState.currentUser = _userPersistent.get();
   }
 
   @override
