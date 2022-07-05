@@ -27,7 +27,9 @@ namespace DataAccess.Repositories.Requests
             _dbContext.Requests.Add(request);
         }
 
-        public IEnumerable<Request> GetRequestsByTitle(string title) => _dbContext.Requests.Where(req => req.Title.Equals(title)).ToList();
+        public IEnumerable<Request> GetRequestsByTitle(string title) => _dbContext.Requests.Where(req => req.Title.Contains(title));
+
+        public IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email) => _dbContext.Requests.Include(req => req.Customer).Where(req => (req.Title.Contains(title) && req.Customer.Email.Equals(email)));
 
         public IEnumerable<Request> GetRequestsByCustomerEmail(string email)
         {

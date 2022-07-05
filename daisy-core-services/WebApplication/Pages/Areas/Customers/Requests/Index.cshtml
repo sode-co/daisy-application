@@ -116,6 +116,17 @@
         </p>
     }
 }
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions">
+        <p>
+            Search by title: 
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-outline-success" />
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>

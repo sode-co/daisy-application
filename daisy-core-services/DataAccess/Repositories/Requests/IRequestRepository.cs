@@ -12,6 +12,7 @@ namespace DataAccess.Repositories.Requests
     {
         void CreateRequest(Request request);
         IEnumerable<Request> GetRequestsByTitle(string title);
+        IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email);
         IEnumerable<Request> GetRequestsByCustomerEmail(string email);
         IEnumerable<Request> RequestPaging(DateTime timeOffset, int count);
     }

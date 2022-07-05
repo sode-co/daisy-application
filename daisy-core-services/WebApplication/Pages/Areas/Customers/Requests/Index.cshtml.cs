@@ -21,25 +21,45 @@ namespace WebApplication.Pages.Areas.Customers.Requests
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
+        public string CurrentFilter { get; set; }
         public PaginatedList<Request> Request { get;set; }
 
-        public async Task<IActionResult> OnGetAsync(int? pageIndex)
+        public async Task<IActionResult> OnGetAsync(string searchString, int? pageIndex)
         {
+
             string role = UserAuthentication.Role();
 
             if (role != "CUSTOMER" && role != "ADMIN")
             {
                 return Redirect("/Unauthorized");
             }
+
+            CurrentFilter = searchString;
             IQueryable<Request> requests;
             if(role == "CUSTOMER")
             {
                 var email = UserAuthentication.UserLogin.Email;
-                requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
+                if (searchString != null)
+                {
+                    pageIndex = 1;
+                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitleAndEmail(searchString, email);
+                }
+                else
+                {
+                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
+                }
             } 
             else
             {
-                requests = _unitOfWorkFactory.Get.RequestRepository.GetAll();
+                if (searchString != null)
+                {
+                    pageIndex = 1;
+                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitle(searchString);
+                }
+                else
+                {
+                    requests = _unitOfWorkFactory.Get.RequestRepository.GetAll();
+                }
             }
             Request = await PaginatedList<Request>.CreateAsync(
                 requests.AsNoTracking(), pageIndex ?? 1, 10);
