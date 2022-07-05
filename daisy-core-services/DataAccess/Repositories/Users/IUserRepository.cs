@@ -19,5 +19,6 @@ namespace DataAccess.Repositories.Users
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);
+        void DeleteUserPermanently(User user);
     }
 }
