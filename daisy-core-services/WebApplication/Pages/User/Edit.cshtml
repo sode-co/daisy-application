@@ -1,0 +1,73 @@
+﻿@page
+@model WebApplication.Pages.UserCRUD.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="User.FirstName" class="control-label"></label>
+                <input asp-for="User.FirstName" class="form-control" />
+                <span asp-validation-for="User.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.LastName" class="control-label"></label>
+                <input asp-for="User.LastName" class="form-control" />
+                <span asp-validation-for="User.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.DisplayName" class="control-label"></label>
+                <input asp-for="User.DisplayName" class="form-control" />
+                <span asp-validation-for="User.DisplayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Email" class="control-label"></label>
+                <input asp-for="User.Email" class="form-control" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Description" class="control-label"></label>
+                <input asp-for="User.Description" class="form-control" />
+                <span asp-validation-for="User.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Avatar" class="control-label"></label>
+                <input asp-for="User.Avatar" class="form-control" />
+                <span asp-validation-for="User.Avatar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Address" class="control-label"></label>
+                <input asp-for="User.Address" class="form-control" />
+                <span asp-validation-for="User.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Phone" class="control-label"></label>
+                <input asp-for="User.Phone" class="form-control" />
+                <span asp-validation-for="User.Phone" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="User.Id" />
+            <input type="hidden" asp-for="User.ObjectId" />
+            <input type="hidden" asp-for="User.Role" />
+            <input type="hidden" asp-for="User.Settings" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
