@@ -27,6 +27,17 @@ namespace DataAccess.Repositories.Requests
             _dbContext.Requests.Add(request);
         }
 
+        public Request GetRequest(int id)
+        {
+            return _dbContext.Requests.Find(id);
+        }
+
+        public void UpdateRequest(Request request)
+        {
+            _dbContext.Requests.Update(request);
+            _dbContext.SaveChanges();
+        }
+
         public IEnumerable<Request> GetRequestsByTitle(string title) => _dbContext.Requests.Where(req => req.Title.Contains(title));
 
         public IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email) => _dbContext.Requests.Include(req => req.Customer).Where(req => (req.Title.Contains(title) && req.Customer.Email.Equals(email)));

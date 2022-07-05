@@ -10,7 +10,9 @@ namespace DataAccess.Repositories.Requests
 {
     public interface IRequestRepository : IRepository<Request>
     {
+        Request GetRequest(int id);
         void CreateRequest(Request request);
+        void UpdateRequest(Request request);
         IEnumerable<Request> GetRequestsByTitle(string title);
         IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email);
         IEnumerable<Request> GetRequestsByCustomerEmail(string email);

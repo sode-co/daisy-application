@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using WebApplication.Pages.Utils;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.Areas.Customers.Requests
 {
     public class EditModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public EditModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public EditModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         [BindProperty]
@@ -38,7 +38,7 @@ namespace WebApplication.Pages.Areas.Customers.Requests
                 return NotFound();
             }
 
-            Request = await _context.Requests.FirstOrDefaultAsync(m => m.Id == id);
+            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
 
             if (Request == null)
             {
@@ -56,30 +56,11 @@ namespace WebApplication.Pages.Areas.Customers.Requests
                 return Page();
             }
 
-            _context.Attach(Request).State = EntityState.Modified;
+            _unitOfWorkFactory.Get.RequestRepository.UpdateRequest(Request);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RequestExists(Request.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
 
             return RedirectToPage("./Index");
-        }
-
-        private bool RequestExists(int id)
-        {
-            return _context.Requests.Any(e => e.Id == id);
         }
     }
 }
