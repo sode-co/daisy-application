@@ -7,18 +7,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using DataAccess.UnitOfWork;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
     public class CreateModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
+        private UnitOfWorkFactory _unitOfWorkFactory;
 
-        public CreateModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        public CreateModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context, UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
-        }
+            this._unitOfWorkFactory = unitOfWorkFactory;
 
+        }
         public IActionResult OnGet()
         {
             return Page();
@@ -28,15 +30,29 @@ namespace WebApplication.Pages.Areas.Designers.Applications
         public JobApplication JobApplication { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? requestId)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                Request request = work.RequestRepository.GetRequest((int)requestId);
+                var email = UserAuthentication.UserLogin.Email;
+                var freelancer = work.UserRepository.GetUsersByEmail(email);
+                JobApplication.Freelancer = freelancer;
+                JobApplication.Request = request;
+                JobApplication.OfferedPrice = (decimal)request.Budget;
+                JobApplication.CreatedAt = DateTime.Now;
+                JobApplication.UpdatedAt = DateTime.Now;
+                JobApplication.ResolvedAt = DateTime.Now;
+                JobApplication.Status = "WAITING";
+                JobApplication.ObjectId = "";
 
-            _context.JobApplications.Add(JobApplication);
-            await _context.SaveChangesAsync();
+                work.JobApplicationRepository.Add(JobApplication);
+                work.Save();
+            }
 
             return RedirectToPage("./Index");
         }

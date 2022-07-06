@@ -9,5 +9,6 @@ namespace DataAccess.Repositories.JobApplications
 {
     public interface IJobApplicationRepository : IRepository<JobApplication>
     {
+        void CreateJobApplication(JobApplication jobApplication);
     }
 }

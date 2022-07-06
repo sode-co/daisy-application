@@ -159,7 +159,7 @@
                     @Html.DisplayFor(modelItem => item.CreatedAt)
                 </td>
                 <td>
-                    <a asp-page="../Applications/Create" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Apply</button></a>
+                    <a asp-page="../Applications/Create" asp-route-requestId="@item.Id"><button class="btn btn-outline-secondary">Apply</button></a>
                 </td>
             </tr>
         }

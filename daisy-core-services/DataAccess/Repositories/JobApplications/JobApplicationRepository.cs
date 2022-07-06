@@ -16,5 +16,10 @@ namespace DataAccess.Repositories.JobApplications
         {
             _dbContext = dbContext;
         }
+
+        public void CreateJobApplication(JobApplication jobApplication)
+        {
+            _dbContext.JobApplications.Add(jobApplication);
+        }
     }
 }
