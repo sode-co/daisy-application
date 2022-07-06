@@ -48,8 +48,7 @@ namespace WebApplication.Pages.Areas.Customers.Requests
             }
             using (var work = _unitOfWorkFactory.Get)
             {
-                // This email will be replaced after @KhangNV7 set current user
-                string email = "ngocptse150112@fpt.edu.vn";
+                var email = UserAuthentication.UserLogin.Email;
                 var user = work.UserRepository.GetUsersByEmail(email);
                 request.Category = work.CategoryRepository.GetCategoryByName(category);
                 request.Customer = user;

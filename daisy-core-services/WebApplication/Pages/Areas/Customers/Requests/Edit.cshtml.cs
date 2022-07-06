@@ -57,7 +57,7 @@ namespace WebApplication.Pages.Areas.Customers.Requests
             }
 
             _unitOfWorkFactory.Get.RequestRepository.UpdateRequest(Request);
-
+            _unitOfWorkFactory.Get.Save();
 
 
             return RedirectToPage("./Index");

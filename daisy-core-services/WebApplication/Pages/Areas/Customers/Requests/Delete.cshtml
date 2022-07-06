@@ -20,6 +20,9 @@
 <div>
     <h4>Request</h4>
     <hr />
+    <input type="hidden" asp-for="Request.Id" />
+    <input type="hidden" asp-for="Request.ObjectId" />
+
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Request.Title)

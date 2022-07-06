@@ -13,6 +13,7 @@ namespace DataAccess.Repositories.Requests
         Request GetRequest(int id);
         void CreateRequest(Request request);
         void UpdateRequest(Request request);
+        void DeleteRequest(Request request);
         IEnumerable<Request> GetRequestsByTitle(string title);
         IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email);
         IEnumerable<Request> GetRequestsByCustomerEmail(string email);

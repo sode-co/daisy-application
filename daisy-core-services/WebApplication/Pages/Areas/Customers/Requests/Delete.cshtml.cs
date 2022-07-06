@@ -8,16 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using WebApplication.Pages.Utils;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.Areas.Customers.Requests
 {
     public class DeleteModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public DeleteModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public DeleteModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         [BindProperty]
@@ -37,7 +37,7 @@ namespace WebApplication.Pages.Areas.Customers.Requests
                 return NotFound();
             }
 
-            Request = await _context.Requests.FirstOrDefaultAsync(m => m.Id == id);
+            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
 
             if (Request == null)
             {
@@ -53,12 +53,12 @@ namespace WebApplication.Pages.Areas.Customers.Requests
                 return NotFound();
             }
 
-            Request = await _context.Requests.FindAsync(id);
+            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
 
             if (Request != null)
             {
-                _context.Requests.Remove(Request);
-                await _context.SaveChangesAsync();
+                _unitOfWorkFactory.Get.RequestRepository.DeleteRequest(Request);
+                _unitOfWorkFactory.Get.Save();
             }
 
             return RedirectToPage("./Index");

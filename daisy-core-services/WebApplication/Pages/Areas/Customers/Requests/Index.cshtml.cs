@@ -58,7 +58,7 @@ namespace WebApplication.Pages.Areas.Customers.Requests
                 }
                 else
                 {
-                    requests = _unitOfWorkFactory.Get.RequestRepository.GetAll();
+                    requests = _unitOfWorkFactory.Get.RequestRepository.GetAll(req => req.DeletedAt == null);
                 }
             }
             Request = await PaginatedList<Request>.CreateAsync(

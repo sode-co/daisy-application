@@ -38,13 +38,20 @@ namespace DataAccess.Repositories.Requests
             _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Request> GetRequestsByTitle(string title) => _dbContext.Requests.Where(req => req.Title.Contains(title));
+        public void DeleteRequest(Request request)
+        {
+            request.DeletedAt = DateTime.Now;
+            _dbContext.Requests.Update(request);
+            _dbContext.SaveChanges();
+        }
 
-        public IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email) => _dbContext.Requests.Include(req => req.Customer).Where(req => (req.Title.Contains(title) && req.Customer.Email.Equals(email)));
+        public IEnumerable<Request> GetRequestsByTitle(string title) => _dbContext.Requests.Where(req => req.Title.Contains(title) && req.DeletedAt == null);
+
+        public IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email) => _dbContext.Requests.Include(req => req.Customer).Where(req => (req.Title.Contains(title) && req.Customer.Email.Equals(email) && req.DeletedAt == null));
 
         public IEnumerable<Request> GetRequestsByCustomerEmail(string email)
         {
-            return _dbContext.Requests.Include(req => req.Customer).Where(req => req.Customer.Email.Equals(email));
+            return _dbContext.Requests.Include(req => req.Customer).Where(req => req.Customer.Email.Equals(email) && req.DeletedAt == null);
         }
 
         public IEnumerable<Request> RequestPaging(DateTime timeOffset, int count) =>
