@@ -36,5 +36,10 @@ namespace Api.Common
             public const string AVAILABLE = "AVAILABLE";
             public const string TAKEN = "TAKEN";
         }
+        public class DISCUSSION_STATUS
+        {
+            public const string SENT = "SENT";
+            public const string REMOVED = "REMOVED";
+        }
     }
 }

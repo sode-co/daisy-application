@@ -9,5 +9,7 @@ namespace DataAccess.Repositories.Discussions
 {
     public interface IDiscussionRepository : IRepository<Discussion>
     {
+        public void RemoveDiscussion(int workspaceId, int discussionId, string discussionStatus);
+
     }
 }
