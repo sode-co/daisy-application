@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/design/design_snackbar.dart';
+import 'package:daisy_application/app/foundation/flow_controller.dart';
 import 'package:daisy_application/app/pages/update-profile/deps/update_profile_deps.dart';
 import 'package:daisy_application/app/pages/update-profile/model/update_profile_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/users/users_rest_api.dart';
@@ -14,20 +16,21 @@ import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class UpdateProfileFlowController extends AutoRouter {
+class UpdateProfileFlowController extends FlowController {
   const UpdateProfileFlowController({Key? key}) : super(key: key);
 
   @override
   AutoRouterState createState() => _UpdateProfileFlowControllerState();
 }
 
-class _UpdateProfileFlowControllerState extends AutoRouterState
+class _UpdateProfileFlowControllerState extends FlowControllerState
     implements UpdateProfileListener<AutoRouter> {
   UpdateProfileState? profileState;
   late AuthenticationService _authService;
 
   @override
   void initState() {
+    verifyRoute(requireAuth: true, requireRole: UserRole.CUSTOMER);
     profileState = UpdateProfileState();
     _authService = locator.get();
     super.initState();

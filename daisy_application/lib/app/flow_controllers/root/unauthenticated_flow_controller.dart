@@ -5,6 +5,7 @@ import 'package:daisy_application/app/dialogs/alert_dialog.dart';
 import 'package:daisy_application/app/router/admin_router.gr.dart';
 import 'package:daisy_application/app/router/router.gr.dart' as Routers;
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/persistent/user_persistent.dart';
 import 'package:daisy_application/domain-services/authentication-service.dart';
@@ -45,6 +46,12 @@ class _UnAuthenticatedFlowControllerState
   @override
   void onBtnFindJobCliked() {
     context.router.push(const Routers.DicoveryJobRoute());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Debug.log('unauthenticated-flow', 'didChangeDependencies');
   }
 
   @override

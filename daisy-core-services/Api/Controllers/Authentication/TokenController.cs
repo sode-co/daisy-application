@@ -17,7 +17,6 @@ namespace Api.Controllers.Authentication
         {
             var token = authorization.Split(' ')[1];
             Console.WriteLine("Generating new access token from refresh token " + token);
-
             var userData = _jwtToken.ValidateRefreshToken(token);
 
             if (userData == null)

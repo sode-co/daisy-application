@@ -3,6 +3,7 @@ import 'package:daisy_application/app/common/design/design_snackbar.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app/dialogs/alert_dialog.dart';
 import 'package:daisy_application/app/dialogs/job_apply_dialog.dart';
+import 'package:daisy_application/app/foundation/flow_controller.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/app/router/router.gr.dart';
@@ -20,14 +21,14 @@ import 'package:provider/provider.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/common/safety_utils.dart';
 
-class DicoveryJobFlowController extends AutoRouter {
+class DicoveryJobFlowController extends FlowController {
   const DicoveryJobFlowController({Key? key}) : super(key: key);
 
   @override
   AutoRouterState createState() => _DiscoveryJobFlowControllerState();
 }
 
-class _DiscoveryJobFlowControllerState extends AutoRouterState
+class _DiscoveryJobFlowControllerState extends FlowControllerState
     implements DiscoveryJobListener<AutoRouter> {
   late RequestGrpcClient _requestGrpcClient;
   late JobApplicationRestApi _applicationRestApi;
