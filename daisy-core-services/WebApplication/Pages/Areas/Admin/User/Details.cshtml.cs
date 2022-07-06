@@ -7,28 +7,36 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using WebApplication.Pages.Utils;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.UserCRUD
 {
     public class DetailsModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public DetailsModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public DetailsModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         public Domain.Models.User User { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string role = UserAuthentication.Role();
+
+            if (role != "ADMIN")
+            {
+                return Redirect("/Unauthorized");
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            User = _unitOfWorkFactory.Get.UserRepository.GetUser((int)id);
 
             if (User == null)
             {

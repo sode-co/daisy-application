@@ -1,9 +1,9 @@
 ﻿using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +27,32 @@ namespace DataAccess.Repositories.Requests
             _dbContext.Requests.Add(request);
         }
 
-        public IEnumerable<Request> GetRequestsByTitle(string title) => _dbContext.Requests.Where(req => req.Title.Equals(title)).ToList();
+        public Request GetRequest(int id)
+        {
+            return _dbContext.Requests.Find(id);
+        }
+
+        public void UpdateRequest(Request request)
+        {
+            _dbContext.Requests.Update(request);
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteRequest(Request request)
+        {
+            request.DeletedAt = DateTime.Now;
+            _dbContext.Requests.Update(request);
+            _dbContext.SaveChanges();
+        }
+
+        public IEnumerable<Request> GetRequestsByTitle(string title) => _dbContext.Requests.Where(req => req.Title.Contains(title) && req.DeletedAt == null);
+
+        public IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email) => _dbContext.Requests.Include(req => req.Customer).Where(req => (req.Title.Contains(title) && req.Customer.Email.Equals(email) && req.DeletedAt == null));
+
+        public IEnumerable<Request> GetRequestsByCustomerEmail(string email)
+        {
+            return _dbContext.Requests.Include(req => req.Customer).Where(req => req.Customer.Email.Equals(email) && req.DeletedAt == null);
+        }
 
         public IEnumerable<Request> RequestPaging(DateTime timeOffset, int count) =>
             GetAll((request => request.CreatedAt < timeOffset), null, "Customer,Category")

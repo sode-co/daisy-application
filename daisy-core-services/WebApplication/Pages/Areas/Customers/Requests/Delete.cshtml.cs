@@ -7,31 +7,39 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using WebApplication.Pages.Utils;
+using DataAccess.UnitOfWork;
 
-namespace WebApplication.Pages.UserCRUD
+namespace WebApplication.Pages.Areas.Customers.Requests
 {
     public class DeleteModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public DeleteModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public DeleteModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         [BindProperty]
-        public Domain.Models.User User { get; set; }
+        public Request Request { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string role = UserAuthentication.Role();
+
+            if (role != "CUSTOMER" && role != "ADMIN")
+            {
+                return Redirect("/Unauthorized");
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
 
-            if (User == null)
+            if (Request == null)
             {
                 return NotFound();
             }
@@ -45,12 +53,12 @@ namespace WebApplication.Pages.UserCRUD
                 return NotFound();
             }
 
-            User = await _context.Users.FindAsync(id);
+            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
 
-            if (User != null)
+            if (Request != null)
             {
-                _context.Users.Remove(User);
-                await _context.SaveChangesAsync();
+                _unitOfWorkFactory.Get.RequestRepository.DeleteRequest(Request);
+                _unitOfWorkFactory.Get.Save();
             }
 
             return RedirectToPage("./Index");

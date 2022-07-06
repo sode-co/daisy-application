@@ -60,10 +60,13 @@ namespace DataAccess.Repositories.Users
             user.DeletedAt = DateTime.Now;
             _dbContext.Users.Update(user);
         }
+        public void DeleteUserPermanently(User user)
+        {
+            _dbContext.Users.Remove(user);
+        }
         public void UpdateUser(User user)
         {
             _dbContext.Users.Update(user);
-            
         }
 
         public IEnumerable<User> GetUsersByName(string name) => _dbContext.Users.ToList().
