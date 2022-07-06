@@ -98,8 +98,9 @@ namespace Api.Controllers.CustomerController
 
                 work.UserRepository.UpdateUser(existingUser);
                 work.Save();
+
+                return Ok();
             }
-            return NoContent();
         }
 
         [HttpDelete("{id}")]

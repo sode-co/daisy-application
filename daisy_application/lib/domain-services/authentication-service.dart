@@ -53,9 +53,25 @@ class AuthenticationService {
     final result = await _userClient.getCurrentUser().Value();
 
     if (result.failureType == FAILURE_TYPE.NONE) {
-      _userPersistent.set(result.data);
+      await _userPersistent.set(result.data);
     }
 
     return result;
+  }
+
+  Future<Result> refreshAccessToken() async {
+    AuthenticationModel? auth =
+        await _authenticationPersistent.getCurrentAuth();
+
+    var result = await _authRestClient
+        .generateAccessToken('Bearer ${auth!.refreshToken}')
+        .Value();
+
+    Debug.log('tiendang-debug', 'refresh access token', result.data);
+    if (result.failureType != FAILURE_TYPE.NONE) return result;
+
+    auth.accessToken = result.data.accessToken;
+
+    return await _saveUserDataAndAuthenticationIntoLocal(auth);
   }
 }

@@ -26,7 +26,7 @@ class _UpdateProfileState extends State<UpdateProfile> with WidgetListener {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     ApplicationState appState = context.watch();
-    UserModel currentUser = appState.currentUser;
+    UserModel currentUser = appState.currentUser!;
     var model = context.watch<UpdateProfileState>();
 
     return Scaffold(

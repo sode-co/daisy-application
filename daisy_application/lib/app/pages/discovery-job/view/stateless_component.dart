@@ -1,5 +1,6 @@
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/style.dart';
@@ -165,13 +166,11 @@ class JobDetails extends StatelessWidget {
               children: const [
                 Icon(Icons.tips_and_updates_outlined),
                 SizedBox(width: Design.contentSpacing),
-                Text('You match this job'),
+                Text('You match this job')
               ],
             ),
             const SizedBox(height: Design.headerSpacing),
-            ApplicationButton(
-              onApply: onApply,
-            ),
+            ApplicationButton(onApply: onApply),
             const SizedBox(height: Design.headerSpacing),
             Text(
               'Phân loại:',

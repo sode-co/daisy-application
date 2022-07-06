@@ -33,16 +33,17 @@ class _HeaderState extends State<Header> {
               children: <Widget>[
                 const SizedBox(width: 150),
                 Image.asset('assets/images/weblogo.png', width: 100),
-                ButtonInfo(text: 'Danh mục', onPressed: () {}),
-                ButtonInfo(
+                ButtonInfo.small(text: 'Danh mục', onPressed: () {}),
+                ButtonInfo.small(
                     text: 'Đăng tin',
                     onPressed: _navigationListener.onBtnJobPostClicked),
-                ButtonInfo(
-                  text: 'Workspace',
-                  onPressed:
-                      _navigationListener.onBtnWorkspaceAndFindDesignerClicked,
-                ),
-                ButtonInfo(
+                if (isLoggedIn)
+                  ButtonInfo.small(
+                    text: 'Workspace',
+                    onPressed: _navigationListener
+                        .onBtnWorkspaceAndFindDesignerClicked,
+                  ),
+                ButtonInfo.small(
                   text: 'Tìm việc freelance',
                   onPressed: _navigationListener.onBtnFindJobCliked,
                 ),

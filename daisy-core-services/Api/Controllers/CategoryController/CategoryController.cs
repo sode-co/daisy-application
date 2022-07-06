@@ -37,7 +37,7 @@ namespace Api.Controllers.CategoryController
             using (var work = _unitOfWorkFactory.Get)
             {
                 var parentCategories = work.CategoryRepository.GetParentCategories();
-
+            
                 return new JsonResult(new { parentCategories = parentCategories });
             }
         }

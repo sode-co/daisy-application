@@ -1,27 +1,56 @@
 library flow_controller;
 
 import 'package:auto_route/auto_route.dart';
-import 'package:daisy_application/app/flow_controllers/post_new_job/post_new_job_flow_controller.dart';
-import 'package:daisy_application/app/pages/post-new-job/view/post_new_job.dart';
+import 'package:daisy_application/app/router/admin_router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
-import 'package:daisy_application/common/debugging/logger.dart';
-import 'package:fluro/fluro.dart';
+import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-abstract class FlowController extends StatefulWidget {
-  final Widget child;
-
-  const FlowController(this.child, {Key? key}) : super(key: key);
+abstract class FlowController extends AutoRouter {
+  const FlowController({Key? key}) : super(key: key);
 
   @override
-  State<FlowController> createState() => FlowControllerState();
+  AutoRouterState createState() => FlowControllerState();
 }
 
-class FlowControllerState<T extends FlowController> extends State<T> {
+class FlowControllerState extends AutoRouterState {
   @override
-  Widget build(BuildContext context) {
-    return widget.child;
+  void initState() {
+    super.initState();
+  }
+
+  ApplicationState get appState => context.read();
+
+  Future<void> verifyRoute({
+    bool autoRoute = true,
+    bool requireAuth = false,
+    UserRole? requireRole,
+  }) async {
+    bool isAuthenticated = appState.currentUser != null && appState.isLoggedIn;
+    bool _requireAuth = requireAuth || requireRole != null;
+    if (_requireAuth && !isAuthenticated) {
+      await _doRoutingWhenVerifiedFailed();
+      return;
+    }
+
+    UserModel currentUser = appState.currentUser!;
+    if (requireRole != null && currentUser.role != requireRole.name) {
+      await _doRoutingWhenVerifiedFailed();
+      return;
+    }
+  }
+
+  Future<void> _doRoutingWhenVerifiedFailed() async {
+    final canPop = Navigator.canPop(context);
+    if (canPop) {
+      Navigator.of(context).pop();
+      return;
+    }
+
+    // TODO: Should show the 404 page not found
+    await context.pushRoute(const HomeRoute());
   }
 }

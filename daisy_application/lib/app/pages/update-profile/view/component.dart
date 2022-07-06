@@ -4,9 +4,12 @@ import 'package:daisy_application/app/common/style.dart';
 import 'package:daisy_application/app/common/widget/badge/custom_badge.dart';
 import 'package:daisy_application/app/pages/update-profile/model/update_profile_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/common/access_utils.dart';
+import 'package:daisy_application/common/string_validation.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:daisy_application/common/safety_utils.dart';
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({Key? key}) : super(key: key);
@@ -14,7 +17,7 @@ class UserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ApplicationState appState = context.watch();
-    UserModel currentUser = appState.currentUser;
+    UserModel currentUser = appState.currentUser!;
 
     return CustomizedBadge(
         badge: Container(
@@ -74,6 +77,9 @@ class UpdateProfileTitle extends StatelessWidget {
   }
 }
 
+String validateMessage(String? fieldName) =>
+    '${fieldName ?? ''} không thể bỏ trống';
+
 class UpdateProfileForm extends StatefulWidget {
   final VoidCallback? onSubmitted;
   const UpdateProfileForm({super.key, this.onSubmitted});
@@ -83,11 +89,13 @@ class UpdateProfileForm extends StatefulWidget {
 }
 
 class _UpdateProfileFormState extends State<UpdateProfileForm> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     ApplicationState appState = context.watch();
-    UserModel currentUser = appState.currentUser;
+    UserModel currentUser = appState.currentUser!;
     final _formKey = GlobalKey<FormState>();
     var model = context.watch<UpdateProfileState>();
     model.updatedProfile = currentUser;
@@ -107,6 +115,8 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
                   CustomTextField(
                     fieldName: 'Họ của bạn',
                     maxLines: 1,
+                    validation: (value) =>
+                        value.isNone().thenReturn(validateMessage('Họ và tên')),
                     initialValue: currentUser.lastName,
                     isShortenForm: true,
                   ),
@@ -122,17 +132,24 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
             ),
             CustomTextField(
               fieldName: 'Tên hiển thị',
+              validation: (value) =>
+                  value.isNone().thenReturn(validateMessage('Tên hiển thị')),
               maxLines: 1,
               initialValue: currentUser.displayName,
             ),
             CustomTextField(
               fieldName: 'Địa chỉ email của bạn',
+              validation: (value) => (!value.isEmail())
+                  .thenReturn('Địa chỉ email của bạn không hợp lệ'),
               maxLines: 1,
               initialValue: currentUser.email,
             ),
             CustomTextField(
               fieldName: 'Số điện thoại',
+              keyboardType: TextInputType.phone,
               maxLines: 1,
+              validation: (value) => (!value.isPhoneNumber())
+                  .thenReturn('Số điện thoại không hợp lệ'),
               initialValue: currentUser.phone,
             ),
             CustomTextField(
@@ -177,7 +194,9 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
                         minimumSize: const Size(110.0, 50.0),
                         primary: const Color(BuiltinColor.blue_gradient_01),
                       ),
-                      onPressed: widget.onSubmitted,
+                      onPressed: () => _formKey.currentState!
+                          .validate()
+                          .then(() => widget.onSubmitted!()),
                       child: const Text(
                         'Cập nhật',
                         style: TextStyle(fontSize: 15.0),
@@ -201,6 +220,9 @@ class CustomTextField extends StatelessWidget {
   final int? index;
   final bool? isShortenForm;
   final String? initialValue;
+  final GlobalKey<FormState>? formKey;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
 
   const CustomTextField({
     Key? key,
@@ -210,6 +232,9 @@ class CustomTextField extends StatelessWidget {
     this.index,
     this.isShortenForm,
     this.initialValue,
+    this.formKey,
+    this.controller,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -230,6 +255,8 @@ class CustomTextField extends StatelessWidget {
               ? (isShortenForm ?? false ? size.width * 0.3 : size.width * 0.615)
               : size.width * 0.7,
           child: TextFormField(
+            key: formKey,
+            controller: controller,
             onChanged: (value) {
               if (fieldName == 'Họ của bạn') {
                 model.updatedProfile.lastName = value;
@@ -253,6 +280,7 @@ class CustomTextField extends StatelessWidget {
             initialValue: initialValue,
             validator: validation,
             maxLines: maxLines,
+            keyboardType: keyboardType,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
             ),

@@ -1,8 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/design/design_snackbar.dart';
+import 'package:daisy_application/app/common/widget/header/header_deps.dart';
+import 'package:daisy_application/app/dialogs/alert_dialog.dart';
 import 'package:daisy_application/app/dialogs/job_apply_dialog.dart';
+import 'package:daisy_application/app/foundation/flow_controller.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
@@ -12,18 +16,19 @@ import 'package:daisy_application/core_services/http/job_application/job_applica
 import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:daisy_application/service_locator/locator.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/common/safety_utils.dart';
 
-class DicoveryJobFlowController extends AutoRouter {
+class DicoveryJobFlowController extends FlowController {
   const DicoveryJobFlowController({Key? key}) : super(key: key);
 
   @override
   AutoRouterState createState() => _DiscoveryJobFlowControllerState();
 }
 
-class _DiscoveryJobFlowControllerState extends AutoRouterState
+class _DiscoveryJobFlowControllerState extends FlowControllerState
     implements DiscoveryJobListener<AutoRouter> {
   late RequestGrpcClient _requestGrpcClient;
   late JobApplicationRestApi _applicationRestApi;
@@ -45,6 +50,8 @@ class _DiscoveryJobFlowControllerState extends AutoRouterState
   }
 
   ApplicationState get _appState => context.read();
+  HeaderAuthenticationListener get _authListener =>
+      context.findAncestorStateOfType()!;
 
   @override
   void onLoadMoreRequest() => _loadMoreRequest();
@@ -62,7 +69,6 @@ class _DiscoveryJobFlowControllerState extends AutoRouterState
     await for (var singleResult in _requestGrpcClient.startStreamingRequests(
         timeOffset: lastLoadedRequestTimeStamp)) {
       if (singleResult.failureType == FAILURE_TYPE.NONE) {
-        Debug.log(ns, 'Drawing ${singleResult.data!.length} requests model');
         _jobScreenState?.addRequests(singleResult.data!);
       }
     }
@@ -80,13 +86,58 @@ class _DiscoveryJobFlowControllerState extends AutoRouterState
 
   @override
   void onBtnApplyClicked() {
-    showDialog(
-        builder: (ctx) => JobApplyDialog(
-            context,
-            _jobScreenState?.selectedRequest ?? _jobScreenState!.requests[0],
-            _appState.currentUser!,
-            onBtnConfirmApplyClicked),
-        context: context);
+    final currentUser = _appState.currentUser;
+    if (currentUser == null) {
+      context.show(DialogAlert.error(
+        context,
+        title: 'Ứng tuyển thất bại',
+        message:
+            'Việc ứng tuyển yêu cầu phải xác minh danh tính, vui lòng hãy đăng nhập trước khi gửi yêu cầu ứng tuyển.',
+        affirmativeText: 'Login now',
+        negativeText: 'Not now',
+        onAffirmativeClicked: _onLoginDialogAffirmativeClicked,
+        onNegativeClicked: _closePopup,
+      ));
+
+      return;
+    }
+
+    if (currentUser.address.isBlank() ||
+        currentUser.email.isBlank() ||
+        currentUser.phone.isBlank()) {
+      context.show(DialogAlert.error(
+        context,
+        title: 'Ứng tuyển thất bại',
+        message:
+            'Chúng tôi cần thêm thông tin để có thể thực hiện việc ứng tuyển, vui lòng bổ sung thêm',
+        affirmativeText: 'Update info now',
+        negativeText: 'Not now',
+        onAffirmativeClicked: () {
+          context.pushRoute(const UpdateProfileRoute());
+          _closePopup();
+        },
+        onNegativeClicked: _closePopup,
+      ));
+
+      return;
+    }
+
+    context.show(
+      JobApplyDialog(
+          context,
+          _jobScreenState?.selectedRequest ?? _jobScreenState!.requests[0],
+          _appState.currentUser!,
+          onBtnConfirmApplyClicked),
+    );
+  }
+
+  void _onLoginDialogAffirmativeClicked() {
+    Navigator.of(context, rootNavigator: true).pop();
+    _authListener.onBtnSigninClicked();
+  }
+
+  void _closePopup() {
+    Navigator.of(context, rootNavigator: true).pop();
   }
 
   @override

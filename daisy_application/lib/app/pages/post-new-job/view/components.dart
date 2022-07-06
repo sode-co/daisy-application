@@ -10,6 +10,8 @@ import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:daisy_application/common/safety_utils.dart';
+import 'package:daisy_application/common/access_utils.dart';
 
 class CreateNewJobMobileBtn extends StatelessWidget {
   const CreateNewJobMobileBtn({Key? key}) : super(key: key);
@@ -88,7 +90,10 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
+                        validation: (value) => value
+                            .isNone()
+                            .thenReturn('Tên dự án không thể bỏ trống'),
                         fieldName: 'Đặt tên cụ thể cho công việc cần tuyển',
                         label: 'Tên dự án',
                         maxLines: 1,
@@ -125,10 +130,13 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
                         fieldName:
                             'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
                         label: 'Mô tả dự án',
+                        validation: (value) => value
+                            .isNone()
+                            .thenReturn('Mô tả dự án không thể bỏ trống'),
                         maxLines: 1,
                       ),
                       const SizedBox(
@@ -137,13 +145,12 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       CustomTextField(
                         fieldName: 'Ngân sách dự án',
                         label: 'Ngân sách',
+                        hintText: '100',
+                        keyboardType: TextInputType.number,
                         maxLines: 1,
-                        validation: (value) {
-                          if (value == null) {
-                            return 'Giá trị nhập vào phải là số thập phân???';
-                          }
-                          return null;
-                        },
+                        validation: (value) => value
+                            .isNone()
+                            .thenReturn('Ngân sách không thể bỏ trống'),
                       ),
                       const SizedBox(
                         height: 5.0,
@@ -327,7 +334,9 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                         minimumSize: const Size(140.0, 60.0),
                         primary: const Color(BuiltinColor.blue_gradient_01),
                       ),
-                      onPressed: widget.onSubmitted,
+                      onPressed: () => _formKey.currentState!.validate().then(
+                          () => widget.onSubmitted
+                              .then(() => widget.onSubmitted!())),
                       child: const Text(
                         'Đăng việc',
                         style: TextStyle(fontSize: 16.5),
@@ -436,6 +445,9 @@ class CustomTextField extends StatelessWidget {
   final int maxLines;
   final String? Function(String?)? validation;
   final int? index;
+  final String? hintText;
+  final TextInputType? keyboardType;
+  final GlobalKey<FormState>? formKey;
 
   const CustomTextField({
     Key? key,
@@ -444,6 +456,9 @@ class CustomTextField extends StatelessWidget {
     required this.maxLines,
     this.validation,
     this.index,
+    this.keyboardType,
+    this.formKey,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -463,6 +478,8 @@ class CustomTextField extends StatelessWidget {
               ? size.width * 0.6
               : size.width * 0.7,
           child: TextFormField(
+            key: formKey,
+            keyboardType: keyboardType,
             onChanged: (value) {
               if (label == 'Tên dự án') {
                 model.parentRequest.title = value;
@@ -491,6 +508,7 @@ class CustomTextField extends StatelessWidget {
             validator: validation,
             maxLines: maxLines,
             decoration: InputDecoration(
+              hintText: hintText,
               border: const OutlineInputBorder(),
               labelText: label,
             ),
@@ -545,12 +563,8 @@ class _ChildRequestFormState extends State<ChildRequestForm> {
           fieldName: 'Đặt tên cụ thể cho item $_index',
           label: 'Tên đầu việc',
           maxLines: 1,
-          validation: (value) {
-            if (value == null) {
-              return 'Giá trị nhập vào phải là số thập phân???';
-            }
-            return null;
-          },
+          validation: (value) =>
+              value.isNone().thenReturn('Tên đầu việc không thể bỏ trống'),
           index: _index,
         ),
         const SizedBox(

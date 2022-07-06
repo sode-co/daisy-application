@@ -9,12 +9,7 @@ abstract class RequestRestApi {
   factory RequestRestApi(Dio dio, {String baseUrl}) = _RequestRestApi;
 
   @POST('')
-  Future<void> createNewRequest(
+  Future<HttpResponse<void>> createNewRequest(
     @Body() RequestModel body,
-  );
-
-  @GET('/title/{title}')
-  Future<String> getRequestsByTitle(
-    @Path('title') String title,
   );
 }
