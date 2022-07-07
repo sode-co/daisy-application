@@ -7,23 +7,36 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using WebApplication.Pages.Utils;
+using DataAccess.UnitOfWork;
+using SaleWebApp.Paging;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
     public class IndexModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public IndexModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public IndexModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public IList<JobApplication> JobApplication { get;set; }
+        public PaginatedList<JobApplication> JobApplication { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? pageIndex)
         {
-            JobApplication = await _context.JobApplications.ToListAsync();
+            string role = UserAuthentication.Role();
+
+            if (role != "DESIGNER")
+            {
+                return Redirect("/Unauthorized");
+            }
+
+            IQueryable<JobApplication> jobApplications = _unitOfWorkFactory.Get.JobApplicationRepository.GetAll(jobApplication => jobApplication.DeletedAt == null);
+            JobApplication = await PaginatedList<JobApplication>.CreateAsync(
+                jobApplications.AsNoTracking(), pageIndex ?? 1, 10);
+
+            return Page();
         }
     }
 }

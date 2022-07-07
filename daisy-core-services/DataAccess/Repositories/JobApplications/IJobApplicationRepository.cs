@@ -11,5 +11,6 @@ namespace DataAccess.Repositories.JobApplications
     {
         void CreateJobApplication(JobApplication jobApplication);
         void UpdateJobApplication(JobApplication jobApplication);
+        void DeleteJobApplication(JobApplication jobApplication);
     }
 }

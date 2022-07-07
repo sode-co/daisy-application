@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
@@ -26,7 +27,14 @@ namespace WebApplication.Pages.Areas.Designers.Applications
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+                string role = UserAuthentication.Role();
+
+                if (role != "DESIGNER")
+                {
+                    return Redirect("/Unauthorized");
+                }
+
+                if (id == null)
             {
                 return NotFound();
             }

@@ -2,6 +2,8 @@
 @model WebApplication.Pages.Areas.Designers.Applications.IndexModel
 
 @{
+    @using Utils
+
     ViewData["Title"] = "Index";
 }
 
@@ -160,3 +162,18 @@
         }
     </tbody>
 </table>
+
+@{ var prevDisabled = !Model.JobApplication.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.JobApplication.HasNextPage ? "disabled" : ""; }
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.JobApplication.PageIndex - 1)"
+   class="btn btn-outline-dark @prevDisabled">
+    Previous
+</a>
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.JobApplication.PageIndex + 1)"
+   class="btn btn-outline-dark @nextDisabled">
+    Next
+</a>

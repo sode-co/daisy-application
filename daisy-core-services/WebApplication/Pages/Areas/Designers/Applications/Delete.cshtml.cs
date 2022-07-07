@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
     public class DeleteModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public DeleteModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public DeleteModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
+
 
         [BindProperty]
         public JobApplication JobApplication { get; set; }
@@ -29,7 +30,10 @@ namespace WebApplication.Pages.Areas.Designers.Applications
                 return NotFound();
             }
 
-            JobApplication = await _context.JobApplications.FirstOrDefaultAsync(m => m.Id == id);
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            }
 
             if (JobApplication == null)
             {
@@ -45,12 +49,17 @@ namespace WebApplication.Pages.Areas.Designers.Applications
                 return NotFound();
             }
 
-            JobApplication = await _context.JobApplications.FindAsync(id);
 
-            if (JobApplication != null)
+            using (var work = _unitOfWorkFactory.Get)
             {
-                _context.JobApplications.Remove(JobApplication);
-                await _context.SaveChangesAsync();
+                JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+
+                if (JobApplication != null)
+                {
+                    work.JobApplicationRepository.DeleteJobApplication(JobApplication);
+                    work.Save();
+                }
+
             }
 
             return RedirectToPage("./Index");

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
@@ -23,6 +24,13 @@ namespace WebApplication.Pages.Areas.Designers.Applications
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string role = UserAuthentication.Role();
+
+            if (role != "DESIGNER")
+            {
+                return Redirect("/Unauthorized");
+            }
+
             if (id == null)
             {
                 return NotFound();
