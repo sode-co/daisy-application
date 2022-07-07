@@ -8,37 +8,47 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using WebApplication.Pages.Utils;
+using static Api.Common.Constants;
 using DataAccess.UnitOfWork;
 
-namespace WebApplication.Pages.Areas.Customers.Requests
+namespace WebApplication.Pages.Areas.Designers.Applications
 {
     public class DetailsModel : PageModel
     {
         private UnitOfWorkFactory _unitOfWorkFactory;
+
         public DetailsModel(UnitOfWorkFactory unitOfWorkFactory)
         {
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public Request Request { get; set; }
+        public JobApplication JobApplication { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             string role = UserAuthentication.Role();
-
-            if (role.Equals("CUSTOMER") && role.Equals("ADMIN"))
+            if (role != "DESIGNER")
             {
                 return Redirect("/Unauthorized");
             }
+
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            }
 
-            if (Request == null)
+            if (JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
+            {
+                return Redirect("/Unauthorized");
+            }
+
+            if (JobApplication == null)
             {
                 return NotFound();
             }

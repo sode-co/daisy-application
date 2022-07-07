@@ -8,39 +8,48 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
-using WebApplication.Pages.Utils;
 using DataAccess.UnitOfWork;
+using WebApplication.Pages.Utils;
+using static Api.Common.Constants;
 
-namespace WebApplication.Pages.Areas.Customers.Requests
+namespace WebApplication.Pages.Areas.Designers.Applications
 {
     public class EditModel : PageModel
     {
         private UnitOfWorkFactory _unitOfWorkFactory;
+
         public EditModel(UnitOfWorkFactory unitOfWorkFactory)
         {
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         [BindProperty]
-        public Request Request { get; set; }
+        public JobApplication JobApplication { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             string role = UserAuthentication.Role();
-
-            if (role.Equals("CUSTOMER") && role.Equals("ADMIN"))
+            if (role != "DESIGNER")
             {
                 return Redirect("/Unauthorized");
             }
+
 
             if (id == null)
             {
                 return NotFound();
             }
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            }
 
-            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
+            if (JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
+            {
+                return Redirect("/Unauthorized");
+            }
 
-            if (Request == null)
+            if (JobApplication == null)
             {
                 return NotFound();
             }
@@ -56,9 +65,12 @@ namespace WebApplication.Pages.Areas.Customers.Requests
                 return Page();
             }
 
-            _unitOfWorkFactory.Get.RequestRepository.UpdateRequest(Request);
-            _unitOfWorkFactory.Get.Save();
-
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                JobApplication.UpdatedAt = DateTime.Now;
+                work.JobApplicationRepository.UpdateJobApplication(JobApplication);
+                work.Save();
+            }
 
             return RedirectToPage("./Index");
         }

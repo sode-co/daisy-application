@@ -1,11 +1,10 @@
-﻿@page "/request"
-@model WebApplication.Pages.Areas.Customers.Requests.IndexModel
+﻿@page
+@model WebApplication.Pages.Areas.Designers.Applications.IndexModel
 
 @{
     @using Utils
 
-    ViewData["Title"] = "Project Management";
-    string role = UserAuthentication.Role();
+    ViewData["Title"] = "Index";
 }
 
 <div>
@@ -105,103 +104,87 @@
         </g>
     </svg>
     &nbsp;
-    <span style="font-size: 22px; font-weight: 600; color: #23175c">Project management</span>
+    <span style="font-size: 22px; font-weight: 600; color: #23175c">Job you applied</span>
 </div>
-
-@{
-    if (role == "CUSTOMER")
-    {
-        <p>
-            <a asp-page="Create"><button class="btn btn-success">Create New Job Post</button></a>
-        </p>
-    }
-}
-
-<form asp-page="./Index" method="get">
-    <div class="form-actions">
-        <p>
-            Search by title: 
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-outline-success" />
-        </p>
-    </div>
-</form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Request[0].Title)
+                @Html.DisplayNameFor(model => model.JobApplication[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Request[0].Description)
+                @Html.DisplayNameFor(model => model.JobApplication[0].PreferredLanguage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Request[0].Budget)
+                @Html.DisplayNameFor(model => model.JobApplication[0].Timeline)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Request[0].Timeline)
+                @Html.DisplayNameFor(model => model.JobApplication[0].OfferedPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Request[0].CreatedAt)
+                @Html.DisplayNameFor(model => model.JobApplication[0].Status)
             </th>
-            <th style="width: 350px"></th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobApplication[0].UpdatedAt)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Request)
+        @foreach (var item in Model.JobApplication)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Budget)
+                    @Html.DisplayFor(modelItem => item.PreferredLanguage)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Timeline)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                    @Html.DisplayFor(modelItem => item.OfferedPrice)
                 </td>
-                <td style="width: 350px">
-                    <a asp-page="./Edit" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Edit</button></a>
-                    |
-                    <a asp-page="./Details" asp-route-id="@item.Id">
-                        <button class="btn btn-outline-info">
-                            Details
-                        </button>
-                    </a> |
-                    <a asp-page="../Applications/Index" asp-route-requestId="@item.Id">
-                        <button class="btn btn-outline-info">
-                            Applications
-                        </button>
-                    </a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">
-                        <button class="btn btn-outline-danger">
-                            Delete
-                        </button>
-                    </a>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    @{
+                        if (item.Status == "PENDING")
+                        {
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                        }
+                        if (item.Status == "PENDING")
+                        {
+                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        }
+                        if (item.Status == "PENDING")
+                        {
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        }
+                    }
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@{ var prevDisabled = !Model.Request.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.Request.HasNextPage ? "disabled" : ""; }
+@{ var prevDisabled = !Model.JobApplication.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.JobApplication.HasNextPage ? "disabled" : ""; }
 
 <a asp-page="./Index"
-   asp-route-pageIndex="@(Model.Request.PageIndex - 1)"
+   asp-route-pageIndex="@(Model.JobApplication.PageIndex - 1)"
    class="btn btn-outline-dark @prevDisabled">
     Previous
 </a>
 
 <a asp-page="./Index"
-   asp-route-pageIndex="@(Model.Request.PageIndex + 1)"
+   asp-route-pageIndex="@(Model.JobApplication.PageIndex + 1)"
    class="btn btn-outline-dark @nextDisabled">
     Next
 </a>

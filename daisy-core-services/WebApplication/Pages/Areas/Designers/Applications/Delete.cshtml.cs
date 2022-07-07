@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
-using WebApplication.Pages.Utils;
 using DataAccess.UnitOfWork;
+using WebApplication.Pages.Utils;
+using static Api.Common.Constants;
 
-namespace WebApplication.Pages.Areas.Customers.Requests
+namespace WebApplication.Pages.Areas.Designers.Applications
 {
     public class DeleteModel : PageModel
     {
@@ -20,26 +21,35 @@ namespace WebApplication.Pages.Areas.Customers.Requests
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
+
         [BindProperty]
-        public Request Request { get; set; }
+        public JobApplication JobApplication { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            string role = UserAuthentication.Role();
-
-            if(role.Equals("CUSTOMER") && role.Equals("ADMIN"))
-            {
-                return Redirect("/Unauthorized");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            }
 
-            if (Request == null)
+            string role = UserAuthentication.Role();
+            if (role != "DESIGNER")
+            {
+                return Redirect("/Unauthorized");
+            }
+
+            if (JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
+            {
+                return Redirect("/Unauthorized");
+            }
+
+
+            if (JobApplication == null)
             {
                 return NotFound();
             }
@@ -53,12 +63,17 @@ namespace WebApplication.Pages.Areas.Customers.Requests
                 return NotFound();
             }
 
-            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
 
-            if (Request != null)
+            using (var work = _unitOfWorkFactory.Get)
             {
-                _unitOfWorkFactory.Get.RequestRepository.DeleteRequest(Request);
-                _unitOfWorkFactory.Get.Save();
+                JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+
+                if (JobApplication != null)
+                {
+                    work.JobApplicationRepository.DeleteJobApplication(JobApplication);
+                    work.Save();
+                }
+
             }
 
             return RedirectToPage("./Index");

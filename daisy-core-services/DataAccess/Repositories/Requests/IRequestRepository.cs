@@ -18,5 +18,6 @@ namespace DataAccess.Repositories.Requests
         IEnumerable<Request> GetRequestsByTitleAndEmail(string title, string email);
         IEnumerable<Request> GetRequestsByCustomerEmail(string email);
         IEnumerable<Request> RequestPaging(DateTime timeOffset, int count);
+        IEnumerable<Request> GetRequestsDesignerHasntAppliedYet(string designerEmail);
     }
 }

@@ -1,10 +1,10 @@
-﻿@page "/request"
-@model WebApplication.Pages.Areas.Customers.Requests.IndexModel
+﻿@page 
+@model WebApplication.Pages.Areas.Designers.Requests.IndexModel
 
 @{
     @using Utils
 
-    ViewData["Title"] = "Project Management";
+    ViewData["Title"] = "Project finding";
     string role = UserAuthentication.Role();
 }
 
@@ -105,22 +105,13 @@
         </g>
     </svg>
     &nbsp;
-    <span style="font-size: 22px; font-weight: 600; color: #23175c">Project management</span>
+    <span style="font-size: 22px; font-weight: 600; color: #23175c">Job can match with you</span>
 </div>
-
-@{
-    if (role == "CUSTOMER")
-    {
-        <p>
-            <a asp-page="Create"><button class="btn btn-success">Create New Job Post</button></a>
-        </p>
-    }
-}
 
 <form asp-page="./Index" method="get">
     <div class="form-actions">
         <p>
-            Search by title: 
+            Search job by title: 
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-outline-success" />
         </p>
@@ -167,41 +158,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedAt)
                 </td>
-                <td style="width: 350px">
-                    <a asp-page="./Edit" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Edit</button></a>
-                    |
-                    <a asp-page="./Details" asp-route-id="@item.Id">
-                        <button class="btn btn-outline-info">
-                            Details
-                        </button>
-                    </a> |
-                    <a asp-page="../Applications/Index" asp-route-requestId="@item.Id">
-                        <button class="btn btn-outline-info">
-                            Applications
-                        </button>
-                    </a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">
-                        <button class="btn btn-outline-danger">
-                            Delete
-                        </button>
-                    </a>
+                <td>
+                    <a asp-page="../Applications/Create" asp-route-requestId="@item.Id"><button class="btn btn-outline-secondary">Apply</button></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-@{ var prevDisabled = !Model.Request.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.Request.HasNextPage ? "disabled" : ""; }
-
-<a asp-page="./Index"
-   asp-route-pageIndex="@(Model.Request.PageIndex - 1)"
-   class="btn btn-outline-dark @prevDisabled">
-    Previous
-</a>
-
-<a asp-page="./Index"
-   asp-route-pageIndex="@(Model.Request.PageIndex + 1)"
-   class="btn btn-outline-dark @nextDisabled">
-    Next
-</a>

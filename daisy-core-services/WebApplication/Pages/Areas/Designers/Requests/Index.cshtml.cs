@@ -10,8 +10,9 @@ using Domain.Models;
 using DataAccess.UnitOfWork;
 using WebApplication.Pages.Utils;
 using SaleWebApp.Paging;
+using AutoMapper.QueryableExtensions;
 
-namespace WebApplication.Pages.Areas.Customers.Requests
+namespace WebApplication.Pages.Areas.Designers.Requests
 {
     public class IndexModel : PageModel
     {
@@ -22,47 +23,34 @@ namespace WebApplication.Pages.Areas.Customers.Requests
         }
 
         public string CurrentFilter { get; set; }
-        public PaginatedList<Request> Request { get;set; }
+        public List<Request> Request { get;set; }
 
         public async Task<IActionResult> OnGetAsync(string searchString, int? pageIndex)
         {
 
             string role = UserAuthentication.Role();
 
-            if (role.Equals("CUSTOMER") && role.Equals("ADMIN"))
+            if (role != "DESIGNER")
             {
                 return Redirect("/Unauthorized");
             }
-
             CurrentFilter = searchString;
-            IQueryable<Request> requests;
-            if(role == "CUSTOMER")
+            List<Request> requests;
+
+            using (var work = _unitOfWorkFactory.Get)
             {
-                var email = UserAuthentication.UserLogin.Email;
+                var designerEmail = UserAuthentication.UserLogin.Email;
                 if (searchString != null)
                 {
                     pageIndex = 1;
-                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitleAndEmail(searchString, email);
+                    requests = work.RequestRepository.GetRequestsDesignerHasntAppliedYet(designerEmail).Where(req => req.Title.ToLower().Contains(searchString.ToLower())).ToList();
                 }
                 else
                 {
-                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
-                }
-            } 
-            else
-            {
-                if (searchString != null)
-                {
-                    pageIndex = 1;
-                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitle(searchString);
-                }
-                else
-                {
-                    requests = _unitOfWorkFactory.Get.RequestRepository.GetAll(req => req.DeletedAt == null);
+                    requests = work.RequestRepository.GetRequestsDesignerHasntAppliedYet(designerEmail).ToList();
                 }
             }
-            Request = await PaginatedList<Request>.CreateAsync(
-                requests.AsNoTracking(), pageIndex ?? 1, 10);
+            Request = requests;
             return Page();
         }
     }

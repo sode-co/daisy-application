@@ -59,5 +59,14 @@ namespace DataAccess.Repositories.Requests
                 .OrderByDescending(request => request.CreatedAt)
                 .Take(count)
                 .ToList();
+
+        public IEnumerable<Request> GetRequestsDesignerHasntAppliedYet(string designerEmail)
+        {
+            User designer = _dbContext.Users.ToList().FirstOrDefault(user => user.Email.Equals(designerEmail));
+            List<JobApplication> appliedJobs = _dbContext.JobApplications.Include(jobApplication => jobApplication.Request).Where(jobApplication => jobApplication.Freelancer.Equals(designer) && jobApplication.DeletedAt == null).ToList();
+            List<Request> appliedRequests = appliedJobs.Select((job) => job.Request).ToList();
+            List<Request> allRequests = _dbContext.Requests.Where(req => req.DeletedAt == null).ToList();
+            return _dbContext.Requests.Where(req => !appliedRequests.Contains(req)).ToList();
+        }
     }
 }
