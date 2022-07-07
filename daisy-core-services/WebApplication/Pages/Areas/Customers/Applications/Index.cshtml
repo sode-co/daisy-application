@@ -129,9 +129,6 @@
                 @Html.DisplayNameFor(model => model.JobApplication[0].Timeline)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.JobApplication[0].OfferedPrice)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.JobApplication[0].Status)
             </th>
             <th>
@@ -163,18 +160,13 @@
                 @Html.DisplayFor(modelItem => item.Timeline)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OfferedPrice)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Approve" asp-route-id="@item.Id" asp-route-freelancerId="@item.Freelancer.Id" asp-route-requestId="@item.Request.Id">Approve</a>
             </td>
         </tr>
         }

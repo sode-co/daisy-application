@@ -32,11 +32,15 @@ namespace WebApplication.Pages.Areas.Customers.Applications
                 return Redirect("/Unauthorized");
             }
 
-            IQueryable<JobApplication> jobApplications;
-                jobApplications = _unitOfWorkFactory.Get.JobApplicationRepository.GetAll(jobApplication => jobApplication.Request.Id == requestId && jobApplication.DeletedAt == null).Include(jobApplication => jobApplication.Freelancer);
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                IQueryable<JobApplication> jobApplications;
 
-            JobApplication = await PaginatedList<JobApplication>.CreateAsync(
+                jobApplications = work.JobApplicationRepository.GetAll(jobApplication => jobApplication.Request.Id == requestId && jobApplication.DeletedAt == null).Include(jobApplication => jobApplication.Freelancer).Include(jobApplication => jobApplication.Request);
+                JobApplication = await PaginatedList<JobApplication>.CreateAsync(
                 jobApplications.AsNoTracking(), pageIndex ?? 1, 10);
+
+            }
 
             return Page();
         }
