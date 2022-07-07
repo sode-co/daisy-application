@@ -165,9 +165,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>
-            <td>
-                <a asp-page="./Approve" asp-route-id="@item.Id" asp-route-freelancerId="@item.Freelancer.Id" asp-route-requestId="@item.Request.Id">Approve</a>
-            </td>
+            @{
+                if(item.Status == "PENDING")
+                {
+                    <td>
+                        <a asp-page="./Approve" asp-route-id="@item.Id" asp-route-freelancerId="@item.Freelancer.Id" asp-route-requestId="@item.Request.Id">Approve</a>
+                    </td>
+                }
+            }
         </tr>
         }
     </tbody>

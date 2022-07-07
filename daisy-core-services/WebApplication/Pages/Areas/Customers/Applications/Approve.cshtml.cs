@@ -30,23 +30,19 @@ namespace WebApplication.Pages.Areas.Customers.Applications
         public async Task<IActionResult> OnGetAsync(int? id, int? freelancerId, int? requestId)
         {
             string role = UserAuthentication.Role();
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                JobApplication = work.JobApplicationRepository.Get((int)id);
+                Designer = work.UserRepository.GetUser((int)freelancerId);
+            }
 
             if (role != "CUSTOMER" && role != "ADMIN")
             {
                 return Redirect("/Unauthorized");
             }
-
-            if (id == null)
+            if(JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
             {
-                return NotFound();
-            }
-
-            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)requestId);
-            Designer = _unitOfWorkFactory.Get.UserRepository.GetUser((int)freelancerId);
-
-            if (Request == null)
-            {
-                return NotFound();
+                return Redirect("/Unauthorized");
             }
             return Page();
         }
@@ -64,6 +60,13 @@ namespace WebApplication.Pages.Areas.Customers.Applications
                 JobApplication.Status = STATUS_JOB_APPLICATION.APPROVE;
                 work.JobApplicationRepository.UpdateJobApplication(JobApplication);
                 work.Save();
+                List<JobApplication> listRejectedApplication = work.JobApplicationRepository.GetAll().Include(job => job.Request).Where(job => job.Request.Id == requestId && job.Id != id).ToList();
+                foreach(var application in listRejectedApplication)
+                {
+                    application.Status = STATUS_JOB_APPLICATION.REJECT;
+                    work.JobApplicationRepository.UpdateJobApplication(application);
+                    work.Save();
+                }
             }
             return RedirectToPage("./Index", new { requestId = requestId });
         }
