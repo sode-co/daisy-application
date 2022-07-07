@@ -10,6 +10,7 @@ using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
 using WebApplication.Pages.Utils;
+using static Api.Common.Constants;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
@@ -27,20 +28,25 @@ namespace WebApplication.Pages.Areas.Designers.Applications
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-                string role = UserAuthentication.Role();
+            string role = UserAuthentication.Role();
+            if (role != "DESIGNER")
+            {
+                return Redirect("/Unauthorized");
+            }
 
-                if (role != "DESIGNER")
-                {
-                    return Redirect("/Unauthorized");
-                }
 
-                if (id == null)
+            if (id == null)
             {
                 return NotFound();
             }
             using (var work = _unitOfWorkFactory.Get)
             {
                 JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            }
+
+            if (JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
+            {
+                return Redirect("/Unauthorized");
             }
 
             if (JobApplication == null)

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
+using WebApplication.Pages.Utils;
+using static Api.Common.Constants;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
@@ -34,6 +36,18 @@ namespace WebApplication.Pages.Areas.Designers.Applications
             {
                 JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
             }
+
+            string role = UserAuthentication.Role();
+            if (role != "DESIGNER")
+            {
+                return Redirect("/Unauthorized");
+            }
+
+            if (JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
+            {
+                return Redirect("/Unauthorized");
+            }
+
 
             if (JobApplication == null)
             {

@@ -8,16 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using WebApplication.Pages.Utils;
+using static Api.Common.Constants;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
     public class DetailsModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
+        private UnitOfWorkFactory _unitOfWorkFactory;
 
-        public DetailsModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        public DetailsModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         public JobApplication JobApplication { get; set; }
@@ -25,18 +27,26 @@ namespace WebApplication.Pages.Areas.Designers.Applications
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             string role = UserAuthentication.Role();
-
             if (role != "DESIGNER")
             {
                 return Redirect("/Unauthorized");
             }
+
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            JobApplication = await _context.JobApplications.FirstOrDefaultAsync(m => m.Id == id);
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            }
+
+            if (JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
+            {
+                return Redirect("/Unauthorized");
+            }
 
             if (JobApplication == null)
             {
