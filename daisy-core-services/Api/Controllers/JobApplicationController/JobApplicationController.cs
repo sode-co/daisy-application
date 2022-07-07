@@ -57,8 +57,8 @@ namespace Api.Controllers.JobApplicationController
             }
         }
 
-        // GET: v1/applications/list
-        [HttpGet("list")]
+        // GET: v1/applications
+        [HttpGet("")]
         [Authorize(Policy = ROLE.DESIGNER)]
         public IEnumerable<JobApplication> GetJobApplicationByFreelancerId()
         {

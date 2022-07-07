@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static Api.Common.Constants;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,13 +28,14 @@ namespace Api.Controllers.ProjectController
 
         // GET v1/project/:projectId
         [HttpGet("{projectId}")]
-        public Project GetProjectById(int projectId)
+        public IActionResult GetProjectById(int projectId)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                var project = work.ProjectRepository.GetFirstOrDefault(project => project.Id == projectId, "Customer,Freelancer,Category,Payment,Request");
-                var result = _mapper.Map<Project, Project>(project);
-                return result;
+                var projects = work.ProjectRepository.GetAll(project => project.Id == projectId, null, "Customer,Freelancer,Category,Payment,Request");
+                if (projects.Count() == 0) return NotFound();
+
+                return Ok(projects.First());
             }
         }
 
@@ -98,18 +100,6 @@ namespace Api.Controllers.ProjectController
             }
         }
 
-        // PUT v1/project
-        [HttpPut]
-        public JsonResult UpdateProject(int projectId)
-        {
-            //using (var work = _unitOfWorkFactory.Get)
-            //{
-            //    work.ProjectRepository.DeactivateProject(projectId, PROJECT_STATUS.CANCELED);
-            //    work.Save();
-                return Json(new { message = "ok" });
-            //}
-        }
-
         // GET v1/project/list
         [HttpGet("list")]
         public IEnumerable<Project> GetListAllProject()
@@ -134,19 +124,26 @@ namespace Api.Controllers.ProjectController
             }
         }
 
-        [HttpGet("customer/status")]
-        [Authorize(Policy = ROLE.CUSTOMER)]
-        public IEnumerable<Project> GetProjectByStatus(string projectStatus)
+        [HttpGet("")]
+        public IEnumerable<Project> GetProjects()
         {
-            using (var work = _unitOfWorkFactory.Get)
-            {
-                User loginUser = (User)HttpContext.Items["User"];
-                var projectList = work.ProjectRepository.GetAll(null, null, "Customer,Freelancer,Category,Payment,Request");
-                int customerId = loginUser.Id;
-                IEnumerable<Project> projects = work.ProjectRepository.GetProjectsByStatus(customerId, projectList, projectStatus);
+            using var work = _unitOfWorkFactory.Get;
+            User loginUser = (User)HttpContext.Items["User"];
+            return work.ProjectRepository.GetAll((project) =>
+                      (project.Customer.Id.Equals(loginUser.Id) || project.Freelancer.Id.Equals(loginUser.Id)),
+                   null, "Customer,Freelancer,Category,Payment,Request").ToList();
+        }
 
-                return projects;
-            }
+        [HttpGet("status/{status}")]
+        [Authorize]
+        public IEnumerable<Project> GetProjectByStatus(string status)
+        {
+            using var work = _unitOfWorkFactory.Get;
+            User loginUser = (User)HttpContext.Items["User"];
+            return work.ProjectRepository.GetAll((project) =>
+                      (project.Customer.Id == loginUser.Id || project.Freelancer.Id == loginUser.Id) &&
+                      status.Equals(project.Status),
+                   null, "Customer,Freelancer,Category,Payment,Request").ToList();
         }
     }
 }

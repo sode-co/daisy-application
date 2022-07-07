@@ -29,6 +29,11 @@ namespace DataAccess.Repositories.Projects
                 throw new Exception("Job application not found!");
             }
 
+            List<JobApplication> appliedJobs = new List<JobApplication>();
+            int? v = 2;
+            int x = v.Value;
+            List<Request> appliedRequests = appliedJobs.Select((job) => job.Request).ToList();
+
             Request req = _dbContext.Requests
                     .Include(r => r.Customer)
                     .Include(r => r.Category)
