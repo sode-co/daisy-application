@@ -120,4 +120,54 @@ extension CommonComponent on WorkspaceState {
           style: Design.textButtonSmall(textColor: cardInfo.buttonColor!),
         ),
       );
+
+  Widget createItemButton(
+          {Function()? onMainBtnClicked,
+          Function()? onOptionBtnClicked,
+          Color? buttonColor,
+          required String buttonText}) =>
+      LayoutBuilder(builder: (context, constraint) {
+        return Row(
+          children: [
+            Expanded(
+              child: InkWell(
+                  onTap: () {},
+                  child: Container(
+                      height: constraint.maxHeight,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: buttonColor ?? Design.accentRed.shade400,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5))),
+                      child: Text(
+                        buttonText,
+                        style: Design.textButtonSmall(
+                            textColor: Design.colorWhite),
+                      ))),
+            ),
+            const SizedBox(width: Design.contentSpacing),
+            InkWell(
+              onTap: onOptionBtnClicked,
+              child: Container(
+                  height: constraint.maxHeight,
+                  width: constraint.maxWidth * 0.3,
+                  decoration: BoxDecoration(
+                      color: Design.accentRed.shade400,
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(5),
+                          bottomRight: Radius.circular(5))),
+                  child: const Icon(
+                    Icons.more_horiz,
+                    color: Design.colorWhite,
+                  )),
+            )
+          ],
+        );
+      });
+
+  Widget createItemDivider() => Container(
+        height: 2,
+        decoration: BoxDecoration(color: Design.colorNeutral.shade400),
+      );
 }

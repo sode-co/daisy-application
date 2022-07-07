@@ -7,8 +7,8 @@ extension HeaderWorkspace on WorkspaceState {
         color: Design.headerColor,
         padding: const EdgeInsets.only(
             left: Design.headerSpacing * 2,
-            top: Design.headerSpacing,
-            bottom: Design.headerSpacing),
+            top: Design.headerSpacing * 3,
+            bottom: Design.headerSpacing * 2),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

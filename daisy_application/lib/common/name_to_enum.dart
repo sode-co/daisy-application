@@ -24,4 +24,15 @@ extension EnumCreator on String {
 
     throw UnsupportedError('ProjectStatus not include any value name $this');
   }
+
+  RequestStatus toRequestStatus() {
+    switch (this) {
+      case 'AVAILABLE':
+        return RequestStatus.AVAILABLE;
+      case 'TAKEN':
+        return RequestStatus.TAKEN;
+    }
+
+    throw UnsupportedError('RequestStatus not include any value name $this');
+  }
 }
