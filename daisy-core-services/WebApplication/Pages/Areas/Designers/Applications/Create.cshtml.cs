@@ -9,6 +9,7 @@ using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
 using WebApplication.Pages.Utils;
+using static Api.Common.Constants;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
@@ -19,7 +20,6 @@ namespace WebApplication.Pages.Areas.Designers.Applications
         public CreateModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context, UnitOfWorkFactory unitOfWorkFactory)
         {
             this._unitOfWorkFactory = unitOfWorkFactory;
-
         }
         public IActionResult OnGet()
         {
@@ -47,7 +47,8 @@ namespace WebApplication.Pages.Areas.Designers.Applications
                 JobApplication.CreatedAt = DateTime.Now;
                 JobApplication.UpdatedAt = DateTime.Now;
                 JobApplication.ResolvedAt = DateTime.Now;
-                JobApplication.Status = "WAITING";
+                JobApplication.Timeline = request.Timeline;
+                JobApplication.Status = STATUS_JOB_APPLICATION.PENDING;
                 JobApplication.ObjectId = "";
 
                 work.JobApplicationRepository.Add(JobApplication);

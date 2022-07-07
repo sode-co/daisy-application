@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.Areas.Designers.Applications
 {
     public class EditModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
+        private UnitOfWorkFactory _unitOfWorkFactory;
 
-        public EditModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        public EditModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         [BindProperty]
@@ -29,8 +30,10 @@ namespace WebApplication.Pages.Areas.Designers.Applications
             {
                 return NotFound();
             }
-
-            JobApplication = await _context.JobApplications.FirstOrDefaultAsync(m => m.Id == id);
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                JobApplication = work.JobApplicationRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            }
 
             if (JobApplication == null)
             {
@@ -48,30 +51,14 @@ namespace WebApplication.Pages.Areas.Designers.Applications
                 return Page();
             }
 
-            _context.Attach(JobApplication).State = EntityState.Modified;
-
-            try
+            using (var work = _unitOfWorkFactory.Get)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!JobApplicationExists(JobApplication.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                JobApplication.UpdatedAt = DateTime.Now;
+                work.JobApplicationRepository.UpdateJobApplication(JobApplication);
+                work.Save();
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool JobApplicationExists(int id)
-        {
-            return _context.JobApplications.Any(e => e.Id == id);
         }
     }
 }

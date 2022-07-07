@@ -14,11 +14,6 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="JobApplication.ResolvedAt" class="control-label"></label>
-                <input asp-for="JobApplication.ResolvedAt" class="form-control" />
-                <span asp-validation-for="JobApplication.ResolvedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="JobApplication.Description" class="control-label"></label>
                 <input asp-for="JobApplication.Description" class="form-control" />
                 <span asp-validation-for="JobApplication.Description" class="text-danger"></span>
@@ -28,47 +23,15 @@
                 <input asp-for="JobApplication.PreferredLanguage" class="form-control" />
                 <span asp-validation-for="JobApplication.PreferredLanguage" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="JobApplication.Timeline" class="control-label"></label>
-                <input asp-for="JobApplication.Timeline" class="form-control" />
-                <span asp-validation-for="JobApplication.Timeline" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobApplication.OfferedPrice" class="control-label"></label>
-                <input asp-for="JobApplication.OfferedPrice" class="form-control" />
-                <span asp-validation-for="JobApplication.OfferedPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobApplication.Data" class="control-label"></label>
-                <input asp-for="JobApplication.Data" class="form-control" />
-                <span asp-validation-for="JobApplication.Data" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobApplication.Status" class="control-label"></label>
-                <input asp-for="JobApplication.Status" class="form-control" />
-                <span asp-validation-for="JobApplication.Status" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="JobApplication.OfferedPrice" />
+            <input type="hidden" asp-for="JobApplication.Timeline" />
+            <input type="hidden" asp-for="JobApplication.ResolvedAt" />
+            <input type="hidden" asp-for="JobApplication.Data" />
+            <input type="hidden" asp-for="JobApplication.Status" />
             <input type="hidden" asp-for="JobApplication.Id" />
-            <div class="form-group">
-                <label asp-for="JobApplication.CreatedAt" class="control-label"></label>
-                <input asp-for="JobApplication.CreatedAt" class="form-control" />
-                <span asp-validation-for="JobApplication.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobApplication.UpdatedAt" class="control-label"></label>
-                <input asp-for="JobApplication.UpdatedAt" class="form-control" />
-                <span asp-validation-for="JobApplication.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobApplication.DeletedAt" class="control-label"></label>
-                <input asp-for="JobApplication.DeletedAt" class="form-control" />
-                <span asp-validation-for="JobApplication.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobApplication.ObjectId" class="control-label"></label>
-                <input asp-for="JobApplication.ObjectId" class="form-control" />
-                <span asp-validation-for="JobApplication.ObjectId" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="JobApplication.CreatedAt" />
+            <input type="hidden" asp-for="JobApplication.DeletedAt" />
+            <input type="hidden" asp-for="JobApplication.ObjectId" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

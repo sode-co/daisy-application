@@ -21,5 +21,9 @@ namespace DataAccess.Repositories.JobApplications
         {
             _dbContext.JobApplications.Add(jobApplication);
         }
+        public void UpdateJobApplication(JobApplication jobApplication)
+        {
+            _dbContext.JobApplications.Update(jobApplication);
+        }
     }
 }
