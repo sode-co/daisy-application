@@ -25,6 +25,7 @@ namespace WebApplication.Pages.Areas.Designers.Applications
 
         public async Task<IActionResult> OnGetAsync(int? pageIndex)
         {
+            string email = UserAuthentication.UserLogin.Email;
             string role = UserAuthentication.Role();
 
             if (role != "DESIGNER")
@@ -32,7 +33,7 @@ namespace WebApplication.Pages.Areas.Designers.Applications
                 return Redirect("/Unauthorized");
             }
 
-            IQueryable<JobApplication> jobApplications = _unitOfWorkFactory.Get.JobApplicationRepository.GetAll(jobApplication => jobApplication.DeletedAt == null);
+            IQueryable<JobApplication> jobApplications = _unitOfWorkFactory.Get.JobApplicationRepository.GetAll(jobApplication => jobApplication.DeletedAt == null).Include(job => job.Freelancer).Where(job => job.Freelancer.Email.Equals(email));
             JobApplication = await PaginatedList<JobApplication>.CreateAsync(
                 jobApplications.AsNoTracking(), pageIndex ?? 1, 10);
 
