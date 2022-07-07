@@ -14,6 +14,9 @@ class Debug {
   static void _invoked(List arguments) {
     String rootMessage = '';
     for (final argument in arguments) {
+      if (argument is List<JsonSerializable>) {
+        rootMessage += ' ${json.encode(argument)}';
+      }
       if (argument is JsonSerializable) {
         rootMessage += ' ${json.encode(argument.toJson())}';
       } else {

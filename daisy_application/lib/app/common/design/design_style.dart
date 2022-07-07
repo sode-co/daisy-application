@@ -66,7 +66,7 @@ abstract class Design {
 
   static const colorWhite = Colors.white;
   static const colorBlack = Colors.black;
-
+  static const Color headerColor = Color(0xFFF2F2F2);
   static const Color primaryTextColor = colorBlack;
   static const Color secondaryTextColor = Colors.black87;
 
@@ -122,12 +122,21 @@ abstract class Design {
   static TextStyle textBodyBold({Color? textColor}) =>
       textBody(textColor: textColor, bold: true);
 
-  static TextStyle textBody({Color? textColor, bool bold = false}) {
+  static TextStyle textBody(
+      {Color? textColor, bool bold = false, bool isEnable = false}) {
     return TextStyle(
-        color: toTextColor(textColor: textColor),
+        color: toTextColor(textColor: textColor, isEnabled: isEnable),
         fontSize: 16,
         height: 1.37,
         fontWeight: _toFontWeight(bold));
+  }
+
+  static TextStyle textLogo({Color? textColor}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor),
+        fontSize: 60,
+        fontFamily: 'larsseit',
+        fontWeight: FontWeight.w900);
   }
 
   static TextStyle textBodyFold({Color? textColor, bool bold = false}) {
@@ -147,10 +156,26 @@ abstract class Design {
         fontWeight: _toFontWeight(bold));
   }
 
+  static TextStyle textName(
+      {Color? textColor = Design.colorBlack, bold = false, isEnabled = true}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor, isEnabled: isEnabled),
+        fontSize: 15,
+        fontStyle: FontStyle.italic,
+        fontWeight: FontWeight.w700);
+  }
+
   static TextStyle textButton({Color? textColor, isEnabled = true}) {
     return TextStyle(
         color: toTextColor(textColor: textColor, isEnabled: isEnabled),
         fontSize: 20,
+        fontWeight: FontWeight.w900);
+  }
+
+  static TextStyle textButtonSmall({Color? textColor, isEnabled = true}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor, isEnabled: isEnabled),
+        fontSize: 16,
         fontWeight: FontWeight.w900);
   }
 

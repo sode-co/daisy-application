@@ -10,4 +10,7 @@ abstract class JobApplicationRestApi {
 
   @POST('')
   Future<HttpResponse<void>> create(@Body() JobApplicationModel body);
+
+  @GET('')
+  Future<HttpResponse<List<JobApplicationModel>>> GetAll();
 }

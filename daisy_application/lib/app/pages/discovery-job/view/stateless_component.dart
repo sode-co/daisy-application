@@ -6,6 +6,7 @@ import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/style.dart';
 import 'package:flutter/material.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/common/access_utils.dart';
 
 class IntroJobCard extends StatelessWidget {
   final Function(RequestModel)? onItemSelected;
@@ -18,7 +19,7 @@ class IntroJobCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: Design.itemSpacing),
       child: InkWell(
-        onTap: onItemSelected == null ? null : () => onItemSelected!(request),
+        onTap: () => onItemSelected.then(() => onItemSelected!(request)),
         child: SizedBox(
           width: context.isScreenType(ScreenType.DESKTOP) ? 400.0 : 380.0,
           child: Row(

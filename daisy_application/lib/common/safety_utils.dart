@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 extension SafetyExt on JsonSerializable {
   T? access<T>(String path) {
-    if (this == null || this is String || _isNumeric(toString())) return null;
+    if (this is String || _isNumeric(toString())) return null;
     List<String> fields = path.split('.');
 
     if (fields.isEmpty) return null;
@@ -29,21 +29,22 @@ extension SafetyUtils on dynamic {
     return false;
   }
 
-  bool isBlank() {
-    if (this == null) return false;
+  T? or<T>(T? replacement) {
+    if (this.isNone()) return replacement;
 
-    if (this is String) return toString().trim() != '';
-
-    return true;
+    return this;
   }
-}
 
-bool _isNumeric(String str) {
-  if (str == null) {
+  bool isBlank() {
+    if (this == null) return true;
+
+    if (this is String) return toString().trim() == '';
+
     return false;
   }
-  return double.tryParse(str) != null;
 }
+
+bool _isNumeric(String str) => double.tryParse(str) != null;
 
 void main(List<String> args) {
   // Object abc = {'name': 'a'};

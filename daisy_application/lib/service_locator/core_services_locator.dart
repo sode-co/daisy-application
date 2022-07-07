@@ -5,6 +5,7 @@ import 'package:daisy_application/core_services/http/authentication/authenticati
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
+import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/http/user/user_rest_api.dart';
 import 'package:daisy_application/core_services/http/users/users_rest_api.dart';
@@ -63,6 +64,9 @@ class CoreServiceLocator {
     locator.registerFactory<JobApplicationRestApi>(() => JobApplicationRestApi(
         locator.get(),
         baseUrl: '${Config.API_URL}/v1/application'));
+
+    locator.registerFactory<ProjectRestApi>(() =>
+        ProjectRestApi(locator.get(), baseUrl: '${Config.API_URL}/v1/project'));
   }
 
   static Future<void> _initPersistentService() async {
