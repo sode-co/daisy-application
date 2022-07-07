@@ -26,7 +26,7 @@ namespace WebApplication.Pages.Areas.Customers.Requests
         {
             string role = UserAuthentication.Role();
 
-            if (role != "CUSTOMER" && role != "ADMIN")
+            if (role.Equals("CUSTOMER") && role.Equals("ADMIN"))
             {
                 return Redirect("/Unauthorized");
             }

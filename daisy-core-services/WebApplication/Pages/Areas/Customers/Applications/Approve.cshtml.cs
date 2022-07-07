@@ -30,17 +30,15 @@ namespace WebApplication.Pages.Areas.Customers.Applications
         public async Task<IActionResult> OnGetAsync(int? id, int? freelancerId, int? requestId)
         {
             string role = UserAuthentication.Role();
-            using (var work = _unitOfWorkFactory.Get)
-            {
-                JobApplication = work.JobApplicationRepository.Get((int)id);
-                Designer = work.UserRepository.GetUser((int)freelancerId);
-            }
+            using var work = _unitOfWorkFactory.Get;
+            JobApplication = work.JobApplicationRepository.Get(id.Value);
+            Designer = work.UserRepository.GetUser(freelancerId.Value);
 
-            if (role != "CUSTOMER" && role != "ADMIN")
+            if (role.Equals("CUSTOMER") && role.Equals("ADMIN"))
             {
                 return Redirect("/Unauthorized");
             }
-            if(JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
+            if (JobApplication.Status != STATUS_JOB_APPLICATION.PENDING)
             {
                 return Redirect("/Unauthorized");
             }
@@ -56,15 +54,14 @@ namespace WebApplication.Pages.Areas.Customers.Applications
 
             using (var work = _unitOfWorkFactory.Get)
             {
-               JobApplication = work.JobApplicationRepository.Get((int)id);
+               JobApplication = work.JobApplicationRepository.Get(id.Value);
                 JobApplication.Status = STATUS_JOB_APPLICATION.APPROVE;
                 work.JobApplicationRepository.UpdateJobApplication(JobApplication);
                 work.Save();
-                List<JobApplication> listRejectedApplication = work.JobApplicationRepository.GetAll().Include(job => job.Request).Where(job => job.Request.Id == requestId && job.Id != id).ToList();
-                foreach(var application in listRejectedApplication)
+                List<JobApplication> listRejectedApplication = work.JobApplicationRepository.GetAll((job) => job.Request.Id == requestId && job.Id != id, null, "Request").ToList();
+                foreach (var application in listRejectedApplication)
                 {
                     application.Status = STATUS_JOB_APPLICATION.REJECT;
-                    work.JobApplicationRepository.UpdateJobApplication(application);
                     work.Save();
                 }
             }
