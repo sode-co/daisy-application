@@ -10,6 +10,7 @@ using Domain.Models;
 using DataAccess.UnitOfWork;
 using WebApplication.Pages.Utils;
 using SaleWebApp.Paging;
+using AutoMapper.QueryableExtensions;
 
 namespace WebApplication.Pages.Areas.Designers.Requests
 {
@@ -22,7 +23,7 @@ namespace WebApplication.Pages.Areas.Designers.Requests
         }
 
         public string CurrentFilter { get; set; }
-        public PaginatedList<Request> Request { get;set; }
+        public List<Request> Request { get;set; }
 
         public async Task<IActionResult> OnGetAsync(string searchString, int? pageIndex)
         {
@@ -33,21 +34,23 @@ namespace WebApplication.Pages.Areas.Designers.Requests
             {
                 return Redirect("/Unauthorized");
             }
-
             CurrentFilter = searchString;
-            IQueryable<Request> requests;
-            
-            if (searchString != null)
+            List<Request> requests;
+
+            using (var work = _unitOfWorkFactory.Get)
             {
-                pageIndex = 1;
-                requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitle(searchString);
+                var designerEmail = UserAuthentication.UserLogin.Email;
+                if (searchString != null)
+                {
+                    pageIndex = 1;
+                    requests = work.RequestRepository.GetRequestsDesignerHasntAppliedYet(designerEmail).Where(req => req.Title.ToLower().Contains(searchString.ToLower())).ToList();
+                }
+                else
+                {
+                    requests = work.RequestRepository.GetRequestsDesignerHasntAppliedYet(designerEmail).ToList();
+                }
             }
-            else
-            {
-                requests = _unitOfWorkFactory.Get.RequestRepository.GetAll(req => req.DeletedAt == null);
-            }
-            Request = await PaginatedList<Request>.CreateAsync(
-                requests.AsNoTracking(), pageIndex ?? 1, 10);
+            Request = requests;
             return Page();
         }
     }
