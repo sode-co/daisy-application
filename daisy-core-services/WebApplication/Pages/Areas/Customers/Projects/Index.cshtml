@@ -14,15 +14,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Project[0].ResolvedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project[0].Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project[0].PreferredLanguage)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Project[0].Name)
             </th>
             <th>
@@ -33,6 +24,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Project[0].Budget)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].PreferredLanguage)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Project[0].IsAllowedPublic)
@@ -50,47 +44,57 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Project) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ResolvedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreferredLanguage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Timeline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Budget)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAllowedPublic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Project)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Timeline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Budget)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreferredLanguage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAllowedPublic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{ var prevDisabled = !Model.Project.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Project.HasNextPage ? "disabled" : ""; }
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Project.PageIndex - 1)"
+   class="btn btn-outline-dark @prevDisabled">
+    Previous
+</a>
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Project.PageIndex + 1)"
+   class="btn btn-outline-dark @nextDisabled">
+    Next
+</a>

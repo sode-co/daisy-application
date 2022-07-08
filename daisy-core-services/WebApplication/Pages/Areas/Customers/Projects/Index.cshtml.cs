@@ -7,23 +7,26 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using DataAccess.UnitOfWork;
+using SaleWebApp.Paging;
 
 namespace WebApplication.Pages.Areas.Customers.Projects
 {
     public class IndexModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public IndexModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public IndexModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public IList<Project> Project { get;set; }
+        public string CurrentFilter { get; set; }
+        public PaginatedList<Project> Project { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? pageIndex)
         {
-            Project = await _context.Projects.ToListAsync();
+            IQueryable<Project> projects = _unitOfWorkFactory.Get.ProjectRepository.GetAll();
+            Project = await PaginatedList<Project>.CreateAsync(projects.AsNoTracking(), pageIndex ?? 1, 10);
         }
     }
 }
