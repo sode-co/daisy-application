@@ -1,6 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart';
 import 'package:daisy_application/app/pages/work_space/view/work_space_screen.dart';
+import 'package:daisy_application/app/router/admin_router.gr.dart';
+import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/common/name_to_enum.dart';
 import 'package:flutter/material.dart';
 
 class WorkspaceCardInfo {
@@ -171,4 +176,88 @@ extension CommonComponent on WorkspaceState {
         height: 2,
         decoration: BoxDecoration(color: Design.colorNeutral.shade400),
       );
+
+  Widget getEmptyMessageByTab(WorkspaceTab tab) {
+    switch (tab) {
+      case WorkspaceTab.AppliedRequest:
+      case WorkspaceTab.PostedRequest:
+        return createEmptyAllRequestMessage();
+      case WorkspaceTab.AllProjects:
+      case WorkspaceTab.ActiveProjects:
+      case WorkspaceTab.CanceledProjects:
+      case WorkspaceTab.DoneProjects:
+        return createEmptyAllProjectMessage();
+    }
+  }
+
+  Widget createEmptyAllRequestMessage({double? width, double? height}) =>
+      Container(
+          padding: const EdgeInsets.all(Design.contentSpacing),
+          width: width,
+          height: height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              currentUser.role!.toUserRole() == UserRole.CUSTOMER
+                  ? Text(
+                      'Bạn vẫn chưa đăng tin nào',
+                      style: Design.textLogo(),
+                    )
+                  : Text(
+                      'Bạn hiện chưa ứng tuyển dự án',
+                      style: Design.textLogo(),
+                    ),
+              const SizedBox(height: Design.contentSpacing),
+              Container(
+                width: size.width * 0.2,
+                height: 5,
+                decoration: const BoxDecoration(color: Colors.black),
+              ),
+              const SizedBox(height: Design.headerSpacing),
+              currentUser.role!.toUserRole() == UserRole.CUSTOMER
+                  ? ButtonInfo(
+                      text: 'Hãy đăng thêm dự án mới tại đây',
+                      onPressed: () =>
+                          context.pushRoute(const PostNewJobRoute()),
+                    )
+                  : ButtonInfo(
+                      text: 'Cùng nhau tìm kiếm cơ hội việc làm nào',
+                      onPressed: () =>
+                          context.pushRoute(const DicoveryJobRoute()),
+                    )
+            ],
+          ));
+
+  Widget createEmptyAllProjectMessage({double? width, double? height}) =>
+      Container(
+          padding: const EdgeInsets.all(Design.contentSpacing),
+          width: width,
+          height: height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Bạn vẫn chưa có dự án nào',
+                style: Design.textLogo(),
+              ),
+              const SizedBox(height: Design.contentSpacing),
+              Container(
+                width: size.width * 0.2,
+                height: 5,
+                decoration: const BoxDecoration(color: Colors.black),
+              ),
+              const SizedBox(height: Design.headerSpacing),
+              currentUser.role!.toUserRole() == UserRole.CUSTOMER
+                  ? ButtonInfo(
+                      text: 'Hãy đăng dự án mới nào',
+                      onPressed: () =>
+                          context.pushRoute(const PostNewJobRoute()),
+                    )
+                  : ButtonInfo(
+                      text: 'Tìm kiếm dự án mới tại đây',
+                      onPressed: () =>
+                          context.pushRoute(const DicoveryJobRoute()),
+                    )
+            ],
+          ));
 }

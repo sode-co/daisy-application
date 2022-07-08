@@ -38,7 +38,7 @@ class _RequestRestApi implements RequestRestApi {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<RequestModel>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '',
+                .compose(_dio.options, '/posted',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!

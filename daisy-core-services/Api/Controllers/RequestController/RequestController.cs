@@ -139,12 +139,12 @@ namespace Api.Controllers.RequestController
         }
 
         [Authorize(ROLE.CUSTOMER)]
-        [HttpGet("")]
+        [HttpGet("posted")]
         public IEnumerable<Request> GetAll()
         {
             int userId = ((User)HttpContext.Items["User"]).Id;
             using var work = _unitOfWorkFactory.Get;
-            return work.RequestRepository.GetAll((request) => request.Customer.Id.Equals(userId)).ToList();
+            return work.RequestRepository.GetAll((request) => request.Customer.Id.Equals(userId)).Take(30).ToList();
         }
 
         [Authorize(ROLE.DESIGNER)]
@@ -159,7 +159,7 @@ namespace Api.Controllers.RequestController
                         null, "Request")
                     .Select((application) => application.Request.Id);
 
-            return work.RequestRepository.GetAll(request => appliedRequestId.Contains(request.Id)).ToList();
+            return work.RequestRepository.GetAll(request => appliedRequestId.Contains(request.Id)).Take(30).ToList();
         }
     }
 }

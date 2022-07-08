@@ -15,6 +15,7 @@ import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart
 import 'package:daisy_application/app/pages/work_space/view/header_workspace.dart';
 import 'package:daisy_application/app/pages/work_space/view/item_project.dart';
 import 'package:daisy_application/app/pages/work_space/view/item_request.dart';
+import 'package:daisy_application/app/pages/work_space/view/workspace_common.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/math_utils.dart';
@@ -175,15 +176,19 @@ class WorkspaceState extends State<WorkspaceScreen>
 
   Size get size => MediaQuery.of(context).size;
 
-  List<Widget> _createRequestTab(List<RequestModel> items) => items
-      .map((request) => SizedBox(
-          width: size.width * (Responsive.isDesktop(context) ? 0.4 : 0.7),
-          child: createRequestInfoCard(request)))
-      .toList();
+  List<Widget> _createRequestTab(List<RequestModel> items) => items.isNotEmpty
+      ? items
+          .map((request) => SizedBox(
+              width: size.width * (Responsive.isDesktop(context) ? 0.4 : 0.7),
+              child: createRequestInfoCard(request)))
+          .toList()
+      : [getEmptyMessageByTab(_screenState.activeTab)];
 
-  List<Widget> _createProjectTab(List<ProjectModel> items) => items
-      .map((project) => SizedBox(
-          width: size.width * (Responsive.isDesktop(context) ? 0.5 : 0.7),
-          child: createProjectInfoCard(project)))
-      .toList();
+  List<Widget> _createProjectTab(List<ProjectModel> items) => items.isNotEmpty
+      ? items
+          .map((project) => SizedBox(
+              width: size.width * (Responsive.isDesktop(context) ? 0.5 : 0.7),
+              child: createProjectInfoCard(project)))
+          .toList()
+      : [getEmptyMessageByTab(_screenState.activeTab)];
 }

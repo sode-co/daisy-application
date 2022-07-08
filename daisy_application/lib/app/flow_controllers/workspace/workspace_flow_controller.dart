@@ -5,6 +5,7 @@ import 'package:daisy_application/app/pages/work_space/deps/workspace_listener.d
 import 'package:daisy_application/app/pages/work_space/model/workspace_screen_state.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart';
 import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/common/math_utils.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
@@ -67,12 +68,14 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
 
   @override
   Future<void> onSelectedTabChanged(WorkspaceTab tab) async {
-    if (tab == WorkspaceTab.AllProjects &&
+    if (tab == WorkspaceTab.PostedRequest &&
         _screenState!.allPostedRequests.isEmpty) {
       final result = await _requestRestApi.getAll().Value<List<RequestModel>>();
       _errorHandling(result);
 
-      _screenState!.allPostedRequests = result.data!;
+      _screenState!.allPostedRequests = result.data!
+          .getRange(0, limit(result.data!.length, max: 30))
+          .toList();
     }
     if (tab == WorkspaceTab.AppliedRequest &&
         _screenState!.allPendingRequests.isEmpty) {
@@ -80,14 +83,18 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
           await _requestRestApi.getAppliedRequest().Value<List<RequestModel>>();
       _errorHandling(result);
 
-      _screenState!.allPendingRequests = result.data!;
+      _screenState!.allPendingRequests = result.data!
+          .getRange(0, limit(result.data!.length, max: 30))
+          .toList();
     }
 
     if (tab == WorkspaceTab.AllProjects && _screenState!.allProjects.isEmpty) {
       final result = await _projectRestApi.getAll().Value<List<ProjectModel>>();
       _errorHandling(result);
 
-      _screenState!.allProjects = result.data!;
+      _screenState!.allProjects = result.data!
+          .getRange(0, limit(result.data!.length, max: 30))
+          .toList();
     }
 
     if (tab == WorkspaceTab.ActiveProjects &&
@@ -99,7 +106,7 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
     if (tab == WorkspaceTab.DoneProjects &&
         _screenState!.doneProjects.isEmpty) {
       _screenState!.doneProjects =
-          await _fetchProjectByStatus(ProjectStatus.DONE);
+          (await _fetchProjectByStatus(ProjectStatus.DONE));
     }
 
     if (tab == WorkspaceTab.CanceledProjects &&
