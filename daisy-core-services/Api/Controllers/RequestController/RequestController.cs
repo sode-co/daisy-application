@@ -138,15 +138,13 @@ namespace Api.Controllers.RequestController
             return NotFound();
         }
 
-        [AllowAnonymous]
+        [Authorize(ROLE.CUSTOMER)]
         [HttpGet("")]
-        public IActionResult GetAll()
+        public IEnumerable<Request> GetAll()
         {
             int userId = ((User)HttpContext.Items["User"]).Id;
             using var work = _unitOfWorkFactory.Get;
-            var request = work.RequestRepository.GetAll((request) => request.Customer.Id.Equals(userId));
-
-            return NotFound();
+            return work.RequestRepository.GetAll((request) => request.Customer.Id.Equals(userId)).ToList();
         }
 
         [Authorize(ROLE.DESIGNER)]
