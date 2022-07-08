@@ -1,4 +1,5 @@
 import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/pages/work_space/view/work_space_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -32,15 +33,15 @@ extension CommonComponent on WorkspaceState {
               return Padding(
                 padding: const EdgeInsets.all(Design.itemSpacing),
                 child: SizedBox(
-                  width: size.width * 0.9,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       createItemImage(constraint),
                       const SizedBox(width: Design.bodySpacing),
                       showInfo(cardInfo),
                       Expanded(child: Container()),
-                      createButton(cardInfo)
+                      if (Responsive.isDesktop(context)) createButton(cardInfo)
                     ],
                   ),
                 ),
@@ -55,7 +56,7 @@ extension CommonComponent on WorkspaceState {
   Widget createButton(WorkspaceCardInfo cardInfo) {
     return cardInfo.isDisplayButton
         ? SizedBox(
-            height: 45,
+            height: 38,
             width: 180,
             child: createItemButton(
               buttonText: cardInfo.buttonName!,
@@ -65,7 +66,7 @@ extension CommonComponent on WorkspaceState {
   }
 
   Widget createItemImage(BoxConstraints constraint) => Container(
-        width: constraint.maxWidth * 0.2,
+        width: constraint.maxWidth * 0.15,
         padding: EdgeInsets.all(constraint.maxWidth * 0.2 * 0.1),
         decoration: BoxDecoration(
             color: Design.colorWhite,
@@ -111,10 +112,10 @@ extension CommonComponent on WorkspaceState {
   }
 
   Widget createItemTag(WorkspaceCardInfo cardInfo) => Container(
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(2)),
-            border: Border.all(color: cardInfo.buttonColor!, width: 3)),
+            border: Border.all(color: cardInfo.buttonColor!, width: 2)),
         child: Text(
           cardInfo.tagName!,
           style: Design.textButtonSmall(textColor: cardInfo.buttonColor!),
@@ -151,7 +152,7 @@ extension CommonComponent on WorkspaceState {
               onTap: onOptionBtnClicked,
               child: Container(
                   height: constraint.maxHeight,
-                  width: constraint.maxWidth * 0.3,
+                  width: constraint.maxWidth * 0.25,
                   decoration: BoxDecoration(
                       color: Design.accentRed.shade400,
                       borderRadius: const BorderRadius.only(

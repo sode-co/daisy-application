@@ -7,8 +7,14 @@ import 'design.dart';
 class SideBarItem {
   final String label;
   final IconData icon;
+  final bool isEnabled;
+  final int rotate;
 
-  SideBarItem({required this.label, required this.icon});
+  SideBarItem(
+      {required this.label,
+      required this.icon,
+      this.isEnabled = true,
+      this.rotate = 0});
 }
 
 class SideBar extends StatefulWidget {
@@ -36,29 +42,37 @@ class _SideBarState extends State<SideBar> {
       onDestinationSelected: widget.onTabChanged,
       labelType: NavigationRailLabelType.selected,
       destinations: widget.items.map((item) {
-        return _createNavItem(
-            item.label, item.icon, index++ == widget.selectedTabIndex);
+        return _createNavItem(item.label, item.icon,
+            index++ == widget.selectedTabIndex, item.isEnabled, item.rotate);
       }).toList(),
     );
   }
 
-  NavigationRailDestination _createNavItem(
-          String label, IconData icon, bool isActive) =>
+  NavigationRailDestination _createNavItem(String label, IconData icon,
+          bool isActive, bool isEnable, int rotate) =>
       NavigationRailDestination(
-        icon: Responsive.isDesktop(context)
-            ? _LabelAndIcon(
-                icondata: icon,
-                isActive: isActive,
-                label: label,
-              )
-            : Tooltip(message: label, child: Icon(icon)),
-        selectedIcon: Responsive.isDesktop(context)
-            ? _LabelAndIcon(
-                icondata: icon,
-                isActive: isActive,
-                label: label,
-              )
-            : Tooltip(message: label, child: Icon(icon)),
+        icon: isEnable
+            ? (Responsive.isDesktop(context)
+                ? _LabelAndIcon(
+                    icondata: icon,
+                    isActive: isActive,
+                    label: label,
+                  )
+                : RotatedBox(
+                    quarterTurns: rotate,
+                    child: Tooltip(message: label, child: Icon(icon))))
+            : const SizedBox(width: 0),
+        selectedIcon: isEnable
+            ? (Responsive.isDesktop(context)
+                ? _LabelAndIcon(
+                    icondata: icon,
+                    isActive: isActive,
+                    label: label,
+                  )
+                : RotatedBox(
+                    quarterTurns: rotate,
+                    child: Tooltip(message: label, child: Icon(icon))))
+            : const SizedBox(width: 0),
         label: const SizedBox(height: 0),
       );
 }
@@ -76,12 +90,11 @@ class _LabelAndIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      height: 50,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+    return LayoutBuilder(builder: (context, constrant) {
+      return Container(
+        width: 250,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
               icondata,
@@ -93,7 +106,7 @@ class _LabelAndIcon extends StatelessWidget {
             Text(label, style: Design.textBody(isEnable: isActive, bold: true)),
           ],
         ),
-      ),
-    );
+      );
+    });
   }
 }

@@ -17,17 +17,12 @@ class DisplayName {
       case RequestStatus.AVAILABLE:
         switch (role) {
           case UserRole.CUSTOMER:
-            return 'Available';
+            return 'Open for apply';
           case UserRole.DESIGNER:
-            return 'Available for applied';
+            return 'Processing';
         }
       case RequestStatus.TAKEN:
-        switch (role) {
-          case UserRole.CUSTOMER:
-            return 'Already taken';
-          case UserRole.DESIGNER:
-            return 'Not available';
-        }
+        return 'Closed';
     }
   }
 }

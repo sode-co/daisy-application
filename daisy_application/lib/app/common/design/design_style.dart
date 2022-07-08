@@ -175,7 +175,7 @@ abstract class Design {
   static TextStyle textButtonSmall({Color? textColor, isEnabled = true}) {
     return TextStyle(
         color: toTextColor(textColor: textColor, isEnabled: isEnabled),
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: FontWeight.w900);
   }
 

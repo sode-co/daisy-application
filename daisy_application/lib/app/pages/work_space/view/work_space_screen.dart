@@ -11,12 +11,14 @@ import 'package:daisy_application/app/pages/landing-page/view/common.dart';
 import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
 import 'package:daisy_application/app/pages/work_space/deps/workspace_listener.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_screen_state.dart';
+import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart';
 import 'package:daisy_application/app/pages/work_space/view/header_workspace.dart';
 import 'package:daisy_application/app/pages/work_space/view/item_project.dart';
 import 'package:daisy_application/app/pages/work_space/view/item_request.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/math_utils.dart';
+import 'package:daisy_application/common/name_to_enum.dart';
 import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
@@ -71,21 +73,30 @@ class WorkspaceState extends State<WorkspaceScreen>
             Container(
               alignment: Alignment.center,
               width: limit(
-                  size.width * (Responsive.isDesktop(context) ? 0.6 : 0.9),
-                  max: 1400),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _createSideBar(),
-                  Expanded(child: Container()),
-                  Column(
-                    children: [
-                      ..._createContent(),
-                      const SizedBox(height: Design.headerSpacing * 4)
-                    ],
-                  )
-                ],
-              ),
+                  size.width * (Responsive.isDesktop(context) ? 0.65 : 1),
+                  max: 1200),
+              child: Responsive.isDesktop(context)
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _createSideBar(),
+                        Expanded(child: Container()),
+                        Column(
+                          children: [
+                            ..._createContent(),
+                            const SizedBox(height: Design.headerSpacing * 4)
+                          ],
+                        )
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        RotatedBox(quarterTurns: 3, child: _createSideBar()),
+                        ..._createContent(),
+                        const SizedBox(height: Design.headerSpacing * 4)
+                      ],
+                    ),
             ),
             if (Responsive.isDesktop(context))
               Container(
@@ -110,37 +121,56 @@ class WorkspaceState extends State<WorkspaceScreen>
   UserModel get currentUser => appState.currentUser!;
 
   Widget _createSideBar() => SizedBox(
-        height: 800,
+        height: 400,
+        width: 220,
         child: SideBar(
-          onTabChanged: _listener.onSelectedTabChanged,
-          selectedTabIndex: _screenState.activeTab,
+          onTabChanged: (index) =>
+              _listener.onSelectedTabChanged(getTab(index)),
+          selectedTabIndex: getTabIndex(_screenState.activeTab),
           items: [
-            SideBarItem(label: 'Đơn đã nộp', icon: Icons.all_inbox_sharp),
-            SideBarItem(label: 'Tất cả', icon: Icons.all_inbox_sharp),
             SideBarItem(
-                label: 'Đang hoạt động', icon: Icons.work_history_sharp),
+                label: currentUser.role!.toUserRole() == UserRole.CUSTOMER
+                    ? getTabDisplayName(WorkspaceTab.PostedRequest)
+                    : getTabDisplayName(WorkspaceTab.AppliedRequest),
+                icon: Icons.all_inbox_sharp,
+                rotate: getRotationByPlatform()),
             SideBarItem(
-                label: 'Hoàn thành', icon: Icons.document_scanner_outlined),
-            SideBarItem(label: 'Đã hủy', icon: Icons.cancel),
+                label: getTabDisplayName(WorkspaceTab.AllProjects),
+                icon: Icons.indeterminate_check_box_rounded,
+                rotate: getRotationByPlatform()),
+            SideBarItem(
+                label: getTabDisplayName(WorkspaceTab.ActiveProjects),
+                icon: Icons.work_history_sharp,
+                rotate: getRotationByPlatform()),
+            SideBarItem(
+                label: getTabDisplayName(WorkspaceTab.DoneProjects),
+                icon: Icons.document_scanner_outlined,
+                rotate: getRotationByPlatform()),
+            SideBarItem(
+                label: getTabDisplayName(WorkspaceTab.CanceledProjects),
+                icon: Icons.cancel,
+                rotate: getRotationByPlatform()),
           ],
         ),
       );
 
+  int getRotationByPlatform() => Responsive.isDesktop(context) ? 1 : 1;
+
   List<Widget> _createContent() {
     switch (_screenState.activeTab) {
-      case 0:
+      case WorkspaceTab.AppliedRequest:
         return _createRequestTab(_screenState.allPendingRequests);
-      case 1:
+      case WorkspaceTab.PostedRequest:
+        return _createRequestTab(_screenState.allPostedRequests);
+      case WorkspaceTab.AllProjects:
         return _createProjectTab(_screenState.allProjects);
-      case 2:
+      case WorkspaceTab.ActiveProjects:
         return _createProjectTab(_screenState.activeProjects);
-      case 3:
-        return _createProjectTab(_screenState.doneProjects);
-      case 4:
+      case WorkspaceTab.CanceledProjects:
         return _createProjectTab(_screenState.canceledProjects);
+      case WorkspaceTab.DoneProjects:
+        return _createProjectTab(_screenState.doneProjects);
     }
-
-    throw Exception('Unsupported tab with index ${_screenState.activeTab}');
   }
 
   Size get size => MediaQuery.of(context).size;
@@ -153,7 +183,7 @@ class WorkspaceState extends State<WorkspaceScreen>
 
   List<Widget> _createProjectTab(List<ProjectModel> items) => items
       .map((project) => SizedBox(
-          width: size.width * (Responsive.isDesktop(context) ? 0.4 : 0.7),
+          width: size.width * (Responsive.isDesktop(context) ? 0.5 : 0.7),
           child: createProjectInfoCard(project)))
       .toList();
 }

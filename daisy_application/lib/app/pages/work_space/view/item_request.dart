@@ -16,7 +16,7 @@ extension ItemRequest on WorkspaceState {
     final buttonColor = currentStatus == RequestStatus.AVAILABLE
         ? Design.accentRed.shade400
         : Colors.black45;
-    const buttonName = 'View request';
+    const buttonName = 'Xem đơn';
     WorkspaceCardInfo cardInfo = WorkspaceCardInfo(
         title: request.title,
         buttonColor: buttonColor,

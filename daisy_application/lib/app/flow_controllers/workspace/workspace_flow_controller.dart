@@ -3,8 +3,8 @@ import 'package:daisy_application/app/common/design/design_snackbar.dart';
 import 'package:daisy_application/app/foundation/flow_controller.dart';
 import 'package:daisy_application/app/pages/work_space/deps/workspace_listener.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_screen_state.dart';
+import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart';
 import 'package:daisy_application/common/constants.dart';
-import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
@@ -32,7 +32,8 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
     _projectRestApi = locator.get();
     _requestRestApi = locator.get();
     _screenState = WorkSpaceScreenState();
-    Future.sync(() async => await onSelectedTabChanged(2));
+    Future.sync(
+        () async => await onSelectedTabChanged(WorkspaceTab.ActiveProjects));
     super.initState();
   }
 
@@ -65,8 +66,16 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
   }
 
   @override
-  Future<void> onSelectedTabChanged(int tabIndex) async {
-    if (tabIndex == 0 && _screenState!.allPendingRequests.isEmpty) {
+  Future<void> onSelectedTabChanged(WorkspaceTab tab) async {
+    if (tab == WorkspaceTab.AllProjects &&
+        _screenState!.allPostedRequests.isEmpty) {
+      final result = await _requestRestApi.getAll().Value<List<RequestModel>>();
+      _errorHandling(result);
+
+      _screenState!.allPostedRequests = result.data!;
+    }
+    if (tab == WorkspaceTab.AppliedRequest &&
+        _screenState!.allPendingRequests.isEmpty) {
       final result =
           await _requestRestApi.getAppliedRequest().Value<List<RequestModel>>();
       _errorHandling(result);
@@ -74,28 +83,31 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
       _screenState!.allPendingRequests = result.data!;
     }
 
-    if (tabIndex == 1 && _screenState!.allProjects.isEmpty) {
+    if (tab == WorkspaceTab.AllProjects && _screenState!.allProjects.isEmpty) {
       final result = await _projectRestApi.getAll().Value<List<ProjectModel>>();
       _errorHandling(result);
 
       _screenState!.allProjects = result.data!;
     }
 
-    if (tabIndex == 2 && _screenState!.activeProjects.isEmpty) {
+    if (tab == WorkspaceTab.ActiveProjects &&
+        _screenState!.activeProjects.isEmpty) {
       _screenState!.activeProjects =
           await _fetchProjectByStatus(ProjectStatus.IN_PROGRESS);
     }
 
-    if (tabIndex == 3 && _screenState!.doneProjects.isEmpty) {
+    if (tab == WorkspaceTab.DoneProjects &&
+        _screenState!.doneProjects.isEmpty) {
       _screenState!.doneProjects =
           await _fetchProjectByStatus(ProjectStatus.DONE);
     }
 
-    if (tabIndex == 4 && _screenState!.canceledProjects.isEmpty) {
+    if (tab == WorkspaceTab.CanceledProjects &&
+        _screenState!.canceledProjects.isEmpty) {
       _screenState!.canceledProjects =
           await _fetchProjectByStatus(ProjectStatus.CANCELED);
     }
 
-    _screenState!.activeTab = tabIndex;
+    _screenState!.activeTab = tab;
   }
 }

@@ -13,6 +13,9 @@ abstract class RequestRestApi {
     @Body() RequestModel body,
   );
 
+  @GET('')
+  Future<HttpResponse<List<RequestModel>>> getAll();
+
   @GET('/applied')
   Future<HttpResponse<List<RequestModel>>> getAppliedRequest();
 }
