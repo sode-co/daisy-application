@@ -162,7 +162,7 @@ namespace Api.Controllers.RequestController
                     .Select((application) => application.Request.Id);
 
             return work.RequestRepository.GetAll(request => appliedRequestId.Contains(request.Id))
-                .OrderByDescending(x => x.CreatedAt).Take(30).Take(30).ToList();
+                .OrderByDescending(x => x.CreatedAt).Take(30).ToList();
         }
     }
 }

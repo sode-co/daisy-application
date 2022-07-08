@@ -56,7 +56,7 @@ class AuthenticationService {
       await _userPersistent.set(result.data);
     }
 
-    return result;
+    return Result(data: auth);
   }
 
   Future<Result> refreshAccessToken() async {
