@@ -13,7 +13,7 @@ abstract class RequestRestApi {
     @Body() RequestModel body,
   );
 
-  @GET('')
+  @GET('/posted')
   Future<HttpResponse<List<RequestModel>>> getAll();
 
   @GET('/applied')
