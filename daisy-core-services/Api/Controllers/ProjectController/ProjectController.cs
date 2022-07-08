@@ -143,7 +143,7 @@ namespace Api.Controllers.ProjectController
             return work.ProjectRepository.GetAll((project) =>
                       (project.Customer.Id == loginUser.Id || project.Freelancer.Id == loginUser.Id) &&
                       status.Equals(project.Status),
-                   null, "Customer,Freelancer,Category,Payment,Request").ToList();
+                   null, "Customer,Freelancer,Category,Payment,Request").OrderByDescending((x) => x.CreatedAt).ToList();
         }
     }
 }
