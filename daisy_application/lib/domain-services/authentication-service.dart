@@ -70,8 +70,9 @@ class AuthenticationService {
     Debug.log('tiendang-debug', 'refresh access token', result.data);
     if (result.failureType != FAILURE_TYPE.NONE) return result;
 
-    auth.accessToken = result.data.accessToken;
+    AuthenticationModel newAuth = AuthenticationModel(
+        auth.message, result.data.accessToken, auth.refreshToken);
 
-    return await _saveUserDataAndAuthenticationIntoLocal(auth);
+    return await _saveUserDataAndAuthenticationIntoLocal(newAuth);
   }
 }
