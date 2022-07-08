@@ -1,0 +1,65 @@
+﻿@page
+@model WebApplication.Pages.Areas.Customers.Discussions.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Discussion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Discussion.Type" class="control-label"></label>
+                <input asp-for="Discussion.Type" class="form-control" />
+                <span asp-validation-for="Discussion.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discussion.Content" class="control-label"></label>
+                <input asp-for="Discussion.Content" class="form-control" />
+                <span asp-validation-for="Discussion.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discussion.Status" class="control-label"></label>
+                <input asp-for="Discussion.Status" class="form-control" />
+                <span asp-validation-for="Discussion.Status" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Discussion.Id" />
+            <div class="form-group">
+                <label asp-for="Discussion.CreatedAt" class="control-label"></label>
+                <input asp-for="Discussion.CreatedAt" class="form-control" />
+                <span asp-validation-for="Discussion.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discussion.UpdatedAt" class="control-label"></label>
+                <input asp-for="Discussion.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Discussion.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discussion.DeletedAt" class="control-label"></label>
+                <input asp-for="Discussion.DeletedAt" class="form-control" />
+                <span asp-validation-for="Discussion.DeletedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discussion.ObjectId" class="control-label"></label>
+                <input asp-for="Discussion.ObjectId" class="form-control" />
+                <span asp-validation-for="Discussion.ObjectId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
