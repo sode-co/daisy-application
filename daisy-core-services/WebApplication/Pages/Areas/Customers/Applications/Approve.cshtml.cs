@@ -54,7 +54,7 @@ namespace WebApplication.Pages.Areas.Customers.Applications
 
             using (var work = _unitOfWorkFactory.Get)
             {
-               JobApplication = work.JobApplicationRepository.Get(id.Value);
+                JobApplication = work.JobApplicationRepository.Get(id.Value);
                 JobApplication.Status = STATUS_JOB_APPLICATION.APPROVE;
                 work.JobApplicationRepository.UpdateJobApplication(JobApplication);
                 work.Save();
@@ -64,6 +64,9 @@ namespace WebApplication.Pages.Areas.Customers.Applications
                     application.Status = STATUS_JOB_APPLICATION.REJECT;
                     work.Save();
                 }
+                User user = UserAuthentication.UserLogin;
+
+                work.ProjectRepository.CreateProjectAndWorkspace(JobApplication.Id, false, PROJECT_STATUS.IN_PROGRESS, REQUEST_STATUS.TAKEN, REQUEST_STATUS.TAKEN, user.Id);
             }
             return RedirectToPage("./Index", new { requestId = requestId });
         }
