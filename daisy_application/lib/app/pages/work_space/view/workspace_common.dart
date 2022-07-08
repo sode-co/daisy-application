@@ -86,9 +86,13 @@ extension CommonComponent on WorkspaceState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '${cardInfo.title}',
-          style: Design.textBody(bold: true),
+        Container(
+          width: 260,
+          child: Text(
+            '${cardInfo.title}',
+            maxLines: 2,
+            style: Design.textBody(bold: true),
+          ),
         ),
         const SizedBox(height: Design.itemSpacing),
         Row(
