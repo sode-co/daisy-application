@@ -12,4 +12,10 @@ abstract class RequestRestApi {
   Future<HttpResponse<void>> createNewRequest(
     @Body() RequestModel body,
   );
+
+  @GET('')
+  Future<HttpResponse<List<RequestModel>>> getAll();
+
+  @GET('/applied')
+  Future<HttpResponse<List<RequestModel>>> getAppliedRequest();
 }

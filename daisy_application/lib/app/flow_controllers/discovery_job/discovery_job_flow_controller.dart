@@ -92,7 +92,7 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
         context,
         title: 'Ứng tuyển thất bại',
         message:
-            'Việc ứng tuyển yêu cầu phải xác minh danh tính, vui lòng hãy đăng nhập trước khi gửi yêu cầu ứng tuyển.',
+            'Việc ứng tuyển yêau cầu phải xác minh danh tính, vui lòng hãy đăng nhập trước khi gửi yêu cầu ứng tuyển.',
         affirmativeText: 'Login now',
         negativeText: 'Not now',
         onAffirmativeClicked: _onLoginDialogAffirmativeClicked,
@@ -102,7 +102,7 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
       return;
     }
 
-    if (currentUser.address.isBlank() ||
+    if ((currentUser.lastName.isBlank() && currentUser.firstName.isBlank()) ||
         currentUser.email.isBlank() ||
         currentUser.phone.isBlank()) {
       context.show(DialogAlert.error(

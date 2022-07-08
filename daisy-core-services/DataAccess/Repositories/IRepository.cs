@@ -17,7 +17,8 @@ namespace DataAccess.Repositories
 
         T GetFirstOrDefault(
             Expression<Func<T, bool>> filter = null,
-            string includeProperties = null
+            string includeProperties = null,
+            T defaultValue = null
             );
 
         void Add(T t);

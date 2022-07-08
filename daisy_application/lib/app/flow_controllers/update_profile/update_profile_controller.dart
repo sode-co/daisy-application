@@ -30,7 +30,7 @@ class _UpdateProfileFlowControllerState extends FlowControllerState
 
   @override
   void initState() {
-    verifyRoute(requireAuth: true, requireRole: UserRole.CUSTOMER);
+    verifyRoute(requireAuth: true);
     profileState = UpdateProfileState();
     _authService = locator.get();
     super.initState();

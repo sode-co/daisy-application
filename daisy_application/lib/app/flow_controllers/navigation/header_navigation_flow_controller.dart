@@ -34,7 +34,7 @@ class _HeaderNavigationFlowControllerState extends AutoRouterState
 
   @override
   void onBtnWorkspaceAndFindDesignerClicked() {
-    context.router.push(const Routers.ContactAndProjectRoute());
+    context.router.push(const Routers.WorkSpaceRoute());
   }
 
   @override

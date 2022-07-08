@@ -13,8 +13,6 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i16;
 
-import '../flow_controllers/contact_and_project/contact_and_project_controller.dart'
-    as _i5;
 import '../flow_controllers/discovery_job/discovery_job_flow_controller.dart'
     as _i7;
 import '../flow_controllers/post_new_job/post_new_job_flow_controller.dart'
@@ -25,13 +23,14 @@ import '../flow_controllers/root/root.dart' as _i1;
 import '../flow_controllers/signup/signup_flow_controller.dart' as _i8;
 import '../flow_controllers/update_profile/update_profile_controller.dart'
     as _i4;
-import '../pages/discovery-designer/view/discovery_designer.dart' as _i12;
+import '../flow_controllers/workspace/workspace_flow_controller.dart' as _i5;
 import '../pages/discovery-job/view/discovery_job_page.dart' as _i14;
 import '../pages/landing-page/view/landing.dart' as _i9;
 import '../pages/post-new-job/view/post_new_job.dart' as _i10;
 import '../pages/project-details/view/project_details.dart' as _i13;
 import '../pages/signup-page/view/signup.dart' as _i15;
 import '../pages/update-profile/view/update_profile.dart' as _i11;
+import '../pages/work_space/view/work_space_screen.dart' as _i12;
 
 class AppRouter extends _i2.RootStackRouter {
   AppRouter([_i16.GlobalKey<_i16.NavigatorState>? navigatorKey])
@@ -55,10 +54,9 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.UpdateProfileFlowController());
     },
-    ContactAndProjectRoute.name: (routeData) {
+    WorkSpaceRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData,
-          child: const _i5.ContactAndProjectFlowController());
+          routeData: routeData, child: const _i5.WorkSpaceFlowController());
     },
     ProjectDetailsRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -85,9 +83,9 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i11.UpdateProfile());
     },
-    _ContactAndProjectRoute.name: (routeData) {
+    _WorkSpaceRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i12.ContactAndProject());
+          routeData: routeData, child: const _i12.WorkspaceScreen());
     },
     _ProjectDetailsRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -132,12 +130,12 @@ class AppRouter extends _i2.RootStackRouter {
                 _i2.RouteConfig(_UpdateProfileRoute.name,
                     path: '', parent: UpdateProfileRoute.name)
               ]),
-          _i2.RouteConfig(ContactAndProjectRoute.name,
-              path: 'contact-and-project',
+          _i2.RouteConfig(WorkSpaceRoute.name,
+              path: 'workspace',
               parent: RootRoute.name,
               children: [
-                _i2.RouteConfig(_ContactAndProjectRoute.name,
-                    path: '', parent: ContactAndProjectRoute.name)
+                _i2.RouteConfig(_WorkSpaceRoute.name,
+                    path: '', parent: WorkSpaceRoute.name)
               ]),
           _i2.RouteConfig(ProjectDetailsRoute.name,
               path: 'project-details',
@@ -202,13 +200,13 @@ class UpdateProfileRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.ContactAndProjectFlowController]
-class ContactAndProjectRoute extends _i2.PageRouteInfo<void> {
-  const ContactAndProjectRoute({List<_i2.PageRouteInfo>? children})
-      : super(ContactAndProjectRoute.name,
-            path: 'contact-and-project', initialChildren: children);
+/// [_i5.WorkSpaceFlowController]
+class WorkSpaceRoute extends _i2.PageRouteInfo<void> {
+  const WorkSpaceRoute({List<_i2.PageRouteInfo>? children})
+      : super(WorkSpaceRoute.name,
+            path: 'workspace', initialChildren: children);
 
-  static const String name = 'ContactAndProjectRoute';
+  static const String name = 'WorkSpaceRoute';
 }
 
 /// generated route for
@@ -265,12 +263,11 @@ class _UpdateProfileRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.ContactAndProject]
-class _ContactAndProjectRoute extends _i2.PageRouteInfo<void> {
-  const _ContactAndProjectRoute()
-      : super(_ContactAndProjectRoute.name, path: '');
+/// [_i12.WorkspaceScreen]
+class _WorkSpaceRoute extends _i2.PageRouteInfo<void> {
+  const _WorkSpaceRoute() : super(_WorkSpaceRoute.name, path: '');
 
-  static const String name = '_ContactAndProjectRoute';
+  static const String name = '_WorkSpaceRoute';
 }
 
 /// generated route for

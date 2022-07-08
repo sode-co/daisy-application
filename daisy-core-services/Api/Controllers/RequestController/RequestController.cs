@@ -138,5 +138,28 @@ namespace Api.Controllers.RequestController
             return NotFound();
         }
 
+        [Authorize(ROLE.CUSTOMER)]
+        [HttpGet("")]
+        public IEnumerable<Request> GetAll()
+        {
+            int userId = ((User)HttpContext.Items["User"]).Id;
+            using var work = _unitOfWorkFactory.Get;
+            return work.RequestRepository.GetAll((request) => request.Customer.Id.Equals(userId)).ToList();
+        }
+
+        [Authorize(ROLE.DESIGNER)]
+        [HttpGet("applied")]
+        public IEnumerable<Request> GetAppliedRequests()
+        {
+            int userId = ((User)HttpContext.Items["User"]).Id;
+
+            using var work = _unitOfWorkFactory.Get;
+            var appliedRequestId = work.JobApplicationRepository
+                    .GetAll((application) => application.Freelancer.Id.Equals(userId),
+                        null, "Request")
+                    .Select((application) => application.Request.Id);
+
+            return work.RequestRepository.GetAll(request => appliedRequestId.Contains(request.Id)).ToList();
+        }
     }
 }

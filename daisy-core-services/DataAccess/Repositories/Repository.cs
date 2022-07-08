@@ -53,7 +53,7 @@ namespace DataAccess.Repositories
 
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null, T defaultValue = null)
         {
             IQueryable<T> query = dbSet;
 
@@ -70,8 +70,7 @@ namespace DataAccess.Repositories
                 }
             }
 
-            return query.FirstOrDefault();
-
+            return query.Count() == 0 ? defaultValue : query.First();
         }
 
         public void Remove(T t)
