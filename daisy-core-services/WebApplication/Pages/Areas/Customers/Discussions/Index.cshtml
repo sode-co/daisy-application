@@ -119,8 +119,8 @@
 <p>
     <a asp-page="Create" asp-route-workspaceId="@(Model.Workspace.Id)"><button class="btn btn-outline-success">Create New Discussion</button></a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>Sender</th>
             <th>
@@ -177,7 +177,7 @@
                     }
                     if (item.Status.Equals("SENT"))
                     {
-                        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id"><button class="btn btn-outline-danger">Delete</button></a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id" class="text-danger">Delete</a>
                     }
                 }
             </td>
