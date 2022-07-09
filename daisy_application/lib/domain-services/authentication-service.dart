@@ -67,7 +67,6 @@ class AuthenticationService {
         .generateAccessToken('Bearer ${auth!.refreshToken}')
         .Value();
 
-    Debug.log('tiendang-debug', 'refresh access token', result.data);
     if (result.failureType != FAILURE_TYPE.NONE) return result;
 
     AuthenticationModel newAuth = AuthenticationModel(

@@ -1,3 +1,5 @@
+import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/common/math_utils.dart';
 import 'package:flutter/material.dart';
 
 abstract class Design {
@@ -79,6 +81,13 @@ abstract class Design {
   static const double headerSpacing = 30;
   static const double bodySpacing = 22;
   static const double contentSpacing = 7;
+  static const double toolbarHeight = 100;
+
+  static double alignmentSpacing(BuildContext context) {
+    return Responsive.isDesktop(context)
+        ? limit(MediaQuery.of(context).size.width * 0.15, max: 150)
+        : 20;
+  }
 
   static TextStyle textHeadline({bool bold = false}) {
     return TextStyle(
@@ -123,7 +132,7 @@ abstract class Design {
       textBody(textColor: textColor, bold: true);
 
   static TextStyle textBody(
-      {Color? textColor, bool bold = false, bool isEnable = false}) {
+      {Color? textColor, bool bold = false, bool isEnable = true}) {
     return TextStyle(
         color: toTextColor(textColor: textColor, isEnabled: isEnable),
         fontSize: 16,
@@ -139,12 +148,33 @@ abstract class Design {
         fontWeight: FontWeight.w900);
   }
 
-  static TextStyle textBodyFold({Color? textColor, bool bold = false}) {
+  static TextStyle textSmallLogo({Color? textColor}) {
     return TextStyle(
         color: toTextColor(textColor: textColor),
-        fontSize: 22,
+        fontSize: 40,
+        fontFamily: 'larsseit',
+        fontWeight: FontWeight.w900);
+  }
+
+  static TextStyle textBodyFold(
+      {Color? textColor, bool bold = false, bool isMobile = false}) {
+    return isMobile
+        ? textBodyFoldMobile()
+        : TextStyle(
+            color: toTextColor(textColor: textColor),
+            fontSize: 22,
+            height: 1.3,
+            fontFamily: 'larsseit',
+            fontWeight: FontWeight.w700);
+  }
+
+  static TextStyle textBodyFoldMobile({Color? textColor, bool bold = false}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor),
+        fontSize: 19,
         height: 1.3,
-        fontWeight: FontWeight.w500);
+        fontFamily: 'larsseit',
+        fontWeight: FontWeight.w700);
   }
 
   static TextStyle textBodyLarge(
