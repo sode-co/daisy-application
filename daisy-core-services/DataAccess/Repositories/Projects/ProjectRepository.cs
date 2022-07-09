@@ -56,8 +56,6 @@ namespace DataAccess.Repositories.Projects
             _dbContext.Projects.Add(pro);
             _dbContext.SaveChanges();
 
-            // int projectid = pro.Id;
-
             foreach (Request requestItem in req.Items)
             {
                 Workspace workspace = new Workspace()

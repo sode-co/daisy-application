@@ -54,7 +54,7 @@ namespace WebApplication.Pages.Areas.Customers.Applications
 
             using (var work = _unitOfWorkFactory.Get)
             {
-                JobApplication = work.JobApplicationRepository.Get(id.Value);
+                JobApplication = work.JobApplicationRepository.GetAll(j => j.Id.Equals(id.Value)).Include(j => j.Freelancer).FirstOrDefault();
                 JobApplication.Status = STATUS_JOB_APPLICATION.APPROVE;
                 work.JobApplicationRepository.UpdateJobApplication(JobApplication);
                 work.Save();
@@ -66,7 +66,33 @@ namespace WebApplication.Pages.Areas.Customers.Applications
                 }
                 User user = UserAuthentication.UserLogin;
 
-                work.ProjectRepository.CreateProjectAndWorkspace(JobApplication.Id, false, PROJECT_STATUS.IN_PROGRESS, REQUEST_STATUS.TAKEN, REQUEST_STATUS.TAKEN, user.Id);
+                Request req = work.RequestRepository.GetAll(r => r.Id.Equals(requestId)).Include(r => r.Customer).Include(r => r.Category).FirstOrDefault();
+                Project project = new Project()
+                {
+                    Customer = req.Customer,
+                    Freelancer = JobApplication.Freelancer,
+                    Category = req.Category,
+                    Data = JobApplication.Data,
+                    PreferredLanguage = JobApplication.PreferredLanguage,
+                    Name = req.Title,
+                    Description = req.Description,
+                    Timeline = JobApplication.Timeline ?? req.Timeline,
+                    Budget = req.Budget ?? JobApplication.OfferedPrice,
+                    IsAllowedPublic = false,
+                    Status = PROJECT_STATUS.IN_PROGRESS,
+                    Request = req,
+                };
+                work.ProjectRepository.Add(project);
+                work.Save();
+                Workspace workspace = new Workspace()
+                {
+                    Project = project,
+                    Request = req,
+                    Status = REQUEST_STATUS.TAKEN,
+                };
+                work.WorkspaceRepository.Add(workspace);
+                work.Save();
+
             }
             return RedirectToPage("./Index", new { requestId = requestId });
         }
