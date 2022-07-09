@@ -27,7 +27,7 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
         {
             string role = UserAuthentication.Role();
 
-            if (role.Equals("CUSTOMER") && role.Equals("DESIGNER"))
+            if (!role.Equals("CUSTOMER") && !role.Equals("DESIGNER"))
             {
                 return Redirect("/Unauthorized");
             }

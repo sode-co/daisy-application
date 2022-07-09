@@ -23,33 +23,14 @@
                 <input asp-for="Discussion.Content" class="form-control" />
                 <span asp-validation-for="Discussion.Content" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Discussion.Status" class="control-label"></label>
-                <input asp-for="Discussion.Status" class="form-control" />
-                <span asp-validation-for="Discussion.Status" class="text-danger"></span>
-            </div>
             <input type="hidden" asp-for="Discussion.Id" />
+            <input type="hidden" asp-for="Discussion.Status" />
+            <input type="hidden" asp-for="Discussion.CreatedAt" />
+            <input type="hidden" asp-for="Discussion.UpdatedAt" />
+            <input type="hidden" asp-for="Discussion.DeletedAt" />
+            <input type="hidden" asp-for="Discussion.ObjectId" />
             <div class="form-group">
-                <label asp-for="Discussion.CreatedAt" class="control-label"></label>
-                <input asp-for="Discussion.CreatedAt" class="form-control" />
-                <span asp-validation-for="Discussion.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Discussion.UpdatedAt" class="control-label"></label>
-                <input asp-for="Discussion.UpdatedAt" class="form-control" />
-                <span asp-validation-for="Discussion.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Discussion.DeletedAt" class="control-label"></label>
-                <input asp-for="Discussion.DeletedAt" class="form-control" />
-                <span asp-validation-for="Discussion.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Discussion.ObjectId" class="control-label"></label>
-                <input asp-for="Discussion.ObjectId" class="form-control" />
-                <span asp-validation-for="Discussion.ObjectId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                <input type="hidden" asp-for="Workspace.Id" />
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

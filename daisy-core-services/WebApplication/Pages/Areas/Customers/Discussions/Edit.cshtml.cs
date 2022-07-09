@@ -8,29 +8,50 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using WebApplication.Pages.Utils;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.Areas.Customers.Discussions
 {
     public class EditModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public EditModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public EditModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         [BindProperty]
         public Discussion Discussion { get; set; }
+        [BindProperty]
+        public Workspace Workspace { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, int? workspaceId)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Discussion = await _context.Discussions.FirstOrDefaultAsync(m => m.Id == id);
+            string role = UserAuthentication.Role();
+
+            if (role.Equals("CUSTOMER") && role.Equals("DESIGNER"))
+            {
+                return Redirect("/Unauthorized");
+            }
+            var email = UserAuthentication.UserLogin.Email;
+
+            using var work = _unitOfWorkFactory.Get;
+            User user = work.UserRepository.GetUsersByEmail(email);
+            Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").FirstOrDefault();
+
+            if (!Workspace.Project.Freelancer.Equals(user) && !Workspace.Project.Customer.Equals(user))
+            {
+                return Redirect("/Unauthorized");
+            }
+
+
+            Discussion = work.DiscussionRepository.Get((int)id);
 
             if (Discussion == null)
             {
@@ -41,37 +62,19 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? workspaceId)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Discussion).State = EntityState.Modified;
+            using var work = _unitOfWorkFactory.Get;
+            Discussion.UpdatedAt = DateTime.Now;
+            work.DiscussionRepository.UpdateDiscussion(Discussion);
+            work.Save();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DiscussionExists(Discussion.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool DiscussionExists(int id)
-        {
-            return _context.Discussions.Any(e => e.Id == id);
+            return RedirectToPage("./Index", new { workspaceId = workspaceId });
         }
     }
 }
