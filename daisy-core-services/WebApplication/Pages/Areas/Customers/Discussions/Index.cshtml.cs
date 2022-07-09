@@ -19,11 +19,13 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public IList<Discussion> Discussion { get;set; }
+        public IList<Discussion> Discussion { get; set; }
+        public Workspace Workspace { get; set; }
 
         public async Task OnGetAsync(int? workspaceId)
         {
             var work = _unitOfWorkFactory.Get;
+            Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").FirstOrDefault();
             Discussion = work.DiscussionRepository.GetAll((d) => d.Workspace.Id == workspaceId, null, "Workspace").ToList(); ;
         }
     }

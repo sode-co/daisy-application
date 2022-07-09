@@ -7,23 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.Areas.Customers.Workspaces
 {
     public class IndexModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public IndexModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public IndexModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         public IList<Workspace> Workspace { get;set; }
 
         public async Task OnGetAsync()
         {
-            Workspace = await _context.Workspaces.ToListAsync();
+            using var work = _unitOfWorkFactory.Get;
+            Workspace = work.WorkspaceRepository.GetWorkspaces().ToList();
         }
     }
 }
