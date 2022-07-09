@@ -117,11 +117,12 @@
 
 <br/>
 <p>
-    <a asp-page="Create"><button class="btn btn-outline-success">Create New Discussion</button></a>
+    <a asp-page="Create" asp-route-workspaceId="@(Model.Workspace.Id)"><button class="btn btn-outline-success">Create New Discussion</button></a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>Sender</th>
             <th>
                 @Html.DisplayNameFor(model => model.Discussion[0].Type)
             </th>
@@ -146,30 +147,41 @@
     <tbody>
         @foreach (var item in Model.Discussion)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdatedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeletedAt)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id"><button class="btn btn-outline-dark">Edit</button></a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id"><button class="btn btn-outline-danger">Delete</button></a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sender.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeletedAt)
+            </td>
+            <td>
+                @{
+                    if (item.Status.Equals("SENT"))
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id"><button class="btn btn-outline-dark">Edit</button></a>
+                    }
+                    if (item.Status.Equals("SENT"))
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id"><button class="btn btn-outline-danger">Delete</button></a>
+                    }
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>

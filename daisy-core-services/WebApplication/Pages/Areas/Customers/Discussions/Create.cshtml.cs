@@ -7,20 +7,37 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using DataAccess.UnitOfWork;
+using static Api.Common.Constants;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Customers.Discussions
 {
     public class CreateModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public CreateModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public CreateModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public IActionResult OnGet()
+        [BindProperty]
+        public Workspace Workspace { get; set; }
+
+        public IActionResult OnGet(int? workspaceId)
         {
+            string role = UserAuthentication.Role();
+
+            if (role.Equals("CUSTOMER") && role.Equals("DESIGNER"))
+            {
+                return Redirect("/Unauthorized");
+            }
+            var email = UserAuthentication.UserLogin.Email;
+
+            using var work = _unitOfWorkFactory.Get;
+            User user = work.UserRepository.GetUsersByEmail(email);
+            Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").FirstOrDefault();
+
             return Page();
         }
 
@@ -28,17 +45,25 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
         public Discussion Discussion { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? workspaceId)
         {
+            using var work = _unitOfWorkFactory.Get;
+
+            var email = UserAuthentication.UserLogin.Email;
+
+            Discussion.CreatedAt = DateTime.Now;
+            Discussion.Status = DISCUSSION_STATUS.SENT;
+            Discussion.Workspace = work.WorkspaceRepository.Get((int)workspaceId);
+            Discussion.Sender = work.UserRepository.GetUsersByEmail(email);
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Discussions.Add(Discussion);
-            await _context.SaveChangesAsync();
+            work.DiscussionRepository.CreateDiscussion(Discussion);
+            work.Save();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { workspaceId = workspaceId });
         }
     }
 }
