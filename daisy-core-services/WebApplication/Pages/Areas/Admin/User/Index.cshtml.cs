@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using WebApplication.Pages.Utils;
@@ -29,9 +28,7 @@ namespace WebApplication.Pages.UserCRUD
         }
 
         public IList<User> User { get;set; }
-        
         public decimal TotalPage { get; set; }
-
         public async Task<IActionResult> OnGetAsync(int p = 1)
         {
             string role = UserAuthentication.Role();

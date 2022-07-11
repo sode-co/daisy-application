@@ -1,0 +1,55 @@
+﻿@page
+@model WebApplication.Pages.Areas.Designers.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+    <h4>Portfolio</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Portfolio.Biography)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Portfolio.Biography)
+        </dd>
+    </dl>
+    <p><a asp-page="./Edit" asp-route-returnURL="@Model.currentURL" asp-route-id="@Model.Portfolio.Id">Edit</a> </p>
+    <h3>Art works</h3>
+    <p><a asp-page="../Artwork/Create" asp-route-creatorID="@Model.Portfolio.Id" asp-route-returnURL="@Model.currentURL">Add new art work</a></p>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Title)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ArtWork) {
+        <tr>
+            <td>
+                <img style="width: 100px; height: auto;" src="@item.Image" class="img-responsive">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <a asp-page="../Artwork/Edit" asp-route-returnURL="@Model.currentURL" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="../Artwork/Delete" asp-route-returnURL="@Model.currentURL" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

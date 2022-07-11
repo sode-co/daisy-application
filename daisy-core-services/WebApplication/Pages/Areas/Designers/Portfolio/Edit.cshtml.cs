@@ -5,22 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
 
-namespace WebApplication.Pages.UserCRUD
+namespace WebApplication.Pages.Areas.Designers
 {
     public class EditModel : PageModel
     {
         private UnitOfWorkFactory _unitOfWorkFactory;
+
         public EditModel(UnitOfWorkFactory unitOfWorkFactory)
         {
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         [BindProperty]
-        public User User { get; set; }
+        public Domain.Models.Portfolio Portfolio { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,10 +30,12 @@ namespace WebApplication.Pages.UserCRUD
             {
                 return NotFound();
             }
-
-            User = _unitOfWorkFactory.Get.UserRepository.GetUser((int)id);
-
-            if (User == null)
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                Portfolio = await work.PortfolioRepository.GetAll().FirstOrDefaultAsync(m => m.Id == id);
+            }
+           
+            if (Portfolio == null)
             {
                 return NotFound();
             }
@@ -40,18 +44,21 @@ namespace WebApplication.Pages.UserCRUD
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string? returnURL)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            using var work = _unitOfWorkFactory.Get;
-            work.UserRepository.UpdateUser(User);
-            work.Save();
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                Portfolio.UpdatedAt = DateTime.Now;
+                work.PortfolioRepository.UpdatePortfolio(Portfolio);
+                work.Save();
+            }
 
-            return RedirectToPage("./Index");
+            return Redirect(returnURL != null ? returnURL : "./Index");
         }
     }
 }

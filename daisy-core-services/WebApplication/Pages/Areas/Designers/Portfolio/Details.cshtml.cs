@@ -4,40 +4,41 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DataAccess.MssqlServerIntegration;
-using Domain.Models;
-using WebApplication.Pages.Utils;
+using Microsoft.EntityFrameworkCore;
 using DataAccess.UnitOfWork;
+using Microsoft.AspNetCore.Http.Extensions;
 
-namespace WebApplication.Pages.UserCRUD
+namespace WebApplication.Pages.Areas.Designers
 {
     public class DetailsModel : PageModel
     {
         private UnitOfWorkFactory _unitOfWorkFactory;
+        public string currentURL;
+
         public DetailsModel(UnitOfWorkFactory unitOfWorkFactory)
         {
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public Domain.Models.User User { get; set; }
+        public Domain.Models.Portfolio Portfolio { get; set; }
+
+        public List<Domain.Models.ArtWork> ArtWork { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            string role = UserAuthentication.Role();
-
-            if (role != "ADMIN")
-            {
-                return Redirect("/Unauthorized");
-            }
-
+            currentURL = HttpContext.Request.GetEncodedPathAndQuery();
             if (id == null)
             {
                 return NotFound();
             }
 
-            User = _unitOfWorkFactory.Get.UserRepository.GetUser((int)id);
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                Portfolio = work.PortfolioRepository.GetAll().FirstOrDefault(m => m.Id == id);
+                ArtWork = work.ArtWorkRepository.GetArtWorkByPortfolioId(Portfolio.Id).ToList();
+            }
 
-            if (User == null)
+            if (Portfolio == null)
             {
                 return NotFound();
             }

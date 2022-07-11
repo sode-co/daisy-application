@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
-using WebApplication.Pages.Utils;
 using DataAccess.UnitOfWork;
 
-namespace WebApplication.Pages.Areas.Customers.Requests
+namespace WebApplication.Pages.Areas.Designers.Artwork
 {
     public class DeleteModel : PageModel
     {
@@ -20,47 +20,40 @@ namespace WebApplication.Pages.Areas.Customers.Requests
         }
 
         [BindProperty]
-        public Request Request { get; set; }
+        public ArtWork ArtWork { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            string role = UserAuthentication.Role();
-
-            if(role.Equals("CUSTOMER") && role.Equals("ADMIN"))
-            {
-                return Redirect("/Unauthorized");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                ArtWork = work.ArtWorkRepository.GetFirstOrDefault(m => m.Id == id);
+            }
 
-            if (Request == null)
+            if (ArtWork == null)
             {
                 return NotFound();
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(string? returnURL, int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Request = _unitOfWorkFactory.Get.RequestRepository.GetRequest((int)id);
-
-            if (Request != null)
+            using (var work = _unitOfWorkFactory.Get)
             {
-                _unitOfWorkFactory.Get.RequestRepository.DeleteRequest(Request);
-                _unitOfWorkFactory.Get.Save();
+                work.ArtWorkRepository.DeleteArtWork(ArtWork);
             }
 
-            return RedirectToPage("./Index");
+            return Redirect(returnURL != null ? returnURL : "./Index");
         }
     }
 }
