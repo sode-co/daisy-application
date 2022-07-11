@@ -46,11 +46,11 @@ namespace WebApplication.Pages.UserCRUD
 
             string email = UserAuthentication.UserLogin.Email;
 
-            var users = _unitOfWorkFactory.Get.UserRepository.GetUsers().Where(u => !u.Email.Equals(email));
+            var users = _unitOfWorkFactory.Get.UserRepository.GetUsers().Where(u => !u.Email.Equals(email) && u.DeletedAt == null);
             
             if (!string.IsNullOrEmpty(SearchString))
             {
-                users = _unitOfWorkFactory.Get.UserRepository.GetUsersByName(SearchString).Where(u => !u.Email.Equals(email));
+                users = _unitOfWorkFactory.Get.UserRepository.GetUsersByName(SearchString).Where(u => !u.Email.Equals(email) && u.DeletedAt == null);
             }
             decimal tmp = Math.Ceiling(Convert.ToDecimal(users.Count()/ ItemPerPage));
             TotalPage = tmp == 0 ? 1 : tmp;
