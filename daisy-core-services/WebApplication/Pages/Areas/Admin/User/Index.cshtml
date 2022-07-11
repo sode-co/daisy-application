@@ -113,14 +113,17 @@
         <input type="submit" value="Search" class="btn btn-outline-success" />
     </p>
 </form>
-<table class="table">
+<table class="table table-bordered table-hover">
     <thead>
-        <tr>
+        <tr class="table-danger">
             <th>
                 Name
             </th>
-            <th>
-                Display name
+            <th style="width: 200px">
+                Display
+            </th>
+            <th style="width: 300px">
+                Description
             </th>
             <th>
                 Email
@@ -146,6 +149,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)

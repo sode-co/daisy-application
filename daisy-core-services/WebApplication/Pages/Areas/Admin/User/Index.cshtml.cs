@@ -44,11 +44,13 @@ namespace WebApplication.Pages.UserCRUD
             ItemPerPage = 10;
             CurrentPage = p;
 
-            var users = _unitOfWorkFactory.Get.UserRepository.GetUsers();
+            string email = UserAuthentication.UserLogin.Email;
+
+            var users = _unitOfWorkFactory.Get.UserRepository.GetUsers().Where(u => !u.Email.Equals(email));
             
             if (!string.IsNullOrEmpty(SearchString))
             {
-                users = _unitOfWorkFactory.Get.UserRepository.GetUsersByName(SearchString);
+                users = _unitOfWorkFactory.Get.UserRepository.GetUsersByName(SearchString).Where(u => !u.Email.Equals(email));
             }
             decimal tmp = Math.Ceiling(Convert.ToDecimal(users.Count()/ ItemPerPage));
             TotalPage = tmp == 0 ? 1 : tmp;
