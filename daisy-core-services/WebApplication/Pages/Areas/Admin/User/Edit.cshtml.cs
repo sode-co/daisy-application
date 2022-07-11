@@ -48,15 +48,11 @@ namespace WebApplication.Pages.UserCRUD
                 return Page();
             }
 
-            _unitOfWorkFactory.Get.UserRepository.UpdateUser(User);
-            _unitOfWorkFactory.Get.Save();
+            using var work = _unitOfWorkFactory.Get;
+            work.UserRepository.UpdateUser(User);
+            work.Save();
 
             return RedirectToPage("./Index");
-        }
-
-        private bool UserExists(int id)
-        {
-            return _unitOfWorkFactory.Get.UserRepository.GetUser((int)id) != null;
         }
     }
 }
