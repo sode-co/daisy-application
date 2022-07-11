@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Http.Extensions;
 using SaleWebApp.Paging;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Designers
 {
@@ -27,6 +28,14 @@ namespace WebApplication.Pages.Areas.Designers
 
         public async Task<IActionResult> OnGetAsync(int? id, int? pageIndex)
         {
+            string role = UserAuthentication.Role();
+
+            if (role.Equals(""))
+            {
+                return Redirect("/Unauthorized");
+            }
+
+
             currentURL = HttpContext.Request.GetEncodedPathAndQuery();
             if (id == null)
             {

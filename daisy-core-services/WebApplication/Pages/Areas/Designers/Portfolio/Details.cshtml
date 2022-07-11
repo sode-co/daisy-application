@@ -10,6 +10,30 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Portfolio.Freelancer.DisplayName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Portfolio.Freelancer.DisplayName)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Portfolio.Freelancer.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Portfolio.Freelancer.Email)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Portfolio.Freelancer.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Portfolio.Freelancer.Phone)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Portfolio.Biography)
         </dt>
         <dd class="col-sm-10">
@@ -27,7 +51,17 @@
         &nbsp;
         <span style="font-size: 22px; font-weight: 600; color: #23175c">Artworks of this portfolios</span>
     </div>
-    <p><a asp-page="../Artwork/Create" asp-route-creatorID="@Model.Portfolio.Id" asp-route-returnURL="@Model.currentURL"><button class="btn btn-outline-success">Add new artwork</button></a></p>
+    @{
+        if (UserAuthentication.UserLogin != null)
+        {
+            string email = UserAuthentication.UserLogin.Email;
+            if (Model.Portfolio.Freelancer.Email.Equals(email))
+            {
+                <p><a asp-page="../Artwork/Create" asp-route-creatorID="@Model.Portfolio.Id" asp-route-returnURL="@Model.currentURL"><button class="btn btn-outline-success">Add new artwork</button></a></p>
+            }
+        }
+
+    }
     <table class="table table-bordered table-hover">
         <thead>
             <tr class="table-warning">
