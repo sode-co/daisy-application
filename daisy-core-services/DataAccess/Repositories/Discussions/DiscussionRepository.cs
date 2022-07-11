@@ -30,5 +30,26 @@ namespace DataAccess.Repositories.Discussions
                 _dbContext.SaveChanges();
             }
         }
+
+        public void CreateDiscussion(Discussion discussion)
+        {
+            _dbContext.Discussions.Add(discussion);
+        }
+
+        public Discussion GetDiscussion(int id)
+        {
+            return _dbContext.Discussions.Find(id);
+        }
+
+        public IEnumerable<Discussion> GetDiscussions()
+        {
+            return _dbContext.Discussions.ToList();
+        }
+
+        public void UpdateDiscussion(Discussion discussion)
+        {
+            _dbContext.Discussions.Update(discussion);
+        }
+
     }
 }

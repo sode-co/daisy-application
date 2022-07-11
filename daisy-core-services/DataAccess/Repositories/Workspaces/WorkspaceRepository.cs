@@ -16,5 +16,39 @@ namespace DataAccess.Repositories.Workspaces
         {
             _dbContext = dbContext;
         }
+
+        public void CreateWorkspace(Workspace workspace)
+        {
+            _dbContext.Workspaces.Add(workspace);
+        }
+
+        public Workspace GetWorkspace(int id)
+        {
+            return _dbContext.Workspaces.Find(id);
+        }
+
+        public IEnumerable<Workspace> GetWorkspaces()
+        {
+            return _dbContext.Workspaces.ToList();
+        }
+        public void DeleteWorkspace(Workspace workspace)
+        {
+            workspace.DeletedAt = DateTime.Now;
+            _dbContext.Workspaces.Update(workspace);
+        }
+        public void DeleteWorkspacePermanently(Workspace workspace)
+        {
+            _dbContext.Workspaces.Remove(workspace);
+        }
+        public void UpdateWorkspace(Workspace workspace)
+        {
+            _dbContext.Workspaces.Update(workspace);
+        }
+        public IEnumerable<Workspace> GetWorkspaceByCustomerId(int customerId)
+        {
+            List<Workspace> workspaceList = new();
+
+            return workspaceList;
+        }
     }
 }
