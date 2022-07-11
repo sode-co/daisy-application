@@ -21,6 +21,15 @@ namespace DataAccess.Repositories.Portfolios
         {
             portfolio.DeletedAt = DateTime.Now;
             _dbContext.Portfolios.Update(portfolio);
+            _dbContext.SaveChanges();
+
+        }
+        public void UpdatePortfolio(Portfolio portfolio)
+        {
+            portfolio.UpdatedAt = DateTime.Now;
+            _dbContext.Portfolios.Update(portfolio);
+            _dbContext.SaveChanges();
+
         }
     }
 }
