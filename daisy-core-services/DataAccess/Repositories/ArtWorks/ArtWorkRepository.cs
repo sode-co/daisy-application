@@ -20,8 +20,7 @@ namespace DataAccess.Repositories.ArtWorks
 
         public IEnumerable<ArtWork> GetArtWorkByPortfolioId(int id)
         {
-            var artWorks = _dbContext.ArtWorks.ToList();
-            var artWorksByPortfolio = artWorks.Where(aw => aw.Portfolio.Id == id).ToList();
+            var artWorksByPortfolio = _dbContext.ArtWorks.Where(aw => aw.Portfolio.Id == id);
             return artWorksByPortfolio;
         }
 
