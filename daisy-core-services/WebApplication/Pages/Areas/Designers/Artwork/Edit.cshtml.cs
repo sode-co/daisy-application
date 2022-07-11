@@ -25,6 +25,13 @@ namespace WebApplication.Pages.Areas.Designers.Artwork
 
         public async Task<IActionResult> OnGetAsync(string? returnURL, int? id)
         {
+            string role = UserAuthentication.Role();
+
+            if (!role.Equals("DESIGNER"))
+            {
+                return Redirect("/Unauthorized");
+            }
+
             if (id == null)
             {
                 return NotFound();

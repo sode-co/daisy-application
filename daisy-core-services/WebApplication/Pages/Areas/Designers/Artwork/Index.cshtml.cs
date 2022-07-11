@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Designers.Artwork
 {
@@ -21,9 +22,17 @@ namespace WebApplication.Pages.Areas.Designers.Artwork
 
         public IList<ArtWork> ArtWork { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            string role = UserAuthentication.Role();
+
+            if (role.Equals(""))
+            {
+                return Redirect("/Unauthorized");
+            }
+
             ArtWork = await _context.ArtWorks.ToListAsync();
+            return Page();
         }
     }
 }
