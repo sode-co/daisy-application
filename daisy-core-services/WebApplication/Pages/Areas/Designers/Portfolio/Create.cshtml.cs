@@ -7,20 +7,28 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
+using WebApplication.Pages.Utils;
+using DataAccess.UnitOfWork;
 
 namespace WebApplication.Pages.Areas.Designers
 {
     public class CreateModel : PageModel
     {
-        private readonly DataAccess.MssqlServerIntegration.ApplicationDbContext _context;
-
-        public CreateModel(DataAccess.MssqlServerIntegration.ApplicationDbContext context)
+        private UnitOfWorkFactory _unitOfWorkFactory;
+        public CreateModel(UnitOfWorkFactory unitOfWorkFactory)
         {
-            _context = context;
+            this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
         public IActionResult OnGet()
         {
+            string role = UserAuthentication.Role();
+
+            if (!role.Equals("DESIGNER"))
+            {
+                return Redirect("/Unauthorized");
+            }
+
             return Page();
         }
 
@@ -35,9 +43,16 @@ namespace WebApplication.Pages.Areas.Designers
                 return Page();
             }
 
-            _context.Portfolios.Add(Portfolio);
-            await _context.SaveChangesAsync();
+            string email = UserAuthentication.UserLogin.Email;
 
+            using var work = _unitOfWorkFactory.Get;
+            User designer = work.UserRepository.GetUsersByEmail(email);
+            Portfolio.Freelancer = designer;
+            Portfolio.IsActive = true;
+            Portfolio.CreatedAt = DateTime.Now;
+            work.PortfolioRepository.Add(Portfolio);
+            work.Save();
+    
             return RedirectToPage("./Index");
         }
     }

@@ -9,6 +9,7 @@ using Domain.Models;
 using WebApplication.Pages.Utils;
 using DataAccess.UnitOfWork;
 using static Api.Common.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication.Pages.Areas.Customers.Applications
 {
@@ -33,7 +34,7 @@ namespace WebApplication.Pages.Areas.Customers.Applications
             JobApplication = work.JobApplicationRepository.Get(id.Value);
             Designer = work.UserRepository.GetUser(freelancerId.Value);
 
-            if (role.Equals("CUSTOMER") && role.Equals("ADMIN"))
+            if (!role.Equals("CUSTOMER"))
             {
                 return Redirect("/Unauthorized");
             }
