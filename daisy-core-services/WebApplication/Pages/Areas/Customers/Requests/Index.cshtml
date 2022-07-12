@@ -137,6 +137,14 @@
     </div>
 </form>
 
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="AVAILABLE">Available</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+    </li>
+</ul>
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
@@ -215,12 +223,14 @@
 
 <a asp-page="./Index"
    asp-route-pageIndex="@(Model.Request.PageIndex - 1)"
+   asp-route-status="@(Model.CurrentStatus)"
    class="btn btn-outline-dark @prevDisabled">
     Previous
 </a>
 
 <a asp-page="./Index"
    asp-route-pageIndex="@(Model.Request.PageIndex + 1)"
+   asp-route-status="@(Model.CurrentStatus)"
    class="btn btn-outline-dark @nextDisabled">
     Next
 </a>

@@ -64,9 +64,15 @@ namespace WebApplication.Pages.Areas.Customers.Applications
                     application.Status = STATUS_JOB_APPLICATION.REJECT;
                     work.Save();
                 }
+
+
                 User user = UserAuthentication.UserLogin;
 
                 Request req = work.RequestRepository.GetAll(r => r.Id.Equals(requestId)).Include(r => r.Customer).Include(r => r.Category).FirstOrDefault();
+
+                req.Status = REQUEST_STATUS.TAKEN;
+                work.RequestRepository.UpdateRequest(req);
+                work.Save();
                 Project project = new Project()
                 {
                     Customer = req.Customer,
