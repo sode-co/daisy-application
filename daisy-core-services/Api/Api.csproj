@@ -61,6 +61,7 @@
     <None Remove="MongoDB.Driver" />
     <None Remove="MongoDB.Driver.GridFS" />
     <None Remove="MongoDB.Bson" />
+    <None Remove="Controllers\resource\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Middlewares\" />
@@ -72,5 +73,6 @@
     <Folder Include="Response\Authentication\" />
     <Folder Include="Response\User\" />
     <Folder Include="Controllers\Designer\" />
+    <Folder Include="Controllers\resource\" />
   </ItemGroup>
 </Project>

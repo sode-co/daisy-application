@@ -1,8 +1,17 @@
+import 'dart:typed_data';
+
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/pages/project-details/view/files/page_project_file.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/core_services/common/response_handler.dart';
+import 'package:daisy_application/core_services/socket/file_upload/file_upload_socket_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:daisy_application/app/common/widget/image_picker/native_image_picker.dart'
+    if (dart.library.html) 'package:daisy_application/app/common/widget/image_picker/web_image_picker.dart'
+    as image_picker;
 
 extension ProjectFileManagement on ProjectDetailsPageState {
   Widget createProjectFileManagementTab() => Container(
@@ -68,10 +77,31 @@ extension ProjectFileManagement on ProjectDetailsPageState {
         }),
       );
 
+  Future _pickImage() async {
+    try {
+      Uint8List? bytes =
+          await image_picker.UniversalImagePicker.getImageAsByte();
+      if (bytes == null) return;
+
+      Debug.log('found bytes', bytes);
+      await FileUploadSocketClient().performUpload(bytes,
+          (double progress, FAILURE_TYPE failed) {
+        Debug.log('upload-file-call-back', 'uploaded progress', progress,
+            'with failure type', failed);
+      });
+    } on PlatformException catch (e) {
+      Debug.log(
+          'File picker', 'An error occurs while picking image', e.message);
+    }
+  }
+
   Widget _createUploadButton() => Responsive.isDesktop(context)
-      ? const ButtonPrimary(
+      ? ButtonPrimary(
           text: 'Upload',
           backgroundColor: Colors.black38,
+          onPressed: () async {
+            await _pickImage();
+          },
         )
       : Container();
 

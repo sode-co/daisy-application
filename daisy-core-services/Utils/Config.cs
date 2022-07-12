@@ -31,6 +31,7 @@ namespace Utils
             public string MONGO_DB_HOST { get; set; }
             public string MONGO_DB_PORT { get; set; }
             public string MONGO_DB_USER { get; set; }
+            public string MONGO_DB_NAME { get; set; }
             public string MONGO_DB_PASSWORD { get; set; }
             public bool IsProduction { get { return (ENVIRONMENT != null && ENVIRONMENT.ToLower() == "Production".ToLower()); } }
             public bool IsTest { get { return (ENVIRONMENT != null && ENVIRONMENT.ToLower() == "Test".ToLower()); } }

@@ -23,7 +23,9 @@ extension PageProjectFile on ProjectDetailsPageState {
             crossAxisCount: 3,
           ),
           itemCount: screenState.currentProjectTab.resources.length,
-          itemBuilder: (ctx, index) => {}));
+          itemBuilder: (ctx, index) {
+            return Container();
+          }));
 
   void switchFileTab(int index) {
     filePageController.animateToPage(index,

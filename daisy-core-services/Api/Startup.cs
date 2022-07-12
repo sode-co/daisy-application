@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 using Api.Middlewares;
@@ -150,6 +152,9 @@ namespace Api
 
             Config.AdaptEnv(env.EnvironmentName);
             app.UseRouting();
+            var wsOption = new WebSocketOptions() { KeepAliveInterval = TimeSpan.FromSeconds(120) };
+            app.UseWebSockets(wsOption);
+
             app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
