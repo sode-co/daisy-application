@@ -35,7 +35,7 @@
     </div>
     <div class="form-group">
         <label for="timeline">Your project timeline</label>
-        <input class="form-control" asp-for="request.Timeline" asp-format="{0:yyyy-MM-dd}" />
+        <input class="form-control" asp-for="request.Timeline" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddThh:mm")" />
     </div>
 
     <button type="submit" class="btn btn-outline-success">Submit</button>
