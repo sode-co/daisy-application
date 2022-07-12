@@ -130,21 +130,50 @@
 <form asp-page="./Index" method="get">
     <div class="form-actions">
         <p>
-            Search by title: 
+            Search by title:
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-outline-success" />
         </p>
     </div>
 </form>
-
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="AVAILABLE">Available</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
-    </li>
-</ul>
+@{
+    if (Model.CurrentStatus != null)
+    {
+        if (Model.CurrentStatus.Equals("AVAILABLE"))
+        {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="AVAILABLE">Available</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+                </li>
+            </ul>
+        }
+        else
+        {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="AVAILABLE">Available</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+                </li>
+            </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-page="" asp-route-status="AVAILABLE">Available</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+            </li>
+        </ul>
+    }
+}
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
@@ -219,7 +248,7 @@
 </table>
 
 @{ var prevDisabled = !Model.Request.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.Request.HasNextPage ? "disabled" : ""; }
+    var nextDisabled = !Model.Request.HasNextPage ? "disabled" : ""; }
 
 <a asp-page="./Index"
    asp-route-pageIndex="@(Model.Request.PageIndex - 1)"
