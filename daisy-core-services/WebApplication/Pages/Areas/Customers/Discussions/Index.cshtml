@@ -154,9 +154,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
+            @{
+                if (item.Type.Equals("img"))
+                {
+                    <td>
+                        <img style="width: 250px; height: auto;" src="@item.Content" class="img-responsive">
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </td>
+                }
+            }
+
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
