@@ -134,6 +134,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.JobApplication[0].UpdatedAt)
             </th>
+            <th>
+                View Portfolios
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -165,8 +168,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>
+            <td>
+                @{
+                    <a asp-page="/Areas/Designers/Portfolio/MyPortfolios"
+                       asp-route-freelancerId="@(item.Freelancer.Id)"
+                       class="btn btn-outline-warning">
+                        Portfolios
+                    </a>
+                }
+            </td>
             @{
-                if(item.Status == "PENDING")
+                if (item.Status == "PENDING")
                 {
                     <td>
                         <a asp-page="./Approve" asp-route-id="@item.Id" asp-route-freelancerId="@item.Freelancer.Id" asp-route-requestId="@item.Request.Id">Approve</a>

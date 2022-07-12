@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.Areas.Designers.Artwork
 {
@@ -21,6 +22,13 @@ namespace WebApplication.Pages.Areas.Designers.Artwork
 
         public IActionResult OnGet()
         {
+            string role = UserAuthentication.Role();
+
+            if (!role.Equals("DESIGNER"))
+            {
+                return Redirect("/Unauthorized");
+            }
+
             return Page();
         }
 

@@ -53,7 +53,7 @@ namespace WebApplication.Pages.Areas.Designers
             work.PortfolioRepository.Add(Portfolio);
             work.Save();
     
-            return RedirectToPage("./Index");
+            return RedirectToPage("./MyPortfolios");
         }
     }
 }

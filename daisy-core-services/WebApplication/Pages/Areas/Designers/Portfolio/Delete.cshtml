@@ -1,12 +1,13 @@
 ﻿@page
-@model WebApplication.Pages.Areas.Designers.DetailsModel
+@model WebApplication.Pages.Areas.Designers.DeleteModel
 @using WebApplication.Pages.Utils;
 
 @{
     ViewData["Title"] = "Details";
 }
 <div>
-    <h4>Portfolio</h4>
+    <h4>Delete portfolio</h4>
+    <h5 class="text-danger">Are you sure delete this resource?</h5>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -40,19 +41,7 @@
             @Html.DisplayFor(model => model.Portfolio.Biography)
         </dd>
     </dl>
-
-    @{
-        if (UserAuthentication.UserLogin != null)
-        {
-            string email = UserAuthentication.UserLogin.Email;
-            if (Model.Portfolio.Freelancer.Email.Equals(email))
-            {
-                <p><a asp-page="./Edit" asp-route-returnURL="@Model.currentURL" asp-route-id="@Model.Portfolio.Id">Edit</a> </p>
-            }
-        }
-    }
-
-
+    <p><a asp-page="./Edit" asp-route-returnURL="@Model.currentURL" asp-route-id="@Model.Portfolio.Id">Edit</a> </p>
     <div>
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width="100" height="100"
@@ -63,17 +52,14 @@
         &nbsp;
         <span style="font-size: 22px; font-weight: 600; color: #23175c">Artworks of this portfolios</span>
     </div>
-    @{
-        if (UserAuthentication.UserLogin != null)
-        {
-            string email = UserAuthentication.UserLogin.Email;
-            if (Model.Portfolio.Freelancer.Email.Equals(email))
-            {
-                <p><a asp-page="../Artwork/Create" asp-route-creatorID="@Model.Portfolio.Id" asp-route-returnURL="@Model.currentURL"><button class="btn btn-outline-success">Add new artwork</button></a></p>
-            }
-        }
 
-    }
+    <form method="post">
+        <input type="hidden" asp-for="@(Model.Portfolio.Id)" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+
+
     <table class="table table-bordered table-hover">
         <thead>
             <tr class="table-warning">
@@ -131,14 +117,14 @@
 </div>
 
 @{ var prevDisabled = !Model.ArtWork.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.ArtWork.HasNextPage ? "disabled" : ""; 
+    var nextDisabled = !Model.ArtWork.HasNextPage ? "disabled" : "";
 
-<a asp-page="./Details?id=@(Model.Portfolio.Id)"
+    <a asp-page="./Details?id=@(Model.Portfolio.Id)"
        asp-route-id="@(Model.Portfolio.Id)"
-   asp-route-pageIndex="@(Model.ArtWork.PageIndex - 1)"
-   class="btn btn-outline-dark @prevDisabled">
-    Previous
-</a>
+       asp-route-pageIndex="@(Model.ArtWork.PageIndex - 1)"
+       class="btn btn-outline-dark @prevDisabled">
+        Previous
+    </a>
     <a asp-page="./Details"
        asp-route-id="@(Model.Portfolio.Id)"
        asp-route-pageIndex="@(Model.ArtWork.PageIndex + 1)"
@@ -146,3 +132,4 @@
         Next
     </a>
 }
+

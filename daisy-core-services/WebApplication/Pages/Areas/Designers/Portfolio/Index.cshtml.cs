@@ -33,7 +33,7 @@ namespace WebApplication.Pages.Areas.Designers
             }
             using (var work = _unitOfWorkFactory.Get)
             {
-                Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).ToListAsync();
+                Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).Where(p => p.DeletedAt == null).ToListAsync();
             }
 
             return Page();

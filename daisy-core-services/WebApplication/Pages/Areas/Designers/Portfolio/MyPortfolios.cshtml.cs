@@ -23,11 +23,11 @@ namespace WebApplication.Pages.Areas.Designers
 
         public IList<Domain.Models.Portfolio> Portfolio { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? freelancerId)
         {
             string role = UserAuthentication.Role();
 
-            if (!role.Equals("DESIGNER"))
+            if (role.Equals(""))
             {
                 return Redirect("/Unauthorized");
             }
@@ -35,7 +35,14 @@ namespace WebApplication.Pages.Areas.Designers
 
             using (var work = _unitOfWorkFactory.Get)
             {
-                Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).Where(p => p.Freelancer.Email.Equals(email)).ToListAsync();
+                if (freelancerId == null)
+                {
+                    Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).Where(p => p.Freelancer.Email.Equals(email) && p.DeletedAt == null).ToListAsync();
+                }
+                else
+                {
+                    Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).Where(p => p.Freelancer.Id.Equals(freelancerId) && p.DeletedAt == null).ToListAsync();
+                }
             }
 
             return Page();
