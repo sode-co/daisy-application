@@ -36,14 +36,14 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
 
             using var work = _unitOfWorkFactory.Get;
             User user = work.UserRepository.GetUsersByEmail(email);
-            Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").FirstOrDefault();
+            Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").Include(p => p.Project.Freelancer).FirstOrDefault();
 
             if(!Workspace.Project.Freelancer.Equals(user) && !Workspace.Project.Customer.Equals(user))
             {
                 return Redirect("/Unauthorized");
             }
 
-            Discussion = work.DiscussionRepository.GetAll((d) => d.Workspace.Id == workspaceId, null, "Workspace").ToList(); ;
+            Discussion = work.DiscussionRepository.GetAll((d) => d.Workspace.Id == workspaceId, null, "Workspace").Where(d => d.DeletedAt == null).ToList(); ;
 
             return Page();
         }

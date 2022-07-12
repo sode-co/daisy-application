@@ -1,5 +1,6 @@
 ﻿@page
 @model WebApplication.Pages.Areas.Customers.Discussions.IndexModel
+@using WebApplication.Pages.Utils;
 
 @{
     ViewData["Title"] = "Index";
@@ -116,15 +117,27 @@
 </div>
 
 <br />
-<p>
-    <a asp-page="Create" asp-route-workspaceId="@(Model.Workspace.Id)"><button class="btn btn-outline-dark">Create New Discussion</button></a>
-</p>
-<form asp-page-handler="update" method="post">
-    <div class="form-group">
-        <input type="hidden" name="workspaceId" value="@(Model.Workspace.Id)" />
-        <input type="submit" value="Mark this project as Done" class="btn btn-success" />
-    </div>
-</form>
+
+@{
+    if (!Model.Workspace.Status.Equals("DONE"))
+    {
+        <p>
+            <a asp-page="Create" asp-route-workspaceId="@(Model.Workspace.Id)"><button class="btn btn-outline-dark">Create New Discussion</button></a>
+        </p>
+        <form asp-page-handler="update" method="post">
+            <div class="form-group">
+                <input type="hidden" name="workspaceId" value="@(Model.Workspace.Id)" />
+                <input type="submit" value="Mark this project as Done" class="btn btn-success" />
+            </div>
+        </form>
+    }
+    else
+    {
+        <p style="font-size: 18px; font-weight: 600; color: #d10700 ">
+            &#8226; This Project is completed. Discussion is closed automatically.
+        </p>
+    }
+}
 
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
@@ -144,9 +157,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Discussion[0].UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discussion[0].DeletedAt)
             </th>
             <th></th>
         </tr>
@@ -186,17 +196,16 @@
                     @Html.DisplayFor(modelItem => item.UpdatedAt)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DeletedAt)
-                </td>
-                <td>
                     @{
-                        if (item.Status.Equals("SENT"))
+                        if (!Model.Workspace.Status.Equals("DONE"))
                         {
-                            <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id"><button class="btn btn-outline-dark">Edit</button></a>
-                        }
-                        if (item.Status.Equals("SENT"))
-                        {
-                            <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id" class="text-danger">Delete</a>
+                            var email = UserAuthentication.UserLogin.Email;
+
+                            if (item.Status.Equals("SENT") && item.Sender.Email.Equals(email))
+                            {
+                                <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id"><button class="btn btn-outline-dark">Edit</button></a>
+                                <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id" class="text-danger">Delete</a>
+                            }
                         }
                     }
                 </td>
