@@ -37,11 +37,11 @@ namespace WebApplication.Pages.Areas.Designers
             {
                 if (freelancerId == null)
                 {
-                    Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).Where(p => p.Freelancer.Email.Equals(email)).ToListAsync();
+                    Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).Where(p => p.Freelancer.Email.Equals(email) && p.DeletedAt == null).ToListAsync();
                 }
                 else
                 {
-                    Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).Where(p => p.Freelancer.Id.Equals(freelancerId)).ToListAsync();
+                    Portfolio = await work.PortfolioRepository.GetAll().Include(p => p.Freelancer).Where(p => p.Freelancer.Id.Equals(freelancerId) && p.DeletedAt == null).ToListAsync();
                 }
             }
 
