@@ -35,7 +35,7 @@ namespace WebApplication.Pages.Areas.Customers.Workspaces
             using var work = _unitOfWorkFactory.Get;
             User user = work.UserRepository.GetUsersByEmail(email);
 
-            Workspace = work.WorkspaceRepository.GetAll().Include(w => w.Project).Where(w => w.Project.Freelancer.Equals(user) || w.Project.Customer.Equals(user)).ToList();
+            Workspace = work.WorkspaceRepository.GetAll().Include(w => w.Project).Where(w => w.Project.Freelancer.Equals(user) || w.Project.Customer.Equals(user) && w.DeletedAt == null).ToList();
 
             return Page();
         }
