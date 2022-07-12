@@ -105,7 +105,17 @@
         </g>
     </svg>
     &nbsp;
-    <span style="font-size: 22px; font-weight: 600; color: #23175c">Project management</span>
+    @{
+        if (role == "CUSTOMER")
+        {
+            <span style="font-size: 22px; font-weight: 600; color: #23175c">Projects management</span>
+        }
+        else
+        {
+            <span style="font-size: 22px; font-weight: 600; color: #23175c">All projects</span>
+        }
+    }
+
 </div>
 
 @{
@@ -127,8 +137,8 @@
     </div>
 </form>
 
-<table class="table">
-    <thead>
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Request[0].Title)
@@ -145,7 +155,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Request[0].CreatedAt)
             </th>
-            <th style="width: 350px"></th>
+            @{
+                if (role.Equals("CUSTOMER"))
+                {
+                    <th></th>
+                }
+            }
         </tr>
     </thead>
     <tbody>
@@ -167,25 +182,29 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedAt)
                 </td>
-                <td style="width: 350px">
-                    <a asp-page="./Edit" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Edit</button></a>
-                    |
-                    <a asp-page="./Details" asp-route-id="@item.Id">
-                        <button class="btn btn-outline-info">
-                            Details
-                        </button>
-                    </a> |
-                    <a asp-page="../Applications/Index" asp-route-requestId="@item.Id">
-                        <button class="btn btn-outline-info">
-                            Applications
-                        </button>
-                    </a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">
-                        <button class="btn btn-outline-danger">
-                            Delete
-                        </button>
-                    </a>
-                </td>
+                @{
+                    if (role.Equals("CUSTOMER"))
+                    {
+                        <td style="width: 350px">
+                            <a asp-page="./Edit" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Edit</button></a>
+                            <a asp-page="./Details" asp-route-id="@item.Id">
+                                <button class="btn btn-outline-info">
+                                    Details
+                                </button>
+                            </a>
+                            <a asp-page="../Applications/Index" asp-route-requestId="@item.Id">
+                                <button class="btn btn-outline-info">
+                                    Applications
+                                </button>
+                            </a>
+                            <a asp-page="./Delete" asp-route-id="@item.Id">
+                                <button class="btn btn-outline-danger">
+                                    Delete
+                                </button>
+                            </a>
+                        </td>
+                    }
+                }
             </tr>
         }
     </tbody>
