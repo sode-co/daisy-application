@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 class ProjectFileTab {
   final String? title;
   final ResourceWorkStatus? fileType;
-  final List<ResourceModel>? resources;
+  final List<ResourceModel> resources;
 
-  ProjectFileTab({this.title, this.fileType, this.resources});
+  ProjectFileTab({this.title, this.fileType, this.resources = const []});
 }
 
 class ProjectDetailsState with ChangeNotifier {
@@ -54,6 +54,8 @@ class ProjectDetailsState with ChangeNotifier {
     _currentFileTabIndex = value;
     notifyListeners();
   }
+
+  ProjectFileTab get currentProjectTab => fileTabs[_currentFileTabIndex];
 
   int get currentFileTabIndex => _currentFileTabIndex;
 }

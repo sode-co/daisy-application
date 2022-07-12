@@ -17,12 +17,13 @@ extension PageProjectFile on ProjectDetailsPageState {
   }
 
   Widget createProjectFilePage(int index) => Container(
-        alignment: Alignment.center,
-        child: Text(
-          screenState.fileTabs[index].fileType!.name,
-          style: Design.textLogo(),
-        ),
-      );
+      alignment: Alignment.center,
+      child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          itemCount: screenState.currentProjectTab.resources.length,
+          itemBuilder: (ctx, index) => {}));
 
   void switchFileTab(int index) {
     filePageController.animateToPage(index,

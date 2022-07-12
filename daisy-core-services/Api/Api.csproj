@@ -19,6 +19,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.16.1" />
+    <PackageReference Include="MongoDB.Driver.GridFS" Version="2.16.1" />
+    <PackageReference Include="MongoDB.Bson" Version="2.16.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +58,9 @@
     <None Remove="Controllers\Designer\" />
     <None Remove="Microsoft.AspNetCore.SignalR" />
     <None Remove="Hub\Requests\" />
+    <None Remove="MongoDB.Driver" />
+    <None Remove="MongoDB.Driver.GridFS" />
+    <None Remove="MongoDB.Bson" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Middlewares\" />
