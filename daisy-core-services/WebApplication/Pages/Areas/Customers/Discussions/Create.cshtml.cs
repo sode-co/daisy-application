@@ -23,6 +23,8 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
 
         [BindProperty]
         public Workspace Workspace { get; set; }
+        [BindProperty]
+        public string type { get; set; }
 
         public IActionResult OnGet(int? workspaceId)
         {
@@ -32,6 +34,9 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
             {
                 return Redirect("/Unauthorized");
             }
+            string[] type = new string[] { "img", "text" };
+            ViewData["Type"] = new SelectList(type);
+
             var email = UserAuthentication.UserLogin.Email;
 
             using var work = _unitOfWorkFactory.Get;
@@ -50,7 +55,7 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
             using var work = _unitOfWorkFactory.Get;
 
             var email = UserAuthentication.UserLogin.Email;
-
+            Discussion.Type = type;
             Discussion.CreatedAt = DateTime.Now;
             Discussion.Status = DISCUSSION_STATUS.SENT;
             Discussion.Workspace = work.WorkspaceRepository.Get((int)workspaceId);
@@ -61,6 +66,11 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
             }
 
             work.DiscussionRepository.CreateDiscussion(Discussion);
+            work.Save();
+
+            Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").FirstOrDefault();
+            Workspace.UpdatedAt = DateTime.Now;
+            work.WorkspaceRepository.UpdateWorkspace(Workspace);
             work.Save();
 
             return RedirectToPage("./Index", new { workspaceId = workspaceId });

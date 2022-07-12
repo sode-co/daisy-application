@@ -21,8 +21,9 @@ namespace WebApplication.Pages.Areas.Customers.Workspaces
         }
 
         public IList<Workspace> Workspace { get;set; }
+        public string CurrentStatus { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string? status)
         {
             string role = UserAuthentication.Role();
 
@@ -34,8 +35,14 @@ namespace WebApplication.Pages.Areas.Customers.Workspaces
 
             using var work = _unitOfWorkFactory.Get;
             User user = work.UserRepository.GetUsersByEmail(email);
-
-            Workspace = work.WorkspaceRepository.GetAll().Include(w => w.Project).Where(w => w.Project.Freelancer.Equals(user) || w.Project.Customer.Equals(user)).ToList();
+            CurrentStatus = status;
+            if(status == null)
+            {
+                Workspace = work.WorkspaceRepository.GetAll().Include(w => w.Project).Where(w => (w.Project.Freelancer.Equals(user) || w.Project.Customer.Equals(user)) && w.DeletedAt == null).ToList();
+            } else
+            {
+                Workspace = work.WorkspaceRepository.GetAll().Include(w => w.Project).Where(w => (w.Project.Freelancer.Equals(user) || w.Project.Customer.Equals(user)) && w.DeletedAt == null && w.Status.Equals(status)).ToList();
+            }
 
             return Page();
         }

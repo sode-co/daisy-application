@@ -1,5 +1,6 @@
 ﻿@page
 @model WebApplication.Pages.Areas.Customers.Discussions.IndexModel
+@using WebApplication.Pages.Utils;
 
 @{
     ViewData["Title"] = "Index";
@@ -115,10 +116,29 @@
     <p style="font-size: 15px; font-weight: 400; color: #23175c">Timeline: @Html.DisplayFor(model => model.Workspace.Project.Timeline)</p>
 </div>
 
-<br/>
-<p>
-    <a asp-page="Create" asp-route-workspaceId="@(Model.Workspace.Id)"><button class="btn btn-outline-success">Create New Discussion</button></a>
-</p>
+<br />
+
+@{
+    if (!Model.Workspace.Status.Equals("DONE"))
+    {
+        <p>
+            <a asp-page="Create" asp-route-workspaceId="@(Model.Workspace.Id)"><button class="btn btn-outline-dark">Create New Discussion</button></a>
+        </p>
+        <form asp-page-handler="update" method="post">
+            <div class="form-group">
+                <input type="hidden" name="workspaceId" value="@(Model.Workspace.Id)" />
+                <input type="submit" value="Mark this project as Done" class="btn btn-success" />
+            </div>
+        </form>
+    }
+    else
+    {
+        <p style="font-size: 18px; font-weight: 600; color: #d10700 ">
+            &#8226; This Project is completed. Discussion is closed automatically.
+        </p>
+    }
+}
+
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
@@ -138,50 +158,58 @@
             <th>
                 @Html.DisplayNameFor(model => model.Discussion[0].UpdatedAt)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discussion[0].DeletedAt)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Discussion)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sender.DisplayName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeletedAt)
-            </td>
-            <td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sender.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
                 @{
-                    if (item.Status.Equals("SENT"))
+                    if (item.Type.Equals("img"))
                     {
-                        <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id"><button class="btn btn-outline-dark">Edit</button></a>
+                        <td>
+                            <img style="width: 250px; height: auto;" src="@item.Content" class="img-responsive">
+                        </td>
                     }
-                    if (item.Status.Equals("SENT"))
+                    else
                     {
-                        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id" class="text-danger">Delete</a>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
                     }
                 }
-            </td>
-        </tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    @{
+                        if (!Model.Workspace.Status.Equals("DONE"))
+                        {
+                            var email = UserAuthentication.UserLogin.Email;
+
+                            if (item.Status.Equals("SENT") && item.Sender.Email.Equals(email))
+                            {
+                                <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id"><button class="btn btn-outline-dark">Edit</button></a>
+                                <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-workspaceId="@item.Workspace.Id" class="text-danger">Delete</a>
+                            }
+                        }
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>

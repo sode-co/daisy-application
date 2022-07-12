@@ -105,6 +105,44 @@
     <span style="font-size: 22px; font-weight: 600; color: #23175c">Your workspaces</span>
 </div>
 
+@{
+    if (Model.CurrentStatus != null)
+    {
+        if (Model.CurrentStatus.Equals("TAKEN"))
+        {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="DONE">Done</a>
+                </li>
+            </ul>
+        }
+        else
+        {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="DONE">Done</a>
+                </li>
+            </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-page="" asp-route-status="DONE">Done</a>
+            </li>
+        </ul>
+    }
+}
 <table class="table">
     <thead>
         <tr>
@@ -116,12 +154,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Workspace[0].UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Workspace[0].DeletedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Workspace[0].ObjectId)
             </th>
             <th></th>
         </tr>
@@ -140,16 +172,9 @@
                     @Html.DisplayFor(modelItem => item.UpdatedAt)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DeletedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ObjectId)
-                </td>
-                <td>
                     <a asp-page="../Discussions/Index" asp-route-workspaceId="@item.Id">
-                        <button class="btn btn-success">Discussion</button></a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">
-                        <button class="btn btn-outline-info">Details</button></a>
+                        <button class="btn btn-success">Discussion</button>
+                    </a>
                 </td>
             </tr>
         }
