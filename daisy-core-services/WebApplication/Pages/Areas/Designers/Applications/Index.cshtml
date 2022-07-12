@@ -111,6 +111,12 @@
     <thead>
         <tr>
             <th>
+                Project Title
+            </th>
+            <th>
+                Job Description
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.JobApplication[0].Description)
             </th>
             <th>
@@ -120,7 +126,7 @@
                 @Html.DisplayNameFor(model => model.JobApplication[0].Timeline)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.JobApplication[0].OfferedPrice)
+                Budget
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.JobApplication[0].Status)
@@ -134,42 +140,48 @@
     <tbody>
         @foreach (var item in Model.JobApplication)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PreferredLanguage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Timeline)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OfferedPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdatedAt)
-                </td>
-                <td>
-                    @{
-                        if (item.Status == "PENDING")
-                        {
-                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
-                        }
-                        if (item.Status == "PENDING")
-                        {
-                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                        }
-                        if (item.Status == "PENDING")
-                        {
-                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Request.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Request.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreferredLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Timeline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfferedPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @{
+                    if (item.Status == "PENDING")
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
                     }
-                </td>
-            </tr>
+                    if (item.Status == "PENDING")
+                    {
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                    }
+                    if (item.Status == "PENDING")
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>
