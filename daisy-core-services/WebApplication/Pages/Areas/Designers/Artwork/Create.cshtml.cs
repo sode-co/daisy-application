@@ -47,9 +47,10 @@ namespace WebApplication.Pages.Areas.Designers.Artwork
             {
                 if (creatorID != null)
                 {
-                    Domain.Models.Portfolio portfolio = work.PortfolioRepository.GetFirstOrDefault(p => p.Id == creatorID);
+                    Domain.Models.Portfolio portfolio = work.PortfolioRepository.Get((int)creatorID);
                     ArtWork.Portfolio = portfolio;
                     work.ArtWorkRepository.CreateArtWork(ArtWork);
+                    work.Save();
                 }
             }
 
