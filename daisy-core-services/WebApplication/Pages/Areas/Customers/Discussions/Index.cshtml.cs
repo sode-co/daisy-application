@@ -23,6 +23,7 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
 
         public IList<Discussion> Discussion { get; set; }
         public Workspace Workspace { get; set; }
+        public Project Project { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? workspaceId)
         {
@@ -37,6 +38,8 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
             using var work = _unitOfWorkFactory.Get;
             User user = work.UserRepository.GetUsersByEmail(email);
             Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").Include(p => p.Project.Freelancer).FirstOrDefault();
+
+            Project = work.ProjectRepository.GetAll(p => p.Id.Equals(Workspace.Project.Id)).Include(p => p.Customer).Include(p => p.Freelancer).FirstOrDefault();
 
             if(!Workspace.Project.Freelancer.Equals(user) && !Workspace.Project.Customer.Equals(user))
             {
@@ -59,6 +62,8 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
                 return Page();
             }
             Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").FirstOrDefault();
+            Project = work.ProjectRepository.GetAll(p => p.Id.Equals(Workspace.Project.Id)).Include(p => p.Customer).Include(p => p.Freelancer).FirstOrDefault();
+
             Workspace.Project.Status = PROJECT_STATUS.DONE;
             Workspace.Status = PROJECT_STATUS.DONE;
             work.Save();

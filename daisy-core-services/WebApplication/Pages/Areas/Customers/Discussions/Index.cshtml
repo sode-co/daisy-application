@@ -116,6 +116,27 @@
     <p style="font-size: 15px; font-weight: 400; color: #23175c">Timeline: @Html.DisplayFor(model => model.Workspace.Project.Timeline)</p>
 </div>
 
+<div class="d-flex align-items-center">
+    <div style="padding: 5px; width: 700px" class="d-inline-block">
+        <p style="font-size: 16px; font-weight: 500; color: #23175c">
+            &#8226; Customer's Infomations:
+        </p>
+        <p style="font-size: 15px; font-weight: 400; color: #23175c">Name: @Html.DisplayFor(model => model.Project.Customer.DisplayName)</p>
+        <p style="font-size: 15px; font-weight: 400; color: #23175c">Phone: @Html.DisplayFor(model => model.Project.Customer.Phone) &nbsp; Email: @Html.DisplayFor(model => model.Project.Customer.Email)</p>
+        <p style="font-size: 15px; font-weight: 400; color: #23175c">Address: @Html.DisplayFor(model => model.Project.Customer.Address)</p>
+        <p style="font-size: 15px; font-weight: 400; color: #23175c">Description: @Html.DisplayFor(model => model.Project.Customer.Description)</p>
+    </div>
+    <div style="padding: 5px; width: 700px" class="d-inline-block">
+        <p style="font-size: 16px; font-weight: 500; color: #23175c">
+            &#8226; Freelancer's Infomations:
+        </p>
+        <p style="font-size: 15px; font-weight: 400; color: #23175c">Name: @Html.DisplayFor(model => model.Project.Freelancer.DisplayName)</p>
+        <p style="font-size: 15px; font-weight: 400; color: #23175c">Phone: @Html.DisplayFor(model => model.Project.Freelancer.Phone) &nbsp; Email: @Html.DisplayFor(model => model.Project.Customer.Email)</p>
+        <p style="font-size: 15px; font-weight: 400; color: #23175c">Address: @Html.DisplayFor(model => model.Project.Freelancer.Address)</p>
+        <p style="font-size: 15px; font-weight: 400; color: #23175c">Description: @Html.DisplayFor(model => model.Project.Freelancer.Description)</p>
+    </div>
+</div>
+
 <br />
 
 @{
@@ -213,3 +234,4 @@
         }
     </tbody>
 </table>
+
