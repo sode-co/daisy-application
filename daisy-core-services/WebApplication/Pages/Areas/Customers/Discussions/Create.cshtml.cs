@@ -68,6 +68,11 @@ namespace WebApplication.Pages.Areas.Customers.Discussions
             work.DiscussionRepository.CreateDiscussion(Discussion);
             work.Save();
 
+            Workspace = work.WorkspaceRepository.GetAll((d) => d.Id == workspaceId, null, "Project").FirstOrDefault();
+            Workspace.UpdatedAt = DateTime.Now;
+            work.WorkspaceRepository.UpdateWorkspace(Workspace);
+            work.Save();
+
             return RedirectToPage("./Index", new { workspaceId = workspaceId });
         }
     }
