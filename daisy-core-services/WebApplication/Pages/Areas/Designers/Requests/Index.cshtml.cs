@@ -41,11 +41,11 @@ namespace WebApplication.Pages.Areas.Designers.Requests
                 if (searchString != null)
                 {
                     pageIndex = 1;
-                    requests = work.RequestRepository.GetRequestsDesignerHasntAppliedYet(designerEmail).Where(req => req.Title.ToLower().Contains(searchString.ToLower())).ToList();
+                    requests = work.RequestRepository.GetRequestsDesignerHasntAppliedYet(designerEmail).Where(req => req.Title.ToLower().Contains(searchString.ToLower()) && req.DeletedAt == null && req.Timeline >= DateTime.Now && req.Status.Equals("AVAILABLE")).ToList();
                 }
                 else
                 {
-                    requests = work.RequestRepository.GetRequestsDesignerHasntAppliedYet(designerEmail).ToList();
+                    requests = work.RequestRepository.GetRequestsDesignerHasntAppliedYet(designerEmail).Where(req => req.DeletedAt == null && req.Timeline >= DateTime.Now && req.Status.Equals("AVAILABLE")).ToList();
                 }
             }
             Request = requests;
