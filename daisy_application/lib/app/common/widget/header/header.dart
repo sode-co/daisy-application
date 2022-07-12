@@ -66,7 +66,6 @@ class _HeaderState extends State<Header> {
         const SizedBox(width: 1),
         ..._createAuthenButton(isLoggedIn),
         if (Responsive.isDesktop(context)) SizedBox(width: size.width * 0.1),
-        SizedBox(width: Design.alignmentSpacing(context)),
       ],
       backgroundColor: widget.color,
       foregroundColor: Colors.black,

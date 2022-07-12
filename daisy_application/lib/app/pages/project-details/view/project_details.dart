@@ -2,10 +2,13 @@ import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
 import 'package:daisy_application/app/common/widget/header/header.dart';
+import 'package:daisy_application/app/pages/project-details/deps/project_details_listener.dart';
 import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
 import 'package:daisy_application/app/pages/project-details/view/discussions/project_discussion.dart';
+import 'package:daisy_application/app/pages/project-details/view/files/project_files_management.dart';
 import 'package:daisy_application/app/pages/project-details/view/overview/project_overview.dart';
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_header.dart';
 import 'package:provider/provider.dart';
@@ -18,16 +21,21 @@ class ProjectDetailsPage extends StatefulWidget {
 }
 
 class ProjectDetailsPageState extends State<ProjectDetailsPage> {
+  late PageController filePageController;
   @override
   initState() {
     super.initState();
+    Debug.log('recreate file page controller');
+    filePageController = PageController(initialPage: 0);
   }
 
   ApplicationState get appState => context.watch();
-  ProjectDetailsState get screenState => context.watch();
+  ProjectDetailsState get screenState => context.read();
+  ProjectDetailsListener get listener => context.findAncestorStateOfType()!;
 
   @override
   Widget build(BuildContext context) {
+    context.watch<ProjectDetailsState>();
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -62,7 +70,7 @@ class ProjectDetailsPageState extends State<ProjectDetailsPage> {
               children: [
                 createProjectOverViewTab(),
                 createProjectDiscussionTab(),
-                buildTestBody('Profile'),
+                createProjectFileManagementTab(),
                 buildTestBody('Settings')
               ],
             ),

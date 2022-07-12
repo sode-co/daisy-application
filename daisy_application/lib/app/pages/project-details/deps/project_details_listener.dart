@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
 
 abstract class ProjectDetailsListener<T extends StatefulWidget>
-    implements State<T> {}
+    implements State<T> {
+  void onFileNavTabSelected(int index);
+}

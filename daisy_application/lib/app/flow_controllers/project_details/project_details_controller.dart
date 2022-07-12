@@ -36,4 +36,9 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
       child: super.build(context),
     );
   }
+
+  @override
+  void onFileNavTabSelected(int index) {
+    // TODO: implement onFileNavTabSelected
+  }
 }

@@ -17,6 +17,9 @@ DiscussionModel _$DiscussionModelFromJson(Map<String, dynamic> json) =>
       workspace: json['workspace'] == null
           ? null
           : WorkspaceModel.fromJson(json['workspace'] as Map<String, dynamic>),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$DiscussionModelToJson(DiscussionModel instance) =>
@@ -26,4 +29,5 @@ Map<String, dynamic> _$DiscussionModelToJson(DiscussionModel instance) =>
       'type': instance.type,
       'content': instance.content,
       'workspace': instance.workspace,
+      'createdAt': instance.createdAt?.toIso8601String(),
     };
