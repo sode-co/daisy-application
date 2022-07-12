@@ -40,7 +40,19 @@
             @Html.DisplayFor(model => model.Portfolio.Biography)
         </dd>
     </dl>
-    <p><a asp-page="./Edit" asp-route-returnURL="@Model.currentURL" asp-route-id="@Model.Portfolio.Id">Edit</a> </p>
+
+    @{
+        if (UserAuthentication.UserLogin != null)
+        {
+            string email = UserAuthentication.UserLogin.Email;
+            if (Model.Portfolio.Freelancer.Email.Equals(email))
+            {
+                <p><a asp-page="./Edit" asp-route-returnURL="@Model.currentURL" asp-route-id="@Model.Portfolio.Id">Edit</a> </p>
+            }
+        }
+    }
+
+
     <div>
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width="100" height="100"
