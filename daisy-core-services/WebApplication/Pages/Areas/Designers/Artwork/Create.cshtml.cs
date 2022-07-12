@@ -49,6 +49,9 @@ namespace WebApplication.Pages.Areas.Designers.Artwork
                 {
                     Domain.Models.Portfolio portfolio = work.PortfolioRepository.Get((int)creatorID);
                     ArtWork.Portfolio = portfolio;
+                    portfolio.UpdatedAt = DateTime.Now;
+                    work.PortfolioRepository.UpdatePortfolio(portfolio);
+                    work.Save();
                     work.ArtWorkRepository.CreateArtWork(ArtWork);
                     work.Save();
                 }
