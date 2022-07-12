@@ -4,6 +4,8 @@
 
 @{
     ViewData["Title"] = "Index";
+    string role = UserAuthentication.Role();
+
 }
 
 <div>
@@ -145,12 +147,15 @@
         <p>
             <a asp-page="Create" asp-route-workspaceId="@(Model.Workspace.Id)"><button class="btn btn-outline-dark">Create New Discussion</button></a>
         </p>
-        <form asp-page-handler="update" method="post">
-            <div class="form-group">
-                <input type="hidden" name="workspaceId" value="@(Model.Workspace.Id)" />
-                <input type="submit" value="Mark this project as Done" class="btn btn-success" />
-            </div>
-        </form>
+        if (role.Equals("CUSTOMER"))
+        {
+            <form asp-page-handler="update" method="post">
+                <div class="form-group">
+                    <input type="hidden" name="workspaceId" value="@(Model.Workspace.Id)" />
+                    <input type="submit" value="Mark this project as Done" class="btn btn-success" />
+                </div>
+            </form>
+        }
     }
     else
     {
