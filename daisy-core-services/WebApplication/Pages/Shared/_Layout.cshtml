@@ -1,5 +1,8 @@
 ﻿@{
     @using Utils
+    @using DataAccess.UnitOfWork;
+    @using Domain.Models;
+
     bool isLogin = Context.User.Identity.IsAuthenticated;
     string role = UserAuthentication.Role();
 }
@@ -47,6 +50,9 @@
                             }
                             else
                             {
+                                string email = UserAuthentication.UserLogin.Email;
+                                UnitOfWorkFactory _unitOfWorkFactory = new UnitOfWorkFactory();
+                                User user = _unitOfWorkFactory.Get.UserRepository.GetUsersByEmail(email);
                                 if (role == "ADMIN")
                                 {
                                     <li class="nav-item">
@@ -83,7 +89,10 @@
                                         <a class="nav-link text-dark" asp-area="" asp-page="/Areas/Designers/Portfolio/Index">Discovery</a>
                                     </li>
                                     <li class="nav-item">
-                                        <div style="width: 400px"></div>
+                                        <a class="nav-link text-dark" asp-area="" asp-route-id="@user.Id" asp-page="/Areas/Admin/User/Edit">Update Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div style="width: 350px"></div>
                                     </li>
                                     <li class="nav-item logout">
                                         <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
@@ -110,7 +119,10 @@
                                         <a class="nav-link text-dark" asp-area="" asp-page="/Areas/Designers/Portfolio/Index">Discovery</a>
                                     </li>
                                     <li class="nav-item">
-                                        <div style="width: 200px"></div>
+                                        <a class="nav-link text-dark" asp-area="" asp-route-id="@user.Id" asp-page="/Areas/Admin/User/Edit">Update Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div style="width: 150px"></div>
                                     </li>
                                     <li class="nav-item logout">
                                         <a class="nav-link logout" asp-page="/Authentication/Login" asp-page-handler="Logout">Logout</a>
