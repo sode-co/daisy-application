@@ -45,6 +45,7 @@ namespace WebApplication.Pages.Areas.Designers
             using (var work = _unitOfWorkFactory.Get)
             {
                 Portfolio = work.PortfolioRepository.GetAll().Include(p => p.Freelancer).FirstOrDefault(m => m.Id == id);
+                List<Domain.Models.ArtWork> artWorks = work.ArtWorkRepository.GetArtWorkByPortfolioId(Portfolio.Id).ToList();
                 IQueryable<Domain.Models.ArtWork> listArtWorks = (IQueryable<Domain.Models.ArtWork>)work.ArtWorkRepository.GetArtWorkByPortfolioId(Portfolio.Id);
                 ArtWork = await PaginatedList<Domain.Models.ArtWork>.CreateAsync(
                 listArtWorks.AsNoTracking(), pageIndex ?? 1, 10);
