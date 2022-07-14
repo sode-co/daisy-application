@@ -3,6 +3,7 @@
 import 'package:daisy_application/core_services/models/category/category_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
+import 'package:daisy_application/core_services/models/workspace/workspace_model.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -22,11 +23,13 @@ class ProjectModel extends JsonSerializable with HiveObjectMixin {
   DateTime? timeline;
   double? budget;
   String? status;
+  List<WorkspaceModel> workspaces = [];
   bool? isAllowedPublic;
   RequestModel? request;
 
   ProjectModel(
       {this.id,
+      this.workspaces = const [],
       this.customer,
       this.freelancer,
       this.category,

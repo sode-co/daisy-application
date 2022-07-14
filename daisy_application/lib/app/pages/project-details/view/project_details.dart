@@ -9,6 +9,8 @@ import 'package:daisy_application/app/pages/project-details/view/files/project_f
 import 'package:daisy_application/app/pages/project-details/view/overview/project_overview.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
+import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_header.dart';
 import 'package:provider/provider.dart';
@@ -22,14 +24,30 @@ class ProjectDetailsPage extends StatefulWidget {
 
 class ProjectDetailsPageState extends State<ProjectDetailsPage> {
   late PageController filePageController;
+  late DiscussionSignalRClient discussionService;
+
   @override
   initState() {
     super.initState();
     Debug.log('recreate file page controller');
+    discussionService =
+        locator.get(param1: screenState.project!.workspaces.first);
+
+    discussionService.connect().then((value) async {
+      await for (var discussion in discussionService.streamNewMessages()) {
+        Debug.log('receiving new message', discussion);
+      }
+    });
     filePageController = PageController(initialPage: 0);
   }
 
-  ApplicationState get appState => context.watch();
+  @override
+  void dispose() {
+    discussionService.end();
+    super.dispose();
+  }
+
+  ApplicationState get appState => context.read();
   ProjectDetailsState get screenState => context.read();
   ProjectDetailsListener get listener => context.findAncestorStateOfType()!;
 

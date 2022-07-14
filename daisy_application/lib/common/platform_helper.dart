@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:daisy_application/common/constants.dart';
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;

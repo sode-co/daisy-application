@@ -13,6 +13,7 @@ ResourceModel _$ResourceModelFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['createdAt'] as String),
       fileType: json['fileType'] as String?,
+      fileName: json['fileName'] as String?,
       workspace: json['workspace'] == null
           ? null
           : WorkspaceModel.fromJson(json['workspace'] as Map<String, dynamic>),
@@ -23,5 +24,6 @@ Map<String, dynamic> _$ResourceModelToJson(ResourceModel instance) =>
       'id': instance.id,
       'createdAt': instance.createdAt?.toIso8601String(),
       'fileType': instance.fileType,
+      'fileName': instance.fileName,
       'workspace': instance.workspace,
     };

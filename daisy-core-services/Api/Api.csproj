@@ -22,6 +22,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.16.1" />
     <PackageReference Include="MongoDB.Driver.GridFS" Version="2.16.1" />
     <PackageReference Include="MongoDB.Bson" Version="2.16.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="5.0.17" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +63,9 @@
     <None Remove="MongoDB.Driver.GridFS" />
     <None Remove="MongoDB.Bson" />
     <None Remove="Controllers\resource\" />
+    <None Remove="Hubs\" />
+    <None Remove="Hubs\Discussions\" />
+    <None Remove="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Middlewares\" />
@@ -74,5 +78,7 @@
     <Folder Include="Response\User\" />
     <Folder Include="Controllers\Designer\" />
     <Folder Include="Controllers\resource\" />
+    <Folder Include="Hubs\" />
+    <Folder Include="Hubs\Discussions\" />
   </ItemGroup>
 </Project>

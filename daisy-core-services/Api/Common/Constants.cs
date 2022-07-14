@@ -41,5 +41,15 @@ namespace Api.Common
             public const string SENT = "SENT";
             public const string REMOVED = "REMOVED";
         }
+        public class RESOURCE_WORK_STATUS {
+            public const string IN_PROGRESS = "IN_PROGRESS";
+            public const string DECLINED = "DECLINED";
+            public const string FINAL = "FINAL";
+        }
+        public class FILE_TYPE
+        {
+            public const string IMAGE_PNG = "image/png";
+            public const string IMAGE_JPEG = "image/jpeg";
+        }
     }
 }

@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
+using Api.Controllers.resource;
+using Api.Hubs.Discussions;
 using Api.Middlewares;
 using AutoMapper;
 using DataAccess.UnitOfWork;
@@ -152,7 +154,7 @@ namespace Api
 
             Config.AdaptEnv(env.EnvironmentName);
             app.UseRouting();
-            var wsOption = new WebSocketOptions() { KeepAliveInterval = TimeSpan.FromSeconds(120) };
+            var wsOption = new WebSocketOptions() { KeepAliveInterval = TimeSpan.FromSeconds(120)};
             app.UseWebSockets(wsOption);
 
             app.UseCors("AllowAll");
@@ -161,6 +163,7 @@ namespace Api
             app.useAuthenticationMiddleWare();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<DiscussionHub>("/discussion");
                 endpoints.MapControllers();
             });
         }

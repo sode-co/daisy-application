@@ -1,8 +1,12 @@
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/utils/size_mode.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
+import 'package:daisy_application/core_services/models/discussion/discussion_model.dart';
+import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
+import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:daisy_application/app/pages/project-details/view/discussions/item_project_discussion.dart';
+import 'package:mime_type/mime_type.dart';
 
 extension ProjectDiscussion on ProjectDetailsPageState {
   Widget createProjectDiscussionTab() {
@@ -85,7 +89,13 @@ extension ProjectDiscussion on ProjectDetailsPageState {
                       color: Colors.black87,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await discussionService.sendMessage(DiscussionModel(
+                          sender: appState.currentUser,
+                          type: 'text/plain',
+                          content: 'Hello nè',
+                          workspace: screenState.project!.workspaces.first));
+                    },
                     icon: const Icon(Icons.send, color: Design.colorWhite),
                     color: Colors.white,
                   ),

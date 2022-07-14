@@ -1,3 +1,4 @@
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
@@ -12,11 +13,17 @@ import 'package:daisy_application/core_services/http/users/users_rest_api.dart';
 import 'package:daisy_application/core_services/http_interceptor/authentication_interceptor.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
+import 'package:daisy_application/core_services/models/workspace/workspace_model.dart';
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:daisy_application/core_services/persistent/user_persistent.dart';
+import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:daisy_application/core_services/socket/file_upload/file_upload_socket_client.dart';
+import 'package:signalr_netcore/http_connection_options.dart';
+import 'package:signalr_netcore/hub_connection.dart';
+import 'package:signalr_netcore/hub_connection_builder.dart';
+import 'package:signalr_netcore/web_supporting_http_client.dart';
 // ignore: library_prefixes
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import '../common/config.dart';
@@ -31,6 +38,7 @@ class CoreServiceLocator {
     _initHttpService();
     await _initPersistentService();
     _initGoogleService();
+    _initSignalRServices();
   }
 
   static void _initGrpcService() {
@@ -38,6 +46,21 @@ class CoreServiceLocator {
     locator
         .registerFactory<HealthCheckGrpcClient>(() => HealthCheckGrpcClient());
     locator.registerFactory<RequestGrpcClient>(() => RequestGrpcClient());
+  }
+
+  static void _initSignalRServices() {
+    final httpConnectionOptions = HttpConnectionOptions(
+        httpClient:
+            WebSupportingHttpClient(null, httpClientCreateCallback: null),
+        logMessageContent: true);
+
+    locator.registerFactory<HubConnection>(() => HubConnectionBuilder()
+        .withUrl('${Config.API_URL}/discussion', options: httpConnectionOptions)
+        .withAutomaticReconnect(
+            retryDelays: [2000, 5000, 10000, 20000]).build());
+
+    locator.registerFactoryParam<DiscussionSignalRClient, WorkspaceModel, void>(
+        (p1, p2) => DiscussionSignalRClient(locator.get(), p1));
   }
 
   static void _initSocketService() {

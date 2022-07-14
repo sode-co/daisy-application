@@ -35,4 +35,55 @@ message Request {
     string Status = 10;
 }
 
+message Project {
+    int32 Id = 1;
+    int64 CreatedAt = 2;
+    string ObjectId = 3;
+    User Customer = 4;
+    Category Category = 5;
+    int64 ResolvedAt = 6;
+    string Data = 7;
+    string Name = 8;
+    float Budget = 9;
+    int64 Timeline = 10;
+    string Status = 11;
+    Request request = 12;
+}
+
+message Workspace {
+    int32 Id = 1;
+    int64 CreatedAt = 2;
+    string ObjectId = 3;
+    Request Request = 4;
+    Project Project = 5;
+    repeated Discussion Discussions = 6;
+    repeated Resource Resources = 7;
+}
+
+message Discussion {
+    int32 Id = 1;
+    int64 CreatedAt = 2;
+    string ObjectId = 3;
+    string Type = 4;
+    string Content = 5;
+    User Sender = 6;
+    Workspace Workspace = 7;
+}
+
+message Resource {
+    int32 Id = 1;
+    int64 CreatedAt = 2;
+    string ObjectId = 3;
+    File File = 4;
+    string WorkStatus = 5;
+    string ResourceKey = 6;
+    Workspace Workspace = 7;
+}
+
+message File {
+    bytes Data = 1;
+    string MimeType = 2;
+    string FileName = 3;
+}
+
 service None {}

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/design/design_sidebar.dart';
