@@ -6,7 +6,6 @@ import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:grpc/grpc_web.dart';
 
 class JobApplyDialog extends Dialog {
   final BuildContext context;
