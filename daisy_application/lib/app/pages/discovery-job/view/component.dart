@@ -1,8 +1,8 @@
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
-import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
-import 'package:daisy_application/app/common/responsive.dart';
+
 import 'stateless_component.dart';
 
 class RequestIntroList extends StatefulWidget {

@@ -1,9 +1,9 @@
+import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
+import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/component.dart';
-import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
-import 'package:daisy_application/app/common/widget/header/header.dart';
-import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
