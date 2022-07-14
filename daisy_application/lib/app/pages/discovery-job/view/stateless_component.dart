@@ -1,12 +1,14 @@
-import 'package:daisy_application/app/common/design/design.dart';
-import 'package:daisy_application/common/constants.dart';
-import 'package:daisy_application/common/debugging/logger.dart';
-import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/app/common/colors.dart';
+import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/style.dart';
-import 'package:flutter/material.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/common/access_utils.dart';
+import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/core_services/models/request/request_model.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class IntroJobCard extends StatelessWidget {
   final Function(RequestModel)? onItemSelected;
@@ -16,80 +18,95 @@ class IntroJobCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DiscoveryJobScreenState _screenState = context.watch();
+    RequestModel? selectedRequest = _screenState.selectedRequest ??
+        (_screenState.requests.isEmpty ? null : _screenState.requests.first);
+
     return Padding(
       padding: const EdgeInsets.only(top: Design.itemSpacing),
-      child: InkWell(
-        onTap: () => onItemSelected.then(() => onItemSelected!(request)),
-        child: SizedBox(
-          width: context.isScreenType(ScreenType.DESKTOP) ? 400.0 : 380.0,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 60.0,
-                width: 60.0,
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    request.customer!.avatar!,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10.0),
-              Column(
+      child: Container(
+        color: request.id == selectedRequest!.id
+            ? const Color(0xffa8d4ff).withOpacity(0.5)
+            : Colors.white,
+        child: InkWell(
+          onTap: () => onItemSelected.then(() => onItemSelected!(request)),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: Responsive.isDesktop(context) ? 30.0 : 10.0,
+                vertical: Responsive.isDesktop(context) ? 20.0 : 10.0),
+            child: SizedBox(
+              width: context.isScreenType(ScreenType.DESKTOP) ? 400.0 : 380.0,
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 300,
-                    child: Text(
-                      '${request.title}',
-                      style: Design.textBodyBold(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  SizedBox(
-                    width: 280,
-                    child: Text(
-                      request.description ?? '',
-                      style: Design.textBody(),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 280,
-                    child: Text(
-                      '',
-                      style: Design.textBody(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: [
-                      const Icon(Icons.event_available, color: Colors.green),
-                      const SizedBox(
-                        width: 2.0,
+                    height: 60.0,
+                    width: 60.0,
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        request.customer!.avatar!,
                       ),
-                      Text(
-                        request.status ?? '',
-                        style: Design.textBody(),
+                    ),
+                  ),
+                  const SizedBox(width: 10.0),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 300,
+                        child: Text(
+                          '${request.title}',
+                          style: Design.textBodyBold(),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      SizedBox(
+                        width: 280,
+                        child: Text(
+                          request.description ?? '',
+                          style: Design.textBody(),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 280,
+                        child: Text(
+                          '',
+                          style: Design.textBody(),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.event_available,
+                              color: Colors.green),
+                          const SizedBox(
+                            width: 2.0,
+                          ),
+                          Text(
+                            request.status ?? '',
+                            style: Design.textBody(),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 2.0,
+                      ),
+                      Container(
+                        color: Colors.grey.withOpacity(0.3),
+                        child: const SizedBox(width: 300, height: 1.0),
+                      ),
+                      const SizedBox(
+                        height: 5.0,
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 2.0,
-                  ),
-                  Container(
-                    color: Colors.grey.withOpacity(0.3),
-                    child: const SizedBox(width: 300, height: 1.0),
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

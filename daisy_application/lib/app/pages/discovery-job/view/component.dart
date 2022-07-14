@@ -45,7 +45,7 @@ class _RequestIntroListState extends State<RequestIntroList> {
       width: context.deviceInfo.screenSize.width * 0.3,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: Responsive.isDesktop(context) ? 15.0 : 5.0,
+          horizontal: 0.0,
           vertical: Responsive.isDesktop(context) ? 15.0 : 5.0,
         ),
         child: ListView.builder(

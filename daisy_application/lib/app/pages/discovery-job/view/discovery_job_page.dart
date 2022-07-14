@@ -53,7 +53,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
         (_screenState.requests.isEmpty ? null : _screenState.requests.first);
 
     return Container(
-      color: Colors.grey.shade100,
+      color: Colors.grey.shade200,
       child: Padding(
         padding: EdgeInsets.only(
           left: Responsive.isDesktop(context) ? 100.0 : 0.0,
