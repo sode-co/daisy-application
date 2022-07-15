@@ -6,4 +6,5 @@ abstract class DiscoveryJobListener<T extends StatefulWidget>
   void onLoadMoreRequest();
   void onBtnApplyClicked();
   void onBtnConfirmApplyClicked(UserModel user, String description);
+  void onLoadListApplicants();
 }

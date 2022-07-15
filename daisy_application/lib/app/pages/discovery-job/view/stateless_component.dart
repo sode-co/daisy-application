@@ -3,6 +3,7 @@ import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/style.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/common/access_utils.dart';
 import 'package:daisy_application/common/constants.dart';
@@ -124,11 +125,24 @@ class _DisplayTime {
   String toString() => '$number $name ago';
 }
 
-class JobDetails extends StatelessWidget {
+class JobDetails extends StatefulWidget {
   final VoidCallback? onApply;
   const JobDetails({Key? key, required this.request, this.onApply})
       : super(key: key);
   final RequestModel request;
+
+  @override
+  State<JobDetails> createState() => _JobDetailsState();
+}
+
+class _JobDetailsState extends State<JobDetails> {
+  DiscoveryJobListener get _listener => context.findAncestorStateOfType()!;
+
+  @override
+  initState() {
+    super.initState();
+    _listener.onLoadListApplicants();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +150,7 @@ class JobDetails extends StatelessWidget {
     _DisplayTime displayTime;
 
     double weeksCount = ((DateTime.now().millisecondsSinceEpoch -
-            request.createdAt!.millisecondsSinceEpoch) /
+            widget.request.createdAt!.millisecondsSinceEpoch) /
         (1000 * 60 * 60 * 24) /
         7);
 
@@ -158,7 +172,7 @@ class JobDetails extends StatelessWidget {
             SizedBox(
               width: size.width * 0.8,
               child: Text(
-                request.title ?? '',
+                widget.request.title ?? '',
                 style: Design.textTitle(),
               ),
             ),
@@ -188,7 +202,7 @@ class JobDetails extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Design.headerSpacing),
-            ApplicationButton(onApply: onApply),
+            ApplicationButton(onApply: widget.onApply),
             const SizedBox(height: Design.headerSpacing),
             Text(
               'Phân loại:',
@@ -196,7 +210,7 @@ class JobDetails extends StatelessWidget {
             ),
             const SizedBox(height: Design.contentSpacing),
             Text(
-              request.category!.name!,
+              widget.request.category!.name!,
               style: Design.textBody(),
             ),
             const SizedBox(height: Design.headerSpacing),
@@ -206,7 +220,7 @@ class JobDetails extends StatelessWidget {
             ),
             const SizedBox(height: Design.contentSpacing),
             Text(
-              request.description!,
+              widget.request.description!,
               style: Design.textBody(),
             ),
             const SizedBox(height: Design.headerSpacing),
@@ -215,7 +229,8 @@ class JobDetails extends StatelessWidget {
               style: Design.textHeadline(),
             ),
             const SizedBox(height: Design.contentSpacing),
-            RecruiterInfo(request: request)
+            RecruiterInfo(request: widget.request),
+            const Text('List applicants'),
           ],
         ),
       ),
