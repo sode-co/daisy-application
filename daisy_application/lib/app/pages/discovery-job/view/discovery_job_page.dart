@@ -73,6 +73,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
                   requests: _screenState.requests,
                   onItemSelected: (request) {
                     _screenState.selectedRequest = request;
+                    _listener.onLoadListApplicants();
                   },
                   onLoadMore: _onLoadMoreRequest,
                 ),
@@ -90,6 +91,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
                   JobDetails(
                     request: selectedRequest,
                     onApply: _listener.onBtnApplyClicked,
+                    applicants: _screenState.applicants,
                   ),
               ],
             )),

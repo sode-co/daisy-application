@@ -5,8 +5,10 @@ import 'package:daisy_application/app/common/style.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
+import 'package:daisy_application/app/pages/discovery-job/view/applicants_list.dart';
 import 'package:daisy_application/common/access_utils.dart';
 import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -127,9 +129,11 @@ class _DisplayTime {
 
 class JobDetails extends StatefulWidget {
   final VoidCallback? onApply;
-  const JobDetails({Key? key, required this.request, this.onApply})
+  const JobDetails(
+      {Key? key, required this.request, this.onApply, required this.applicants})
       : super(key: key);
   final RequestModel request;
+  final List<JobApplicationModel> applicants;
 
   @override
   State<JobDetails> createState() => _JobDetailsState();
@@ -166,72 +170,78 @@ class _JobDetailsState extends State<JobDetails> {
       padding: const EdgeInsets.only(top: Design.headerSpacing),
       child: SizedBox(
         width: size.width * 0.5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: size.width * 0.8,
-              child: Text(
-                widget.request.title ?? '',
-                style: Design.textTitle(),
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(' ', style: Design.textBody()),
-                Text(
-                  displayTime.toString(),
-                  style: Style.lightSmallString,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: size.width * 0.8,
+                child: Text(
+                  widget.request.title ?? '',
+                  style: Design.textTitle(),
                 ),
-              ],
-            ),
-            const SizedBox(height: Design.bodySpacing),
-            Row(
-              children: const [
-                Icon(Icons.work_outline),
-                SizedBox(width: Design.contentSpacing),
-                Text('Freelance'),
-              ],
-            ),
-            Row(
-              children: const [
-                Icon(Icons.tips_and_updates_outlined),
-                SizedBox(width: Design.contentSpacing),
-                Text('You match this job')
-              ],
-            ),
-            const SizedBox(height: Design.headerSpacing),
-            ApplicationButton(onApply: widget.onApply),
-            const SizedBox(height: Design.headerSpacing),
-            Text(
-              'Phân loại:',
-              style: Design.textHeadline(),
-            ),
-            const SizedBox(height: Design.contentSpacing),
-            Text(
-              widget.request.category!.name!,
-              style: Design.textBody(),
-            ),
-            const SizedBox(height: Design.headerSpacing),
-            Text(
-              'Mô tả chi tiết:',
-              style: Design.textHeadline(),
-            ),
-            const SizedBox(height: Design.contentSpacing),
-            Text(
-              widget.request.description!,
-              style: Design.textBody(),
-            ),
-            const SizedBox(height: Design.headerSpacing),
-            Text(
-              'Thông tin người tuyển dụng',
-              style: Design.textHeadline(),
-            ),
-            const SizedBox(height: Design.contentSpacing),
-            RecruiterInfo(request: widget.request),
-            const Text('List applicants'),
-          ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(' ', style: Design.textBody()),
+                  Text(
+                    displayTime.toString(),
+                    style: Style.lightSmallString,
+                  ),
+                ],
+              ),
+              const SizedBox(height: Design.bodySpacing),
+              Row(
+                children: const [
+                  Icon(Icons.work_outline),
+                  SizedBox(width: Design.contentSpacing),
+                  Text('Freelance'),
+                ],
+              ),
+              Row(
+                children: const [
+                  Icon(Icons.tips_and_updates_outlined),
+                  SizedBox(width: Design.contentSpacing),
+                  Text('You match this job')
+                ],
+              ),
+              const SizedBox(height: Design.headerSpacing),
+              ApplicationButton(onApply: widget.onApply),
+              const SizedBox(height: Design.headerSpacing),
+              Text(
+                'Phân loại:',
+                style: Design.textHeadline(),
+              ),
+              const SizedBox(height: Design.contentSpacing),
+              Text(
+                widget.request.category!.name!,
+                style: Design.textBody(),
+              ),
+              const SizedBox(height: Design.headerSpacing),
+              Text(
+                'Mô tả chi tiết:',
+                style: Design.textHeadline(),
+              ),
+              const SizedBox(height: Design.contentSpacing),
+              Text(
+                widget.request.description!,
+                style: Design.textBody(),
+              ),
+              const SizedBox(height: Design.headerSpacing),
+              Text(
+                'Thông tin người tuyển dụng',
+                style: Design.textHeadline(),
+              ),
+              const SizedBox(height: Design.contentSpacing),
+              RecruiterInfo(request: widget.request),
+              if (widget.applicants.isNotEmpty)
+                ListApplicants(applicants: widget.applicants)
+              else
+                const Text('Chưa có ứng viên nào ứng tuyển cho vị trí này'),
+            ],
+          ),
         ),
       ),
     );

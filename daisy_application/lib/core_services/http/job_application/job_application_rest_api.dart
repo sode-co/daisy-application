@@ -17,5 +17,5 @@ abstract class JobApplicationRestApi {
 
   @GET('/request/{requestId}')
   Future<HttpResponse<List<JobApplicationModel>>> GetApplicantsOfRequest(
-      @Path('requestId') int requestId);
+      @Path('requestId') int? requestId);
 }

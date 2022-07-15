@@ -174,11 +174,9 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
     const ns = 'discovery-page';
     Debug.log(ns, 'get list applicants', _appState.currentUser,
         _jobScreenState?.selectedRequest);
-
-    // final result = await _applicationRestApi.GetApplicantsOfRequest(
-    //     _jobScreenState!.selectedRequest!.id!);
-    final result = await _applicationRestApi.GetApplicantsOfRequest(34);
+    final result = await _applicationRestApi.GetApplicantsOfRequest(
+        _jobScreenState?.selectedRequest?.id ??
+            _jobScreenState!.requests[0].id!);
     _jobScreenState!.applicants = result.data;
-    Debug.log('applicants', _jobScreenState!.applicants);
   }
 }
