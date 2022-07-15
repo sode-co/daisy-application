@@ -23,7 +23,7 @@ class ListApplicants extends StatelessWidget {
               children: [
                 Text(
                   'Danh sách ứng viên',
-                  style: Design.textBody(),
+                  style: Design.textSmallHeadline(),
                 ),
                 DataTable(
                   horizontalMargin: 0,
@@ -117,12 +117,12 @@ class ListApplicants extends StatelessWidget {
                   primary: Colors.blue.withOpacity(0.5),
                 ),
                 icon: const Icon(
-                  Icons.edit,
+                  Icons.recommend,
                   size: 14,
                 ),
                 onPressed: () {},
                 // Edit
-                label: const Text('Edit'),
+                label: const Text('Duyệt'),
               ),
               const SizedBox(
                 width: 6,
@@ -137,7 +137,7 @@ class ListApplicants extends StatelessWidget {
                 ),
                 onPressed: () {},
                 //View
-                label: const Text('View'),
+                label: const Text('Xem portfolio'),
               ),
               const SizedBox(
                 width: 6,
@@ -146,7 +146,10 @@ class ListApplicants extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.red.withOpacity(0.5),
                 ),
-                icon: const Icon(Icons.delete),
+                icon: const Icon(
+                  Icons.highlight_off,
+                  size: 14,
+                ),
                 onPressed: () {
                   showDialog(
                       context: context,
@@ -157,7 +160,7 @@ class ListApplicants extends StatelessWidget {
                           child: AlertDialog(
                               title: const Center(
                                 child: Text(
-                                  'Xác nhận xóa người dùng',
+                                  'Xác nhận từ chối',
                                   style: TextStyle(
                                     fontFamily: 'Roboto',
                                   ),
@@ -169,7 +172,7 @@ class ListApplicants extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                        "Are you sure want to delete '${applicant.freelancer!.displayName!}'?"),
+                                        "Bạn có chắc muốn từ chối ứng viên '${applicant.freelancer!.displayName!}'?"),
                                     SizedBox(
                                       height: Responsive.isDesktop(context)
                                           ? 30
@@ -190,7 +193,7 @@ class ListApplicants extends StatelessWidget {
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
-                                            label: const Text('Cancel')),
+                                            label: const Text('Hủy bỏ')),
                                         const SizedBox(
                                           width: 20,
                                         ),
@@ -202,7 +205,7 @@ class ListApplicants extends StatelessWidget {
                                             style: ElevatedButton.styleFrom(
                                                 primary: Colors.red),
                                             onPressed: () {},
-                                            label: const Text('Delete'))
+                                            label: const Text('Từ chối'))
                                       ],
                                     )
                                   ],
@@ -212,7 +215,7 @@ class ListApplicants extends StatelessWidget {
                       });
                 },
                 // Delete
-                label: const Text('Delete'),
+                label: const Text('Từ chối'),
               ),
             ],
           ),

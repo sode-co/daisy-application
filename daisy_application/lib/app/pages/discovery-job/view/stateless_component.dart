@@ -169,7 +169,7 @@ class _JobDetailsState extends State<JobDetails> {
     return Padding(
       padding: const EdgeInsets.only(top: Design.headerSpacing),
       child: SizedBox(
-        width: size.width * 0.5,
+        width: size.width * 0.57,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
@@ -236,10 +236,16 @@ class _JobDetailsState extends State<JobDetails> {
               ),
               const SizedBox(height: Design.contentSpacing),
               RecruiterInfo(request: widget.request),
+              const SizedBox(
+                height: Design.contentSpacing,
+              ),
               if (widget.applicants.isNotEmpty)
                 ListApplicants(applicants: widget.applicants)
               else
-                const Text('Chưa có ứng viên nào ứng tuyển cho vị trí này'),
+                Text(
+                  'Chưa có ứng viên nào ứng tuyển cho vị trí này',
+                  style: Design.textBody(),
+                ),
             ],
           ),
         ),

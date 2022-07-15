@@ -42,7 +42,7 @@ class _RequestIntroListState extends State<RequestIntroList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: context.deviceInfo.screenSize.width * 0.3,
+      width: context.deviceInfo.screenSize.width * 0.28,
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: 0.0,
