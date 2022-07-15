@@ -156,7 +156,6 @@ namespace Api
             app.UseRouting();
             var wsOption = new WebSocketOptions() { KeepAliveInterval = TimeSpan.FromSeconds(120)};
             app.UseWebSockets(wsOption);
-
             app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
