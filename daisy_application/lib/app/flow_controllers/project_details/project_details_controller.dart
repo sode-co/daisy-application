@@ -19,21 +19,21 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
   ProjectDetailsState? projectDetailsState;
   late DiscussionSignalRClient _discussionRealtimeService;
 
-  ProjectDetailsState get screenState => context.read();
+  // ProjectDetailsState get screenState => context.read();
 
   @override
   void initState() {
     super.initState();
-    _discussionRealtimeService =
-        locator.get(param1: screenState.project!.workspaces);
+    // _discussionRealtimeService =
+    //     locator.get(param1: screenState.project!.workspaces);
     projectDetailsState = ProjectDetailsState();
-    _discussionRealtimeService.connect();
+    // _discussionRealtimeService.connect();
   }
 
   Future<void> streamingDiscussion(DiscussionModel discussion) async {
     await for (var discussion
         in _discussionRealtimeService.streamNewMessages()) {
-      screenState.addDiscussions([discussion]);
+      // screenState.addDiscussions([discussion]);
     }
   }
 
