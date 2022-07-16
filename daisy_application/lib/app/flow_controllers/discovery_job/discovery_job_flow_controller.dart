@@ -179,4 +179,16 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
             _jobScreenState!.requests[0].id!);
     _jobScreenState!.applicants = result.data;
   }
+
+  @override
+  void onBtnApproveJobApplication() => approveJobApplication();
+
+  Future<void> approveJobApplication() async {
+    const ns = 'discovery-page';
+    Debug.log('on approve list candidate');
+    // final result = await _applicationRestApi.GetApplicantsOfRequest(
+    //     _jobScreenState?.selectedRequest?.id ??
+    //         _jobScreenState!.requests[0].id!);
+    // _jobScreenState!.applicants = result.data;
+  }
 }

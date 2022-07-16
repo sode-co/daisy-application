@@ -1,12 +1,23 @@
 import 'package:daisy_application/app/common/design/design_style.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/pages/admin/constants.dart';
+import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
 import 'package:flutter/material.dart';
 
-class ListApplicants extends StatelessWidget {
+class ListApplicants extends StatefulWidget {
   final List<JobApplicationModel> applicants;
-  const ListApplicants({Key? key, required this.applicants}) : super(key: key);
+  final Function()? onApproveBtnClick;
+  const ListApplicants(
+      {Key? key, required this.applicants, this.onApproveBtnClick})
+      : super(key: key);
+
+  @override
+  State<ListApplicants> createState() => _ListApplicantsState();
+}
+
+class _ListApplicantsState extends State<ListApplicants> {
+  DiscoveryJobListener get _listener => context.findAncestorStateOfType()!;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +76,7 @@ class ListApplicants extends StatelessWidget {
                       label: Text(''),
                     ),
                   ],
-                  rows: applicants
+                  rows: widget.applicants
                       .map((user) => applicantDataRow(user, context))
                       .toList(),
                 ),
@@ -120,7 +131,9 @@ class ListApplicants extends StatelessWidget {
                   Icons.recommend,
                   size: 14,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  _listener.onBtnApproveJobApplication();
+                },
                 // Edit
                 label: const Text('Duyệt'),
               ),
