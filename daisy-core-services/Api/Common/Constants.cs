@@ -35,6 +35,7 @@ namespace Api.Common
         {
             public const string AVAILABLE = "AVAILABLE";
             public const string TAKEN = "TAKEN";
+            public const string CANCELED = "CANCELED";
         }
         public class DISCUSSION_STATUS
         {
