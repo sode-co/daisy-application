@@ -168,15 +168,13 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
   }
 
   @override
-  void onLoadListApplicants() => getListApplicants();
+  void onLoadListApplicants(int? requestId) => getListApplicants(requestId);
 
-  Future<void> getListApplicants() async {
+  Future<void> getListApplicants(int? requestId) async {
     const ns = 'discovery-page';
     Debug.log(ns, 'get list applicants', _appState.currentUser,
         _jobScreenState?.selectedRequest);
-    final result = await _applicationRestApi.GetApplicantsOfRequest(
-        _jobScreenState?.selectedRequest?.id ??
-            _jobScreenState!.requests[0].id!);
+    final result = await _applicationRestApi.GetApplicantsOfRequest(requestId);
     _jobScreenState!.applicants = result.data;
   }
 
@@ -189,5 +187,6 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
     const ns = 'discovery-page';
     Debug.log('on approve list candidate');
     await _applicationRestApi.approveApplication(requestId, freelancerEmail);
+    context.toastSuccess('Duyệt đơn ứng tuyển thành công');
   }
 }

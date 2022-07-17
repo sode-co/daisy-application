@@ -148,7 +148,7 @@ class _JobDetailsState extends State<JobDetails> {
   @override
   initState() {
     super.initState();
-    _listener.onLoadListApplicants();
+    _listener.onLoadListApplicants(widget.request.id);
   }
 
   @override

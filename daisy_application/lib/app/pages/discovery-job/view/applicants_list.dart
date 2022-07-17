@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/design/design_style.dart';
-import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/app/dialogs/alert_dialog.dart';
 import 'package:daisy_application/app/pages/admin/constants.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
 import 'package:flutter/material.dart';
 
@@ -72,10 +75,9 @@ class _ListApplicantsState extends State<ListApplicants> {
                         ),
                       ),
                     ),
-                    if (widget.applicants[0].status == 'PENDING')
-                      const DataColumn(
-                        label: Text(''),
-                      ),
+                    const DataColumn(
+                      label: Text(''),
+                    ),
                   ],
                   rows: widget.applicants
                       .map((user) => applicantDataRow(user, context))
@@ -167,74 +169,33 @@ class _ListApplicantsState extends State<ListApplicants> {
                     size: 14,
                   ),
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return Theme(
-                            data: Theme.of(context)
-                                .copyWith(dialogBackgroundColor: Colors.white),
-                            child: AlertDialog(
-                                title: const Center(
-                                  child: Text(
-                                    'Xác nhận từ chối',
-                                    style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                    ),
-                                  ),
-                                ),
-                                content: Container(
-                                  color: secondaryColor,
-                                  height: 90,
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                          "Bạn có chắc muốn từ chối ứng viên '${applicant.freelancer!.displayName!}'?"),
-                                      SizedBox(
-                                        height: Responsive.isDesktop(context)
-                                            ? 30
-                                            : 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton.icon(
-                                              icon: const Icon(
-                                                Icons.close,
-                                                size: 14,
-                                              ),
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Colors.grey.shade400,
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              label: const Text('Hủy bỏ')),
-                                          const SizedBox(
-                                            width: 20,
-                                          ),
-                                          ElevatedButton.icon(
-                                              icon: const Icon(
-                                                Icons.delete,
-                                                size: 14,
-                                              ),
-                                              style: ElevatedButton.styleFrom(
-                                                  primary: Colors.red),
-                                              onPressed: () {},
-                                              label: const Text('Từ chối'))
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )),
-                          );
-                        });
+                    context.show(
+                      DialogAlert.error(
+                        context,
+                        title: 'Xác nhận từ chối đơn ',
+                        message:
+                            'Bạn có chắc muốn từ chối ${applicant.freelancer!.displayName}',
+                        affirmativeText: 'Từ chối',
+                        negativeText: 'Hủy bỏ',
+                        onAffirmativeClicked: () {
+                          context.pushRoute(const DicoveryJobRoute());
+                          Navigator.of(context, rootNavigator: true).pop();
+                        },
+                        onNegativeClicked: () {
+                          Navigator.of(context, rootNavigator: true).pop();
+                        },
+                      ),
+                    );
                   },
                   // Delete
                   label: const Text('Từ chối'),
                 ),
               ],
             ),
+          ),
+        if (applicant.status != 'PENDING')
+          DataCell(
+            Text(applicant.status!),
           ),
       ],
     );
