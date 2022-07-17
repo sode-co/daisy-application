@@ -53,8 +53,6 @@ namespace Api.Common
         {
             public const string IN_COMPLETE = "IN_COMPLETE";
             public const string COMPLETE = "COMPLETE";
-            public const string FAILED = "FAILED";
-            public const string CANCELED = "CANCELED";
         }
         public class PAYMENT_CURRENCY
         {
