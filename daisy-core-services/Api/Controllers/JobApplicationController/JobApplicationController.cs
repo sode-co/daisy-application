@@ -97,7 +97,7 @@ namespace Api.Controllers.JobApplicationController
         }
 
         [HttpPut()]
-        //[Authorize(Policy = ROLE.CUSTOMER)]
+        [Authorize(Policy = ROLE.CUSTOMER)]
         public IActionResult ApproveJobApplication(int requestId, string freelancerEmail)
         {
             using (var work = _unitOfWorkFactory.Get)
@@ -111,9 +111,11 @@ namespace Api.Controllers.JobApplicationController
                 // Create Payment object to save to Project
                 Payment payment = new Payment()
                 {
-                    Status = Constants.PAYMENT_STATUS.PENDING,
-                    Amount = (decimal)request.Budget,
-                    Currency = Constants.PAYMENT_CURRENCY_STATUS.VND,
+                    Status = Constants.PAYMENT_STATUS.IN_COMPLETE,
+                    // amount of money has been paid
+                    Amount = 0,
+                    Currency = Constants.PAYMENT_CURRENCY.VND,
+                    // amount of money must to paid
                     TotalAmount = (decimal)request.Budget,
                 };
 
