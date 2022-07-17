@@ -56,7 +56,7 @@ import 'package:daisy_application/app/pages/work_space/view/work_space_screen.da
               initial: true),
         ]),
         AutoRoute(
-            path: 'project-details',
+            path: 'project/:projectId',
             name: 'ProjectDetailsRoute',
             page: ProjectDetailsFlowController,
             children: [

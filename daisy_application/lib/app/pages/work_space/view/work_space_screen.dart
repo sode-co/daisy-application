@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/design/design_sidebar.dart';
@@ -14,6 +15,7 @@ import 'package:daisy_application/app/pages/work_space/view/header_workspace.dar
 import 'package:daisy_application/app/pages/work_space/view/item_project.dart';
 import 'package:daisy_application/app/pages/work_space/view/item_request.dart';
 import 'package:daisy_application/app/pages/work_space/view/workspace_common.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/math_utils.dart';
@@ -186,7 +188,9 @@ class WorkspaceState extends State<WorkspaceScreen>
       ? items
           .map((project) => SizedBox(
               width: size.width * (Responsive.isDesktop(context) ? 0.5 : 0.7),
-              child: createProjectInfoCard(project)))
+              child: createProjectInfoCard(project,
+                  onItemSelected: ((p0) => context.router.push(
+                      ProjectDetailsRoute(projectId: p0.id.toString()))))))
           .toList()
       : [getEmptyMessageByTab(_screenState.activeTab)];
 }

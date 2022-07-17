@@ -52,9 +52,7 @@ class BottomNavBar extends StatelessWidget {
                       IconButton(
                         tooltip: 'Favorite',
                         icon: const IconButtomItem(icon: Icons.favorite_border),
-                        onPressed: () {
-                          context.router.push(const ProjectDetailsRoute());
-                        },
+                        onPressed: () {},
                       ),
                       IconButton(
                         tooltip: 'Notifications',

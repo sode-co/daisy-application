@@ -24,26 +24,23 @@ class ProjectDetailsPage extends StatefulWidget {
 
 class ProjectDetailsPageState extends State<ProjectDetailsPage> {
   late PageController filePageController;
-  late DiscussionSignalRClient discussionService;
+  late ScrollController? discussionScrollController;
+  late TextEditingController discussionTextController;
 
   @override
   initState() {
     super.initState();
+    discussionTextController = TextEditingController();
+    discussionScrollController = ScrollController()
+      ..addListener(onDiscussionListScroll);
     Debug.log('recreate file page controller');
-    discussionService =
-        locator.get(param1: screenState.project!.workspaces.first);
-
-    discussionService.connect().then((value) async {
-      await for (var discussion in discussionService.streamNewMessages()) {
-        Debug.log('receiving new message', discussion);
-      }
-    });
     filePageController = PageController(initialPage: 0);
   }
 
   @override
   void dispose() {
-    discussionService.end();
+    discussionTextController.dispose();
+    discussionScrollController!.dispose();
     super.dispose();
   }
 

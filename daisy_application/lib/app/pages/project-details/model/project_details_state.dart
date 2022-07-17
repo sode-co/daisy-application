@@ -17,8 +17,9 @@ class ProjectFileTab {
 }
 
 class ProjectDetailsState with ChangeNotifier {
+  bool isDiscussionLoading = false;
   RequestModel request = RequestModel();
-  ProjectModel? project =
+  ProjectModel? _project =
       ProjectModel(name: 'Sode', workspaces: [WorkspaceModel(id: 1)]);
   final List<ProjectFileTab> fileTabs = [
     ProjectFileTab(
@@ -33,23 +34,14 @@ class ProjectDetailsState with ChangeNotifier {
         fileType: ResourceWorkStatus.FINAL, title: 'Final', resources: []),
   ];
 
-  final List<DiscussionModel> _discussions = [
-    DiscussionModel(
-        sender: UserModel(
-            null, null, null, 'TienDang', null, null, null, null, null, null),
-        createdAt: DateTime.now(),
-        content: 'Hi how are you ?'),
-    DiscussionModel(
-        sender: UserModel(
-            null, null, null, 'TienDang', null, null, null, null, null, null),
-        createdAt: DateTime.now(),
-        content: 'Hi how are you ?'),
-    DiscussionModel(
-        sender: UserModel(
-            null, null, null, 'TienDang', null, null, null, null, null, null),
-        createdAt: DateTime.now(),
-        content: 'Hi how are you ?'),
-  ];
+  set project(ProjectModel? project) {
+    _project = project;
+    notifyListeners();
+  }
+
+  ProjectModel? get project => _project;
+
+  final List<DiscussionModel> _discussions = [];
 
   List<DiscussionModel> get discussions => _discussions;
 
@@ -67,7 +59,6 @@ class ProjectDetailsState with ChangeNotifier {
   void addDiscussions(List<DiscussionModel> discussions) {
     _discussions
       ..addAll(discussions)
-      ..removeWhere((a) => _discussions.find((b) => b.id == a.id) != null)
       ..sort(((a, b) =>
           b.createdAt!.millisecondsSinceEpoch -
           a.createdAt!.millisecondsSinceEpoch));

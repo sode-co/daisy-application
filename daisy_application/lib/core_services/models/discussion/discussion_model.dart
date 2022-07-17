@@ -1,7 +1,6 @@
-import 'package:daisy_application/core_services/models/project/project_model.dart';
-import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:daisy_application/core_services/models/workspace/workspace_model.dart';
+import 'package:daisy_application/schema/models.pbgrpc.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -25,6 +24,15 @@ class DiscussionModel extends JsonSerializable with HiveObjectMixin {
       this.createdAt});
 
   DiscussionModel.empty();
+
+  DiscussionModel.fromProto(Discussion proto) {
+    id = proto.id;
+    sender = UserModel.fromProto(proto.sender);
+    type = proto.type;
+    content = proto.content;
+    workspace = WorkspaceModel.fromProto(proto.workspace);
+    createdAt = DateTime.fromMillisecondsSinceEpoch(proto.createdAt.toInt());
+  }
 
   factory DiscussionModel.fromJson(Map<String, dynamic> json) =>
       _$DiscussionModelFromJson(json);

@@ -86,7 +86,7 @@ extension ProjectFileManagement on ProjectDetailsPageState {
           await image_picker.UniversalImagePicker.getImage();
 
       ResourceModel newResource = ResourceModel(
-          fileType: 'image/png',
+          fileType: 'image',
           workspace:
               WorkspaceModel(id: screenState.project!.workspaces.first.id),
           binary: pickerResult.binary,

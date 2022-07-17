@@ -32,25 +32,25 @@ Future<void> main() async {
   await setupDependencies();
   Debug.log('init-client', 'Client start healthcheck');
   String ns = 'network-healthcheck';
-  Timer.periodic(const Duration(seconds: 60), (Timer t) async {
-    HealthCheckGrpcClient client = locator.get();
-    final result = await client.performNetworkCheck();
-    if (result.failureType == FAILURE_TYPE.NONE) {
-      Debug.log('$ns-grpc', 'Grpc connection ok');
-    } else {
-      Error.log('$ns-grpc', 'Grpc connection error');
-    }
+  // Timer.periodic(const Duration(seconds: 60), (Timer t) async {
+  //   HealthCheckGrpcClient client = locator.get();
+  //   final result = await client.performNetworkCheck();
+  //   if (result.failureType == FAILURE_TYPE.NONE) {
+  //     Debug.log('$ns-grpc', 'Grpc connection ok');
+  //   } else {
+  //     Error.log('$ns-grpc', 'Grpc connection error');
+  //   }
 
-    // HealthCheckRestApi healthCheckApi = locator.get();
-    // final response = (await healthCheckApi.get().Value());
-    // if (response.failureType != FAILURE_TYPE.NONE) {
-    //   Error.log('$ns-http', 'Failed when perform network check with status',
-    //       response.failureType.name);
-    // } else {
-    //   final data = response.data;
-    //   Debug.log('$ns-http', 'Network check with result', data.message);
-    // }
-  });
+  //   // HealthCheckRestApi healthCheckApi = locator.get();
+  //   // final response = (await healthCheckApi.get().Value());
+  //   // if (response.failureType != FAILURE_TYPE.NONE) {
+  //   //   Error.log('$ns-http', 'Failed when perform network check with status',
+  //   //       response.failureType.name);
+  //   // } else {
+  //   //   final data = response.data;
+  //   //   Debug.log('$ns-http', 'Network check with result', data.message);
+  //   // }
+  // });
 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());

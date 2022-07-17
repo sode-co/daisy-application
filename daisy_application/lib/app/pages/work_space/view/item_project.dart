@@ -6,9 +6,11 @@ import 'package:daisy_application/common/to_string_utils.dart';
 import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:daisy_application/common/name_to_enum.dart';
+import 'package:daisy_application/common/access_utils.dart';
 
 extension ItemProject on WorkspaceState {
-  Widget createProjectInfoCard(ProjectModel project) {
+  Widget createProjectInfoCard(ProjectModel project,
+      {Function(ProjectModel)? onItemSelected}) {
     final currentStatus = project.status!.toProjectStatus();
     final tagName = DisplayName.fromProjectStatus(
         project.status!.toProjectStatus(), currentUser.role!.toUserRole());
@@ -32,6 +34,8 @@ extension ItemProject on WorkspaceState {
             project.customer?.displayName ?? project.customer?.lastName ?? '',
         buttonName: buttonName);
 
-    return createInfoCard(cardInfo);
+    return createInfoCard(cardInfo,
+        onItemSelected: () =>
+            onItemSelected.then(() => onItemSelected!(project)));
   }
 }

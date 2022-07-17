@@ -30,10 +30,12 @@ class WorkspaceCardInfo {
 }
 
 extension CommonComponent on WorkspaceState {
-  Widget createInfoCard(WorkspaceCardInfo cardInfo) => Column(
+  Widget createInfoCard(WorkspaceCardInfo cardInfo,
+          {Function()? onItemSelected}) =>
+      Column(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: onItemSelected,
             child: LayoutBuilder(builder: (context, constraint) {
               return Padding(
                 padding: const EdgeInsets.all(Design.itemSpacing),
