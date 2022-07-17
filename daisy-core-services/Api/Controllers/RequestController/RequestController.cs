@@ -175,7 +175,6 @@ namespace Api.Controllers.RequestController
             if(request == null) return NotFound();
 
             request.Status = Constants.REQUEST_STATUS.CANCELED;
-            request.DeletedAt = DateTime.Now;
             work.Save();
 
             return Ok();
