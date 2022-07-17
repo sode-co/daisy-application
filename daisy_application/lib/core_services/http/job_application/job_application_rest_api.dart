@@ -18,4 +18,10 @@ abstract class JobApplicationRestApi {
   @GET('/request/{requestId}')
   Future<HttpResponse<List<JobApplicationModel>>> GetApplicantsOfRequest(
       @Path('requestId') int? requestId);
+
+  @PUT('')
+  Future<HttpResponse<List<JobApplicationModel>>> approveApplication(
+    @Path('requestId') int requestId,
+    @Path('freelancerEmail') String freelancerEmail,
+  );
 }
