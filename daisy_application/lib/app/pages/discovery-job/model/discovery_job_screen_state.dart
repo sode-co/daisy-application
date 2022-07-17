@@ -1,3 +1,4 @@
+import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,7 @@ class DiscoveryJobScreenState extends ChangeNotifier {
   List<RequestModel> requests = [];
   RequestModel? _selectedRequest;
   bool _isRequestLoading = false;
+  List<JobApplicationModel> applicants = [];
 
   set selectedRequest(RequestModel? value) {
     _selectedRequest = value;
