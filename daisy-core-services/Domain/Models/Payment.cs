@@ -18,6 +18,8 @@ namespace Domain.Models
         [MaxLength(255)]
         public String Currency { get; set; }
 
+        public ICollection<PaymentAction> PaymentActions { get; set; }
+
         [MaxLength(int.MaxValue)]
         public String Data { get; set; } = "{}";
 
