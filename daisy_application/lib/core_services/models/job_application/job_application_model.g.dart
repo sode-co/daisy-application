@@ -21,6 +21,7 @@ JobApplicationModel _$JobApplicationModelFromJson(Map<String, dynamic> json) =>
       request: json['request'] == null
           ? null
           : RequestModel.fromJson(json['request'] as Map<String, dynamic>),
+      status: json['status'] as String?,
     );
 
 Map<String, dynamic> _$JobApplicationModelToJson(
@@ -33,4 +34,5 @@ Map<String, dynamic> _$JobApplicationModelToJson(
       'offeredPrice': instance.offeredPrice,
       'freelancer': instance.freelancer,
       'request': instance.request,
+      'status': instance.status,
     };
