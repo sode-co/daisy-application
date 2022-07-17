@@ -51,8 +51,8 @@ namespace Api.Common
         }
         public class PAYMENT_STATUS
         {
-            public const string PENDING = "PENDING";
-            public const string SUCCESSFULLY = "SUCCESSFULLY";
+            public const string IN_COMPLETE = "IN_COMPLETE";
+            public const string COMPLETE = "COMPLETE";
             public const string FAILED = "FAILED";
             public const string CANCELED = "CANCELED";
         }
