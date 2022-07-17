@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package daisy;
+
+import "models.proto";
+
+message FetchDiscussionRequestModel {
+    int64 TimeOffset = 1;
+    int32 Count = 2;
+    int32 rate = 3;
+}
+
+message FetchDiscussionResponseModel {
+    repeated Discussion Discussions = 1;
+}
+
+service DiscussionService {
+    rpc FetchDiscussions(FetchDiscussionRequestModel) returns (stream FetchDiscussionResponseModel);
+}

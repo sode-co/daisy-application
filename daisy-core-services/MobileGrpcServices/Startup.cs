@@ -34,6 +34,7 @@ namespace MobileGrpcServices
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<HealthCheckServiceImp>().EnableGrpcWeb();
+                endpoints.MapGrpcService<DiscussionService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
                 endpoints.MapGrpcService<UploadFileService>().EnableGrpcWeb();
                 endpoints.MapGet("/", async context =>
                 {

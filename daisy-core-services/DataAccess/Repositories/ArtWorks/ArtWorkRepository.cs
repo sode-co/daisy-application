@@ -26,6 +26,5 @@ namespace DataAccess.Repositories.ArtWorks
 
             return artWorksByCategory;
         }
-
     }
 }

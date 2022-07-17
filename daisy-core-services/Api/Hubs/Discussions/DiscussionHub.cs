@@ -19,7 +19,7 @@ namespace Api.Hubs.Discussions
 			_unitOfWorkFactory = unitOfWorkFactory;
 		}
 
-		public async Task SendMessage(String json)
+		public async Task<Object> SendMessage(String json)
         {
             var settings = new JsonSerializerSettings
             {
@@ -42,6 +42,8 @@ namespace Api.Hubs.Discussions
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             }));
+
+            return "OK";
         }
 	}
 }

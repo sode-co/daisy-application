@@ -11,8 +11,8 @@ message User {
     string Role = 6;
     string Email = 7;
     string Phone = 8;
-    string address = 10;
-    string avatar = 11;
+    string address = 9;
+    string avatar = 10;
 }
 
 message Category {
@@ -48,6 +48,9 @@ message Project {
     int64 Timeline = 10;
     string Status = 11;
     Request request = 12;
+    User Freelancer = 13;
+    string Description = 14;
+    repeated Workspace Workspaces = 15;
 }
 
 message Workspace {
@@ -58,6 +61,7 @@ message Workspace {
     Project Project = 5;
     repeated Discussion Discussions = 6;
     repeated Resource Resources = 7;
+    string Status = 8;
 }
 
 message Discussion {

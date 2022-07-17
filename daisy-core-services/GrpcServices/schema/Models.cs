@@ -27,41 +27,44 @@ namespace Daisy {
             "Cgxtb2RlbHMucHJvdG8SBWRhaXN5IqsBCgRVc2VyEgoKAklkGAEgASgFEhAK",
             "CE9iamVjdElkGAIgASgJEhEKCUZpcnN0TmFtZRgDIAEoCRIQCghMYXN0TmFt",
             "ZRgEIAEoCRITCgtEaXNwbGF5TmFtZRgFIAEoCRIMCgRSb2xlGAYgASgJEg0K",
-            "BUVtYWlsGAcgASgJEg0KBVBob25lGAggASgJEg8KB2FkZHJlc3MYCiABKAkS",
-            "DgoGYXZhdGFyGAsgASgJIkQKCENhdGVnb3J5EgoKAklkGAEgASgFEhAKCE9i",
+            "BUVtYWlsGAcgASgJEg0KBVBob25lGAggASgJEg8KB2FkZHJlc3MYCSABKAkS",
+            "DgoGYXZhdGFyGAogASgJIkQKCENhdGVnb3J5EgoKAklkGAEgASgFEhAKCE9i",
             "amVjdElkGAIgASgJEgwKBE5hbWUYAyABKAkSDAoEVHlwZRgEIAEoCSLSAQoH",
             "UmVxdWVzdBIKCgJJZBgBIAEoBRIRCglDcmVhdGVkQXQYAiABKAMSEAoIT2Jq",
             "ZWN0SWQYAyABKAkSHQoIQ3VzdG9tZXIYBCABKAsyCy5kYWlzeS5Vc2VyEiEK",
             "CENhdGVnb3J5GAUgASgLMg8uZGFpc3kuQ2F0ZWdvcnkSDQoFVGl0bGUYBiAB",
             "KAkSEwoLRGVzY3JpcHRpb24YByABKAkSDgoGQnVkZ2V0GAggASgCEhAKCFRp",
-            "bWVsaW5lGAkgASgDEg4KBlN0YXR1cxgKIAEoCSL/AQoHUHJvamVjdBIKCgJJ",
+            "bWVsaW5lGAkgASgDEg4KBlN0YXR1cxgKIAEoCSLbAgoHUHJvamVjdBIKCgJJ",
             "ZBgBIAEoBRIRCglDcmVhdGVkQXQYAiABKAMSEAoIT2JqZWN0SWQYAyABKAkS",
             "HQoIQ3VzdG9tZXIYBCABKAsyCy5kYWlzeS5Vc2VyEiEKCENhdGVnb3J5GAUg",
             "ASgLMg8uZGFpc3kuQ2F0ZWdvcnkSEgoKUmVzb2x2ZWRBdBgGIAEoAxIMCgRE",
             "YXRhGAcgASgJEgwKBE5hbWUYCCABKAkSDgoGQnVkZ2V0GAkgASgCEhAKCFRp",
             "bWVsaW5lGAogASgDEg4KBlN0YXR1cxgLIAEoCRIfCgdyZXF1ZXN0GAwgASgL",
-            "Mg4uZGFpc3kuUmVxdWVzdCLKAQoJV29ya3NwYWNlEgoKAklkGAEgASgFEhEK",
-            "CUNyZWF0ZWRBdBgCIAEoAxIQCghPYmplY3RJZBgDIAEoCRIfCgdSZXF1ZXN0",
-            "GAQgASgLMg4uZGFpc3kuUmVxdWVzdBIfCgdQcm9qZWN0GAUgASgLMg4uZGFp",
-            "c3kuUHJvamVjdBImCgtEaXNjdXNzaW9ucxgGIAMoCzIRLmRhaXN5LkRpc2N1",
-            "c3Npb24SIgoJUmVzb3VyY2VzGAcgAygLMg8uZGFpc3kuUmVzb3VyY2UingEK",
-            "CkRpc2N1c3Npb24SCgoCSWQYASABKAUSEQoJQ3JlYXRlZEF0GAIgASgDEhAK",
-            "CE9iamVjdElkGAMgASgJEgwKBFR5cGUYBCABKAkSDwoHQ29udGVudBgFIAEo",
-            "CRIbCgZTZW5kZXIYBiABKAsyCy5kYWlzeS5Vc2VyEiMKCVdvcmtzcGFjZRgH",
-            "IAEoCzIQLmRhaXN5LldvcmtzcGFjZSKkAQoIUmVzb3VyY2USCgoCSWQYASAB",
-            "KAUSEQoJQ3JlYXRlZEF0GAIgASgDEhAKCE9iamVjdElkGAMgASgJEhkKBEZp",
-            "bGUYBCABKAsyCy5kYWlzeS5GaWxlEhIKCldvcmtTdGF0dXMYBSABKAkSEwoL",
-            "UmVzb3VyY2VLZXkYBiABKAkSIwoJV29ya3NwYWNlGAcgASgLMhAuZGFpc3ku",
-            "V29ya3NwYWNlIjgKBEZpbGUSDAoERGF0YRgBIAEoDBIQCghNaW1lVHlwZRgC",
-            "IAEoCRIQCghGaWxlTmFtZRgDIAEoCTIGCgROb25lYgZwcm90bzM="));
+            "Mg4uZGFpc3kuUmVxdWVzdBIfCgpGcmVlbGFuY2VyGA0gASgLMgsuZGFpc3ku",
+            "VXNlchITCgtEZXNjcmlwdGlvbhgOIAEoCRIkCgpXb3Jrc3BhY2VzGA8gAygL",
+            "MhAuZGFpc3kuV29ya3NwYWNlItoBCglXb3Jrc3BhY2USCgoCSWQYASABKAUS",
+            "EQoJQ3JlYXRlZEF0GAIgASgDEhAKCE9iamVjdElkGAMgASgJEh8KB1JlcXVl",
+            "c3QYBCABKAsyDi5kYWlzeS5SZXF1ZXN0Eh8KB1Byb2plY3QYBSABKAsyDi5k",
+            "YWlzeS5Qcm9qZWN0EiYKC0Rpc2N1c3Npb25zGAYgAygLMhEuZGFpc3kuRGlz",
+            "Y3Vzc2lvbhIiCglSZXNvdXJjZXMYByADKAsyDy5kYWlzeS5SZXNvdXJjZRIO",
+            "CgZTdGF0dXMYCCABKAkingEKCkRpc2N1c3Npb24SCgoCSWQYASABKAUSEQoJ",
+            "Q3JlYXRlZEF0GAIgASgDEhAKCE9iamVjdElkGAMgASgJEgwKBFR5cGUYBCAB",
+            "KAkSDwoHQ29udGVudBgFIAEoCRIbCgZTZW5kZXIYBiABKAsyCy5kYWlzeS5V",
+            "c2VyEiMKCVdvcmtzcGFjZRgHIAEoCzIQLmRhaXN5LldvcmtzcGFjZSKkAQoI",
+            "UmVzb3VyY2USCgoCSWQYASABKAUSEQoJQ3JlYXRlZEF0GAIgASgDEhAKCE9i",
+            "amVjdElkGAMgASgJEhkKBEZpbGUYBCABKAsyCy5kYWlzeS5GaWxlEhIKCldv",
+            "cmtTdGF0dXMYBSABKAkSEwoLUmVzb3VyY2VLZXkYBiABKAkSIwoJV29ya3Nw",
+            "YWNlGAcgASgLMhAuZGFpc3kuV29ya3NwYWNlIjgKBEZpbGUSDAoERGF0YRgB",
+            "IAEoDBIQCghNaW1lVHlwZRgCIAEoCRIQCghGaWxlTmFtZRgDIAEoCTIGCgRO",
+            "b25lYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.User), global::Daisy.User.Parser, new[]{ "Id", "ObjectId", "FirstName", "LastName", "DisplayName", "Role", "Email", "Phone", "Address", "Avatar" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Category), global::Daisy.Category.Parser, new[]{ "Id", "ObjectId", "Name", "Type" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Request), global::Daisy.Request.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Customer", "Category", "Title", "Description", "Budget", "Timeline", "Status" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Project), global::Daisy.Project.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Customer", "Category", "ResolvedAt", "Data", "Name", "Budget", "Timeline", "Status", "Request" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Workspace), global::Daisy.Workspace.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Request", "Project", "Discussions", "Resources" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Project), global::Daisy.Project.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Customer", "Category", "ResolvedAt", "Data", "Name", "Budget", "Timeline", "Status", "Request", "Freelancer", "Description", "Workspaces" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Workspace), global::Daisy.Workspace.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Request", "Project", "Discussions", "Resources", "Status" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Discussion), global::Daisy.Discussion.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Type", "Content", "Sender", "Workspace" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Resource), global::Daisy.Resource.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "File", "WorkStatus", "ResourceKey", "Workspace" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.File), global::Daisy.File.Parser, new[]{ "Data", "MimeType", "FileName" }, null, null, null, null)
@@ -221,7 +224,7 @@ namespace Daisy {
     }
 
     /// <summary>Field number for the "address" field.</summary>
-    public const int AddressFieldNumber = 10;
+    public const int AddressFieldNumber = 9;
     private string address_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -233,7 +236,7 @@ namespace Daisy {
     }
 
     /// <summary>Field number for the "avatar" field.</summary>
-    public const int AvatarFieldNumber = 11;
+    public const int AvatarFieldNumber = 10;
     private string avatar_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -337,11 +340,11 @@ namespace Daisy {
         output.WriteString(Phone);
       }
       if (Address.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(74);
         output.WriteString(Address);
       }
       if (Avatar.Length != 0) {
-        output.WriteRawTag(90);
+        output.WriteRawTag(82);
         output.WriteString(Avatar);
       }
       if (_unknownFields != null) {
@@ -387,11 +390,11 @@ namespace Daisy {
         output.WriteString(Phone);
       }
       if (Address.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(74);
         output.WriteString(Address);
       }
       if (Avatar.Length != 0) {
-        output.WriteRawTag(90);
+        output.WriteRawTag(82);
         output.WriteString(Avatar);
       }
       if (_unknownFields != null) {
@@ -523,11 +526,11 @@ namespace Daisy {
             Phone = input.ReadString();
             break;
           }
-          case 82: {
+          case 74: {
             Address = input.ReadString();
             break;
           }
-          case 90: {
+          case 82: {
             Avatar = input.ReadString();
             break;
           }
@@ -578,11 +581,11 @@ namespace Daisy {
             Phone = input.ReadString();
             break;
           }
-          case 82: {
+          case 74: {
             Address = input.ReadString();
             break;
           }
-          case 90: {
+          case 82: {
             Avatar = input.ReadString();
             break;
           }
@@ -1479,6 +1482,9 @@ namespace Daisy {
       timeline_ = other.timeline_;
       status_ = other.status_;
       request_ = other.request_ != null ? other.request_.Clone() : null;
+      freelancer_ = other.freelancer_ != null ? other.freelancer_.Clone() : null;
+      description_ = other.description_;
+      workspaces_ = other.workspaces_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1632,6 +1638,41 @@ namespace Daisy {
       }
     }
 
+    /// <summary>Field number for the "Freelancer" field.</summary>
+    public const int FreelancerFieldNumber = 13;
+    private global::Daisy.User freelancer_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.User Freelancer {
+      get { return freelancer_; }
+      set {
+        freelancer_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Description" field.</summary>
+    public const int DescriptionFieldNumber = 14;
+    private string description_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Description {
+      get { return description_; }
+      set {
+        description_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Workspaces" field.</summary>
+    public const int WorkspacesFieldNumber = 15;
+    private static readonly pb::FieldCodec<global::Daisy.Workspace> _repeated_workspaces_codec
+        = pb::FieldCodec.ForMessage(122, global::Daisy.Workspace.Parser);
+    private readonly pbc::RepeatedField<global::Daisy.Workspace> workspaces_ = new pbc::RepeatedField<global::Daisy.Workspace>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Daisy.Workspace> Workspaces {
+      get { return workspaces_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1659,6 +1700,9 @@ namespace Daisy {
       if (Timeline != other.Timeline) return false;
       if (Status != other.Status) return false;
       if (!object.Equals(Request, other.Request)) return false;
+      if (!object.Equals(Freelancer, other.Freelancer)) return false;
+      if (Description != other.Description) return false;
+      if(!workspaces_.Equals(other.workspaces_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1678,6 +1722,9 @@ namespace Daisy {
       if (Timeline != 0L) hash ^= Timeline.GetHashCode();
       if (Status.Length != 0) hash ^= Status.GetHashCode();
       if (request_ != null) hash ^= Request.GetHashCode();
+      if (freelancer_ != null) hash ^= Freelancer.GetHashCode();
+      if (Description.Length != 0) hash ^= Description.GetHashCode();
+      hash ^= workspaces_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1744,6 +1791,15 @@ namespace Daisy {
         output.WriteRawTag(98);
         output.WriteMessage(Request);
       }
+      if (freelancer_ != null) {
+        output.WriteRawTag(106);
+        output.WriteMessage(Freelancer);
+      }
+      if (Description.Length != 0) {
+        output.WriteRawTag(114);
+        output.WriteString(Description);
+      }
+      workspaces_.WriteTo(output, _repeated_workspaces_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1802,6 +1858,15 @@ namespace Daisy {
         output.WriteRawTag(98);
         output.WriteMessage(Request);
       }
+      if (freelancer_ != null) {
+        output.WriteRawTag(106);
+        output.WriteMessage(Freelancer);
+      }
+      if (Description.Length != 0) {
+        output.WriteRawTag(114);
+        output.WriteString(Description);
+      }
+      workspaces_.WriteTo(ref output, _repeated_workspaces_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1848,6 +1913,13 @@ namespace Daisy {
       if (request_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Request);
       }
+      if (freelancer_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Freelancer);
+      }
+      if (Description.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Description);
+      }
+      size += workspaces_.CalculateSize(_repeated_workspaces_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1905,6 +1977,16 @@ namespace Daisy {
         }
         Request.MergeFrom(other.Request);
       }
+      if (other.freelancer_ != null) {
+        if (freelancer_ == null) {
+          Freelancer = new global::Daisy.User();
+        }
+        Freelancer.MergeFrom(other.Freelancer);
+      }
+      if (other.Description.Length != 0) {
+        Description = other.Description;
+      }
+      workspaces_.Add(other.workspaces_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1975,6 +2057,21 @@ namespace Daisy {
               Request = new global::Daisy.Request();
             }
             input.ReadMessage(Request);
+            break;
+          }
+          case 106: {
+            if (freelancer_ == null) {
+              Freelancer = new global::Daisy.User();
+            }
+            input.ReadMessage(Freelancer);
+            break;
+          }
+          case 114: {
+            Description = input.ReadString();
+            break;
+          }
+          case 122: {
+            workspaces_.AddEntriesFrom(input, _repeated_workspaces_codec);
             break;
           }
         }
@@ -2049,6 +2146,21 @@ namespace Daisy {
             input.ReadMessage(Request);
             break;
           }
+          case 106: {
+            if (freelancer_ == null) {
+              Freelancer = new global::Daisy.User();
+            }
+            input.ReadMessage(Freelancer);
+            break;
+          }
+          case 114: {
+            Description = input.ReadString();
+            break;
+          }
+          case 122: {
+            workspaces_.AddEntriesFrom(ref input, _repeated_workspaces_codec);
+            break;
+          }
         }
       }
     }
@@ -2097,6 +2209,7 @@ namespace Daisy {
       project_ = other.project_ != null ? other.project_.Clone() : null;
       discussions_ = other.discussions_.Clone();
       resources_ = other.resources_.Clone();
+      status_ = other.status_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2188,6 +2301,18 @@ namespace Daisy {
       get { return resources_; }
     }
 
+    /// <summary>Field number for the "Status" field.</summary>
+    public const int StatusFieldNumber = 8;
+    private string status_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Status {
+      get { return status_; }
+      set {
+        status_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2210,6 +2335,7 @@ namespace Daisy {
       if (!object.Equals(Project, other.Project)) return false;
       if(!discussions_.Equals(other.discussions_)) return false;
       if(!resources_.Equals(other.resources_)) return false;
+      if (Status != other.Status) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2224,6 +2350,7 @@ namespace Daisy {
       if (project_ != null) hash ^= Project.GetHashCode();
       hash ^= discussions_.GetHashCode();
       hash ^= resources_.GetHashCode();
+      if (Status.Length != 0) hash ^= Status.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2264,6 +2391,10 @@ namespace Daisy {
       }
       discussions_.WriteTo(output, _repeated_discussions_codec);
       resources_.WriteTo(output, _repeated_resources_codec);
+      if (Status.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(Status);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2296,6 +2427,10 @@ namespace Daisy {
       }
       discussions_.WriteTo(ref output, _repeated_discussions_codec);
       resources_.WriteTo(ref output, _repeated_resources_codec);
+      if (Status.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(Status);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2323,6 +2458,9 @@ namespace Daisy {
       }
       size += discussions_.CalculateSize(_repeated_discussions_codec);
       size += resources_.CalculateSize(_repeated_resources_codec);
+      if (Status.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Status);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2358,6 +2496,9 @@ namespace Daisy {
       }
       discussions_.Add(other.discussions_);
       resources_.Add(other.resources_);
+      if (other.Status.Length != 0) {
+        Status = other.Status;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2407,6 +2548,10 @@ namespace Daisy {
             resources_.AddEntriesFrom(input, _repeated_resources_codec);
             break;
           }
+          case 66: {
+            Status = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -2454,6 +2599,10 @@ namespace Daisy {
           }
           case 58: {
             resources_.AddEntriesFrom(ref input, _repeated_resources_codec);
+            break;
+          }
+          case 66: {
+            Status = input.ReadString();
             break;
           }
         }
