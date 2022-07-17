@@ -167,12 +167,13 @@ namespace Api.Controllers.RequestController
         }
 
         [Authorize(ROLE.CUSTOMER)]
-        [HttpDelete("{requestId}")]
-        public IActionResult DeleteRequest(int requestId)
+        [HttpDelete("/cancel/{requestId}")]
+        public IActionResult CancelRequest(int requestId)
         {
             using var work = _unitOfWorkFactory.Get;
             var request = work.RequestRepository.Get(requestId);
             if(request == null) return NotFound();
+
             request.Status = Constants.REQUEST_STATUS.CANCELED;
             request.DeletedAt = DateTime.Now;
             work.Save();
