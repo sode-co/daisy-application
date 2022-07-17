@@ -27,87 +27,90 @@ class IntroJobCard extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(top: Design.itemSpacing),
-      child: Container(
-        color: request.id == selectedRequest!.id
-            ? const Color(0xffa8d4ff).withOpacity(0.5)
-            : Colors.white,
-        child: InkWell(
-          onTap: () => onItemSelected.then(() => onItemSelected!(request)),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: Responsive.isDesktop(context) ? 30.0 : 10.0,
-                vertical: Responsive.isDesktop(context) ? 20.0 : 10.0),
-            child: SizedBox(
-              width: context.isScreenType(ScreenType.DESKTOP) ? 400.0 : 380.0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 60.0,
-                    width: 60.0,
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        request.customer!.avatar!,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          color: request.id == selectedRequest!.id
+              ? const Color(0xffa8d4ff).withOpacity(0.5)
+              : Colors.white,
+          child: InkWell(
+            onTap: () => onItemSelected.then(() => onItemSelected!(request)),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Responsive.isDesktop(context) ? 30.0 : 10.0,
+                  vertical: Responsive.isDesktop(context) ? 20.0 : 10.0),
+              child: SizedBox(
+                width: context.isScreenType(ScreenType.DESKTOP) ? 400.0 : 380.0,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 60.0,
+                      width: 60.0,
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          request.customer!.avatar!,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 10.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          '${request.title}',
-                          style: Design.textBodyBold(),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      SizedBox(
-                        width: 280,
-                        child: Text(
-                          request.description ?? '',
-                          style: Design.textBody(),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 280,
-                        child: Text(
-                          '',
-                          style: Design.textBody(),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        children: [
-                          const Icon(Icons.event_available,
-                              color: Colors.green),
-                          const SizedBox(
-                            width: 2.0,
+                    const SizedBox(width: 10.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 300,
+                          child: Text(
+                            '${request.title}',
+                            style: Design.textBodyBold(),
                           ),
-                          Text(
-                            request.status ?? '',
+                        ),
+                        const SizedBox(
+                          height: 5.0,
+                        ),
+                        SizedBox(
+                          width: 280,
+                          child: Text(
+                            request.description ?? '',
                             style: Design.textBody(),
                           ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 2.0,
-                      ),
-                      Container(
-                        color: Colors.grey.withOpacity(0.3),
-                        child: const SizedBox(width: 300, height: 1.0),
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                    ],
-                  ),
-                ],
+                        ),
+                        SizedBox(
+                          width: 280,
+                          child: Text(
+                            '',
+                            style: Design.textBody(),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Row(
+                          children: [
+                            const Icon(Icons.event_available,
+                                color: Colors.green),
+                            const SizedBox(
+                              width: 2.0,
+                            ),
+                            Text(
+                              request.status ?? '',
+                              style: Design.textBody(),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 2.0,
+                        ),
+                        Container(
+                          color: Colors.grey.withOpacity(0.3),
+                          child: const SizedBox(width: 300, height: 1.0),
+                        ),
+                        const SizedBox(
+                          height: 5.0,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -192,7 +195,8 @@ class _JobDetailsState extends State<JobDetails> {
                   ),
                 ],
               ),
-              const SizedBox(height: Design.bodySpacing),
+              if (Responsive.isDesktop(context))
+                const SizedBox(height: Design.bodySpacing),
               Row(
                 children: const [
                   Icon(Icons.work_outline),
@@ -275,21 +279,26 @@ class RecruiterInfo extends StatelessWidget {
         width: double.infinity,
         height: 100,
         child: Padding(
-          padding: const EdgeInsets.only(left: Design.contentSpacing),
+          padding: EdgeInsets.only(
+            left: Design.contentSpacing,
+            top: Responsive.isDesktop(context) ? 0.0 : 25.0,
+          ),
           child: Center(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: double.infinity,
-                  width: 80.0,
+                  height:
+                      Responsive.isDesktop(context) ? double.infinity : 50.0,
+                  width: Responsive.isDesktop(context) ? 80.0 : 50.0,
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(
                       request.customer?.avatar ?? '',
                     ),
                   ),
                 ),
-                const SizedBox(width: Design.contentSpacing),
+                if (Responsive.isDesktop(context))
+                  const SizedBox(width: Design.contentSpacing),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Column(
