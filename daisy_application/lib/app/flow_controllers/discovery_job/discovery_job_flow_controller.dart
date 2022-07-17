@@ -181,14 +181,13 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
   }
 
   @override
-  void onBtnApproveJobApplication() => approveJobApplication();
+  void onBtnApproveJobApplication(int requestId, String freelancerEmail) =>
+      approveJobApplication(requestId, freelancerEmail);
 
-  Future<void> approveJobApplication() async {
+  Future<void> approveJobApplication(
+      int requestId, String freelancerEmail) async {
     const ns = 'discovery-page';
     Debug.log('on approve list candidate');
-    // final result = await _applicationRestApi.GetApplicantsOfRequest(
-    //     _jobScreenState?.selectedRequest?.id ??
-    //         _jobScreenState!.requests[0].id!);
-    // _jobScreenState!.applicants = result.data;
+    await _applicationRestApi.approveApplication(requestId, freelancerEmail);
   }
 }

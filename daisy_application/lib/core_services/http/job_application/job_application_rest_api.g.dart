@@ -75,7 +75,10 @@ class _JobApplicationRestApi implements JobApplicationRestApi {
   Future<HttpResponse<List<JobApplicationModel>>> approveApplication(
       requestId, freelancerEmail) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'requestId': requestId,
+      r'freelancerEmail': freelancerEmail
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(

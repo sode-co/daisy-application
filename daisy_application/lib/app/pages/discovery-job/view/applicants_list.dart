@@ -134,7 +134,8 @@ class _ListApplicantsState extends State<ListApplicants> {
                     size: 14,
                   ),
                   onPressed: () {
-                    _listener.onBtnApproveJobApplication();
+                    _listener.onBtnApproveJobApplication(
+                        applicant.request!.id!, applicant!.freelancer!.email!);
                   },
                   // Edit
                   label: const Text('Duyệt'),
