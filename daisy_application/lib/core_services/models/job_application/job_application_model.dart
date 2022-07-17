@@ -1,8 +1,6 @@
 import 'package:daisy_application/core_services/models/category/category_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
-import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
-import 'package:daisy_application/schema/models.pb.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -18,6 +16,7 @@ class JobApplicationModel extends JsonSerializable with HiveObjectMixin {
   double? offeredPrice;
   UserModel? freelancer;
   RequestModel? request;
+  String? status;
 
   JobApplicationModel(
       {this.id,
@@ -26,7 +25,8 @@ class JobApplicationModel extends JsonSerializable with HiveObjectMixin {
       this.description,
       this.offeredPrice,
       this.freelancer,
-      this.request});
+      this.request,
+      this.status});
 
   JobApplicationModel.init();
 

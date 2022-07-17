@@ -72,9 +72,10 @@ class _ListApplicantsState extends State<ListApplicants> {
                         ),
                       ),
                     ),
-                    const DataColumn(
-                      label: Text(''),
-                    ),
+                    if (widget.applicants[0].status == 'PENDING')
+                      const DataColumn(
+                        label: Text(''),
+                      ),
                   ],
                   rows: widget.applicants
                       .map((user) => applicantDataRow(user, context))
@@ -120,119 +121,120 @@ class _ListApplicantsState extends State<ListApplicants> {
         DataCell(
           Text(applicant.description!),
         ),
-        DataCell(
-          Row(
-            children: [
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue.withOpacity(0.5),
+        if (applicant.status == 'PENDING')
+          DataCell(
+            Row(
+              children: [
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue.withOpacity(0.5),
+                  ),
+                  icon: const Icon(
+                    Icons.recommend,
+                    size: 14,
+                  ),
+                  onPressed: () {
+                    _listener.onBtnApproveJobApplication();
+                  },
+                  // Edit
+                  label: const Text('Duyệt'),
                 ),
-                icon: const Icon(
-                  Icons.recommend,
-                  size: 14,
+                const SizedBox(
+                  width: 6,
                 ),
-                onPressed: () {
-                  _listener.onBtnApproveJobApplication();
-                },
-                // Edit
-                label: const Text('Duyệt'),
-              ),
-              const SizedBox(
-                width: 6,
-              ),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green.withOpacity(0.5),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green.withOpacity(0.5),
+                  ),
+                  icon: const Icon(
+                    Icons.visibility,
+                    size: 14,
+                  ),
+                  onPressed: () {},
+                  //View
+                  label: const Text('Xem portfolio'),
                 ),
-                icon: const Icon(
-                  Icons.visibility,
-                  size: 14,
+                const SizedBox(
+                  width: 6,
                 ),
-                onPressed: () {},
-                //View
-                label: const Text('Xem portfolio'),
-              ),
-              const SizedBox(
-                width: 6,
-              ),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red.withOpacity(0.5),
-                ),
-                icon: const Icon(
-                  Icons.highlight_off,
-                  size: 14,
-                ),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (_) {
-                        return Theme(
-                          data: Theme.of(context)
-                              .copyWith(dialogBackgroundColor: Colors.white),
-                          child: AlertDialog(
-                              title: const Center(
-                                child: Text(
-                                  'Xác nhận từ chối',
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red.withOpacity(0.5),
+                  ),
+                  icon: const Icon(
+                    Icons.highlight_off,
+                    size: 14,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) {
+                          return Theme(
+                            data: Theme.of(context)
+                                .copyWith(dialogBackgroundColor: Colors.white),
+                            child: AlertDialog(
+                                title: const Center(
+                                  child: Text(
+                                    'Xác nhận từ chối',
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                    ),
                                   ),
                                 ),
-                              ),
-                              content: Container(
-                                color: secondaryColor,
-                                height: 90,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                        "Bạn có chắc muốn từ chối ứng viên '${applicant.freelancer!.displayName!}'?"),
-                                    SizedBox(
-                                      height: Responsive.isDesktop(context)
-                                          ? 30
-                                          : 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        ElevatedButton.icon(
-                                            icon: const Icon(
-                                              Icons.close,
-                                              size: 14,
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                              primary: Colors.grey.shade400,
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            label: const Text('Hủy bỏ')),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        ElevatedButton.icon(
-                                            icon: const Icon(
-                                              Icons.delete,
-                                              size: 14,
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.red),
-                                            onPressed: () {},
-                                            label: const Text('Từ chối'))
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )),
-                        );
-                      });
-                },
-                // Delete
-                label: const Text('Từ chối'),
-              ),
-            ],
+                                content: Container(
+                                  color: secondaryColor,
+                                  height: 90,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                          "Bạn có chắc muốn từ chối ứng viên '${applicant.freelancer!.displayName!}'?"),
+                                      SizedBox(
+                                        height: Responsive.isDesktop(context)
+                                            ? 30
+                                            : 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ElevatedButton.icon(
+                                              icon: const Icon(
+                                                Icons.close,
+                                                size: 14,
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Colors.grey.shade400,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              label: const Text('Hủy bỏ')),
+                                          const SizedBox(
+                                            width: 20,
+                                          ),
+                                          ElevatedButton.icon(
+                                              icon: const Icon(
+                                                Icons.delete,
+                                                size: 14,
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                  primary: Colors.red),
+                                              onPressed: () {},
+                                              label: const Text('Từ chối'))
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          );
+                        });
+                  },
+                  // Delete
+                  label: const Text('Từ chối'),
+                ),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }
