@@ -16,5 +16,13 @@ namespace DataAccess.Repositories.Payments
         {
             _dbContext = dbContext;
         }
+
+        public void UpdatePaymentStatus(int paymentId, string status)
+        {
+            var payment = _dbContext.Payments.FirstOrDefault(pay => pay.Id == paymentId);
+            payment.Status = status;
+            _dbContext.Payments.Update(payment);
+            _dbContext.SaveChanges();
+        }
     }
 }

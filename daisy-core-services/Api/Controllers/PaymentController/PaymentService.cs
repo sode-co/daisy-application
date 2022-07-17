@@ -1,12 +1,12 @@
-using BuyTogether.Domain.Services;
 using System;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net;
+using Utils;
 
-namespace Api.Controllers.PaymentService {
+namespace Api.Controllers.PaymentServices {
  public class MoMoRequestDto : MoMoDepositDto {
         public string PartnerCode {
             get; set;
@@ -42,7 +42,7 @@ namespace Api.Controllers.PaymentService {
     }
 
   public class DepositoryDto {
-        public long Amount {
+        public int paymentId {
             get; set;
         }
         public string RedirectUrl {
@@ -122,18 +122,18 @@ namespace Api.Controllers.PaymentService {
         }
     }
 
-    public class PaymentService : IPaymentService {
-        private readonly IConfig _config;
-        public PaymentService(IConfig Config) {
-            this._config = Config;
+    //public class PaymentService : IPaymentService {
+    public class PaymentService
+        {
+        public PaymentService() {
         }
 // lay tu momo
-        private readonly string MOMO_SECRET_CONFIG_KEY = "MOMO";
-        private readonly string MOMO_ACCESSKEY_CONFIG_KEY = "MOMO";
-        private readonly string MOMO_PARTNER_CODE_CONFIG_KEY = "MOMO";
+        private readonly string MOMO_SECRET_CONFIG_KEY = Config.Get().MOMO_TEST_ENV_SECRET_KEY;
+        private readonly string MOMO_ACCESSKEY_CONFIG_KEY = Config.Get().MOMO_TEST_ENV_ACCESS_KEY;
+        private readonly string MOMO_PARTNER_CODE_CONFIG_KEY = Config.Get().MOMO_TEST_ENV_PARTNER_CODE;
     // call back to server 
     // vd: hello.com/api/payment/callback
-        private readonly string SERVER_URL_CONFIG_KEY = "SERVER_URL";
+        private readonly string SERVER_URL_CONFIG_KEY = $"{Config.Get().PROTOCOL}://{Config.Get().API_HOST}:{Config.Get().API_PORT}/payment/momo/callback";
 
 
         private string SignSHA256(string message, string key) {
@@ -150,7 +150,9 @@ namespace Api.Controllers.PaymentService {
         private string SendMoMoRequest(string postJsonString) {
 
             try {
-                var endpoint = this._config.GetEnvByKey(Constant.MOMO_ENDPOINT_CONFIG_KEY);
+                //var endpoint = Config.Get().MOMO_TEST_ENV_ENDPOINT_API;
+                var endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
                 HttpWebRequest httpWReq = (HttpWebRequest) WebRequest.Create(endpoint);
 
                 var postData = postJsonString;
@@ -180,7 +182,6 @@ namespace Api.Controllers.PaymentService {
                     }
                 }
 
-
                 //todo parse it
                 return jsonresponse;
                 //return new MomoResponse(mtid, jsonresponse);
@@ -206,7 +207,7 @@ namespace Api.Controllers.PaymentService {
             moMoRequestDto.lang = "en";
             moMoRequestDto.RequestType = "captureWallet";
             moMoRequestDto.RedirectUrl = moMoPaymentDto.RedirectUrl;
-            moMoRequestDto.IpnUrl = (this.SERVER_URL_CONFIG_KEY)
+            moMoRequestDto.IpnUrl = (this.SERVER_URL_CONFIG_KEY);
             string rawHash = "accessKey=" + accessKey +
               "&amount=" + moMoRequestDto.Amount +
               "&extraData=" + moMoRequestDto.ExtraData +

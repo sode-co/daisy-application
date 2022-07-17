@@ -57,11 +57,6 @@ namespace DataAccess.Repositories
         {
             IQueryable<T> query = dbSet;
 
-            if (filter != null)
-            {
-                query.Where(filter);
-            }
-
             if (includeProperties != null)
             {
                 foreach (var includedProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
@@ -70,7 +65,12 @@ namespace DataAccess.Repositories
                 }
             }
 
-            return query.Count() == 0 ? defaultValue : query.First();
+            if (filter != null)
+            {
+                return query.FirstOrDefault(filter);
+            }
+
+            return defaultValue;
         }
 
         public void Remove(T t)

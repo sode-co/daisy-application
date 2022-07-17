@@ -41,5 +41,22 @@ namespace Api.Common
             public const string SENT = "SENT";
             public const string REMOVED = "REMOVED";
         }
+
+        public class PAYMENT_STATUS
+        {
+            public const string PENDING = "PENDING";
+            public const string SUCCESSFULLY = "SUCCESSFULLY";
+            public const string CANCELED = "CANCELED";
+            public const string WAITING = "WAITING";
+            public const string URGENT = "URGENT";
+        }
+
+        public class PAYMENT_ACTION_STATUS
+        {
+            public const string PENDING = "PENDING";
+            public const string SUCCESSFULLY = "SUCCESSFULLY";
+            public const string FAILED = "FAILED";
+            public const string CANCELED = "CANCELED";
+        }
     }
 }
