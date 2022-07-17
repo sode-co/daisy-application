@@ -41,5 +41,40 @@ namespace Api.Common
             public const string SENT = "SENT";
             public const string REMOVED = "REMOVED";
         }
+        public class PAYMENT_ACTION_STATUS
+        {
+            public const string PENDING = "PENDING";
+            public const string SUCCESSFULLY = "SUCCESSFULLY";
+            public const string CANCELED = "CANCELED";
+            public const string WAITING = "WAITING";
+            public const string URGENT = "URGENT";
+        }
+        public class PAYMENT_STATUS
+        {
+            public const string IN_COMPLETE = "IN_COMPLETE";
+            public const string COMPLETE = "COMPLETE";
+        }
+        public class PAYMENT_CURRENCY
+        {
+            public const string VND = "VNĐ";
+            public const string DOLLAR = "$";
+        }
+        public class WORKSPACE_STATUS
+        {
+            public const string DONE = "DONE";
+            public const string IN_PROGRESS = "IN_PROGRESS";
+            public const string CANCELED = "CANCELED";
+        }
+        public class RESOURCE_WORK_STATUS
+        {
+            public const string IN_PROGRESS = "IN_PROGRESS";
+            public const string DECLINED = "DECLINED";
+            public const string FINAL = "FINAL";
+        }
+        public class FILE_TYPE
+        {
+            public const string IMAGE_PNG = "image/png";
+            public const string IMAGE_JPEG = "image/jpeg";
+        }
     }
 }

@@ -95,5 +95,61 @@ namespace Api.Controllers.JobApplicationController
                 return result;
             }
         }
+
+        [HttpPut()]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public IActionResult ApproveJobApplication(int requestId, string freelancerEmail)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                // Update status of request
+                User customer = (User)HttpContext.Items["User"];
+                Request request = work.RequestRepository.GetFirstOrDefault(r => r.Id == requestId, "Category");
+                User freelancer = work.UserRepository.GetUsersByEmail(freelancerEmail);
+                request.Status = Constants.REQUEST_STATUS.TAKEN;
+
+                // Create Payment object to save to Project
+                Payment payment = new Payment()
+                {
+                    Status = Constants.PAYMENT_STATUS.IN_COMPLETE,
+                    // amount of money has been paid
+                    Amount = 0,
+                    Currency = Constants.PAYMENT_CURRENCY.VND,
+                    // amount of money must to paid
+                    TotalAmount = (decimal)request.Budget,
+                };
+
+                // From Request info create Project
+                Project project = new()
+                {
+                    Customer = work.UserRepository.Get(customer.Id),
+                    Freelancer = freelancer,
+                    Category = request.Category,
+                    Name = request.Title,
+                    Description = request.Description,
+                    Timeline = request.Timeline,
+                    Budget = (decimal)request.Budget,
+                    Status = Constants.PROJECT_STATUS.IN_PROGRESS,
+                    Request = request,
+                    Payment = payment
+                };
+
+                work.ProjectRepository.Add(project);
+                work.Save();
+
+                // Create workspace?
+                Workspace workspace = new()
+                {
+                    Status = Constants.WORKSPACE_STATUS.IN_PROGRESS,
+                    Request = request,
+                    Project = work.ProjectRepository.GetFirstOrDefault(pro => pro.Id == project.Id, "Customer,Freelancer,Category,Payment,Request")
+                };
+
+                work.WorkspaceRepository.Add(workspace);
+                work.Save();
+
+                return Ok();
+            }
+        }
     }
 }

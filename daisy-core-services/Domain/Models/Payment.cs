@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BusinessObject;
@@ -17,6 +18,8 @@ namespace Domain.Models
 
         [MaxLength(255)]
         public String Currency { get; set; }
+
+        public ICollection<PaymentAction> PaymentActions { get; set; }
 
         [MaxLength(int.MaxValue)]
         public String Data { get; set; } = "{}";
