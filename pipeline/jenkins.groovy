@@ -43,40 +43,41 @@ pipeline {
         }
       }
     }
+    stage('Checking out') {
+      steps {
+        script {
+          def repo = checkout scm
+          dir('daisy-application') {
+            GIT_COMMIT_SHORT = sh(
+              script: "printf \$(git rev-parse --short ${repo.GIT_COMMIT})",
+              returnStdout: true)
+          }
+
+          _TARGET_BRANCH = env.BRANCH_NAME
+          if (_TARGET_BRANCH == "main") {
+            println 'Current branch is main switch to production environment'
+            _ENV = 'production'
+          }
+          else {
+            println "Current branch is ${_TARGET_BRANCH} switch to test environment"
+            _ENV = 'test'
+          }
+
+          println "Checked out the branch ${_TARGET_BRANCH}"
+          println "Git commit short hash: ${GIT_COMMIT_SHORT}"
+        }
+      }
+    }
     stage('Prebuild') {
       steps {
         slackSend color: "good", message: """
         Pipeline has been started, 
         buildURL: ${BUILD_URL}
+        commit: https://github.com/sode-co/daisy-application/commit/${GIT_COMMIT_SHORT}
         branch: ${env.BRANCH_NAME}
         """
       }
     }
-    // stage('Checking out') {
-    //   steps {
-    //     script {
-    //       def repo = checkout scm
-    //       dir('daisy-application') {
-    //         GIT_COMMIT_SHORT = sh(
-    //           script: "printf \$(git rev-parse --short ${repo.GIT_COMMIT})",
-    //           returnStdout: true)
-    //       }
-
-    //       _TARGET_BRANCH = env.BRANCH_NAME
-    //       if (_TARGET_BRANCH == "main") {
-    //         println 'Current branch is main switch to production environment'
-    //         _ENV = 'production'
-    //       }
-    //       else {
-    //         println "Current branch is ${_TARGET_BRANCH} switch to test environment"
-    //         _ENV = 'test'
-    //       }
-
-    //       println "Checked out the branch ${_TARGET_BRANCH}"
-    //       println "Git commit short hash: ${GIT_COMMIT_SHORT}"
-    //     }
-    //   }
-    // }
     // stage('Setup environment') {
     //   steps {
     //     script {
