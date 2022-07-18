@@ -71,24 +71,20 @@ import 'package:daisy_application/app/pages/work_space/view/work_space_screen.da
             path: 'discovery',
             page: DicoveryJobFlowController,
             children: [
-              AutoRoute(path: '', page: DiscoverJobPage, initial: true)
+              AutoRoute(path: '', page: DiscoverJobPage, initial: true),
+            ]),
+        AutoRoute(
+            path: 'discovery-mobile',
+            name: 'DiscoveryMobileRoute',
+            page: DicoveryJobFlowController,
+            children: [
+              AutoRoute(path: '', page: JobDetailsScreen, initial: true),
             ]),
         AutoRoute(
           path: 'signup',
           page: SignupFlowController,
           children: [AutoRoute(path: '', page: SignUp, initial: true)],
         ),
-        AutoRoute(
-            path: 'job-details',
-            name: 'JobDetailsRoute',
-            page: DicoveryJobFlowController,
-            children: [
-              AutoRoute(
-                  path: '',
-                  name: '_JobDetailsRoute',
-                  page: JobDetailsScreen,
-                  initial: true),
-            ]),
       ],
     ),
   ],

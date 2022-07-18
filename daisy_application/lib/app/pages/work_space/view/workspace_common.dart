@@ -3,7 +3,7 @@ import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart';
 import 'package:daisy_application/app/pages/work_space/view/work_space_screen.dart';
-import 'package:daisy_application/app/router/admin_router.gr.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/name_to_enum.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class WorkspaceCardInfo {
   final String? tagName;
   final String? buttonName;
   final bool isDisplayButton;
-  final Function()? onMainBtnClicked;
+  final dynamic Function()? onMainBtnClicked;
 
   WorkspaceCardInfo(
       {this.buttonColor,
@@ -135,7 +135,7 @@ extension CommonComponent on WorkspaceState {
       );
 
   Widget createItemButton(
-          {Function()? onMainBtnClicked,
+          {dynamic Function()? onMainBtnClicked,
           Function(dynamic)? onOptionBtnClicked,
           Color? buttonColor,
           required String buttonText}) =>
@@ -144,9 +144,7 @@ extension CommonComponent on WorkspaceState {
           children: [
             Expanded(
               child: InkWell(
-                  onTap: () {
-                    onMainBtnClicked;
-                  },
+                  onTap: onMainBtnClicked,
                   child: Container(
                       height: constraint.maxHeight,
                       alignment: Alignment.center,
@@ -234,7 +232,7 @@ extension CommonComponent on WorkspaceState {
                   : ButtonInfo(
                       text: 'Cùng nhau tìm kiếm cơ hội việc làm nào',
                       onPressed: () =>
-                          context.pushRoute(const DicoveryJobRoute()),
+                          context.pushRoute(DicoveryJobRoute(request: null)),
                     )
             ],
           ));
@@ -267,7 +265,7 @@ extension CommonComponent on WorkspaceState {
                   : ButtonInfo(
                       text: 'Tìm kiếm dự án mới tại đây',
                       onPressed: () =>
-                          context.pushRoute(const DicoveryJobRoute()),
+                          context.pushRoute(DicoveryJobRoute(request: null)),
                     )
             ],
           ));

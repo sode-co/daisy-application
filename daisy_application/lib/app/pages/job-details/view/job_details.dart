@@ -5,12 +5,13 @@ import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_pag
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/stateless_component.dart';
 import 'package:daisy_application/app/pages/job-details/model/job_details_state.dart';
+import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class JobDetailsScreen extends StatefulWidget {
-  const JobDetailsScreen({Key? key}) : super(key: key);
+  const JobDetailsScreen({Key? key, RequestModel? request}) : super(key: key);
 
   @override
   State<JobDetailsScreen> createState() => _JobDetailsScreenState();
@@ -23,12 +24,13 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
   }
 
   DiscoveryJobListener get _listener => context.findAncestorStateOfType()!;
+  ApplicationState get _appState => context.read();
 
   @override
   Widget build(BuildContext context) {
     DiscoveryJobScreenState _screenState = context.watch();
-    RequestModel? selectedRequest = _screenState.selectedRequest ??
-        (_screenState.requests.isEmpty ? null : _screenState.requests.first);
+    var x = _screenState.selectedRequest;
+    //  RequestModel? selectedRequest = _appState.currentRequest;
 
     return Scaffold(
       appBar: const Header(),
@@ -43,7 +45,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             ),
           ],
           child: JobDetails(
-            request: selectedRequest!,
+            request: _screenState.selectedRequest!,
             onApply: _listener.onBtnApplyClicked,
             applicants: _screenState.applicants,
           ),

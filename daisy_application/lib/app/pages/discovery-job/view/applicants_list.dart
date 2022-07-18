@@ -178,7 +178,7 @@ class _ListApplicantsState extends State<ListApplicants> {
                         affirmativeText: 'Từ chối',
                         negativeText: 'Hủy bỏ',
                         onAffirmativeClicked: () {
-                          context.pushRoute(const DicoveryJobRoute());
+                          context.pushRoute(DicoveryJobRoute(request: null));
                           Navigator.of(context, rootNavigator: true).pop();
                         },
                         onNegativeClicked: () {
