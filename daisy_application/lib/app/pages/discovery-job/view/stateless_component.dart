@@ -136,7 +136,7 @@ class JobDetails extends StatefulWidget {
       {Key? key, required this.request, this.onApply, required this.applicants})
       : super(key: key);
   final RequestModel request;
-  final List<JobApplicationModel> applicants;
+  final List<JobApplicationModel>? applicants;
 
   @override
   State<JobDetails> createState() => _JobDetailsState();
@@ -168,7 +168,8 @@ class _JobDetailsState extends State<JobDetails> {
     } else {
       displayTime = _DisplayTime('hours', (weeksCount * 7 * 24).toInt());
     }
-
+    var x = widget.request;
+    var y = widget.applicants;
     return Padding(
       padding: const EdgeInsets.only(top: Design.headerSpacing),
       child: SizedBox(
@@ -220,7 +221,7 @@ class _JobDetailsState extends State<JobDetails> {
               ),
               const SizedBox(height: Design.contentSpacing),
               Text(
-                widget.request.category!.name!,
+                widget.request.category?.name ?? '',
                 style: Design.textBody(),
               ),
               const SizedBox(height: Design.headerSpacing),
@@ -230,7 +231,7 @@ class _JobDetailsState extends State<JobDetails> {
               ),
               const SizedBox(height: Design.contentSpacing),
               Text(
-                widget.request.description!,
+                widget.request.description ?? '',
                 style: Design.textBody(),
               ),
               const SizedBox(height: Design.headerSpacing),
@@ -243,13 +244,18 @@ class _JobDetailsState extends State<JobDetails> {
               const SizedBox(
                 height: Design.contentSpacing,
               ),
-              if (widget.applicants.isNotEmpty)
-                ListApplicants(applicants: widget.applicants)
-              else
+              if (widget.applicants == null)
                 Text(
                   'Chưa có ứng viên nào ứng tuyển cho vị trí này',
                   style: Design.textBody(),
                 ),
+              // if (widget.applicants != null && widget.applicants!.isNotEmpty)
+              ListApplicants(applicants: widget.applicants ?? [])
+              // else
+              //   Text(
+              //     'Chưa có ứng viên nào ứng tuyển cho vị trí này',
+              //     style: Design.textBody(),
+              //   ),
             ],
           ),
         ),

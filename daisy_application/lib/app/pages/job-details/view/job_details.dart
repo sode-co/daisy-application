@@ -30,6 +30,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
   Widget build(BuildContext context) {
     DiscoveryJobScreenState _screenState = context.watch();
     var x = _screenState.selectedRequest;
+    var y = _screenState.applicants;
+    var z = _listener.onBtnApplyClicked;
     //  RequestModel? selectedRequest = _appState.currentRequest;
 
     return Scaffold(
@@ -47,7 +49,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           child: JobDetails(
             request: _screenState.selectedRequest!,
             onApply: _listener.onBtnApplyClicked,
-            applicants: _screenState.applicants,
+            applicants: _screenState.applicants ?? [],
           ),
         ),
       ),
