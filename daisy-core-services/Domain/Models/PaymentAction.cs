@@ -25,8 +25,9 @@ namespace Domain.Models
         [MaxLength(int.MaxValue)]
         public String Data { get; set; } = "{}";
 
-        public String Type { get; set; }
         public String Status { get; set; }
+
+        public String Type { get; set; }
 
         public override string TableName => "PaymentActions";
 

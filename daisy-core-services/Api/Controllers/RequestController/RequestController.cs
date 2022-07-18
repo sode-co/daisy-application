@@ -9,6 +9,7 @@ using static Api.Common.Constants;
 using System.Collections.Generic;
 using Utils;
 using System;
+using Api.Common;
 
 namespace Api.Controllers.RequestController
 {
@@ -163,6 +164,20 @@ namespace Api.Controllers.RequestController
 
             return work.RequestRepository.GetAll(request => appliedRequestId.Contains(request.Id))
                 .OrderByDescending(x => x.CreatedAt).Take(30).ToList();
+        }
+
+        [Authorize(ROLE.CUSTOMER)]
+        [HttpDelete("/cancel/{requestId}")]
+        public IActionResult CancelRequest(int requestId)
+        {
+            using var work = _unitOfWorkFactory.Get;
+            var request = work.RequestRepository.Get(requestId);
+            if(request == null) return NotFound();
+
+            request.Status = Constants.REQUEST_STATUS.CANCELED;
+            work.Save();
+
+            return Ok();
         }
     }
 }
