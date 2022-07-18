@@ -11,7 +11,7 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i16;
+import 'package:flutter/material.dart' as _i17;
 
 import '../flow_controllers/discovery_job/discovery_job_flow_controller.dart'
     as _i7;
@@ -25,6 +25,7 @@ import '../flow_controllers/update_profile/update_profile_controller.dart'
     as _i4;
 import '../flow_controllers/workspace/workspace_flow_controller.dart' as _i5;
 import '../pages/discovery-job/view/discovery_job_page.dart' as _i14;
+import '../pages/job-details/view/job_details.dart' as _i16;
 import '../pages/landing-page/view/landing.dart' as _i9;
 import '../pages/post-new-job/view/post_new_job.dart' as _i10;
 import '../pages/project-details/view/project_details.dart' as _i13;
@@ -33,7 +34,7 @@ import '../pages/update-profile/view/update_profile.dart' as _i11;
 import '../pages/work_space/view/work_space_screen.dart' as _i12;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i16.GlobalKey<_i16.NavigatorState>? navigatorKey])
+  AppRouter([_i17.GlobalKey<_i17.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -71,6 +72,10 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: _i8.SignupFlowController());
     },
+    JobDetailsRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i7.DicoveryJobFlowController());
+    },
     LandingPage.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i9.LandingPage());
@@ -98,6 +103,10 @@ class AppRouter extends _i2.RootStackRouter {
     SignUp.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i15.SignUp());
+    },
+    _JobDetailsRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i16.JobDetailsScreen());
     }
   };
 
@@ -156,6 +165,13 @@ class AppRouter extends _i2.RootStackRouter {
               parent: RootRoute.name,
               children: [
                 _i2.RouteConfig(SignUp.name, path: '', parent: SignupRoute.name)
+              ]),
+          _i2.RouteConfig(JobDetailsRoute.name,
+              path: 'job-details',
+              parent: RootRoute.name,
+              children: [
+                _i2.RouteConfig(_JobDetailsRoute.name,
+                    path: '', parent: JobDetailsRoute.name)
               ])
         ])
       ];
@@ -239,6 +255,16 @@ class SignupRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [_i7.DicoveryJobFlowController]
+class JobDetailsRoute extends _i2.PageRouteInfo<void> {
+  const JobDetailsRoute({List<_i2.PageRouteInfo>? children})
+      : super(JobDetailsRoute.name,
+            path: 'job-details', initialChildren: children);
+
+  static const String name = 'JobDetailsRoute';
+}
+
+/// generated route for
 /// [_i9.LandingPage]
 class LandingPage extends _i2.PageRouteInfo<void> {
   const LandingPage() : super(LandingPage.name, path: '');
@@ -292,4 +318,12 @@ class SignUp extends _i2.PageRouteInfo<void> {
   const SignUp() : super(SignUp.name, path: '');
 
   static const String name = 'SignUp';
+}
+
+/// generated route for
+/// [_i16.JobDetailsScreen]
+class _JobDetailsRoute extends _i2.PageRouteInfo<void> {
+  const _JobDetailsRoute() : super(_JobDetailsRoute.name, path: '');
+
+  static const String name = '_JobDetailsRoute';
 }

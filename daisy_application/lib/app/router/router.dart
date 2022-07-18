@@ -7,6 +7,7 @@ import 'package:daisy_application/app/flow_controllers/signup/signup_flow_contro
 import 'package:daisy_application/app/flow_controllers/update_profile/update_profile_controller.dart';
 import 'package:daisy_application/app/flow_controllers/workspace/workspace_flow_controller.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/discovery_job_page.dart';
+import 'package:daisy_application/app/pages/job-details/view/job_details.dart';
 import 'package:daisy_application/app/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/app/pages/post-new-job/view/post_new_job.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
@@ -76,7 +77,18 @@ import 'package:daisy_application/app/pages/work_space/view/work_space_screen.da
           path: 'signup',
           page: SignupFlowController,
           children: [AutoRoute(path: '', page: SignUp, initial: true)],
-        )
+        ),
+        AutoRoute(
+            path: 'job-details',
+            name: 'JobDetailsRoute',
+            page: DicoveryJobFlowController,
+            children: [
+              AutoRoute(
+                  path: '',
+                  name: '_JobDetailsRoute',
+                  page: JobDetailsScreen,
+                  initial: true),
+            ]),
       ],
     ),
   ],

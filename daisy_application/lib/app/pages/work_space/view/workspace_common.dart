@@ -17,6 +17,7 @@ class WorkspaceCardInfo {
   final String? tagName;
   final String? buttonName;
   final bool isDisplayButton;
+  final Function()? onMainBtnClicked;
 
   WorkspaceCardInfo(
       {this.buttonColor,
@@ -26,7 +27,8 @@ class WorkspaceCardInfo {
       this.authorAvatar,
       this.authorName,
       this.isDisplayButton = true,
-      this.buttonName});
+      this.buttonName,
+      this.onMainBtnClicked});
 }
 
 extension CommonComponent on WorkspaceState {
@@ -66,6 +68,7 @@ extension CommonComponent on WorkspaceState {
             child: createItemButton(
               buttonText: cardInfo.buttonName!,
               buttonColor: cardInfo.buttonColor!,
+              onMainBtnClicked: cardInfo.onMainBtnClicked,
             ))
         : Container();
   }
@@ -133,7 +136,7 @@ extension CommonComponent on WorkspaceState {
 
   Widget createItemButton(
           {Function()? onMainBtnClicked,
-          Function()? onOptionBtnClicked,
+          Function(dynamic)? onOptionBtnClicked,
           Color? buttonColor,
           required String buttonText}) =>
       LayoutBuilder(builder: (context, constraint) {
@@ -141,7 +144,9 @@ extension CommonComponent on WorkspaceState {
           children: [
             Expanded(
               child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    onMainBtnClicked;
+                  },
                   child: Container(
                       height: constraint.maxHeight,
                       alignment: Alignment.center,
@@ -158,7 +163,9 @@ extension CommonComponent on WorkspaceState {
             ),
             const SizedBox(width: Design.contentSpacing),
             InkWell(
-              onTap: onOptionBtnClicked,
+              onTap: () {
+                onOptionBtnClicked;
+              },
               child: Container(
                   height: constraint.maxHeight,
                   width: constraint.maxWidth * 0.25,

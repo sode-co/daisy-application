@@ -2,11 +2,11 @@ import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/pages/work_space/view/work_space_screen.dart';
 import 'package:daisy_application/app/pages/work_space/view/workspace_common.dart';
 import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/common/name_to_enum.dart';
 import 'package:daisy_application/common/to_string_utils.dart';
-import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
-import 'package:daisy_application/common/name_to_enum.dart';
 
 extension ItemRequest on WorkspaceState {
   Widget createRequestInfoCard(RequestModel request) {
@@ -18,15 +18,19 @@ extension ItemRequest on WorkspaceState {
         : Colors.black45;
     const buttonName = 'Xem đơn';
     WorkspaceCardInfo cardInfo = WorkspaceCardInfo(
-        title: request.title,
-        buttonColor: buttonColor,
-        tagName: tagName,
-        image: '',
-        authorAvatar: request.customer?.avatar ?? '',
-        isDisplayButton: currentStatus != RequestStatus.TAKEN,
-        authorName:
-            request.customer?.displayName ?? request.customer?.lastName ?? '',
-        buttonName: buttonName);
+      title: request.title,
+      buttonColor: buttonColor,
+      tagName: tagName,
+      image: '',
+      authorAvatar: request.customer?.avatar ?? '',
+      isDisplayButton: currentStatus != RequestStatus.TAKEN,
+      authorName:
+          request.customer?.displayName ?? request.customer?.lastName ?? '',
+      buttonName: buttonName,
+      onMainBtnClicked: () {
+        Debug.log('Xem ddonw');
+      },
+    );
 
     return createInfoCard(cardInfo);
   }
