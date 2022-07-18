@@ -344,7 +344,7 @@ pipeline {
   }
   post {
     always {
-      slackSend color: "good", message: """
+      slackSend color: "#5F9EA0", message: """
         Pipeline has been finished, 
         buildURL: ${BUILD_URL}
         branch: ${env.BRANCH_NAME}
