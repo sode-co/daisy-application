@@ -1,10 +1,13 @@
 import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
+import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 extension ProjectHeader on ProjectDetailsPageState {
   Widget createHeader() {
+    ProjectModel? project = screenState.project;
     final currentTime = DateFormat('hh:mm a').format(DateTime.now());
     return Container(
       alignment: Alignment.topLeft,
@@ -14,21 +17,26 @@ extension ProjectHeader on ProjectDetailsPageState {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            'Title',
-            style: Design.textSmallLogo(),
+            project?.name ?? 'loading...',
+            style:
+                Design.textSmallLogo(isMobile: !Responsive.isDesktop(context)),
           ),
           const SizedBox(height: Design.contentSpacing),
           Row(
             children: [
-              createItemTag('Website', Design.primaryTextColor),
+              createItemTag(project?.category?.name ?? 'loading...',
+                  Design.primaryTextColor),
               const SizedBox(width: Design.contentSpacing),
               createItemTag('In Progress', Design.accentRed.shade400),
               const SizedBox(width: Design.contentSpacing),
-              Text('with TienDang', style: Design.textCaption()),
-              Text(' Local time: $currentTime',
-                  style: Design.textCaption(
-                    textColor: Design.colorNeutral.shade600,
-                  ))
+              Text(
+                  'with ${project?.customer?.displayName ?? project?.customer?.firstName ?? 'loading...'}',
+                  style: Design.textCaption()),
+              if (Responsive.isDesktop(context))
+                Text(' Local time: $currentTime',
+                    style: Design.textCaption(
+                      textColor: Design.colorNeutral.shade600,
+                    ))
             ],
           ),
         ],

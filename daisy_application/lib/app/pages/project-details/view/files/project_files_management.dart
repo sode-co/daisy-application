@@ -74,7 +74,9 @@ extension ProjectFileManagement on ProjectDetailsPageState {
                 color: getTabColor(index), borderRadius: borderRadius),
             child: Text(
               title,
-              style: Design.textButton(textColor: getTextColor(index)),
+              style: Design.textButton(
+                  textColor: getTextColor(index),
+                  isMobile: !Responsive.isDesktop(context)),
             ),
           );
         }),

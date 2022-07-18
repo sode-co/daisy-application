@@ -78,8 +78,10 @@ abstract class Design {
   static final fontColorWhite = colorWhite.withOpacity(0.92);
 
   static const double itemSpacing = 17;
+  static const double itemMobileSpacing = 12;
   static const double headerSpacing = 30;
   static const double bodySpacing = 22;
+  static const double bodyMobileSpacing = 14;
   static const double contentSpacing = 7;
   static const double toolbarHeight = 100;
 
@@ -135,23 +137,23 @@ abstract class Design {
       {Color? textColor, bool bold = false, bool isEnable = true}) {
     return TextStyle(
         color: toTextColor(textColor: textColor, isEnabled: isEnable),
-        fontSize: 16,
+        fontSize: 15,
         height: 1.37,
         fontWeight: _toFontWeight(bold));
   }
 
-  static TextStyle textLogo({Color? textColor}) {
+  static TextStyle textLogo({Color? textColor, bool isMobile = false}) {
     return TextStyle(
         color: toTextColor(textColor: textColor),
-        fontSize: 60,
+        fontSize: isMobile ? 35 : 60,
         fontFamily: 'larsseit',
         fontWeight: FontWeight.w900);
   }
 
-  static TextStyle textSmallLogo({Color? textColor}) {
+  static TextStyle textSmallLogo({Color? textColor, bool isMobile = false}) {
     return TextStyle(
         color: toTextColor(textColor: textColor),
-        fontSize: 40,
+        fontSize: isMobile ? 26 : 40,
         fontFamily: 'larsseit',
         fontWeight: FontWeight.w900);
   }
@@ -171,7 +173,7 @@ abstract class Design {
   static TextStyle textBodyFoldMobile({Color? textColor, bool bold = false}) {
     return TextStyle(
         color: toTextColor(textColor: textColor),
-        fontSize: 19,
+        fontSize: 14,
         height: 1.3,
         fontFamily: 'larsseit',
         fontWeight: FontWeight.w700);
@@ -195,10 +197,11 @@ abstract class Design {
         fontWeight: FontWeight.w700);
   }
 
-  static TextStyle textButton({Color? textColor, isEnabled = true}) {
+  static TextStyle textButton(
+      {Color? textColor, isEnabled = true, bool isMobile = false}) {
     return TextStyle(
         color: toTextColor(textColor: textColor, isEnabled: isEnabled),
-        fontSize: 20,
+        fontSize: isMobile ? 15 : 20,
         fontWeight: FontWeight.w900);
   }
 

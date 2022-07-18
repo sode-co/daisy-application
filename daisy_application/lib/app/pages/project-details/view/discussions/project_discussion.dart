@@ -63,8 +63,8 @@ extension ProjectDiscussion on ProjectDetailsPageState {
       });
 
   Widget createUploadResourceButton() => Container(
-        height: 70,
-        width: 70,
+        height: 58,
+        width: 58,
         decoration: const BoxDecoration(
             color: Colors.black87,
             borderRadius: BorderRadius.only(
@@ -79,30 +79,35 @@ extension ProjectDiscussion on ProjectDetailsPageState {
       );
 
   Widget createTextBox() => Expanded(
-      child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black87, width: 5),
-              borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(5))),
-          child: TextField(
-            controller: discussionTextController,
-            cursorWidth: 6,
-            maxLines: null,
-            textAlignVertical: TextAlignVertical.center,
-            decoration: InputDecoration(
-              prefixText: '   ',
-              hintText: 'Type message here',
-              hintStyle: TextStyle(
-                  fontSize: 30,
-                  height: 1.45,
-                  color: Design.colorNeutral.shade500),
-            ),
-            style: const TextStyle(
-              fontSize: 30,
-              height: 1.45,
-            ),
-          )));
+          child: ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 120, minHeight: 40),
+        child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black87, width: 5),
+                borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(5),
+                    bottomRight: Radius.circular(5))),
+            child: TextField(
+              scrollPadding: EdgeInsets.all(0),
+              controller: discussionTextController,
+              cursorWidth: 4,
+              maxLines: null,
+              textAlignVertical: TextAlignVertical.center,
+              decoration: InputDecoration(
+                prefixText: '   ',
+                suffixText: '   ',
+                hintText: 'Type message here',
+                hintStyle: TextStyle(
+                    fontSize: 17,
+                    height: 1,
+                    color: Design.colorNeutral.shade500),
+              ),
+              style: const TextStyle(
+                fontSize: 17,
+                height: 1,
+              ),
+            )),
+      ));
 
   Widget createSendButton() => LayoutBuilder(builder: (context, constraint) {
         return SizedBox(
@@ -110,8 +115,8 @@ extension ProjectDiscussion on ProjectDetailsPageState {
           children: [
             const SizedBox(width: Design.contentSpacing),
             Container(
-              height: 70,
-              width: 70,
+              height: 58,
+              width: 58,
               decoration: const BoxDecoration(
                   color: Colors.black87,
                   borderRadius: BorderRadius.all(Radius.circular(5))),
