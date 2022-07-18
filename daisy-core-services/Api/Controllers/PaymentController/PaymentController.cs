@@ -31,7 +31,7 @@ namespace Api.Controllers.PaymentController
         }
 
         [HttpGet("payment-action/list")]
-        [Authorize]
+        [Authorize(Roles = Constants.ROLE.DESIGNER + "," + Constants.ROLE.CUSTOMER)]
         public IList<PaymentAction> GetAllPaymentActionsByUserId()
         {
             using (var work = _unitOfWorkFactory.Get){
@@ -42,7 +42,7 @@ namespace Api.Controllers.PaymentController
         }
 
         [HttpGet("payment-action/{paymentId}")]
-        [Authorize]
+        [Authorize(Roles = Constants.ROLE.DESIGNER + "," + Constants.ROLE.CUSTOMER)]
         public IList<PaymentAction> GetAllPaymentActionsByUserIdAndPaymentId(int paymentId)
         {
             using var work = _unitOfWorkFactory.Get;
@@ -144,7 +144,8 @@ namespace Api.Controllers.PaymentController
         }
 
         [HttpPost("system/momo")]
-        [Authorize(Policy = Constants.ROLE.ADMIN)]
+        //[Authorize(Policy = Constants.ROLE.ADMIN)] // chưa có admin
+        [Authorize]
         //[SwaggerOperation("Deposit Momo into user wallet")]
         public IActionResult AddPaymentActionBySystemToDesigner([FromBody] DepositoryDto body)
         {
