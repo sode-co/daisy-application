@@ -43,6 +43,15 @@ pipeline {
         }
       }
     }
+    stage('Prebuild') {
+      steps {
+        slackSend color: "good", message: """
+        Pipeline has been started, 
+        buildURL: ${BUILD_URL}
+        branch: ${env.BRANCH_NAME}
+        """
+      }
+    }
     stage('Checking out') {
       steps {
         script {
@@ -331,6 +340,16 @@ pipeline {
           println 'Clean up success.'
         }
       }
+    }
+  }
+  post {
+    always {
+      slackSend color: "good", message: """
+        Pipeline has been finished, 
+        buildURL: ${BUILD_URL}
+        branch: ${env.BRANCH_NAME}
+        result: ${currentBuild.result}
+        """
     }
   }
 }
