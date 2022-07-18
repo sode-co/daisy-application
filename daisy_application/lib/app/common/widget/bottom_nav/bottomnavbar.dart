@@ -41,7 +41,6 @@ class BottomNavBar extends StatelessWidget {
                             icon: Icons.person_search_outlined),
                         onPressed: () {
                           context.router.push(const DicoveryJobRoute());
-                          Navigator.pushNamed(context, '/find-freelance-job');
                         },
                       ),
                       IconButton(
