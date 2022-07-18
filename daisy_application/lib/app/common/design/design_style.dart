@@ -238,4 +238,13 @@ abstract class Design {
   static FontWeight _toFontWeight(bool isBold) {
     return isBold ? FontWeight.w600 : FontWeight.normal;
   }
+
+  static TextStyle textTableHeader({Color? textColor, isEnabled = true}) {
+    return TextStyle(
+      color: toTextColor(textColor: textColor, isEnabled: isEnabled),
+      fontSize: 17,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'Roboto',
+    );
+  }
 }

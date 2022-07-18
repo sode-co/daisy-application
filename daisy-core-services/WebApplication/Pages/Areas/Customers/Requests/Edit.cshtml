@@ -32,12 +32,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Request.Budget" class="control-label"></label>
-                <input asp-for="Request.Budget" class="form-control" />
+                <input type="number" min="0" step="0.1" class="form-control" id="budget" asp-for="Request.Budget" aria-describedby="budget" placeholder="9999.0">
                 <span asp-validation-for="Request.Budget" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Request.Timeline" class="control-label"></label>
-                <input asp-for="Request.Timeline" class="form-control" />
+                <input class="form-control" asp-for="Request.Timeline" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddThh:mm")" />
                 <span asp-validation-for="Request.Timeline" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Request.Id" />

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using WebApplication.Pages.Utils;
@@ -29,9 +28,7 @@ namespace WebApplication.Pages.UserCRUD
         }
 
         public IList<User> User { get;set; }
-        
         public decimal TotalPage { get; set; }
-
         public async Task<IActionResult> OnGetAsync(int p = 1)
         {
             string role = UserAuthentication.Role();
@@ -44,11 +41,13 @@ namespace WebApplication.Pages.UserCRUD
             ItemPerPage = 10;
             CurrentPage = p;
 
-            var users = _unitOfWorkFactory.Get.UserRepository.GetUsers();
+            string email = UserAuthentication.UserLogin.Email;
+
+            var users = _unitOfWorkFactory.Get.UserRepository.GetUsers().Where(u => !u.Email.Equals(email) && u.DeletedAt == null);
             
             if (!string.IsNullOrEmpty(SearchString))
             {
-                users = _unitOfWorkFactory.Get.UserRepository.GetUsersByName(SearchString);
+                users = _unitOfWorkFactory.Get.UserRepository.GetUsersByName(SearchString).Where(u => !u.Email.Equals(email) && u.DeletedAt == null);
             }
             decimal tmp = Math.Ceiling(Convert.ToDecimal(users.Count()/ ItemPerPage));
             TotalPage = tmp == 0 ? 1 : tmp;

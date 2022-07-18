@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using DataAccess.UnitOfWork;
+using WebApplication.Pages.Utils;
 
 namespace WebApplication.Pages.UserCRUD
 {
@@ -25,6 +25,13 @@ namespace WebApplication.Pages.UserCRUD
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string role = UserAuthentication.Role();
+
+            if (role.Equals(""))
+            {
+                return Redirect("/Unauthorized");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -48,15 +55,18 @@ namespace WebApplication.Pages.UserCRUD
                 return Page();
             }
 
-            _unitOfWorkFactory.Get.UserRepository.UpdateUser(User);
-            _unitOfWorkFactory.Get.Save();
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool UserExists(int id)
-        {
-            return _unitOfWorkFactory.Get.UserRepository.GetUser((int)id) != null;
+            using var work = _unitOfWorkFactory.Get;
+            work.UserRepository.UpdateUser(User);
+            work.Save();
+            string role = UserAuthentication.Role();
+            if(role.Equals("ADMIN"))
+            {
+                return RedirectToPage("./Index");
+            }
+            else
+            {
+                return RedirectToPage("/Index");
+            }
         }
     }
 }

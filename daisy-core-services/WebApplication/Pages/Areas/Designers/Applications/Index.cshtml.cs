@@ -33,7 +33,7 @@ namespace WebApplication.Pages.Areas.Designers.Applications
                 return Redirect("/Unauthorized");
             }
 
-            IQueryable<JobApplication> jobApplications = _unitOfWorkFactory.Get.JobApplicationRepository.GetAll(jobApplication => jobApplication.DeletedAt == null).Include(job => job.Freelancer).Where(job => job.Freelancer.Email.Equals(email));
+            IQueryable<JobApplication> jobApplications = _unitOfWorkFactory.Get.JobApplicationRepository.GetAll(jobApplication => jobApplication.DeletedAt == null).Include(job => job.Freelancer).Include(job => job.Request).Where(job => job.Freelancer.Email.Equals(email));
             JobApplication = await PaginatedList<JobApplication>.CreateAsync(
                 jobApplications.AsNoTracking(), pageIndex ?? 1, 10);
 

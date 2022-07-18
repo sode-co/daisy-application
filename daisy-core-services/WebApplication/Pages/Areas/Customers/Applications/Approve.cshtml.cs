@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using WebApplication.Pages.Utils;
 using DataAccess.UnitOfWork;
 using static Api.Common.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication.Pages.Areas.Customers.Applications
 {
@@ -34,7 +34,7 @@ namespace WebApplication.Pages.Areas.Customers.Applications
             JobApplication = work.JobApplicationRepository.Get(id.Value);
             Designer = work.UserRepository.GetUser(freelancerId.Value);
 
-            if (role.Equals("CUSTOMER") && role.Equals("ADMIN"))
+            if (!role.Equals("CUSTOMER"))
             {
                 return Redirect("/Unauthorized");
             }
@@ -54,7 +54,7 @@ namespace WebApplication.Pages.Areas.Customers.Applications
 
             using (var work = _unitOfWorkFactory.Get)
             {
-               JobApplication = work.JobApplicationRepository.Get(id.Value);
+                JobApplication = work.JobApplicationRepository.GetAll(j => j.Id.Equals(id.Value)).Include(j => j.Freelancer).FirstOrDefault();
                 JobApplication.Status = STATUS_JOB_APPLICATION.APPROVE;
                 work.JobApplicationRepository.UpdateJobApplication(JobApplication);
                 work.Save();
@@ -64,6 +64,41 @@ namespace WebApplication.Pages.Areas.Customers.Applications
                     application.Status = STATUS_JOB_APPLICATION.REJECT;
                     work.Save();
                 }
+
+
+                User user = UserAuthentication.UserLogin;
+
+                Request req = work.RequestRepository.GetAll(r => r.Id.Equals(requestId)).Include(r => r.Customer).Include(r => r.Category).FirstOrDefault();
+
+                req.Status = REQUEST_STATUS.TAKEN;
+                work.RequestRepository.UpdateRequest(req);
+                work.Save();
+                Project project = new Project()
+                {
+                    Customer = req.Customer,
+                    Freelancer = JobApplication.Freelancer,
+                    Category = req.Category,
+                    Data = JobApplication.Data,
+                    PreferredLanguage = JobApplication.PreferredLanguage,
+                    Name = req.Title,
+                    Description = req.Description,
+                    Timeline = JobApplication.Timeline ?? req.Timeline,
+                    Budget = req.Budget ?? JobApplication.OfferedPrice,
+                    IsAllowedPublic = false,
+                    Status = PROJECT_STATUS.IN_PROGRESS,
+                    Request = req,
+                };
+                work.ProjectRepository.Add(project);
+                work.Save();
+                Workspace workspace = new Workspace()
+                {
+                    Project = project,
+                    Request = req,
+                    Status = REQUEST_STATUS.TAKEN,
+                };
+                work.WorkspaceRepository.Add(workspace);
+                work.Save();
+
             }
             return RedirectToPage("./Index", new { requestId = requestId });
         }

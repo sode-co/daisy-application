@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/design/design_sidebar.dart';
 import 'package:daisy_application/app/common/responsive.dart';
@@ -7,7 +6,6 @@ import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart
 import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/listeners/WidgetListener.dart';
 import 'package:daisy_application/app/pages/landing-page/view/common.dart';
-import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
 import 'package:daisy_application/app/pages/work_space/deps/workspace_listener.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_screen_state.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart';
@@ -23,7 +21,6 @@ import 'package:daisy_application/common/name_to_enum.dart';
 import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,9 +1,9 @@
+import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
+import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/component.dart';
-import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
-import 'package:daisy_application/app/common/widget/header/header.dart';
-import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +53,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
         (_screenState.requests.isEmpty ? null : _screenState.requests.first);
 
     return Container(
-      color: Colors.grey.shade100,
+      color: Colors.grey.shade200,
       child: Padding(
         padding: EdgeInsets.only(
           left: Responsive.isDesktop(context) ? 100.0 : 0.0,
@@ -73,6 +73,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
                   requests: _screenState.requests,
                   onItemSelected: (request) {
                     _screenState.selectedRequest = request;
+                    _listener.onLoadListApplicants(request.id);
                   },
                   onLoadMore: _onLoadMoreRequest,
                 ),
@@ -90,6 +91,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
                   JobDetails(
                     request: selectedRequest,
                     onApply: _listener.onBtnApplyClicked,
+                    applicants: _screenState.applicants,
                   ),
               ],
             )),

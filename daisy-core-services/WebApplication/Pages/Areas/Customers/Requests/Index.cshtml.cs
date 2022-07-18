@@ -22,9 +22,10 @@ namespace WebApplication.Pages.Areas.Customers.Requests
         }
 
         public string CurrentFilter { get; set; }
+        public string CurrentStatus { get; set; }
         public PaginatedList<Request> Request { get;set; }
 
-        public async Task<IActionResult> OnGetAsync(string searchString, int? pageIndex)
+        public async Task<IActionResult> OnGetAsync(string searchString, int? pageIndex, string? status)
         {
 
             string role = UserAuthentication.Role();
@@ -36,31 +37,64 @@ namespace WebApplication.Pages.Areas.Customers.Requests
 
             CurrentFilter = searchString;
             IQueryable<Request> requests;
-            if(role == "CUSTOMER")
+            CurrentStatus = status;
+            if (status == null)
             {
-                var email = UserAuthentication.UserLogin.Email;
-                if (searchString != null)
+                if (role == "CUSTOMER")
                 {
-                    pageIndex = 1;
-                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitleAndEmail(searchString, email);
+                    var email = UserAuthentication.UserLogin.Email;
+                    if (searchString != null)
+                    {
+                        pageIndex = 1;
+                        requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitleAndEmail(searchString, email);
+                    }
+                    else
+                    {
+                        requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
+                    }
                 }
                 else
                 {
-                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByCustomerEmail(email);
-                }
-            } 
-            else
-            {
-                if (searchString != null)
-                {
-                    pageIndex = 1;
-                    requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitle(searchString);
-                }
-                else
-                {
-                    requests = _unitOfWorkFactory.Get.RequestRepository.GetAll(req => req.DeletedAt == null);
+                    if (searchString != null)
+                    {
+                        pageIndex = 1;
+                        requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitle(searchString);
+                    }
+                    else
+                    {
+                        requests = _unitOfWorkFactory.Get.RequestRepository.GetAll(req => req.DeletedAt == null);
+                    }
                 }
             }
+            else
+            {
+                if (role == "CUSTOMER")
+                {
+                    var email = UserAuthentication.UserLogin.Email;
+                    if (searchString != null)
+                    {
+                        pageIndex = 1;
+                        requests = _unitOfWorkFactory.Get.RequestRepository.GetAll().Include(req => req.Customer).Where(req => (req.Title.Contains(searchString) && req.Customer.Email.Equals(email) && req.DeletedAt == null && req.Status.Equals(status)));
+                    }
+                    else
+                    {
+                        requests = _unitOfWorkFactory.Get.RequestRepository.GetAll().Include(req => req.Customer).Where(req => req.Customer.Email.Equals(email) && req.DeletedAt == null && req.Status.Equals(status));
+                    }
+                }
+                else
+                {
+                    if (searchString != null)
+                    {
+                        pageIndex = 1;
+                        requests = (IQueryable<Request>)_unitOfWorkFactory.Get.RequestRepository.GetRequestsByTitle(searchString).Where(r => r.Status.Equals(status));
+                    }
+                    else
+                    {
+                        requests = _unitOfWorkFactory.Get.RequestRepository.GetAll(req => req.DeletedAt == null).Where(r => r.Status.Equals(status));
+                    }
+                }
+            }
+            
             Request = await PaginatedList<Request>.CreateAsync(
                 requests.AsNoTracking(), pageIndex ?? 1, 10);
             return Page();

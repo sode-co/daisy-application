@@ -40,4 +40,10 @@
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Pages\Areas\Designers\Portfolio\Index - Copy.cshtml.cs">
+      <DependentUpon>Index.cshtml.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
