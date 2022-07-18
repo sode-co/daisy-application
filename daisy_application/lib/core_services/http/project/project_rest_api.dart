@@ -15,4 +15,7 @@ abstract class ProjectRestApi {
   @GET('/status/{status}')
   Future<HttpResponse<List<ProjectModel>>> getByStatus(
       @Path('status') String status);
+
+  @GET('/{id}')
+  Future<HttpResponse<ProjectModel>> getById(@Path('id') String projectId);
 }

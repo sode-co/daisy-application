@@ -30,22 +30,25 @@ class WorkspaceCardInfo {
 }
 
 extension CommonComponent on WorkspaceState {
-  Widget createInfoCard(WorkspaceCardInfo cardInfo) => Column(
+  Widget createInfoCard(WorkspaceCardInfo cardInfo,
+          {Function()? onItemSelected}) =>
+      Column(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: onItemSelected,
             child: LayoutBuilder(builder: (context, constraint) {
               return Padding(
-                padding: const EdgeInsets.all(Design.itemSpacing),
+                padding: const EdgeInsets.all(Design.itemMobileSpacing),
                 child: SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       createItemImage(constraint),
-                      const SizedBox(width: Design.bodySpacing),
+                      const SizedBox(width: Design.itemMobileSpacing),
                       showInfo(cardInfo),
-                      Expanded(child: Container()),
+                      if (Responsive.isDesktop(context))
+                        Expanded(child: Container()),
                       if (Responsive.isDesktop(context)) createButton(cardInfo)
                     ],
                   ),
@@ -86,7 +89,7 @@ extension CommonComponent on WorkspaceState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        SizedBox(
           width: 260,
           child: Text(
             '${cardInfo.title}',

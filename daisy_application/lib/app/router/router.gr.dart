@@ -11,6 +11,7 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
+import 'package:flutter/cupertino.dart' as _i17;
 import 'package:flutter/material.dart' as _i16;
 
 import '../flow_controllers/discovery_job/discovery_job_flow_controller.dart'
@@ -59,9 +60,14 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: const _i5.WorkSpaceFlowController());
     },
     ProjectDetailsRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ProjectDetailsRouteArgs>(
+          orElse: () => ProjectDetailsRouteArgs(
+              projectId: pathParams.getString('projectId')));
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: const _i6.ProjectDetailsFlowController());
+          child:
+              _i6.ProjectDetailsFlowController(args.projectId, key: args.key));
     },
     DicoveryJobRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -138,7 +144,7 @@ class AppRouter extends _i2.RootStackRouter {
                     path: '', parent: WorkSpaceRoute.name)
               ]),
           _i2.RouteConfig(ProjectDetailsRoute.name,
-              path: 'project-details',
+              path: 'project/:projectId',
               parent: RootRoute.name,
               children: [
                 _i2.RouteConfig(_ProjectDetailsRoute.name,
@@ -211,12 +217,31 @@ class WorkSpaceRoute extends _i2.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.ProjectDetailsFlowController]
-class ProjectDetailsRoute extends _i2.PageRouteInfo<void> {
-  const ProjectDetailsRoute({List<_i2.PageRouteInfo>? children})
+class ProjectDetailsRoute extends _i2.PageRouteInfo<ProjectDetailsRouteArgs> {
+  ProjectDetailsRoute(
+      {required String projectId,
+      _i17.Key? key,
+      List<_i2.PageRouteInfo>? children})
       : super(ProjectDetailsRoute.name,
-            path: 'project-details', initialChildren: children);
+            path: 'project/:projectId',
+            args: ProjectDetailsRouteArgs(projectId: projectId, key: key),
+            rawPathParams: {'projectId': projectId},
+            initialChildren: children);
 
   static const String name = 'ProjectDetailsRoute';
+}
+
+class ProjectDetailsRouteArgs {
+  const ProjectDetailsRouteArgs({required this.projectId, this.key});
+
+  final String projectId;
+
+  final _i17.Key? key;
+
+  @override
+  String toString() {
+    return 'ProjectDetailsRouteArgs{projectId: $projectId, key: $key}';
+  }
 }
 
 /// generated route for

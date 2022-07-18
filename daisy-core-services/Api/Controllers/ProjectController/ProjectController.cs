@@ -32,7 +32,7 @@ namespace Api.Controllers.ProjectController
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                var projects = work.ProjectRepository.GetAll(project => project.Id == projectId, null, "Customer,Freelancer,Category,Payment,Request");
+                var projects = work.ProjectRepository.GetAll(project => project.Id == projectId, null, "Customer,Freelancer,Category,Payment,Request,Workspaces");
                 if (projects.Count() == 0) return NotFound();
 
                 return Ok(projects.First());

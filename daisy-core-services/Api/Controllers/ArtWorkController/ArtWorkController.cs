@@ -22,7 +22,7 @@ namespace Api.Controllers.ArtWorkController
         [HttpGet("{artworkId}")]
         public IActionResult GetArtworkById(int artworkId)
         {
-            using (var work = _unitOfWorkFactory.Get)
+                       using (var work = _unitOfWorkFactory.Get)
             {
                 ArtWork artWork = work.ArtWorkRepository.Get(artworkId);
                 if (artWork != null) return Json(artWork);

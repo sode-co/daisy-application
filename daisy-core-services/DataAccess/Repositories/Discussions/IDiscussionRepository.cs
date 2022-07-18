@@ -10,6 +10,7 @@ namespace DataAccess.Repositories.Discussions
     public interface IDiscussionRepository : IRepository<Discussion>
     {
         public void RemoveDiscussion(int workspaceId, int discussionId, string discussionStatus);
+        public IEnumerable<Discussion> DiscussionPaging(DateTime timeOffset, int count);
         public void CreateDiscussion(Discussion discussion);
         public Discussion GetDiscussion(int id);
         public IEnumerable<Discussion> GetDiscussions();

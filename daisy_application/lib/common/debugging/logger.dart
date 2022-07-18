@@ -11,6 +11,8 @@ class Debug {
       level: tool.Level.debug, printer: _printer, filter: _Filter());
   static dynamic log = VarargsFunction(Debug._invoked);
 
+  static Logger get logger => _debug;
+
   static void _invoked(List arguments) {
     String rootMessage = '';
     for (final argument in arguments) {
@@ -32,6 +34,8 @@ class Error {
   static final _error = tool.Logger(
       level: tool.Level.error, printer: _printer, filter: _Filter());
   static dynamic log = VarargsFunction(Error._invoked);
+
+  static Logger get logger => _error;
 
   static void _invoked(List arguments) {
     String rootMessage = '';

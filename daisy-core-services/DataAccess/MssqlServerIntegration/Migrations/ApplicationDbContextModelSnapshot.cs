@@ -78,7 +78,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(455)");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -115,12 +114,10 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("RefreshToken")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -159,7 +156,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(455)");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -193,7 +189,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -248,7 +243,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -306,7 +300,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -363,7 +356,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -403,7 +395,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -456,7 +447,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -511,7 +501,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -580,7 +569,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -625,12 +613,19 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FileName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("FileType")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ResourceKey")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -679,7 +674,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -747,7 +741,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -787,7 +780,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ObjectId")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
