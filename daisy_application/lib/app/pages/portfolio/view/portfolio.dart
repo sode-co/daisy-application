@@ -42,7 +42,7 @@ class PortfolioPageState extends State<PortfolioPage> {
   Widget build(BuildContext context) {
     context.watch<PortfolioState>();
     return DefaultTabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -184,11 +184,16 @@ class PortfolioPageState extends State<PortfolioPage> {
               ),
             ),
           ),
+          const SizedBox(height: 8.0),
           Center(
-              child: Text(
-            'Ngoc Neeee',
-            style: Design.textBody(),
-          )),
+            child: Text(
+              screenState.portfolio?.freelancer?.displayName ??
+                  'Barney Stinson',
+              style: Design.textButton(
+                textColor: Colors.black.withOpacity(0.7),
+              ),
+            ),
+          ),
           const SizedBox(
             height: 10,
           ),
