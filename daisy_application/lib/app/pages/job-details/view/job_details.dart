@@ -44,8 +44,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal:
-                    Responsive.isDesktop(context) ? size.width * 0.1 : 0.0,
-                vertical: 20.0),
+                    Responsive.isDesktop(context) ? size.width * 0.1 : 10.0,
+                vertical: Responsive.isDesktop(context) ? 20.0 : 10.0),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade200),
@@ -55,7 +55,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal:
-                      Responsive.isDesktop(context) ? size.width * 0.02 : 0.0,
+                      Responsive.isDesktop(context) ? size.width * 0.02 : 8.0,
                   vertical:
                       Responsive.isDesktop(context) ? size.height * 0.01 : 0.0,
                 ),
@@ -63,7 +63,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   request: _screenState.selectedRequest!,
                   onApply: _listener.onBtnApplyClicked,
                   applicants: _screenState.applicants,
-                  width: size.width * 0.8,
+                  width: Responsive.isDesktop(context)
+                      ? size.width * 0.8
+                      : size.width,
                 ),
               ),
             ),

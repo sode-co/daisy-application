@@ -68,10 +68,13 @@ class _ListApplicantsState extends State<ListApplicants> {
                       ),
                     ),
                     DataColumn(
-                      label: Text(
-                        'Mô tả',
-                        style: Design.textTableHeader(
-                          textColor: Colors.black.withOpacity(0.6),
+                      label: SizedBox(
+                        width: 300.0,
+                        child: Text(
+                          'Mô tả',
+                          style: Design.textTableHeader(
+                            textColor: Colors.black.withOpacity(0.6),
+                          ),
                         ),
                       ),
                     ),
@@ -126,7 +129,12 @@ class _ListApplicantsState extends State<ListApplicants> {
           ),
         ),
         DataCell(
-          Text(applicant.description!),
+          SizedBox(
+            width: applicant.status == 'PENDING'
+                ? MediaQuery.of(context).size.width * 0.03
+                : MediaQuery.of(context).size.width * 0.34,
+            child: Text(applicant.description!),
+          ),
         ),
         if (applicant.status == 'PENDING')
           DataCell(
