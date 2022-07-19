@@ -26,7 +26,6 @@ namespace DataAccess.Repositories.Portfolios
         }
         public void UpdatePortfolio(Portfolio portfolio)
         {
-            portfolio.UpdatedAt = DateTime.Now;
             _dbContext.Portfolios.Update(portfolio);
             _dbContext.SaveChanges();
 
