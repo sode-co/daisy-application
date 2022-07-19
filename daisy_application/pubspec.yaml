@@ -49,6 +49,7 @@ dependencies:
   web_socket_channel: ^2.2.0
   mime_type: ^1.0.0
   msgpack_dart: ^1.0.0
+  flutter_keyboard_visibility_web: ^2.0.0
   
 dev_dependencies:
   flutter_test:
