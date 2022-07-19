@@ -406,81 +406,74 @@ class PortfolioPageState extends State<PortfolioPage> {
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
-                              "Experience",
+                              'Experience',
+                              style: Design.textSmallHeadline(),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            Text('''
-Hello I am a freelancer
-
-He has previously been a speaker at the Flutter Global Summit'21, Flutter Vikings and events across colleges, universities (like VIT Chennai, Vellore, MIT-ADT), and clubs (IEEE APSIT, SFIT, GirlScript, GeeksforGeeks Student Chapter, Google CrowdSource, and more) here in India.
-'''),
-                            Divider(),
                             Text(
-                              "About Me",
+                              screenState.portfolio?.freelancer?.description ??
+                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+                              style: Design.textBody(),
                             ),
-                            SizedBox(
+                            const Divider(),
+                            Text(
+                              'About Me',
+                              style: Design.textSmallHeadline(),
+                            ),
+                            const SizedBox(
                               height: 10,
                             ),
-                            Text('''
-Aditya is a content creator and has over 5K subscribers on YouTube and a 700+ member community on Discord.
-📺 YouTube Channel: watch.adityathakur.in
-🚀 Discord Community: discord.adityathakur.in
-'''),
+                            Text(
+                              screenState.portfolio?.freelancer?.description ??
+                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+                              style: Design.textBody(),
+                            ),
                           ],
+                        ),
+                        const SizedBox(
+                          height: 10.0,
                         ),
                         Column(
                           children: [
                             Card(
+                              elevation: 2.0,
                               color: Colors.white,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 20, horizontal: 40),
+                                    vertical: 20.0, horizontal: 15.0),
                                 child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
-                                        "Location",
+                                      Text(
+                                        'Location',
+                                        style: Design.textCaption(),
                                       ),
                                       const SizedBox(
                                         height: 10,
                                       ),
                                       Row(
-                                        children: const [
+                                        children: [
                                           Icon(
-                                            Icons.circle,
-                                            size: 16,
+                                            Icons.chevron_right,
+                                            size: 14,
+                                            color:
+                                                Colors.black.withOpacity(0.6),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
-                                          Text(
-                                            "Dharamshala, India",
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Text(
-                                        "Website",
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: const [
-                                          Text("adityathakur.in"),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Icon(
-                                            Icons.launch,
-                                            size: 16,
+                                          Flexible(
+                                            child: Text(
+                                              screenState.portfolio?.freelancer
+                                                      ?.address ??
+                                                  '123 Main Street, New York, NY 10030',
+                                              style: Design.textBody(),
+                                            ),
                                           )
                                         ],
                                       ),
@@ -488,41 +481,65 @@ Aditya is a content creator and has over 5K subscribers on YouTube and a 700+ me
                                         height: 10,
                                       ),
                                       Text(
-                                        "Portfolio",
-                                        style: Design.textBody(),
+                                        'Biography',
+                                        style: Design.textCaption(),
                                       ),
                                       const SizedBox(
                                         height: 10,
                                       ),
                                       Row(
-                                        children: const [
-                                          Text('Portfolio neeeee'),
-                                          SizedBox(
+                                        children: [
+                                          Icon(
+                                            Icons.chevron_right,
+                                            size: 14,
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                          ),
+                                          const SizedBox(
                                             width: 5,
                                           ),
-                                          Icon(
-                                            Icons.launch,
-                                            size: 16,
-                                          )
+                                          Flexible(
+                                            child: Text(
+                                              screenState
+                                                      .portfolio?.biography ??
+                                                  'Loremp was born into such wealth and privilege that her family inspired the phrase ‘keeping up with the Joneses',
+                                              style: Design.textBody(),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                       const SizedBox(
                                         height: 10,
                                       ),
                                       Text(
-                                        "Email",
-                                        style: Design.textBody(),
+                                        'Email',
+                                        style: Design.textCaption(),
                                       ),
                                       const SizedBox(
                                         height: 10,
                                       ),
                                       Row(
-                                        children: const [
-                                          Text('portfolio'),
-                                          SizedBox(
+                                        children: [
+                                          Icon(
+                                            Icons.chevron_right,
+                                            size: 14,
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                          ),
+                                          const SizedBox(
                                             width: 5,
                                           ),
-                                          Icon(
+                                          Flexible(
+                                              child: Text(
+                                            screenState.portfolio?.freelancer
+                                                    ?.email ??
+                                                'ptnngoc22@gmail.com',
+                                            style: Design.textBody(),
+                                          )),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          const Icon(
                                             Icons.launch,
                                             size: 16,
                                           )
