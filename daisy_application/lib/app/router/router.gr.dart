@@ -11,8 +11,9 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i16;
+import 'package:flutter/material.dart' as _i17;
 
+import '../../core_services/models/request/request_model.dart' as _i18;
 import '../flow_controllers/discovery_job/discovery_job_flow_controller.dart'
     as _i7;
 import '../flow_controllers/post_new_job/post_new_job_flow_controller.dart'
@@ -25,15 +26,16 @@ import '../flow_controllers/update_profile/update_profile_controller.dart'
     as _i4;
 import '../flow_controllers/workspace/workspace_flow_controller.dart' as _i5;
 import '../pages/discovery-job/view/discovery_job_page.dart' as _i14;
+import '../pages/job-details/view/job_details.dart' as _i15;
 import '../pages/landing-page/view/landing.dart' as _i9;
 import '../pages/post-new-job/view/post_new_job.dart' as _i10;
 import '../pages/project-details/view/project_details.dart' as _i13;
-import '../pages/signup-page/view/signup.dart' as _i15;
+import '../pages/signup-page/view/signup.dart' as _i16;
 import '../pages/update-profile/view/update_profile.dart' as _i11;
 import '../pages/work_space/view/work_space_screen.dart' as _i12;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i16.GlobalKey<_i16.NavigatorState>? navigatorKey])
+  AppRouter([_i17.GlobalKey<_i17.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -59,13 +61,26 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: const _i5.WorkSpaceFlowController());
     },
     ProjectDetailsRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ProjectDetailsRouteArgs>(
+          orElse: () => ProjectDetailsRouteArgs(
+              projectId: pathParams.getString('projectId')));
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: const _i6.ProjectDetailsFlowController());
+          child:
+              _i6.ProjectDetailsFlowController(args.projectId, key: args.key));
     },
     DicoveryJobRoute.name: (routeData) {
+      final args = routeData.argsAs<DicoveryJobRouteArgs>();
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i7.DicoveryJobFlowController());
+          routeData: routeData,
+          child: _i7.DicoveryJobFlowController(args.request, key: args.key));
+    },
+    DiscoveryMobileRoute.name: (routeData) {
+      final args = routeData.argsAs<DiscoveryMobileRouteArgs>();
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i7.DicoveryJobFlowController(args.request, key: args.key));
     },
     SignupRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -95,9 +110,16 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i14.DiscoverJobPage());
     },
+    JobDetailsScreen.name: (routeData) {
+      final args = routeData.argsAs<JobDetailsScreenArgs>(
+          orElse: () => const JobDetailsScreenArgs());
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i15.JobDetailsScreen(key: args.key, request: args.request));
+    },
     SignUp.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i15.SignUp());
+          routeData: routeData, child: const _i16.SignUp());
     }
   };
 
@@ -138,7 +160,7 @@ class AppRouter extends _i2.RootStackRouter {
                     path: '', parent: WorkSpaceRoute.name)
               ]),
           _i2.RouteConfig(ProjectDetailsRoute.name,
-              path: 'project-details',
+              path: 'project/:projectId',
               parent: RootRoute.name,
               children: [
                 _i2.RouteConfig(_ProjectDetailsRoute.name,
@@ -150,6 +172,13 @@ class AppRouter extends _i2.RootStackRouter {
               children: [
                 _i2.RouteConfig(DiscoverJobPage.name,
                     path: '', parent: DicoveryJobRoute.name)
+              ]),
+          _i2.RouteConfig(DiscoveryMobileRoute.name,
+              path: 'discovery-mobile',
+              parent: RootRoute.name,
+              children: [
+                _i2.RouteConfig(JobDetailsScreen.name,
+                    path: '', parent: DiscoveryMobileRoute.name)
               ]),
           _i2.RouteConfig(SignupRoute.name,
               path: 'signup',
@@ -211,22 +240,87 @@ class WorkSpaceRoute extends _i2.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.ProjectDetailsFlowController]
-class ProjectDetailsRoute extends _i2.PageRouteInfo<void> {
-  const ProjectDetailsRoute({List<_i2.PageRouteInfo>? children})
+class ProjectDetailsRoute extends _i2.PageRouteInfo<ProjectDetailsRouteArgs> {
+  ProjectDetailsRoute(
+      {required String projectId,
+      _i17.Key? key,
+      List<_i2.PageRouteInfo>? children})
       : super(ProjectDetailsRoute.name,
-            path: 'project-details', initialChildren: children);
+            path: 'project/:projectId',
+            args: ProjectDetailsRouteArgs(projectId: projectId, key: key),
+            rawPathParams: {'projectId': projectId},
+            initialChildren: children);
 
   static const String name = 'ProjectDetailsRoute';
 }
 
+class ProjectDetailsRouteArgs {
+  const ProjectDetailsRouteArgs({required this.projectId, this.key});
+
+  final String projectId;
+
+  final _i17.Key? key;
+
+  @override
+  String toString() {
+    return 'ProjectDetailsRouteArgs{projectId: $projectId, key: $key}';
+  }
+}
+
 /// generated route for
 /// [_i7.DicoveryJobFlowController]
-class DicoveryJobRoute extends _i2.PageRouteInfo<void> {
-  const DicoveryJobRoute({List<_i2.PageRouteInfo>? children})
+class DicoveryJobRoute extends _i2.PageRouteInfo<DicoveryJobRouteArgs> {
+  DicoveryJobRoute(
+      {required _i18.RequestModel? request,
+      _i17.Key? key,
+      List<_i2.PageRouteInfo>? children})
       : super(DicoveryJobRoute.name,
-            path: 'discovery', initialChildren: children);
+            path: 'discovery',
+            args: DicoveryJobRouteArgs(request: request, key: key),
+            initialChildren: children);
 
   static const String name = 'DicoveryJobRoute';
+}
+
+class DicoveryJobRouteArgs {
+  const DicoveryJobRouteArgs({required this.request, this.key});
+
+  final _i18.RequestModel? request;
+
+  final _i17.Key? key;
+
+  @override
+  String toString() {
+    return 'DicoveryJobRouteArgs{request: $request, key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i7.DicoveryJobFlowController]
+class DiscoveryMobileRoute extends _i2.PageRouteInfo<DiscoveryMobileRouteArgs> {
+  DiscoveryMobileRoute(
+      {required _i18.RequestModel? request,
+      _i17.Key? key,
+      List<_i2.PageRouteInfo>? children})
+      : super(DiscoveryMobileRoute.name,
+            path: 'discovery-mobile',
+            args: DiscoveryMobileRouteArgs(request: request, key: key),
+            initialChildren: children);
+
+  static const String name = 'DiscoveryMobileRoute';
+}
+
+class DiscoveryMobileRouteArgs {
+  const DiscoveryMobileRouteArgs({required this.request, this.key});
+
+  final _i18.RequestModel? request;
+
+  final _i17.Key? key;
+
+  @override
+  String toString() {
+    return 'DiscoveryMobileRouteArgs{request: $request, key: $key}';
+  }
 }
 
 /// generated route for
@@ -287,7 +381,30 @@ class DiscoverJobPage extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.SignUp]
+/// [_i15.JobDetailsScreen]
+class JobDetailsScreen extends _i2.PageRouteInfo<JobDetailsScreenArgs> {
+  JobDetailsScreen({_i17.Key? key, _i18.RequestModel? request})
+      : super(JobDetailsScreen.name,
+            path: '', args: JobDetailsScreenArgs(key: key, request: request));
+
+  static const String name = 'JobDetailsScreen';
+}
+
+class JobDetailsScreenArgs {
+  const JobDetailsScreenArgs({this.key, this.request});
+
+  final _i17.Key? key;
+
+  final _i18.RequestModel? request;
+
+  @override
+  String toString() {
+    return 'JobDetailsScreenArgs{key: $key, request: $request}';
+  }
+}
+
+/// generated route for
+/// [_i16.SignUp]
 class SignUp extends _i2.PageRouteInfo<void> {
   const SignUp() : super(SignUp.name, path: '');
 

@@ -1,7 +1,7 @@
 library flow_controller;
 
 import 'package:auto_route/auto_route.dart';
-import 'package:daisy_application/app/router/admin_router.gr.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';

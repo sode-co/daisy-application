@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -38,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
                         icon: const IconButtomItem(
                             icon: Icons.person_search_outlined),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/find-freelance-job');
+                          context.pushRoute(DicoveryJobRoute(request: null));
                         },
                       ),
                       IconButton(
@@ -50,7 +52,7 @@ class BottomNavBar extends StatelessWidget {
                         tooltip: 'Favorite',
                         icon: const IconButtomItem(icon: Icons.favorite_border),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/portfolio');
+                          context.router.push(const WorkSpaceRoute());
                         },
                       ),
                       IconButton(

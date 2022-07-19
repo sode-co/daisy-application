@@ -1,8 +1,8 @@
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
-import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
-import 'package:daisy_application/app/common/responsive.dart';
+
 import 'stateless_component.dart';
 
 class RequestIntroList extends StatefulWidget {
@@ -42,10 +42,12 @@ class _RequestIntroListState extends State<RequestIntroList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: context.deviceInfo.screenSize.width * 0.3,
+      width: Responsive.isDesktop(context)
+          ? context.deviceInfo.screenSize.width * 0.28
+          : context.deviceInfo.screenSize.width,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: Responsive.isDesktop(context) ? 15.0 : 5.0,
+          horizontal: 0.0,
           vertical: Responsive.isDesktop(context) ? 15.0 : 5.0,
         ),
         child: ListView.builder(

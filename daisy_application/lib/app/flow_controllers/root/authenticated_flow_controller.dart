@@ -40,7 +40,7 @@ class _AuthenticatedFlowControllerState
 
   @override
   void onBtnFindJobCliked() {
-    context.router.push(const Routers.DicoveryJobRoute());
+    context.router.push(Routers.DicoveryJobRoute(request: null));
   }
 
   @override

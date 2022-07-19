@@ -1,6 +1,4 @@
-import 'dart:html';
-
-import 'package:daisy_application/app/common/colors.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/design/design_sidebar.dart';
 import 'package:daisy_application/app/common/responsive.dart';
@@ -8,7 +6,6 @@ import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart
 import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/listeners/WidgetListener.dart';
 import 'package:daisy_application/app/pages/landing-page/view/common.dart';
-import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
 import 'package:daisy_application/app/pages/work_space/deps/workspace_listener.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_screen_state.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart';
@@ -16,6 +13,7 @@ import 'package:daisy_application/app/pages/work_space/view/header_workspace.dar
 import 'package:daisy_application/app/pages/work_space/view/item_project.dart';
 import 'package:daisy_application/app/pages/work_space/view/item_request.dart';
 import 'package:daisy_application/app/pages/work_space/view/workspace_common.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/math_utils.dart';
@@ -23,7 +21,6 @@ import 'package:daisy_application/common/name_to_enum.dart';
 import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -188,7 +185,9 @@ class WorkspaceState extends State<WorkspaceScreen>
       ? items
           .map((project) => SizedBox(
               width: size.width * (Responsive.isDesktop(context) ? 0.5 : 0.7),
-              child: createProjectInfoCard(project)))
+              child: createProjectInfoCard(project,
+                  onItemSelected: ((p0) => context.router.push(
+                      ProjectDetailsRoute(projectId: p0.id.toString()))))))
           .toList()
       : [getEmptyMessageByTab(_screenState.activeTab)];
 }

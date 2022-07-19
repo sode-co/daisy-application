@@ -108,6 +108,21 @@ namespace Api.Controllers.JobApplicationController
                 User freelancer = work.UserRepository.GetUsersByEmail(freelancerEmail);
                 request.Status = Constants.REQUEST_STATUS.TAKEN;
 
+                var jobApplications = work.JobApplicationRepository.GetAll(j => j.Request.Id == requestId, null, "Freelancer,Request");
+                foreach(var job in jobApplications)
+                {
+                    if(job.Freelancer.Email.Equals(freelancerEmail))
+                    {
+                        // Approve application
+                        job.Status = Constants.STATUS_JOB_APPLICATION.APPROVE;
+                    }
+                    else
+                    {
+                        // Reject application
+                        job.Status = Constants.STATUS_JOB_APPLICATION.REJECT;
+                    }
+                }
+
                 // Create Payment object to save to Project
                 Payment payment = new Payment()
                 {

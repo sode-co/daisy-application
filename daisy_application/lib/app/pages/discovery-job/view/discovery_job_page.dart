@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
+import 'package:daisy_application/app/common/widget/header/header.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/component.dart';
-import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
-import 'package:daisy_application/app/common/widget/header/header.dart';
-import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +55,7 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
         (_screenState.requests.isEmpty ? null : _screenState.requests.first);
 
     return Container(
-      color: Colors.grey.shade100,
+      color: Colors.grey.shade200,
       child: Padding(
         padding: EdgeInsets.only(
           left: Responsive.isDesktop(context) ? 100.0 : 0.0,
@@ -61,38 +63,55 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
           right: Responsive.isDesktop(context) ? 100.0 : 0.0,
         ),
         child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade200),
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RequestIntroList(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade200),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Responsive.isDesktop(context)
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RequestIntroList(
+                      requests: _screenState.requests,
+                      onItemSelected: (request) {
+                        _screenState.selectedRequest = request;
+                        _listener.onLoadListApplicants(request.id);
+                      },
+                      onLoadMore: _onLoadMoreRequest,
+                    ),
+                    SizedBox(
+                      width: 1.0,
+                      height: double.infinity,
+                      child: Container(
+                        color: Colors.grey.shade200,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: Design.headerSpacing,
+                    ),
+                    if (selectedRequest != null)
+                      JobDetails(
+                        request: selectedRequest,
+                        onApply: _listener.onBtnApplyClicked,
+                        applicants: _screenState.applicants,
+                      ),
+                  ],
+                )
+              : RequestIntroList(
                   requests: _screenState.requests,
                   onItemSelected: (request) {
                     _screenState.selectedRequest = request;
+                    if (Responsive.isDesktop(context)) {
+                      _listener.onLoadListApplicants(request.id);
+                    } else {
+                      context.router
+                          .push(DiscoveryMobileRoute(request: request));
+                    }
                   },
                   onLoadMore: _onLoadMoreRequest,
                 ),
-                SizedBox(
-                  width: 1.0,
-                  height: double.infinity,
-                  child: Container(
-                    color: Colors.grey.shade200,
-                  ),
-                ),
-                const SizedBox(
-                  width: Design.headerSpacing,
-                ),
-                if (selectedRequest != null)
-                  JobDetails(
-                    request: selectedRequest,
-                    onApply: _listener.onBtnApplyClicked,
-                  ),
-              ],
-            )),
+        ),
       ),
     );
   }

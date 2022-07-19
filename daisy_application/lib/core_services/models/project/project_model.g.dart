@@ -8,6 +8,10 @@ part of 'project_model.dart';
 
 ProjectModel _$ProjectModelFromJson(Map<String, dynamic> json) => ProjectModel(
       id: json['id'] as int?,
+      workspaces: (json['workspaces'] as List<dynamic>?)
+              ?.map((e) => WorkspaceModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       customer: json['customer'] == null
           ? null
           : UserModel.fromJson(json['customer'] as Map<String, dynamic>),
@@ -49,6 +53,7 @@ Map<String, dynamic> _$ProjectModelToJson(ProjectModel instance) =>
       'timeline': instance.timeline?.toIso8601String(),
       'budget': instance.budget,
       'status': instance.status,
+      'workspaces': instance.workspaces,
       'isAllowedPublic': instance.isAllowedPublic,
       'request': instance.request,
     };

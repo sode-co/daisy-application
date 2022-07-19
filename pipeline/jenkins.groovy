@@ -68,6 +68,16 @@ pipeline {
         }
       }
     }
+    stage('Prebuild') {
+      steps {
+        slackSend color: "good", message: """
+        Pipeline has been started, 
+        buildURL: ${BUILD_URL}
+        commit: https://github.com/sode-co/daisy-application/commit/${GIT_COMMIT_SHORT}
+        branch: ${env.BRANCH_NAME}
+        """
+      }
+    }
     stage('Setup environment') {
       steps {
         script {
@@ -331,6 +341,17 @@ pipeline {
           println 'Clean up success.'
         }
       }
+    }
+  }
+  post {
+    always {
+      slackSend color: "#5F9EA0", message: """
+        Pipeline has been finished, 
+        buildURL: ${BUILD_URL}
+        branch: ${env.BRANCH_NAME}
+        commit: https://github.com/sode-co/daisy-application/commit/${GIT_COMMIT_SHORT}
+        result: ${currentBuild.result}
+        """
     }
   }
 }

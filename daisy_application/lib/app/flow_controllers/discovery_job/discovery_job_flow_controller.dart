@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/design/design_snackbar.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app/dialogs/alert_dialog.dart';
 import 'package:daisy_application/app/dialogs/job_apply_dialog.dart';
@@ -10,20 +11,23 @@ import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/common/safety_utils.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
 import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
 import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
+import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:daisy_application/app/common/utils/widget_utils.dart';
-import 'package:daisy_application/common/safety_utils.dart';
 
 class DicoveryJobFlowController extends FlowController {
-  const DicoveryJobFlowController({Key? key}) : super(key: key);
-
+  const DicoveryJobFlowController(
+    this.request, {
+    Key? key,
+  }) : super(key: key);
+  final RequestModel? request;
   @override
   AutoRouterState createState() => _DiscoveryJobFlowControllerState();
 }
@@ -78,6 +82,9 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
 
   @override
   Widget build(BuildContext context) {
+    DicoveryJobFlowController abc = widget as DicoveryJobFlowController;
+    _jobScreenState!.selectedRequest = abc.request;
+
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (ctx) => _jobScreenState)],
       child: super.build(context),
@@ -165,5 +172,26 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
       context
           .toastError('Nộp đơn thất bại, có lỗi trong quá trình gửi dữ liệu');
     }
+  }
+
+  @override
+  void onLoadListApplicants(int? requestId) => getListApplicants(requestId);
+
+  Future<void> getListApplicants(int? requestId) async {
+    const ns = 'discovery-page';
+    final result = await _applicationRestApi.GetApplicantsOfRequest(requestId);
+    _jobScreenState!.applicants = result.data;
+  }
+
+  @override
+  void onBtnApproveJobApplication(
+          RequestModel? request, int requestId, String freelancerEmail) =>
+      approveJobApplication(request, requestId, freelancerEmail);
+
+  Future<void> approveJobApplication(
+      RequestModel? request, int requestId, String freelancerEmail) async {
+    await _applicationRestApi.approveApplication(requestId, freelancerEmail);
+    context.toastSuccess('Duyệt đơn ứng tuyển thành công');
+    context.router.push(DiscoveryMobileRoute(request: request));
   }
 }

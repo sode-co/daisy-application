@@ -31,6 +31,13 @@ namespace DataAccess.Repositories.Discussions
             }
         }
 
+
+        public IEnumerable<Discussion> DiscussionPaging(DateTime timeOffset, int count) =>
+            GetAll((discussion => discussion.CreatedAt < timeOffset), null, "Sender,Workspace")
+                .OrderByDescending(request => request.CreatedAt)
+                .Take(count)
+                .ToList();
+
         public void CreateDiscussion(Discussion discussion)
         {
             _dbContext.Discussions.Add(discussion);

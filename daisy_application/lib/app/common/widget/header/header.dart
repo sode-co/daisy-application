@@ -10,7 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Header extends StatefulWidget with PreferredSizeWidget {
-  const Header({Key? key}) : super(key: key);
+  final Color color;
+  final double elevation;
+  const Header({Key? key, this.color = Design.colorWhite, this.elevation = 5})
+      : super(key: key);
 
   @override
   State<Header> createState() => _HeaderState();
@@ -28,11 +31,17 @@ class _HeaderState extends State<Header> {
     // UserModel currentUser = appState.currentUser;
 
     return AppBar(
+      elevation: widget.elevation,
       title: (Responsive.isDesktop(context))
           ? Row(
               children: <Widget>[
-                const SizedBox(width: 150),
-                Image.asset('assets/images/weblogo.png', width: 100),
+                SizedBox(width: Design.alignmentSpacing(context)),
+                Image.asset(
+                  'assets/images/ic_daisy_rectangle.jpg',
+                  width: kToolbarHeight,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(width: Design.headerSpacing),
                 ButtonInfo.small(text: 'Danh mục', onPressed: () {}),
                 ButtonInfo.small(
                     text: 'Đăng tin',
@@ -58,7 +67,7 @@ class _HeaderState extends State<Header> {
         ..._createAuthenButton(isLoggedIn),
         if (Responsive.isDesktop(context)) SizedBox(width: size.width * 0.1),
       ],
-      backgroundColor: Colors.white,
+      backgroundColor: widget.color,
       foregroundColor: Colors.black,
     );
   }
@@ -88,7 +97,7 @@ class _HeaderState extends State<Header> {
         text: context.isScreenType(ScreenType.DESKTOP)
             ? 'Đăng ký qua email Fpt'
             : 'Đăng ký',
-        backgroundColor: Design.colorWhite,
+        backgroundColor: widget.color,
         onPressed: _authenticationListener.onBtnSignupClicked,
       );
 

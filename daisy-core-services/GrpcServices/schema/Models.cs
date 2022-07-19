@@ -27,20 +27,47 @@ namespace Daisy {
             "Cgxtb2RlbHMucHJvdG8SBWRhaXN5IqsBCgRVc2VyEgoKAklkGAEgASgFEhAK",
             "CE9iamVjdElkGAIgASgJEhEKCUZpcnN0TmFtZRgDIAEoCRIQCghMYXN0TmFt",
             "ZRgEIAEoCRITCgtEaXNwbGF5TmFtZRgFIAEoCRIMCgRSb2xlGAYgASgJEg0K",
-            "BUVtYWlsGAcgASgJEg0KBVBob25lGAggASgJEg8KB2FkZHJlc3MYCiABKAkS",
-            "DgoGYXZhdGFyGAsgASgJIkQKCENhdGVnb3J5EgoKAklkGAEgASgFEhAKCE9i",
+            "BUVtYWlsGAcgASgJEg0KBVBob25lGAggASgJEg8KB2FkZHJlc3MYCSABKAkS",
+            "DgoGYXZhdGFyGAogASgJIkQKCENhdGVnb3J5EgoKAklkGAEgASgFEhAKCE9i",
             "amVjdElkGAIgASgJEgwKBE5hbWUYAyABKAkSDAoEVHlwZRgEIAEoCSLSAQoH",
             "UmVxdWVzdBIKCgJJZBgBIAEoBRIRCglDcmVhdGVkQXQYAiABKAMSEAoIT2Jq",
             "ZWN0SWQYAyABKAkSHQoIQ3VzdG9tZXIYBCABKAsyCy5kYWlzeS5Vc2VyEiEK",
             "CENhdGVnb3J5GAUgASgLMg8uZGFpc3kuQ2F0ZWdvcnkSDQoFVGl0bGUYBiAB",
             "KAkSEwoLRGVzY3JpcHRpb24YByABKAkSDgoGQnVkZ2V0GAggASgCEhAKCFRp",
-            "bWVsaW5lGAkgASgDEg4KBlN0YXR1cxgKIAEoCTIGCgROb25lYgZwcm90bzM="));
+            "bWVsaW5lGAkgASgDEg4KBlN0YXR1cxgKIAEoCSLbAgoHUHJvamVjdBIKCgJJ",
+            "ZBgBIAEoBRIRCglDcmVhdGVkQXQYAiABKAMSEAoIT2JqZWN0SWQYAyABKAkS",
+            "HQoIQ3VzdG9tZXIYBCABKAsyCy5kYWlzeS5Vc2VyEiEKCENhdGVnb3J5GAUg",
+            "ASgLMg8uZGFpc3kuQ2F0ZWdvcnkSEgoKUmVzb2x2ZWRBdBgGIAEoAxIMCgRE",
+            "YXRhGAcgASgJEgwKBE5hbWUYCCABKAkSDgoGQnVkZ2V0GAkgASgCEhAKCFRp",
+            "bWVsaW5lGAogASgDEg4KBlN0YXR1cxgLIAEoCRIfCgdyZXF1ZXN0GAwgASgL",
+            "Mg4uZGFpc3kuUmVxdWVzdBIfCgpGcmVlbGFuY2VyGA0gASgLMgsuZGFpc3ku",
+            "VXNlchITCgtEZXNjcmlwdGlvbhgOIAEoCRIkCgpXb3Jrc3BhY2VzGA8gAygL",
+            "MhAuZGFpc3kuV29ya3NwYWNlItoBCglXb3Jrc3BhY2USCgoCSWQYASABKAUS",
+            "EQoJQ3JlYXRlZEF0GAIgASgDEhAKCE9iamVjdElkGAMgASgJEh8KB1JlcXVl",
+            "c3QYBCABKAsyDi5kYWlzeS5SZXF1ZXN0Eh8KB1Byb2plY3QYBSABKAsyDi5k",
+            "YWlzeS5Qcm9qZWN0EiYKC0Rpc2N1c3Npb25zGAYgAygLMhEuZGFpc3kuRGlz",
+            "Y3Vzc2lvbhIiCglSZXNvdXJjZXMYByADKAsyDy5kYWlzeS5SZXNvdXJjZRIO",
+            "CgZTdGF0dXMYCCABKAkingEKCkRpc2N1c3Npb24SCgoCSWQYASABKAUSEQoJ",
+            "Q3JlYXRlZEF0GAIgASgDEhAKCE9iamVjdElkGAMgASgJEgwKBFR5cGUYBCAB",
+            "KAkSDwoHQ29udGVudBgFIAEoCRIbCgZTZW5kZXIYBiABKAsyCy5kYWlzeS5V",
+            "c2VyEiMKCVdvcmtzcGFjZRgHIAEoCzIQLmRhaXN5LldvcmtzcGFjZSKkAQoI",
+            "UmVzb3VyY2USCgoCSWQYASABKAUSEQoJQ3JlYXRlZEF0GAIgASgDEhAKCE9i",
+            "amVjdElkGAMgASgJEhkKBEZpbGUYBCABKAsyCy5kYWlzeS5GaWxlEhIKCldv",
+            "cmtTdGF0dXMYBSABKAkSEwoLUmVzb3VyY2VLZXkYBiABKAkSIwoJV29ya3Nw",
+            "YWNlGAcgASgLMhAuZGFpc3kuV29ya3NwYWNlIjgKBEZpbGUSDAoERGF0YRgB",
+            "IAEoDBIQCghNaW1lVHlwZRgCIAEoCRIQCghGaWxlTmFtZRgDIAEoCTIGCgRO",
+            "b25lYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.User), global::Daisy.User.Parser, new[]{ "Id", "ObjectId", "FirstName", "LastName", "DisplayName", "Role", "Email", "Phone", "Address", "Avatar" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Category), global::Daisy.Category.Parser, new[]{ "Id", "ObjectId", "Name", "Type" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Request), global::Daisy.Request.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Customer", "Category", "Title", "Description", "Budget", "Timeline", "Status" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Request), global::Daisy.Request.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Customer", "Category", "Title", "Description", "Budget", "Timeline", "Status" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Project), global::Daisy.Project.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Customer", "Category", "ResolvedAt", "Data", "Name", "Budget", "Timeline", "Status", "Request", "Freelancer", "Description", "Workspaces" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Workspace), global::Daisy.Workspace.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Request", "Project", "Discussions", "Resources", "Status" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Discussion), global::Daisy.Discussion.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Type", "Content", "Sender", "Workspace" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Resource), global::Daisy.Resource.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "File", "WorkStatus", "ResourceKey", "Workspace" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.File), global::Daisy.File.Parser, new[]{ "Data", "MimeType", "FileName" }, null, null, null, null)
           }));
     }
     #endregion
@@ -197,7 +224,7 @@ namespace Daisy {
     }
 
     /// <summary>Field number for the "address" field.</summary>
-    public const int AddressFieldNumber = 10;
+    public const int AddressFieldNumber = 9;
     private string address_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -209,7 +236,7 @@ namespace Daisy {
     }
 
     /// <summary>Field number for the "avatar" field.</summary>
-    public const int AvatarFieldNumber = 11;
+    public const int AvatarFieldNumber = 10;
     private string avatar_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -313,11 +340,11 @@ namespace Daisy {
         output.WriteString(Phone);
       }
       if (Address.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(74);
         output.WriteString(Address);
       }
       if (Avatar.Length != 0) {
-        output.WriteRawTag(90);
+        output.WriteRawTag(82);
         output.WriteString(Avatar);
       }
       if (_unknownFields != null) {
@@ -363,11 +390,11 @@ namespace Daisy {
         output.WriteString(Phone);
       }
       if (Address.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(74);
         output.WriteString(Address);
       }
       if (Avatar.Length != 0) {
-        output.WriteRawTag(90);
+        output.WriteRawTag(82);
         output.WriteString(Avatar);
       }
       if (_unknownFields != null) {
@@ -499,11 +526,11 @@ namespace Daisy {
             Phone = input.ReadString();
             break;
           }
-          case 82: {
+          case 74: {
             Address = input.ReadString();
             break;
           }
-          case 90: {
+          case 82: {
             Avatar = input.ReadString();
             break;
           }
@@ -554,11 +581,11 @@ namespace Daisy {
             Phone = input.ReadString();
             break;
           }
-          case 82: {
+          case 74: {
             Address = input.ReadString();
             break;
           }
-          case 90: {
+          case 82: {
             Avatar = input.ReadString();
             break;
           }
@@ -1400,6 +1427,2303 @@ namespace Daisy {
           }
           case 82: {
             Status = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class Project : pb::IMessage<Project>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Project> _parser = new pb::MessageParser<Project>(() => new Project());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<Project> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.ModelsReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Project() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Project(Project other) : this() {
+      id_ = other.id_;
+      createdAt_ = other.createdAt_;
+      objectId_ = other.objectId_;
+      customer_ = other.customer_ != null ? other.customer_.Clone() : null;
+      category_ = other.category_ != null ? other.category_.Clone() : null;
+      resolvedAt_ = other.resolvedAt_;
+      data_ = other.data_;
+      name_ = other.name_;
+      budget_ = other.budget_;
+      timeline_ = other.timeline_;
+      status_ = other.status_;
+      request_ = other.request_ != null ? other.request_.Clone() : null;
+      freelancer_ = other.freelancer_ != null ? other.freelancer_.Clone() : null;
+      description_ = other.description_;
+      workspaces_ = other.workspaces_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Project Clone() {
+      return new Project(this);
+    }
+
+    /// <summary>Field number for the "Id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "CreatedAt" field.</summary>
+    public const int CreatedAtFieldNumber = 2;
+    private long createdAt_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long CreatedAt {
+      get { return createdAt_; }
+      set {
+        createdAt_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ObjectId" field.</summary>
+    public const int ObjectIdFieldNumber = 3;
+    private string objectId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ObjectId {
+      get { return objectId_; }
+      set {
+        objectId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Customer" field.</summary>
+    public const int CustomerFieldNumber = 4;
+    private global::Daisy.User customer_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.User Customer {
+      get { return customer_; }
+      set {
+        customer_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Category" field.</summary>
+    public const int CategoryFieldNumber = 5;
+    private global::Daisy.Category category_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.Category Category {
+      get { return category_; }
+      set {
+        category_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ResolvedAt" field.</summary>
+    public const int ResolvedAtFieldNumber = 6;
+    private long resolvedAt_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long ResolvedAt {
+      get { return resolvedAt_; }
+      set {
+        resolvedAt_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Data" field.</summary>
+    public const int DataFieldNumber = 7;
+    private string data_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Name" field.</summary>
+    public const int NameFieldNumber = 8;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Budget" field.</summary>
+    public const int BudgetFieldNumber = 9;
+    private float budget_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Budget {
+      get { return budget_; }
+      set {
+        budget_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Timeline" field.</summary>
+    public const int TimelineFieldNumber = 10;
+    private long timeline_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Timeline {
+      get { return timeline_; }
+      set {
+        timeline_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Status" field.</summary>
+    public const int StatusFieldNumber = 11;
+    private string status_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Status {
+      get { return status_; }
+      set {
+        status_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "request" field.</summary>
+    public const int RequestFieldNumber = 12;
+    private global::Daisy.Request request_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.Request Request {
+      get { return request_; }
+      set {
+        request_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Freelancer" field.</summary>
+    public const int FreelancerFieldNumber = 13;
+    private global::Daisy.User freelancer_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.User Freelancer {
+      get { return freelancer_; }
+      set {
+        freelancer_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Description" field.</summary>
+    public const int DescriptionFieldNumber = 14;
+    private string description_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Description {
+      get { return description_; }
+      set {
+        description_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Workspaces" field.</summary>
+    public const int WorkspacesFieldNumber = 15;
+    private static readonly pb::FieldCodec<global::Daisy.Workspace> _repeated_workspaces_codec
+        = pb::FieldCodec.ForMessage(122, global::Daisy.Workspace.Parser);
+    private readonly pbc::RepeatedField<global::Daisy.Workspace> workspaces_ = new pbc::RepeatedField<global::Daisy.Workspace>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Daisy.Workspace> Workspaces {
+      get { return workspaces_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as Project);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(Project other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (CreatedAt != other.CreatedAt) return false;
+      if (ObjectId != other.ObjectId) return false;
+      if (!object.Equals(Customer, other.Customer)) return false;
+      if (!object.Equals(Category, other.Category)) return false;
+      if (ResolvedAt != other.ResolvedAt) return false;
+      if (Data != other.Data) return false;
+      if (Name != other.Name) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Budget, other.Budget)) return false;
+      if (Timeline != other.Timeline) return false;
+      if (Status != other.Status) return false;
+      if (!object.Equals(Request, other.Request)) return false;
+      if (!object.Equals(Freelancer, other.Freelancer)) return false;
+      if (Description != other.Description) return false;
+      if(!workspaces_.Equals(other.workspaces_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (CreatedAt != 0L) hash ^= CreatedAt.GetHashCode();
+      if (ObjectId.Length != 0) hash ^= ObjectId.GetHashCode();
+      if (customer_ != null) hash ^= Customer.GetHashCode();
+      if (category_ != null) hash ^= Category.GetHashCode();
+      if (ResolvedAt != 0L) hash ^= ResolvedAt.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Budget != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Budget);
+      if (Timeline != 0L) hash ^= Timeline.GetHashCode();
+      if (Status.Length != 0) hash ^= Status.GetHashCode();
+      if (request_ != null) hash ^= Request.GetHashCode();
+      if (freelancer_ != null) hash ^= Freelancer.GetHashCode();
+      if (Description.Length != 0) hash ^= Description.GetHashCode();
+      hash ^= workspaces_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (CreatedAt != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectId);
+      }
+      if (customer_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Customer);
+      }
+      if (category_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Category);
+      }
+      if (ResolvedAt != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(ResolvedAt);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Data);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(Name);
+      }
+      if (Budget != 0F) {
+        output.WriteRawTag(77);
+        output.WriteFloat(Budget);
+      }
+      if (Timeline != 0L) {
+        output.WriteRawTag(80);
+        output.WriteInt64(Timeline);
+      }
+      if (Status.Length != 0) {
+        output.WriteRawTag(90);
+        output.WriteString(Status);
+      }
+      if (request_ != null) {
+        output.WriteRawTag(98);
+        output.WriteMessage(Request);
+      }
+      if (freelancer_ != null) {
+        output.WriteRawTag(106);
+        output.WriteMessage(Freelancer);
+      }
+      if (Description.Length != 0) {
+        output.WriteRawTag(114);
+        output.WriteString(Description);
+      }
+      workspaces_.WriteTo(output, _repeated_workspaces_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (CreatedAt != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectId);
+      }
+      if (customer_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Customer);
+      }
+      if (category_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Category);
+      }
+      if (ResolvedAt != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(ResolvedAt);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Data);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(Name);
+      }
+      if (Budget != 0F) {
+        output.WriteRawTag(77);
+        output.WriteFloat(Budget);
+      }
+      if (Timeline != 0L) {
+        output.WriteRawTag(80);
+        output.WriteInt64(Timeline);
+      }
+      if (Status.Length != 0) {
+        output.WriteRawTag(90);
+        output.WriteString(Status);
+      }
+      if (request_ != null) {
+        output.WriteRawTag(98);
+        output.WriteMessage(Request);
+      }
+      if (freelancer_ != null) {
+        output.WriteRawTag(106);
+        output.WriteMessage(Freelancer);
+      }
+      if (Description.Length != 0) {
+        output.WriteRawTag(114);
+        output.WriteString(Description);
+      }
+      workspaces_.WriteTo(ref output, _repeated_workspaces_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (CreatedAt != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ObjectId);
+      }
+      if (customer_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Customer);
+      }
+      if (category_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Category);
+      }
+      if (ResolvedAt != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ResolvedAt);
+      }
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Data);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Budget != 0F) {
+        size += 1 + 4;
+      }
+      if (Timeline != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Timeline);
+      }
+      if (Status.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Status);
+      }
+      if (request_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Request);
+      }
+      if (freelancer_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Freelancer);
+      }
+      if (Description.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Description);
+      }
+      size += workspaces_.CalculateSize(_repeated_workspaces_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(Project other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.CreatedAt != 0L) {
+        CreatedAt = other.CreatedAt;
+      }
+      if (other.ObjectId.Length != 0) {
+        ObjectId = other.ObjectId;
+      }
+      if (other.customer_ != null) {
+        if (customer_ == null) {
+          Customer = new global::Daisy.User();
+        }
+        Customer.MergeFrom(other.Customer);
+      }
+      if (other.category_ != null) {
+        if (category_ == null) {
+          Category = new global::Daisy.Category();
+        }
+        Category.MergeFrom(other.Category);
+      }
+      if (other.ResolvedAt != 0L) {
+        ResolvedAt = other.ResolvedAt;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Budget != 0F) {
+        Budget = other.Budget;
+      }
+      if (other.Timeline != 0L) {
+        Timeline = other.Timeline;
+      }
+      if (other.Status.Length != 0) {
+        Status = other.Status;
+      }
+      if (other.request_ != null) {
+        if (request_ == null) {
+          Request = new global::Daisy.Request();
+        }
+        Request.MergeFrom(other.Request);
+      }
+      if (other.freelancer_ != null) {
+        if (freelancer_ == null) {
+          Freelancer = new global::Daisy.User();
+        }
+        Freelancer.MergeFrom(other.Freelancer);
+      }
+      if (other.Description.Length != 0) {
+        Description = other.Description;
+      }
+      workspaces_.Add(other.workspaces_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CreatedAt = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            ObjectId = input.ReadString();
+            break;
+          }
+          case 34: {
+            if (customer_ == null) {
+              Customer = new global::Daisy.User();
+            }
+            input.ReadMessage(Customer);
+            break;
+          }
+          case 42: {
+            if (category_ == null) {
+              Category = new global::Daisy.Category();
+            }
+            input.ReadMessage(Category);
+            break;
+          }
+          case 48: {
+            ResolvedAt = input.ReadInt64();
+            break;
+          }
+          case 58: {
+            Data = input.ReadString();
+            break;
+          }
+          case 66: {
+            Name = input.ReadString();
+            break;
+          }
+          case 77: {
+            Budget = input.ReadFloat();
+            break;
+          }
+          case 80: {
+            Timeline = input.ReadInt64();
+            break;
+          }
+          case 90: {
+            Status = input.ReadString();
+            break;
+          }
+          case 98: {
+            if (request_ == null) {
+              Request = new global::Daisy.Request();
+            }
+            input.ReadMessage(Request);
+            break;
+          }
+          case 106: {
+            if (freelancer_ == null) {
+              Freelancer = new global::Daisy.User();
+            }
+            input.ReadMessage(Freelancer);
+            break;
+          }
+          case 114: {
+            Description = input.ReadString();
+            break;
+          }
+          case 122: {
+            workspaces_.AddEntriesFrom(input, _repeated_workspaces_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CreatedAt = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            ObjectId = input.ReadString();
+            break;
+          }
+          case 34: {
+            if (customer_ == null) {
+              Customer = new global::Daisy.User();
+            }
+            input.ReadMessage(Customer);
+            break;
+          }
+          case 42: {
+            if (category_ == null) {
+              Category = new global::Daisy.Category();
+            }
+            input.ReadMessage(Category);
+            break;
+          }
+          case 48: {
+            ResolvedAt = input.ReadInt64();
+            break;
+          }
+          case 58: {
+            Data = input.ReadString();
+            break;
+          }
+          case 66: {
+            Name = input.ReadString();
+            break;
+          }
+          case 77: {
+            Budget = input.ReadFloat();
+            break;
+          }
+          case 80: {
+            Timeline = input.ReadInt64();
+            break;
+          }
+          case 90: {
+            Status = input.ReadString();
+            break;
+          }
+          case 98: {
+            if (request_ == null) {
+              Request = new global::Daisy.Request();
+            }
+            input.ReadMessage(Request);
+            break;
+          }
+          case 106: {
+            if (freelancer_ == null) {
+              Freelancer = new global::Daisy.User();
+            }
+            input.ReadMessage(Freelancer);
+            break;
+          }
+          case 114: {
+            Description = input.ReadString();
+            break;
+          }
+          case 122: {
+            workspaces_.AddEntriesFrom(ref input, _repeated_workspaces_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class Workspace : pb::IMessage<Workspace>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Workspace> _parser = new pb::MessageParser<Workspace>(() => new Workspace());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<Workspace> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.ModelsReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Workspace() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Workspace(Workspace other) : this() {
+      id_ = other.id_;
+      createdAt_ = other.createdAt_;
+      objectId_ = other.objectId_;
+      request_ = other.request_ != null ? other.request_.Clone() : null;
+      project_ = other.project_ != null ? other.project_.Clone() : null;
+      discussions_ = other.discussions_.Clone();
+      resources_ = other.resources_.Clone();
+      status_ = other.status_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Workspace Clone() {
+      return new Workspace(this);
+    }
+
+    /// <summary>Field number for the "Id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "CreatedAt" field.</summary>
+    public const int CreatedAtFieldNumber = 2;
+    private long createdAt_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long CreatedAt {
+      get { return createdAt_; }
+      set {
+        createdAt_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ObjectId" field.</summary>
+    public const int ObjectIdFieldNumber = 3;
+    private string objectId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ObjectId {
+      get { return objectId_; }
+      set {
+        objectId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Request" field.</summary>
+    public const int RequestFieldNumber = 4;
+    private global::Daisy.Request request_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.Request Request {
+      get { return request_; }
+      set {
+        request_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Project" field.</summary>
+    public const int ProjectFieldNumber = 5;
+    private global::Daisy.Project project_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.Project Project {
+      get { return project_; }
+      set {
+        project_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Discussions" field.</summary>
+    public const int DiscussionsFieldNumber = 6;
+    private static readonly pb::FieldCodec<global::Daisy.Discussion> _repeated_discussions_codec
+        = pb::FieldCodec.ForMessage(50, global::Daisy.Discussion.Parser);
+    private readonly pbc::RepeatedField<global::Daisy.Discussion> discussions_ = new pbc::RepeatedField<global::Daisy.Discussion>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Daisy.Discussion> Discussions {
+      get { return discussions_; }
+    }
+
+    /// <summary>Field number for the "Resources" field.</summary>
+    public const int ResourcesFieldNumber = 7;
+    private static readonly pb::FieldCodec<global::Daisy.Resource> _repeated_resources_codec
+        = pb::FieldCodec.ForMessage(58, global::Daisy.Resource.Parser);
+    private readonly pbc::RepeatedField<global::Daisy.Resource> resources_ = new pbc::RepeatedField<global::Daisy.Resource>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Daisy.Resource> Resources {
+      get { return resources_; }
+    }
+
+    /// <summary>Field number for the "Status" field.</summary>
+    public const int StatusFieldNumber = 8;
+    private string status_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Status {
+      get { return status_; }
+      set {
+        status_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as Workspace);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(Workspace other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (CreatedAt != other.CreatedAt) return false;
+      if (ObjectId != other.ObjectId) return false;
+      if (!object.Equals(Request, other.Request)) return false;
+      if (!object.Equals(Project, other.Project)) return false;
+      if(!discussions_.Equals(other.discussions_)) return false;
+      if(!resources_.Equals(other.resources_)) return false;
+      if (Status != other.Status) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (CreatedAt != 0L) hash ^= CreatedAt.GetHashCode();
+      if (ObjectId.Length != 0) hash ^= ObjectId.GetHashCode();
+      if (request_ != null) hash ^= Request.GetHashCode();
+      if (project_ != null) hash ^= Project.GetHashCode();
+      hash ^= discussions_.GetHashCode();
+      hash ^= resources_.GetHashCode();
+      if (Status.Length != 0) hash ^= Status.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (CreatedAt != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectId);
+      }
+      if (request_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Request);
+      }
+      if (project_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Project);
+      }
+      discussions_.WriteTo(output, _repeated_discussions_codec);
+      resources_.WriteTo(output, _repeated_resources_codec);
+      if (Status.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(Status);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (CreatedAt != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectId);
+      }
+      if (request_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Request);
+      }
+      if (project_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Project);
+      }
+      discussions_.WriteTo(ref output, _repeated_discussions_codec);
+      resources_.WriteTo(ref output, _repeated_resources_codec);
+      if (Status.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(Status);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (CreatedAt != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ObjectId);
+      }
+      if (request_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Request);
+      }
+      if (project_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Project);
+      }
+      size += discussions_.CalculateSize(_repeated_discussions_codec);
+      size += resources_.CalculateSize(_repeated_resources_codec);
+      if (Status.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Status);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(Workspace other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.CreatedAt != 0L) {
+        CreatedAt = other.CreatedAt;
+      }
+      if (other.ObjectId.Length != 0) {
+        ObjectId = other.ObjectId;
+      }
+      if (other.request_ != null) {
+        if (request_ == null) {
+          Request = new global::Daisy.Request();
+        }
+        Request.MergeFrom(other.Request);
+      }
+      if (other.project_ != null) {
+        if (project_ == null) {
+          Project = new global::Daisy.Project();
+        }
+        Project.MergeFrom(other.Project);
+      }
+      discussions_.Add(other.discussions_);
+      resources_.Add(other.resources_);
+      if (other.Status.Length != 0) {
+        Status = other.Status;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CreatedAt = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            ObjectId = input.ReadString();
+            break;
+          }
+          case 34: {
+            if (request_ == null) {
+              Request = new global::Daisy.Request();
+            }
+            input.ReadMessage(Request);
+            break;
+          }
+          case 42: {
+            if (project_ == null) {
+              Project = new global::Daisy.Project();
+            }
+            input.ReadMessage(Project);
+            break;
+          }
+          case 50: {
+            discussions_.AddEntriesFrom(input, _repeated_discussions_codec);
+            break;
+          }
+          case 58: {
+            resources_.AddEntriesFrom(input, _repeated_resources_codec);
+            break;
+          }
+          case 66: {
+            Status = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CreatedAt = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            ObjectId = input.ReadString();
+            break;
+          }
+          case 34: {
+            if (request_ == null) {
+              Request = new global::Daisy.Request();
+            }
+            input.ReadMessage(Request);
+            break;
+          }
+          case 42: {
+            if (project_ == null) {
+              Project = new global::Daisy.Project();
+            }
+            input.ReadMessage(Project);
+            break;
+          }
+          case 50: {
+            discussions_.AddEntriesFrom(ref input, _repeated_discussions_codec);
+            break;
+          }
+          case 58: {
+            resources_.AddEntriesFrom(ref input, _repeated_resources_codec);
+            break;
+          }
+          case 66: {
+            Status = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class Discussion : pb::IMessage<Discussion>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Discussion> _parser = new pb::MessageParser<Discussion>(() => new Discussion());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<Discussion> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.ModelsReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Discussion() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Discussion(Discussion other) : this() {
+      id_ = other.id_;
+      createdAt_ = other.createdAt_;
+      objectId_ = other.objectId_;
+      type_ = other.type_;
+      content_ = other.content_;
+      sender_ = other.sender_ != null ? other.sender_.Clone() : null;
+      workspace_ = other.workspace_ != null ? other.workspace_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Discussion Clone() {
+      return new Discussion(this);
+    }
+
+    /// <summary>Field number for the "Id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "CreatedAt" field.</summary>
+    public const int CreatedAtFieldNumber = 2;
+    private long createdAt_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long CreatedAt {
+      get { return createdAt_; }
+      set {
+        createdAt_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ObjectId" field.</summary>
+    public const int ObjectIdFieldNumber = 3;
+    private string objectId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ObjectId {
+      get { return objectId_; }
+      set {
+        objectId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Type" field.</summary>
+    public const int TypeFieldNumber = 4;
+    private string type_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Type {
+      get { return type_; }
+      set {
+        type_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Content" field.</summary>
+    public const int ContentFieldNumber = 5;
+    private string content_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Content {
+      get { return content_; }
+      set {
+        content_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Sender" field.</summary>
+    public const int SenderFieldNumber = 6;
+    private global::Daisy.User sender_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.User Sender {
+      get { return sender_; }
+      set {
+        sender_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Workspace" field.</summary>
+    public const int WorkspaceFieldNumber = 7;
+    private global::Daisy.Workspace workspace_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.Workspace Workspace {
+      get { return workspace_; }
+      set {
+        workspace_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as Discussion);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(Discussion other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (CreatedAt != other.CreatedAt) return false;
+      if (ObjectId != other.ObjectId) return false;
+      if (Type != other.Type) return false;
+      if (Content != other.Content) return false;
+      if (!object.Equals(Sender, other.Sender)) return false;
+      if (!object.Equals(Workspace, other.Workspace)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (CreatedAt != 0L) hash ^= CreatedAt.GetHashCode();
+      if (ObjectId.Length != 0) hash ^= ObjectId.GetHashCode();
+      if (Type.Length != 0) hash ^= Type.GetHashCode();
+      if (Content.Length != 0) hash ^= Content.GetHashCode();
+      if (sender_ != null) hash ^= Sender.GetHashCode();
+      if (workspace_ != null) hash ^= Workspace.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (CreatedAt != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectId);
+      }
+      if (Type.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Type);
+      }
+      if (Content.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Content);
+      }
+      if (sender_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Sender);
+      }
+      if (workspace_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Workspace);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (CreatedAt != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectId);
+      }
+      if (Type.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Type);
+      }
+      if (Content.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Content);
+      }
+      if (sender_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Sender);
+      }
+      if (workspace_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Workspace);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (CreatedAt != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ObjectId);
+      }
+      if (Type.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Type);
+      }
+      if (Content.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Content);
+      }
+      if (sender_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Sender);
+      }
+      if (workspace_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Workspace);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(Discussion other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.CreatedAt != 0L) {
+        CreatedAt = other.CreatedAt;
+      }
+      if (other.ObjectId.Length != 0) {
+        ObjectId = other.ObjectId;
+      }
+      if (other.Type.Length != 0) {
+        Type = other.Type;
+      }
+      if (other.Content.Length != 0) {
+        Content = other.Content;
+      }
+      if (other.sender_ != null) {
+        if (sender_ == null) {
+          Sender = new global::Daisy.User();
+        }
+        Sender.MergeFrom(other.Sender);
+      }
+      if (other.workspace_ != null) {
+        if (workspace_ == null) {
+          Workspace = new global::Daisy.Workspace();
+        }
+        Workspace.MergeFrom(other.Workspace);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CreatedAt = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            ObjectId = input.ReadString();
+            break;
+          }
+          case 34: {
+            Type = input.ReadString();
+            break;
+          }
+          case 42: {
+            Content = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (sender_ == null) {
+              Sender = new global::Daisy.User();
+            }
+            input.ReadMessage(Sender);
+            break;
+          }
+          case 58: {
+            if (workspace_ == null) {
+              Workspace = new global::Daisy.Workspace();
+            }
+            input.ReadMessage(Workspace);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CreatedAt = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            ObjectId = input.ReadString();
+            break;
+          }
+          case 34: {
+            Type = input.ReadString();
+            break;
+          }
+          case 42: {
+            Content = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (sender_ == null) {
+              Sender = new global::Daisy.User();
+            }
+            input.ReadMessage(Sender);
+            break;
+          }
+          case 58: {
+            if (workspace_ == null) {
+              Workspace = new global::Daisy.Workspace();
+            }
+            input.ReadMessage(Workspace);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class Resource : pb::IMessage<Resource>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Resource> _parser = new pb::MessageParser<Resource>(() => new Resource());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<Resource> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.ModelsReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Resource() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Resource(Resource other) : this() {
+      id_ = other.id_;
+      createdAt_ = other.createdAt_;
+      objectId_ = other.objectId_;
+      file_ = other.file_ != null ? other.file_.Clone() : null;
+      workStatus_ = other.workStatus_;
+      resourceKey_ = other.resourceKey_;
+      workspace_ = other.workspace_ != null ? other.workspace_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Resource Clone() {
+      return new Resource(this);
+    }
+
+    /// <summary>Field number for the "Id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "CreatedAt" field.</summary>
+    public const int CreatedAtFieldNumber = 2;
+    private long createdAt_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long CreatedAt {
+      get { return createdAt_; }
+      set {
+        createdAt_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ObjectId" field.</summary>
+    public const int ObjectIdFieldNumber = 3;
+    private string objectId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ObjectId {
+      get { return objectId_; }
+      set {
+        objectId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "File" field.</summary>
+    public const int FileFieldNumber = 4;
+    private global::Daisy.File file_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.File File {
+      get { return file_; }
+      set {
+        file_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "WorkStatus" field.</summary>
+    public const int WorkStatusFieldNumber = 5;
+    private string workStatus_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string WorkStatus {
+      get { return workStatus_; }
+      set {
+        workStatus_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "ResourceKey" field.</summary>
+    public const int ResourceKeyFieldNumber = 6;
+    private string resourceKey_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ResourceKey {
+      get { return resourceKey_; }
+      set {
+        resourceKey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Workspace" field.</summary>
+    public const int WorkspaceFieldNumber = 7;
+    private global::Daisy.Workspace workspace_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.Workspace Workspace {
+      get { return workspace_; }
+      set {
+        workspace_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as Resource);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(Resource other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (CreatedAt != other.CreatedAt) return false;
+      if (ObjectId != other.ObjectId) return false;
+      if (!object.Equals(File, other.File)) return false;
+      if (WorkStatus != other.WorkStatus) return false;
+      if (ResourceKey != other.ResourceKey) return false;
+      if (!object.Equals(Workspace, other.Workspace)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (CreatedAt != 0L) hash ^= CreatedAt.GetHashCode();
+      if (ObjectId.Length != 0) hash ^= ObjectId.GetHashCode();
+      if (file_ != null) hash ^= File.GetHashCode();
+      if (WorkStatus.Length != 0) hash ^= WorkStatus.GetHashCode();
+      if (ResourceKey.Length != 0) hash ^= ResourceKey.GetHashCode();
+      if (workspace_ != null) hash ^= Workspace.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (CreatedAt != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectId);
+      }
+      if (file_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(File);
+      }
+      if (WorkStatus.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(WorkStatus);
+      }
+      if (ResourceKey.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(ResourceKey);
+      }
+      if (workspace_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Workspace);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (CreatedAt != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectId);
+      }
+      if (file_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(File);
+      }
+      if (WorkStatus.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(WorkStatus);
+      }
+      if (ResourceKey.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(ResourceKey);
+      }
+      if (workspace_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Workspace);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (CreatedAt != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CreatedAt);
+      }
+      if (ObjectId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ObjectId);
+      }
+      if (file_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(File);
+      }
+      if (WorkStatus.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(WorkStatus);
+      }
+      if (ResourceKey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ResourceKey);
+      }
+      if (workspace_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Workspace);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(Resource other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.CreatedAt != 0L) {
+        CreatedAt = other.CreatedAt;
+      }
+      if (other.ObjectId.Length != 0) {
+        ObjectId = other.ObjectId;
+      }
+      if (other.file_ != null) {
+        if (file_ == null) {
+          File = new global::Daisy.File();
+        }
+        File.MergeFrom(other.File);
+      }
+      if (other.WorkStatus.Length != 0) {
+        WorkStatus = other.WorkStatus;
+      }
+      if (other.ResourceKey.Length != 0) {
+        ResourceKey = other.ResourceKey;
+      }
+      if (other.workspace_ != null) {
+        if (workspace_ == null) {
+          Workspace = new global::Daisy.Workspace();
+        }
+        Workspace.MergeFrom(other.Workspace);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CreatedAt = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            ObjectId = input.ReadString();
+            break;
+          }
+          case 34: {
+            if (file_ == null) {
+              File = new global::Daisy.File();
+            }
+            input.ReadMessage(File);
+            break;
+          }
+          case 42: {
+            WorkStatus = input.ReadString();
+            break;
+          }
+          case 50: {
+            ResourceKey = input.ReadString();
+            break;
+          }
+          case 58: {
+            if (workspace_ == null) {
+              Workspace = new global::Daisy.Workspace();
+            }
+            input.ReadMessage(Workspace);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CreatedAt = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            ObjectId = input.ReadString();
+            break;
+          }
+          case 34: {
+            if (file_ == null) {
+              File = new global::Daisy.File();
+            }
+            input.ReadMessage(File);
+            break;
+          }
+          case 42: {
+            WorkStatus = input.ReadString();
+            break;
+          }
+          case 50: {
+            ResourceKey = input.ReadString();
+            break;
+          }
+          case 58: {
+            if (workspace_ == null) {
+              Workspace = new global::Daisy.Workspace();
+            }
+            input.ReadMessage(Workspace);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class File : pb::IMessage<File>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<File> _parser = new pb::MessageParser<File>(() => new File());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<File> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.ModelsReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public File() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public File(File other) : this() {
+      data_ = other.data_;
+      mimeType_ = other.mimeType_;
+      fileName_ = other.fileName_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public File Clone() {
+      return new File(this);
+    }
+
+    /// <summary>Field number for the "Data" field.</summary>
+    public const int DataFieldNumber = 1;
+    private pb::ByteString data_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "MimeType" field.</summary>
+    public const int MimeTypeFieldNumber = 2;
+    private string mimeType_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string MimeType {
+      get { return mimeType_; }
+      set {
+        mimeType_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "FileName" field.</summary>
+    public const int FileNameFieldNumber = 3;
+    private string fileName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string FileName {
+      get { return fileName_; }
+      set {
+        fileName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as File);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(File other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Data != other.Data) return false;
+      if (MimeType != other.MimeType) return false;
+      if (FileName != other.FileName) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (MimeType.Length != 0) hash ^= MimeType.GetHashCode();
+      if (FileName.Length != 0) hash ^= FileName.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Data.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Data);
+      }
+      if (MimeType.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(MimeType);
+      }
+      if (FileName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(FileName);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Data.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Data);
+      }
+      if (MimeType.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(MimeType);
+      }
+      if (FileName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(FileName);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      }
+      if (MimeType.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MimeType);
+      }
+      if (FileName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(FileName);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(File other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+      if (other.MimeType.Length != 0) {
+        MimeType = other.MimeType;
+      }
+      if (other.FileName.Length != 0) {
+        FileName = other.FileName;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Data = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            MimeType = input.ReadString();
+            break;
+          }
+          case 26: {
+            FileName = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Data = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            MimeType = input.ReadString();
+            break;
+          }
+          case 26: {
+            FileName = input.ReadString();
             break;
           }
         }
