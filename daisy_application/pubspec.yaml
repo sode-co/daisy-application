@@ -50,6 +50,7 @@ dependencies:
   mime_type: ^1.0.0
   msgpack_dart: ^1.0.0
   flutter_keyboard_visibility_web: ^2.0.0
+  url_launcher: ^6.1.5
   
 dev_dependencies:
   flutter_test:

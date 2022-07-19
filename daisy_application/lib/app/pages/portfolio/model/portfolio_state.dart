@@ -1,7 +1,6 @@
+import 'package:daisy_application/core_services/models/portfolio/portfolio_model.dart';
 import 'package:flutter/material.dart';
 
-class ProjectFileTab {
-  ProjectFileTab();
+class PortfolioState with ChangeNotifier {
+  PortfolioModel? portfolio;
 }
-
-class PortfolioState with ChangeNotifier {}

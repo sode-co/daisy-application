@@ -8,6 +8,7 @@ import 'package:daisy_application/app/pages/portfolio/view/portfolio_header.dart
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({Key? key}) : super(key: key);
@@ -41,7 +42,8 @@ class PortfolioPageState extends State<PortfolioPage> {
   Widget build(BuildContext context) {
     context.watch<PortfolioState>();
     return DefaultTabController(
-      length: 4,
+      initialIndex: 1,
+      length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: NestedScrollView(
@@ -72,10 +74,8 @@ class PortfolioPageState extends State<PortfolioPage> {
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                createProjectOverViewTab(),
-                createProjectDiscussionTab(),
-                createProjectFileManagementTab(),
-                buildTestBody('Settings')
+                createPortfolioTab(),
+                createContactTab(),
               ],
             ),
           ),
@@ -126,10 +126,8 @@ class PortfolioPageState extends State<PortfolioPage> {
       indicatorWeight: 5,
       indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
       tabs: [
-        createTab('Overview'),
-        createTab('Discussion'),
-        createTab('Files'),
-        createTab('Payment')
+        createTab('Portfolio'),
+        createTab('Liên lạc'),
       ],
     );
   }
@@ -152,15 +150,398 @@ class PortfolioPageState extends State<PortfolioPage> {
         itemCount: 25,
       );
 
-  Widget createProjectOverViewTab() {
-    return Text('KK');
+  Widget createPortfolioTab() {
+    return const Text('Portfolio');
   }
 
-  Widget createProjectDiscussionTab() {
-    return Text('KK');
-  }
+  Widget createContactTab() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 200,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.purple,
+                  Colors.pinkAccent,
+                ],
+              ),
+            ),
+            child: const Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(
+                      'https://firebasestorage.googleapis.com/v0/b/test-37ba6.appspot.com/o/Cat03.jpg?alt=media&token=143bae7b-74d9-44d5-a73f-4eb1ba3fc1ab'),
+                ),
+              ),
+            ),
+          ),
+          Center(
+              child: Text(
+            'Ngoc Neeee',
+            style: Design.textBody(),
+          )),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              OutlinedButton(
+                  onPressed: () async {
+                    final Uri _url = Uri.parse(
+                        'https://www.linkedin.com/in/ngoc-phan-thieu-856259128/');
+                    await launchUrl(_url);
+                  },
+                  child: Text(
+                    'Linkedin',
+                    style: Design.textBody(),
+                  )),
+              const SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () async {
+                    //Call to launch email
+                    final Uri emailLaunchUri = Uri(
+                      scheme: 'mailto',
+                      path: screenState.portfolio?.freelancer?.email ??
+                          'ptngoc22@gmail.com',
+                    );
+                    await launchUrl(emailLaunchUri);
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.add,
+                        size: 16,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Thêm liên lạc',
+                        style: Design.textBody(textColor: Colors.white),
+                      )
+                    ],
+                  ))
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: MediaQuery.of(context).size.width > 1200
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          flex: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Experience',
+                                style: Design.textSmallHeadline(),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+                                style: Design.textBody(),
+                              ),
+                              const Divider(),
+                              Text(
+                                'About Me',
+                                style: Design.textSmallHeadline(),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                screenState
+                                        .portfolio?.freelancer?.description ??
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+                                style: Design.textBody(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Card(
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 20, horizontal: 40),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Location',
+                                          style: Design.textCaption(),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.chevron_right,
+                                              size: 14,
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Flexible(
+                                              child: Text(
+                                                screenState.portfolio
+                                                        ?.freelancer?.address ??
+                                                    '123 Main Street, New York, NY 10030',
+                                                style: Design.textBody(),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'Biography',
+                                          style: Design.textCaption(),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.chevron_right,
+                                              size: 14,
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Flexible(
+                                              child: Text(
+                                                screenState
+                                                        .portfolio?.biography ??
+                                                    'Loremp was born into such wealth and privilege that her family inspired the phrase ‘keeping up with the Joneses',
+                                                style: Design.textBody(),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'Email',
+                                          style: Design.textCaption(),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.chevron_right,
+                                              size: 14,
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              screenState.portfolio?.freelancer
+                                                      ?.email ??
+                                                  'ptnngoc22@gmail.com',
+                                              style: Design.textBody(),
+                                            )),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            const Icon(
+                                              Icons.launch,
+                                              size: 16,
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                      ]),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "Experience",
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text('''
+Hello I am a freelancer
 
-  Widget createProjectFileManagementTab() {
-    return Text('KK');
+He has previously been a speaker at the Flutter Global Summit'21, Flutter Vikings and events across colleges, universities (like VIT Chennai, Vellore, MIT-ADT), and clubs (IEEE APSIT, SFIT, GirlScript, GeeksforGeeks Student Chapter, Google CrowdSource, and more) here in India.
+'''),
+                            Divider(),
+                            Text(
+                              "About Me",
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text('''
+Aditya is a content creator and has over 5K subscribers on YouTube and a 700+ member community on Discord.
+📺 YouTube Channel: watch.adityathakur.in
+🚀 Discord Community: discord.adityathakur.in
+'''),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Card(
+                              color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 20, horizontal: 40),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Location",
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.circle,
+                                            size: 16,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "Dharamshala, India",
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Text(
+                                        "Website",
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Text("adityathakur.in"),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Icon(
+                                            Icons.launch,
+                                            size: 16,
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Portfolio",
+                                        style: Design.textBody(),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Text('Portfolio neeeee'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Icon(
+                                            Icons.launch,
+                                            size: 16,
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Email",
+                                        style: Design.textBody(),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Text('portfolio'),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Icon(
+                                            Icons.launch,
+                                            size: 16,
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                    ]),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

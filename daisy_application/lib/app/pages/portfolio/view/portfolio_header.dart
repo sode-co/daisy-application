@@ -15,18 +15,15 @@ extension PortfolioHeader on PortfolioPageState {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            'Hello',
+            'Portfolio',
             style:
                 Design.textSmallLogo(isMobile: !Responsive.isDesktop(context)),
           ),
           const SizedBox(height: Design.contentSpacing),
           Row(
             children: [
-              createItemTag('loading...', Design.primaryTextColor),
+              createItemTag('Favorite designer', Design.accentRed),
               const SizedBox(width: Design.contentSpacing),
-              createItemTag('In Progress', Design.accentRed.shade400),
-              const SizedBox(width: Design.contentSpacing),
-              Text('with ${'loading...'}', style: Design.textCaption()),
               if (Responsive.isDesktop(context))
                 Text(' Local time: $currentTime',
                     style: Design.textCaption(
@@ -44,6 +41,12 @@ extension PortfolioHeader on PortfolioPageState {
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(2)),
             border: Border.all(color: color, width: 2)),
-        child: Text(text, style: Design.textButtonSmall(textColor: color)),
+        child: Row(
+          children: [
+            Icon(Icons.favorite_border, color: color, size: 18.0),
+            const SizedBox(width: 5.0),
+            Text(text, style: Design.textButtonSmall(textColor: color)),
+          ],
+        ),
       );
 }
