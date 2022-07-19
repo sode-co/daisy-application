@@ -29,7 +29,6 @@ namespace Utils
             public string MOMO_TEST_ENV_PARTNER_CODE { get; set; }
             public string MOMO_TEST_ENV_ACCESS_KEY { get; set; }
             public string MOMO_TEST_ENV_SECRET_KEY { get; set; }
-            public string MOMO_TEST_ENV_ENDPOINT_API { get; set; }
             public string ADMIN_EMAIL { get; set; }
             public string ENVIRONMENT { get { return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"); } }
             public bool IsProduction { get { return (ENVIRONMENT != null && ENVIRONMENT.ToLower() == "Production".ToLower()); } }

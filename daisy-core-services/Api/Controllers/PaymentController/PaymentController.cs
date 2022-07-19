@@ -3,13 +3,13 @@ using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Transactions;
-using Api.Controllers.PaymentServices;
 using Domain.Models;
 using System;
 using Api.Common;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using Api.Services;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,7 +23,7 @@ namespace Api.Controllers.PaymentController
     public class PaymentController : Controller
     {
         private UnitOfWorkFactory _unitOfWorkFactory;
-        private PaymentService _paymentService = new PaymentService();
+        private MomoPaymentService _paymentService = new MomoPaymentService();
 
         public PaymentController(UnitOfWorkFactory unitOfWorkFactory)
         {
@@ -60,21 +60,45 @@ namespace Api.Controllers.PaymentController
             {
                 return NotFound();
             }
-            // UPDATE PAYMENT ACTION
-            work.PaymentActionRepository.UpdatePaymentActionStatus(paymentAction.Id, Constants.PAYMENT_ACTION_STATUS.SUCCESSFULLY);
-            //_________________________
+            if (int.Parse(body.ResultCode) == 0)
+            {
+                // UPDATE PAYMENT ACTION
+                work.PaymentActionRepository.UpdatePaymentActionStatus(paymentAction.Id, Constants.PAYMENT_ACTION_STATUS.SUCCESSFULLY);
+                //_________________________
 
-            // UPDATE PAYMENT
-            work.PaymentRepository.UpdatePaymentStatus(paymentAction.Payment.Id, Constants.PAYMENT_STATUS.WAITING_FOR_SYSTEM);
-            //_________________________
+                // UPDATE PAYMENT
+                work.PaymentRepository.UpdatePaymentStatus(paymentAction.Payment.Id, Constants.PAYMENT_STATUS.WAITING_FOR_SYSTEM);
+                //_________________________
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("system/callback")]
+        public IActionResult CallBackSystemForChecking([FromBody] MoMoCallBackDto body)
+        {
+            using var work = _unitOfWorkFactory.Get;
+            var paymentAction = work.PaymentActionRepository.GetFirstOrDefault(x => x.OrderId == body.OrderId, "Payment");
+            if (paymentAction == null || (long)Decimal.Round(paymentAction.Amount) != body.Amount)
+            {
+                return NotFound();
+            }
+            if (int.Parse(body.ResultCode) == 0)
+            {
+                // UPDATE PAYMENT ACTION
+                work.PaymentActionRepository.UpdatePaymentActionStatus(paymentAction.Id, Constants.PAYMENT_ACTION_STATUS.SUCCESSFULLY);
+                //_________________________
+
+                // UPDATE PAYMENT
+                work.PaymentRepository.UpdatePaymentStatus(paymentAction.Payment.Id, Constants.PAYMENT_STATUS.WAITING_FOR_SYSTEM);
+                //_________________________
+            }
 
             return Ok();
         }
 
         [HttpPost("customer/momo")]
         [Authorize(Policy = Constants.ROLE.CUSTOMER)]
-        //[SwaggerOperation("Deposit Momo into user wallet")]
-        //public async Task<IActionResult> GenerateMomoUrlForCustomer([FromBody] DepositoryDto body) {
         public IActionResult GenerateMomoUrlForCustomer([FromBody] DepositoryDto body)
         {
             using var work = _unitOfWorkFactory.Get;
@@ -124,7 +148,7 @@ namespace Api.Controllers.PaymentController
                 momoDeposit.Amount = (long)Decimal.Round(payment.TotalAmount);
                 
                 momoDeposit.OrderId = action.OrderId;
-                //momoDeposit.OrderInfo = "Purchasing for Daisy, project: " + project.Name;
+                momoDeposit.OrderInfo = "Purchasing for Daisy, project: " + project.Name;
 
                 momoDeposit.RequestId = action.OrderId;
                 momoDeposit.RedirectUrl = body.RedirectUrl;

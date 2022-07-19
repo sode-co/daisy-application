@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -6,27 +6,36 @@ using System.IO;
 using System.Net;
 using Utils;
 
-namespace Api.Controllers.PaymentServices {
- public class MoMoRequestDto : MoMoDepositDto {
-        public string PartnerCode {
+namespace Api.Services
+{
+    public class MoMoRequestDto : MoMoDepositDto
+    {
+        public string PartnerCode
+        {
             get; set;
         }
-        public string AccessKey {
+        public string AccessKey
+        {
             get; set;
         }
-        public string RequestType {
+        public string RequestType
+        {
             get; set;
         }
-        public string lang {
+        public string lang
+        {
             get; set;
         }
-        public new string RedirectUrl {
+        public new string RedirectUrl
+        {
             get; set;
         }
-        public string IpnUrl {
+        public string IpnUrl
+        {
             get; set;
         }
-        public string stringfyJson() {
+        public string stringfyJson()
+        {
             return "accessKey=" + AccessKey +
              "&amount=" + Amount +
              "&extraData=" + ExtraData +
@@ -41,105 +50,130 @@ namespace Api.Controllers.PaymentServices {
         }
     }
 
-  public class DepositoryDto {
-        public int paymentId {
-            get; set;
-        }
-        public string RedirectUrl {
-            get; set;
-        }
-    }
-
-    public class MoMoDepositDto {
-
-        public string RequestId {
-            get; set;
-        }
-        public long Amount {
-            get; set;
-        }
-        public string OrderId {
-            get; set;
-        }
-        public string OrderInfo {
-            get; set;
-        }
-
-        public string ExtraData {
-            get; set;
-        }
-
-        public string Signature {
-            get; set;
-        }
-        public string RedirectUrl {
-            get; set;
-        }
-    }
-
-
-
-    public class MoMoCallBackDto {
-        public string PartnerCode {
-            get; set;
-        }
-
-        public string OrderId {
-            get; set;
-        }
-        public string RequestId {
-            get; set;
-        }
-        public long Amount {
-            get; set;
-        }
-        public string OrderInfo {
-            get; set;
-        }
-        public string OrderType {
-            get; set;
-        }
-        public long TransId {
-            get; set;
-        }
-        public string ResultCode {
-            get; set;
-        }
-        public string Message {
-            get; set;
-        }
-        public string PayType {
-            get; set;
-        }
-        public long ResponseTime {
-            get; set;
-        }
-        public string ExtraData {
-            get; set;
-        }
-        public string Signature {
-            get; set;
-        }
-    }
-
-    //public class PaymentService : IPaymentService {
-    public class PaymentService
+    public class DepositoryDto
+    {
+        public int paymentId
         {
-        public PaymentService() {
+            get; set;
         }
-// lay tu momo
+        public string RedirectUrl
+        {
+            get; set;
+        }
+    }
+
+    public class MoMoDepositDto
+    {
+
+        public string RequestId
+        {
+            get; set;
+        }
+        public long Amount
+        {
+            get; set;
+        }
+        public string OrderId
+        {
+            get; set;
+        }
+        public string OrderInfo
+        {
+            get; set;
+        }
+
+        public string ExtraData
+        {
+            get; set;
+        }
+
+        public string Signature
+        {
+            get; set;
+        }
+        public string RedirectUrl
+        {
+            get; set;
+        }
+    }
+
+    public class MoMoCallBackDto
+    {
+        public string PartnerCode
+        {
+            get; set;
+        }
+
+        public string OrderId
+        {
+            get; set;
+        }
+        public string RequestId
+        {
+            get; set;
+        }
+        public long Amount
+        {
+            get; set;
+        }
+        public string OrderInfo
+        {
+            get; set;
+        }
+        public string OrderType
+        {
+            get; set;
+        }
+        public long TransId
+        {
+            get; set;
+        }
+        public string ResultCode
+        {
+            get; set;
+        }
+        public string Message
+        {
+            get; set;
+        }
+        public string PayType
+        {
+            get; set;
+        }
+        public long ResponseTime
+        {
+            get; set;
+        }
+        public string ExtraData
+        {
+            get; set;
+        }
+        public string Signature
+        {
+            get; set;
+        }
+    }
+
+    public class MomoPaymentService
+    {
+        public MomoPaymentService()
+        {
+        }
+        // lay tu momo
         private readonly string MOMO_SECRET_CONFIG_KEY = Config.Get().MOMO_TEST_ENV_SECRET_KEY;
         private readonly string MOMO_ACCESSKEY_CONFIG_KEY = Config.Get().MOMO_TEST_ENV_ACCESS_KEY;
         private readonly string MOMO_PARTNER_CODE_CONFIG_KEY = Config.Get().MOMO_TEST_ENV_PARTNER_CODE;
-    // call back to server 
-    // vd: hello.com/api/payment/callback
+        // call back to server 
+        // vd: hello.com/api/payment/callback
         private readonly string SERVER_URL_CONFIG_KEY = $"{Config.Get().PROTOCOL}://{Config.Get().API_HOST}:{Config.Get().API_PORT}/payment/momo/callback";
 
 
-        private string SignSHA256(string message, string key) {
+        private string SignSHA256(string message, string key)
+        {
             byte[] keyByte = Encoding.UTF8.GetBytes(key);
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-            using (var hmacsha256 = new HMACSHA256(keyByte)) {
+            using (var hmacsha256 = new HMACSHA256(keyByte))
+            {
                 byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
                 string hex = BitConverter.ToString(hashmessage);
                 hex = hex.Replace("-", "").ToLower();
@@ -147,13 +181,15 @@ namespace Api.Controllers.PaymentServices {
 
             }
         }
-        private string SendMoMoRequest(string postJsonString) {
+        private string SendMoMoRequest(string postJsonString)
+        {
 
-            try {
+            try
+            {
                 //var endpoint = Config.Get().MOMO_TEST_ENV_ENDPOINT_API;
                 var endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
-                HttpWebRequest httpWReq = (HttpWebRequest) WebRequest.Create(endpoint);
+                HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create(endpoint);
 
                 var postData = postJsonString;
 
@@ -170,14 +206,16 @@ namespace Api.Controllers.PaymentServices {
                 stream.Write(data, 0, data.Length);
                 stream.Close();
 
-                HttpWebResponse response = (HttpWebResponse) httpWReq.GetResponse();
+                HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
 
                 string jsonresponse = "";
 
-                using (var reader = new StreamReader(response.GetResponseStream())) {
+                using (var reader = new StreamReader(response.GetResponseStream()))
+                {
 
                     string temp = null;
-                    while ((temp = reader.ReadLine()) != null) {
+                    while ((temp = reader.ReadLine()) != null)
+                    {
                         jsonresponse += temp;
                     }
                 }
@@ -187,12 +225,14 @@ namespace Api.Controllers.PaymentServices {
                 //return new MomoResponse(mtid, jsonresponse);
 
             }
-            catch (WebException e) {
+            catch (WebException e)
+            {
                 return e.Message;
             }
         }
         private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
-        public string MonoDeposit(MoMoDepositDto moMoPaymentDto) {
+        public string MonoDeposit(MoMoDepositDto moMoPaymentDto)
+        {
             var moMoRequestDto = new MoMoRequestDto();
             var secretKey = this.MOMO_SECRET_CONFIG_KEY;
             var accessKey = this.MOMO_ACCESSKEY_CONFIG_KEY;
@@ -224,8 +264,8 @@ namespace Api.Controllers.PaymentServices {
             JObject message = new JObject
             {
                 { "partnerCode", moMoRequestDto.PartnerCode },
-                { "partnerName", "Buyehter" },
-                { "storeId", "Buyehter" },
+                { "partnerName", "Daisy" },
+                { "storeId", "Daisy" },
                 { "requestId", moMoRequestDto.RequestId },
                 { "amount", moMoRequestDto.Amount },
                 { "orderId", moMoRequestDto.OrderId },
