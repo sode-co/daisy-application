@@ -179,8 +179,6 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
 
   Future<void> getListApplicants(int? requestId) async {
     const ns = 'discovery-page';
-    Debug.log(ns, 'get list applicants', _appState.currentUser,
-        _jobScreenState?.selectedRequest);
     final result = await _applicationRestApi.GetApplicantsOfRequest(requestId);
     _jobScreenState!.applicants = result.data;
   }
@@ -192,8 +190,6 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
 
   Future<void> approveJobApplication(
       RequestModel? request, int requestId, String freelancerEmail) async {
-    const ns = 'discovery-page';
-    Debug.log('on approve list candidate');
     await _applicationRestApi.approveApplication(requestId, freelancerEmail);
     context.toastSuccess('Duyệt đơn ứng tuyển thành công');
     context.router.push(DiscoveryMobileRoute(request: request));

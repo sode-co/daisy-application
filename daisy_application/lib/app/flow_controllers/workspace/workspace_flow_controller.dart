@@ -149,8 +149,6 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
 
   Future<void> approveJobApplication(
       int requestId, String freelancerEmail) async {
-    const ns = 'discovery-page';
-    Debug.log('on approve list candidate');
     await _applicationRestApi.approveApplication(requestId, freelancerEmail);
     context.toastSuccess('Duyệt đơn ứng tuyển thành công');
   }
