@@ -87,5 +87,18 @@ namespace Api.Controllers.PortfolioController
                 return NoContent();
             }
         }
+
+        [HttpGet("{designerEmail}")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public IActionResult GetPortfolioByEmail(string designerEmail)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var portfolioList = work.PortfolioRepository.GetAll(null, null, "Freelancer");
+                Portfolio portfolio = portfolioList.FirstOrDefault(p => p.Freelancer.Email == designerEmail);
+                if (portfolio is null) return NotFound();
+                return new JsonResult(new { portfolio = portfolio }); ;
+            }
+        }
     }
 }
