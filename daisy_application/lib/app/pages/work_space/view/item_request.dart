@@ -27,7 +27,7 @@ extension ItemRequest on WorkspaceState {
       tagName: tagName,
       image: '',
       authorAvatar: request.customer?.avatar ?? '',
-      isDisplayButton: currentStatus != RequestStatus.TAKEN,
+      isDisplayButton: true,
       authorName:
           request.customer?.displayName ?? request.customer?.lastName ?? '',
       buttonName: buttonName,

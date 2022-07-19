@@ -22,7 +22,7 @@ class DisplayName {
             return 'Processing';
         }
       case RequestStatus.TAKEN:
-        return 'Closed';
+        return 'Taken';
     }
   }
 }

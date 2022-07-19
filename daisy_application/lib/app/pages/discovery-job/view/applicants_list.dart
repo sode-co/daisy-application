@@ -75,8 +75,13 @@ class _ListApplicantsState extends State<ListApplicants> {
                         ),
                       ),
                     ),
-                    const DataColumn(
-                      label: Text('Trạng thái'),
+                    DataColumn(
+                      label: Text(
+                        'Trạng thái',
+                        style: Design.textTableHeader(
+                          textColor: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
                     ),
                   ],
                   rows: widget.applicants
