@@ -186,14 +186,16 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
   }
 
   @override
-  void onBtnApproveJobApplication(int requestId, String freelancerEmail) =>
-      approveJobApplication(requestId, freelancerEmail);
+  void onBtnApproveJobApplication(
+          RequestModel? request, int requestId, String freelancerEmail) =>
+      approveJobApplication(request, requestId, freelancerEmail);
 
   Future<void> approveJobApplication(
-      int requestId, String freelancerEmail) async {
+      RequestModel? request, int requestId, String freelancerEmail) async {
     const ns = 'discovery-page';
     Debug.log('on approve list candidate');
     await _applicationRestApi.approveApplication(requestId, freelancerEmail);
     context.toastSuccess('Duyệt đơn ứng tuyển thành công');
+    context.router.push(DiscoveryMobileRoute(request: request));
   }
 }

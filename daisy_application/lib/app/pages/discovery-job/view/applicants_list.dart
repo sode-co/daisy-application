@@ -76,7 +76,7 @@ class _ListApplicantsState extends State<ListApplicants> {
                       ),
                     ),
                     const DataColumn(
-                      label: Text(''),
+                      label: Text('Trạng thái'),
                     ),
                   ],
                   rows: widget.applicants
@@ -136,7 +136,7 @@ class _ListApplicantsState extends State<ListApplicants> {
                     size: 14,
                   ),
                   onPressed: () {
-                    _listener.onBtnApproveJobApplication(
+                    _listener.onBtnApproveJobApplication(applicant.request,
                         applicant.request!.id!, applicant!.freelancer!.email!);
                   },
                   // Edit

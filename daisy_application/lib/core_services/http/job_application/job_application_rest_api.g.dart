@@ -72,7 +72,7 @@ class _JobApplicationRestApi implements JobApplicationRestApi {
   }
 
   @override
-  Future<HttpResponse<List<JobApplicationModel>>> approveApplication(
+  Future<HttpResponse<void>> approveApplication(
       requestId, freelancerEmail) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -81,17 +81,12 @@ class _JobApplicationRestApi implements JobApplicationRestApi {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<JobApplicationModel>>>(
-            Options(method: 'PUT', headers: _headers, extra: _extra)
-                .compose(_dio.options, '',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) =>
-            JobApplicationModel.fromJson(i as Map<String, dynamic>))
-        .toList();
-    final httpResponse = HttpResponse(value, _result);
+    final _result = await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(
+        Options(method: 'PUT', headers: _headers, extra: _extra)
+            .compose(_dio.options, '',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final httpResponse = HttpResponse(null, _result);
     return httpResponse;
   }
 
