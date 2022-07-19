@@ -6,14 +6,20 @@ class DiscoveryJobScreenState extends ChangeNotifier {
   List<RequestModel> requests = [];
   RequestModel? _selectedRequest;
   bool _isRequestLoading = false;
-  List<JobApplicationModel> applicants = [];
+  List<JobApplicationModel> _applicants = [];
 
   set selectedRequest(RequestModel? value) {
     _selectedRequest = value;
     notifyListeners();
   }
 
+  set applicants(List<JobApplicationModel> value) {
+    _applicants = value;
+    notifyListeners();
+  }
+
   RequestModel? get selectedRequest => _selectedRequest;
+  List<JobApplicationModel> get applicants => _applicants;
 
   set isRequestLoading(bool value) {
     _isRequestLoading = value;

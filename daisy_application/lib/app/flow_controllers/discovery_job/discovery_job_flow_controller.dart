@@ -16,14 +16,18 @@ import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
 import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
 import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
+import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DicoveryJobFlowController extends FlowController {
-  const DicoveryJobFlowController({Key? key}) : super(key: key);
-
+  const DicoveryJobFlowController(
+    this.request, {
+    Key? key,
+  }) : super(key: key);
+  final RequestModel? request;
   @override
   AutoRouterState createState() => _DiscoveryJobFlowControllerState();
 }
@@ -78,6 +82,9 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
 
   @override
   Widget build(BuildContext context) {
+    DicoveryJobFlowController abc = widget as DicoveryJobFlowController;
+    _jobScreenState!.selectedRequest = abc.request;
+
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (ctx) => _jobScreenState)],
       child: super.build(context),
@@ -172,21 +179,19 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
 
   Future<void> getListApplicants(int? requestId) async {
     const ns = 'discovery-page';
-    Debug.log(ns, 'get list applicants', _appState.currentUser,
-        _jobScreenState?.selectedRequest);
     final result = await _applicationRestApi.GetApplicantsOfRequest(requestId);
     _jobScreenState!.applicants = result.data;
   }
 
   @override
-  void onBtnApproveJobApplication(int requestId, String freelancerEmail) =>
-      approveJobApplication(requestId, freelancerEmail);
+  void onBtnApproveJobApplication(
+          RequestModel? request, int requestId, String freelancerEmail) =>
+      approveJobApplication(request, requestId, freelancerEmail);
 
   Future<void> approveJobApplication(
-      int requestId, String freelancerEmail) async {
-    const ns = 'discovery-page';
-    Debug.log('on approve list candidate');
+      RequestModel? request, int requestId, String freelancerEmail) async {
     await _applicationRestApi.approveApplication(requestId, freelancerEmail);
     context.toastSuccess('Duyệt đơn ứng tuyển thành công');
+    context.router.push(DiscoveryMobileRoute(request: request));
   }
 }

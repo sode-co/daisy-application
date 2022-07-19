@@ -68,15 +68,23 @@ class _ListApplicantsState extends State<ListApplicants> {
                       ),
                     ),
                     DataColumn(
+                      label: SizedBox(
+                        width: 300.0,
+                        child: Text(
+                          'Mô tả',
+                          style: Design.textTableHeader(
+                            textColor: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
                       label: Text(
-                        'Mô tả',
+                        'Trạng thái',
                         style: Design.textTableHeader(
                           textColor: Colors.black.withOpacity(0.6),
                         ),
                       ),
-                    ),
-                    const DataColumn(
-                      label: Text(''),
                     ),
                   ],
                   rows: widget.applicants
@@ -121,7 +129,12 @@ class _ListApplicantsState extends State<ListApplicants> {
           ),
         ),
         DataCell(
-          Text(applicant.description!),
+          SizedBox(
+            width: applicant.status == 'PENDING'
+                ? MediaQuery.of(context).size.width * 0.03
+                : MediaQuery.of(context).size.width * 0.34,
+            child: Text(applicant.description!),
+          ),
         ),
         if (applicant.status == 'PENDING')
           DataCell(
@@ -136,7 +149,7 @@ class _ListApplicantsState extends State<ListApplicants> {
                     size: 14,
                   ),
                   onPressed: () {
-                    _listener.onBtnApproveJobApplication(
+                    _listener.onBtnApproveJobApplication(applicant.request,
                         applicant.request!.id!, applicant!.freelancer!.email!);
                   },
                   // Edit
@@ -178,7 +191,7 @@ class _ListApplicantsState extends State<ListApplicants> {
                         affirmativeText: 'Từ chối',
                         negativeText: 'Hủy bỏ',
                         onAffirmativeClicked: () {
-                          context.pushRoute(const DicoveryJobRoute());
+                          context.pushRoute(DicoveryJobRoute(request: null));
                           Navigator.of(context, rootNavigator: true).pop();
                         },
                         onNegativeClicked: () {

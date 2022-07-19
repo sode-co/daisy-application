@@ -7,6 +7,7 @@ import 'package:daisy_application/app/flow_controllers/signup/signup_flow_contro
 import 'package:daisy_application/app/flow_controllers/update_profile/update_profile_controller.dart';
 import 'package:daisy_application/app/flow_controllers/workspace/workspace_flow_controller.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/discovery_job_page.dart';
+import 'package:daisy_application/app/pages/job-details/view/job_details.dart';
 import 'package:daisy_application/app/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/app/pages/post-new-job/view/post_new_job.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
@@ -70,13 +71,20 @@ import 'package:daisy_application/app/pages/work_space/view/work_space_screen.da
             path: 'discovery',
             page: DicoveryJobFlowController,
             children: [
-              AutoRoute(path: '', page: DiscoverJobPage, initial: true)
+              AutoRoute(path: '', page: DiscoverJobPage, initial: true),
+            ]),
+        AutoRoute(
+            path: 'discovery-mobile',
+            name: 'DiscoveryMobileRoute',
+            page: DicoveryJobFlowController,
+            children: [
+              AutoRoute(path: '', page: JobDetailsScreen, initial: true),
             ]),
         AutoRoute(
           path: 'signup',
           page: SignupFlowController,
           children: [AutoRoute(path: '', page: SignUp, initial: true)],
-        )
+        ),
       ],
     ),
   ],
