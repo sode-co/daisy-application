@@ -4,13 +4,15 @@ import 'package:daisy_application/app/pages/portfolio/model/portfolio_state.dart
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/grpc/discussions/discussions_grpc_client.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
+import 'package:daisy_application/core_services/models/portfolio/portfolio_model.dart';
 import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PortfolioFlowController extends AutoRouter {
-  const PortfolioFlowController({Key? key}) : super(key: key);
+  const PortfolioFlowController(this.portfolio, {Key? key}) : super(key: key);
+  final PortfolioModel? portfolio;
 
   @override
   AutoRouterState createState() => _PortfolioFlowControllerState();

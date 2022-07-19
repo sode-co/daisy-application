@@ -15,6 +15,7 @@ import 'package:daisy_application/common/safety_utils.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
 import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
+import 'package:daisy_application/core_services/http/portfolio/portfolio_rest_api.dart';
 import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
@@ -36,6 +37,7 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
     implements DiscoveryJobListener<AutoRouter> {
   late RequestGrpcClient _requestGrpcClient;
   late JobApplicationRestApi _applicationRestApi;
+  late PortfolioRestApi _portfolioRestApi;
 
   DiscoveryJobScreenState? _jobScreenState;
 
@@ -44,6 +46,7 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
     super.initState();
     _jobScreenState = DiscoveryJobScreenState();
     _applicationRestApi = locator.get();
+    _portfolioRestApi = locator.get();
     _requestGrpcClient = locator.get();
   }
 
@@ -193,5 +196,14 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
     await _applicationRestApi.approveApplication(requestId, freelancerEmail);
     context.toastSuccess('Duyệt đơn ứng tuyển thành công');
     context.router.push(DiscoveryMobileRoute(request: request));
+  }
+
+  @override
+  void getPortfolioByDesignerEmail(String designerEmail) =>
+      getPortfolio(designerEmail);
+
+  Future<void> getPortfolio(String designerEmail) async {
+    var result = await _portfolioRestApi.getByDesignerEmail(designerEmail);
+    context.router.push(PortfolioRoute(portfolio: result.data));
   }
 }

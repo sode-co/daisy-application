@@ -13,6 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i19;
 
+import '../../core_services/models/portfolio/portfolio_model.dart' as _i21;
 import '../../core_services/models/request/request_model.dart' as _i20;
 import '../flow_controllers/discovery_job/discovery_job_flow_controller.dart'
     as _i7;
@@ -89,8 +90,10 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: _i8.SignupFlowController());
     },
     PortfolioRoute.name: (routeData) {
+      final args = routeData.argsAs<PortfolioRouteArgs>();
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i9.PortfolioFlowController());
+          routeData: routeData,
+          child: _i9.PortfolioFlowController(args.portfolio, key: args.key));
     },
     LandingPage.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -351,12 +354,30 @@ class SignupRoute extends _i2.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.PortfolioFlowController]
-class PortfolioRoute extends _i2.PageRouteInfo<void> {
-  const PortfolioRoute({List<_i2.PageRouteInfo>? children})
+class PortfolioRoute extends _i2.PageRouteInfo<PortfolioRouteArgs> {
+  PortfolioRoute(
+      {required _i21.PortfolioModel? portfolio,
+      _i19.Key? key,
+      List<_i2.PageRouteInfo>? children})
       : super(PortfolioRoute.name,
-            path: 'portfolio', initialChildren: children);
+            path: 'portfolio',
+            args: PortfolioRouteArgs(portfolio: portfolio, key: key),
+            initialChildren: children);
 
   static const String name = 'PortfolioRoute';
+}
+
+class PortfolioRouteArgs {
+  const PortfolioRouteArgs({required this.portfolio, this.key});
+
+  final _i21.PortfolioModel? portfolio;
+
+  final _i19.Key? key;
+
+  @override
+  String toString() {
+    return 'PortfolioRouteArgs{portfolio: $portfolio, key: $key}';
+  }
 }
 
 /// generated route for

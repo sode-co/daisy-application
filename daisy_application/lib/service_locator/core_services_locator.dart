@@ -1,4 +1,3 @@
-import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/discussions/discussions_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
@@ -7,6 +6,7 @@ import 'package:daisy_application/core_services/http/authentication/authenticati
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
+import 'package:daisy_application/core_services/http/portfolio/portfolio_rest_api.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/http/user/user_rest_api.dart';
@@ -14,19 +14,19 @@ import 'package:daisy_application/core_services/http/users/users_rest_api.dart';
 import 'package:daisy_application/core_services/http_interceptor/authentication_interceptor.dart';
 import 'package:daisy_application/core_services/models/authentication/authentication_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
-import 'package:daisy_application/core_services/models/workspace/workspace_model.dart';
 import 'package:daisy_application/core_services/persistent/authentication_persistent.dart';
 import 'package:daisy_application/core_services/persistent/user_persistent.dart';
 import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
+import 'package:daisy_application/core_services/socket/file_upload/file_upload_socket_client.dart';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:daisy_application/core_services/socket/file_upload/file_upload_socket_client.dart';
 import 'package:signalr_netcore/http_connection_options.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 import 'package:signalr_netcore/web_supporting_http_client.dart';
 // ignore: library_prefixes
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 import '../common/config.dart';
 import 'locator.dart';
 import 'native_locator.dart' if (dart.library.html) 'web_locator.dart'
@@ -109,6 +109,10 @@ class CoreServiceLocator {
 
     locator.registerFactory<ProjectRestApi>(() =>
         ProjectRestApi(locator.get(), baseUrl: '${Config.API_URL}/v1/project'));
+
+    locator.registerFactory<PortfolioRestApi>(() => PortfolioRestApi(
+        locator.get(),
+        baseUrl: '${Config.API_URL}/v1/portfolios'));
   }
 
   static Future<void> _initPersistentService() async {

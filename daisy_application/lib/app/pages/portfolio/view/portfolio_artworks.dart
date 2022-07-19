@@ -20,8 +20,8 @@ extension PortfolioArtworks on PortfolioPageState {
               ),
               onPressed: () {},
               child: SizedBox(
-                width: 120.0,
-                height: 40.0,
+                width: 130.0,
+                height: 50.0,
                 child: Row(
                   children: [
                     const Icon(Icons.add, color: Colors.white, size: 18.0),
