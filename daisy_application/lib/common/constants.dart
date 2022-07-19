@@ -9,6 +9,8 @@ enum ProjectStatus { DONE, IN_PROGRESS, CANCELED }
 
 enum RequestStatus { AVAILABLE, TAKEN }
 
+enum ResourceWorkStatus { IN_PROGRESS, DECLINED, FINAL }
+
 enum AspectRatioType { LONG, SHORT }
 
 enum AspectRatio { Aspect16_9, Aspect19_9 }

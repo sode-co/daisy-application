@@ -12,7 +12,13 @@ namespace Domain.Models
         public String FileType { get; set; }
 
         [MaxLength(255)]
+        public String FileName { get; set; }
+
+        [MaxLength(255)]
         public String WorkStatus { get; set; }
+
+        [MaxLength(255)]
+        public String ResourceKey { get; set; }
 
         public virtual ICollection<ArtWork> ArtWorks { get; set; }
 

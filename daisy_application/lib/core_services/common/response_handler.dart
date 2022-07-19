@@ -31,13 +31,12 @@ extension ConvertToResult on Future<HttpResponse> {
 
       return result;
     } on DioError catch (err) {
+      FAILURE_TYPE failureType;
       if (err.response == null) {
-        Debug.log(ns,
-            'Parsing request failed due to response not found with error', err);
-        throw UnsupportedError('Null response');
+        failureType = FAILURE_TYPE.INTERNAL_SERVER_ERROR;
+        return Result<T>(data: null, failureType: failureType);
       }
 
-      FAILURE_TYPE failureType;
       switch (err.response!.statusCode) {
         case 200:
           failureType = FAILURE_TYPE.NONE;

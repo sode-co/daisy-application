@@ -36,7 +36,6 @@ class UserModel extends JsonSerializable with HiveObjectMixin {
       _$UserModelFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
-
   UserModel.fromProto(User proto) {
     id = proto.id;
     firstName = proto.firstName;

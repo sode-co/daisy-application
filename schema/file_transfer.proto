@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package filetransfer;
+
+message Chunk {
+  bytes Content = 1;
+}
+
+enum Status {
+  SUCCESS = 0;
+  FAILED = 1;
+}
+
+message TransferStatus {
+  Status Status = 1;
+  string Message = 2;
+}
+
+message DownloadModel {
+  TransferStatus status = 1;
+  Chunk data = 2;
+}
+
+message DownloadRequest {}
+
+service UploadService {
+  rpc Upload(stream Chunk) returns (TransferStatus) {};
+  rpc Download(DownloadRequest) returns (stream DownloadModel) {};
+}

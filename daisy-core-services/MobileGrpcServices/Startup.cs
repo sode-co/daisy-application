@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using DataAccess.UnitOfWork;
 using GrpcServices;
+using GrpcServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,8 @@ namespace MobileGrpcServices
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<HealthCheckServiceImp>().EnableGrpcWeb();
+                endpoints.MapGrpcService<DiscussionService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
+                endpoints.MapGrpcService<UploadFileService>().EnableGrpcWeb();
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
