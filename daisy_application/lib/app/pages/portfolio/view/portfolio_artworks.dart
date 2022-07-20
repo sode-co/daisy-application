@@ -1,5 +1,7 @@
 import 'package:daisy_application/app/common/design/design_style.dart';
 import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/app/dialogs/artwork_dialog.dart';
 import 'package:daisy_application/app/pages/portfolio/view/portfolio.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +20,9 @@ extension PortfolioArtworks on PortfolioPageState {
                 backgroundColor: MaterialStateProperty.all(
                     const Color.fromARGB(255, 41, 180, 113)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.show(AddArtworkDialog(context, () {}));
+              },
               child: SizedBox(
                 width: 130.0,
                 height: 50.0,
