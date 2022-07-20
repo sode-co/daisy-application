@@ -10,19 +10,17 @@ class ProjectFileTab {
   final String? title;
   final ResourceWorkStatus? fileType;
   final List<ResourceModel> _resources = [];
-  final ProjectDetailsState state;
 
-  ProjectFileTab(this.state, {this.title, this.fileType});
+  ProjectFileTab({this.title, this.fileType});
 
   List<ResourceModel> get resources => _resources;
 
   void addResources(List<ResourceModel> resources) {
-    resources
+    _resources
       ..addAll(resources)
       ..sort(((a, b) =>
           b.createdAt!.millisecondsSinceEpoch -
           a.createdAt!.millisecondsSinceEpoch));
-    state.notifyListeners();
   }
 }
 
@@ -35,16 +33,20 @@ class ProjectDetailsState with ChangeNotifier {
 
   ProjectDetailsState() {
     fileTabs.addAll([
-      ProjectFileTab(this,
+      ProjectFileTab(
           fileType: ResourceWorkStatus.IN_PROGRESS, title: 'In progress'),
-      ProjectFileTab(this,
-          fileType: ResourceWorkStatus.DECLINED, title: 'Declined'),
-      ProjectFileTab(this, fileType: ResourceWorkStatus.FINAL, title: 'Final'),
+      ProjectFileTab(fileType: ResourceWorkStatus.DECLINED, title: 'Declined'),
+      ProjectFileTab(fileType: ResourceWorkStatus.FINAL, title: 'Final'),
     ]);
   }
 
   set project(ProjectModel? project) {
     _project = project;
+    notifyListeners();
+  }
+
+  void addResources(List<ResourceModel> resources) {
+    currentProjectTab.addResources(resources);
     notifyListeners();
   }
 

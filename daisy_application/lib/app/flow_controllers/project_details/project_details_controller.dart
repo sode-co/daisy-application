@@ -104,7 +104,7 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
       projectDetailsState!.project!.workspaces.first.id!,
       DateTime.now().millisecondsSinceEpoch,
     )) {
-      tab.addResources([response]);
+      projectDetailsState!.addResources([response]);
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/flow_controllers/project_details/project_details_controller.dart';
 import 'package:daisy_application/app/pages/project-details/view/files/item_project_file.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
@@ -20,8 +21,8 @@ extension PageProjectFile on ProjectDetailsPageState {
   Widget createProjectFilePage(int index) => Container(
       alignment: Alignment.center,
       child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: Responsive.isDesktop(context) ? 4 : 2,
           ),
           itemCount: screenState.currentProjectTab.resources.length,
           itemBuilder: (ctx, index) {
