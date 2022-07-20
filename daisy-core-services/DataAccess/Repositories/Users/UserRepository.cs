@@ -1,6 +1,7 @@
 ﻿using DataAccess.MssqlServerIntegration;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace DataAccess.Repositories.Users
 
         public IEnumerable<User> GetDesignersByCategory(int categoryId)
         {
-            var artWorks = _dbContext.ArtWorks.ToList();
+            var artWorks = _dbContext.ArtWorks.Include(a => a.Category).ToList();
             var category = _dbContext.Categories.Find(categoryId);
             var artWorkList = artWorks.Where(art => art.Category.Id == categoryId).ToList();
             var portfolioList = _dbContext.Portfolios.ToList();
