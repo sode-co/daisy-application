@@ -14,7 +14,7 @@ class FindDesignerFlowController extends AutoRouter {
 
 class _FindDesignerFlowControllerState extends AutoRouterState
     implements FindDesignerListener<AutoRouter> {
-  FindDesignerPageState? findDesignerState;
+  FindDesigneScreenState? findDesignerState;
 
   FindDesignerFlowController get myWidget =>
       widget as FindDesignerFlowController;
@@ -22,7 +22,7 @@ class _FindDesignerFlowControllerState extends AutoRouterState
   @override
   void initState() {
     super.initState();
-    findDesignerState = FindDesignerPageState();
+    findDesignerState = FindDesigneScreenState();
   }
 
   ApplicationState get appState => context.read();
@@ -36,7 +36,7 @@ class _FindDesignerFlowControllerState extends AutoRouterState
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<FindDesignerPageState>(
+        ChangeNotifierProvider<FindDesigneScreenState>(
             create: (ctx) => findDesignerState!)
       ],
       child: super.build(context),
