@@ -11,12 +11,14 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i19;
+import 'package:flutter/material.dart' as _i21;
 
-import '../../core_services/models/portfolio/portfolio_model.dart' as _i21;
-import '../../core_services/models/request/request_model.dart' as _i20;
+import '../../core_services/models/portfolio/portfolio_model.dart' as _i23;
+import '../../core_services/models/request/request_model.dart' as _i22;
 import '../flow_controllers/discovery_job/discovery_job_flow_controller.dart'
     as _i7;
+import '../flow_controllers/find_designer/find_designer_flow_controller.dart'
+    as _i10;
 import '../flow_controllers/portfolio/portfolio_flow_controller.dart' as _i9;
 import '../flow_controllers/post_new_job/post_new_job_flow_controller.dart'
     as _i3;
@@ -27,18 +29,19 @@ import '../flow_controllers/signup/signup_flow_controller.dart' as _i8;
 import '../flow_controllers/update_profile/update_profile_controller.dart'
     as _i4;
 import '../flow_controllers/workspace/workspace_flow_controller.dart' as _i5;
-import '../pages/discovery-job/view/discovery_job_page.dart' as _i15;
-import '../pages/job-details/view/job_details.dart' as _i16;
-import '../pages/landing-page/view/landing.dart' as _i10;
-import '../pages/portfolio/view/portfolio.dart' as _i18;
-import '../pages/post-new-job/view/post_new_job.dart' as _i11;
-import '../pages/project-details/view/project_details.dart' as _i14;
-import '../pages/signup-page/view/signup.dart' as _i17;
-import '../pages/update-profile/view/update_profile.dart' as _i12;
-import '../pages/work_space/view/work_space_screen.dart' as _i13;
+import '../pages/discovery-job/view/discovery_job_page.dart' as _i16;
+import '../pages/find-designer/view/find_designer.dart' as _i20;
+import '../pages/job-details/view/job_details.dart' as _i17;
+import '../pages/landing-page/view/landing.dart' as _i11;
+import '../pages/portfolio/view/portfolio.dart' as _i19;
+import '../pages/post-new-job/view/post_new_job.dart' as _i12;
+import '../pages/project-details/view/project_details.dart' as _i15;
+import '../pages/signup-page/view/signup.dart' as _i18;
+import '../pages/update-profile/view/update_profile.dart' as _i13;
+import '../pages/work_space/view/work_space_screen.dart' as _i14;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i19.GlobalKey<_i19.NavigatorState>? navigatorKey])
+  AppRouter([_i21.GlobalKey<_i21.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -97,47 +100,55 @@ class AppRouter extends _i2.RootStackRouter {
           child: _i9.PortfolioFlowController(
               key: args.key, portfolio: args.portfolio));
     },
+    FindDesignerRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i10.FindDesignerFlowController());
+    },
     LandingPage.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i10.LandingPage());
+          routeData: routeData, child: const _i11.LandingPage());
     },
     PostNewJob.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i11.PostNewJob());
+          routeData: routeData, child: const _i12.PostNewJob());
     },
     _UpdateProfileRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i12.UpdateProfile());
+          routeData: routeData, child: const _i13.UpdateProfile());
     },
     _WorkSpaceRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i13.WorkspaceScreen());
+          routeData: routeData, child: const _i14.WorkspaceScreen());
     },
     _ProjectDetailsRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i14.ProjectDetailsPage());
+          routeData: routeData, child: const _i15.ProjectDetailsPage());
     },
     DiscoverJobPage.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i15.DiscoverJobPage());
+          routeData: routeData, child: const _i16.DiscoverJobPage());
     },
     JobDetailsScreen.name: (routeData) {
       final args = routeData.argsAs<JobDetailsScreenArgs>(
           orElse: () => const JobDetailsScreenArgs());
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i16.JobDetailsScreen(key: args.key, request: args.request));
+          child: _i17.JobDetailsScreen(key: args.key, request: args.request));
     },
     SignUp.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i17.SignUp());
+          routeData: routeData, child: const _i18.SignUp());
     },
     _PortfolioRoute.name: (routeData) {
       final args = routeData.argsAs<_PortfolioRouteArgs>(
           orElse: () => const _PortfolioRouteArgs());
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i18.PortfolioPage(key: args.key, portfolio: args.portfolio));
+          child: _i19.PortfolioPage(key: args.key, portfolio: args.portfolio));
+    },
+    _FindDesignerRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i20.FindDesignerPage());
     }
   };
 
@@ -210,6 +221,13 @@ class AppRouter extends _i2.RootStackRouter {
               children: [
                 _i2.RouteConfig(_PortfolioRoute.name,
                     path: '', parent: PortfolioRoute.name)
+              ]),
+          _i2.RouteConfig(FindDesignerRoute.name,
+              path: 'find-designer',
+              parent: RootRoute.name,
+              children: [
+                _i2.RouteConfig(_FindDesignerRoute.name,
+                    path: '', parent: FindDesignerRoute.name)
               ])
         ])
       ];
@@ -268,7 +286,7 @@ class WorkSpaceRoute extends _i2.PageRouteInfo<void> {
 class ProjectDetailsRoute extends _i2.PageRouteInfo<ProjectDetailsRouteArgs> {
   ProjectDetailsRoute(
       {required String projectId,
-      _i19.Key? key,
+      _i21.Key? key,
       List<_i2.PageRouteInfo>? children})
       : super(ProjectDetailsRoute.name,
             path: 'project/:projectId',
@@ -284,7 +302,7 @@ class ProjectDetailsRouteArgs {
 
   final String projectId;
 
-  final _i19.Key? key;
+  final _i21.Key? key;
 
   @override
   String toString() {
@@ -296,8 +314,8 @@ class ProjectDetailsRouteArgs {
 /// [_i7.DicoveryJobFlowController]
 class DicoveryJobRoute extends _i2.PageRouteInfo<DicoveryJobRouteArgs> {
   DicoveryJobRoute(
-      {required _i20.RequestModel? request,
-      _i19.Key? key,
+      {required _i22.RequestModel? request,
+      _i21.Key? key,
       List<_i2.PageRouteInfo>? children})
       : super(DicoveryJobRoute.name,
             path: 'discovery',
@@ -310,9 +328,9 @@ class DicoveryJobRoute extends _i2.PageRouteInfo<DicoveryJobRouteArgs> {
 class DicoveryJobRouteArgs {
   const DicoveryJobRouteArgs({required this.request, this.key});
 
-  final _i20.RequestModel? request;
+  final _i22.RequestModel? request;
 
-  final _i19.Key? key;
+  final _i21.Key? key;
 
   @override
   String toString() {
@@ -324,8 +342,8 @@ class DicoveryJobRouteArgs {
 /// [_i7.DicoveryJobFlowController]
 class DiscoveryMobileRoute extends _i2.PageRouteInfo<DiscoveryMobileRouteArgs> {
   DiscoveryMobileRoute(
-      {required _i20.RequestModel? request,
-      _i19.Key? key,
+      {required _i22.RequestModel? request,
+      _i21.Key? key,
       List<_i2.PageRouteInfo>? children})
       : super(DiscoveryMobileRoute.name,
             path: 'discovery-mobile',
@@ -338,9 +356,9 @@ class DiscoveryMobileRoute extends _i2.PageRouteInfo<DiscoveryMobileRouteArgs> {
 class DiscoveryMobileRouteArgs {
   const DiscoveryMobileRouteArgs({required this.request, this.key});
 
-  final _i20.RequestModel? request;
+  final _i22.RequestModel? request;
 
-  final _i19.Key? key;
+  final _i21.Key? key;
 
   @override
   String toString() {
@@ -361,8 +379,8 @@ class SignupRoute extends _i2.PageRouteInfo<void> {
 /// [_i9.PortfolioFlowController]
 class PortfolioRoute extends _i2.PageRouteInfo<PortfolioRouteArgs> {
   PortfolioRoute(
-      {_i19.Key? key,
-      _i21.PortfolioModel? portfolio,
+      {_i21.Key? key,
+      _i23.PortfolioModel? portfolio,
       List<_i2.PageRouteInfo>? children})
       : super(PortfolioRoute.name,
             path: 'portfolio',
@@ -375,9 +393,9 @@ class PortfolioRoute extends _i2.PageRouteInfo<PortfolioRouteArgs> {
 class PortfolioRouteArgs {
   const PortfolioRouteArgs({this.key, this.portfolio});
 
-  final _i19.Key? key;
+  final _i21.Key? key;
 
-  final _i21.PortfolioModel? portfolio;
+  final _i23.PortfolioModel? portfolio;
 
   @override
   String toString() {
@@ -386,7 +404,17 @@ class PortfolioRouteArgs {
 }
 
 /// generated route for
-/// [_i10.LandingPage]
+/// [_i10.FindDesignerFlowController]
+class FindDesignerRoute extends _i2.PageRouteInfo<void> {
+  const FindDesignerRoute({List<_i2.PageRouteInfo>? children})
+      : super(FindDesignerRoute.name,
+            path: 'find-designer', initialChildren: children);
+
+  static const String name = 'FindDesignerRoute';
+}
+
+/// generated route for
+/// [_i11.LandingPage]
 class LandingPage extends _i2.PageRouteInfo<void> {
   const LandingPage() : super(LandingPage.name, path: '');
 
@@ -394,7 +422,7 @@ class LandingPage extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.PostNewJob]
+/// [_i12.PostNewJob]
 class PostNewJob extends _i2.PageRouteInfo<void> {
   const PostNewJob() : super(PostNewJob.name, path: '');
 
@@ -402,7 +430,7 @@ class PostNewJob extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.UpdateProfile]
+/// [_i13.UpdateProfile]
 class _UpdateProfileRoute extends _i2.PageRouteInfo<void> {
   const _UpdateProfileRoute() : super(_UpdateProfileRoute.name, path: '');
 
@@ -410,7 +438,7 @@ class _UpdateProfileRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.WorkspaceScreen]
+/// [_i14.WorkspaceScreen]
 class _WorkSpaceRoute extends _i2.PageRouteInfo<void> {
   const _WorkSpaceRoute() : super(_WorkSpaceRoute.name, path: '');
 
@@ -418,7 +446,7 @@ class _WorkSpaceRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.ProjectDetailsPage]
+/// [_i15.ProjectDetailsPage]
 class _ProjectDetailsRoute extends _i2.PageRouteInfo<void> {
   const _ProjectDetailsRoute() : super(_ProjectDetailsRoute.name, path: '');
 
@@ -426,7 +454,7 @@ class _ProjectDetailsRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.DiscoverJobPage]
+/// [_i16.DiscoverJobPage]
 class DiscoverJobPage extends _i2.PageRouteInfo<void> {
   const DiscoverJobPage() : super(DiscoverJobPage.name, path: '');
 
@@ -434,9 +462,9 @@ class DiscoverJobPage extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.JobDetailsScreen]
+/// [_i17.JobDetailsScreen]
 class JobDetailsScreen extends _i2.PageRouteInfo<JobDetailsScreenArgs> {
-  JobDetailsScreen({_i19.Key? key, _i20.RequestModel? request})
+  JobDetailsScreen({_i21.Key? key, _i22.RequestModel? request})
       : super(JobDetailsScreen.name,
             path: '', args: JobDetailsScreenArgs(key: key, request: request));
 
@@ -446,9 +474,9 @@ class JobDetailsScreen extends _i2.PageRouteInfo<JobDetailsScreenArgs> {
 class JobDetailsScreenArgs {
   const JobDetailsScreenArgs({this.key, this.request});
 
-  final _i19.Key? key;
+  final _i21.Key? key;
 
-  final _i20.RequestModel? request;
+  final _i22.RequestModel? request;
 
   @override
   String toString() {
@@ -457,7 +485,7 @@ class JobDetailsScreenArgs {
 }
 
 /// generated route for
-/// [_i17.SignUp]
+/// [_i18.SignUp]
 class SignUp extends _i2.PageRouteInfo<void> {
   const SignUp() : super(SignUp.name, path: '');
 
@@ -465,9 +493,9 @@ class SignUp extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.PortfolioPage]
+/// [_i19.PortfolioPage]
 class _PortfolioRoute extends _i2.PageRouteInfo<_PortfolioRouteArgs> {
-  _PortfolioRoute({_i19.Key? key, _i21.PortfolioModel? portfolio})
+  _PortfolioRoute({_i21.Key? key, _i23.PortfolioModel? portfolio})
       : super(_PortfolioRoute.name,
             path: '',
             args: _PortfolioRouteArgs(key: key, portfolio: portfolio));
@@ -478,12 +506,20 @@ class _PortfolioRoute extends _i2.PageRouteInfo<_PortfolioRouteArgs> {
 class _PortfolioRouteArgs {
   const _PortfolioRouteArgs({this.key, this.portfolio});
 
-  final _i19.Key? key;
+  final _i21.Key? key;
 
-  final _i21.PortfolioModel? portfolio;
+  final _i23.PortfolioModel? portfolio;
 
   @override
   String toString() {
     return '_PortfolioRouteArgs{key: $key, portfolio: $portfolio}';
   }
+}
+
+/// generated route for
+/// [_i20.FindDesignerPage]
+class _FindDesignerRoute extends _i2.PageRouteInfo<void> {
+  const _FindDesignerRoute() : super(_FindDesignerRoute.name, path: '');
+
+  static const String name = '_FindDesignerRoute';
 }

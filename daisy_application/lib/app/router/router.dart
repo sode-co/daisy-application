@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/flow_controllers/discovery_job/discovery_job_flow_controller.dart';
+import 'package:daisy_application/app/flow_controllers/find_designer/find_designer_flow_controller.dart';
 import 'package:daisy_application/app/flow_controllers/portfolio/portfolio_flow_controller.dart';
 import 'package:daisy_application/app/flow_controllers/post_new_job/post_new_job_flow_controller.dart';
 import 'package:daisy_application/app/flow_controllers/project_details/project_details_controller.dart';
@@ -8,6 +9,7 @@ import 'package:daisy_application/app/flow_controllers/signup/signup_flow_contro
 import 'package:daisy_application/app/flow_controllers/update_profile/update_profile_controller.dart';
 import 'package:daisy_application/app/flow_controllers/workspace/workspace_flow_controller.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/discovery_job_page.dart';
+import 'package:daisy_application/app/pages/find-designer/view/find_designer.dart';
 import 'package:daisy_application/app/pages/job-details/view/job_details.dart';
 import 'package:daisy_application/app/pages/landing-page/view/landing.dart';
 import 'package:daisy_application/app/pages/portfolio/view/portfolio.dart';
@@ -96,6 +98,17 @@ import 'package:daisy_application/app/pages/work_space/view/work_space_screen.da
                   path: '',
                   name: '_PortfolioRoute',
                   page: PortfolioPage,
+                  initial: true),
+            ]),
+        AutoRoute(
+            path: 'find-designer',
+            name: 'FindDesignerRoute',
+            page: FindDesignerFlowController,
+            children: [
+              AutoRoute(
+                  path: '',
+                  name: '_FindDesignerRoute',
+                  page: FindDesignerPage,
                   initial: true),
             ]),
       ],
