@@ -16,5 +16,16 @@ namespace DataAccess.Repositories.Resources
         {
             _dbContext = dbContext;
         }
+
+        public IEnumerable<Resource> ResourcePaging(DateTime timeOffset, int count, int workId, string workStatus)
+        {
+            return GetAll((resource => resource.CreatedAt < timeOffset &&
+                            resource.Workspace.Id == workId &&
+                            workStatus.Equals(resource.WorkStatus)),
+                          null, "Workspace")
+                .OrderByDescending(resource => resource.CreatedAt)
+                .Take(count)
+                .ToList();
+        }
     }
 }

@@ -8,14 +8,15 @@ class ResourceGrpcClient {
   Stream<ResourceModel> streamingResource(
       String workStatus, int workspaceId, int timeOffset) async* {
     ClientChannelBase channel = locator.get();
-    StreamingResourceClient client = StreamingResourceClient(channel);
-    await for (var response in client.streaming(ResoureStreamingRequestModel(
-        workStatus: workStatus,
-        workspaceId: workspaceId,
-        timeOffset: $fixum.Int64.parseInt(timeOffset.toString()),
-        count: 50,
-        rate: 5))) {
-      for (var res in response.resource) {
+    ResourceServiceClient client = ResourceServiceClient(channel);
+    await for (var response in client.streamingResourceModel(
+        StreamingResourceModelRequestModel(
+            workStatus: workStatus,
+            workspaceId: workspaceId,
+            timeOffset: $fixum.Int64.parseInt(timeOffset.toString()),
+            count: 50,
+            rate: 5))) {
+      for (var res in response.resources) {
         yield ResourceModel.fromProto(res);
       }
     }

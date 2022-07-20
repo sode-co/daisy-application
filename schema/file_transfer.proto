@@ -1,19 +1,16 @@
 syntax = "proto3";
 
-package filetransfer;
+package daisy;
+
+import "models.proto";
 
 message Chunk {
   bytes Content = 1;
 }
 
-enum Status {
-  SUCCESS = 0;
-  FAILED = 1;
-}
-
-message TransferStatus {
-  Status Status = 1;
-  string Message = 2;
+enum TransferStatus {
+  DONE = 0;
+  STREAMING = 1;
 }
 
 message DownloadModel {
@@ -23,7 +20,33 @@ message DownloadModel {
 
 message DownloadRequest {}
 
+message StreamingResourceModelRequestModel {
+  int64 TimeOffset = 1;
+  int32 Count = 2;
+  int32 rate = 3;
+  int32 workspaceId = 4;
+  string workStatus = 5;
+}
+
+message StreamingResourceFileRequestModel {
+  repeated string Resources = 1;
+}
+
+message StreamingResourceModelResponseModel {
+  repeated Resource Resources = 1;
+}
+
+message StreamingResourceFileResponseModel {
+  TransferStatus status = 1;
+  int32 ResourceId = 2;
+  Chunk binary = 3;
+}
+
 service UploadService {
-  rpc Upload(stream Chunk) returns (TransferStatus) {};
   rpc Download(DownloadRequest) returns (stream DownloadModel) {};
+}
+
+service ResourceService {
+  rpc StreamingResourceModel(StreamingResourceModelRequestModel) returns (stream StreamingResourceModelResponseModel);
+  rpc StreamingResourceFile(StreamingResourceFileRequestModel) returns (stream StreamingResourceFileResponseModel);
 }

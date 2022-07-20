@@ -65,17 +65,15 @@ class Chunk extends $pb.GeneratedMessage {
 
 class DownloadModel extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DownloadModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
-    ..e<Status>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: Status.SUCCESS, valueOf: Status.valueOf, enumValues: Status.values)
+    ..e<TransferStatus>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: TransferStatus.DONE, valueOf: TransferStatus.valueOf, enumValues: TransferStatus.values)
     ..aOM<Chunk>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'data', subBuilder: Chunk.create)
-    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'resourceId', protoName: 'resourceId')
     ..hasRequiredFields = false
   ;
 
   DownloadModel._() : super();
   factory DownloadModel({
-    Status? status,
+    TransferStatus? status,
     Chunk? data,
-    $core.String? resourceId,
   }) {
     final _result = create();
     if (status != null) {
@@ -83,9 +81,6 @@ class DownloadModel extends $pb.GeneratedMessage {
     }
     if (data != null) {
       _result.data = data;
-    }
-    if (resourceId != null) {
-      _result.resourceId = resourceId;
     }
     return _result;
   }
@@ -111,9 +106,9 @@ class DownloadModel extends $pb.GeneratedMessage {
   static DownloadModel? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Status get status => $_getN(0);
+  TransferStatus get status => $_getN(0);
   @$pb.TagNumber(1)
-  set status(Status v) { setField(1, v); }
+  set status(TransferStatus v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasStatus() => $_has(0);
   @$pb.TagNumber(1)
@@ -129,15 +124,6 @@ class DownloadModel extends $pb.GeneratedMessage {
   void clearData() => clearField(2);
   @$pb.TagNumber(2)
   Chunk ensureData() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $core.String get resourceId => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set resourceId($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasResourceId() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearResourceId() => clearField(3);
 }
 
 class DownloadRequest extends $pb.GeneratedMessage {
@@ -169,18 +155,18 @@ class DownloadRequest extends $pb.GeneratedMessage {
   static DownloadRequest? _defaultInstance;
 }
 
-class ResoureStreamingRequestModel extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ResoureStreamingRequestModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
+class StreamingResourceModelRequestModel extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'StreamingResourceModelRequestModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
     ..aInt64(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'TimeOffset', protoName: 'TimeOffset')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Count', $pb.PbFieldType.O3, protoName: 'Count')
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rate', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'WorkspaceId', $pb.PbFieldType.O3, protoName: 'WorkspaceId')
-    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'WorkStatus', protoName: 'WorkStatus')
+    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'workspaceId', $pb.PbFieldType.O3, protoName: 'workspaceId')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'workStatus', protoName: 'workStatus')
     ..hasRequiredFields = false
   ;
 
-  ResoureStreamingRequestModel._() : super();
-  factory ResoureStreamingRequestModel({
+  StreamingResourceModelRequestModel._() : super();
+  factory StreamingResourceModelRequestModel({
     $fixnum.Int64? timeOffset,
     $core.int? count,
     $core.int? rate,
@@ -205,26 +191,26 @@ class ResoureStreamingRequestModel extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory ResoureStreamingRequestModel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ResoureStreamingRequestModel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory StreamingResourceModelRequestModel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StreamingResourceModelRequestModel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ResoureStreamingRequestModel clone() => ResoureStreamingRequestModel()..mergeFromMessage(this);
+  StreamingResourceModelRequestModel clone() => StreamingResourceModelRequestModel()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ResoureStreamingRequestModel copyWith(void Function(ResoureStreamingRequestModel) updates) => super.copyWith((message) => updates(message as ResoureStreamingRequestModel)) as ResoureStreamingRequestModel; // ignore: deprecated_member_use
+  StreamingResourceModelRequestModel copyWith(void Function(StreamingResourceModelRequestModel) updates) => super.copyWith((message) => updates(message as StreamingResourceModelRequestModel)) as StreamingResourceModelRequestModel; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ResoureStreamingRequestModel create() => ResoureStreamingRequestModel._();
-  ResoureStreamingRequestModel createEmptyInstance() => create();
-  static $pb.PbList<ResoureStreamingRequestModel> createRepeated() => $pb.PbList<ResoureStreamingRequestModel>();
+  static StreamingResourceModelRequestModel create() => StreamingResourceModelRequestModel._();
+  StreamingResourceModelRequestModel createEmptyInstance() => create();
+  static $pb.PbList<StreamingResourceModelRequestModel> createRepeated() => $pb.PbList<StreamingResourceModelRequestModel>();
   @$core.pragma('dart2js:noInline')
-  static ResoureStreamingRequestModel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResoureStreamingRequestModel>(create);
-  static ResoureStreamingRequestModel? _defaultInstance;
+  static StreamingResourceModelRequestModel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamingResourceModelRequestModel>(create);
+  static StreamingResourceModelRequestModel? _defaultInstance;
 
   @$pb.TagNumber(1)
   $fixnum.Int64 get timeOffset => $_getI64(0);
@@ -272,60 +258,162 @@ class ResoureStreamingRequestModel extends $pb.GeneratedMessage {
   void clearWorkStatus() => clearField(5);
 }
 
-class ResourceStreamingResponseModel extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ResourceStreamingResponseModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
-    ..pc<$1.Resource>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'resource', $pb.PbFieldType.PM, subBuilder: $1.Resource.create)
-    ..aOM<DownloadModel>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'download', subBuilder: DownloadModel.create)
+class StreamingResourceFileRequestModel extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'StreamingResourceFileRequestModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
+    ..pPS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Resources', protoName: 'Resources')
     ..hasRequiredFields = false
   ;
 
-  ResourceStreamingResponseModel._() : super();
-  factory ResourceStreamingResponseModel({
-    $core.Iterable<$1.Resource>? resource,
-    DownloadModel? download,
+  StreamingResourceFileRequestModel._() : super();
+  factory StreamingResourceFileRequestModel({
+    $core.Iterable<$core.String>? resources,
   }) {
     final _result = create();
-    if (resource != null) {
-      _result.resource.addAll(resource);
-    }
-    if (download != null) {
-      _result.download = download;
+    if (resources != null) {
+      _result.resources.addAll(resources);
     }
     return _result;
   }
-  factory ResourceStreamingResponseModel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ResourceStreamingResponseModel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory StreamingResourceFileRequestModel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StreamingResourceFileRequestModel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ResourceStreamingResponseModel clone() => ResourceStreamingResponseModel()..mergeFromMessage(this);
+  StreamingResourceFileRequestModel clone() => StreamingResourceFileRequestModel()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ResourceStreamingResponseModel copyWith(void Function(ResourceStreamingResponseModel) updates) => super.copyWith((message) => updates(message as ResourceStreamingResponseModel)) as ResourceStreamingResponseModel; // ignore: deprecated_member_use
+  StreamingResourceFileRequestModel copyWith(void Function(StreamingResourceFileRequestModel) updates) => super.copyWith((message) => updates(message as StreamingResourceFileRequestModel)) as StreamingResourceFileRequestModel; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ResourceStreamingResponseModel create() => ResourceStreamingResponseModel._();
-  ResourceStreamingResponseModel createEmptyInstance() => create();
-  static $pb.PbList<ResourceStreamingResponseModel> createRepeated() => $pb.PbList<ResourceStreamingResponseModel>();
+  static StreamingResourceFileRequestModel create() => StreamingResourceFileRequestModel._();
+  StreamingResourceFileRequestModel createEmptyInstance() => create();
+  static $pb.PbList<StreamingResourceFileRequestModel> createRepeated() => $pb.PbList<StreamingResourceFileRequestModel>();
   @$core.pragma('dart2js:noInline')
-  static ResourceStreamingResponseModel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResourceStreamingResponseModel>(create);
-  static ResourceStreamingResponseModel? _defaultInstance;
+  static StreamingResourceFileRequestModel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamingResourceFileRequestModel>(create);
+  static StreamingResourceFileRequestModel? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$1.Resource> get resource => $_getList(0);
+  $core.List<$core.String> get resources => $_getList(0);
+}
+
+class StreamingResourceModelResponseModel extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'StreamingResourceModelResponseModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
+    ..pc<$1.Resource>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Resources', $pb.PbFieldType.PM, protoName: 'Resources', subBuilder: $1.Resource.create)
+    ..hasRequiredFields = false
+  ;
+
+  StreamingResourceModelResponseModel._() : super();
+  factory StreamingResourceModelResponseModel({
+    $core.Iterable<$1.Resource>? resources,
+  }) {
+    final _result = create();
+    if (resources != null) {
+      _result.resources.addAll(resources);
+    }
+    return _result;
+  }
+  factory StreamingResourceModelResponseModel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StreamingResourceModelResponseModel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  StreamingResourceModelResponseModel clone() => StreamingResourceModelResponseModel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  StreamingResourceModelResponseModel copyWith(void Function(StreamingResourceModelResponseModel) updates) => super.copyWith((message) => updates(message as StreamingResourceModelResponseModel)) as StreamingResourceModelResponseModel; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static StreamingResourceModelResponseModel create() => StreamingResourceModelResponseModel._();
+  StreamingResourceModelResponseModel createEmptyInstance() => create();
+  static $pb.PbList<StreamingResourceModelResponseModel> createRepeated() => $pb.PbList<StreamingResourceModelResponseModel>();
+  @$core.pragma('dart2js:noInline')
+  static StreamingResourceModelResponseModel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamingResourceModelResponseModel>(create);
+  static StreamingResourceModelResponseModel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$1.Resource> get resources => $_getList(0);
+}
+
+class StreamingResourceFileResponseModel extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'StreamingResourceFileResponseModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
+    ..e<TransferStatus>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: TransferStatus.DONE, valueOf: TransferStatus.valueOf, enumValues: TransferStatus.values)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ResourceId', $pb.PbFieldType.O3, protoName: 'ResourceId')
+    ..aOM<Chunk>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'binary', subBuilder: Chunk.create)
+    ..hasRequiredFields = false
+  ;
+
+  StreamingResourceFileResponseModel._() : super();
+  factory StreamingResourceFileResponseModel({
+    TransferStatus? status,
+    $core.int? resourceId,
+    Chunk? binary,
+  }) {
+    final _result = create();
+    if (status != null) {
+      _result.status = status;
+    }
+    if (resourceId != null) {
+      _result.resourceId = resourceId;
+    }
+    if (binary != null) {
+      _result.binary = binary;
+    }
+    return _result;
+  }
+  factory StreamingResourceFileResponseModel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StreamingResourceFileResponseModel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  StreamingResourceFileResponseModel clone() => StreamingResourceFileResponseModel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  StreamingResourceFileResponseModel copyWith(void Function(StreamingResourceFileResponseModel) updates) => super.copyWith((message) => updates(message as StreamingResourceFileResponseModel)) as StreamingResourceFileResponseModel; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static StreamingResourceFileResponseModel create() => StreamingResourceFileResponseModel._();
+  StreamingResourceFileResponseModel createEmptyInstance() => create();
+  static $pb.PbList<StreamingResourceFileResponseModel> createRepeated() => $pb.PbList<StreamingResourceFileResponseModel>();
+  @$core.pragma('dart2js:noInline')
+  static StreamingResourceFileResponseModel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamingResourceFileResponseModel>(create);
+  static StreamingResourceFileResponseModel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  TransferStatus get status => $_getN(0);
+  @$pb.TagNumber(1)
+  set status(TransferStatus v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
 
   @$pb.TagNumber(2)
-  DownloadModel get download => $_getN(1);
+  $core.int get resourceId => $_getIZ(1);
   @$pb.TagNumber(2)
-  set download(DownloadModel v) { setField(2, v); }
+  set resourceId($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasDownload() => $_has(1);
+  $core.bool hasResourceId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearDownload() => clearField(2);
-  @$pb.TagNumber(2)
-  DownloadModel ensureDownload() => $_ensure(1);
+  void clearResourceId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  Chunk get binary => $_getN(2);
+  @$pb.TagNumber(3)
+  set binary(Chunk v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasBinary() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBinary() => clearField(3);
+  @$pb.TagNumber(3)
+  Chunk ensureBinary() => $_ensure(2);
 }
 
