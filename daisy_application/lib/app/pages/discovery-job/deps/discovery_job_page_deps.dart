@@ -10,4 +10,5 @@ abstract class DiscoveryJobListener<T extends StatefulWidget>
   void onLoadListApplicants(int? requestId);
   void onBtnApproveJobApplication(
       RequestModel? request, int requestId, String freelancerEmail);
+  void getPortfolioByDesignerEmail(String designerEmail);
 }
