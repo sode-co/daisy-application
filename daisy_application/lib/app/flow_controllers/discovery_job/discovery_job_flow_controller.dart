@@ -17,6 +17,7 @@ import 'package:daisy_application/core_services/grpc/request/request_grpc_client
 import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
 import 'package:daisy_application/core_services/http/portfolio/portfolio_rest_api.dart';
 import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
+import 'package:daisy_application/core_services/models/portfolio/portfolio_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:daisy_application/service_locator/locator.dart';
@@ -204,6 +205,7 @@ class _DiscoveryJobFlowControllerState extends FlowControllerState
 
   Future<void> getPortfolio(String designerEmail) async {
     var result = await _portfolioRestApi.getByDesignerEmail(designerEmail);
-    context.router.push(PortfolioRoute(portfolio: result.data));
+    PortfolioModel portfolio = result.data;
+    context.router.push(PortfolioRoute(portfolio: portfolio));
   }
 }

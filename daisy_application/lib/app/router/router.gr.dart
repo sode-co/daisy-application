@@ -90,10 +90,12 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: _i8.SignupFlowController());
     },
     PortfolioRoute.name: (routeData) {
-      final args = routeData.argsAs<PortfolioRouteArgs>();
+      final args = routeData.argsAs<PortfolioRouteArgs>(
+          orElse: () => const PortfolioRouteArgs());
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i9.PortfolioFlowController(args.portfolio, key: args.key));
+          child: _i9.PortfolioFlowController(
+              key: args.key, portfolio: args.portfolio));
     },
     LandingPage.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -131,8 +133,11 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: const _i17.SignUp());
     },
     _PortfolioRoute.name: (routeData) {
+      final args = routeData.argsAs<_PortfolioRouteArgs>(
+          orElse: () => const _PortfolioRouteArgs());
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i18.PortfolioPage());
+          routeData: routeData,
+          child: _i18.PortfolioPage(key: args.key, portfolio: args.portfolio));
     }
   };
 
@@ -356,27 +361,27 @@ class SignupRoute extends _i2.PageRouteInfo<void> {
 /// [_i9.PortfolioFlowController]
 class PortfolioRoute extends _i2.PageRouteInfo<PortfolioRouteArgs> {
   PortfolioRoute(
-      {required _i21.PortfolioModel? portfolio,
-      _i19.Key? key,
+      {_i19.Key? key,
+      _i21.PortfolioModel? portfolio,
       List<_i2.PageRouteInfo>? children})
       : super(PortfolioRoute.name,
             path: 'portfolio',
-            args: PortfolioRouteArgs(portfolio: portfolio, key: key),
+            args: PortfolioRouteArgs(key: key, portfolio: portfolio),
             initialChildren: children);
 
   static const String name = 'PortfolioRoute';
 }
 
 class PortfolioRouteArgs {
-  const PortfolioRouteArgs({required this.portfolio, this.key});
-
-  final _i21.PortfolioModel? portfolio;
+  const PortfolioRouteArgs({this.key, this.portfolio});
 
   final _i19.Key? key;
 
+  final _i21.PortfolioModel? portfolio;
+
   @override
   String toString() {
-    return 'PortfolioRouteArgs{portfolio: $portfolio, key: $key}';
+    return 'PortfolioRouteArgs{key: $key, portfolio: $portfolio}';
   }
 }
 
@@ -461,8 +466,24 @@ class SignUp extends _i2.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.PortfolioPage]
-class _PortfolioRoute extends _i2.PageRouteInfo<void> {
-  const _PortfolioRoute() : super(_PortfolioRoute.name, path: '');
+class _PortfolioRoute extends _i2.PageRouteInfo<_PortfolioRouteArgs> {
+  _PortfolioRoute({_i19.Key? key, _i21.PortfolioModel? portfolio})
+      : super(_PortfolioRoute.name,
+            path: '',
+            args: _PortfolioRouteArgs(key: key, portfolio: portfolio));
 
   static const String name = '_PortfolioRoute';
+}
+
+class _PortfolioRouteArgs {
+  const _PortfolioRouteArgs({this.key, this.portfolio});
+
+  final _i19.Key? key;
+
+  final _i21.PortfolioModel? portfolio;
+
+  @override
+  String toString() {
+    return '_PortfolioRouteArgs{key: $key, portfolio: $portfolio}';
+  }
 }

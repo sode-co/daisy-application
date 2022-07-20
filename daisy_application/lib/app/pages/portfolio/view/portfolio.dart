@@ -8,12 +8,13 @@ import 'package:daisy_application/app/pages/portfolio/view/portfolio_artworks.da
 import 'package:daisy_application/app/pages/portfolio/view/portfolio_contact.dart';
 import 'package:daisy_application/app/pages/portfolio/view/portfolio_header.dart';
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/core_services/models/portfolio/portfolio_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PortfolioPage extends StatefulWidget {
-  const PortfolioPage({Key? key}) : super(key: key);
-
+  const PortfolioPage({Key? key, this.portfolio}) : super(key: key);
+  final PortfolioModel? portfolio;
   @override
   State<PortfolioPage> createState() => PortfolioPageState();
 }
@@ -22,7 +23,6 @@ class PortfolioPageState extends State<PortfolioPage> {
   late PageController filePageController;
   late ScrollController? discussionScrollController;
   late TextEditingController discussionTextController;
-
   @override
   initState() {
     super.initState();
@@ -41,7 +41,6 @@ class PortfolioPageState extends State<PortfolioPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<PortfolioState>();
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
