@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 
 class AddArtworkDialog extends Dialog {
   final BuildContext context;
-  late TextEditingController descriptionController;
+  late TextEditingController descriptionController1;
+  late TextEditingController descriptionController2;
   final Function()? onConfirmClicked;
 
   AddArtworkDialog(this.context, this.onConfirmClicked, {Key? key})
       : super(key: key) {
-    descriptionController = TextEditingController();
+    descriptionController1 = TextEditingController();
+    descriptionController2 = TextEditingController();
   }
 
   @override
@@ -107,7 +109,7 @@ class AddArtworkDialog extends Dialog {
           ),
           BasicTextField(
             widthMode: WidthMode.MATCH_PARENT,
-            controller: descriptionController,
+            controller: descriptionController1,
             maxLines: 1,
             hintText:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -127,7 +129,7 @@ class AddArtworkDialog extends Dialog {
           ),
           BasicTextField(
             widthMode: WidthMode.MATCH_PARENT,
-            controller: descriptionController,
+            controller: descriptionController2,
             maxLines: 1,
             hintText:
                 'https://firebasestorage.googleapis.com/v0/b/test-37ba6.appspot.com/o/Cat03.jpg?alt=media&token=143bae7b-74d9-44d5-a73f-4eb1ba3fc1ab',
