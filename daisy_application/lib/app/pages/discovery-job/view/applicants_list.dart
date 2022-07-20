@@ -53,7 +53,7 @@ class _ListApplicantsState extends State<ListApplicants> {
                     ),
                     DataColumn(
                       label: Text(
-                        'E-mail',
+                        'Xem portfolio',
                         style: Design.textTableHeader(
                           textColor: Colors.black.withOpacity(0.6),
                         ),
@@ -61,22 +61,11 @@ class _ListApplicantsState extends State<ListApplicants> {
                     ),
                     DataColumn(
                       label: Text(
-                        'Số điện thoại',
+                        'Trạng thái',
                         style: Design.textTableHeader(
                           textColor: Colors.black.withOpacity(0.6),
                         ),
                       ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Mô tả',
-                        style: Design.textTableHeader(
-                          textColor: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                    ),
-                    const DataColumn(
-                      label: Text(''),
                     ),
                   ],
                   rows: widget.applicants
@@ -111,17 +100,21 @@ class _ListApplicantsState extends State<ListApplicants> {
           ),
         ),
         DataCell(
-          Text(
-            applicant.freelancer!.email!,
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 52, 155, 55),
+            ),
+            icon: const Icon(
+              Icons.recommend,
+              size: 14,
+            ),
+            onPressed: () {
+              _listener
+                  .getPortfolioByDesignerEmail(applicant.freelancer!.email!);
+            },
+            // Edit
+            label: const Text('Portfolio'),
           ),
-        ),
-        DataCell(
-          Text(
-            applicant.freelancer!.phone!,
-          ),
-        ),
-        DataCell(
-          Text(applicant.description!),
         ),
         if (applicant.status == 'PENDING')
           DataCell(
@@ -136,7 +129,7 @@ class _ListApplicantsState extends State<ListApplicants> {
                     size: 14,
                   ),
                   onPressed: () {
-                    _listener.onBtnApproveJobApplication(
+                    _listener.onBtnApproveJobApplication(applicant.request,
                         applicant.request!.id!, applicant!.freelancer!.email!);
                   },
                   // Edit
@@ -144,18 +137,6 @@ class _ListApplicantsState extends State<ListApplicants> {
                 ),
                 const SizedBox(
                   width: 6,
-                ),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.green.withOpacity(0.5),
-                  ),
-                  icon: const Icon(
-                    Icons.visibility,
-                    size: 14,
-                  ),
-                  onPressed: () {},
-                  //View
-                  label: const Text('Xem portfolio'),
                 ),
                 const SizedBox(
                   width: 6,
@@ -178,7 +159,7 @@ class _ListApplicantsState extends State<ListApplicants> {
                         affirmativeText: 'Từ chối',
                         negativeText: 'Hủy bỏ',
                         onAffirmativeClicked: () {
-                          context.pushRoute(const DicoveryJobRoute());
+                          context.pushRoute(DicoveryJobRoute(request: null));
                           Navigator.of(context, rootNavigator: true).pop();
                         },
                         onNegativeClicked: () {

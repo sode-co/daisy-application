@@ -1,14 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/design/design_snackbar.dart';
 import 'package:daisy_application/app/foundation/flow_controller.dart';
+import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/app/pages/work_space/deps/workspace_listener.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_screen_state.dart';
 import 'package:daisy_application/app/pages/work_space/model/workspace_tabs.dart';
-import 'package:daisy_application/app/router/admin_router.gr.dart';
-import 'package:daisy_application/app/router/router.gr.dart';
+import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/common/math_utils.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
+import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
 import 'package:daisy_application/core_services/models/project/project_model.dart';
@@ -29,12 +31,17 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
   WorkSpaceScreenState? _screenState;
   late ProjectRestApi _projectRestApi;
   late RequestRestApi _requestRestApi;
+  late JobApplicationRestApi _applicationRestApi;
+  DiscoveryJobScreenState? _jobScreenState;
 
   @override
   void initState() {
     _projectRestApi = locator.get();
     _requestRestApi = locator.get();
+    _applicationRestApi = locator.get();
+
     _screenState = WorkSpaceScreenState();
+    _jobScreenState = DiscoveryJobScreenState();
     Future.sync(
         () async => await onSelectedTabChanged(WorkspaceTab.ActiveProjects));
     super.initState();
@@ -118,5 +125,31 @@ class _WorkSpaceFlowControllerState extends FlowControllerState
     }
 
     _screenState!.activeTab = tab;
+  }
+
+  ApplicationState get _appState => context.read();
+
+  @override
+  void onLoadListApplicants(int? requestId) => getListApplicants(requestId);
+
+  Future<void> getListApplicants(int? requestId) async {
+    const ns = 'discovery-page';
+    Debug.log(ns, 'get list applicants', _appState.currentUser,
+        _jobScreenState?.selectedRequest);
+    final result =
+        await _applicationRestApi.GetApplicantsOfRequest(requestId).Value();
+    if (result.failureType == FAILURE_TYPE.NONE) {
+      _jobScreenState!.applicants = result.data;
+    }
+  }
+
+  @override
+  void onBtnApproveJobApplication(int requestId, String freelancerEmail) =>
+      approveJobApplication(requestId, freelancerEmail);
+
+  Future<void> approveJobApplication(
+      int requestId, String freelancerEmail) async {
+    await _applicationRestApi.approveApplication(requestId, freelancerEmail);
+    context.toastSuccess('Duyệt đơn ứng tuyển thành công');
   }
 }

@@ -20,7 +20,7 @@ abstract class JobApplicationRestApi {
       @Path('requestId') int? requestId);
 
   @PUT('')
-  Future<HttpResponse<List<JobApplicationModel>>> approveApplication(
+  Future<HttpResponse<void>> approveApplication(
     @Query('requestId') int requestId,
     @Query('freelancerEmail') String freelancerEmail,
   );

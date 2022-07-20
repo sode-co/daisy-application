@@ -3,6 +3,8 @@
 import 'dart:typed_data';
 
 import 'package:daisy_application/core_services/models/workspace/workspace_model.dart';
+import 'package:daisy_application/schema/file_transfer.pb.dart';
+import 'package:daisy_application/schema/models.pbgrpc.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -15,6 +17,7 @@ class ResourceModel extends JsonSerializable with HiveObjectMixin {
   String? fileType;
   String? fileName;
   WorkspaceModel? workspace;
+  String? workStatus;
   @JsonKey(ignore: true)
   Uint8List? binary;
 
@@ -24,7 +27,17 @@ class ResourceModel extends JsonSerializable with HiveObjectMixin {
       this.fileType,
       this.fileName,
       this.workspace,
+      this.workStatus,
       this.binary});
+
+  ResourceModel.fromProto(Resource proto) {
+    id = proto.id;
+    createdAt = DateTime.fromMillisecondsSinceEpoch(proto.createdAt.toInt());
+    fileType = proto.file.mimeType;
+    fileName = proto.file.fileName;
+    workStatus = proto.workStatus;
+    workspace = WorkspaceModel.fromProto(proto.workspace);
+  }
 
   factory ResourceModel.fromJson(Map<String, dynamic> json) =>
       _$ResourceModelFromJson(json);

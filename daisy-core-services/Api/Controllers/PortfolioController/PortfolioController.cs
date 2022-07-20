@@ -3,6 +3,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Api.Controllers.PortfolioController
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        [Authorize]
+        [Authorize(Policy = ROLE.DESIGNER)]
         [HttpPost()]
         public IActionResult CreatePortfolio([FromBody] Portfolio body)
         {
@@ -33,10 +34,37 @@ namespace Api.Controllers.PortfolioController
                 {
                     work.PortfolioRepository.Add(new Portfolio()
                     {
+                        IsActive = body.IsActive,
                         Freelancer = freelancer,
                         Biography = body.Biography
                     });
 
+                    work.Save();
+
+                    return Ok();
+                }
+
+                return NotFound();
+            }
+        }
+
+        [Authorize(Policy = ROLE.DESIGNER)]
+        [HttpPut()]
+        public IActionResult UpdatePortfolio([FromBody] Portfolio body)
+        {
+            int designerId = ((User)HttpContext.Items["User"]).Id;
+
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                User freelancer = work.UserRepository.Get(designerId);
+                var portfolioList = work.PortfolioRepository.GetAll(null, null, "Freelancer");
+                Portfolio portfolio = portfolioList.FirstOrDefault(p => p.Freelancer.Id == designerId);
+                if (freelancer != null && portfolio != null)
+                {
+                    portfolio.IsActive = body.IsActive;
+                    portfolio.Biography = body.Biography;
+                    portfolio.UpdatedAt = DateTime.Now;
+                    work.PortfolioRepository.UpdatePortfolio(portfolio);
                     work.Save();
 
                     return Ok();
@@ -57,6 +85,18 @@ namespace Api.Controllers.PortfolioController
                 work.PortfolioRepository.DeletePortfolio(deletedPort);
                 work.Save();
                 return NoContent();
+            }
+        }
+
+        [HttpGet("{designerEmail}")]
+        [Authorize(Policy = ROLE.CUSTOMER)]
+        public Portfolio GetPortfolioByEmail(string designerEmail)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                var portfolioList = work.PortfolioRepository.GetAll(null, null, "Freelancer");
+                Portfolio portfolio = portfolioList.FirstOrDefault(p => p.Freelancer.Email == designerEmail);
+                return portfolio;
             }
         }
     }

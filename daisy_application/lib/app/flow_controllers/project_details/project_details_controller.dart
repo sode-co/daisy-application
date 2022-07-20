@@ -9,9 +9,7 @@ import 'package:daisy_application/core_services/grpc/discussions/discussions_grp
 import 'package:daisy_application/core_services/grpc/resource/resource_grpc_client.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/models/discussion/discussion_model.dart';
-import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
-import 'package:daisy_application/schema/file_transfer.pbgrpc.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -94,9 +92,8 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
   }
 
   @override
-  void onFileNavTabSelected(int index) {
-    // TODO: implement onFileNavTabSelected
-  }
+  void onFileNavTabSelected(int index) =>
+      _loadResource(projectDetailsState!.currentProjectTab);
 
   Future<void> _loadResource(ProjectFileTab tab) async {
     if (tab.resources.isNotEmpty) {
@@ -106,12 +103,13 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
       tab.fileType!.name,
       projectDetailsState!.project!.workspaces.first.id!,
       DateTime.now().millisecondsSinceEpoch,
-    )) {}
+    )) {
+      tab.addResources([response]);
+    }
   }
 
   @override
   Future<void> onLoadMoreDicussion() async {
-    Debug.log('loadmore disuccsison');
     if (projectDetailsState == null &&
         projectDetailsState!.isDiscussionLoading) {
       return;

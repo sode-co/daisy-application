@@ -40,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
                         icon: const IconButtomItem(
                             icon: Icons.person_search_outlined),
                         onPressed: () {
-                          context.router.push(const DicoveryJobRoute());
+                          context.pushRoute(DicoveryJobRoute(request: null));
                         },
                       ),
                       IconButton(

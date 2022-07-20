@@ -1,4 +1,5 @@
-import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/flow_controllers/project_details/project_details_controller.dart';
+import 'package:daisy_application/app/pages/project-details/view/files/item_project_file.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,8 @@ extension PageProjectFile on ProjectDetailsPageState {
           ),
           itemCount: screenState.currentProjectTab.resources.length,
           itemBuilder: (ctx, index) {
-            return Container();
+            return createProjectResourceItem(
+                screenState.currentProjectTab.resources[index]);
           }));
 
   void switchFileTab(int index) {
@@ -32,5 +34,6 @@ extension PageProjectFile on ProjectDetailsPageState {
         duration: const Duration(milliseconds: 200),
         curve: Curves.fastOutSlowIn);
     screenState.currentFileTabIndex = index;
+    listener.onFileNavTabSelected(index);
   }
 }

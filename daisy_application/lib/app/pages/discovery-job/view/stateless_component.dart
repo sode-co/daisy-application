@@ -133,11 +133,15 @@ class _DisplayTime {
 class JobDetails extends StatefulWidget {
   final VoidCallback? onApply;
   const JobDetails(
-      {Key? key, required this.request, this.onApply, required this.applicants})
+      {Key? key,
+      required this.request,
+      this.onApply,
+      required this.applicants,
+      this.width})
       : super(key: key);
   final RequestModel request;
-  final List<JobApplicationModel> applicants;
-
+  final List<JobApplicationModel>? applicants;
+  final double? width;
   @override
   State<JobDetails> createState() => _JobDetailsState();
 }
@@ -172,7 +176,8 @@ class _JobDetailsState extends State<JobDetails> {
     return Padding(
       padding: const EdgeInsets.only(top: Design.headerSpacing),
       child: SizedBox(
-        width: size.width * 0.57,
+        width: widget.width ??
+            (Responsive.isDesktop(context) ? size.width * 0.57 : size.width),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
@@ -211,40 +216,48 @@ class _JobDetailsState extends State<JobDetails> {
                   Text('You match this job')
                 ],
               ),
-              const SizedBox(height: Design.headerSpacing),
-              ApplicationButton(onApply: widget.onApply),
+              if (widget.request.status == 'AVAILABLE')
+                const SizedBox(height: Design.headerSpacing),
+              if (widget.request.status == 'AVAILABLE')
+                ApplicationButton(onApply: widget.onApply),
               const SizedBox(height: Design.headerSpacing),
               Text(
                 'Phân loại:',
-                style: Design.textHeadline(),
+                style: Design.textSmallHeadline(),
               ),
               const SizedBox(height: Design.contentSpacing),
               Text(
-                widget.request.category!.name!,
+                widget.request.category?.name ?? '',
                 style: Design.textBody(),
               ),
               const SizedBox(height: Design.headerSpacing),
               Text(
                 'Mô tả chi tiết:',
-                style: Design.textHeadline(),
+                style: Design.textSmallHeadline(),
               ),
               const SizedBox(height: Design.contentSpacing),
               Text(
-                widget.request.description!,
+                widget.request.description ?? '',
                 style: Design.textBody(),
               ),
               const SizedBox(height: Design.headerSpacing),
               Text(
                 'Thông tin người tuyển dụng',
-                style: Design.textHeadline(),
+                style: Design.textSmallHeadline(),
               ),
               const SizedBox(height: Design.contentSpacing),
               RecruiterInfo(request: widget.request),
               const SizedBox(
                 height: Design.contentSpacing,
               ),
-              if (widget.applicants.isNotEmpty)
-                ListApplicants(applicants: widget.applicants)
+              if (widget.applicants == null)
+                Text(
+                  'Chưa có ứng viên nào ứng tuyển cho vị trí này',
+                  style: Design.textBody(),
+                ),
+              const SizedBox(height: Design.headerSpacing),
+              if (widget.applicants!.isNotEmpty)
+                ListApplicants(applicants: widget.applicants ?? [])
               else
                 Text(
                   'Chưa có ứng viên nào ứng tuyển cho vị trí này',
@@ -293,7 +306,8 @@ class RecruiterInfo extends StatelessWidget {
                   width: Responsive.isDesktop(context) ? 80.0 : 50.0,
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(
-                      request.customer?.avatar ?? '',
+                      request.customer?.avatar ??
+                          'https://firebasestorage.googleapis.com/v0/b/test-37ba6.appspot.com/o/Cat03.jpg?alt=media&token=143bae7b-74d9-44d5-a73f-4eb1ba3fc1ab',
                     ),
                   ),
                 ),
@@ -306,14 +320,14 @@ class RecruiterInfo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        request.customer?.displayName ?? '',
+                        request.customer?.displayName ?? 'Lorem ipsum dolor',
                         style: Design.textBodyLarge(bold: true),
                       ),
                       const SizedBox(
                         height: Design.contentSpacing,
                       ),
                       Text(
-                        request.customer?.email ?? '',
+                        request.customer?.email ?? 'ipsumdolor@gmail.com',
                         style: Design.textBody(),
                       ),
                       const SizedBox(

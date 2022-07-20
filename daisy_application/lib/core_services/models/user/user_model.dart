@@ -17,6 +17,7 @@ class UserModel extends JsonSerializable with HiveObjectMixin {
   String? avatar;
   String? address;
   String? phone;
+  String? description;
 
   UserModel(
       this.id,
@@ -28,7 +29,8 @@ class UserModel extends JsonSerializable with HiveObjectMixin {
       this.settings,
       this.avatar,
       this.address,
-      this.phone);
+      this.phone,
+      this.description);
 
   UserModel.init();
 

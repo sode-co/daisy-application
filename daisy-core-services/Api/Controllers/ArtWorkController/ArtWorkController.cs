@@ -3,6 +3,8 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 using static Api.Common.Constants;
 
 namespace Api.Controllers.ArtWorkController
@@ -78,6 +80,37 @@ namespace Api.Controllers.ArtWorkController
                 return Json(new { message = "ok" });
             }
             
+        }
+
+        [Authorize(Policy = ROLE.DESIGNER)]
+        [HttpPost()]
+        public IActionResult CreateArtwork([FromBody] ArtWork body)
+        {
+            int designerId = ((User)HttpContext.Items["User"]).Id;
+
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                User freelancer = work.UserRepository.Get(designerId);
+                var portfolioList = work.PortfolioRepository.GetAll(null, null, "Freelancer");
+                Portfolio portfolio = portfolioList.FirstOrDefault(p => p.Freelancer.Id == designerId);
+                portfolio.UpdatedAt = DateTime.Now;
+                if(freelancer != null && portfolio != null)
+                {
+                    work.ArtWorkRepository.Add(new ArtWork()
+                    {
+                        Description = body.Description,
+                        Image = body.Image,
+                        Portfolio = portfolio,
+                        Title = body.Title
+                    });
+
+                    work.Save();
+                    return Ok();
+                }
+
+                work.Save();
+                return NotFound();
+            }
         }
 
     }

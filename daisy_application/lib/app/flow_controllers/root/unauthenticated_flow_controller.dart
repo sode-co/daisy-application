@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/app/common/widget/header/header_deps.dart';
 import 'package:daisy_application/app/dialogs/alert_dialog.dart';
-import 'package:daisy_application/app/router/admin_router.gr.dart';
 import 'package:daisy_application/app/router/router.gr.dart' as Routers;
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
@@ -11,7 +11,6 @@ import 'package:daisy_application/core_services/persistent/user_persistent.dart'
 import 'package:daisy_application/domain-services/authentication-service.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class UnAuthenticatedFlowController extends StatefulWidget {
@@ -45,7 +44,7 @@ class _UnAuthenticatedFlowControllerState
 
   @override
   void onBtnFindJobCliked() {
-    context.router.push(const Routers.DicoveryJobRoute());
+    context.router.push(Routers.DicoveryJobRoute(request: null));
   }
 
   @override
@@ -71,7 +70,7 @@ class _UnAuthenticatedFlowControllerState
   void _onLoginDialogAffirmativeClicked() async {
     Navigator.of(context, rootNavigator: true).pop();
     await _signIn();
-    context.pushRoute(const PostNewJobRoute());
+    context.pushRoute(PostNewJobRoute());
   }
 
   void _onLoginDialogNegativeClicked() {
