@@ -3,7 +3,7 @@
 //  source: file_transfer.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 import 'dart:async' as $async;
 
@@ -13,37 +13,49 @@ import 'package:grpc/service_api.dart' as $grpc;
 import 'file_transfer.pb.dart' as $0;
 export 'file_transfer.pb.dart';
 
-class UploadServiceClient extends $grpc.Client {
-  static final _$upload = $grpc.ClientMethod<$0.Chunk, $0.TransferStatus>(
-      '/filetransfer.UploadService/Upload',
-      ($0.Chunk value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.TransferStatus.fromBuffer(value));
+class StreamingResourceClient extends $grpc.Client {
+  static final _$streaming = $grpc.ClientMethod<$0.ResoureStreamingRequestModel,
+          $0.ResourceStreamingResponseModel>(
+      '/daisy.StreamingResource/Streaming',
+      ($0.ResoureStreamingRequestModel value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.ResourceStreamingResponseModel.fromBuffer(value));
 
-  UploadServiceClient($grpc.ClientChannel channel,
+  StreamingResourceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$0.TransferStatus> upload(
-      $async.Stream<$0.Chunk> request,
+  $grpc.ResponseStream<$0.ResourceStreamingResponseModel> streaming(
+      $0.ResoureStreamingRequestModel request,
       {$grpc.CallOptions? options}) {
-    return $createStreamingCall(_$upload, request, options: options).single;
+    return $createStreamingCall(
+        _$streaming, $async.Stream.fromIterable([request]),
+        options: options);
   }
 }
 
-abstract class UploadServiceBase extends $grpc.Service {
-  $core.String get $name => 'filetransfer.UploadService';
+abstract class StreamingResourceServiceBase extends $grpc.Service {
+  $core.String get $name => 'daisy.StreamingResource';
 
-  UploadServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.Chunk, $0.TransferStatus>(
-        'Upload',
-        upload,
-        true,
+  StreamingResourceServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.ResoureStreamingRequestModel,
+            $0.ResourceStreamingResponseModel>(
+        'Streaming',
+        streaming_Pre,
         false,
-        ($core.List<$core.int> value) => $0.Chunk.fromBuffer(value),
-        ($0.TransferStatus value) => value.writeToBuffer()));
+        true,
+        ($core.List<$core.int> value) =>
+            $0.ResoureStreamingRequestModel.fromBuffer(value),
+        ($0.ResourceStreamingResponseModel value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.TransferStatus> upload(
-      $grpc.ServiceCall call, $async.Stream<$0.Chunk> request);
+  $async.Stream<$0.ResourceStreamingResponseModel> streaming_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.ResoureStreamingRequestModel> request) async* {
+    yield* streaming(call, await request);
+  }
+
+  $async.Stream<$0.ResourceStreamingResponseModel> streaming(
+      $grpc.ServiceCall call, $0.ResoureStreamingRequestModel request);
 }

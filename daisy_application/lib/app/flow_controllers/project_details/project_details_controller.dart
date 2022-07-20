@@ -1,14 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/pages/project-details/deps/project_details_listener.dart';
 import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
+import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/grpc/discussions/discussions_grpc_client.dart';
+import 'package:daisy_application/core_services/grpc/resource/resource_grpc_client.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/models/discussion/discussion_model.dart';
 import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
+import 'package:daisy_application/schema/file_transfer.pbgrpc.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +33,8 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
   late DiscussionsGrpcClient _discussionsGrpcService;
   late DiscussionSignalRClient _discussionRealtimeService;
 
+  late ResourceGrpcClient _resourceGrpcService;
+
   ProjectDetailsFlowController get myWidget =>
       widget as ProjectDetailsFlowController;
 
@@ -40,12 +45,14 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
     projectApiSerivce = locator.get();
     projectDetailsState = ProjectDetailsState();
     _discussionRealtimeService = locator.get();
+    _resourceGrpcService = locator.get();
     loadProject();
   }
 
   ApplicationState get appState => context.read();
 
   Future<void> loadProject() async {
+    ProjectDetailsRoute(projectId: '');
     var result = await projectApiSerivce.getById(myWidget.projectId).Value();
     if (result.failureType == FAILURE_TYPE.NONE) {
       projectDetailsState!.project = result.data;
@@ -89,6 +96,17 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
   @override
   void onFileNavTabSelected(int index) {
     // TODO: implement onFileNavTabSelected
+  }
+
+  Future<void> _loadResource(ProjectFileTab tab) async {
+    if (tab.resources.isNotEmpty) {
+      return;
+    }
+    await for (var response in _resourceGrpcService.streamingResource(
+      tab.fileType!.name,
+      projectDetailsState!.project!.workspaces.first.id!,
+      DateTime.now().millisecondsSinceEpoch,
+    )) {}
   }
 
   @override
