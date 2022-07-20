@@ -42,9 +42,7 @@ namespace DataAccess.Repositories.Users
                 designerList.Add(user);
             }
 
-            designerList.Distinct();
-
-            return designerList;
+            return designerList.Distinct();
         }
 
         public User GetUser(int id)
