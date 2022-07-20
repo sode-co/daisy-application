@@ -19,6 +19,8 @@ class ArtworkModel extends JsonSerializable with HiveObjectMixin {
   CategoryModel? category;
   String? title;
   String? data;
+  String? resources;
+  String? objectId;
 
   ArtworkModel({
     this.id,
@@ -31,6 +33,8 @@ class ArtworkModel extends JsonSerializable with HiveObjectMixin {
     this.category,
     this.title,
     this.data,
+    this.resources,
+    this.objectId,
   });
   ArtworkModel.init();
 

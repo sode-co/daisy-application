@@ -2,7 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/pages/portfolio/deps/portfolio_listener.dart';
 import 'package:daisy_application/app/pages/portfolio/model/portfolio_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/core_services/http/artwork/artwork_rest_api.dart';
+import 'package:daisy_application/core_services/models/artwork/artwork_model.dart';
 import 'package:daisy_application/core_services/models/portfolio/portfolio_model.dart';
+import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +20,7 @@ class PortfolioFlowController extends AutoRouter {
 class _PortfolioFlowControllerState extends AutoRouterState
     implements PortfolioListener<AutoRouter> {
   PortfolioState? portfolioState;
+  late ArtworkRestApi _artworkRestApi;
 
   PortfolioFlowController get myWidget => widget as PortfolioFlowController;
 
@@ -25,6 +29,7 @@ class _PortfolioFlowControllerState extends AutoRouterState
     super.initState();
     portfolioState = PortfolioState();
     portfolioState!.portfolio = myWidget.portfolio;
+    _artworkRestApi = locator.get();
   }
 
   ApplicationState get appState => context.read();
@@ -42,5 +47,16 @@ class _PortfolioFlowControllerState extends AutoRouterState
       ],
       child: super.build(context),
     );
+  }
+
+  @override
+  void onAddArtworkBtnClick(String title, String image) {
+    ArtworkModel artwork = ArtworkModel.init()
+      ..title = title
+      ..image = image
+      ..objectId = 'string'
+      ..description = 'description'
+      ..data = 'data';
+    _artworkRestApi.create(artwork);
   }
 }

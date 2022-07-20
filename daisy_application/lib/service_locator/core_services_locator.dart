@@ -2,6 +2,7 @@ import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/discussions/discussions_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
+import 'package:daisy_application/core_services/http/artwork/artwork_rest_api.dart';
 import 'package:daisy_application/core_services/http/authentication/authentication_rest_api.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
@@ -113,6 +114,9 @@ class CoreServiceLocator {
     locator.registerFactory<PortfolioRestApi>(() => PortfolioRestApi(
         locator.get(),
         baseUrl: '${Config.API_URL}/v1/portfolios'));
+
+    locator.registerFactory<ArtworkRestApi>(() => ArtworkRestApi(locator.get(),
+        baseUrl: '${Config.API_URL}/v1/artworks'));
   }
 
   static Future<void> _initPersistentService() async {

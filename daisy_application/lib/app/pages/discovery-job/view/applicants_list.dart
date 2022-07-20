@@ -102,7 +102,7 @@ class _ListApplicantsState extends State<ListApplicants> {
         DataCell(
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
-              primary: Colors.blue.withOpacity(0.5),
+              primary: Color.fromARGB(255, 52, 155, 55),
             ),
             icon: const Icon(
               Icons.recommend,
@@ -137,18 +137,6 @@ class _ListApplicantsState extends State<ListApplicants> {
                 ),
                 const SizedBox(
                   width: 6,
-                ),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.green.withOpacity(0.5),
-                  ),
-                  icon: const Icon(
-                    Icons.visibility,
-                    size: 14,
-                  ),
-                  onPressed: () {},
-                  //View
-                  label: const Text('Xem portfolio'),
                 ),
                 const SizedBox(
                   width: 6,

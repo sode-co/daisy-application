@@ -27,6 +27,8 @@ ArtworkModel _$ArtworkModelFromJson(Map<String, dynamic> json) => ArtworkModel(
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
       title: json['title'] as String?,
       data: json['data'] as String?,
+      resources: json['resources'] as String?,
+      objectId: json['objectId'] as String?,
     );
 
 Map<String, dynamic> _$ArtworkModelToJson(ArtworkModel instance) =>
@@ -41,4 +43,6 @@ Map<String, dynamic> _$ArtworkModelToJson(ArtworkModel instance) =>
       'category': instance.category,
       'title': instance.title,
       'data': instance.data,
+      'resources': instance.resources,
+      'objectId': instance.objectId,
     };

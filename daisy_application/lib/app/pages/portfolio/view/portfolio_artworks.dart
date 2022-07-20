@@ -1,3 +1,4 @@
+import 'package:daisy_application/app/common/design/design_snackbar.dart';
 import 'package:daisy_application/app/common/design/design_style.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/utils/widget_utils.dart';
@@ -21,7 +22,14 @@ extension PortfolioArtworks on PortfolioPageState {
                     const Color.fromARGB(255, 41, 180, 113)),
               ),
               onPressed: () {
-                context.show(AddArtworkDialog(context, () {}));
+                context.show(AddArtworkDialog(context, () {
+                  listener.onAddArtworkBtnClick(
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    'https://lh3.googleusercontent.com/a-/AOh14GjF4em_5pQS0cyjExgf0nb2opybohyK8FSLuN9YhNk=s96-c',
+                  );
+                  context.toastSuccess('Thêm addwork thành công');
+                  Navigator.of(context, rootNavigator: true).pop();
+                }));
               },
               child: SizedBox(
                 width: 130.0,
