@@ -3,8 +3,10 @@ import 'package:daisy_application/app/pages/find-designer/deps/find_designer_pag
 import 'package:daisy_application/app/pages/find-designer/model/find_designer_page_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/core_services/http/artwork/artwork_rest_api.dart';
+import 'package:daisy_application/core_services/http/portfolio/portfolio_rest_api.dart';
 import 'package:daisy_application/core_services/http/users/users_rest_api.dart';
 import 'package:daisy_application/core_services/models/artwork/artwork_model.dart';
+import 'package:daisy_application/core_services/models/portfolio/portfolio_model.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +23,7 @@ class _FindDesignerFlowControllerState extends AutoRouterState
   FindDesigneScreenState? findDesignerState;
   late UsersRestApi _usersRestApi;
   late ArtworkRestApi _artworkRestApi;
+  late PortfolioRestApi _portfolioRestApi;
 
   FindDesignerFlowController get myWidget =>
       widget as FindDesignerFlowController;
@@ -30,6 +33,7 @@ class _FindDesignerFlowControllerState extends AutoRouterState
     super.initState();
     _usersRestApi = locator.get();
     _artworkRestApi = locator.get();
+    _portfolioRestApi = locator.get();
     findDesignerState = FindDesigneScreenState();
   }
 
@@ -61,6 +65,13 @@ class _FindDesignerFlowControllerState extends AutoRouterState
   Future<ArtworkModel> onGetLatestArtwork(String designerEmail) async {
     var result =
         await _artworkRestApi.getLatestArtworkByDesignerEmail(designerEmail);
+    return result.data;
+  }
+
+  @override
+  Future<PortfolioModel> getPortfolioByDesignerEmail(
+      String designerEmail) async {
+    var result = await _portfolioRestApi.getByDesignerEmail(designerEmail);
     return result.data;
   }
 }
