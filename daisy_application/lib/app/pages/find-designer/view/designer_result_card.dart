@@ -26,8 +26,7 @@ extension DesignerInfoCard on FindDesignerPageState {
                       CircleAvatar(
                         radius: 30.0,
                         backgroundImage: NetworkImage(
-                          user?.avatar ??
-                              'https://lh3.googleusercontent.com/a/AATXAJyewGNIBZdQcgs33pUj2n9stkcZn5g2FT7t1K85=s96-c',
+                          user?.avatar ?? 'https://i.ibb.co/s30H0fs/images.png',
                         ),
                       ),
                       SizedBox(
@@ -50,7 +49,7 @@ extension DesignerInfoCard on FindDesignerPageState {
               ),
               Image.network(
                 height: 300,
-                'https://i.ibb.co/WKwQ6tb/Cat-November-2010-1a-jpg.webp',
+                'https://i.ibb.co/2vfqLk2/il-570x-N-2471657126-2p46.webp',
               ),
             ],
           ),
