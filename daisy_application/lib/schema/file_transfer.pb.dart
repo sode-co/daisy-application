@@ -260,17 +260,17 @@ class StreamingResourceModelRequestModel extends $pb.GeneratedMessage {
 
 class StreamingResourceFileRequestModel extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'StreamingResourceFileRequestModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
-    ..pPS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Resources', protoName: 'Resources')
+    ..pPS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ResourceKeys', protoName: 'ResourceKeys')
     ..hasRequiredFields = false
   ;
 
   StreamingResourceFileRequestModel._() : super();
   factory StreamingResourceFileRequestModel({
-    $core.Iterable<$core.String>? resources,
+    $core.Iterable<$core.String>? resourceKeys,
   }) {
     final _result = create();
-    if (resources != null) {
-      _result.resources.addAll(resources);
+    if (resourceKeys != null) {
+      _result.resourceKeys.addAll(resourceKeys);
     }
     return _result;
   }
@@ -296,7 +296,7 @@ class StreamingResourceFileRequestModel extends $pb.GeneratedMessage {
   static StreamingResourceFileRequestModel? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$core.String> get resources => $_getList(0);
+  $core.List<$core.String> get resourceKeys => $_getList(0);
 }
 
 class StreamingResourceModelResponseModel extends $pb.GeneratedMessage {
@@ -343,7 +343,7 @@ class StreamingResourceModelResponseModel extends $pb.GeneratedMessage {
 class StreamingResourceFileResponseModel extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'StreamingResourceFileResponseModel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'daisy'), createEmptyInstance: create)
     ..e<TransferStatus>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: TransferStatus.DONE, valueOf: TransferStatus.valueOf, enumValues: TransferStatus.values)
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ResourceId', $pb.PbFieldType.O3, protoName: 'ResourceId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ResourceKey', protoName: 'ResourceKey')
     ..aOM<Chunk>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'binary', subBuilder: Chunk.create)
     ..hasRequiredFields = false
   ;
@@ -351,15 +351,15 @@ class StreamingResourceFileResponseModel extends $pb.GeneratedMessage {
   StreamingResourceFileResponseModel._() : super();
   factory StreamingResourceFileResponseModel({
     TransferStatus? status,
-    $core.int? resourceId,
+    $core.String? resourceKey,
     Chunk? binary,
   }) {
     final _result = create();
     if (status != null) {
       _result.status = status;
     }
-    if (resourceId != null) {
-      _result.resourceId = resourceId;
+    if (resourceKey != null) {
+      _result.resourceKey = resourceKey;
     }
     if (binary != null) {
       _result.binary = binary;
@@ -397,13 +397,13 @@ class StreamingResourceFileResponseModel extends $pb.GeneratedMessage {
   void clearStatus() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get resourceId => $_getIZ(1);
+  $core.String get resourceKey => $_getSZ(1);
   @$pb.TagNumber(2)
-  set resourceId($core.int v) { $_setSignedInt32(1, v); }
+  set resourceKey($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasResourceId() => $_has(1);
+  $core.bool hasResourceKey() => $_has(1);
   @$pb.TagNumber(2)
-  void clearResourceId() => clearField(2);
+  void clearResourceKey() => clearField(2);
 
   @$pb.TagNumber(3)
   Chunk get binary => $_getN(2);

@@ -65,12 +65,12 @@ final $typed_data.Uint8List streamingResourceModelRequestModelDescriptor = $conv
 const StreamingResourceFileRequestModel$json = const {
   '1': 'StreamingResourceFileRequestModel',
   '2': const [
-    const {'1': 'Resources', '3': 1, '4': 3, '5': 9, '10': 'Resources'},
+    const {'1': 'ResourceKeys', '3': 1, '4': 3, '5': 9, '10': 'ResourceKeys'},
   ],
 };
 
 /// Descriptor for `StreamingResourceFileRequestModel`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamingResourceFileRequestModelDescriptor = $convert.base64Decode('CiFTdHJlYW1pbmdSZXNvdXJjZUZpbGVSZXF1ZXN0TW9kZWwSHAoJUmVzb3VyY2VzGAEgAygJUglSZXNvdXJjZXM=');
+final $typed_data.Uint8List streamingResourceFileRequestModelDescriptor = $convert.base64Decode('CiFTdHJlYW1pbmdSZXNvdXJjZUZpbGVSZXF1ZXN0TW9kZWwSIgoMUmVzb3VyY2VLZXlzGAEgAygJUgxSZXNvdXJjZUtleXM=');
 @$core.Deprecated('Use streamingResourceModelResponseModelDescriptor instead')
 const StreamingResourceModelResponseModel$json = const {
   '1': 'StreamingResourceModelResponseModel',
@@ -86,10 +86,10 @@ const StreamingResourceFileResponseModel$json = const {
   '1': 'StreamingResourceFileResponseModel',
   '2': const [
     const {'1': 'status', '3': 1, '4': 1, '5': 14, '6': '.daisy.TransferStatus', '10': 'status'},
-    const {'1': 'ResourceId', '3': 2, '4': 1, '5': 5, '10': 'ResourceId'},
+    const {'1': 'ResourceKey', '3': 2, '4': 1, '5': 9, '10': 'ResourceKey'},
     const {'1': 'binary', '3': 3, '4': 1, '5': 11, '6': '.daisy.Chunk', '10': 'binary'},
   ],
 };
 
 /// Descriptor for `StreamingResourceFileResponseModel`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamingResourceFileResponseModelDescriptor = $convert.base64Decode('CiJTdHJlYW1pbmdSZXNvdXJjZUZpbGVSZXNwb25zZU1vZGVsEi0KBnN0YXR1cxgBIAEoDjIVLmRhaXN5LlRyYW5zZmVyU3RhdHVzUgZzdGF0dXMSHgoKUmVzb3VyY2VJZBgCIAEoBVIKUmVzb3VyY2VJZBIkCgZiaW5hcnkYAyABKAsyDC5kYWlzeS5DaHVua1IGYmluYXJ5');
+final $typed_data.Uint8List streamingResourceFileResponseModelDescriptor = $convert.base64Decode('CiJTdHJlYW1pbmdSZXNvdXJjZUZpbGVSZXNwb25zZU1vZGVsEi0KBnN0YXR1cxgBIAEoDjIVLmRhaXN5LlRyYW5zZmVyU3RhdHVzUgZzdGF0dXMSIAoLUmVzb3VyY2VLZXkYAiABKAlSC1Jlc291cmNlS2V5EiQKBmJpbmFyeRgDIAEoCzIMLmRhaXN5LkNodW5rUgZiaW5hcnk=');

@@ -6,9 +6,11 @@ import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/grpc/discussions/discussions_grpc_client.dart';
+import 'package:daisy_application/core_services/grpc/file_transfer/file_streaming_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/resource/resource_grpc_client.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/models/discussion/discussion_model.dart';
+import 'package:daisy_application/core_services/models/resource/resource_model.dart';
 import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +32,8 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
   late ProjectRestApi projectApiSerivce;
   late DiscussionsGrpcClient _discussionsGrpcService;
   late DiscussionSignalRClient _discussionRealtimeService;
-
   late ResourceGrpcClient _resourceGrpcService;
+  late FileStreamingGrpcClient _fileResourceService;
 
   ProjectDetailsFlowController get myWidget =>
       widget as ProjectDetailsFlowController;
@@ -44,6 +46,7 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
     projectDetailsState = ProjectDetailsState();
     _discussionRealtimeService = locator.get();
     _resourceGrpcService = locator.get();
+    _fileResourceService = locator.get();
     loadProject();
   }
 
@@ -105,6 +108,20 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
       DateTime.now().millisecondsSinceEpoch,
     )) {
       projectDetailsState!.addResources([response]);
+    }
+
+    await _loadResourceBinary();
+  }
+
+  Future<void> _loadResourceBinary() async {
+    final resourceKeys = projectDetailsState!.currentProjectTab.resources
+        .map((e) => e.resourceKey!)
+        .toList();
+
+    await for (var data
+        in _fileResourceService.streamBinaryResource(resourceKeys)) {
+      projectDetailsState!
+          .appendBinaryResource(data.binary, data.resourceKey, data.status);
     }
   }
 

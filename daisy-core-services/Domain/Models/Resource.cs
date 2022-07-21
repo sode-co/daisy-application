@@ -14,6 +14,8 @@ namespace Domain.Models
         [MaxLength(255)]
         public String FileName { get; set; }
 
+        public long FileSize { get; set; }
+
         [MaxLength(255)]
         public String WorkStatus { get; set; }
 

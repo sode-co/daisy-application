@@ -29,7 +29,7 @@ message StreamingResourceModelRequestModel {
 }
 
 message StreamingResourceFileRequestModel {
-  repeated string Resources = 1;
+  repeated string ResourceKeys = 1;
 }
 
 message StreamingResourceModelResponseModel {
@@ -38,7 +38,7 @@ message StreamingResourceModelResponseModel {
 
 message StreamingResourceFileResponseModel {
   TransferStatus status = 1;
-  int32 ResourceId = 2;
+  string ResourceKey = 2;
   Chunk binary = 3;
 }
 

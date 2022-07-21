@@ -1,5 +1,6 @@
 import 'package:daisy_application/core_services/google/google_sign_in.dart';
 import 'package:daisy_application/core_services/grpc/discussions/discussions_grpc_client.dart';
+import 'package:daisy_application/core_services/grpc/file_transfer/file_streaming_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/healthcheck/health_check_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/request/request_grpc_client.dart';
 import 'package:daisy_application/core_services/grpc/resource/resource_grpc_client.dart';
@@ -52,6 +53,8 @@ class CoreServiceLocator {
     locator
         .registerFactory<DiscussionsGrpcClient>(() => DiscussionsGrpcClient());
     locator.registerFactory<ResourceGrpcClient>(() => ResourceGrpcClient());
+    locator.registerFactory<FileStreamingGrpcClient>(
+        () => FileStreamingGrpcClient());
   }
 
   static void _initSignalRServices() {

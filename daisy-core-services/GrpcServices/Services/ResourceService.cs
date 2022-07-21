@@ -1,9 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Daisy;
 using DataAccess.UnitOfWork;
 using Grpc.Core;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.GridFS;
 using Utils;
 using static Daisy.ResourceService;
 
@@ -37,10 +41,11 @@ namespace GrpcServices.Services
                         ObjectId = resource.ObjectId,
                         ResourceKey = resource.ResourceKey,
                         WorkStatus = resource.WorkStatus,
-                        File = new File()
+                        File = new Daisy.File()
                         {
                             FileName = resource.FileName,
-                            MimeType = resource.FileType
+                            MimeType = resource.FileType,
+                            FileSize = resource.FileSize
                         },
                         Workspace = new Workspace()
                         {
@@ -59,6 +64,77 @@ namespace GrpcServices.Services
 
                 await responseStream.WriteAsync(new StreamingResourceModelResponseModel()
                     .Apl(x => x.Resources.Add(resources)));
+            }
+        }
+
+        public override async Task StreamingResourceFile(StreamingResourceFileRequestModel request, IServerStreamWriter<StreamingResourceFileResponseModel> responseStream, ServerCallContext context)
+        {
+            var config = Config.Get();
+            var client = new MongoClient(
+                    $"mongodb://{config.MONGO_DB_USER}:{config.MONGO_DB_PASSWORD}@{config.MONGO_DB_HOST}:{config.MONGO_DB_PORT}/admin?w=majority"
+                );
+            var database = client.GetDatabase(config.MONGO_DB_NAME);
+            var bucket = new GridFSBucket(database, new GridFSBucketOptions
+            {
+                BucketName = "resources",
+                ChunkSizeBytes = 1024 * 50, // 0.5MB
+                ReadPreference = ReadPreference.Secondary
+            });
+
+            var tasks = request.ResourceKeys.Select(resourceKey => _writeBinary(request, responseStream, context, resourceKey, bucket));
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task _writeBinary(StreamingResourceFileRequestModel request,
+                IServerStreamWriter<StreamingResourceFileResponseModel> responseStream,
+                ServerCallContext context, String resourceKey, GridFSBucket bucket)
+        {
+            try
+            {
+                ObjectId objId = ObjectId.Parse(resourceKey);
+                using var stream = await bucket.OpenDownloadStreamAsync(objId);
+                var buffer = new byte[1024 * 50];
+                var bytesCount = 0;
+
+                while((bytesCount = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    var data = new byte[bytesCount];
+                    Buffer.BlockCopy(buffer, 0, data, 0, bytesCount);
+                    await responseStream.WriteAsync(new StreamingResourceFileResponseModel()
+                    {
+                        Status = TransferStatus.Streaming,
+                        Binary = new Chunk()
+                        {
+                            Content = Google.Protobuf.ByteString.CopyFrom(data)
+                        },
+                        ResourceKey = resourceKey
+                    });
+
+                    Console.WriteLine($"Writing resource {resourceKey} with bytesCount {bytesCount}");
+                }
+
+                await responseStream.WriteAsync(new StreamingResourceFileResponseModel()
+                {
+                    Status = TransferStatus.Done,
+                    Binary = new Chunk()
+                    {
+                        Content = Google.Protobuf.ByteString.CopyFrom(new byte[0])
+                    },
+                    ResourceKey = resourceKey
+                });
+            }
+            catch (Exception ex)
+            {
+                await responseStream.WriteAsync(new StreamingResourceFileResponseModel()
+                {
+                    Status = TransferStatus.Done,
+                    Binary = new Chunk()
+                    {
+                        Content = Google.Protobuf.ByteString.CopyFrom(new byte[0])
+                    },
+                    ResourceKey = resourceKey
+                });
+                Console.WriteLine($"Error while streaming resource {resourceKey} with error {ex.Message}, Skipping...");
             }
         }
     }

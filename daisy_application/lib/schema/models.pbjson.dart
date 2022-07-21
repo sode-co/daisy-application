@@ -139,8 +139,9 @@ const File$json = const {
     const {'1': 'Data', '3': 1, '4': 1, '5': 12, '10': 'Data'},
     const {'1': 'MimeType', '3': 2, '4': 1, '5': 9, '10': 'MimeType'},
     const {'1': 'FileName', '3': 3, '4': 1, '5': 9, '10': 'FileName'},
+    const {'1': 'FileSize', '3': 4, '4': 1, '5': 3, '10': 'FileSize'},
   ],
 };
 
 /// Descriptor for `File`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List fileDescriptor = $convert.base64Decode('CgRGaWxlEhIKBERhdGEYASABKAxSBERhdGESGgoITWltZVR5cGUYAiABKAlSCE1pbWVUeXBlEhoKCEZpbGVOYW1lGAMgASgJUghGaWxlTmFtZQ==');
+final $typed_data.Uint8List fileDescriptor = $convert.base64Decode('CgRGaWxlEhIKBERhdGEYASABKAxSBERhdGESGgoITWltZVR5cGUYAiABKAlSCE1pbWVUeXBlEhoKCEZpbGVOYW1lGAMgASgJUghGaWxlTmFtZRIaCghGaWxlU2l6ZRgEIAEoA1IIRmlsZVNpemU=');
