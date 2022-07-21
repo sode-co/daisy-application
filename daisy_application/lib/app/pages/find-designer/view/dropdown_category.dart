@@ -55,7 +55,7 @@ class _DropdownListState extends State<DropdownList> {
         const SizedBox(height: 5.0),
         SizedBox(
           width: Responsive.isDesktop(context)
-              ? size.width * 0.6
+              ? size.width * 0.2
               : size.width * 0.7,
           height: 50,
           child: InputDecorator(
@@ -141,7 +141,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
         const SizedBox(height: 5.0),
         SizedBox(
           width: Responsive.isDesktop(context)
-              ? size.width * 0.6
+              ? size.width * 0.2
               : size.width * 0.7,
           height: 50,
           child: InputDecorator(
