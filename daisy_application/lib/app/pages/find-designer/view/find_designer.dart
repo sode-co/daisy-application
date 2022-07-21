@@ -64,7 +64,8 @@ class FindDesignerPageState extends State<FindDesignerPage> {
           body: Container(
             padding: EdgeInsets.symmetric(
                 horizontal: Design.alignmentSpacing(context),
-                vertical: Design.headerSpacing),
+                vertical:
+                    Responsive.isDesktop(context) ? Design.headerSpacing : 0.0),
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               children: [
