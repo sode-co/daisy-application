@@ -1,11 +1,32 @@
 import 'package:daisy_application/app/common/design/design_style.dart';
 import 'package:daisy_application/app/common/responsive.dart';
-import 'package:daisy_application/app/pages/find-designer/view/find_designer.dart';
+import 'package:daisy_application/app/pages/find-designer/deps/find_designer_page_deps.dart';
+import 'package:daisy_application/core_services/models/artwork/artwork_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 
-extension DesignerInfoCard on FindDesignerPageState {
-  Widget createDesignerCard(UserModel? user) {
+class DesignersResultCard extends StatefulWidget {
+  const DesignersResultCard({Key? key, this.user}) : super(key: key);
+  final UserModel? user;
+  @override
+  State<DesignersResultCard> createState() => _DesignersResultCardState();
+}
+
+class _DesignersResultCardState extends State<DesignersResultCard> {
+  FindDesignerListener get listener => context.findAncestorStateOfType()!;
+  ArtworkModel _artwork = ArtworkModel.init();
+
+  _initData() async {
+    ArtworkModel artwork = await listener
+        .onGetLatestArtwork(widget.user?.email ?? 'tiendmse150195@fpt.edu.vn');
+    setState(() {
+      _artwork = artwork;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _initData();
     Size size = MediaQuery.of(context).size;
     return Card(
       elevation: 5.0,
@@ -26,7 +47,8 @@ extension DesignerInfoCard on FindDesignerPageState {
                       CircleAvatar(
                         radius: 30.0,
                         backgroundImage: NetworkImage(
-                          user?.avatar ?? 'https://i.ibb.co/s30H0fs/images.png',
+                          widget.user?.avatar ??
+                              'https://i.ibb.co/s30H0fs/images.png',
                         ),
                       ),
                       SizedBox(
@@ -36,7 +58,7 @@ extension DesignerInfoCard on FindDesignerPageState {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                user?.displayName ?? 'Lorem Ipsum',
+                                widget.user?.displayName ?? 'Lorem Ipsum',
                                 style: Design.textBody(),
                               ),
                               createItemTag(
@@ -49,7 +71,8 @@ extension DesignerInfoCard on FindDesignerPageState {
               ),
               Image.network(
                 height: 300,
-                'https://i.ibb.co/2vfqLk2/il-570x-N-2471657126-2p46.webp',
+                _artwork.image ??
+                    'https://i.ibb.co/2vfqLk2/il-570x-N-2471657126-2p46.webp',
               ),
             ],
           ),

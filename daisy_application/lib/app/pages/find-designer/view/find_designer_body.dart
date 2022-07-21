@@ -31,8 +31,9 @@ extension FindDesignerBody on FindDesignerPageState {
                     children: List.generate(screenState.designers?.length ?? 9,
                         (index) {
                       return Center(
-                        child:
-                            createDesignerCard(screenState.designers?[index]),
+                        child: DesignersResultCard(
+                          user: screenState.designers?[index],
+                        ),
                       );
                     }),
                   ),
@@ -63,8 +64,9 @@ extension FindDesignerBody on FindDesignerPageState {
                     children: List.generate(screenState.designers?.length ?? 9,
                         (index) {
                       return Center(
-                        child:
-                            createDesignerCard(screenState.designers?[index]),
+                        child: DesignersResultCard(
+                          user: screenState.designers?[index],
+                        ),
                       );
                     }),
                   ),

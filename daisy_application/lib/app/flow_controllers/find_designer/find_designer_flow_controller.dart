@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:daisy_application/app/pages/find-designer/deps/find_designer_page_deps.dart';
 import 'package:daisy_application/app/pages/find-designer/model/find_designer_page_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/core_services/http/artwork/artwork_rest_api.dart';
 import 'package:daisy_application/core_services/http/users/users_rest_api.dart';
+import 'package:daisy_application/core_services/models/artwork/artwork_model.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,7 @@ class _FindDesignerFlowControllerState extends AutoRouterState
     implements FindDesignerListener<AutoRouter> {
   FindDesigneScreenState? findDesignerState;
   late UsersRestApi _usersRestApi;
+  late ArtworkRestApi _artworkRestApi;
 
   FindDesignerFlowController get myWidget =>
       widget as FindDesignerFlowController;
@@ -26,6 +29,7 @@ class _FindDesignerFlowControllerState extends AutoRouterState
   void initState() {
     super.initState();
     _usersRestApi = locator.get();
+    _artworkRestApi = locator.get();
     findDesignerState = FindDesigneScreenState();
   }
 
@@ -51,5 +55,12 @@ class _FindDesignerFlowControllerState extends AutoRouterState
   Future<void> onSearchDesignersByCategoryId(int id) async {
     var result = await _usersRestApi.getDesignersByCategoryId(id);
     findDesignerState?.designers = result.data;
+  }
+
+  @override
+  Future<ArtworkModel> onGetLatestArtwork(String designerEmail) async {
+    var result =
+        await _artworkRestApi.getLatestArtworkByDesignerEmail(designerEmail);
+    return result.data;
   }
 }
