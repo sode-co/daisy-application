@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using static Api.Common.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers.ArtWorkController
 {
@@ -46,6 +47,20 @@ namespace Api.Controllers.ArtWorkController
                 }
 
                 return artWorks;
+            }
+        }
+
+        [HttpGet("designer/{designerEmail}")]
+        [Authorize(Policy = ROLE.DESIGNER)]
+        public ArtWork GetLastArtWorksByDesignerEmail(String designerEmail)
+        {
+            using (var work = _unitOfWorkFactory.Get)
+            {
+                Portfolio portfolio = work.PortfolioRepository.GetAll(null, null, "Freelancer").Where(p => p.Freelancer.Email.Equals(designerEmail)).FirstOrDefault();
+                IEnumerable<ArtWork> artWorks = work.ArtWorkRepository.GetAll(null, null, "Portfolio");
+                ArtWork artWork = artWorks.Where(a => a.Portfolio.Id.Equals(portfolio.Id)).LastOrDefault();
+
+                return artWork;
             }
         }
 
