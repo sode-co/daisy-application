@@ -42,10 +42,10 @@ class _HeaderState extends State<Header> {
                   fit: BoxFit.contain,
                 ),
                 const SizedBox(width: Design.headerSpacing),
-                ButtonInfo.small(text: 'Danh mục', onPressed: () {}),
-                ButtonInfo.small(
-                    text: 'Đăng tin',
-                    onPressed: _navigationListener.onBtnJobPostClicked),
+                if (appState.currentUser?.role == 'CUSTOMER')
+                  ButtonInfo.small(
+                      text: 'Đăng tin',
+                      onPressed: _navigationListener.onBtnJobPostClicked),
                 if (isLoggedIn)
                   ButtonInfo.small(
                     text: 'Workspace',
