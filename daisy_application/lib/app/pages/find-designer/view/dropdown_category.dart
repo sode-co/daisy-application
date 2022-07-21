@@ -1,6 +1,8 @@
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/style.dart';
+import 'package:daisy_application/app/pages/find-designer/deps/find_designer_page_deps.dart';
 import 'package:daisy_application/app/pages/find-designer/model/find_designer_page_state.dart';
+import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/models/category/category_model.dart';
@@ -36,6 +38,7 @@ class _DropdownListState extends State<DropdownList> {
 
   late String _label;
   CategoryModel dropdownValue = CategoryModel.init()..name = '';
+  FindDesignerListener get listener => context.findAncestorStateOfType()!;
 
   _DropdownListState(
     label,
@@ -70,6 +73,8 @@ class _DropdownListState extends State<DropdownList> {
                 style: Style.placeHolderText,
                 onChanged: (CategoryModel? newValue) {
                   model.parentCategory = newValue!;
+                  listener.onSearchDesignersByCategoryId(newValue.id ?? 1);
+                  Debug.log('model.designers', model.designers);
                   setState(
                     () {
                       dropdownValue = newValue;

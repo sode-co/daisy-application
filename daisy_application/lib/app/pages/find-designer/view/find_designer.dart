@@ -2,10 +2,10 @@ import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/widget/bottom_nav/bottomnavbar.dart';
 import 'package:daisy_application/app/common/widget/header/header.dart';
+import 'package:daisy_application/app/pages/find-designer/deps/find_designer_page_deps.dart';
 import 'package:daisy_application/app/pages/find-designer/model/find_designer_page_state.dart';
 import 'package:daisy_application/app/pages/find-designer/view/find_designer_body.dart';
 import 'package:daisy_application/app/pages/find-designer/view/find_designer_header.dart';
-import 'package:daisy_application/app/pages/portfolio/deps/portfolio_listener.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class FindDesignerPageState extends State<FindDesignerPage> {
 
   ApplicationState get appState => context.read();
   FindDesigneScreenState get screenState => context.watch();
-  PortfolioListener get listener => context.findAncestorStateOfType()!;
+  FindDesignerListener get listener => context.findAncestorStateOfType()!;
 
   @override
   Widget build(BuildContext context) {

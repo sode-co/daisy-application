@@ -12,4 +12,8 @@ abstract class UsersRestApi {
   Future<HttpResponse<void>> updateUser(
     @Body() UserModel body,
   );
+
+  @GET('/category/{id}')
+  Future<HttpResponse<List<UserModel>>> getDesignersByCategoryId(
+      @Path('id') int? categoryId);
 }
