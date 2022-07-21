@@ -29,11 +29,12 @@ class FindDesignerPageState extends State<FindDesignerPage> {
   }
 
   ApplicationState get appState => context.read();
-  FindDesigneScreenState get screenState => context.read();
+  FindDesigneScreenState get screenState => context.watch();
   PortfolioListener get listener => context.findAncestorStateOfType()!;
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FindDesigneScreenState>();
     return DefaultTabController(
       initialIndex: 0,
       length: 1,

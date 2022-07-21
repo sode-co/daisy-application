@@ -5,6 +5,7 @@ abstract class HeaderNavigationListener<T extends StatefulWidget>
   void onBtnJobPostClicked() {}
   void onBtnWorkspaceAndFindDesignerClicked() {}
   void onBtnFindJobCliked() {}
+  void onBtnFindDesignerCliked() {}
 
   void onBtnProfileDetailsClicked() {}
 }

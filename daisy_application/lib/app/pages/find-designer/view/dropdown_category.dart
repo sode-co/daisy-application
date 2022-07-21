@@ -104,8 +104,7 @@ class DropdownChildrenList extends StatefulWidget {
   final String parentName;
   final int index;
   @override
-  State<DropdownChildrenList> createState() =>
-      _DropdownChildrenListState(label, parentName, index);
+  State<DropdownChildrenList> createState() => _DropdownChildrenListState();
 }
 
 class _DropdownChildrenListState extends State<DropdownChildrenList> {
@@ -120,7 +119,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
   _initData() async {
     CategoryRestApi _categoryClient = locator.get();
     Result result = await _categoryClient
-        .getChildrenCategoriesByParentName(_parentName)
+        .getChildrenCategoriesByParentName(widget.parentName)
         .Value();
     setState(() {
       _categories = result.data.childCategories;
@@ -128,20 +127,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
     });
   }
 
-  late String _label;
-  late String _parentName;
-  late int _index;
   CategoryModel dropdownValue = CategoryModel.init()..name = '';
-
-  _DropdownChildrenListState(
-    label,
-    parentName,
-    index,
-  ) {
-    _label = label;
-    _parentName = parentName;
-    _index = index;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +137,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(_label, style: Style.stringText),
+        Text(widget.label, style: Style.stringText),
         const SizedBox(height: 5.0),
         SizedBox(
           width: Responsive.isDesktop(context)

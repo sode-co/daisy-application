@@ -15,14 +15,14 @@ extension FindDesignerHeader on FindDesignerPageState {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            'Portfolio',
+            'Khám phá designers',
             style:
                 Design.textSmallLogo(isMobile: !Responsive.isDesktop(context)),
           ),
           const SizedBox(height: Design.contentSpacing),
           Row(
             children: [
-              createItemTag('Favorite designer', Design.accentRed),
+              createItemTag('Trending designer', Colors.blueAccent),
               const SizedBox(width: Design.contentSpacing),
               if (Responsive.isDesktop(context))
                 Text(' Local time: $currentTime',
@@ -43,7 +43,7 @@ extension FindDesignerHeader on FindDesignerPageState {
             border: Border.all(color: color, width: 2)),
         child: Row(
           children: [
-            Icon(Icons.favorite_border, color: color, size: 18.0),
+            Icon(Icons.trending_up, color: color, size: 18.0),
             const SizedBox(width: 5.0),
             Text(text, style: Design.textButtonSmall(textColor: color)),
           ],

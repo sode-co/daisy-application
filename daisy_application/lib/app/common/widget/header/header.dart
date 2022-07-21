@@ -56,6 +56,10 @@ class _HeaderState extends State<Header> {
                   text: 'Tìm việc freelance',
                   onPressed: _navigationListener.onBtnFindJobCliked,
                 ),
+                ButtonInfo.small(
+                  text: 'Tìm kiếm designer',
+                  onPressed: _navigationListener.onBtnFindDesignerCliked,
+                ),
               ],
             )
           : Padding(
