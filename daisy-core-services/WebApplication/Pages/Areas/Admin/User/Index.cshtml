@@ -106,36 +106,75 @@
 </div>
 
 
-<form>
-    <p>
-        Search by display name: <input class="form-control" type="text" asp-for="SearchString" />
-        <br />
-        <input type="submit" value="Search" class="btn btn-outline-success" />
-    </p>
+<form method="get">
+    <div class="form-actions">
+        <p>
+            Search by display name: 
+            <input type="text" asp-for="SearchString" />
+            <input type="submit" value="Search" class="btn btn-outline-success" />
+        </p>
+    </div>  
 </form>
+<br />
+
+@{
+    if (Model.RoleFilter != null)
+    {
+        if (Model.RoleFilter.Equals("CUSTOMER"))
+        {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-for="RoleFilter" asp-page="" asp-route-roleUser="CUSTOMER">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-for="RoleFilter" asp-page="" asp-route-roleUser="DESIGNER">Designer</a>
+                </li>
+            </ul>
+        }
+        else
+        {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-for="RoleFilter" asp-page="" asp-route-roleUser="CUSTOMER">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-for="RoleFilter" asp-page="" asp-route-roleUser="DESIGNER">Designer</a>
+                </li>
+            </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" asp-for="RoleFilter" asp-page="" asp-route-roleUser="CUSTOMER">Customer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-for="RoleFilter" asp-page="" asp-route-roleUser="DESIGNER">Designer</a>
+            </li>
+        </ul>
+    }
+}
 <table class="table table-bordered table-hover">
-    <thead>
-        <tr class="table-danger">
-            <th>
-                Name
+    <thead class="thead-dark">
+        <tr>
+            <th width="250px">
+                @Html.DisplayNameFor(modelItem => modelItem.User[0].DisplayName)
             </th>
-            <th style="width: 200px">
-                Display
-            </th>
-            <th style="width: 300px">
-                Description
+            <th width="200px">
+                @Html.DisplayNameFor(modelItem => modelItem.User[0].Description)
             </th>
             <th>
-                Email
+                @Html.DisplayNameFor(modelItem => modelItem.User[0].Email)
             </th>
             <th>
-                Role
+                @Html.DisplayNameFor(modelItem => modelItem.User[0].Role)
             </th>
             <th>
-                Phone
+                @Html.DisplayNameFor(modelItem => modelItem.User[0].Phone)
             </th>
-            <th>
-                Address
+            <th width="150px">
+                @Html.DisplayNameFor(modelItem => modelItem.User[0].Address)
             </th>
             <th></th>
         </tr>
@@ -143,51 +182,56 @@
     <tbody>
         @foreach (var item in Model.User)
         {
-        <tr>
-            <td>
-                @(item.LastName + " " + item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DisplayName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td style="width: 350px">
-                <a asp-page="./Edit" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Edit</button></a>
-                |
-                <a asp-page="./Details" asp-route-id="@item.Id">
-                    <button class="btn btn-outline-info">
-                        Details
-                    </button>
-                </a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td style="width: 350px">
+                    <a asp-page="./Edit" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Edit</button></a>
+                    |
+                    <a asp-page="./Details" asp-route-id="@item.Id">
+                        <button class="btn btn-outline-info">
+                            Details
+                        </button>
+                    </a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+@{ var prevDisabled = !Model.User.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.User.HasNextPage ? "disabled" : ""; }
+
 <div class="flex">
     <ul class="col-6 pagination">
-        <button class="btn btn-outline-dark disabled">
+        <a asp-page="./Index"
+           asp-route-pageIndex="@(Model.User.PageIndex - 1)"
+           asp-route-roleUser="@(Model.RoleFilter)"
+           class="btn btn-outline-dark @prevDisabled">
             Previous
-        </button>
-        <div class="px-2 page-item">
-            @Model.CurrentPage / @Model.TotalPage pages
-        </div>
-        <button class="btn btn-outline-dark disabled">
+        </a>
+
+        <a asp-page="./Index"
+           asp-route-pageIndex="@(Model.User.PageIndex + 1)"
+           asp-route-roleUser="@(Model.RoleFilter)"
+           class="btn btn-outline-dark @nextDisabled">
             Next
-        </button>
+        </a>
     </ul>
 </div>
