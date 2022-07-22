@@ -33,6 +33,7 @@ namespace WebApplication.Pages.Authentication
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
 
+        // UPDATE 22/07/2022: This website is for ADMIN to manage Daisy's core data. Only administrators of the system can access this website
         public async Task<IActionResult> OnGetGoogleResponse()
         {
             var result = await HttpContext.AuthenticateAsync();
@@ -43,24 +44,34 @@ namespace WebApplication.Pages.Authentication
             string email = principle.FindFirstValue(ClaimTypes.Email);
             string displayName = principle.FindFirstValue(ClaimTypes.Name);
             string avatar = principle.FindFirstValue("urn:google:picture");
+            // old
+            //User user = new()
+            //{
+            //    DisplayName = displayName,
+            //    Email = email,
+            //    Avatar = avatar,
+            //    CreatedAt = DateTime.Now,
+            //};
+            //if (GetCurrentUser(email) == null)
+            //{
+            //    AddUserFromGoogleResponse(user);
+            //    return RedirectToPage("DetailInformation/", new { @email = email });
+            //}
 
-            User user = new()
+            //var loginUser = _unitOfWorkFactory.Get.UserRepository.GetUsersByEmail(email);
+            //SessionUtils.SetUser(loginUser);
+
+            //return RedirectToPage("../Index");
+
+
+           var loginUser = _unitOfWorkFactory.Get.UserRepository.GetUsersByEmail(email);
+
+            if (IsAdminLogin(loginUser))
             {
-                DisplayName = displayName,
-                Email = email,
-                Avatar = avatar,
-                CreatedAt = DateTime.Now,
-            };
-            if (GetCurrentUser(email) == null)
-            {
-                AddUserFromGoogleResponse(user);
-                return RedirectToPage("DetailInformation/", new { @email = email });
+                SessionUtils.SetUser(loginUser);
+                return RedirectToPage("../Index");
             }
-
-            var loginUser = _unitOfWorkFactory.Get.UserRepository.GetUsersByEmail(email);
-            SessionUtils.SetUser(loginUser);
-
-            return RedirectToPage("../Index");
+            return RedirectToPage("/Unauthorized");
         }
 
         public void AddUserFromGoogleResponse(User user)
@@ -86,6 +97,17 @@ namespace WebApplication.Pages.Authentication
             return RedirectToPage("../Index");
         }
         
-        public bool IsAdminLogin(String email) => Config.Get().ADMIN_EMAIL.Equals(email);
+        // check for logging in user is admin or not
+        public bool IsAdminLogin(User user)
+        {
+            if (user != null)
+            {
+                if (user.Role == Constants.ROLE.ADMIN)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
