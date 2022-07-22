@@ -67,6 +67,8 @@ class ProjectModel extends JsonSerializable with HiveObjectMixin {
     request = RequestModel.fromProto(proto.request);
   }
 
+  bool get isComplete => status == 'DONE';
+
   factory ProjectModel.fromJson(Map<String, dynamic> json) =>
       _$ProjectModelFromJson(json);
   @override

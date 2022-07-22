@@ -43,7 +43,6 @@ namespace DataAccess.Repositories.Projects
             {
                 throw new Exception("You are not the requester of this request!");
             }
-
             Project pro = new Project()
             {
                 Customer = req.Customer,

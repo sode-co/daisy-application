@@ -9,6 +9,6 @@ namespace DataAccess.Repositories.Payments
 {
     public interface IPaymentRepository : IRepository<Payment>
     {
-        public void UpdatePaymentStatus(int paymentId, string status);
+        public void UpdatePaymentStatus(int paymentId, string status, decimal amount);
     }
 }

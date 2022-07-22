@@ -102,12 +102,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 type: "nvarchar(max)",
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "Status",
-                table: "PaymentActions",
-                type: "nvarchar(max)",
-                nullable: true);
-
             //migrationBuilder.AlterColumn<string>(
             //    name: "ObjectId",
             //    table: "Notifications",
@@ -183,10 +177,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "OrderId",
-                table: "PaymentActions");
-
-            migrationBuilder.DropColumn(
-                name: "Status",
                 table: "PaymentActions");
 
             //    migrationBuilder.AlterColumn<string>(

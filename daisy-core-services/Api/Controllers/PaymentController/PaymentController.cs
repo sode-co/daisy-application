@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Api.Services;
+using Api.Models;
+using Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -51,11 +55,12 @@ namespace Api.Controllers.PaymentController
         }
 
         // called by momo only when customer purchased successfully
-        [HttpPost("momo/callback")]
-        public IActionResult CallBackMomo([FromBody] MoMoCallBackDto body)
+        [HttpGet("momo/callback")]
+        public IActionResult CallBackMomo([FromQuery] MoMoCallBackDto body)
         {
             using var work = _unitOfWorkFactory.Get;
             var paymentAction = work.PaymentActionRepository.GetFirstOrDefault(x => x.OrderId == body.OrderId, "Payment");
+            Project project = work.ProjectRepository.GetFirstOrDefault(prj => prj.Payment.Id == paymentAction.Payment.Id, "Payment,Customer,Freelancer");
             if (paymentAction == null || (long)Decimal.Round(paymentAction.Amount) != body.Amount)
             {
                 return NotFound();
@@ -67,11 +72,15 @@ namespace Api.Controllers.PaymentController
                 //_________________________
 
                 // UPDATE PAYMENT
-                work.PaymentRepository.UpdatePaymentStatus(paymentAction.Payment.Id, Constants.PAYMENT_STATUS.WAITING_FOR_SYSTEM);
+                work.PaymentRepository.UpdatePaymentStatus(paymentAction.Payment.Id, Constants.PAYMENT_STATUS.WAITING_FOR_SYSTEM, body.Amount);
                 //_________________________
             }
 
-            return Ok();
+            var payload = JObject.Parse(paymentAction.Data);
+            project.Status = Constants.PROJECT_STATUS.DONE;
+
+            work.Save();
+            return Redirect((string) payload["clientUrl"]);
         }
 
         [HttpPost("system/callback")]
@@ -90,7 +99,7 @@ namespace Api.Controllers.PaymentController
                 //_________________________
 
                 // UPDATE PAYMENT
-                work.PaymentRepository.UpdatePaymentStatus(paymentAction.Payment.Id, Constants.PAYMENT_STATUS.WAITING_FOR_SYSTEM);
+                work.PaymentRepository.UpdatePaymentStatus(paymentAction.Payment.Id, Constants.PAYMENT_STATUS.WAITING_FOR_SYSTEM, 0);
                 //_________________________
             }
 
@@ -102,8 +111,7 @@ namespace Api.Controllers.PaymentController
         public IActionResult GenerateMomoUrlForCustomer([FromBody] DepositoryDto body)
         {
             using var work = _unitOfWorkFactory.Get;
-            try
-            {
+
                 Payment payment = work.PaymentRepository.GetFirstOrDefault(p => p.Id == body.paymentId);
                 Project project = work.ProjectRepository.GetFirstOrDefault(prj => prj.Payment.Id == body.paymentId, "Payment,Customer,Freelancer");
                 if (payment == null || project == null)
@@ -128,22 +136,26 @@ namespace Api.Controllers.PaymentController
                     });
                 }
                 var user = work.UserRepository.GetUser(((User)HttpContext.Items["User"]).Id);
-                // todo: insert payment_action
-                PaymentAction action = new PaymentAction()
-                {
+            // todo: insert payment_action
+            PaymentAction action = new PaymentAction()
+            {
                     Amount = payment.TotalAmount,
                     OrderId = Guid.NewGuid().ToString(),
                     User = user,
+                    Data = JsonConvert.SerializeObject(new {
+                        clientUrl = body.RedirectUrl
+                    }),
                     Payment = payment,
                     PaymentMethod = Constants.PAYMENT_METHOD.MOMO,
                     Type = Constants.PAYMENT_METHOD.MOMO,
                     Status = Constants.PAYMENT_ACTION_STATUS.FAILED, //initial status is failed => if transaction's status is successfully only -> update status
                 };
                 int paymentActionId = work.PaymentActionRepository.AddPaymentAction(action);
-                // _____________________________
-                // update Payment status
-                //work.PaymentRepository.UpdatePaymentStatus(payment.Id, Constants.PAYMENT_STATUS.WAITING);
-
+            // _____________________________
+            // update Payment status
+            //work.PaymentRepository.UpdatePaymentStatus(payment.Id, Constants.PAYMENT_STATUS.WAITING);
+            try
+            {
                 var momoDeposit = new MoMoDepositDto();
                 momoDeposit.Amount = (long)Decimal.Round(payment.TotalAmount);
                 
@@ -151,14 +163,16 @@ namespace Api.Controllers.PaymentController
                 momoDeposit.OrderInfo = "Purchasing for Daisy, project: " + project.Name;
 
                 momoDeposit.RequestId = action.OrderId;
-                momoDeposit.RedirectUrl = body.RedirectUrl;
+                momoDeposit.RedirectUrl = $"http://{Config.Get().API_HOST}:{Config.Get().API_PORT}/v1/payment/momo/callback";
 
                 var responseFromMomo = _paymentService.MonoDeposit(momoDeposit);
                 work.Save();
-                return new ObjectResult(responseFromMomo);
+
+                return new JsonResult(new { PaymentRedirectUrl = responseFromMomo });
             }
             catch(Exception ex)
             {
+                Console.WriteLine("Some error happend while creating transaction " + ex.Message);
                 work.Dispose();
                 return new JsonResult(new
                 {
@@ -215,7 +229,8 @@ namespace Api.Controllers.PaymentController
                 int paymentActionId = work.PaymentActionRepository.AddPaymentAction(action);
                 // _____________________________
                 // update Payment status
-                work.PaymentRepository.UpdatePaymentStatus(payment.Id, Constants.PAYMENT_STATUS.COMPLETE);
+                work.PaymentRepository.UpdatePaymentStatus(payment.Id, Constants.PAYMENT_STATUS.COMPLETE, 0);
+
                 work.Save();
                 return Ok();
             }

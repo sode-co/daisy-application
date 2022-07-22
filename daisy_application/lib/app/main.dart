@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:app_links/app_links.dart';
 import 'package:daisy_application/app/router/router.gr.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/constants.dart';

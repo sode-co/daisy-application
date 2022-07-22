@@ -44,7 +44,9 @@ extension ProjectPayment on ProjectDetailsPageState {
                 '\$${payment?.amount ?? 'loading...'} ${payment?.currency ?? 'VND'}',
           ),
           Expanded(child: Container()),
-          _completeProjectButton()
+          screenState.project!.isComplete
+              ? Text('Completed', style: Design.textSmallLogo())
+              : _completeProjectButton()
         ],
       );
 
