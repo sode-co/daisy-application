@@ -14,6 +14,7 @@ extension FindDesignerBody on FindDesignerPageState {
               Column(
                 children: [
                   const DropdownList(label: 'Lĩnh vực'),
+                  const SizedBox(height: 20.0),
                   DropdownChildrenList(
                     parentName: screenState.parentCategory?.name ??
                         'Nhận diện thương hiệu',

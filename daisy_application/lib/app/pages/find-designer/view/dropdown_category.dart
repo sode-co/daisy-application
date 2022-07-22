@@ -1,3 +1,4 @@
+import 'package:daisy_application/app/common/design/design_style.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/style.dart';
 import 'package:daisy_application/app/pages/find-designer/deps/find_designer_page_deps.dart';
@@ -53,7 +54,7 @@ class _DropdownListState extends State<DropdownList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(_label, style: Style.stringText),
+        Text(_label, style: Design.textButtonSmall()),
         const SizedBox(height: 5.0),
         SizedBox(
           width: Responsive.isDesktop(context)
@@ -141,7 +142,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label, style: Style.stringText),
+        Text(widget.label, style: Design.textButtonSmall()),
         const SizedBox(height: 5.0),
         SizedBox(
           width: Responsive.isDesktop(context)
