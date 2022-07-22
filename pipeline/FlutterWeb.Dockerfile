@@ -7,6 +7,7 @@ ARG MOBILE_GRPC_PORT=50152
 ARG GRPC_PORT=50052
 ARG PROTOCOL="http"
 ARG ENVIRONMENT="production"
+ARG WEB_URL='http://slimair.cool:8081'
 
 RUN flutter doctor
 RUN flutter config --enable-web
@@ -25,6 +26,7 @@ RUN flutter build web -t lib/app/main.dart \
     --dart-define=GRPC_HOST=$GRPC_HOST \
     --dart-define=GRPC_PORT=$GRPC_PORT \
     --dart-define=MOBILE_GRPC_PORT=$MOBILE_GRPC_PORT \
+    --dart-define=WEB_URL=$WEB_URL \
     --dart-define=ENVIRONMENT=$ENVIRONMENT
 
 ENTRYPOINT ["script/server.sh"]
