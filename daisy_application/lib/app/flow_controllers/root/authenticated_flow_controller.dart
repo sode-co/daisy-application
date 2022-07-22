@@ -72,4 +72,9 @@ class _AuthenticatedFlowControllerState
   void onBtnProfileDetailsClicked() {
     context.router.push(const Routers.UpdateProfileRoute());
   }
+
+  @override
+  void onBtnFindDesignerCliked() {
+    context.router.push(const Routers.FindDesignerRoute());
+  }
 }

@@ -10,4 +10,8 @@ abstract class ArtworkRestApi {
 
   @POST('')
   Future<HttpResponse<void>> create(@Body() ArtworkModel body);
+
+  @GET('/designer/{designerEmail}')
+  Future<HttpResponse<ArtworkModel>> getLatestArtworkByDesignerEmail(
+      @Path('designerEmail') String? designerEmail);
 }

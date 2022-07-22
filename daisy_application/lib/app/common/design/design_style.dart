@@ -212,6 +212,13 @@ abstract class Design {
         fontWeight: FontWeight.w900);
   }
 
+  static TextStyle textTagSmall({Color? textColor, isEnabled = true}) {
+    return TextStyle(
+        color: toTextColor(textColor: textColor, isEnabled: isEnabled),
+        fontSize: 12,
+        fontWeight: FontWeight.w800);
+  }
+
   static TextStyle textCaption({Color? textColor, bool bold = false}) {
     return TextStyle(
         color: toTextColor(textColor: textColor, isEnabled: true),

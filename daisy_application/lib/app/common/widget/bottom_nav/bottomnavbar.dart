@@ -31,12 +31,14 @@ class BottomNavBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       IconButton(
-                        tooltip: 'Menu',
-                        icon: const IconButtomItem(icon: Icons.menu_outlined),
-                        onPressed: () {},
+                        tooltip: 'Workspace',
+                        icon: const IconButtomItem(icon: Icons.work_outline),
+                        onPressed: () {
+                          context.router.push(const WorkSpaceRoute());
+                        },
                       ),
                       IconButton(
-                        tooltip: 'Tìm kiếm designer',
+                        tooltip: 'Tìm kiếm jobs',
                         icon: const IconButtomItem(
                             icon: Icons.person_search_outlined),
                         onPressed: () {
@@ -49,10 +51,10 @@ class BottomNavBar extends StatelessWidget {
                         onPressed: () {},
                       ),
                       IconButton(
-                        tooltip: 'Favorite',
-                        icon: const IconButtomItem(icon: Icons.favorite_border),
+                        tooltip: 'Tìm kiếm designers',
+                        icon: const IconButtomItem(icon: Icons.query_stats),
                         onPressed: () {
-                          context.router.push(const WorkSpaceRoute());
+                          context.pushRoute(const FindDesignerRoute());
                         },
                       ),
                       IconButton(
