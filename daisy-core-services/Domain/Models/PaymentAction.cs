@@ -16,6 +16,8 @@ namespace Domain.Models
         [MaxLength(255)]
         public String PaymentMethod { get; set; }
 
+        public String OrderId { get; set; }
+
         public virtual Payment Payment { get; set; }
 
         public decimal Amount { get; set; }

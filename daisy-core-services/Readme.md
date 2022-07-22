@@ -19,7 +19,7 @@
 
 # 3. Environment Variables:
 
-  #### 1. `DB_HOST_NAME`: The host name of MssqlDatabase
+  #### 1. `DB_HOST_NAME`: The host name of MssqlServerDatabase
   #### 2. `DB_PORT`: The port of MssqlDatabase
   #### 3. `DB_NAME`: Database name, type `Daisy`
   #### 4. `DB_USER`: Authenticated database user name
@@ -49,7 +49,10 @@
         "GOOGLE_CLIENT_SECRET": <string>,
         "GOOGLE_CLIENT_ID": <string>,
         "LogLevel": "Warning",
-        "AllowedHosts": "*"
+        "AllowedHosts": "*",
+        "MOMO_TEST_ENV_PARTNER_CODE": <string>,
+        "MOMO_TEST_ENV_ACCESS_KEY": <string>,
+        "MOMO_TEST_ENV_SECRET_KEY": <string>
     }
 
 # 4. Migrations Guide:
@@ -57,10 +60,13 @@
   ### 1. `Update Models and Add Migrations`:
 
   - In Developer PowerShell, cd `daisy-application\daisy-core-services\DataAccess`, run  <br/>
-    `dotnet ef migrations add <migration-name> --output-dir MssqlIntegration/Migrations`.
+    `dotnet ef migrations add <migration-name> --output-dir MssqlServerIntegration/Migrations`.
+    
   ### 2. `Update Database follow new changes`:
+  
   - In Developer PowerShell, cd `daisy-application\daisy-core-services\DataAccess`, run
     `dotnet ef database update`.
   - If you need to revert your database to the older version, run
     `dotnet ef database update <previous-migration-name>` instead.
   - ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID: Ask @TienDang to get those secret keys
+  - MOMO_TEST_ENV_PARTNER_CODE, MOMO_TEST_ENV_ACCESS_KEY, MOMO_TEST_ENV_SECRET_KEY: Ask @Triet to get those secret keys

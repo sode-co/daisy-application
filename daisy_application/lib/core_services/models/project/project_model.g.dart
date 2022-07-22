@@ -21,6 +21,9 @@ ProjectModel _$ProjectModelFromJson(Map<String, dynamic> json) => ProjectModel(
       category: json['category'] == null
           ? null
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
+      payment: json['payment'] == null
+          ? null
+          : PaymentModel.fromJson(json['payment'] as Map<String, dynamic>),
       resolvedAt: json['resolvedAt'] == null
           ? null
           : DateTime.parse(json['resolvedAt'] as String),
@@ -56,4 +59,5 @@ Map<String, dynamic> _$ProjectModelToJson(ProjectModel instance) =>
       'workspaces': instance.workspaces,
       'isAllowedPublic': instance.isAllowedPublic,
       'request': instance.request,
+      'payment': instance.payment,
     };

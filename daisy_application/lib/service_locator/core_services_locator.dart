@@ -9,6 +9,7 @@ import 'package:daisy_application/core_services/http/authentication/authenticati
 import 'package:daisy_application/core_services/http/category/category_rest_api.dart';
 import 'package:daisy_application/core_services/http/health_check/health_check_rest_api.dart';
 import 'package:daisy_application/core_services/http/job_application/job_application_rest_api.dart';
+import 'package:daisy_application/core_services/http/payment/payment_rest_api.dart';
 import 'package:daisy_application/core_services/http/portfolio/portfolio_rest_api.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/http/request/request_rest_api.dart';
@@ -122,6 +123,9 @@ class CoreServiceLocator {
 
     locator.registerFactory<ArtworkRestApi>(() => ArtworkRestApi(locator.get(),
         baseUrl: '${Config.API_URL}/v1/artworks'));
+
+    locator.registerFactory(() =>
+        PaymentRestApi(locator.get(), baseUrl: '${Config.API_URL}/v1/payment'));
   }
 
   static Future<void> _initPersistentService() async {

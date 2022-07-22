@@ -9,6 +9,7 @@ using Domain.Models;
 using WebApplication.Pages.Utils;
 using DataAccess.UnitOfWork;
 using SaleWebApp.Paging;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication.Pages.UserCRUD
 {
@@ -16,20 +17,18 @@ namespace WebApplication.Pages.UserCRUD
     {
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
-
         [BindProperty(SupportsGet = true)]
-        public int CurrentPage { get; set; }
+        public string RoleFilter { get; set; }
+        [BindProperty(SupportsGet = true)]
         public int ItemPerPage { get; set; }
-
         private UnitOfWorkFactory _unitOfWorkFactory;
         public IndexModel(UnitOfWorkFactory unitOfWorkFactory)
         {
             this._unitOfWorkFactory = unitOfWorkFactory;
         }
-
-        public IList<User> User { get;set; }
+        public PaginatedList<User> User { get; set; }
         public decimal TotalPage { get; set; }
-        public async Task<IActionResult> OnGetAsync(int p = 1)
+        public async Task<IActionResult> OnGetAsync(string searchString, int? pageIndex, string? roleUser)
         {
             string role = UserAuthentication.Role();
 
@@ -38,21 +37,68 @@ namespace WebApplication.Pages.UserCRUD
                 return Redirect("/Unauthorized");
             }
 
+            SearchString = searchString;
+            RoleFilter = roleUser;
+            IQueryable<User> userList;
             ItemPerPage = 10;
-            CurrentPage = p;
 
-            string email = UserAuthentication.UserLogin.Email;
+            var email = UserAuthentication.UserLogin.Email;
 
-            var users = _unitOfWorkFactory.Get.UserRepository.GetUsers().Where(u => !u.Email.Equals(email) && u.DeletedAt == null);
-            
-            if (!string.IsNullOrEmpty(SearchString))
+            if (roleUser == "CUSTOMER")
             {
-                users = _unitOfWorkFactory.Get.UserRepository.GetUsersByName(SearchString).Where(u => !u.Email.Equals(email) && u.DeletedAt == null);
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    userList = (IQueryable<User>)_unitOfWorkFactory.Get.UserRepository.GetAll(
+                        u => u.DisplayName.ToUpper().Contains(SearchString.ToUpper()) &&
+                        u.Role == roleUser &&
+                        !u.Email.Equals(email) &&
+                        u.DeletedAt == null);
+                }
+                else
+                {
+                    userList = (IQueryable<User>)_unitOfWorkFactory.Get.UserRepository.GetAll(
+                       u => u.DeletedAt == null &&
+                       u.Role == roleUser &&
+                       !u.Email.Equals(email));
+                }
             }
-            decimal tmp = Math.Ceiling(Convert.ToDecimal(users.Count()/ ItemPerPage));
-            TotalPage = tmp == 0 ? 1 : tmp;
-            User = users.Skip((CurrentPage - 1) * ItemPerPage).Take(ItemPerPage).ToList();
-            
+            else if (roleUser == "DESIGNER")
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    userList = (IQueryable<User>)_unitOfWorkFactory.Get.UserRepository.GetAll(
+                        u => u.DisplayName.ToUpper().Contains(SearchString.ToUpper()) &&
+                        u.Role == roleUser &&
+                        !u.Email.Equals(email) &&
+                        u.DeletedAt == null);
+                }
+                else
+                {
+                    userList = (IQueryable<User>)_unitOfWorkFactory.Get.UserRepository.GetAll(
+                       u => u.DeletedAt == null &&
+                       u.Role == roleUser &&
+                       !u.Email.Equals(email));
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    userList = (IQueryable<User>)_unitOfWorkFactory.Get.UserRepository.GetAll(
+                        u => u.DisplayName.ToUpper().Contains(SearchString.ToUpper()) &&
+                        !u.Email.Equals(email) &&
+                        u.DeletedAt == null);
+                }
+                else
+                {
+                    userList = (IQueryable<User>)_unitOfWorkFactory.Get.UserRepository.GetAll(
+                        u => u.DeletedAt == null &&
+                        !u.Email.Equals(email));
+                }
+            }
+
+            User = await PaginatedList<User>.CreateAsync(
+                        userList.AsNoTracking(), pageIndex ?? 1, ItemPerPage);
             return Page();
         }
     }

@@ -44,15 +44,20 @@ namespace Api.Common
         }
         public class PAYMENT_ACTION_STATUS
         {
+            // public const string PENDING = "PENDING";
+            // public const string SUCCESSFULLY = "SUCCESSFULLY";
+            // public const string CANCELED = "CANCELED";
+            // public const string WAITING = "WAITING";
+            // public const string URGENT = "URGENT";
             public const string PENDING = "PENDING";
             public const string SUCCESSFULLY = "SUCCESSFULLY";
+            public const string FAILED = "FAILED";
             public const string CANCELED = "CANCELED";
-            public const string WAITING = "WAITING";
-            public const string URGENT = "URGENT";
         }
         public class PAYMENT_STATUS
         {
             public const string IN_COMPLETE = "IN_COMPLETE";
+            public const string WAITING_FOR_SYSTEM = "WAITING_FOR_SYSTEM";
             public const string COMPLETE = "COMPLETE";
         }
         public class PAYMENT_CURRENCY
@@ -76,6 +81,15 @@ namespace Api.Common
         {
             public const string IMAGE_PNG = "image/png";
             public const string IMAGE_JPEG = "image/jpeg";
+        }
+        public class PAYMENT_METHOD
+        {
+            public const string MOMO = "MOMO";
+        }
+        public class PAYMENT_TYPE
+        {
+            public const string USER_PAID = "USER_PAID";
+            public const string SYSTEM_PAID = "SYSTEM_PAID";
         }
     }
 }

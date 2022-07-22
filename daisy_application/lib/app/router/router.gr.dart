@@ -11,10 +11,11 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
+import 'package:flutter/cupertino.dart' as _i20;
 import 'package:flutter/material.dart' as _i19;
 
-import '../../core_services/models/portfolio/portfolio_model.dart' as _i21;
-import '../../core_services/models/request/request_model.dart' as _i20;
+import '../../core_services/models/portfolio/portfolio_model.dart' as _i22;
+import '../../core_services/models/request/request_model.dart' as _i21;
 import '../flow_controllers/discovery_job/discovery_job_flow_controller.dart'
     as _i7;
 import '../flow_controllers/portfolio/portfolio_flow_controller.dart' as _i9;
@@ -268,7 +269,7 @@ class WorkSpaceRoute extends _i2.PageRouteInfo<void> {
 class ProjectDetailsRoute extends _i2.PageRouteInfo<ProjectDetailsRouteArgs> {
   ProjectDetailsRoute(
       {required String projectId,
-      _i19.Key? key,
+      _i20.Key? key,
       List<_i2.PageRouteInfo>? children})
       : super(ProjectDetailsRoute.name,
             path: 'project/:projectId',
@@ -284,7 +285,7 @@ class ProjectDetailsRouteArgs {
 
   final String projectId;
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   @override
   String toString() {
@@ -296,8 +297,8 @@ class ProjectDetailsRouteArgs {
 /// [_i7.DicoveryJobFlowController]
 class DicoveryJobRoute extends _i2.PageRouteInfo<DicoveryJobRouteArgs> {
   DicoveryJobRoute(
-      {required _i20.RequestModel? request,
-      _i19.Key? key,
+      {required _i21.RequestModel? request,
+      _i20.Key? key,
       List<_i2.PageRouteInfo>? children})
       : super(DicoveryJobRoute.name,
             path: 'discovery',
@@ -310,9 +311,9 @@ class DicoveryJobRoute extends _i2.PageRouteInfo<DicoveryJobRouteArgs> {
 class DicoveryJobRouteArgs {
   const DicoveryJobRouteArgs({required this.request, this.key});
 
-  final _i20.RequestModel? request;
+  final _i21.RequestModel? request;
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   @override
   String toString() {
@@ -324,8 +325,8 @@ class DicoveryJobRouteArgs {
 /// [_i7.DicoveryJobFlowController]
 class DiscoveryMobileRoute extends _i2.PageRouteInfo<DiscoveryMobileRouteArgs> {
   DiscoveryMobileRoute(
-      {required _i20.RequestModel? request,
-      _i19.Key? key,
+      {required _i21.RequestModel? request,
+      _i20.Key? key,
       List<_i2.PageRouteInfo>? children})
       : super(DiscoveryMobileRoute.name,
             path: 'discovery-mobile',
@@ -338,9 +339,9 @@ class DiscoveryMobileRoute extends _i2.PageRouteInfo<DiscoveryMobileRouteArgs> {
 class DiscoveryMobileRouteArgs {
   const DiscoveryMobileRouteArgs({required this.request, this.key});
 
-  final _i20.RequestModel? request;
+  final _i21.RequestModel? request;
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   @override
   String toString() {
@@ -361,8 +362,8 @@ class SignupRoute extends _i2.PageRouteInfo<void> {
 /// [_i9.PortfolioFlowController]
 class PortfolioRoute extends _i2.PageRouteInfo<PortfolioRouteArgs> {
   PortfolioRoute(
-      {_i19.Key? key,
-      _i21.PortfolioModel? portfolio,
+      {_i20.Key? key,
+      _i22.PortfolioModel? portfolio,
       List<_i2.PageRouteInfo>? children})
       : super(PortfolioRoute.name,
             path: 'portfolio',
@@ -375,9 +376,9 @@ class PortfolioRoute extends _i2.PageRouteInfo<PortfolioRouteArgs> {
 class PortfolioRouteArgs {
   const PortfolioRouteArgs({this.key, this.portfolio});
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
-  final _i21.PortfolioModel? portfolio;
+  final _i22.PortfolioModel? portfolio;
 
   @override
   String toString() {
@@ -436,7 +437,7 @@ class DiscoverJobPage extends _i2.PageRouteInfo<void> {
 /// generated route for
 /// [_i16.JobDetailsScreen]
 class JobDetailsScreen extends _i2.PageRouteInfo<JobDetailsScreenArgs> {
-  JobDetailsScreen({_i19.Key? key, _i20.RequestModel? request})
+  JobDetailsScreen({_i20.Key? key, _i21.RequestModel? request})
       : super(JobDetailsScreen.name,
             path: '', args: JobDetailsScreenArgs(key: key, request: request));
 
@@ -446,9 +447,9 @@ class JobDetailsScreen extends _i2.PageRouteInfo<JobDetailsScreenArgs> {
 class JobDetailsScreenArgs {
   const JobDetailsScreenArgs({this.key, this.request});
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
-  final _i20.RequestModel? request;
+  final _i21.RequestModel? request;
 
   @override
   String toString() {
@@ -467,7 +468,7 @@ class SignUp extends _i2.PageRouteInfo<void> {
 /// generated route for
 /// [_i18.PortfolioPage]
 class _PortfolioRoute extends _i2.PageRouteInfo<_PortfolioRouteArgs> {
-  _PortfolioRoute({_i19.Key? key, _i21.PortfolioModel? portfolio})
+  _PortfolioRoute({_i20.Key? key, _i22.PortfolioModel? portfolio})
       : super(_PortfolioRoute.name,
             path: '',
             args: _PortfolioRouteArgs(key: key, portfolio: portfolio));
@@ -478,9 +479,9 @@ class _PortfolioRoute extends _i2.PageRouteInfo<_PortfolioRouteArgs> {
 class _PortfolioRouteArgs {
   const _PortfolioRouteArgs({this.key, this.portfolio});
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
-  final _i21.PortfolioModel? portfolio;
+  final _i22.PortfolioModel? portfolio;
 
   @override
   String toString() {
