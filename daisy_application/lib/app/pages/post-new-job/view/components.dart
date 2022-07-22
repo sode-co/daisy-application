@@ -644,7 +644,7 @@ class _DropdownChildrenListState extends State<DropdownChildrenList> {
 
     if (model.parentRequest.items.length < _index) {
       model.parentRequest.items.add(RequestModel.init()
-        ..status = 'string'
+        ..status = 'AVAILABLE'
         ..budget = 0
         ..timeline = model.parentRequest.timeline);
     }

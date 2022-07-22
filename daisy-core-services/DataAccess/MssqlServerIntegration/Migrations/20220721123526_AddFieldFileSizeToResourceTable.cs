@@ -19,10 +19,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
             migrationBuilder.DropColumn(
                 name: "FileSize",
                 table: "Resources");
-
-            migrationBuilder.DropColumn(
-                name: "Status",
-                table: "PaymentActions");
         }
     }
 }

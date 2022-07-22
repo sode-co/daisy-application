@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class PostNewJobState with ChangeNotifier {
   RequestModel parentRequest = RequestModel.init()
-    ..status = 'string'
+    ..status = 'AVAILABLE'
     ..timeline = DateTime.now().add(const Duration(days: 3))
     ..category = (CategoryModel.init()
       ..name = 'Nhận diện thương hiệu'

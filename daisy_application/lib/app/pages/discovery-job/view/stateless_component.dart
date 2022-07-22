@@ -358,7 +358,7 @@ class ApplicationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     ApplicationState appState = context.read();
     bool isDesigner = (appState.currentUser != null &&
-        appState.currentUser!.role != 'DESIGNER');
+        appState.currentUser!.role == 'DESIGNER');
     return isDesigner
         ? Container(
             decoration: BoxDecoration(
