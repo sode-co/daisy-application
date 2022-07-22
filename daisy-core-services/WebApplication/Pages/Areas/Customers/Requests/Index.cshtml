@@ -148,9 +148,12 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="CANCELED">Canceled</a>
+                </li>
             </ul>
         }
-        else
+        else if (Model.CurrentStatus.Equals("TAKEN"))
         {
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -158,6 +161,23 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="CANCELED">Canceled</a>
+                </li>
+            </ul>
+        }
+        else if (Model.CurrentStatus.Equals("CANCELED"))
+        {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="AVAILABLE">Available</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="CANCELED">Canceled</a>
                 </li>
             </ul>
         }
@@ -170,6 +190,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-page="" asp-route-status="CANCELED">Canceled</a>
             </li>
         </ul>
     }
