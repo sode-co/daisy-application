@@ -53,28 +53,9 @@ class _ListApplicantsState extends State<ListApplicants> {
                     ),
                     DataColumn(
                       label: Text(
-                        'E-mail',
+                        'Xem portfolio',
                         style: Design.textTableHeader(
                           textColor: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Số điện thoại',
-                        style: Design.textTableHeader(
-                          textColor: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: SizedBox(
-                        width: 300.0,
-                        child: Text(
-                          'Mô tả',
-                          style: Design.textTableHeader(
-                            textColor: Colors.black.withOpacity(0.6),
-                          ),
                         ),
                       ),
                     ),
@@ -119,21 +100,20 @@ class _ListApplicantsState extends State<ListApplicants> {
           ),
         ),
         DataCell(
-          Text(
-            applicant.freelancer!.email!,
-          ),
-        ),
-        DataCell(
-          Text(
-            applicant.freelancer!.phone!,
-          ),
-        ),
-        DataCell(
-          SizedBox(
-            width: applicant.status == 'PENDING'
-                ? MediaQuery.of(context).size.width * 0.03
-                : MediaQuery.of(context).size.width * 0.34,
-            child: Text(applicant.description!),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 52, 155, 55),
+            ),
+            icon: const Icon(
+              Icons.recommend,
+              size: 14,
+            ),
+            onPressed: () {
+              _listener
+                  .getPortfolioByDesignerEmail(applicant.freelancer!.email!);
+            },
+            // Edit
+            label: const Text('Portfolio'),
           ),
         ),
         if (applicant.status == 'PENDING')
@@ -157,18 +137,6 @@ class _ListApplicantsState extends State<ListApplicants> {
                 ),
                 const SizedBox(
                   width: 6,
-                ),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.green.withOpacity(0.5),
-                  ),
-                  icon: const Icon(
-                    Icons.visibility,
-                    size: 14,
-                  ),
-                  onPressed: () {},
-                  //View
-                  label: const Text('Xem portfolio'),
                 ),
                 const SizedBox(
                   width: 6,

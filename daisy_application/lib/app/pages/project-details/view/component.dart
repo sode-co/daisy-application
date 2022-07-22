@@ -3,7 +3,6 @@
 import 'package:daisy_application/app/common/colors.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
-import 'package:daisy_application/app/pages/project-details/view/candidate_list.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -116,7 +115,6 @@ class _ProjectDetailsBodyState extends State<ProjectDetailsBody>
             controller: _controller,
             children: const <Widget>[
               Text('Đầu việc'),
-              CandidateListBody(),
               Text('Thảo luận'),
             ],
           ),
