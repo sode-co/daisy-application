@@ -10,7 +10,7 @@ def _WEB_APP_PORT
 def _TARGET_BRANCH
 def _SUB_NAME
 def _ENV
-def _HOST="128.199.142.104"
+def _HOST="localhost"
 
 pipeline {
   agent any
@@ -171,7 +171,8 @@ pipeline {
                 --build-arg GRPC_HOST=${_HOST} \
                 --build-arg MOBILE_GRPC_PORT=${_MOBILE_GRPC_PORT} \
                 --build-arg GRPC_PORT=${_WEB_GRPC_PORT} \
-                --build-arg WEB_URL=http://${_HOST}:${_WEB_APP_PORT} \
+                --build-arg WEB_URL=
+                http://${_HOST}:${_WEB_APP_PORT} \
                 -t tiendvlp/daisy_flutter_web:${_SUB_NAME} .
             """
           }
