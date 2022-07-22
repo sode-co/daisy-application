@@ -54,9 +54,9 @@ namespace Daisy {
             "UmVzb3VyY2USCgoCSWQYASABKAUSEQoJQ3JlYXRlZEF0GAIgASgDEhAKCE9i",
             "amVjdElkGAMgASgJEhkKBEZpbGUYBCABKAsyCy5kYWlzeS5GaWxlEhIKCldv",
             "cmtTdGF0dXMYBSABKAkSEwoLUmVzb3VyY2VLZXkYBiABKAkSIwoJV29ya3Nw",
-            "YWNlGAcgASgLMhAuZGFpc3kuV29ya3NwYWNlIjgKBEZpbGUSDAoERGF0YRgB",
-            "IAEoDBIQCghNaW1lVHlwZRgCIAEoCRIQCghGaWxlTmFtZRgDIAEoCTIGCgRO",
-            "b25lYgZwcm90bzM="));
+            "YWNlGAcgASgLMhAuZGFpc3kuV29ya3NwYWNlIkoKBEZpbGUSDAoERGF0YRgB",
+            "IAEoDBIQCghNaW1lVHlwZRgCIAEoCRIQCghGaWxlTmFtZRgDIAEoCRIQCghG",
+            "aWxlU2l6ZRgEIAEoAzIGCgROb25lYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -67,7 +67,7 @@ namespace Daisy {
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Workspace), global::Daisy.Workspace.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Request", "Project", "Discussions", "Resources", "Status" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Discussion), global::Daisy.Discussion.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "Type", "Content", "Sender", "Workspace" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Resource), global::Daisy.Resource.Parser, new[]{ "Id", "CreatedAt", "ObjectId", "File", "WorkStatus", "ResourceKey", "Workspace" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.File), global::Daisy.File.Parser, new[]{ "Data", "MimeType", "FileName" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.File), global::Daisy.File.Parser, new[]{ "Data", "MimeType", "FileName", "FileSize" }, null, null, null, null)
           }));
     }
     #endregion
@@ -3507,6 +3507,7 @@ namespace Daisy {
       data_ = other.data_;
       mimeType_ = other.mimeType_;
       fileName_ = other.fileName_;
+      fileSize_ = other.fileSize_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3552,6 +3553,18 @@ namespace Daisy {
       }
     }
 
+    /// <summary>Field number for the "FileSize" field.</summary>
+    public const int FileSizeFieldNumber = 4;
+    private long fileSize_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long FileSize {
+      get { return fileSize_; }
+      set {
+        fileSize_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3570,6 +3583,7 @@ namespace Daisy {
       if (Data != other.Data) return false;
       if (MimeType != other.MimeType) return false;
       if (FileName != other.FileName) return false;
+      if (FileSize != other.FileSize) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3580,6 +3594,7 @@ namespace Daisy {
       if (Data.Length != 0) hash ^= Data.GetHashCode();
       if (MimeType.Length != 0) hash ^= MimeType.GetHashCode();
       if (FileName.Length != 0) hash ^= FileName.GetHashCode();
+      if (FileSize != 0L) hash ^= FileSize.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3610,6 +3625,10 @@ namespace Daisy {
         output.WriteRawTag(26);
         output.WriteString(FileName);
       }
+      if (FileSize != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(FileSize);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3632,6 +3651,10 @@ namespace Daisy {
         output.WriteRawTag(26);
         output.WriteString(FileName);
       }
+      if (FileSize != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(FileSize);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3650,6 +3673,9 @@ namespace Daisy {
       }
       if (FileName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(FileName);
+      }
+      if (FileSize != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(FileSize);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3671,6 +3697,9 @@ namespace Daisy {
       }
       if (other.FileName.Length != 0) {
         FileName = other.FileName;
+      }
+      if (other.FileSize != 0L) {
+        FileSize = other.FileSize;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3699,6 +3728,10 @@ namespace Daisy {
             FileName = input.ReadString();
             break;
           }
+          case 32: {
+            FileSize = input.ReadInt64();
+            break;
+          }
         }
       }
     #endif
@@ -3724,6 +3757,10 @@ namespace Daisy {
           }
           case 26: {
             FileName = input.ReadString();
+            break;
+          }
+          case 32: {
+            FileSize = input.ReadInt64();
             break;
           }
         }

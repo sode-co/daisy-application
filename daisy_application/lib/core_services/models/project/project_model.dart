@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:daisy_application/core_services/models/category/category_model.dart';
+import 'package:daisy_application/core_services/models/payments/payment_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:daisy_application/core_services/models/workspace/workspace_model.dart';
@@ -27,6 +28,7 @@ class ProjectModel extends JsonSerializable with HiveObjectMixin {
   List<WorkspaceModel> workspaces = [];
   bool? isAllowedPublic;
   RequestModel? request;
+  PaymentModel? payment;
 
   ProjectModel(
       {this.id,
@@ -34,6 +36,7 @@ class ProjectModel extends JsonSerializable with HiveObjectMixin {
       this.customer,
       this.freelancer,
       this.category,
+      this.payment,
       this.resolvedAt,
       this.data,
       this.preferedLanguage,
@@ -63,6 +66,8 @@ class ProjectModel extends JsonSerializable with HiveObjectMixin {
         proto.workspaces.map((e) => WorkspaceModel.fromProto(e)).toList();
     request = RequestModel.fromProto(proto.request);
   }
+
+  bool get isComplete => status == 'DONE';
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) =>
       _$ProjectModelFromJson(json);

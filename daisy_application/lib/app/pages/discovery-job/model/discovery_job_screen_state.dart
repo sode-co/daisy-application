@@ -39,7 +39,9 @@ class DiscoveryJobScreenState extends ChangeNotifier {
       ..addAll(values)
       ..sort(((a, b) =>
           b.createdAt!.millisecondsSinceEpoch -
-          a.createdAt!.millisecondsSinceEpoch));
+          a.createdAt!.millisecondsSinceEpoch))
+      ..removeWhere((element) =>
+          element.description == null || element.description!.isEmpty);
     notifyListeners();
   }
 }

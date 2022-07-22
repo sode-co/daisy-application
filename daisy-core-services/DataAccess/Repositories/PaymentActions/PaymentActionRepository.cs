@@ -16,5 +16,20 @@ namespace DataAccess.Repositories.PaymentActions
         {
             _dbContext = dbContext;
         }
+
+        public int AddPaymentAction(PaymentAction paymentAction)
+        {
+            _dbContext.PaymentActions.Add(paymentAction);
+            _dbContext.SaveChanges();
+            return paymentAction.Id;
+        }
+
+        public void UpdatePaymentActionStatus(int paymentActionId, string status)
+        {
+            var action = _dbContext.PaymentActions.FirstOrDefault(x => x.Id == paymentActionId);
+            action.Status = status;
+            _dbContext.PaymentActions.Update(action);
+            _dbContext.SaveChanges();
+        }
     }
 }

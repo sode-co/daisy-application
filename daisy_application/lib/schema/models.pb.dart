@@ -1106,6 +1106,7 @@ class File extends $pb.GeneratedMessage {
     ..a<$core.List<$core.int>>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Data', $pb.PbFieldType.OY, protoName: 'Data')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'MimeType', protoName: 'MimeType')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'FileName', protoName: 'FileName')
+    ..aInt64(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'FileSize', protoName: 'FileSize')
     ..hasRequiredFields = false
   ;
 
@@ -1114,6 +1115,7 @@ class File extends $pb.GeneratedMessage {
     $core.List<$core.int>? data,
     $core.String? mimeType,
     $core.String? fileName,
+    $fixnum.Int64? fileSize,
   }) {
     final _result = create();
     if (data != null) {
@@ -1124,6 +1126,9 @@ class File extends $pb.GeneratedMessage {
     }
     if (fileName != null) {
       _result.fileName = fileName;
+    }
+    if (fileSize != null) {
+      _result.fileSize = fileSize;
     }
     return _result;
   }
@@ -1174,5 +1179,14 @@ class File extends $pb.GeneratedMessage {
   $core.bool hasFileName() => $_has(2);
   @$pb.TagNumber(3)
   void clearFileName() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get fileSize => $_getI64(3);
+  @$pb.TagNumber(4)
+  set fileSize($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFileSize() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFileSize() => clearField(4);
 }
 

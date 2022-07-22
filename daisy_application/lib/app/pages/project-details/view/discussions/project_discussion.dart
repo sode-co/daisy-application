@@ -88,15 +88,18 @@ extension ProjectDiscussion on ProjectDetailsPageState {
                     topRight: Radius.circular(5),
                     bottomRight: Radius.circular(5))),
             child: TextField(
-              scrollPadding: EdgeInsets.all(0),
+              scrollPadding: const EdgeInsets.all(0),
               controller: discussionTextController,
               cursorWidth: 4,
+              enabled: !screenState.project!.isComplete,
               maxLines: null,
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                 prefixText: '   ',
                 suffixText: '   ',
-                hintText: 'Type message here',
+                hintText: screenState.project!.isComplete
+                    ? 'This discussion has been locked'
+                    : 'Type message here',
                 hintStyle: TextStyle(
                     fontSize: 17,
                     height: 1,

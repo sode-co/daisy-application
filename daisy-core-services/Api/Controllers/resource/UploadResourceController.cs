@@ -51,10 +51,12 @@ namespace Api.Controllers.resource
 
                 using var stream = await bucket.OpenUploadStreamAsync(fileName, null);
                 var resourceKey = stream.Id;
+                long fileSize = 0;
                 while (!receiveResult.CloseStatus.HasValue)
                 {
                     var data = new ArraySegment<byte>(buffer, 0, receiveResult.Count).ToArray();
                     await stream.WriteAsync(data, 0, data.Length);
+                    fileSize += data.Length;
                     await webSocket.SendAsync(Encoding.UTF8.GetBytes("ok"),
                         WebSocketMessageType.Text, true, CancellationToken.None);
                     receiveResult = await webSocket.ReceiveAsync(
@@ -64,6 +66,7 @@ namespace Api.Controllers.resource
                 var newResource = new Resource() {
                     ResourceKey = resourceKey + "",
                     FileType = fileType,
+                    FileSize = fileSize,
                     FileName = fileName,
                     Workspace = new Workspace() { Id = workspaceId},
                     WorkStatus = RESOURCE_WORK_STATUS.IN_PROGRESS

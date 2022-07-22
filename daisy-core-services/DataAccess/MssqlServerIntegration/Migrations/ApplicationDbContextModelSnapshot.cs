@@ -398,12 +398,18 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
                     b.Property<string>("PaymentMethod")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
@@ -616,6 +622,9 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Property<string>("FileName")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("FileType")
                         .HasMaxLength(255)
@@ -901,7 +910,7 @@ namespace DataAccess.MssqlServerIntegration.Migrations
             modelBuilder.Entity("Domain.Models.PaymentAction", b =>
                 {
                     b.HasOne("Domain.Models.Payment", "Payment")
-                        .WithMany()
+                        .WithMany("PaymentActions")
                         .HasForeignKey("PaymentId");
 
                     b.HasOne("Domain.Models.User", "User")
@@ -1019,6 +1028,11 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                     b.Navigation("Project");
 
                     b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("Domain.Models.Payment", b =>
+                {
+                    b.Navigation("PaymentActions");
                 });
 
             modelBuilder.Entity("Domain.Models.Project", b =>

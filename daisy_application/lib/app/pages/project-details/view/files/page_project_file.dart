@@ -1,4 +1,5 @@
-import 'package:daisy_application/app/common/design/design.dart';
+import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/pages/project-details/view/files/item_project_file.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +20,14 @@ extension PageProjectFile on ProjectDetailsPageState {
   Widget createProjectFilePage(int index) => Container(
       alignment: Alignment.center,
       child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: (9 / 11),
+            crossAxisCount: Responsive.isDesktop(context) ? 4 : 2,
           ),
           itemCount: screenState.currentProjectTab.resources.length,
           itemBuilder: (ctx, index) {
-            return Container();
+            return createProjectResourceItem(
+                screenState.currentProjectTab.resources[index]);
           }));
 
   void switchFileTab(int index) {
@@ -32,5 +35,6 @@ extension PageProjectFile on ProjectDetailsPageState {
         duration: const Duration(milliseconds: 200),
         curve: Curves.fastOutSlowIn);
     screenState.currentFileTabIndex = index;
+    listener.onFileNavTabSelected(index);
   }
 }

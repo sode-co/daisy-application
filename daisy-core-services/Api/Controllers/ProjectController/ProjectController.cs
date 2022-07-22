@@ -35,7 +35,9 @@ namespace Api.Controllers.ProjectController
                 var projects = work.ProjectRepository.GetAll(project => project.Id == projectId, null, "Customer,Freelancer,Category,Payment,Request,Workspaces");
                 if (projects.Count() == 0) return NotFound();
 
-                return Ok(projects.First());
+                var p = projects.First();
+
+                return Ok(p);
             }
         }
 

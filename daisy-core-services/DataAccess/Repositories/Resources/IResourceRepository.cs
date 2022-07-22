@@ -9,5 +9,6 @@ namespace DataAccess.Repositories.Resources
 {
     public interface IResourceRepository : IRepository<Resource>
     {
+        IEnumerable<Resource> ResourcePaging(DateTime timeOffset, int count, int workId, string workStatus);
     }
 }

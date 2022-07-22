@@ -27,7 +27,8 @@ extension ProjectHeader on ProjectDetailsPageState {
               createItemTag(project?.category?.name ?? 'loading...',
                   Design.primaryTextColor),
               const SizedBox(width: Design.contentSpacing),
-              createItemTag('In Progress', Design.accentRed.shade400),
+              createItemTag(project!.isComplete ? 'Completed' : 'In Progress',
+                  Design.accentRed.shade400),
               const SizedBox(width: Design.contentSpacing),
               Text(
                   'with ${project?.customer?.displayName ?? project?.customer?.firstName ?? 'loading...'}',

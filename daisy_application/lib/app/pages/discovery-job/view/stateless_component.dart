@@ -6,10 +6,12 @@ import 'package:daisy_application/app/common/utils/widget_utils.dart';
 import 'package:daisy_application/app/pages/discovery-job/deps/discovery_job_page_deps.dart';
 import 'package:daisy_application/app/pages/discovery-job/model/discovery_job_screen_state.dart';
 import 'package:daisy_application/app/pages/discovery-job/view/applicants_list.dart';
+import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/access_utils.dart';
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/core_services/models/job_application/job_application_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
+import 'package:daisy_application/core_services/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -354,30 +356,35 @@ class ApplicationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: const Color(BuiltinColor.blue_gradient_01),
-        ),
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: SizedBox(
-        width: 200.0,
-        height: 50.0,
-        child: TextButton.icon(
-          icon: const Icon(
-            Icons.approval,
-            color: Color(BuiltinColor.blue_gradient_01),
-          ),
-          label: const Text(
-            'Ứng tuyển ngay',
-            style: TextStyle(
-              color: Color(BuiltinColor.blue_gradient_01),
+    ApplicationState appState = context.read();
+    bool isDesigner = (appState.currentUser != null &&
+        appState.currentUser!.role == 'DESIGNER');
+    return isDesigner
+        ? Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color(BuiltinColor.blue_gradient_01),
+              ),
+              borderRadius: BorderRadius.circular(15.0),
             ),
-          ),
-          onPressed: onApply,
-        ),
-      ),
-    );
+            child: SizedBox(
+              width: 200.0,
+              height: 50.0,
+              child: TextButton.icon(
+                icon: const Icon(
+                  Icons.approval,
+                  color: Color(BuiltinColor.blue_gradient_01),
+                ),
+                label: const Text(
+                  'Ứng tuyển ngay',
+                  style: TextStyle(
+                    color: Color(BuiltinColor.blue_gradient_01),
+                  ),
+                ),
+                onPressed: onApply,
+              ),
+            ),
+          )
+        : Container();
   }
 }

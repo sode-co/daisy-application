@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Utils.Authentication;
 using static Api.Common.Constants;
 
@@ -27,15 +28,15 @@ namespace Api.Controllers.DiscussionController
             _mapper = mapper;
         }
 
-        [Authorize(Policy = ROLE.CUSTOMER)]
-        [Authorize(Policy = ROLE.DESIGNER)]
+        [Authorize]
+        //[Authorize(Policy = ROLE.DESIGNER)]
         // GET v1/discussions/workspace/:workspaceId
         [HttpGet("workspace/{workspaceId}")]
-        public IEnumerable<Discussion> GetDiscussionsByWorkspaceId(int workspaceId)
+        public IList<Discussion> GetDiscussionsByWorkspaceId(int workspaceId)
         {
             using (var work = _unitOfWorkFactory.Get)
             {
-                var discussions = work.DiscussionRepository.GetAll(j => j.Workspace.Id == workspaceId, null, "Sender,Workspace");
+                var discussions = work.DiscussionRepository.GetAll(j => j.Workspace.Id == workspaceId, null, "Sender,Workspace").ToList();
                 return discussions;
             }
         }

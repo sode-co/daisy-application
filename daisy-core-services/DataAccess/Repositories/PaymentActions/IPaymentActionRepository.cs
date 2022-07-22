@@ -9,5 +9,7 @@ namespace DataAccess.Repositories.PaymentActions
 {
     public interface IPaymentActionRepository : IRepository<PaymentAction>
     {
+        public int AddPaymentAction(PaymentAction paymentAction);
+        public void UpdatePaymentActionStatus(int paymentActionId, string status);
     }
 }

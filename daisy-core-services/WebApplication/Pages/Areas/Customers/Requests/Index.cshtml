@@ -148,9 +148,12 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="CANCELED">Canceled</a>
+                </li>
             </ul>
         }
-        else
+        else if (Model.CurrentStatus.Equals("TAKEN"))
         {
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -158,6 +161,23 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="CANCELED">Canceled</a>
+                </li>
+            </ul>
+        }
+        else if (Model.CurrentStatus.Equals("CANCELED"))
+        {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="AVAILABLE">Available</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="CANCELED">Canceled</a>
                 </li>
             </ul>
         }
@@ -170,6 +190,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" asp-page="" asp-route-status="TAKEN">Taken</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-page="" asp-route-status="CANCELED">Canceled</a>
             </li>
         </ul>
     }
@@ -192,6 +215,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Request[0].CreatedAt)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Request[0].Status)
+            </th>
             @{
                 if (role.Equals("CUSTOMER"))
                 {
@@ -203,46 +229,49 @@
     <tbody>
         @foreach (var item in Model.Request)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Budget)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Timeline)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                @{
-                    if (role.Equals("CUSTOMER"))
-                    {
-                        <td style="width: 350px">
-                            <a asp-page="./Edit" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Edit</button></a>
-                            <a asp-page="./Details" asp-route-id="@item.Id">
-                                <button class="btn btn-outline-info">
-                                    Details
-                                </button>
-                            </a>
-                            <a asp-page="../Applications/Index" asp-route-requestId="@item.Id">
-                                <button class="btn btn-outline-info">
-                                    Applications
-                                </button>
-                            </a>
-                            <a asp-page="./Delete" asp-route-id="@item.Id">
-                                <button class="btn btn-outline-danger">
-                                    Delete
-                                </button>
-                            </a>
-                        </td>
-                    }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Budget)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Timeline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            @{
+                if (role.Equals("CUSTOMER"))
+                {
+                    <td style="width: 350px">
+                        <a asp-page="./Edit" asp-route-id="@item.Id"><button class="btn btn-outline-secondary">Edit</button></a>
+                        <a asp-page="./Details" asp-route-id="@item.Id">
+                            <button class="btn btn-outline-info">
+                                Details
+                            </button>
+                        </a>
+                        <a asp-page="../Applications/Index" asp-route-requestId="@item.Id">
+                            <button class="btn btn-outline-info">
+                                Applications
+                            </button>
+                        </a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">
+                            <button class="btn btn-outline-danger">
+                                Delete
+                            </button>
+                        </a>
+                    </td>
                 }
-            </tr>
+            }
+        </tr>
         }
     </tbody>
 </table>

@@ -26,6 +26,9 @@ namespace Utils
             public int GRPC_PORT { get; set; }
             public string GOOGLE_CLIENT_ID { get; set; }
             public string GOOGLE_CLIENT_SECRET { get; set; }
+            public string MOMO_TEST_ENV_PARTNER_CODE { get; set; }
+            public string MOMO_TEST_ENV_ACCESS_KEY { get; set; }
+            public string MOMO_TEST_ENV_SECRET_KEY { get; set; }
             public string ADMIN_EMAIL { get; set; }
             public string ENVIRONMENT { get { return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"); } }
             public string MONGO_DB_HOST { get; set; }

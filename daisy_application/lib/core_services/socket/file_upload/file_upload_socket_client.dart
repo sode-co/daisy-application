@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:daisy_application/common/config.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/common/file_utils.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
@@ -13,7 +14,7 @@ class FileUploadSocketClient {
           resource.binary!, callback);
 
   String _buildWorkspaceResourceUploadUrl(ResourceModel resource) =>
-      'ws://localhost:2433/ws/upload-resource/workspace/${resource.workspace!.id}?fileName=${resource.fileName!}&fileType=${resource.fileType!}';
+      'ws://${Config.API_HOST}:${Config.API_PORT}/ws/upload-resource/workspace/${resource.workspace!.id}?fileName=${resource.fileName!}&fileType=${resource.fileType!}';
 
   Future<void> _performUpload(String url, Uint8List bytes,
       Function(double, FAILURE_TYPE) callback) async {
