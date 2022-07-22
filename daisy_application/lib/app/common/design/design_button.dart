@@ -55,8 +55,8 @@ class ButtonPrimary extends _BaseDesignedButton {
       padding: const EdgeInsets.only(
           left: Design.bodySpacing,
           right: Design.bodySpacing,
-          top: Design.contentSpacing * 1.5,
-          bottom: Design.contentSpacing * 1.5),
+          top: Design.contentSpacing * 1,
+          bottom: Design.contentSpacing * 1),
       width: widthMode == null
           ? width
           : (widthMode == WidthMode.WRAP_CONTENT ? null : double.infinity),

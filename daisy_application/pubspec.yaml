@@ -51,7 +51,9 @@ dependencies:
   msgpack_dart: ^1.0.0
   flutter_keyboard_visibility_web: ^2.0.0
   url_launcher: ^6.1.5
-
+  app_links: ^3.2.0
+  android_intent_plus: ^3.1.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

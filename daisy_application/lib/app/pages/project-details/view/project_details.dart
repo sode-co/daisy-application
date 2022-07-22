@@ -7,6 +7,7 @@ import 'package:daisy_application/app/pages/project-details/model/project_detail
 import 'package:daisy_application/app/pages/project-details/view/discussions/project_discussion.dart';
 import 'package:daisy_application/app/pages/project-details/view/files/project_files_management.dart';
 import 'package:daisy_application/app/pages/project-details/view/overview/project_overview.dart';
+import 'package:daisy_application/app/pages/project-details/view/payments/project_payment.dart';
 import 'package:daisy_application/app_state/application_state.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
 import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
@@ -86,7 +87,7 @@ class ProjectDetailsPageState extends State<ProjectDetailsPage> {
                 createProjectOverViewTab(),
                 createProjectDiscussionTab(),
                 createProjectFileManagementTab(),
-                buildTestBody('Settings')
+                createProjectPaymentTab()
               ],
             ),
           ),

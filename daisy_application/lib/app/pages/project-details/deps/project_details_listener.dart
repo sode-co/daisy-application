@@ -6,4 +6,5 @@ abstract class ProjectDetailsListener<T extends StatefulWidget>
   void onFileNavTabSelected(int index);
   Future<void> onLoadMoreDicussion();
   Future<void> onBtnSendDiscussion(String discussion);
+  Future<void> onBtnCompleteProjectClicked();
 }

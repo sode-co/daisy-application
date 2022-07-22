@@ -1,17 +1,32 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:daisy_application/app/common/design/design_snackbar.dart';
+import 'package:daisy_application/app/common/responsive.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/app/dialogs/alert_dialog.dart';
 import 'package:daisy_application/app/pages/project-details/deps/project_details_listener.dart';
 import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
+import 'package:daisy_application/common/config.dart';
+import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/debugging/logger.dart';
+import 'package:daisy_application/common/platform_helper.dart';
 import 'package:daisy_application/core_services/common/response_handler.dart';
 import 'package:daisy_application/core_services/grpc/discussions/discussions_grpc_client.dart';
+import 'package:daisy_application/core_services/http/payment/payment_rest_api.dart';
 import 'package:daisy_application/core_services/http/project/project_rest_api.dart';
 import 'package:daisy_application/core_services/models/discussion/discussion_model.dart';
+import 'package:daisy_application/core_services/models/payments/momo_model.dart';
+import 'package:daisy_application/core_services/models/payments/payment_model.dart';
 import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:daisy_application/core_services/socket/discussions/discussion_signalr_client.dart';
 import 'package:daisy_application/service_locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:daisy_application/core_services/momo/momo_redirect_native.dart'
+    if (dart.library.html) 'package:daisy_application/core_services/momo/momo_redirect_web.dart'
+    as universal_redirect;
 
 class ProjectDetailsFlowController extends AutoRouter {
   final String projectId;
@@ -29,6 +44,7 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
   late ProjectRestApi projectApiSerivce;
   late DiscussionsGrpcClient _discussionsGrpcService;
   late DiscussionSignalRClient _discussionRealtimeService;
+  late PaymentRestApi _paymentService;
 
   ProjectDetailsFlowController get myWidget =>
       widget as ProjectDetailsFlowController;
@@ -38,6 +54,7 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
     super.initState();
     _discussionsGrpcService = locator.get();
     projectApiSerivce = locator.get();
+    _paymentService = locator.get();
     projectDetailsState = ProjectDetailsState();
     _discussionRealtimeService = locator.get();
     loadProject();
@@ -122,5 +139,36 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
         type: 'text/plain');
 
     await _discussionRealtimeService.sendMessage(newDiscussion);
+  }
+
+  @override
+  Future<void> onBtnCompleteProjectClicked() async {
+    context.show(DialogAlert.info(context,
+        message:
+            'Are  you really want to complete this project, by pressing aggree you must pay all of the fee to complete this project',
+        affirmativeText: 'Aggree',
+        negativeText: 'No I don\'t want to complete this job',
+        onAffirmativeClicked: () => makePayment()));
+  }
+
+  Future<void> makePayment() async {
+    PaymentModel payment = projectDetailsState!.project!.payment!;
+    final ns = 'payment-${payment.id}p';
+    final result = await _paymentService.createTransaction({
+      'redirectUrl': PlatformHelper.isPlatform(Platform.Android)
+          ? 'mobile://android.daisy'
+          : '${Config.WEB_URL}/#/project/${projectDetailsState!.project!.id!}',
+      'paymentId': payment.id
+    }).Value<MomoModel>();
+
+    Debug.log(
+        ns, 'create transaction with result', result.failureType, result.data);
+
+    if (result.failureType != FAILURE_TYPE.NONE) {
+      context.toastError('Payment failed can not create transaction');
+      return;
+    }
+
+    await universal_redirect.redirect(result.data!.paymentRedirectUrl!);
   }
 }
