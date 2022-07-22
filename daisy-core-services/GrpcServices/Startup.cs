@@ -34,6 +34,7 @@ namespace GrpcServices
                    .AllowAnyMethod()
                    .AllowAnyHeader();
            }));
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

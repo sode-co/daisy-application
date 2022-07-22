@@ -154,8 +154,6 @@ namespace Api.Controllers.PaymentController
             // _____________________________
             // update Payment status
             //work.PaymentRepository.UpdatePaymentStatus(payment.Id, Constants.PAYMENT_STATUS.WAITING);
-            try
-            {
                 var momoDeposit = new MoMoDepositDto();
                 momoDeposit.Amount = (long)Decimal.Round(payment.TotalAmount);
                 
@@ -169,16 +167,6 @@ namespace Api.Controllers.PaymentController
                 work.Save();
 
                 return new JsonResult(new { PaymentRedirectUrl = responseFromMomo });
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("Some error happend while creating transaction " + ex.Message);
-                work.Dispose();
-                return new JsonResult(new
-                {
-                    error = "Something went wrong!!! Error: " + ex.Message
-                });
-            }
         }
 
         [HttpPost("system/momo")]

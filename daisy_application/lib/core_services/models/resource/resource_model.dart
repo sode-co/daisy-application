@@ -19,6 +19,7 @@ class ResourceModel extends JsonSerializable with HiveObjectMixin {
   WorkspaceModel? workspace;
   String? resourceKey;
   String? workStatus;
+  @JsonKey(ignore: true)
   TransferStatus? transferStatus;
   @JsonKey(ignore: true)
   Uint8List? binary;

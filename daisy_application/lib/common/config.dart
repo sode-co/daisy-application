@@ -12,7 +12,7 @@ class Config {
   static const int GRPC_MOBILE_PORT =
       int.fromEnvironment('GRPC_MOBILE_PORT', defaultValue: 50152);
   static const WEB_URL =
-      String.fromEnvironment('WEB_URL', defaultValue: 'http://localhost:5000');
+      String.fromEnvironment('WEB_URL', defaultValue: 'http://daisy.com:5000');
   static const String GRPC_URL = '$PROTOCOL://$GRPC_HOST:$GRPC_PORT';
   static const String API_URL = '$PROTOCOL://$API_HOST:$API_PORT';
 }
