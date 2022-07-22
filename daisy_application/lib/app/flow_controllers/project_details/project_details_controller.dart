@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:daisy_application/app/common/utils/widget_utils.dart';
+import 'package:daisy_application/app/dialogs/alert_dialog.dart';
 import 'package:daisy_application/app/pages/project-details/deps/project_details_listener.dart';
 import 'package:daisy_application/app/pages/project-details/model/project_details_state.dart';
 import 'package:daisy_application/app_state/application_state.dart';
@@ -122,5 +124,14 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
         type: 'text/plain');
 
     await _discussionRealtimeService.sendMessage(newDiscussion);
+  }
+
+  @override
+  Future<void> onBtnCompleteProjectClicked() async {
+    context.show(DialogAlert.info(context,
+        message:
+            'Are  you really want to complete this project, by pressing aggree you must pay all of the fee to complete this project',
+        affirmativeText: 'Aggree',
+        negativeText: 'No I don\'t want to complete this job'));
   }
 }

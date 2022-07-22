@@ -1,6 +1,7 @@
 import 'package:daisy_application/common/constants.dart';
 import 'package:daisy_application/common/list_utils.dart';
 import 'package:daisy_application/core_services/models/discussion/discussion_model.dart';
+import 'package:daisy_application/core_services/models/payments/payment_model.dart';
 import 'package:daisy_application/core_services/models/project/project_model.dart';
 import 'package:daisy_application/core_services/models/request/request_model.dart';
 import 'package:daisy_application/core_services/models/resource/resource_model.dart';
@@ -36,6 +37,14 @@ class ProjectDetailsState with ChangeNotifier {
 
   set project(ProjectModel? project) {
     _project = project;
+    _project!.payment = PaymentModel(
+        totalAmount: 200, currency: 'USD', amount: 100, paymentActions: []);
+    _project?.request?.items = [
+      RequestModel(title: 'Design logo'),
+      RequestModel(title: 'Design logo3'),
+      RequestModel(title: 'Design logo2')
+    ];
+
     notifyListeners();
   }
 
