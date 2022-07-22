@@ -12,12 +12,6 @@ namespace DataAccess.MssqlServerIntegration.Migrations
                 type: "bigint",
                 nullable: false,
                 defaultValue: 0L);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Status",
-                table: "PaymentActions",
-                type: "nvarchar(max)",
-                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
