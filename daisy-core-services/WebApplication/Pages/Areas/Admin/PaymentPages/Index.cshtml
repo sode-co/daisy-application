@@ -1,0 +1,196 @@
+﻿@page
+@model WebApplication.Pages.Areas.Admin.PaymentPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions">
+        <p>
+            Search by project name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-outline-success" />
+        </p>
+    </div>
+@{
+    if (Model.CurrentStatus != null)
+    {
+        if (Model.CurrentStatus.Equals("IN_COMPLETE"))
+        {
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" asp-page="" asp-route-status="ALL">All</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="IN_COMPLETE">Incomplete</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" asp-page="" asp-route-status="COMPLETE">Completed</a>
+                    </li>
+                </ul>
+        }
+        else
+        {
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" asp-page="" asp-route-status="ALL">All</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" asp-page="" asp-route-status="IN_COMPLETE">Incomplete</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" asp-page="" asp-route-status="COMPLETE">Completed</a>
+                    </li>
+                </ul>
+        }
+    }
+    else
+    {
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                        <a class="nav-link" aria-current="page" asp-page="" asp-route-status="ALL">All</a>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="IN_COMPLETE">Incomplete</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-page="" asp-route-status="COMPLETE">Completed</a>
+                </li>
+            </ul>
+    }
+}
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Payments[0].pro.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payments[0].pay.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payments[0].pay.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payments[0].pay.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payments[0].pay.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payments[0].pay.TotalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payments[0].pay.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payments[0].pay.UpdatedAt)
+            </th>
+            <th>Log</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Payments) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pro.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pay.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pay.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pay.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pay.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pay.TotalAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pay.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pay.UpdatedAt)
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payment-action-log-@item.pay.Id">History</button>
+
+                <div id="payment-action-log-@item.pay.Id" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                  <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>UserId</th>
+                <th>PaymentMethod</th>
+                <th>OrderId</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Created At</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach (var action in @item.pay.PaymentActions)
+                {
+                    <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.User.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.PaymentMethod)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => action.OrderId)*@
+                        @Html.DisplayFor(modelItem => action.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.Status)
+                    </td>  
+                    </tr>
+                }
+            </tbody>
+          </table>
+            </div>
+                    </div>
+                  </div>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{ var prevDisabled = !Model.Payments.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Payments.HasNextPage ? "disabled" : ""; }
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Payments.PageIndex - 1)"
+   asp-route-status="@(Model.CurrentStatus)"
+   class="btn btn-outline-dark @prevDisabled">
+    Previous
+</a>
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Payments.PageIndex + 1)"
+   asp-route-status="@(Model.CurrentStatus)"
+   class="btn btn-outline-dark @nextDisabled">
+    Next
+</a>
