@@ -88,6 +88,7 @@ message File {
     bytes Data = 1;
     string MimeType = 2;
     string FileName = 3;
+    int64 FileSize = 4;
 }
 
 service None {}

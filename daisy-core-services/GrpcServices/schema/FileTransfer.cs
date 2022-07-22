@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Filetransfer {
+namespace Daisy {
 
   /// <summary>Holder for reflection information generated from file_transfer.proto</summary>
   public static partial class FileTransferReflection {
@@ -24,33 +24,46 @@ namespace Filetransfer {
     static FileTransferReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNmaWxlX3RyYW5zZmVyLnByb3RvEgxmaWxldHJhbnNmZXIiGAoFQ2h1bmsS",
-            "DwoHQ29udGVudBgBIAEoDCJHCg5UcmFuc2ZlclN0YXR1cxIkCgZTdGF0dXMY",
-            "ASABKA4yFC5maWxldHJhbnNmZXIuU3RhdHVzEg8KB01lc3NhZ2UYAiABKAki",
-            "YAoNRG93bmxvYWRNb2RlbBIsCgZzdGF0dXMYASABKAsyHC5maWxldHJhbnNm",
-            "ZXIuVHJhbnNmZXJTdGF0dXMSIQoEZGF0YRgCIAEoCzITLmZpbGV0cmFuc2Zl",
-            "ci5DaHVuayIRCg9Eb3dubG9hZFJlcXVlc3QqIQoGU3RhdHVzEgsKB1NVQ0NF",
-            "U1MQABIKCgZGQUlMRUQQATKcAQoNVXBsb2FkU2VydmljZRI/CgZVcGxvYWQS",
-            "Ey5maWxldHJhbnNmZXIuQ2h1bmsaHC5maWxldHJhbnNmZXIuVHJhbnNmZXJT",
-            "dGF0dXMiACgBEkoKCERvd25sb2FkEh0uZmlsZXRyYW5zZmVyLkRvd25sb2Fk",
-            "UmVxdWVzdBobLmZpbGV0cmFuc2Zlci5Eb3dubG9hZE1vZGVsIgAwAWIGcHJv",
-            "dG8z"));
+            "ChNmaWxlX3RyYW5zZmVyLnByb3RvEgVkYWlzeRoMbW9kZWxzLnByb3RvIhgK",
+            "BUNodW5rEg8KB0NvbnRlbnQYASABKAwiUgoNRG93bmxvYWRNb2RlbBIlCgZz",
+            "dGF0dXMYASABKA4yFS5kYWlzeS5UcmFuc2ZlclN0YXR1cxIaCgRkYXRhGAIg",
+            "ASgLMgwuZGFpc3kuQ2h1bmsiEQoPRG93bmxvYWRSZXF1ZXN0In4KIlN0cmVh",
+            "bWluZ1Jlc291cmNlTW9kZWxSZXF1ZXN0TW9kZWwSEgoKVGltZU9mZnNldBgB",
+            "IAEoAxINCgVDb3VudBgCIAEoBRIMCgRyYXRlGAMgASgFEhMKC3dvcmtzcGFj",
+            "ZUlkGAQgASgFEhIKCndvcmtTdGF0dXMYBSABKAkiOQohU3RyZWFtaW5nUmVz",
+            "b3VyY2VGaWxlUmVxdWVzdE1vZGVsEhQKDFJlc291cmNlS2V5cxgBIAMoCSJJ",
+            "CiNTdHJlYW1pbmdSZXNvdXJjZU1vZGVsUmVzcG9uc2VNb2RlbBIiCglSZXNv",
+            "dXJjZXMYASADKAsyDy5kYWlzeS5SZXNvdXJjZSJ+CiJTdHJlYW1pbmdSZXNv",
+            "dXJjZUZpbGVSZXNwb25zZU1vZGVsEiUKBnN0YXR1cxgBIAEoDjIVLmRhaXN5",
+            "LlRyYW5zZmVyU3RhdHVzEhMKC1Jlc291cmNlS2V5GAIgASgJEhwKBmJpbmFy",
+            "eRgDIAEoCzIMLmRhaXN5LkNodW5rKikKDlRyYW5zZmVyU3RhdHVzEggKBERP",
+            "TkUQABINCglTVFJFQU1JTkcQATJNCg1VcGxvYWRTZXJ2aWNlEjwKCERvd25s",
+            "b2FkEhYuZGFpc3kuRG93bmxvYWRSZXF1ZXN0GhQuZGFpc3kuRG93bmxvYWRN",
+            "b2RlbCIAMAEy9AEKD1Jlc291cmNlU2VydmljZRJxChZTdHJlYW1pbmdSZXNv",
+            "dXJjZU1vZGVsEikuZGFpc3kuU3RyZWFtaW5nUmVzb3VyY2VNb2RlbFJlcXVl",
+            "c3RNb2RlbBoqLmRhaXN5LlN0cmVhbWluZ1Jlc291cmNlTW9kZWxSZXNwb25z",
+            "ZU1vZGVsMAESbgoVU3RyZWFtaW5nUmVzb3VyY2VGaWxlEiguZGFpc3kuU3Ry",
+            "ZWFtaW5nUmVzb3VyY2VGaWxlUmVxdWVzdE1vZGVsGikuZGFpc3kuU3RyZWFt",
+            "aW5nUmVzb3VyY2VGaWxlUmVzcG9uc2VNb2RlbDABYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Filetransfer.Status), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Filetransfer.Chunk), global::Filetransfer.Chunk.Parser, new[]{ "Content" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Filetransfer.TransferStatus), global::Filetransfer.TransferStatus.Parser, new[]{ "Status", "Message" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Filetransfer.DownloadModel), global::Filetransfer.DownloadModel.Parser, new[]{ "Status", "Data" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Filetransfer.DownloadRequest), global::Filetransfer.DownloadRequest.Parser, null, null, null, null, null)
+          new pbr::FileDescriptor[] { global::Daisy.ModelsReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Daisy.TransferStatus), }, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.Chunk), global::Daisy.Chunk.Parser, new[]{ "Content" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.DownloadModel), global::Daisy.DownloadModel.Parser, new[]{ "Status", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.DownloadRequest), global::Daisy.DownloadRequest.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.StreamingResourceModelRequestModel), global::Daisy.StreamingResourceModelRequestModel.Parser, new[]{ "TimeOffset", "Count", "Rate", "WorkspaceId", "WorkStatus" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.StreamingResourceFileRequestModel), global::Daisy.StreamingResourceFileRequestModel.Parser, new[]{ "ResourceKeys" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.StreamingResourceModelResponseModel), global::Daisy.StreamingResourceModelResponseModel.Parser, new[]{ "Resources" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daisy.StreamingResourceFileResponseModel), global::Daisy.StreamingResourceFileResponseModel.Parser, new[]{ "Status", "ResourceKey", "Binary" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Enums
-  public enum Status {
-    [pbr::OriginalName("SUCCESS")] Success = 0,
-    [pbr::OriginalName("FAILED")] Failed = 1,
+  public enum TransferStatus {
+    [pbr::OriginalName("DONE")] Done = 0,
+    [pbr::OriginalName("STREAMING")] Streaming = 1,
   }
 
   #endregion
@@ -70,7 +83,7 @@ namespace Filetransfer {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Filetransfer.FileTransferReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Daisy.FileTransferReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -245,232 +258,6 @@ namespace Filetransfer {
 
   }
 
-  public sealed partial class TransferStatus : pb::IMessage<TransferStatus>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<TransferStatus> _parser = new pb::MessageParser<TransferStatus>(() => new TransferStatus());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<TransferStatus> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Filetransfer.FileTransferReflection.Descriptor.MessageTypes[1]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public TransferStatus() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public TransferStatus(TransferStatus other) : this() {
-      status_ = other.status_;
-      message_ = other.message_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public TransferStatus Clone() {
-      return new TransferStatus(this);
-    }
-
-    /// <summary>Field number for the "Status" field.</summary>
-    public const int StatusFieldNumber = 1;
-    private global::Filetransfer.Status status_ = global::Filetransfer.Status.Success;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Filetransfer.Status Status {
-      get { return status_; }
-      set {
-        status_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "Message" field.</summary>
-    public const int MessageFieldNumber = 2;
-    private string message_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Message {
-      get { return message_; }
-      set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as TransferStatus);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(TransferStatus other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Status != other.Status) return false;
-      if (Message != other.Message) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Status != global::Filetransfer.Status.Success) hash ^= Status.GetHashCode();
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (Status != global::Filetransfer.Status.Success) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) Status);
-      }
-      if (Message.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Message);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Status != global::Filetransfer.Status.Success) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) Status);
-      }
-      if (Message.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Message);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (Status != global::Filetransfer.Status.Success) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
-      }
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(TransferStatus other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Status != global::Filetransfer.Status.Success) {
-        Status = other.Status;
-      }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Status = (global::Filetransfer.Status) input.ReadEnum();
-            break;
-          }
-          case 18: {
-            Message = input.ReadString();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 8: {
-            Status = (global::Filetransfer.Status) input.ReadEnum();
-            break;
-          }
-          case 18: {
-            Message = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
   public sealed partial class DownloadModel : pb::IMessage<DownloadModel>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -485,7 +272,7 @@ namespace Filetransfer {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Filetransfer.FileTransferReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Daisy.FileTransferReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -505,7 +292,7 @@ namespace Filetransfer {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DownloadModel(DownloadModel other) : this() {
-      status_ = other.status_ != null ? other.status_.Clone() : null;
+      status_ = other.status_;
       data_ = other.data_ != null ? other.data_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -518,10 +305,10 @@ namespace Filetransfer {
 
     /// <summary>Field number for the "status" field.</summary>
     public const int StatusFieldNumber = 1;
-    private global::Filetransfer.TransferStatus status_;
+    private global::Daisy.TransferStatus status_ = global::Daisy.TransferStatus.Done;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Filetransfer.TransferStatus Status {
+    public global::Daisy.TransferStatus Status {
       get { return status_; }
       set {
         status_ = value;
@@ -530,10 +317,10 @@ namespace Filetransfer {
 
     /// <summary>Field number for the "data" field.</summary>
     public const int DataFieldNumber = 2;
-    private global::Filetransfer.Chunk data_;
+    private global::Daisy.Chunk data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Filetransfer.Chunk Data {
+    public global::Daisy.Chunk Data {
       get { return data_; }
       set {
         data_ = value;
@@ -555,7 +342,7 @@ namespace Filetransfer {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Status, other.Status)) return false;
+      if (Status != other.Status) return false;
       if (!object.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -564,7 +351,7 @@ namespace Filetransfer {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (status_ != null) hash ^= Status.GetHashCode();
+      if (Status != global::Daisy.TransferStatus.Done) hash ^= Status.GetHashCode();
       if (data_ != null) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -584,9 +371,9 @@ namespace Filetransfer {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (status_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Status);
+      if (Status != global::Daisy.TransferStatus.Done) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Status);
       }
       if (data_ != null) {
         output.WriteRawTag(18);
@@ -602,9 +389,9 @@ namespace Filetransfer {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (status_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Status);
+      if (Status != global::Daisy.TransferStatus.Done) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Status);
       }
       if (data_ != null) {
         output.WriteRawTag(18);
@@ -620,8 +407,8 @@ namespace Filetransfer {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (status_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Status);
+      if (Status != global::Daisy.TransferStatus.Done) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
       }
       if (data_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Data);
@@ -638,15 +425,12 @@ namespace Filetransfer {
       if (other == null) {
         return;
       }
-      if (other.status_ != null) {
-        if (status_ == null) {
-          Status = new global::Filetransfer.TransferStatus();
-        }
-        Status.MergeFrom(other.Status);
+      if (other.Status != global::Daisy.TransferStatus.Done) {
+        Status = other.Status;
       }
       if (other.data_ != null) {
         if (data_ == null) {
-          Data = new global::Filetransfer.Chunk();
+          Data = new global::Daisy.Chunk();
         }
         Data.MergeFrom(other.Data);
       }
@@ -665,16 +449,13 @@ namespace Filetransfer {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            if (status_ == null) {
-              Status = new global::Filetransfer.TransferStatus();
-            }
-            input.ReadMessage(Status);
+          case 8: {
+            Status = (global::Daisy.TransferStatus) input.ReadEnum();
             break;
           }
           case 18: {
             if (data_ == null) {
-              Data = new global::Filetransfer.Chunk();
+              Data = new global::Daisy.Chunk();
             }
             input.ReadMessage(Data);
             break;
@@ -694,16 +475,13 @@ namespace Filetransfer {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            if (status_ == null) {
-              Status = new global::Filetransfer.TransferStatus();
-            }
-            input.ReadMessage(Status);
+          case 8: {
+            Status = (global::Daisy.TransferStatus) input.ReadEnum();
             break;
           }
           case 18: {
             if (data_ == null) {
-              Data = new global::Filetransfer.Chunk();
+              Data = new global::Daisy.Chunk();
             }
             input.ReadMessage(Data);
             break;
@@ -729,7 +507,7 @@ namespace Filetransfer {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Filetransfer.FileTransferReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Daisy.FileTransferReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -860,6 +638,971 @@ namespace Filetransfer {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class StreamingResourceModelRequestModel : pb::IMessage<StreamingResourceModelRequestModel>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<StreamingResourceModelRequestModel> _parser = new pb::MessageParser<StreamingResourceModelRequestModel>(() => new StreamingResourceModelRequestModel());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<StreamingResourceModelRequestModel> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.FileTransferReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceModelRequestModel() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceModelRequestModel(StreamingResourceModelRequestModel other) : this() {
+      timeOffset_ = other.timeOffset_;
+      count_ = other.count_;
+      rate_ = other.rate_;
+      workspaceId_ = other.workspaceId_;
+      workStatus_ = other.workStatus_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceModelRequestModel Clone() {
+      return new StreamingResourceModelRequestModel(this);
+    }
+
+    /// <summary>Field number for the "TimeOffset" field.</summary>
+    public const int TimeOffsetFieldNumber = 1;
+    private long timeOffset_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long TimeOffset {
+      get { return timeOffset_; }
+      set {
+        timeOffset_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Count" field.</summary>
+    public const int CountFieldNumber = 2;
+    private int count_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Count {
+      get { return count_; }
+      set {
+        count_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "rate" field.</summary>
+    public const int RateFieldNumber = 3;
+    private int rate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Rate {
+      get { return rate_; }
+      set {
+        rate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "workspaceId" field.</summary>
+    public const int WorkspaceIdFieldNumber = 4;
+    private int workspaceId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int WorkspaceId {
+      get { return workspaceId_; }
+      set {
+        workspaceId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "workStatus" field.</summary>
+    public const int WorkStatusFieldNumber = 5;
+    private string workStatus_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string WorkStatus {
+      get { return workStatus_; }
+      set {
+        workStatus_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as StreamingResourceModelRequestModel);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(StreamingResourceModelRequestModel other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TimeOffset != other.TimeOffset) return false;
+      if (Count != other.Count) return false;
+      if (Rate != other.Rate) return false;
+      if (WorkspaceId != other.WorkspaceId) return false;
+      if (WorkStatus != other.WorkStatus) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TimeOffset != 0L) hash ^= TimeOffset.GetHashCode();
+      if (Count != 0) hash ^= Count.GetHashCode();
+      if (Rate != 0) hash ^= Rate.GetHashCode();
+      if (WorkspaceId != 0) hash ^= WorkspaceId.GetHashCode();
+      if (WorkStatus.Length != 0) hash ^= WorkStatus.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (TimeOffset != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(TimeOffset);
+      }
+      if (Count != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Count);
+      }
+      if (Rate != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Rate);
+      }
+      if (WorkspaceId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(WorkspaceId);
+      }
+      if (WorkStatus.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(WorkStatus);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (TimeOffset != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(TimeOffset);
+      }
+      if (Count != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Count);
+      }
+      if (Rate != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Rate);
+      }
+      if (WorkspaceId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(WorkspaceId);
+      }
+      if (WorkStatus.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(WorkStatus);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (TimeOffset != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TimeOffset);
+      }
+      if (Count != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Count);
+      }
+      if (Rate != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Rate);
+      }
+      if (WorkspaceId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WorkspaceId);
+      }
+      if (WorkStatus.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(WorkStatus);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(StreamingResourceModelRequestModel other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TimeOffset != 0L) {
+        TimeOffset = other.TimeOffset;
+      }
+      if (other.Count != 0) {
+        Count = other.Count;
+      }
+      if (other.Rate != 0) {
+        Rate = other.Rate;
+      }
+      if (other.WorkspaceId != 0) {
+        WorkspaceId = other.WorkspaceId;
+      }
+      if (other.WorkStatus.Length != 0) {
+        WorkStatus = other.WorkStatus;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            TimeOffset = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            Count = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Rate = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            WorkspaceId = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            WorkStatus = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            TimeOffset = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            Count = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Rate = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            WorkspaceId = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            WorkStatus = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class StreamingResourceFileRequestModel : pb::IMessage<StreamingResourceFileRequestModel>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<StreamingResourceFileRequestModel> _parser = new pb::MessageParser<StreamingResourceFileRequestModel>(() => new StreamingResourceFileRequestModel());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<StreamingResourceFileRequestModel> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.FileTransferReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceFileRequestModel() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceFileRequestModel(StreamingResourceFileRequestModel other) : this() {
+      resourceKeys_ = other.resourceKeys_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceFileRequestModel Clone() {
+      return new StreamingResourceFileRequestModel(this);
+    }
+
+    /// <summary>Field number for the "ResourceKeys" field.</summary>
+    public const int ResourceKeysFieldNumber = 1;
+    private static readonly pb::FieldCodec<string> _repeated_resourceKeys_codec
+        = pb::FieldCodec.ForString(10);
+    private readonly pbc::RepeatedField<string> resourceKeys_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<string> ResourceKeys {
+      get { return resourceKeys_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as StreamingResourceFileRequestModel);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(StreamingResourceFileRequestModel other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!resourceKeys_.Equals(other.resourceKeys_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= resourceKeys_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      resourceKeys_.WriteTo(output, _repeated_resourceKeys_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      resourceKeys_.WriteTo(ref output, _repeated_resourceKeys_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      size += resourceKeys_.CalculateSize(_repeated_resourceKeys_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(StreamingResourceFileRequestModel other) {
+      if (other == null) {
+        return;
+      }
+      resourceKeys_.Add(other.resourceKeys_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            resourceKeys_.AddEntriesFrom(input, _repeated_resourceKeys_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            resourceKeys_.AddEntriesFrom(ref input, _repeated_resourceKeys_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class StreamingResourceModelResponseModel : pb::IMessage<StreamingResourceModelResponseModel>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<StreamingResourceModelResponseModel> _parser = new pb::MessageParser<StreamingResourceModelResponseModel>(() => new StreamingResourceModelResponseModel());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<StreamingResourceModelResponseModel> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.FileTransferReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceModelResponseModel() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceModelResponseModel(StreamingResourceModelResponseModel other) : this() {
+      resources_ = other.resources_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceModelResponseModel Clone() {
+      return new StreamingResourceModelResponseModel(this);
+    }
+
+    /// <summary>Field number for the "Resources" field.</summary>
+    public const int ResourcesFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Daisy.Resource> _repeated_resources_codec
+        = pb::FieldCodec.ForMessage(10, global::Daisy.Resource.Parser);
+    private readonly pbc::RepeatedField<global::Daisy.Resource> resources_ = new pbc::RepeatedField<global::Daisy.Resource>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Daisy.Resource> Resources {
+      get { return resources_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as StreamingResourceModelResponseModel);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(StreamingResourceModelResponseModel other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!resources_.Equals(other.resources_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= resources_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      resources_.WriteTo(output, _repeated_resources_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      resources_.WriteTo(ref output, _repeated_resources_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      size += resources_.CalculateSize(_repeated_resources_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(StreamingResourceModelResponseModel other) {
+      if (other == null) {
+        return;
+      }
+      resources_.Add(other.resources_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            resources_.AddEntriesFrom(input, _repeated_resources_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            resources_.AddEntriesFrom(ref input, _repeated_resources_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class StreamingResourceFileResponseModel : pb::IMessage<StreamingResourceFileResponseModel>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<StreamingResourceFileResponseModel> _parser = new pb::MessageParser<StreamingResourceFileResponseModel>(() => new StreamingResourceFileResponseModel());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<StreamingResourceFileResponseModel> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daisy.FileTransferReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceFileResponseModel() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceFileResponseModel(StreamingResourceFileResponseModel other) : this() {
+      status_ = other.status_;
+      resourceKey_ = other.resourceKey_;
+      binary_ = other.binary_ != null ? other.binary_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public StreamingResourceFileResponseModel Clone() {
+      return new StreamingResourceFileResponseModel(this);
+    }
+
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 1;
+    private global::Daisy.TransferStatus status_ = global::Daisy.TransferStatus.Done;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.TransferStatus Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ResourceKey" field.</summary>
+    public const int ResourceKeyFieldNumber = 2;
+    private string resourceKey_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ResourceKey {
+      get { return resourceKey_; }
+      set {
+        resourceKey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "binary" field.</summary>
+    public const int BinaryFieldNumber = 3;
+    private global::Daisy.Chunk binary_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Daisy.Chunk Binary {
+      get { return binary_; }
+      set {
+        binary_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as StreamingResourceFileResponseModel);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(StreamingResourceFileResponseModel other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Status != other.Status) return false;
+      if (ResourceKey != other.ResourceKey) return false;
+      if (!object.Equals(Binary, other.Binary)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Status != global::Daisy.TransferStatus.Done) hash ^= Status.GetHashCode();
+      if (ResourceKey.Length != 0) hash ^= ResourceKey.GetHashCode();
+      if (binary_ != null) hash ^= Binary.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Status != global::Daisy.TransferStatus.Done) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Status);
+      }
+      if (ResourceKey.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ResourceKey);
+      }
+      if (binary_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Binary);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Status != global::Daisy.TransferStatus.Done) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Status);
+      }
+      if (ResourceKey.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ResourceKey);
+      }
+      if (binary_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Binary);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Status != global::Daisy.TransferStatus.Done) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      }
+      if (ResourceKey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ResourceKey);
+      }
+      if (binary_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Binary);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(StreamingResourceFileResponseModel other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Status != global::Daisy.TransferStatus.Done) {
+        Status = other.Status;
+      }
+      if (other.ResourceKey.Length != 0) {
+        ResourceKey = other.ResourceKey;
+      }
+      if (other.binary_ != null) {
+        if (binary_ == null) {
+          Binary = new global::Daisy.Chunk();
+        }
+        Binary.MergeFrom(other.Binary);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Status = (global::Daisy.TransferStatus) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            ResourceKey = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (binary_ == null) {
+              Binary = new global::Daisy.Chunk();
+            }
+            input.ReadMessage(Binary);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Status = (global::Daisy.TransferStatus) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            ResourceKey = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (binary_ == null) {
+              Binary = new global::Daisy.Chunk();
+            }
+            input.ReadMessage(Binary);
+            break;
+          }
         }
       }
     }

@@ -35,7 +35,8 @@ namespace MobileGrpcServices
             {
                 endpoints.MapGrpcService<HealthCheckServiceImp>().EnableGrpcWeb();
                 endpoints.MapGrpcService<DiscussionService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
-                endpoints.MapGrpcService<UploadFileService>().EnableGrpcWeb();
+                endpoints.MapGrpcService<ResourceService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
+                endpoints.MapGrpcService<RequestService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");

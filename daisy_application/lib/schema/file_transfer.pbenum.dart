@@ -3,24 +3,24 @@
 //  source: file_transfer.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 // ignore_for_file: UNDEFINED_SHOWN_NAME
 import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class Status extends $pb.ProtobufEnum {
-  static const Status SUCCESS = Status._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'SUCCESS');
-  static const Status FAILED = Status._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'FAILED');
+class TransferStatus extends $pb.ProtobufEnum {
+  static const TransferStatus DONE = TransferStatus._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'DONE');
+  static const TransferStatus STREAMING = TransferStatus._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'STREAMING');
 
-  static const $core.List<Status> values = <Status> [
-    SUCCESS,
-    FAILED,
+  static const $core.List<TransferStatus> values = <TransferStatus> [
+    DONE,
+    STREAMING,
   ];
 
-  static final $core.Map<$core.int, Status> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static Status? valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, TransferStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static TransferStatus? valueOf($core.int value) => _byValue[value];
 
-  const Status._($core.int v, $core.String n) : super(v, n);
+  const TransferStatus._($core.int v, $core.String n) : super(v, n);
 }
 

@@ -7,10 +7,10 @@
 
 using grpc = global::Grpc.Core;
 
-namespace Filetransfer {
+namespace Daisy {
   public static partial class UploadService
   {
-    static readonly string __ServiceName = "filetransfer.UploadService";
+    static readonly string __ServiceName = "daisy.UploadService";
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
@@ -46,34 +46,22 @@ namespace Filetransfer {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Filetransfer.Chunk> __Marshaller_filetransfer_Chunk = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Filetransfer.Chunk.Parser));
+    static readonly grpc::Marshaller<global::Daisy.DownloadRequest> __Marshaller_daisy_DownloadRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Daisy.DownloadRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Filetransfer.TransferStatus> __Marshaller_filetransfer_TransferStatus = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Filetransfer.TransferStatus.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Filetransfer.DownloadRequest> __Marshaller_filetransfer_DownloadRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Filetransfer.DownloadRequest.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Filetransfer.DownloadModel> __Marshaller_filetransfer_DownloadModel = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Filetransfer.DownloadModel.Parser));
+    static readonly grpc::Marshaller<global::Daisy.DownloadModel> __Marshaller_daisy_DownloadModel = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Daisy.DownloadModel.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Filetransfer.Chunk, global::Filetransfer.TransferStatus> __Method_Upload = new grpc::Method<global::Filetransfer.Chunk, global::Filetransfer.TransferStatus>(
-        grpc::MethodType.ClientStreaming,
-        __ServiceName,
-        "Upload",
-        __Marshaller_filetransfer_Chunk,
-        __Marshaller_filetransfer_TransferStatus);
-
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Filetransfer.DownloadRequest, global::Filetransfer.DownloadModel> __Method_Download = new grpc::Method<global::Filetransfer.DownloadRequest, global::Filetransfer.DownloadModel>(
+    static readonly grpc::Method<global::Daisy.DownloadRequest, global::Daisy.DownloadModel> __Method_Download = new grpc::Method<global::Daisy.DownloadRequest, global::Daisy.DownloadModel>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "Download",
-        __Marshaller_filetransfer_DownloadRequest,
-        __Marshaller_filetransfer_DownloadModel);
+        __Marshaller_daisy_DownloadRequest,
+        __Marshaller_daisy_DownloadModel);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Filetransfer.FileTransferReflection.Descriptor.Services[0]; }
+      get { return global::Daisy.FileTransferReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of UploadService</summary>
@@ -81,13 +69,7 @@ namespace Filetransfer {
     public abstract partial class UploadServiceBase
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Filetransfer.TransferStatus> Upload(grpc::IAsyncStreamReader<global::Filetransfer.Chunk> requestStream, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task Download(global::Filetransfer.DownloadRequest request, grpc::IServerStreamWriter<global::Filetransfer.DownloadModel> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task Download(global::Daisy.DownloadRequest request, grpc::IServerStreamWriter<global::Daisy.DownloadModel> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -122,22 +104,12 @@ namespace Filetransfer {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncClientStreamingCall<global::Filetransfer.Chunk, global::Filetransfer.TransferStatus> Upload(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return Upload(new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncClientStreamingCall<global::Filetransfer.Chunk, global::Filetransfer.TransferStatus> Upload(grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncClientStreamingCall(__Method_Upload, null, options);
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncServerStreamingCall<global::Filetransfer.DownloadModel> Download(global::Filetransfer.DownloadRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Daisy.DownloadModel> Download(global::Daisy.DownloadRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Download(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncServerStreamingCall<global::Filetransfer.DownloadModel> Download(global::Filetransfer.DownloadRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Daisy.DownloadModel> Download(global::Daisy.DownloadRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_Download, null, options, request);
       }
@@ -155,7 +127,6 @@ namespace Filetransfer {
     public static grpc::ServerServiceDefinition BindService(UploadServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Upload, serviceImpl.Upload)
           .AddMethod(__Method_Download, serviceImpl.Download).Build();
     }
 
@@ -166,8 +137,170 @@ namespace Filetransfer {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, UploadServiceBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_Upload, serviceImpl == null ? null : new grpc::ClientStreamingServerMethod<global::Filetransfer.Chunk, global::Filetransfer.TransferStatus>(serviceImpl.Upload));
-      serviceBinder.AddMethod(__Method_Download, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Filetransfer.DownloadRequest, global::Filetransfer.DownloadModel>(serviceImpl.Download));
+      serviceBinder.AddMethod(__Method_Download, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Daisy.DownloadRequest, global::Daisy.DownloadModel>(serviceImpl.Download));
+    }
+
+  }
+  public static partial class ResourceService
+  {
+    static readonly string __ServiceName = "daisy.ResourceService";
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
+    {
+      #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
+      if (message is global::Google.Protobuf.IBufferMessage)
+      {
+        context.SetPayloadLength(message.CalculateSize());
+        global::Google.Protobuf.MessageExtensions.WriteTo(message, context.GetBufferWriter());
+        context.Complete();
+        return;
+      }
+      #endif
+      context.Complete(global::Google.Protobuf.MessageExtensions.ToByteArray(message));
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static class __Helper_MessageCache<T>
+    {
+      public static readonly bool IsBufferMessage = global::System.Reflection.IntrospectionExtensions.GetTypeInfo(typeof(global::Google.Protobuf.IBufferMessage)).IsAssignableFrom(typeof(T));
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static T __Helper_DeserializeMessage<T>(grpc::DeserializationContext context, global::Google.Protobuf.MessageParser<T> parser) where T : global::Google.Protobuf.IMessage<T>
+    {
+      #if !GRPC_DISABLE_PROTOBUF_BUFFER_SERIALIZATION
+      if (__Helper_MessageCache<T>.IsBufferMessage)
+      {
+        return parser.ParseFrom(context.PayloadAsReadOnlySequence());
+      }
+      #endif
+      return parser.ParseFrom(context.PayloadAsNewBuffer());
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Daisy.StreamingResourceModelRequestModel> __Marshaller_daisy_StreamingResourceModelRequestModel = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Daisy.StreamingResourceModelRequestModel.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Daisy.StreamingResourceModelResponseModel> __Marshaller_daisy_StreamingResourceModelResponseModel = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Daisy.StreamingResourceModelResponseModel.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Daisy.StreamingResourceFileRequestModel> __Marshaller_daisy_StreamingResourceFileRequestModel = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Daisy.StreamingResourceFileRequestModel.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Daisy.StreamingResourceFileResponseModel> __Marshaller_daisy_StreamingResourceFileResponseModel = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Daisy.StreamingResourceFileResponseModel.Parser));
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Daisy.StreamingResourceModelRequestModel, global::Daisy.StreamingResourceModelResponseModel> __Method_StreamingResourceModel = new grpc::Method<global::Daisy.StreamingResourceModelRequestModel, global::Daisy.StreamingResourceModelResponseModel>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "StreamingResourceModel",
+        __Marshaller_daisy_StreamingResourceModelRequestModel,
+        __Marshaller_daisy_StreamingResourceModelResponseModel);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Daisy.StreamingResourceFileRequestModel, global::Daisy.StreamingResourceFileResponseModel> __Method_StreamingResourceFile = new grpc::Method<global::Daisy.StreamingResourceFileRequestModel, global::Daisy.StreamingResourceFileResponseModel>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "StreamingResourceFile",
+        __Marshaller_daisy_StreamingResourceFileRequestModel,
+        __Marshaller_daisy_StreamingResourceFileResponseModel);
+
+    /// <summary>Service descriptor</summary>
+    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
+    {
+      get { return global::Daisy.FileTransferReflection.Descriptor.Services[1]; }
+    }
+
+    /// <summary>Base class for server-side implementations of ResourceService</summary>
+    [grpc::BindServiceMethod(typeof(ResourceService), "BindService")]
+    public abstract partial class ResourceServiceBase
+    {
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task StreamingResourceModel(global::Daisy.StreamingResourceModelRequestModel request, grpc::IServerStreamWriter<global::Daisy.StreamingResourceModelResponseModel> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task StreamingResourceFile(global::Daisy.StreamingResourceFileRequestModel request, grpc::IServerStreamWriter<global::Daisy.StreamingResourceFileResponseModel> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+    }
+
+    /// <summary>Client for ResourceService</summary>
+    public partial class ResourceServiceClient : grpc::ClientBase<ResourceServiceClient>
+    {
+      /// <summary>Creates a new client for ResourceService</summary>
+      /// <param name="channel">The channel to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public ResourceServiceClient(grpc::ChannelBase channel) : base(channel)
+      {
+      }
+      /// <summary>Creates a new client for ResourceService that uses a custom <c>CallInvoker</c>.</summary>
+      /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public ResourceServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
+      {
+      }
+      /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      protected ResourceServiceClient() : base()
+      {
+      }
+      /// <summary>Protected constructor to allow creation of configured clients.</summary>
+      /// <param name="configuration">The client configuration.</param>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      protected ResourceServiceClient(ClientBaseConfiguration configuration) : base(configuration)
+      {
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Daisy.StreamingResourceModelResponseModel> StreamingResourceModel(global::Daisy.StreamingResourceModelRequestModel request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return StreamingResourceModel(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Daisy.StreamingResourceModelResponseModel> StreamingResourceModel(global::Daisy.StreamingResourceModelRequestModel request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_StreamingResourceModel, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Daisy.StreamingResourceFileResponseModel> StreamingResourceFile(global::Daisy.StreamingResourceFileRequestModel request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return StreamingResourceFile(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Daisy.StreamingResourceFileResponseModel> StreamingResourceFile(global::Daisy.StreamingResourceFileRequestModel request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_StreamingResourceFile, null, options, request);
+      }
+      /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      protected override ResourceServiceClient NewInstance(ClientBaseConfiguration configuration)
+      {
+        return new ResourceServiceClient(configuration);
+      }
+    }
+
+    /// <summary>Creates service definition that can be registered with a server</summary>
+    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    public static grpc::ServerServiceDefinition BindService(ResourceServiceBase serviceImpl)
+    {
+      return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_StreamingResourceModel, serviceImpl.StreamingResourceModel)
+          .AddMethod(__Method_StreamingResourceFile, serviceImpl.StreamingResourceFile).Build();
+    }
+
+    /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
+    /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+    /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    public static void BindService(grpc::ServiceBinderBase serviceBinder, ResourceServiceBase serviceImpl)
+    {
+      serviceBinder.AddMethod(__Method_StreamingResourceModel, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Daisy.StreamingResourceModelRequestModel, global::Daisy.StreamingResourceModelResponseModel>(serviceImpl.StreamingResourceModel));
+      serviceBinder.AddMethod(__Method_StreamingResourceFile, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Daisy.StreamingResourceFileRequestModel, global::Daisy.StreamingResourceFileResponseModel>(serviceImpl.StreamingResourceFile));
     }
 
   }

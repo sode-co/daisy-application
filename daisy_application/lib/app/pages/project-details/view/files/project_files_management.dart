@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:daisy_application/app/common/design/design.dart';
 import 'package:daisy_application/app/common/responsive.dart';
 import 'package:daisy_application/app/common/widget/image_picker/get_image_picker_result.dart';
+import 'package:daisy_application/app/flow_controllers/project_details/project_details_controller.dart';
 import 'package:daisy_application/app/pages/project-details/view/files/page_project_file.dart';
 import 'package:daisy_application/app/pages/project-details/view/project_details.dart';
 import 'package:daisy_application/common/debugging/logger.dart';

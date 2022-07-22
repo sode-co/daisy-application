@@ -53,7 +53,7 @@ namespace GrpcServices
             {
                 endpoints.MapGrpcService<HealthCheckServiceImp>().EnableGrpcWeb().RequireCors("AllowAll");
                 endpoints.MapGrpcService<RequestService>().EnableGrpcWeb().RequireCors("AllowAll");
-                endpoints.MapGrpcService<UploadFileService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
+                endpoints.MapGrpcService<ResourceService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
                 endpoints.MapGrpcService<HealthCheckServiceImp>().EnableGrpcWeb().RequireCors("AllowAll"); ;
                 endpoints.MapGrpcService<DiscussionService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
                 endpoints.MapGet("/", async context =>
