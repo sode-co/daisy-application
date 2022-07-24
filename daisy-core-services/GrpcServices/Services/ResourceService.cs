@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Daisy;
 using DataAccess.UnitOfWork;
@@ -85,12 +86,16 @@ namespace GrpcServices.Services
             await Task.WhenAll(tasks);
         }
 
+        private object _oLock;
+        static SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1);
+
         private async Task _writeBinary(StreamingResourceFileRequestModel request,
                 IServerStreamWriter<StreamingResourceFileResponseModel> responseStream,
                 ServerCallContext context, String resourceKey, GridFSBucket bucket)
         {
             try
             {
+                await _semaphoreSlim.WaitAsync();
                 ObjectId objId = ObjectId.Parse(resourceKey);
                 using var stream = await bucket.OpenDownloadStreamAsync(objId);
                 var buffer = new byte[1024 * 50];
@@ -112,7 +117,7 @@ namespace GrpcServices.Services
 
                     Console.WriteLine($"Writing resource {resourceKey} with bytesCount {bytesCount}");
                 }
-
+                
                 await responseStream.WriteAsync(new StreamingResourceFileResponseModel()
                 {
                     Status = TransferStatus.Done,
@@ -135,6 +140,9 @@ namespace GrpcServices.Services
                     ResourceKey = resourceKey
                 });
                 Console.WriteLine($"Error while streaming resource {resourceKey} with error {ex.Message}, Skipping...");
+            }
+            finally {
+                _semaphoreSlim.Release();
             }
         }
     }

@@ -61,6 +61,7 @@ class _ProjectDetailsFlowControllerState extends AutoRouterState
     _resourceGrpcService = locator.get();
     _fileResourceService = locator.get();
     loadProject();
+    onFileNavTabSelected(0);
   }
 
   ApplicationState get appState => context.read();
