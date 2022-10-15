@@ -72,7 +72,7 @@ pipeline {
       steps {
         script {
           if (_TARGET_BRANCH == null || _TARGET_BRANCH == 'main') {
-            _WEB_APP_PORT = 8081
+            _WEB_APP_PORT = 80
             _API_PORT = 2433
             _WEB_GRPC_PORT = 50052
             _MOBILE_GRPC_PORT = 50152
