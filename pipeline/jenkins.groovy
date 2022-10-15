@@ -191,6 +191,7 @@ pipeline {
          dir('daisy-core-services') {
           sh """
             export ASPNETCORE_ENVIRONMENT=${_ENV}
+            export PATH="$PATH:/root/.dotnet/tools"
             dotnet ef database update --startup-project DataAccess
           """
          }
