@@ -24,13 +24,13 @@ extension HeaderWorkspace on WorkspaceState {
                 children: [
                   createHeaderRecommendItem(
                       Image.asset('assets/images/ic_find_person.png'),
-                      'Your designers',
+                      'Your works',
                       Design.accentRed.shade400,
                       () => null),
                   const SizedBox(width: Design.headerSpacing),
                   createHeaderRecommendItem(
                       Image.asset('assets/images/ic_friend.png'),
-                      'Find new designer',
+                      'Find new worker',
                       Design.colorPrimary.shade400,
                       () => null)
                 ],

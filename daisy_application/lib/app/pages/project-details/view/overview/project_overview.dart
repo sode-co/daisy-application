@@ -34,7 +34,7 @@ extension ProjectOverviewTab on ProjectDetailsPageState {
                 createItemOverview(
                     title: 'Customer', content: project.customer?.displayName),
                 createItemOverview(
-                    title: 'Designer',
+                    title: 'Worker',
                     content: project.freelancer?.displayName),
                 createItemOverview(
                     title: 'Budget',

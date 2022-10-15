@@ -22,7 +22,7 @@ extension PortfolioHeader on PortfolioPageState {
           const SizedBox(height: Design.contentSpacing),
           Row(
             children: [
-              createItemTag('Favorite designer', Design.accentRed),
+              createItemTag('Favorite worker', Design.accentRed),
               const SizedBox(width: Design.contentSpacing),
               if (Responsive.isDesktop(context))
                 Text(' Local time: $currentTime',

@@ -365,7 +365,7 @@ class WelcomeToLogin extends StatelessWidget {
       child: TextButton(
         onPressed: () {},
         child: const Text(
-          'Designer, tham gia ngay',
+          'Tham gia ngay',
           style: TextStyle(
               color: Color(BuiltinColor.blue_gradient_01),
               fontWeight: FontWeight.bold,
@@ -388,7 +388,7 @@ class WelcomeToLogin extends StatelessWidget {
       child: TextButton(
         onPressed: () {},
         child: const Text(
-          'Tìm kiếm designer',
+          'Tìm kiếm người lao động',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
         ),

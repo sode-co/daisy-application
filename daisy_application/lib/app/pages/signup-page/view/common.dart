@@ -46,7 +46,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
           width: 300.0,
           height: 30.0,
           child: ListTile(
-            title: const Text('I need something designed',
+            title: const Text('I need someone work for me',
                 style: Style.blueStringBold),
             leading: Radio<UserRole>(
               value: UserRole.CUSTOMER,
@@ -64,7 +64,7 @@ class _SignUpSelectBoxState extends State<SignUpSelectBox> {
           width: 300.0,
           height: 30.0,
           child: ListTile(
-            title: const Text('I\'m a designer', style: Style.blueStringBold),
+            title: const Text('I\'m a freelancer', style: Style.blueStringBold),
             leading: Radio<UserRole>(
               value: UserRole.DESIGNER,
               activeColor: const Color(BuiltinColor.blue_gradient_01),

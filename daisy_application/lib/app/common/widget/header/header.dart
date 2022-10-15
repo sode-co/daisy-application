@@ -57,7 +57,7 @@ class _HeaderState extends State<Header> {
                   onPressed: _navigationListener.onBtnFindJobCliked,
                 ),
                 ButtonInfo.small(
-                  text: 'Tìm kiếm designer',
+                  text: 'Tìm kiếm người lao động',
                   onPressed: _navigationListener.onBtnFindDesignerCliked,
                 ),
               ],

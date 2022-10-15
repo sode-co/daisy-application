@@ -22,7 +22,7 @@ extension FindDesignerHeader on FindDesignerPageState {
           const SizedBox(height: Design.contentSpacing),
           Row(
             children: [
-              createItemTag('Trending designer', Colors.blueAccent),
+              createItemTag('Trending worker', Colors.blueAccent),
               const SizedBox(width: Design.contentSpacing),
               if (Responsive.isDesktop(context))
                 Text(' Local time: $currentTime',
