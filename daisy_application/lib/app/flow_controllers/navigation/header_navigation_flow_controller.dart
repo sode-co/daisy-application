@@ -39,6 +39,7 @@ class _HeaderNavigationFlowControllerState extends AutoRouterState
 
   @override
   void onBtnFindDesignerCliked() {
+    Debug.log('post new job');
     context.router.push(const Routers.FindDesignerRoute());
   }
 
