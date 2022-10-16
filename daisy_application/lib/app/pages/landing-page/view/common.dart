@@ -26,13 +26,15 @@ class SearchCategoriesTextField extends StatelessWidget {
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: Colors.white,
+                  color: const Color(BuiltinColor.orange),
                   width: Responsive.isDesktop(context) ? 0.0 : 1.0),
             ),
             border: const OutlineInputBorder(),
-            prefixIcon: const Icon(Icons.search, color: Colors.white),
+            prefixIcon: const Icon(Icons.search,
+                color: const Color(BuiltinColor.orange)),
             labelText: 'Logo, website, thương hiệu...',
-            labelStyle: const TextStyle(color: Colors.white),
+            labelStyle:
+                const TextStyle(color: const Color(BuiltinColor.orange)),
           ),
         ),
       ),
@@ -47,13 +49,14 @@ class SearchCategoriesTextField extends StatelessWidget {
               listener.submitTextfieldForSelectingCategories();
             },
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white)),
+              backgroundColor:
+                  MaterialStateProperty.all(const Color(BuiltinColor.orange)),
+            ),
             child: const Center(
               child: Text(
                 'Bắt đầu',
-                style: TextStyle(
-                    color: Color(BuiltinColor.blue_gradient_01),
-                    fontWeight: FontWeight.w900),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w900),
               ),
             ),
           )),
@@ -63,13 +66,15 @@ class SearchCategoriesTextField extends StatelessWidget {
       Row(crossAxisAlignment: CrossAxisAlignment.start, children: const [
         Icon(Icons.play_circle,
             color: Colors
-                .white), // sometimes it causes bug not in dom tree??? sometimes not
+                .orange), // sometimes it causes bug not in dom tree??? sometimes not
         SizedBox(width: 7.0),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 3.0),
           child: Text(
-            'Khám phá vùng trời sáng tạo',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+            'Khám phá công việc',
+            style: TextStyle(
+                color: const Color(BuiltinColor.orange),
+                fontWeight: FontWeight.w600),
           ),
         ),
       ]),
@@ -91,7 +96,7 @@ class _IntroCarouselImageState extends State<IntroCarouselImage> {
     'assets/images/intro/brand.png',
     'assets/images/intro/packaging.png',
     'assets/images/intro/logo.png',
-    'assets/images/intro/packaging2.png',
+    'assets/images/intro/brand.png',
   ];
 
   setImgIndex(value) {
@@ -175,21 +180,24 @@ class IntroText extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     var pageWidth = size.width;
     var fontSize =
-        Responsive.isDesktop(context) ? pageWidth * 0.035 : pageWidth * 0.1;
+        Responsive.isDesktop(context) ? pageWidth * 0.02 : pageWidth * 0.1;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('World-class design',
+        Text('Tìm kiếm việc làm phù hợp với bạn',
             style: TextStyle(
-              color: Colors.white,
+              color: const Color(BuiltinColor.orange),
               fontWeight: FontWeight.w900,
               fontSize: fontSize,
             )),
-        Text('At your service',
+        const SizedBox(
+          height: 10.0,
+        ),
+        Text('Linh động, hiệu quả, thu nhập cao',
             style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w900,
-              fontSize: fontSize,
+              color: const Color(BuiltinColor.orange),
+              fontWeight: FontWeight.w200,
+              fontSize: pageWidth * 0.011,
             )),
       ],
     );
@@ -204,31 +212,25 @@ class TrendingTab extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     List<Map<String, String>> trendingItems = [
+      {'Thu ngân': 'assets/images/intro/trending/branding-design.png'},
       {
-        'Thiết kế thương hiệu':
-            'assets/images/intro/trending/branding-design.png'
-      },
-      {
-        'Thiết kế logo':
+        'Kế toán thời vụ':
             'assets/images/intro/trending/logo-website-squarespace.png'
       },
-      {'Thiết kế website': 'assets/images/intro/trending/web-builder.png'},
+      {'Quảng cáo': 'assets/images/intro/trending/web-builder.png'},
+      {'Khuôn vác': 'assets/images/intro/trending/brand-identity-pack.png'},
       {
-        'Logo và thương hiệu':
-            'assets/images/intro/trending/brand-identity-pack.png'
-      },
-      {
-        'Thiết kế bao bì':
+        'Quản lý kho':
             'assets/images/intro/trending/product-packaging-design.png'
       },
-      {'Thiết kế áo': 'assets/images/intro/trending/t-shirt-design.png'},
-      {'Hình minh họa': 'assets/images/intro/trending/illustrations.png'},
-      {'Bìa sách': 'assets/images/intro/trending/book-cover-design.png'},
+      {'Phục vụ': 'assets/images/intro/trending/t-shirt-design.png'},
+      {'Bảo vệ': 'assets/images/intro/trending/illustrations.png'},
+      {'Gia sư': 'assets/images/intro/trending/book-cover-design.png'},
       {'Xem thêm': 'assets/images/intro/trending/categories.png'}
     ];
     var width = Responsive.isDesktop(context) ? 1920.0 : 450.0;
     var imgHeight = Responsive.isDesktop(context) ? 80.0 : 50.0;
-    var paddingHorizontal = Responsive.isDesktop(context) ? 60.0 : 1.0;
+    var paddingHorizontal = Responsive.isDesktop(context) ? 80.0 : 1.0;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),
       child: Column(
@@ -236,8 +238,17 @@ class TrendingTab extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: Responsive.isDesktop(context) ? 22.0 : 5.0),
-            child: Text('Xu hướng', style: Style.h6Bold),
+              horizontal: Responsive.isDesktop(context) ? 22.0 : 5.0,
+              vertical: 10.0,
+            ),
+            child: const Text(
+              'Xu hướng',
+              style: TextStyle(
+                color: const Color(BuiltinColor.blue_gradient_01),
+                fontWeight: FontWeight.bold,
+                fontSize: 19,
+              ),
+            ),
           ),
           SizedBox(
             height: 200.0,
@@ -260,7 +271,7 @@ class TrendingTab extends StatelessWidget {
     String title = '';
     String imgSrc = '';
     imageItem.forEach((k, v) => {title = k, imgSrc = v});
-    double horizontalPadding = Responsive.isDesktop(context) ? 25.0 : 10.0;
+    double horizontalPadding = Responsive.isDesktop(context) ? 45.0 : 10.0;
     double verticalPadding = Responsive.isDesktop(context) ? 25.0 : 10.0;
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -304,8 +315,8 @@ class StatisticInfoSlider extends StatelessWidget {
       child: CarouselSlider(
         options: CarouselOptions(height: 400.0, autoPlay: true),
         items: [
-          '9,920,123 thiết kế',
-          '11,123 thiết kế 3D',
+          '9999 công việc thời vụ',
+          '1111 thanh toán',
           '221,021 cuộc trò chuyện'
         ].map((i) {
           return Builder(
@@ -360,14 +371,14 @@ class WelcomeToLogin extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
           color: Colors.white,
           border: Border.all(
-              color: const Color(BuiltinColor.blue_gradient_01),
+              color: const Color(BuiltinColor.orange),
               style: BorderStyle.solid)),
       child: TextButton(
         onPressed: () {},
         child: const Text(
           'Tham gia ngay',
           style: TextStyle(
-              color: Color(BuiltinColor.blue_gradient_01),
+              color: const Color(BuiltinColor.orange),
               fontWeight: FontWeight.bold,
               fontSize: 18),
         ),
@@ -381,9 +392,9 @@ class WelcomeToLogin extends StatelessWidget {
       width: isDesktop ? 500.0 : 200.0,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: const Color(BuiltinColor.blue_gradient_01),
+          color: const Color(BuiltinColor.orange),
           border: Border.all(
-              color: const Color(BuiltinColor.blue_gradient_01),
+              color: const Color(BuiltinColor.orange),
               style: BorderStyle.solid)),
       child: TextButton(
         onPressed: () {},
@@ -458,7 +469,7 @@ class FooterComponent {
   static Row renderCopyright() {
     return Row(
       children: const [
-        Text('© Daisy'),
+        Text('© SjobS'),
         Text(' | '),
         Text('by Sode'),
         Text(' | '),
@@ -480,7 +491,7 @@ class FooterComponent {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/weblogo.png', width: 300.0),
+              Image.asset('assets/images/SjobS.png', width: 300.0),
               Row(
                 children: [
                   Image.asset('assets/images/appstore.png', scale: 3.0),

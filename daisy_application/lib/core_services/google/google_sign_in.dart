@@ -22,6 +22,7 @@ class GoogleSignIn {
       Debug.log('google-signin', 'Failed to signin with google with error', ex,
           'Skipping...');
     }
+
     if (_account == null) return '';
 
     final googleAuth = await _account!.authentication;

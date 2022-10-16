@@ -36,28 +36,23 @@ class _HeaderState extends State<Header> {
           ? Row(
               children: <Widget>[
                 SizedBox(width: Design.alignmentSpacing(context)),
-                Image.asset(
-                  'assets/images/ic_daisy_rectangle.jpg',
-                  width: kToolbarHeight,
-                  fit: BoxFit.contain,
-                ),
+                Image.asset('assets/images/SjobS.png', scale: 6.0),
                 const SizedBox(width: Design.headerSpacing),
-                ButtonInfo.small(text: 'Danh mục', onPressed: () {}),
                 ButtonInfo.small(
-                    text: 'Đăng tin',
+                    text: 'Đăng việc',
                     onPressed: _navigationListener.onBtnJobPostClicked),
                 if (isLoggedIn)
                   ButtonInfo.small(
-                    text: 'Workspace',
+                    text: 'Dự án',
                     onPressed: _navigationListener
                         .onBtnWorkspaceAndFindDesignerClicked,
                   ),
                 ButtonInfo.small(
-                  text: 'Tìm việc freelance',
+                  text: 'Tìm việc thời vụ',
                   onPressed: _navigationListener.onBtnFindJobCliked,
                 ),
                 ButtonInfo.small(
-                  text: 'Tìm kiếm người lao động',
+                  text: 'Tìm kiếm nhân viên',
                   onPressed: _navigationListener.onBtnFindDesignerCliked,
                 ),
               ],
