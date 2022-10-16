@@ -86,7 +86,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Việc cần tuyển designer', style: Style.h6Bold),
+                      Text('Việc cần tuyển dụng', style: Style.h6Bold),
                       const SizedBox(
                         height: 10.0,
                       ),
@@ -132,7 +132,7 @@ class _PostNewJobFormState extends State<PostNewJobForm> {
                       ),
                       CustomTextField(
                         fieldName:
-                            'Nội dung chi tiết, và các đầu việc cần Designer thực hiện (càng chi tiết designer càng có đầy đủ thông tin để hoàn thiện sản phẩm)',
+                            'Nội dung chi tiết, và các đầu việc cần thực hiện',
                         label: 'Mô tả dự án',
                         validation: (value) => value
                             .isNone()
