@@ -26,6 +26,7 @@ dependencies:
   json_annotation: ^4.5.0
   firebase_core: ^1.17.1
   firebase_auth: ^3.3.19
+  firebase_core_platform_interface: 4.5.1
   google_sign_in: ^5.0.3
   hive: ^2.2.1
   hive_flutter: ^1.1.0
