@@ -10,7 +10,7 @@ def _WEB_APP_PORT
 def _TARGET_BRANCH
 def _SUB_NAME
 def _ENV
-def _HOST="139.59.251.125"
+def _HOST="161.35.98.184"
 
 pipeline {
   agent any
