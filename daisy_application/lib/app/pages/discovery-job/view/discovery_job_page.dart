@@ -45,9 +45,9 @@ class _DiscoverJobState extends State<DiscoverJobPage> {
   }
 
   Widget _createDiscoveryLayout() {
-    double maxDisplayCount = (MediaQuery.of(context).size.height) / 100;
+    double maxDisplayCount = (MediaQuery.of(context).size.height) / 00;
     DiscoveryJobScreenState _screenState = context.watch();
-    if (_screenState.requests.length < maxDisplayCount) {
+    if (_screenState.requests.length < 6) {
       _onLoadMoreRequest();
     }
 
