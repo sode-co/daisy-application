@@ -15,8 +15,8 @@ class RequestGrpcClient {
 
     await for (var response in client.createRequestStreaming(_RequestModel()
       ..timeOffset = $fixum.Int64.parseInt(timeOffset.toString())
-      ..count = count ?? 10
-      ..rate = rate ?? 5)) {
+      ..count = count ?? 20
+      ..rate = rate ?? 1)) {
       yield Result(
           data: response.requests
               .map((item) => RequestModel.fromProto(item))
